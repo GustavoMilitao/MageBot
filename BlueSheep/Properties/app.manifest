@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <assemblyIdentity version="1.0.0.0" name="MyApplication.app"/>
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- Opções de controle de conta do usuário do manifesto.
+             Se você quiser alterar o nível do controle de conta de usuário do Windows, substitua o nó
+             requestedExecutionLevel por uma das seguintes proposições:
+
+             <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+                    <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+                    <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+             A especificação do nó requestedExecutionLevel desativa o arquivo de virtualização e de registro.
+             A especificação do nó requestedExecutionLevel desativar o arquivo de virtualização e de registro.
+             Se você quiser usar a virtualização de arquivo e registro para compatibilidade, remova o nó requestedExecutionLevel.
+        -->
+        <requestedExecutionLevel level="requireAdministrator" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- Lista com todas as versões do Windows com o qual o aplicativo pode ser executado.
+            O Windows irá selecionar automaticamente o ambiente mais compatível. -->
+
+      <!-- Se o seu aplicativo é projetado para funcionar com o Windows Vista, elimine os seguintes comentários do nó supportedOS.-->
+	     <!-- <SupportedOS Id = "{e2011457-1546-43c5-a5fe-008deee3d3f0}"></SupportedOS> -->
+
+      <!--Se o seu aplicativo é projetado para funcionar com o Windows 7, exclua os seguintes comentários do nó supportedOS:-->
+	    <!-- <SupportedOS Id = "{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" /> -->
+
+      <!-- Se o seu aplicativo é projetado para funcionar com o Windows 8, remova o comentário da seguinte do nó supportedOS -->
+      <!-- <SupportedOS Id = "{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"> </ supportedOS> -->
+
+      <!-- Se o seu aplicativo é projetado para funcionar com o Windows 8, remova o comentário da seguinte do nó supportedOS-->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/>-->
+
+    </application>
+  </compatibility>
+
+  <!-- Ativar os temas para os controles e botões de diálogo comuns de Windows (Windows XP e superior)-->
+  <!-- <dependency>
+    <dependentAssembly>
+      <assemblyIdentity
+          type="win32"
+          name="Microsoft.Windows.Common-Controls"
+          version="6.0.0.0"
+          processorArchitecture="*"
+          publicKeyToken="6595b64144ccf1df"
+          language="*"
+        />
+    </dependentAssembly>
+  </dependency>-->
+
+</asmv1:assembly>
