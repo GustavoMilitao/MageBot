@@ -88,6 +88,7 @@ namespace BlueSheep.Core.Fight
             DataClass[] data = GameData.GetDataObjects(D2oFileEnum.Monsters);
             List<DataClass> b = data.ToList().FindAll(e => ((bool)e.Fields["isBoss"]) == true).ToList();
             boss = new Dictionary<string, int>();
+            //Instanciar m_Index (Ver referência no Monsters.Init()
             foreach (DataClass d in b)
             {
                 boss.Add(BlueSheep.Common.Data.I18N.GetText((int)d.Fields["nameId"]), (int)d.Fields["id"]);

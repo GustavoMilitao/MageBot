@@ -219,13 +219,12 @@ namespace BlueSheep.Interface
             IntelliSense.InitItems();
             
         }
-        
+
+
+
+
+
+
         #endregion
-
-      
-
-        
-
-        
     }
 }

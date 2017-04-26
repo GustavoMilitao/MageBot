@@ -190,9 +190,6 @@
     <Compile Include="Common\Protocol\messages\connection\ServerSelectionMessage.cs" />
     <Compile Include="Common\Protocol\messages\connection\ServersListMessage.cs" />
     <Compile Include="Common\Protocol\messages\connection\ServerStatusUpdateMessage.cs" />
-    <Compile Include="Common\Protocol\messages\debug\DebugClearHighlightCellsMessage.cs" />
-    <Compile Include="Common\Protocol\messages\debug\DebugHighlightCellsMessage.cs" />
-    <Compile Include="Common\Protocol\messages\debug\DebugInClientMessage.cs" />
     <Compile Include="Common\Protocol\messages\game\achievement\AchievementDetailedListMessage.cs" />
     <Compile Include="Common\Protocol\messages\game\achievement\AchievementDetailedListRequestMessage.cs" />
     <Compile Include="Common\Protocol\messages\game\achievement\AchievementDetailsMessage.cs" />

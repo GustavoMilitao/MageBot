@@ -1059,6 +1059,7 @@ namespace BlueSheep.Interface
             //this.SocketManager = null;
             m_ConnectionThread = new Thread(Connect);
             m_ConnectionThread.Start();
+            //Connect();
         }
 
         public bool PerformGather()
@@ -1185,7 +1186,7 @@ namespace BlueSheep.Interface
             if (this.SocketManager == null)
                 this.SocketManager = new SocketManager(this);
 
-            this.SocketManager.Connect(new ConnectionInformations("213.248.126.40", 5555, "d'identification"));
+            this.SocketManager.Connect(new ConnectionInformations("213.248.126.144", 5555, "d'identification"));
             loginstate = "identification";
             if (checkBoxBegin.Checked == true)
                 GetNextMeal();
