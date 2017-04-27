@@ -13,8 +13,9 @@ namespace BlueSheep.Engine.Constants
     {
         public static List<string> MonstersList = new List<string>();
         public static List<string> ItemsList = new List<string>();
-        
-        
+        public static List<string> ServersList = new List<string>();
+
+
         [DllImport("user32")]
         private extern static int GetCaretPos(out Point p);
 
@@ -134,6 +135,14 @@ namespace BlueSheep.Engine.Constants
             foreach (DataClass d in GameData.GetDataObjects(D2oFileEnum.Items))
             {
                 ItemsList.Add(BlueSheep.Common.Data.I18N.GetText((int)d.Fields["nameId"]));
+            }
+        }
+
+        public static void InitServers()
+        {
+            foreach (DataClass d in GameData.GetDataObjects(D2oFileEnum.Servers))
+            {
+                ServersList.Add(BlueSheep.Common.Data.I18N.GetText((int)d.Fields["nameId"]));
             }
         }
     }

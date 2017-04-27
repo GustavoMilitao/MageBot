@@ -217,7 +217,7 @@ namespace BlueSheep.Interface
             //}
             IntelliSense.InitMonsters();
             IntelliSense.InitItems();
-            
+            IntelliSense.InitServers();
         }
 
 
