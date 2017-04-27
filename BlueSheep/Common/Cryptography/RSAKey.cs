@@ -32,9 +32,9 @@ namespace BlueSheep.Common.Cryptography
         #endregion
 
         #region Public methods
-        public static int[] Encrypt(sbyte[] helloConnectMessageKey, string accountName, string accountPassword, string salt)
+        public static sbyte[] Encrypt(sbyte[] helloConnectMessageKey, string accountName, string accountPassword, string salt)
         {
-            List<int> credentialsList = new List<int>();
+            List<byte> credentialsList = new List<byte>();
 
             RSACryptoServiceProvider decodedPublicKey = DecodeX509PublicKey(Convert.FromBase64String(m_PublicKey));
 
