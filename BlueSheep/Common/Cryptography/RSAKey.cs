@@ -11,20 +11,30 @@ namespace BlueSheep.Common.Cryptography
     class RSAKey // Class de MoonLight <33
     {
         #region Fields
-        
-        private const string m_PublicKey = "MIIBUzANBgkqhkiG9w0BAQEFAAOCAUAAMIIBOwKCATIAgucoka9J2PXcNdjcu6CuDmgteIMB+rih"
+
+        private const string m_PublicKey = @"MIIBUzANBgkqhkiG9w0BAQEFAAOCAUAAMIIBOwKCATIAgucoka9J2PXcNdjcu6CuDmgteIMB+rih"
 + "2UZJIuSoNT/0J/lEKL/W4UYbDA4U/6TDS0dkMhOpDsSCIDpO1gPG6+6JfhADRfIJItyHZflyXNUj"
-+"WOBG4zuxc/L6wldgX24jKo+iCvlDTNUedE553lrfSU23Hwwzt3+doEfgkgAf0l4ZBez5Z/ldp9it"
-+"2NH6/2/7spHm0Hsvt/YPrJ+EK8ly5fdLk9cvB4QIQel9SQ3JE8UQrxOAx2wrivc6P0gXp5Q6bHQo"
-+"ad1aUp81Ox77l5e8KBJXHzYhdeXaM91wnHTZNhuWmFS3snUHRCBpjDBCkZZ+CxPnKMtm2qJIi57R"
-+"slALQVTykEZoAETKWpLBlSm92X/eXY2DdGf+a7vju9EigYbX0aXxQy2Ln2ZBWmUJyZE8B58CAwEA"
-+"AQ==";
++ "WOBG4zuxc/L6wldgX24jKo+iCvlDTNUedE553lrfSU23Hwwzt3+doEfgkgAf0l4ZBez5Z/ldp9it"
++ "2NH6/2/7spHm0Hsvt/YPrJ+EK8ly5fdLk9cvB4QIQel9SQ3JE8UQrxOAx2wrivc6P0gXp5Q6bHQo"
++ "ad1aUp81Ox77l5e8KBJXHzYhdeXaM91wnHTZNhuWmFS3snUHRCBpjDBCkZZ+CxPnKMtm2qJIi57R"
++ "slALQVTykEZoAETKWpLBlSm92X/eXY2DdGf+a7vju9EigYbX0aXxQy2Ln2ZBWmUJyZE8B58CAwEA"
++ "AQ==";
+
+        //private const string m_PublicKey =
+        //    "MIIBUzANBgkqhkiG9w0BAQEFAAOCAUAAMIIBOwKCATIAqpzRrvO3We7EMi9cWYqdfb3rbdinTay+" +
+        //    "hxQ6t3dOiJLY4NITxyeIuy97yZYOojOlXS2SuJ4cCHjCeLCQO1FwOz+nynQWcBWecz2QdbHD2Kz7" +
+        //    "mNLd2qtZyEDO76rd7LaDOxRvgs9DsH9sfnCuKLKbd725xTLc7wRfJzOH9v9rTTYVXssXe7JUpTx8" +
+        //    "nV8yKnTiq3WpzBeZT4C3ZCR18GBBCh3NmSTbze9i2KipgZnOwBvhskVlweuqZ1KNIKsQgipBFuyw" +
+        //    "w68RGNYaAKofMVVio4amrGpCT5MM852jpHsgJJfOUHu6md1CnvdwDPbo/PKQUI0RLb0ezE5gsPma" +
+        //    "s39QBw+DiaibUkk1aCkBxTOFqpIbjfLM2/4qA6GPcWUJxP3vmGoeCTMBLNEiPfLqVm86QzUCAwEA" +
+        //    "AQ==";
+
         #endregion
 
         #region Public methods
-        public static sbyte[] Encrypt(sbyte[] helloConnectMessageKey, string accountName, string accountPassword, string salt)
+        public static int[] Encrypt(sbyte[] helloConnectMessageKey, string accountName, string accountPassword, string salt)
         {
-            List<byte> credentialsList = new List<byte>();
+            List<int> credentialsList = new List<int>();
 
             RSACryptoServiceProvider decodedPublicKey = DecodeX509PublicKey(Convert.FromBase64String(m_PublicKey));
 
@@ -90,7 +100,7 @@ namespace BlueSheep.Common.Cryptography
 
                 return null;
 
-            Label_00B1:
+                Label_00B1:
                 if (reader.ReadByte() == 0)
                 {
                     switch (reader.ReadUInt16())
@@ -107,7 +117,7 @@ namespace BlueSheep.Common.Cryptography
 
                 return null;
 
-            Label_00F9:
+                Label_00F9:
                 num2 = reader.ReadUInt16();
 
                 byte num3 = 0;
