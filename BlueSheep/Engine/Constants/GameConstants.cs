@@ -12,7 +12,7 @@
         public const sbyte Install = 0;
         public const sbyte Technology = 0;
         public const string Lang = "pt";
-        public const short ServerID = 97;
+        public const short ServerID = 6001;
         public const bool AutoConnect = true;
         public const bool UseCertificate = false;
         public const bool UseLoginToken = false;

@@ -1,5 +1,8 @@
 ﻿using BlueSheep.Common.Data.D2o;
+using BlueSheep.DTO;
+using BlueSheep.Util.Enums.Servers;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -13,7 +16,7 @@ namespace BlueSheep.Engine.Constants
     {
         public static List<string> MonstersList = new List<string>();
         public static List<string> ItemsList = new List<string>();
-        public static List<string> ServersList = new List<string>();
+        public static List<Server> ServersList = new List<Server>();
 
 
         [DllImport("user32")]
@@ -142,8 +145,23 @@ namespace BlueSheep.Engine.Constants
         {
             foreach (DataClass d in GameData.GetDataObjects(D2oFileEnum.Servers))
             {
-                ServersList.Add(BlueSheep.Common.Data.I18N.GetText((int)d.Fields["nameId"]));
+                ServersList.Add(createNewObjectServerFromGameData(d));
             }
+        }
+
+        private static Server createNewObjectServerFromGameData(DataClass data)
+        {
+            Server server = new Server();
+            server.Id = (int)data.Fields["id"];
+            server.Name = Common.Data.I18N.GetText((int)data["nameId"]);
+            server.ServerComment = Common.Data.I18N.GetText((int)data["commentId"]);
+            server.OpeningDate = new DateTime(Convert.ToInt64(data["openingDate"]));
+            server.Language = (string)data["language"];
+            server.Population = (PopulationId)data["populationId"];
+            server.GameType = (GameTypeId)data["gameTypeId"];
+            server.Comunity = (CommunityId)data["communityId"];
+            server.RestrictedToLanguages = (ArrayList)data["restrictedToLanguages"];
+            return server;
         }
     }
 }

@@ -193,7 +193,7 @@ namespace BlueSheep.Interface
             else if (File.Exists(bsConfPath))
             {
                 List<string> PaysList = new List<string>();
-                PaysList.AddRange(new List<string>() { "fr", "en", "ja", "es", "de" });
+                PaysList.AddRange(new List<string>() { "fr", "en", "ja", "es", "de", "pt" });
                 foreach (string pays in PaysList)
                 {
                     string combinedPath = Path.Combine(ActualMainForm.DofusPath, "app", "data", "i18n", "i18n_" + pays + ".d2i");

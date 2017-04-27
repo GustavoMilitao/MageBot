@@ -1394,6 +1394,7 @@
     <Compile Include="Core\Storage\Leaving.cs" />
     <Compile Include="Core\Storage\LeavingDialog.cs" />
     <Compile Include="Core\Storage\Opening.cs" />
+    <Compile Include="DTO\Server.cs" />
     <Compile Include="Engine\Constants\DLLInjector.cs" />
     <Compile Include="Engine\Constants\GameConstants.cs" />
     <Compile Include="Engine\Constants\HumanCheck.cs" />
@@ -1547,6 +1548,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Enums\Servers\CommunityId.cs" />
+    <Compile Include="Util\Enums\Servers\GameTypeId.cs" />
+    <Compile Include="Util\Enums\Servers\PopulationId.cs" />
     <EmbeddedResource Include="Engine\ExceptionHandler\ExceptionDialog.resx">
       <DependentUpon>ExceptionDialog.cs</DependentUpon>
     </EmbeddedResource>
