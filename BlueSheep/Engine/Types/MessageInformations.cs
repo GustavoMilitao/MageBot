@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using BlueSheep.Interface.Text;
 namespace BlueSheep.Engine.Types
 {
-    class MessageInformations
+    public class MessageInformations
     {
         #region Fields
         private readonly BigEndianReader m_Reader = new BigEndianReader();
         private int? m_Header;
         private int? m_Length;
-        private byte[] m_Data;
+        public byte[] m_Data;
         private int? m_LenghtType;
         private int? m_ProtocolID;
         private AccountUC account;

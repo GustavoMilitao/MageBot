@@ -4,7 +4,7 @@ using BlueSheep.Common.IO;
 
 namespace BlueSheep.Engine.Types
 {
-    class MessagePackaging
+    public class MessagePackaging
     {
         #region Fields
         private BigEndianWriter m_Writer;

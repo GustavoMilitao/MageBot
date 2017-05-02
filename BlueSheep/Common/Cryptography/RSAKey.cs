@@ -8,11 +8,11 @@ using System.Text;
 
 namespace BlueSheep.Common.Cryptography
 {
-    class RSAKey // Class de MoonLight <33
+    public class RSAKey // Class de MoonLight <33
     {
         #region Fields
 
-        private const string m_PublicKey = @"MIIBUzANBgkqhkiG9w0BAQEFAAOCAUAAMIIBOwKCATIAgucoka9J2PXcNdjcu6CuDmgteIMB+rih"
+        public static string m_PublicKey = @"MIIBUzANBgkqhkiG9w0BAQEFAAOCAUAAMIIBOwKCATIAgucoka9J2PXcNdjcu6CuDmgteIMB+rih"
 + "2UZJIuSoNT/0J/lEKL/W4UYbDA4U/6TDS0dkMhOpDsSCIDpO1gPG6+6JfhADRfIJItyHZflyXNUj"
 + "WOBG4zuxc/L6wldgX24jKo+iCvlDTNUedE553lrfSU23Hwwzt3+doEfgkgAf0l4ZBez5Z/ldp9it"
 + "2NH6/2/7spHm0Hsvt/YPrJ+EK8ly5fdLk9cvB4QIQel9SQ3JE8UQrxOAx2wrivc6P0gXp5Q6bHQo"
@@ -59,7 +59,7 @@ namespace BlueSheep.Common.Cryptography
         #endregion
 
         #region Private methods
-        private static RSACryptoServiceProvider DecodeX509PublicKey(byte[] X509Key) // Méthode de M4xou
+        public static RSACryptoServiceProvider DecodeX509PublicKey(byte[] X509Key) // Méthode de M4xou
         {
             RSACryptoServiceProvider provider2 = null;
             byte[] secondArray = new byte[] { 0x30, 13, 6, 9, 0x2a, 0x86, 0x48, 0x86, 0xf7, 13, 1, 1, 1, 5, 0 };
@@ -201,7 +201,7 @@ namespace BlueSheep.Common.Cryptography
             return true;
         }
 
-        private static byte[] DecryptHelloConnectMessageKey(sbyte[] helloConnectMessageKey, RSAParameters parameters)
+        public static byte[] DecryptHelloConnectMessageKey(sbyte[] helloConnectMessageKey, RSAParameters parameters)
         {
             byte[] unsignedHelloConnectMessageKey = new byte[helloConnectMessageKey.Length];
             Buffer.BlockCopy(helloConnectMessageKey, 0, unsignedHelloConnectMessageKey, 0, helloConnectMessageKey.Length);
