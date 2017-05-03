@@ -42,7 +42,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public CharacterToRecolorInformation(int id, int[] colors, int cosmeticId)
+        public CharacterToRecolorInformation(uint id, int[] colors, int cosmeticId)
                  : base(id, colors, cosmeticId)
         {
         }

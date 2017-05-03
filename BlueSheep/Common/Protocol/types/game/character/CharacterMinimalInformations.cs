@@ -44,7 +44,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public CharacterMinimalInformations(int id, byte level, string name)
+        public CharacterMinimalInformations(uint id, byte level, string name)
                  : base(id)
         {
             this.level = level;
@@ -56,22 +56,18 @@ namespace BlueSheep.Common.Protocol.Types
         {
 
             base.Serialize(writer);
-            writer.WriteByte(level);
             writer.WriteUTF(name);
-
-
+            writer.WriteByte(level);
         }
 
         public override void Deserialize(BigEndianReader reader)
         {
 
             base.Deserialize(reader);
+            name = reader.ReadUTF();
             level = reader.ReadByte();
             if (level < 1 || level > 200)
                 throw new Exception("Forbidden value on level = " + level + ", it doesn't respect the following condition : level < 1 || level > 200");
-            name = reader.ReadUTF();
-
-
         }
 
 

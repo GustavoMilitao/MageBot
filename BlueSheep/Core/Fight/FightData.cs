@@ -8,6 +8,7 @@ using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
+using BlueSheep.Util.Enums.Fight;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ namespace BlueSheep.Core.Fight
         #region Properties
         public BFighter Fighter
         {
-            get { return GetFighter(m_Account.CharacterBaseInformations.Id); }
+            get { return GetFighter((long)m_Account.CharacterBaseInformations.Id); }
         }
 
         public int MonsterNumber
@@ -711,7 +712,7 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         /// <param name="id">ID du fighter</param>
         /// <returns>BFighter fighter.</returns>
-        private BFighter GetFighter(int id)
+        private BFighter GetFighter(long id)
         {
             return Fighters.FirstOrDefault(f => f.Id == id);
         }

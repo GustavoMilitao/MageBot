@@ -43,7 +43,7 @@ public CharacterMinimalGuildInformations()
 {
 }
 
-public CharacterMinimalGuildInformations(int id, byte level, string name, Types.EntityLook entityLook, Types.BasicGuildInformations guild)
+public CharacterMinimalGuildInformations(uint id, byte level, string name, Types.EntityLook entityLook, Types.BasicGuildInformations guild)
          : base(id, level, name, entityLook)
         {
             this.guild = guild;

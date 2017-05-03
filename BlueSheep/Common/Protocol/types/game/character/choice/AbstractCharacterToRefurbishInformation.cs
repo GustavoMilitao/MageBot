@@ -44,7 +44,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public AbstractCharacterToRefurbishInformation(int id, int[] colors, int cosmeticId)
+        public AbstractCharacterToRefurbishInformation(uint id, int[] colors, int cosmeticId)
                  : base(id)
         {
             this.colors = colors;

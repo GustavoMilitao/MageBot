@@ -15,6 +15,6 @@ namespace BlueSheep.Common.Types
         }
 
         public int CellId { get; internal set; }
-        public int Id { get; protected set; }
+        public long Id { get; protected set; }
     }
 }

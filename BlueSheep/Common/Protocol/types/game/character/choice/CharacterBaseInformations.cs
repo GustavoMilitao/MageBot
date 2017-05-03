@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BlueSheep.Common.IO;
-
+using BlueSheep.Util.Enums.Char;
 
 namespace BlueSheep.Common.Protocol.Types
 {
@@ -36,19 +36,19 @@ namespace BlueSheep.Common.Protocol.Types
             get { return ID; }
         }
 
-        public sbyte breed;
-        public bool sex;
+        public Breed breed;
+        public Sex sex;
 
 
         public CharacterBaseInformations()
         {
         }
 
-        public CharacterBaseInformations(int id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex)
+        public CharacterBaseInformations(uint id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex)
                  : base(id, level, name, entityLook)
         {
-            this.breed = breed;
-            this.sex = sex;
+            this.breed = (Breed)breed;
+            this.sex = (Sex)Convert.ToInt32(sex);
         }
 
 
@@ -56,8 +56,8 @@ namespace BlueSheep.Common.Protocol.Types
         {
 
             base.Serialize(writer);
-            writer.WriteSByte(breed);
-            writer.WriteBoolean(sex);
+            writer.WriteSByte((sbyte)breed);
+            writer.WriteBoolean(Convert.ToBoolean(sex));
 
 
         }
@@ -66,8 +66,8 @@ namespace BlueSheep.Common.Protocol.Types
         {
 
             base.Deserialize(reader);
-            breed = reader.ReadSByte();
-            sex = reader.ReadBoolean();
+            breed = (Breed)reader.ReadSByte();
+            sex = (Sex)Convert.ToInt32(reader.ReadBoolean());
 
 
         }

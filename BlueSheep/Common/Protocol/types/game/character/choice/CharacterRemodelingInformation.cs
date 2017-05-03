@@ -47,7 +47,7 @@ public CharacterRemodelingInformation()
 {
 }
 
-public CharacterRemodelingInformation(int id, string name, sbyte breed, bool sex, short cosmeticId, int[] colors)
+public CharacterRemodelingInformation(uint id, string name, sbyte breed, bool sex, short cosmeticId, int[] colors)
          : base(id)
         {
             this.name = name;

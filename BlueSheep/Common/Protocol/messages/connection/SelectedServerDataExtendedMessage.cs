@@ -61,7 +61,7 @@ namespace BlueSheep.Common.Protocol.Messages
             serverIds = new List<ushort>();
             for (int i = 0; i < length; i++)
             {
-                serverIds.Add(reader.ReadVarUhShort());
+                serverIds.Add((ushort)reader.ReadVarShort());
             }
         }
 

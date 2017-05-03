@@ -44,7 +44,7 @@ public CharacterToRemodelInformations()
 {
 }
 
-public CharacterToRemodelInformations(int id, string name, sbyte breed, bool sex, short cosmeticId, int[] colors, sbyte possibleChangeMask, sbyte mandatoryChangeMask)
+public CharacterToRemodelInformations(uint id, string name, sbyte breed, bool sex, short cosmeticId, int[] colors, sbyte possibleChangeMask, sbyte mandatoryChangeMask)
          : base(id, name, breed, sex, cosmeticId, colors)
         {
             this.possibleChangeMask = possibleChangeMask;

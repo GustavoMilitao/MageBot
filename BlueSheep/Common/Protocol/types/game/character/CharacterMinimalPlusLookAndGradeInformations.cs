@@ -43,7 +43,7 @@ public CharacterMinimalPlusLookAndGradeInformations()
 {
 }
 
-public CharacterMinimalPlusLookAndGradeInformations(int id, byte level, string name, Types.EntityLook entityLook, int grade)
+public CharacterMinimalPlusLookAndGradeInformations(uint id, byte level, string name, Types.EntityLook entityLook, int grade)
          : base(id, level, name, entityLook)
         {
             this.grade = grade;

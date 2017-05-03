@@ -45,7 +45,7 @@ public CharacterHardcoreOrEpicInformations()
 {
 }
 
-public CharacterHardcoreOrEpicInformations(int id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex, sbyte deathState, short deathCount, byte deathMaxLevel)
+public CharacterHardcoreOrEpicInformations(uint id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex, sbyte deathState, short deathCount, byte deathMaxLevel)
          : base(id, level, name, entityLook, breed, sex)
         {
             this.deathState = deathState;

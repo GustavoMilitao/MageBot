@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public CharacterFirstSelectionMessage(int id, bool doTutorial)
+        public CharacterFirstSelectionMessage(ulong id, bool doTutorial)
          : base(id)
         {
             this.doTutorial = doTutorial;

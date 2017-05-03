@@ -27,16 +27,16 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class GuildMember : CharacterMinimalInformations
-{
+    public class GuildMember : CharacterMinimalInformations
+    {
 
-public new const short ID = 88;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const short ID = 88;
+        public override short TypeId
+        {
+            get { return ID; }
+        }
 
-public sbyte breed;
+        public sbyte breed;
         public bool sex;
         public short rank;
         public double givenExperience;
@@ -49,14 +49,14 @@ public sbyte breed;
         public int accountId;
         public int achievementPoints;
         public Types.PlayerStatus status;
-        
 
-public GuildMember()
-{
-}
 
-public GuildMember(int id, byte level, string name, sbyte breed, bool sex, short rank, double givenExperience, sbyte experienceGivenPercent, int rights, sbyte connected, sbyte alignmentSide, ushort hoursSinceLastConnection, sbyte moodSmileyId, int accountId, int achievementPoints, Types.PlayerStatus status)
-         : base(id, level, name)
+        public GuildMember()
+        {
+        }
+
+        public GuildMember(uint id, byte level, string name, sbyte breed, bool sex, short rank, double givenExperience, sbyte experienceGivenPercent, int rights, sbyte connected, sbyte alignmentSide, ushort hoursSinceLastConnection, sbyte moodSmileyId, int accountId, int achievementPoints, Types.PlayerStatus status)
+                 : base(id, level, name)
         {
             this.breed = breed;
             this.sex = sex;
@@ -72,12 +72,12 @@ public GuildMember(int id, byte level, string name, sbyte breed, bool sex, short
             this.achievementPoints = achievementPoints;
             this.status = status;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
             writer.WriteSByte(breed);
             writer.WriteBoolean(sex);
             writer.WriteVarShort(rank);
@@ -92,14 +92,14 @@ base.Serialize(writer);
             writer.WriteInt(achievementPoints);
             writer.WriteShort(status.TypeId);
             status.Serialize(writer);
-            
 
-}
 
-public override void Deserialize(BigEndianReader reader)
-{
+        }
 
-base.Deserialize(reader);
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
             breed = reader.ReadSByte();
             sex = reader.ReadBoolean();
             rank = reader.ReadVarShort();
@@ -128,12 +128,12 @@ base.Deserialize(reader);
             achievementPoints = reader.ReadInt();
             status = (PlayerStatus)Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadShort());
             status.Deserialize(reader);
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

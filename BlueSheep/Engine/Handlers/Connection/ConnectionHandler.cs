@@ -1,15 +1,16 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Engine.Constants;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text;
+using BlueSheep.Util.Text.Connection;
+using DofusBot.Enums;
 using RSA;
 using System;
-using System.Linq;
 
 namespace BlueSheep.Engine.Handlers.Connection
 {
@@ -62,7 +63,7 @@ namespace BlueSheep.Engine.Handlers.Connection
             {
                 identificationFailedMessage.Deserialize(reader);
             }
-            IdentificationFailureReasonEnum.Test(identificationFailedMessage.reason, account);
+            IdentificationFailureReason.Test((IdentificationFailureReasonEnum)identificationFailedMessage.reason, account);
             account.SocketManager.DisconnectFromGUI();
         }
 
@@ -119,7 +120,7 @@ namespace BlueSheep.Engine.Handlers.Connection
                 serverStatusUpdateMessage.Deserialize(reader);
             }
             // Cherche le statut du serveur
-            ServerStatusEnum.Test((uint)serverStatusUpdateMessage.server.status, account);
+            ServerStatus.Test((ServerStatusEnum)serverStatusUpdateMessage.server.status, account);
         }
 
         [MessageHandler(typeof(ServersListMessage))]
@@ -184,7 +185,7 @@ namespace BlueSheep.Engine.Handlers.Connection
                 selectedServerRefusedMessage.Deserialize(reader);
             }
             // Cherche le statut du serveur
-            ServerStatusEnum.Test((uint)selectedServerRefusedMessage.serverStatus, account);
+            ServerStatus.Test((ServerStatusEnum)selectedServerRefusedMessage.serverStatus, account);
         }
         [MessageHandler(typeof(IdentificationFailedForBadVersionMessage))]
         public static void IdentificationFailedForBadVersionMessageTreatment(Message message, byte[] packetDatas, AccountUC account)

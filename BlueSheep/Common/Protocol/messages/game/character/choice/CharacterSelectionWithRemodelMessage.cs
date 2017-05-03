@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public CharacterSelectionWithRemodelMessage(int id, Types.RemodelingInformation remodel)
+        public CharacterSelectionWithRemodelMessage(ulong id, Types.RemodelingInformation remodel)
          : base(id)
         {
             this.remodel = remodel;

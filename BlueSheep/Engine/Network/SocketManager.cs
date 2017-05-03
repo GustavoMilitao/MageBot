@@ -1216,7 +1216,7 @@ namespace BlueSheep.Engine.Network
                 //MessagePackaging pack = new MessagePackaging(writer);
                 //pack.Pack((int)msg.ProtocolID);
                 msg.Pack(writer);
-                account.SocketManager.Send(writer.Data);
+                account.SocketManager.Send(writer.Content);
                 if (account.DebugMode.Checked)
                     account.Log(new DebugTextInformation("[SND] " + msg.ProtocolID), 0);
             }

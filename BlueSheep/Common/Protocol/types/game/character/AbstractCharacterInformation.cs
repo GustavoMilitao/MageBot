@@ -36,16 +36,13 @@ namespace BlueSheep.Common.Protocol.Types
             get { return ID; }
         }
 
-        public int Id { get => Convert.ToInt32(id); set => id = (uint)value; }
-
-        private uint id;
-
+        public double Id { get; set; }
 
         public AbstractCharacterInformation()
         {
         }
 
-        public AbstractCharacterInformation(int id)
+        public AbstractCharacterInformation(uint id)
         {
             this.Id = id;
         }
@@ -54,22 +51,15 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
 
-            writer.WriteVarInt(Id);
-
-
+            writer.WriteVarLong((long)Id);
         }
 
         public virtual void Deserialize(BigEndianReader reader)
         {
-
-            id = (uint)reader.ReadInt32();
+            Id = reader.ReadVarUhLong();
             if (Id < 0)
                 throw new Exception("Forbidden value on id = " + Id + ", it doesn't respect the following condition : id < 0");
-
-
         }
-
-
     }
 
 

@@ -35,6 +35,7 @@ namespace BlueSheep.Interface
             set { m_DofusPath = value; }
         }
         public static MainForm ActualMainForm { get; set; }
+        public static AccountFrm AccFrm { get; set; }
         #endregion
 
         #region Constructors

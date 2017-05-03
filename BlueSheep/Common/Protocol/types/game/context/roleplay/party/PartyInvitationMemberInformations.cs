@@ -47,7 +47,7 @@ public PartyInvitationMemberInformations()
 {
 }
 
-public PartyInvitationMemberInformations(int id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex, short worldX, short worldY, int mapId, short subAreaId, Types.PartyCompanionBaseInformations[] companions)
+public PartyInvitationMemberInformations(uint id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex, short worldX, short worldY, int mapId, short subAreaId, Types.PartyCompanionBaseInformations[] companions)
          : base(id, level, name, entityLook, breed, sex)
         {
             this.worldX = worldX;

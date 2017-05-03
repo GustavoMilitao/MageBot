@@ -42,7 +42,7 @@ public CharacterToRelookInformation()
 {
 }
 
-public CharacterToRelookInformation(int id, int[] colors, int cosmeticId)
+public CharacterToRelookInformation(uint id, int[] colors, int cosmeticId)
          : base(id, colors, cosmeticId)
         {
         }

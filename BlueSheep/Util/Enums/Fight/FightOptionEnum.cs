@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlueSheep.Engine.Enums
+namespace BlueSheep.Util.Enums.Fight
 {
         public enum FightOptionEnum
         {

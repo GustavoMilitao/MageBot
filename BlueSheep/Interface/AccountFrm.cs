@@ -19,7 +19,7 @@ namespace BlueSheep.Interface
         private string m_user;
         private string m_pass;
         private bool m_socket;
-        private AccountUC m_UC;
+        public AccountUC UC { get; set; }
         #endregion
 
         private delegate void Callback();
@@ -47,7 +47,7 @@ namespace BlueSheep.Interface
                 Invoke(new Callback(Reconnect));
                 return;
             }                
-            this.Controls.Remove(m_UC);
+            this.Controls.Remove(UC);
             Init();
         }
 
@@ -55,7 +55,7 @@ namespace BlueSheep.Interface
         {
             AccountUC Uc = new AccountUC(m_user, m_pass, m_socket, this);
             Uc.DebugMode.Checked = true;
-            m_UC = Uc;
+            UC = Uc;
             this.Controls.Add(Uc);
             Uc.Show();
 
@@ -78,7 +78,7 @@ namespace BlueSheep.Interface
 
         private void SaveConfig(object sender , object e)
         {
-            m_UC.ConfigManager.SaveConfig();
+            UC.ConfigManager.SaveConfig();
         }
         #endregion
     }

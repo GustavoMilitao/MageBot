@@ -7,7 +7,9 @@ using BlueSheep.Common.Types;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
+using BlueSheep.Util.Enums.EnumHelper;
 using System;
+using System.Linq;
 
 namespace BlueSheep.Engine.Handlers.Character
 {
@@ -18,6 +20,8 @@ namespace BlueSheep.Engine.Handlers.Character
         public static void CharactersListMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
         {
             CharactersListMessage charactersListMessage = (CharactersListMessage)message;
+
+            //packetDatas = packetDatas.ToList().SkipWhile(a => a == 0).ToArray();
 
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
@@ -30,7 +34,7 @@ namespace BlueSheep.Engine.Handlers.Character
 
             if (!account.IsMITM)
             {
-                CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage(account.CharacterBaseInformations.Id);
+                CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage((ulong)account.CharacterBaseInformations.Id);
                 account.SocketManager.Send(characterSelectionMessage);
             }
             
@@ -49,6 +53,7 @@ namespace BlueSheep.Engine.Handlers.Character
             account.CharacterBaseInformations = characterSelectedSuccessMessage.infos;
 
             account.Log(new BotTextInformation(account.CharacterBaseInformations.name + " de niveau "+ account.CharacterBaseInformations.level + " est connecté."),1);
+            account.Log(new BotTextInformation("Breed: "+account.CharacterBaseInformations.breed.Description() + " Sex: " + account.CharacterBaseInformations.sex.Description()), 1);
             account.ModifBar(7,0,0, account.AccountName + " - " + account.CharacterBaseInformations.name);
             account.ModifBar(8, 0, 0, Convert.ToString(account.CharacterBaseInformations.level));
             

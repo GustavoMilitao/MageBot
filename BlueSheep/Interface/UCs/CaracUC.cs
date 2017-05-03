@@ -139,7 +139,7 @@ namespace BlueSheep.Interface.UCs
 
         public int GetBoost(int statId)
         {
-            DataClass d = GameData.GetDataObject(D2oFileEnum.Breeds, account.CharacterBaseInformations.breed);
+            DataClass d = GameData.GetDataObject(D2oFileEnum.Breeds, (int)account.CharacterBaseInformations.breed);
             switch (statId)
             {
                 case 10:

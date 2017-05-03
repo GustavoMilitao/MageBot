@@ -1,35 +1,29 @@
 ﻿using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
+using DofusBot.Enums;
 
-namespace BlueSheep.Engine.Enums
+namespace BlueSheep.Util.Text.Connection
 {
-    class IdentificationFailureReasonEnum
-    {
-        #region Fields
-        private const int m_WrongCredentials = 2;
-        private const int m_Banned = 3;
-        private const int m_Kicked = 4;
-        private const int m_InMaintenance = 5;
-        #endregion
-
+    public class IdentificationFailureReason
+    { 
         #region Public methods
-        public static void Test(int reason, AccountUC account)
+        public static void Test(IdentificationFailureReasonEnum reason, AccountUC account)
         {
             switch (reason)
             {
-                case m_WrongCredentials:
+                case IdentificationFailureReasonEnum.WrongCredentials:
                     account.Log(new ErrorTextInformation("Echec de connexion : mauvais identifiants."),0);
                     break;
 
-                case m_Banned:
+                case IdentificationFailureReasonEnum.Banned:
                     account.Log(new ErrorTextInformation("Echec de connexion : compte banni."), 0);
                     break;
 
-                case m_Kicked:
+                case IdentificationFailureReasonEnum.Kicked:
                     account.Log(new ErrorTextInformation("Echec de connexion : compte banni temporairement."), 0);
                     break;
 
-                case m_InMaintenance:
+                case IdentificationFailureReasonEnum.InMaintenance:
                     account.Log(new ErrorTextInformation("Echec de connexion : serveur en maintenance."), 0);
                     account.TryReconnect(15);
                     break;

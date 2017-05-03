@@ -60,7 +60,7 @@ namespace BlueSheep.Common.Protocol.Messages
 
         public override void Deserialize(BigEndianReader reader)
         {
-            serverId = reader.ReadVarUhShort();
+            serverId = (ushort)reader.ReadVarShort();
             address = reader.ReadUTF();
             port = reader.ReadUShort();
             canCreateNewCharacter = reader.ReadBoolean();

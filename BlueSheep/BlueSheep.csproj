@@ -1409,11 +1409,14 @@
     <Compile Include="Engine\Constants\HumanCheck.cs" />
     <Compile Include="Engine\Constants\IntelliSense.cs" />
     <Compile Include="Engine\Constants\Translate.cs" />
-    <Compile Include="Engine\Enums\FightOptionEnum.cs" />
-    <Compile Include="Engine\Enums\IdentificationFailureReasonEnum.cs" />
-    <Compile Include="Engine\Enums\ServerStatusEnum.cs" />
-    <Compile Include="Engine\Enums\SpellInabilityReasonEnum.cs" />
-    <Compile Include="Engine\Enums\StatusEnum.cs" />
+    <Compile Include="Util\Enums\Connection\ServerStatusEnum.cs" />
+    <Compile Include="Util\Text\Connection\ServerStatus.cs" />
+    <Compile Include="Util\Enums\Char\Sex.cs" />
+    <Compile Include="Util\Enums\Connection\IdentificationFailureReasonEnum.cs" />
+    <Compile Include="Util\Enums\Fight\FightOptionEnum.cs" />
+    <Compile Include="Util\Text\Connection\IdentificationFailureReason.cs" />
+    <Compile Include="Util\Enums\Fight\SpellInabilityReasonEnum.cs" />
+    <Compile Include="Util\Enums\Char\Status.cs" />
     <Compile Include="Engine\ExceptionHandler\AppSettings.cs" />
     <Compile Include="Engine\ExceptionHandler\ExceptionDialog.cs">
       <SubType>Form</SubType>
@@ -1557,6 +1560,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Enums\Char\BreedEnum.cs" />
+    <Compile Include="Util\Enums\BuidType\BuildTypeEnum.cs" />
+    <Compile Include="Util\Enums\Text\TextInformationTypeEnum.cs" />
     <Compile Include="Util\Enums\EnumHelper\EnumHelper.cs" />
     <Compile Include="Util\Enums\Servers\CommunityId.cs" />
     <Compile Include="Util\Enums\Servers\GameTypeId.cs" />
@@ -1666,6 +1672,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\Data\Pathfinding\Zones\" />
+    <Folder Include="Engine\Enums\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -89,6 +89,7 @@ namespace BlueSheep.Interface
                 {
                     AccountFrm frm = new AccountFrm(account.SubItems[0].Text, account.SubItems[1].Text, true);
                     frm.Show();
+                    MainForm.AccFrm = frm;
                     MainForm.ActualMainForm.AddForm(frm);
                 }
                 else
@@ -121,6 +122,7 @@ namespace BlueSheep.Interface
                     AccountFrm frm = new AccountFrm(account.SubItems[0].Text, account.SubItems[1].Text, false);
                     frm.Show();
                     MainForm.ActualMainForm.AddForm(frm);
+                    MainForm.AccFrm = frm;
                 }
             }
             this.Close();

@@ -43,7 +43,7 @@ public CharacterMinimalAllianceInformations()
 {
 }
 
-public CharacterMinimalAllianceInformations(int id, byte level, string name, Types.EntityLook entityLook, Types.BasicGuildInformations guild, Types.BasicAllianceInformations alliance)
+public CharacterMinimalAllianceInformations(uint id, byte level, string name, Types.EntityLook entityLook, Types.BasicGuildInformations guild, Types.BasicAllianceInformations alliance)
          : base(id, level, name, entityLook, guild)
         {
             this.alliance = alliance;

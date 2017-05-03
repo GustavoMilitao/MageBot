@@ -21,12 +21,12 @@ namespace BlueSheep.Engine.Handlers.Security
 
 
             List<int> tt = new List<int>();
-            for (int i = 0; i <= 255; i++)
-            {
-                Random random = new Random();
-                int test = random.Next(-127, 127);
-                tt.Add(test);
-            }
+            //for (int i = 0; i <= 255; i++)
+            //{
+            //    Random random = new Random();
+            //    int test = random.Next(-127, 127);
+            //    tt.Add(test);
+            //}
 
             //tt.AddRange(HumanCheck.ToListOf(new HumanCheck(account)._hashKey, BitConverter.ToInt32));
 

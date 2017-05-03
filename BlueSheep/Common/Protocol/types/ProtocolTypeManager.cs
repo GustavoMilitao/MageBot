@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BlueSheep.Interface;
+using BlueSheep.Interface.Text;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -62,7 +64,17 @@ namespace BlueSheep.Common.Protocol.Types
         {
             if (!m_types.ContainsKey(id))
             {
-                throw new ProtocolTypeNotFoundException(string.Format("Type <id:{0}> doesn't exist", id));
+                try
+                {
+                    var form = MainForm.AccFrm;
+                    form.UC.Log(new DebugTextInformation("Classe de id : [" + id + "] não implementada "), 0);
+                    return null;
+                }
+                catch
+                {
+                    return null;
+                }
+                //throw new ProtocolTypeNotFoundException(string.Format("Type <id:{0}> doesn't exist", id));
             }
 
             return m_typesConstructors[id]() as T;
