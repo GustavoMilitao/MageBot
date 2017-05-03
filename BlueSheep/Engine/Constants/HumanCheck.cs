@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -276,6 +277,15 @@ namespace BlueSheep.Engine.Constants
                 return null;
             }
         }
+
+        public static List<T> ToListOf<T>(byte[] array, Func<byte[], int, T> bitConverter)
+        {
+            var size = Marshal.SizeOf(typeof(T));
+            return Enumerable.Range(0, array.Length / size)
+                             .Select(i => bitConverter(array, i * size))
+                             .ToList();
+        }
+
 
         #region Private Methods
         private string dec(string param1, string param2)

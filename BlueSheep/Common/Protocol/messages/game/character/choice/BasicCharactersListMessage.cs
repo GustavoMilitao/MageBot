@@ -53,7 +53,7 @@ namespace BlueSheep.Common.Protocol.Messages
             characters = new Types.CharacterBaseInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                 characters[i] = Types.ProtocolTypeManager.GetInstance<Types.CharacterBaseInformations>(reader.ReadShort());
+                 characters[i] = Types.ProtocolTypeManager.GetInstance<Types.CharacterBaseInformations>((short)reader.ReadUShort());
                  characters[i].Deserialize(reader);
             }
         }

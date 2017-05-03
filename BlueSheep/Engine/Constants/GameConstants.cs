@@ -11,7 +11,7 @@
         public const sbyte BuildType = 0;
         public const sbyte Install = 1;
         public const sbyte Technology = 1;
-        public const string Lang = "fr";
+        public const string Lang = "pt";
         public const short ServerID = 0;
         public const bool AutoConnect = true;
         public const bool UseCertificate = false;

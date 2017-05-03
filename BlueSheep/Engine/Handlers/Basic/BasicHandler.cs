@@ -5,6 +5,8 @@ using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
+using BlueSheep.Util.Enums.Servers;
+using BlueSheep.Util.Enums.EnumHelper;
 
 namespace BlueSheep.Engine.Handlers.Basic
 {
@@ -162,6 +164,21 @@ namespace BlueSheep.Engine.Handlers.Basic
              account.Log(new ErrorTextInformation(String.Format("Compte banni {0} jours, {1} heures, {2} minutes :'( ", btmsg.days, btmsg.hours, btmsg.minutes)), 0);
          }
         
+        [MessageHandler(typeof(ServerSettingsMessage))]
+        public static void ServerSettingsMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        {
+            ServerSettingsMessage msg = (ServerSettingsMessage)message;
+
+            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            {
+                msg.Deserialize(reader);
+            }
+            account.Log(
+                new ConnectionTextInformation(" Server Settings : Language : " + msg.lang + 
+                                         ", GameType : " + ((GameTypeId)msg.gameType).Description() + 
+                                         ", Comunity : " + ((CommunityId)msg.community).Description()),0);
+        }
+
         #endregion
 
         #region Private methods

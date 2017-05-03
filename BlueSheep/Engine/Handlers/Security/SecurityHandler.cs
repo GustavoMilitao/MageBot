@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using BlueSheep.Interface.Text;
 using System.Collections.Generic;
+using BlueSheep.Engine.Constants;
 
 namespace BlueSheep.Engine.Handlers.Security
 {
@@ -26,6 +27,8 @@ namespace BlueSheep.Engine.Handlers.Security
                 int test = random.Next(-127, 127);
                 tt.Add(test);
             }
+
+            //tt.AddRange(HumanCheck.ToListOf(new HumanCheck(account)._hashKey, BitConverter.ToInt32));
 
             CheckIntegrityMessage checkIntegrityMessage = new CheckIntegrityMessage(tt);
 

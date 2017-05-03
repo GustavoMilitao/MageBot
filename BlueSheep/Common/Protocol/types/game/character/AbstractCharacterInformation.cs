@@ -27,48 +27,50 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class AbstractCharacterInformation
-{
+    public class AbstractCharacterInformation
+    {
 
-public new const short ID = 400;
-public virtual short TypeId
-{
-    get { return ID; }
-}
-
-public int id;
-        
-
-public AbstractCharacterInformation()
-{
-}
-
-public AbstractCharacterInformation(int id)
+        public new const short ID = 400;
+        public virtual short TypeId
         {
-            this.id = id;
+            get { return ID; }
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
+        public int Id { get => Convert.ToInt32(id); set => id = (uint)value; }
 
-writer.WriteVarInt(id);
-            
-
-}
-
-public virtual void Deserialize(BigEndianReader reader)
-{
-
-id = reader.ReadVarInt();
-            if (id < 0)
-                throw new Exception("Forbidden value on id = " + id + ", it doesn't respect the following condition : id < 0");
-            
-
-}
+        private uint id;
 
 
-}
+        public AbstractCharacterInformation()
+        {
+        }
+
+        public AbstractCharacterInformation(int id)
+        {
+            this.Id = id;
+        }
+
+
+        public virtual void Serialize(BigEndianWriter writer)
+        {
+
+            writer.WriteVarInt(Id);
+
+
+        }
+
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            id = (uint)reader.ReadInt32();
+            if (Id < 0)
+                throw new Exception("Forbidden value on id = " + Id + ", it doesn't respect the following condition : id < 0");
+
+
+        }
+
+
+    }
 
 
 }

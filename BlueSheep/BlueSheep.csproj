@@ -1557,6 +1557,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Enums\EnumHelper\EnumHelper.cs" />
     <Compile Include="Util\Enums\Servers\CommunityId.cs" />
     <Compile Include="Util\Enums\Servers\GameTypeId.cs" />
     <Compile Include="Util\Enums\Servers\PopulationId.cs" />

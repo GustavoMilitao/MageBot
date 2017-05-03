@@ -54,6 +54,7 @@ namespace BlueSheep.Interface
         private void Init()
         {
             AccountUC Uc = new AccountUC(m_user, m_pass, m_socket, this);
+            Uc.DebugMode.Checked = true;
             m_UC = Uc;
             this.Controls.Add(Uc);
             Uc.Show();

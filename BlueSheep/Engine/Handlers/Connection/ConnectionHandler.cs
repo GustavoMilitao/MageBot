@@ -1,6 +1,7 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Engine.Constants;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Engine.Types;
@@ -8,6 +9,8 @@ using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
 using RSA;
 using System;
+using System.Linq;
+
 namespace BlueSheep.Engine.Handlers.Connection
 {
     class ConnectionHandler
@@ -122,6 +125,20 @@ namespace BlueSheep.Engine.Handlers.Connection
         [MessageHandler(typeof(ServersListMessage))]
         public static void ServerListMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
         {
+            //ServersListMessage msg = new ServersListMessage();
+            //using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            //{
+            //    msg.Deserialize(reader);
+            //}
+
+            //account.Log(new ConnectionTextInformation("< --- Available Servers : --- >"),0);
+
+            //foreach (GameServerInformations gsi in msg.servers)
+            //{
+            //    account.Log(new ConnectionTextInformation("Server : "+
+            //        IntelliSense.ServersList.Where(server => server.Id == gsi.id).FirstOrDefault().Name), 0);
+            //}
+
             account.Log(new ConnectionTextInformation("Serveur complet."), 0);
             account.TryReconnect(600);
         }
@@ -145,6 +162,18 @@ namespace BlueSheep.Engine.Handlers.Connection
                 account.SocketManager.Send(charactersListRequestMessage);
             }
         }
+
+        [MessageHandler(typeof(AuthenticationTicketRefusedMessage))]
+        public static void AuthenticationTicketAcceptedRefusedTreatment(Message message, byte[] packetDatas, AccountUC account)
+        {
+            AuthenticationTicketRefusedMessage msg = new AuthenticationTicketRefusedMessage();
+            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            {
+                msg.Deserialize(reader);
+            }
+            account.Log(new ErrorTextInformation("Error : Authentication Ticket Refused"), 0);
+        }
+
         [MessageHandler(typeof(SelectedServerRefusedMessage))]
         public static void SelectedServerRefusedMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
         {

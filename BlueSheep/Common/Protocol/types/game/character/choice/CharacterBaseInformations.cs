@@ -27,53 +27,53 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class CharacterBaseInformations : CharacterMinimalPlusLookInformations
-{
+    public class CharacterBaseInformations : CharacterMinimalPlusLookInformations
+    {
 
-public new const short ID = 45;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const short ID = 45;
+        public override short TypeId
+        {
+            get { return ID; }
+        }
 
-public sbyte breed;
+        public sbyte breed;
         public bool sex;
-        
 
-public CharacterBaseInformations()
-{
-}
 
-public CharacterBaseInformations(int id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex)
-         : base(id, level, name, entityLook)
+        public CharacterBaseInformations()
+        {
+        }
+
+        public CharacterBaseInformations(int id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex)
+                 : base(id, level, name, entityLook)
         {
             this.breed = breed;
             this.sex = sex;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
             writer.WriteSByte(breed);
             writer.WriteBoolean(sex);
-            
 
-}
 
-public override void Deserialize(BigEndianReader reader)
-{
+        }
 
-base.Deserialize(reader);
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
             breed = reader.ReadSByte();
             sex = reader.ReadBoolean();
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

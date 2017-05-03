@@ -27,45 +27,45 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class CharacterToRecolorInformation : AbstractCharacterToRefurbishInformation
-{
+    public class CharacterToRecolorInformation : AbstractCharacterToRefurbishInformation
+    {
 
-public new const short ID = 212;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const short ID = 212;
+        public override short TypeId
+        {
+            get { return ID; }
+        }
 
 
 
-public CharacterToRecolorInformation()
-{
-}
-
-public CharacterToRecolorInformation(int id, int[] colors, int cosmeticId)
-         : base(id, colors, cosmeticId)
+        public CharacterToRecolorInformation()
         {
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
-
-base.Serialize(writer);
-            
-
-}
-
-public override void Deserialize(BigEndianReader reader)
-{
-
-base.Deserialize(reader);
-            
-
-}
+        public CharacterToRecolorInformation(int id, int[] colors, int cosmeticId)
+                 : base(id, colors, cosmeticId)
+        {
+        }
 
 
-}
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
+
+
+        }
+
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
+
+
+        }
+
+
+    }
 
 
 }

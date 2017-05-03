@@ -52,7 +52,7 @@ namespace BlueSheep.Core.Fight
         #region Properties
         public BFighter Fighter
         {
-            get { return GetFighter(m_Account.CharacterBaseInformations.id); }
+            get { return GetFighter(m_Account.CharacterBaseInformations.Id); }
         }
 
         public int MonsterNumber
@@ -425,7 +425,7 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public void TurnEnded(int id)
         {
-            if (id == m_Account.CharacterBaseInformations.id)
+            if (id == m_Account.CharacterBaseInformations.Id)
             {
                 int num4 = 0;
                 List<int> list = new List<int>();

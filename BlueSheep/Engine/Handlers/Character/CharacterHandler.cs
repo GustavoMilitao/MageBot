@@ -30,7 +30,7 @@ namespace BlueSheep.Engine.Handlers.Character
 
             if (!account.IsMITM)
             {
-                CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage(account.CharacterBaseInformations.id);
+                CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage(account.CharacterBaseInformations.Id);
                 account.SocketManager.Send(characterSelectionMessage);
             }
             
@@ -202,7 +202,7 @@ namespace BlueSheep.Engine.Handlers.Character
             {
                 msg.Deserialize(reader);
             }
-            if (msg.playerId == account.CharacterBaseInformations.id)
+            if (msg.playerId == account.CharacterBaseInformations.Id)
             {
                 switch (msg.status.statusId)
                 {

@@ -88,7 +88,7 @@ namespace BlueSheep.Core.Map
 
         public GameRolePlayCharacterInformations Character
         {
-            get { return Players.FirstOrDefault(p => p.contextualId == m_Account.CharacterBaseInformations.id); }
+            get { return Players.FirstOrDefault(p => p.contextualId == m_Account.CharacterBaseInformations.Id); }
         }
 
         public int Id

@@ -146,7 +146,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            if (msg.characterId == account.CharacterBaseInformations.id)
+            if (msg.characterId == account.CharacterBaseInformations.Id)
                 account.FightData.WaitForReady = !msg.isReady;
         }
 
@@ -180,7 +180,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             }
             /* TODO : HANDLE IT */
 
-            if (msg.charId == account.CharacterBaseInformations.id)
+            if (msg.charId == account.CharacterBaseInformations.Id)
             {
                 account.FightData.FightStop();
             }
