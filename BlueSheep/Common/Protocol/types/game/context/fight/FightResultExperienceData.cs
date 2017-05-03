@@ -82,8 +82,8 @@ public override void Serialize(BigEndianWriter writer)
 {
 
 base.Serialize(writer);
-            writer.WriteVarLong(experience);
-            writer.WriteVarLong(experienceLevelFloor);
+            writer.WriteDouble(experience);
+            writer.WriteDouble(experienceLevelFloor);
             writer.WriteDouble(experienceNextLevelFloor);
             writer.WriteVarInt(experienceFightDelta);
             writer.WriteVarInt(experienceForGuild);

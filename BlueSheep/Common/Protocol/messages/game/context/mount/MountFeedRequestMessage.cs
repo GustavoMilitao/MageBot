@@ -45,7 +45,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarLong(mountUid);
+            writer.WriteDouble(mountUid);
             writer.WriteSByte(mountLocation);
             writer.WriteVarInt(mountFoodUid);
             writer.WriteVarInt(quantity);

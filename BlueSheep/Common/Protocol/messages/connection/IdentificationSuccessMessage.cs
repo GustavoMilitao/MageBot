@@ -20,12 +20,12 @@ namespace BlueSheep.Common.Protocol.Messages
 {
     public class IdentificationSuccessMessage : Message
     {
-        public new const uint ID =22;
+        public new const uint ID = 22;
         public override uint ProtocolID
         {
             get { return ID; }
         }
-        
+
         public bool hasRights;
         public bool wasAlreadyConnected;
         public string login;
@@ -36,11 +36,11 @@ namespace BlueSheep.Common.Protocol.Messages
         public double accountCreation;
         public double subscriptionElapsedDuration;
         public double subscriptionEndDate;
-        
+
         public IdentificationSuccessMessage()
         {
         }
-        
+
         public IdentificationSuccessMessage(bool hasRights, bool wasAlreadyConnected, string login, string nickname, int accountId, sbyte communityId, string secretQuestion, double accountCreation, double subscriptionElapsedDuration, double subscriptionEndDate)
         {
             this.hasRights = hasRights;
@@ -54,7 +54,7 @@ namespace BlueSheep.Common.Protocol.Messages
             this.subscriptionElapsedDuration = subscriptionElapsedDuration;
             this.subscriptionEndDate = subscriptionEndDate;
         }
-        
+
         public override void Serialize(BigEndianWriter writer)
         {
             byte flag1 = 0;
@@ -70,7 +70,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteDouble(subscriptionElapsedDuration);
             writer.WriteDouble(subscriptionEndDate);
         }
-        
+
         public override void Deserialize(BigEndianReader reader)
         {
             byte flag1 = reader.ReadByte();
@@ -95,7 +95,7 @@ namespace BlueSheep.Common.Protocol.Messages
             if (subscriptionEndDate < 0 || subscriptionEndDate > 9.007199254740992E15)
                 throw new Exception("Forbidden value on subscriptionEndDate = " + subscriptionEndDate + ", it doesn't respect the following condition : subscriptionEndDate < 0 || subscriptionEndDate > 9.007199254740992E15");
         }
-        
+
     }
-    
+
 }

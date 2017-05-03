@@ -15,6 +15,7 @@ using System.Linq;
 using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Common.IO;
 using BlueSheep.Engine.Types;
+using BlueSheep.Util.Enums.Servers;
 
 namespace BlueSheep.Common.Protocol.Messages
 {
@@ -25,40 +26,45 @@ namespace BlueSheep.Common.Protocol.Messages
         {
             get { return ID; }
         }
-        
-        public short[] serverIds;
-        
-        public SelectedServerDataExtendedMessage()
+
+        public ServerPacketEnum PacketType
         {
+            get { return ServerPacketEnum.SelectedServerDataExtendedMessage; }
         }
-        
-        public SelectedServerDataExtendedMessage(bool ssl, bool canCreateNewCharacter, short serverId, string address, ushort port, string ticket, short[] serverIds)
-         : base(ssl, canCreateNewCharacter, serverId, address, port, ticket)
+
+        public List<ushort> serverIds;
+
+        public SelectedServerDataExtendedMessage(bool canCreateNewCharacter, ushort serverId, string address, ushort port, List<int> ticket, List<ushort> serverIds)
+         : base(canCreateNewCharacter, serverId, address, port, ticket)
         {
             this.serverIds = serverIds;
         }
-        
+
+        public SelectedServerDataExtendedMessage()
+        {
+        }
+
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteUShort((ushort)serverIds.Length);
-            foreach (var entry in serverIds)
+            writer.WriteShort((short)serverIds.Count);
+            for (int i = 0; i < serverIds.Count; i++)
             {
-                 writer.WriteVarShort(entry);
+                writer.WriteVarShort(serverIds[i]);
             }
         }
-        
+
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            var limit = reader.ReadUShort();
-            serverIds = new short[limit];
-            for (int i = 0; i < limit; i++)
+            ushort length = reader.ReadUShort();
+            serverIds = new List<ushort>();
+            for (int i = 0; i < length; i++)
             {
-                 serverIds[i] = reader.ReadVarShort();
+                serverIds.Add(reader.ReadVarUhShort());
             }
         }
-        
+
     }
     
 }

@@ -1212,10 +1212,11 @@ namespace BlueSheep.Engine.Network
         {
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                msg.Serialize(writer);
-                MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.ProtocolID);
-                account.SocketManager.Send(pack.Writer.Content);
+                //msg.Serialize(writer);
+                //MessagePackaging pack = new MessagePackaging(writer);
+                //pack.Pack((int)msg.ProtocolID);
+                msg.Pack(writer);
+                account.SocketManager.Send(writer.Data);
                 if (account.DebugMode.Checked)
                     account.Log(new DebugTextInformation("[SND] " + msg.ProtocolID), 0);
             }

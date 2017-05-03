@@ -60,9 +60,9 @@ namespace BlueSheep.Common.Protocol.Messages
             flag1 = BooleanByteWrapper.SetFlag(flag1, 1, abandonnedPaddock);
             writer.WriteByte(flag1);
             writer.WriteByte(level);
-            writer.WriteVarLong(expLevelFloor);
-            writer.WriteVarLong(experience);
-            writer.WriteVarLong(expNextLevelFloor);
+            writer.WriteDouble(expLevelFloor);
+            writer.WriteDouble(experience);
+            writer.WriteDouble(expNextLevelFloor);
             writer.WriteInt(creationDate);
             writer.WriteVarShort(nbTotalMembers);
             writer.WriteVarShort(nbConnectedMembers);

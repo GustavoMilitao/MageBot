@@ -62,9 +62,9 @@ public virtual void Serialize(BigEndianWriter writer)
 
 writer.WriteSByte(jobId);
             writer.WriteSByte(jobLevel);
-            writer.WriteVarLong(jobXP);
-            writer.WriteVarLong(jobXpLevelFloor);
-            writer.WriteVarLong(jobXpNextLevelFloor);
+            writer.WriteDouble(jobXP);
+            writer.WriteDouble(jobXpLevelFloor);
+            writer.WriteDouble(jobXpNextLevelFloor);
             
 
 }

@@ -63,7 +63,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteSByte(taxCollectorsCount);
             writer.WriteInt(taxCollectorAttack);
             writer.WriteVarInt(kamas);
-            writer.WriteVarLong(experience);
+            writer.WriteDouble(experience);
             writer.WriteVarInt(pods);
             writer.WriteVarInt(itemsValue);
         }

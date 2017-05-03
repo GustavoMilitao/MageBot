@@ -45,10 +45,10 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarLong(experienceCharacter);
-            writer.WriteVarLong(experienceMount);
-            writer.WriteVarLong(experienceGuild);
-            writer.WriteVarLong(experienceIncarnation);
+            writer.WriteDouble(experienceCharacter);
+            writer.WriteDouble(experienceMount);
+            writer.WriteDouble(experienceGuild);
+            writer.WriteDouble(experienceIncarnation);
         }
         
         public override void Deserialize(BigEndianReader reader)

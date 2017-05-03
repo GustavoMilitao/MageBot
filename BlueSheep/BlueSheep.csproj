@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BlueSheep</RootNamespace>
     <AssemblyName>BlueSheep</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>ftp://bluesheepbot.com/bluesheep/</PublishUrl>
@@ -80,6 +80,9 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AES">
+      <HintPath>..\..\DofusBot\AES.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework">
       <HintPath>..\packages\MetroModernUI.1.3.0.0\lib\net\MetroFramework.dll</HintPath>
     </Reference>
@@ -93,6 +96,10 @@
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RSA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\DofusBot\RSA.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -158,6 +165,8 @@
     <Compile Include="Common\IO\BigEndianReader.cs" />
     <Compile Include="Common\IO\BigEndianWriter.cs" />
     <Compile Include="Common\IO\Binary64.cs" />
+    <Compile Include="Common\IO\IDataReader.cs" />
+    <Compile Include="Common\IO\IDataWriter.cs" />
     <Compile Include="Common\IO\Int64.cs" />
     <Compile Include="Common\Protocol\BooleanByteWrapper.cs" />
     <Compile Include="Common\Protocol\messages\authorized\AdminCommandMessage.cs" />
@@ -1551,6 +1560,7 @@
     <Compile Include="Util\Enums\Servers\CommunityId.cs" />
     <Compile Include="Util\Enums\Servers\GameTypeId.cs" />
     <Compile Include="Util\Enums\Servers\PopulationId.cs" />
+    <Compile Include="Util\Enums\Servers\ServerPacketEnum.cs" />
     <EmbeddedResource Include="Engine\ExceptionHandler\ExceptionDialog.resx">
       <DependentUpon>ExceptionDialog.cs</DependentUpon>
     </EmbeddedResource>

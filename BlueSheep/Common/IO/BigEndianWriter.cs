@@ -6,232 +6,349 @@ using System.Text;
 namespace BlueSheep.Common.IO
 {
     [Serializable]
-    public class BigEndianWriter : IDisposable
+    public class BigEndianWriter : IDisposable, IDataWriter
     {
-        #region Fields
-        private BinaryWriter m_BinaryWriter;
-        #endregion
+
+        #region new BigEndianWriter
 
         #region Properties
         public byte[] Content
         {
             get
             {
-                byte[] content = new byte[m_BinaryWriter.BaseStream.Length];
+                byte[] content = new byte[BaseStream.Length];
 
-                m_BinaryWriter.BaseStream.Position = 0;
-                m_BinaryWriter.BaseStream.Read(content, 0, (int)m_BinaryWriter.BaseStream.Length);
+                BaseStream.Position = 0;
+                BaseStream.Read(content, 0, (int)BaseStream.Length);
 
                 return content;
             }
             set
             {
-                m_BinaryWriter.BaseStream.Position = 0;
-                m_BinaryWriter.BaseStream.Write(value, 0, value.Length);
+                BaseStream.Position = 0;
+                BaseStream.Write(value, 0, value.Length);
             }
         }
         #endregion
 
-        #region Constructeurs
-        public BigEndianWriter()
-        {
-            m_BinaryWriter = new BinaryWriter(new MemoryStream(), Encoding.UTF8);
-        }
 
-        public BigEndianWriter(Stream stream)
-        {
-            m_BinaryWriter = new BinaryWriter(stream, Encoding.UTF8);
-        }
-        #endregion
-
-        #region Public methods
-        public void WriteByte(byte byteToWrite)
-        {
-            m_BinaryWriter.Write(byteToWrite);
-        }
-
-        public void WriteBytes(byte[] bytesToWrite)
-        {
-            m_BinaryWriter.Write(bytesToWrite);
-        }
-
-        public void WriteUTF(string stringUTF8ToWrite)
-        {
-            byte[] stringContentInByte = Encoding.UTF8.GetBytes(stringUTF8ToWrite);
-            ushort stringLength = (ushort)stringContentInByte.Length;
-
-            WriteUShort(stringLength);
-
-            for (int index = 0; index < stringContentInByte.Length; index++)
-            {
-                m_BinaryWriter.Write(stringContentInByte[index]);
-            }
-        }
-
-        public void WriteInt(int intToWrite)
-        {
-            WriteInBigEndian(BitConverter.GetBytes(intToWrite));
-        }
-
-        public void WriteDouble(double doubleToWrite)
-        {
-            WriteInBigEndian(BitConverter.GetBytes(doubleToWrite));
-        }
-
-        public void WriteShort(short shortToWrite)
-        {
-            WriteInBigEndian(BitConverter.GetBytes(shortToWrite));
-        }
-
-        public void WriteBoolean(bool boolToWrite)
-        {
-            if (boolToWrite)
-                m_BinaryWriter.Write((byte)1);
-            else
-                m_BinaryWriter.Write((byte)0);
-        }
-
-        public void WriteChar(char charToWrite)
-        {
-            WriteInBigEndian(BitConverter.GetBytes(charToWrite));
-        }
-
-        public void WriteLong(long longToWrite)
-        {
-            WriteInBigEndian(BitConverter.GetBytes(longToWrite));
-        }
-
-        public void WriteFloat(float floatToWrite)
-        {
-            WriteInBigEndian(BitConverter.GetBytes(floatToWrite));
-        }
-
-        public void WriteSingle(Single singleToWrite)
-        {
-            WriteInBigEndian(BitConverter.GetBytes(singleToWrite));
-        }
-
-        public void WriteUInt(uint uintToWrite)
-        {
-            WriteInBigEndian(BitConverter.GetBytes(uintToWrite));
-        }
-
-        public void WriteUShort(ushort ushortToWrite)
-        {
-            WriteInBigEndian(BitConverter.GetBytes(ushortToWrite));
-        }
-
-        public void WriteULong(ulong ulongToWrite)
-        {
-            WriteInBigEndian(BitConverter.GetBytes(ulongToWrite));
-        }
-
-        public void WriteSByte(sbyte sbyteToWrite)
-        {
-            m_BinaryWriter.Write(sbyteToWrite);
-        }
-
-        public void WriteVarInt(int value)
-        {
-            BigEndianWriter buffer = new BigEndianWriter();
-            if (value >= 0 && value <= 127)
-            {
-                WriteBytes(BitConverter.GetBytes(value));
-                return;
-            }
-            int valueToWrite = value;
-            while (valueToWrite != 0)
-            {
-                byte desiredValue = Convert.ToByte(valueToWrite & 127);// extract the first 7 bits
-                valueToWrite = valueToWrite >> 7; //get the next 7 bits
-                if (valueToWrite > 0) //we're not finished
-                {
-                    desiredValue = (byte)(desiredValue | 128); //Set the continuation flag
-                }
-                buffer.WriteByte(desiredValue);
-            }
-            WriteBytes(buffer.Content);
-        }
-
-        public void WriteVarShort(int value)
-        {
-            if (value > short.MaxValue || value < short.MinValue)
-            {
-                throw new Exception("Forbidden value");
-            }
-
-            BigEndianWriter buffer = new BigEndianWriter();
-            if (value >= 0 && value <= 127)
-            {
-                buffer.WriteByte((byte)value);
-                WriteBytes(buffer.Content);
-                return;
-            }
-
-            short valueToWrite = (short)(value & 65535);
-            while (valueToWrite != 0)
-            {
-                byte byteToWrite = Convert.ToByte(valueToWrite & 127);
-                valueToWrite = (short)(valueToWrite >> 7);
-                if (valueToWrite > 0)
-                {
-                    byteToWrite = Convert.ToByte(byteToWrite | 128);
-                }
-                buffer.WriteByte(byteToWrite);
-            }
-            WriteBytes(buffer.Content);
-        }
-
-        public void WriteVarLong(double param1)
-        {
-
-            Int64 result = Int64.fromNumber(param1);
-            if (result.high == 0)
-            {
-                WriteInt32(result.low);
-                return;
-            }
-
-            for (int i = 0; i < 4; i += 1)
-            {
-                WriteByte((byte)(result.low & 127 | 128));
-                result.low = result.low >> 7;
-            }
-
-            if ((result.high & 268435455 << 3) == 0)
-            {
-                WriteByte((byte)(result.high << 4 | result.low));
-            }
-            else
-            {
-                WriteByte((byte)((result.high << 4 | result.low) & 127 | 128));
-                WriteInt32((result.high >> 3));
-            }
-        }
-
-      private void WriteInt32(uint param1)
-      {
-          while (param1 >= 128)
-          {
-              WriteByte((byte)(param1 & 127 | 128));
-              param1 = param1 >> 7;
-          }
-          WriteByte((byte)param1);
-      }
+        #region Dispose
 
         public void Dispose()
         {
-            m_BinaryWriter.Dispose();
-            m_BinaryWriter = null;
+            m_writer.Dispose();
+            m_writer = null;
         }
+
         #endregion
 
-        #region Private methods
-        private void WriteInBigEndian(byte[] contentToConvert)
+        #region Private Methods
+
+        /// <summary>
+        ///     Reverse bytes and write them into the buffer
+        /// </summary>
+        private void WriteBigEndianBytes(byte[] endianBytes)
         {
-            for (int index = contentToConvert.Length - 1; index >= 0; index--)
-                m_BinaryWriter.Write(contentToConvert[index]);
+            for (var i = endianBytes.Length - 1; i >= 0; i--)
+            {
+                m_writer.Write(endianBytes[i]);
+            }
         }
+
+        #endregion
+
+        #region Properties
+
+        private BinaryWriter m_writer;
+
+        public Stream BaseStream
+        {
+            get { return m_writer.BaseStream; }
+        }
+
+        /// <summary>
+        ///     Gets available bytes number in the buffer
+        /// </summary>
+        public long BytesAvailable
+        {
+            get { return m_writer.BaseStream.Length - m_writer.BaseStream.Position; }
+        }
+
+        public long Position
+        {
+            get { return m_writer.BaseStream.Position; }
+            set { m_writer.BaseStream.Position = value; }
+        }
+
+        public byte[] Data
+        {
+            get
+            {
+                var pos = m_writer.BaseStream.Position;
+
+                var data = new byte[m_writer.BaseStream.Length];
+                m_writer.BaseStream.Position = 0;
+                m_writer.BaseStream.Read(data, 0, (int)m_writer.BaseStream.Length);
+
+                m_writer.BaseStream.Position = pos;
+
+                return data;
+            }
+        }
+
+        #endregion
+
+        #region Initialisation
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="BigEndianWriter" /> class.
+        /// </summary>
+        public BigEndianWriter()
+        {
+            m_writer = new BinaryWriter(new MemoryStream(), Encoding.UTF8);
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="BigEndianWriter" /> class.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        public BigEndianWriter(Stream stream)
+        {
+            m_writer = new BinaryWriter(stream, Encoding.UTF8);
+        }
+
+        public BigEndianWriter(byte[] buffer)
+        {
+            m_writer = new BinaryWriter(new MemoryStream(buffer));
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        ///     Write a Short into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteShort(short @short)
+        {
+            WriteBigEndianBytes(BitConverter.GetBytes(@short));
+        }
+
+        /// <summary>
+        ///     Write a int into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteInt(int @int)
+        {
+            WriteBigEndianBytes(BitConverter.GetBytes(@int));
+        }
+
+        /// <summary>
+        ///     Write a long into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteLong(long @long)
+        {
+            WriteBigEndianBytes(BitConverter.GetBytes(@long));
+        }
+
+        /// <summary>
+        ///     Write a UShort into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteUShort(ushort @ushort)
+        {
+            WriteBigEndianBytes(BitConverter.GetBytes(@ushort));
+        }
+
+        /// <summary>
+        ///     Write a int into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteUInt(uint @uint)
+        {
+            WriteBigEndianBytes(BitConverter.GetBytes(@uint));
+        }
+
+        /// <summary>
+        ///     Write a long into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteULong(ulong @ulong)
+        {
+            WriteBigEndianBytes(BitConverter.GetBytes(@ulong));
+        }
+
+        /// <summary>
+        ///     Write a byte into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteByte(byte @byte)
+        {
+            m_writer.Write(@byte);
+        }
+
+        public void WriteSByte(sbyte @byte)
+        {
+            m_writer.Write(@byte);
+        }
+
+        /// <summary>
+        ///     Write a Float into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteFloat(float @float)
+        {
+            m_writer.Write(@float);
+        }
+
+        /// <summary>
+        ///     Write a Boolean into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteBoolean(bool @bool)
+        {
+            if (@bool)
+            {
+                m_writer.Write((byte)1);
+            }
+            else
+            {
+                m_writer.Write((byte)0);
+            }
+        }
+
+        /// <summary>
+        ///     Write a Char into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteChar(char @char)
+        {
+            WriteBigEndianBytes(BitConverter.GetBytes(@char));
+        }
+
+        /// <summary>
+        ///     Write a Double into the buffer
+        /// </summary>
+        public void WriteDouble(double @double)
+        {
+            WriteBigEndianBytes(BitConverter.GetBytes(@double));
+        }
+
+        /// <summary>
+        ///     Write a Single into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteSingle(float @single)
+        {
+            WriteBigEndianBytes(BitConverter.GetBytes(@single));
+        }
+
+        /// <summary>
+        ///     Write a string into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteUTF(string str)
+        {
+            var bytes = Encoding.UTF8.GetBytes(str);
+            var len = (ushort)bytes.Length;
+            WriteUShort(len);
+
+            int i;
+            for (i = 0; i < len; i++)
+                m_writer.Write(bytes[i]);
+        }
+
+        /// <summary>
+        ///     Write a string into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteUTFBytes(string str)
+        {
+            var bytes = Encoding.UTF8.GetBytes(str);
+            var len = bytes.Length;
+            int i;
+            for (i = 0; i < len; i++)
+                m_writer.Write(bytes[i]);
+        }
+
+        /// <summary>
+        ///     Write a bytes array into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteBytes(byte[] data)
+        {
+            m_writer.Write(data);
+        }
+
+        /// <summary>
+        ///     Write a bytes array into the buffer
+        /// </summary>
+        /// <returns></returns>
+        public void WriteBytes(byte[] data, uint offset, uint length)
+        {
+            var array = new byte[length];
+            Array.Copy(data, offset, array, 0, length);
+            m_writer.Write(array);
+        }
+
+        public void Seek(int offset, SeekOrigin seekOrigin)
+        {
+            m_writer.BaseStream.Seek(offset, seekOrigin);
+        }
+
+        public void Clear()
+        {
+            m_writer = new BinaryWriter(new MemoryStream(), Encoding.UTF8);
+        }
+
+        #endregion
+
+        #region Custom Methods
+
+        public void WriteVarShort(short @int)
+        {
+            WriteVar((ushort)@int);
+        }
+
+        public void WriteVarShort(ushort @uint)
+        {
+            WriteVar((ushort)@uint);
+        }
+
+        public void WriteVarInt(int @int)
+        {
+            WriteVar((uint)@int);
+        }
+
+        public void WriteVarInt(uint @uint)
+        {
+            WriteVar(@uint);
+        }
+
+        public void WriteVarLong(long @long)
+        {
+            WriteVar((ulong)@long);
+        }
+
+        public void WriteVarLong(ulong @ulong)
+        {
+            WriteVar(@ulong);
+        }
+
+        private void WriteVar(ulong number)
+        {
+            while (number > 127)
+            {
+                WriteByte((byte)((number & 127) | 128));
+                number >>= 7;
+            }
+            WriteByte((byte)number);
+        }
+
+        #endregion
+
         #endregion
     }
 }

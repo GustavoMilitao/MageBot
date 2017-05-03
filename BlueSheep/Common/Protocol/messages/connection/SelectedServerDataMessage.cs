@@ -28,52 +28,50 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public bool ssl;
         public bool canCreateNewCharacter;
-        public short serverId;
+        public ushort serverId;
         public string address;
         public ushort port;
-        public string ticket;
+        public List<int> ticket;
         
         public SelectedServerDataMessage()
         {
         }
         
-        public SelectedServerDataMessage(bool ssl, bool canCreateNewCharacter, short serverId, string address, ushort port, string ticket)
+        public SelectedServerDataMessage(bool canCreateNewCharacter, ushort serverId, string address, ushort port, List<int> ticket)
         {
-            this.ssl = ssl;
             this.canCreateNewCharacter = canCreateNewCharacter;
             this.serverId = serverId;
             this.address = address;
             this.port = port;
             this.ticket = ticket;
         }
-        
+
         public override void Serialize(BigEndianWriter writer)
         {
-            byte flag1 = 0;
-            flag1 = BooleanByteWrapper.SetFlag(flag1, 0, ssl);
-            flag1 = BooleanByteWrapper.SetFlag(flag1, 1, canCreateNewCharacter);
-            writer.WriteByte(flag1);
             writer.WriteVarShort(serverId);
             writer.WriteUTF(address);
             writer.WriteUShort(port);
-            writer.WriteUTF(ticket);
+            writer.WriteBoolean(canCreateNewCharacter);
+            for (int i = 0; i < ticket.Count; i++)
+            {
+                writer.WriteByte((byte)ticket[i]);
+            }
         }
-        
+
         public override void Deserialize(BigEndianReader reader)
         {
-            byte flag1 = reader.ReadByte();
-            ssl = BooleanByteWrapper.GetFlag(flag1, 0);
-            canCreateNewCharacter = BooleanByteWrapper.GetFlag(flag1, 1);
-            serverId = reader.ReadVarShort();
-            if (serverId < 0)
-                throw new Exception("Forbidden value on serverId = " + serverId + ", it doesn't respect the following condition : serverId < 0");
+            serverId = reader.ReadVarUhShort();
             address = reader.ReadUTF();
             port = reader.ReadUShort();
-            if (port < 0 || port > 65535)
-                throw new Exception("Forbidden value on port = " + port + ", it doesn't respect the following condition : port < 0 || port > 65535");
-            ticket = reader.ReadUTF();
+            canCreateNewCharacter = reader.ReadBoolean();
+            int size = reader.ReadVarInt();
+            ticket = new List<int>();
+            for (int i = 0; i < size; i++)
+            {
+                ticket.Add(reader.ReadByte());
+            }
         }
-        
+
     }
     
 }

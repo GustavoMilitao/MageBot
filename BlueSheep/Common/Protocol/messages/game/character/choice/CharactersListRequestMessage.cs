@@ -39,7 +39,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
         }
-        
+
     }
     
 }

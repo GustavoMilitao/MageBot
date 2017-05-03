@@ -27,50 +27,48 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class TaxCollectorLootInformations : TaxCollectorComplementaryInformations
-{
+    public class TaxCollectorLootInformations : TaxCollectorComplementaryInformations
+    {
 
-public new const short ID = 372;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const short ID = 372;
+        public override short TypeId
+        {
+            get { return ID; }
+        }
 
-public int kamas;
+        public int kamas;
         public double experience;
         public int pods;
         public int itemsValue;
-        
 
-public TaxCollectorLootInformations()
-{
-}
 
-public TaxCollectorLootInformations(int kamas, double experience, int pods, int itemsValue)
+        public TaxCollectorLootInformations()
+        {
+        }
+
+        public TaxCollectorLootInformations(int kamas, double experience, int pods, int itemsValue)
         {
             this.kamas = kamas;
             this.experience = experience;
             this.pods = pods;
             this.itemsValue = itemsValue;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
             writer.WriteVarInt(kamas);
-            writer.WriteVarLong(experience);
+            writer.WriteDouble(experience);
             writer.WriteVarInt(pods);
             writer.WriteVarInt(itemsValue);
-            
+        }
 
-}
+        public override void Deserialize(BigEndianReader reader)
+        {
 
-public override void Deserialize(BigEndianReader reader)
-{
-
-base.Deserialize(reader);
+            base.Deserialize(reader);
             kamas = reader.ReadVarInt();
             if (kamas < 0)
                 throw new Exception("Forbidden value on kamas = " + kamas + ", it doesn't respect the following condition : kamas < 0");
@@ -83,12 +81,12 @@ base.Deserialize(reader);
             itemsValue = reader.ReadVarInt();
             if (itemsValue < 0)
                 throw new Exception("Forbidden value on itemsValue = " + itemsValue + ", it doesn't respect the following condition : itemsValue < 0");
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

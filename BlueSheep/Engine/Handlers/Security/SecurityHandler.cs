@@ -13,59 +13,23 @@ namespace BlueSheep.Engine.Handlers.Security
     class SecurityHandler
     {
         #region Public methods
-        [MessageHandler(typeof (RawDataMessage))]
+        [MessageHandler(typeof(RawDataMessage))]
         public static void RawDataMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
         {
             //TODO : Bypass this fucking anti-bot
-            Random random = new Random();
-            int randomNumber = (int)Math.Floor(random.NextDouble() * 16777215);
 
-            CheckIntegrityMessage checkIntegrityMessage = new CheckIntegrityMessage(new List<int>() {randomNumber} );
 
-            using (BigEndianWriter writer = new BigEndianWriter())
+            List<int> tt = new List<int>();
+            for (int i = 0; i <= 255; i++)
             {
-                checkIntegrityMessage.Serialize(writer);
-
-                MessagePackaging messagePackaging = new MessagePackaging(writer);
-
-                messagePackaging.Pack((int)checkIntegrityMessage.ProtocolID);
-
-                account.SocketManager.Send(messagePackaging.Writer.Content);
+                Random random = new Random();
+                int test = random.Next(-127, 127);
+                tt.Add(test);
             }
-            //using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            //{
-            //    byte[] content = reader.ReadBytes((int)reader.BytesAvailable);
-            //    string d = DateTime.Now.ToShortDateString().Replace('\\', '-').Replace('/', '-');
-            //    File.WriteAllBytes(@"F:\RDMs\" + d + "_RDM.swf", content);
-            //    //account.SocketManager.Disconnect();
-            //}
 
-            //using (BigEndianWriter writer = new BigEndianWriter())
-            //{
-            //    TrustStatusMessage tsm = new TrustStatusMessage(true);
-            //    tsm.Serialize(writer);
-            //    writer.WriteUTF(account.Ticket);
-            //    MessagePackaging pack = new MessagePackaging(writer);
-            //    pack.Pack((int)tsm.ProtocolID);
-            //    account.SocketManager.SendRaw(pack.Writer.Content);
-            //}
-            //using (BigEndianWriter writer = new BigEndianWriter())
-            //{
-            //    writer.WriteBytes(packetDatas);
-            //    MessagePackaging pack = new MessagePackaging(writer);
-            //    pack.Pack(6253);
-            //    account.SocketManager.SendRaw(pack.Writer.Content);
-            //}
-            //    System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create();
-            //    byte[] hash = md5.ComputeHash(pack.Writer.Content);
-            //    StringBuilder sb = new StringBuilder();
-            //    for (int i = 0; i < hash.Length; i++)
-            //    {
-            //        sb.Append(hash[i].ToString("X2"));
-            //    }
-            //    System.Windows.Forms.MessageBox.Show(sb.ToString());
-            //}
-            
+            CheckIntegrityMessage checkIntegrityMessage = new CheckIntegrityMessage(tt);
+
+            account.SocketManager.Send(checkIntegrityMessage);
         }
 
         [MessageHandler(typeof(CheckIntegrityMessage))]

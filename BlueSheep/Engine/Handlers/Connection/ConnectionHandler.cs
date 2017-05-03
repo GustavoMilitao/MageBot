@@ -1,5 +1,4 @@
-﻿using BlueSheep.Common.Cryptography;
-using BlueSheep.Common.Data.D2o;
+﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Engine.Constants;
@@ -7,6 +6,7 @@ using BlueSheep.Engine.Enums;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
+using RSA;
 using System;
 namespace BlueSheep.Engine.Handlers.Connection
 {
@@ -72,7 +72,7 @@ namespace BlueSheep.Engine.Handlers.Connection
                 msg.Deserialize(reader);
             }
             //account.Log(new BotTextInformation(selectedServerDataExtendedMessage.address + " " + (int)selectedServerDataExtendedMessage.port));
-            account.Ticket = msg.ticket;
+            account.Ticket = AES.AES.TicketTrans(msg.ticket).ToString();
             account.HumanCheck = new HumanCheck(account);
             account.SocketManager.IsChangingServer = true;
             if (!account.IsMITM)
@@ -83,8 +83,12 @@ namespace BlueSheep.Engine.Handlers.Connection
             }
             else
             {
-                SelectedServerDataExtendedMessage nmsg = new SelectedServerDataExtendedMessage(
-                msg.ssl, msg.canCreateNewCharacter, msg.serverId, "127.0.0.1", msg.port, msg.ticket, msg.serverIds);
+                SelectedServerDataExtendedMessage nmsg = new SelectedServerDataExtendedMessage(msg.canCreateNewCharacter,
+                                                                                               msg.serverId,
+                                                                                               msg.address,
+                                                                                               msg.port,
+                                                                                               msg.ticket,
+                                                                                               msg.serverIds);
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
                     nmsg.Serialize(writer);

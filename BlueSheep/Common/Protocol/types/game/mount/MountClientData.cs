@@ -124,8 +124,8 @@ writer.WriteDouble(id);
             }
             writer.WriteUTF(name);
             writer.WriteInt(ownerId);
-            writer.WriteVarLong(experience);
-            writer.WriteVarLong(experienceForLevel);
+            writer.WriteDouble(experience);
+            writer.WriteDouble(experienceForLevel);
             writer.WriteDouble(experienceForNextLevel);
             writer.WriteSByte(level);
             writer.WriteVarInt(maxPods);

@@ -81,7 +81,7 @@ base.Serialize(writer);
             writer.WriteSByte(breed);
             writer.WriteBoolean(sex);
             writer.WriteVarShort(rank);
-            writer.WriteVarLong(givenExperience);
+            writer.WriteDouble(givenExperience);
             writer.WriteSByte(experienceGivenPercent);
             writer.WriteVarInt(rights);
             writer.WriteSByte(connected);

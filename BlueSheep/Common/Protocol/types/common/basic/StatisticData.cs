@@ -31,7 +31,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
 
-            writer.WriteVarShort((int)this.actionId);
+            writer.WriteInt((int)actionId);
 
 
 
