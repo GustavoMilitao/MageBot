@@ -30,12 +30,12 @@ namespace BlueSheep.Common.Protocol.Types
 
         public virtual void Serialize(BigEndianWriter writer)
         {
-            writer.WriteInt(this.value);
+            writer.WriteInt(value);
         }
 
         public virtual void Deserialize(BigEndianReader reader)
         {
-            this.value = reader.ReadInt();
+            value = reader.ReadInt();
         }
     }
 }

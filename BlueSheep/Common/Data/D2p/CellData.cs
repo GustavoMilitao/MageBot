@@ -11,15 +11,15 @@ namespace BlueSheep.Data.D2p
         // Methods
         internal void Init(BigEndianReader Reader, int MapVersion)
         {
-            this.Floor = (Reader.ReadSByte() * 10);
-            if ((this.Floor != -1280))
+            Floor = (Reader.ReadSByte() * 10);
+            if ((Floor != -1280))
             {
-                this.LosMov = Reader.ReadSByte();
-                this.Speed = Reader.ReadSByte();
-                this.MapChangeData = Reader.ReadByte();
+                LosMov = Reader.ReadSByte();
+                Speed = Reader.ReadSByte();
+                MapChangeData = Reader.ReadByte();
                 if ((MapVersion > 5))
                 {
-                    this.MoveZone = Reader.ReadByte();
+                    MoveZone = Reader.ReadByte();
                 }
                 if ((MapVersion > 7))
                 {
@@ -31,57 +31,57 @@ namespace BlueSheep.Data.D2p
 
         public bool Blue()
         {
-            return (((this.LosMov & 16) >> 4) == 1);
+            return (((LosMov & 16) >> 4) == 1);
         }
 
         public bool FarmCell()
         {
-            return (((this.LosMov & 32) >> 5) == 1);
+            return (((LosMov & 32) >> 5) == 1);
         }
 
         public bool Los()
         {
-            return (((this.LosMov & 2) >> 1) == 1);
+            return (((LosMov & 2) >> 1) == 1);
         }
 
         public bool Mov()
         {
-            return ((this.LosMov & 1) == 1);
+            return ((LosMov & 1) == 1);
         }
 
         public bool NonWalkableDuringFight()
         {
-            return (((this.LosMov & 4) >> 2) == 1);
+            return (((LosMov & 4) >> 2) == 1);
         }
 
         public bool Red()
         {
-            return (((this.LosMov & 8) >> 3) == 1);
+            return (((LosMov & 8) >> 3) == 1);
         }
 
         public bool Visible()
         {
-            return (((this.LosMov & 64) >> 6) == 1);
+            return (((LosMov & 64) >> 6) == 1);
         }
 
         public bool TopArrow()
         {
-            return ((this.Arrow & 1) != 0);
+            return ((Arrow & 1) != 0);
         }
 
         public bool BottomArrow()
         {
-            return ((this.Arrow & 2) != 0);
+            return ((Arrow & 2) != 0);
         }
 
         public bool RightArrow()
         {
-            return ((this.Arrow & 4) != 0);
+            return ((Arrow & 4) != 0);
         }
 
         public bool LeftArrow()
         {
-            return ((this.Arrow & 8) != 0);
+            return ((Arrow & 8) != 0);
         }
 
         // Fields

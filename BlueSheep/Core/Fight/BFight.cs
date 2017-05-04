@@ -85,7 +85,7 @@ namespace BlueSheep.Core.Fight
             int maxNumber = (int)m_Account.nudMaxMonstersNumber.Value;
             int minLevel = (int)m_Account.nudMinMonstersLevel.Value;
             int maxLevel = (int)m_Account.nudMaxMonstersLevel.Value;
-            lock(this.clock)
+            lock(clock)
             {
                 foreach (MonsterGroup monsters in m_Account.MapData.Monsters)
                 {

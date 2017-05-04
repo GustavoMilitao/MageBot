@@ -16,10 +16,10 @@ namespace BlueSheep.Data.Pathfinding
         // Methods
         public Pathfinder(MapData map)
         {
-            this.MapData = map;
+            MapData = map;
             if (MapData.Id == 2561)
             {
-                this.ListCellIdFighters.Add(53);
+                ListCellIdFighters.Add(53);
             }
         }
 
@@ -51,31 +51,31 @@ namespace BlueSheep.Data.Pathfinding
 
         public void StartPathfinding(MapPoint startP, MapPoint endP)
         {
-            this.Start = startP;
-            this.End = endP;
-            this.StartX = startP.X;
-            this.StartY = startP.Y;
-            this.EndX = endP.X;
-            this.EndY = endP.Y;
+            Start = startP;
+            End = endP;
+            StartX = startP.X;
+            StartY = startP.Y;
+            EndX = endP.X;
+            EndY = endP.Y;
 
-            this.StartPoint = new MapPoint(startP.X, startP.Y);
-            this.EndPoint = new MapPoint(endP.X, endP.Y);
+            StartPoint = new MapPoint(startP.X, startP.Y);
+            EndPoint = new MapPoint(endP.X, endP.Y);
 
-            this.AuxEndPoint = this.StartPoint;
-            this.AuxEndX = this.StartPoint.X;
-            this.AuxEndY = this.StartPoint.Y;
+            AuxEndPoint = StartPoint;
+            AuxEndX = StartPoint.X;
+            AuxEndY = StartPoint.Y;
 
-            this.DistanceToEnd = this.StartPoint.DistanceToCell(this.EndPoint);
+            DistanceToEnd = StartPoint.DistanceToCell(EndPoint);
 
-            for (int y = -19; y <= this.MaxY; y++)
+            for (int y = -19; y <= MaxY; y++)
             {
-                for (int x = 0; x <= this.MaxX; x++)
+                for (int x = 0; x <= MaxX; x++)
                 {
-                    this.MapStatus.Add(new CellInfo(0, null, false, false, x, y));
+                    MapStatus.Add(new CellInfo(0, null, false, false, x, y));
                 }
             }
             OpenList = new List<OpenSquare>();
-            OpenSquare(this.StartY, this.StartX, null, 0, 0, false);
+            OpenSquare(StartY, StartX, null, 0, 0, false);
         }
 
         public void ProcessPathfinding()
@@ -95,29 +95,29 @@ namespace BlueSheep.Data.Pathfinding
             double heuristic = 0;
             uint square = 0;
 
-            if (this.OpenList.Count > 0 && !(IsClosed(this.EndY, this.EndX)))
+            if (OpenList.Count > 0 && !(IsClosed(EndY, EndX)))
             {
                 square = NearerSquare();
-                this.NowY = this.OpenList[(int)square].Y;
-                this.NowX = this.OpenList[(int)square].X;
-                this.PreviousCellId = (new MapPoint(this.NowX, this.NowY)).CellId;
-                CloseSquare(this.NowY, this.NowX);
+                NowY = OpenList[(int)square].Y;
+                NowX = OpenList[(int)square].X;
+                PreviousCellId = (new MapPoint(NowX, NowY)).CellId;
+                CloseSquare(NowY, NowX);
 
-                for (actualY = this.NowY - 1; actualY <= this.NowY + 1; actualY++)
+                for (actualY = NowY - 1; actualY <= NowY + 1; actualY++)
                 {
-                    for (actualX = this.NowX - 1; actualX <= this.NowX + 1; actualX++)
+                    for (actualX = NowX - 1; actualX <= NowX + 1; actualX++)
                     {
                         if ((new MapPoint(actualX, actualY)).IsInMap())
                         {
-                            if (actualY >= this.MinY && actualY < this.MaxY && actualX >= this.MinX && actualX < this.MaxX && !(actualY == this.NowY && actualX == this.NowX) && ((this.AllowDiag) || actualY == this.NowY || actualX == this.NowX && ((AllowDiagCornering) || actualY == this.NowY || actualX == this.NowX || (PointMov(this.NowX, this.NowY,  this.PreviousCellId, this.AllowTroughEntity)) || (PointMov(actualX, this.NowY, this.PreviousCellId, this.AllowTroughEntity)))))
+                            if (actualY >= MinY && actualY < MaxY && actualX >= MinX && actualX < MaxX && !(actualY == NowY && actualX == NowX) && ((AllowDiag) || actualY == NowY || actualX == NowX && ((AllowDiagCornering) || actualY == NowY || actualX == NowX || (PointMov(NowX, NowY, PreviousCellId, AllowTroughEntity)) || (PointMov(actualX, NowY, PreviousCellId, AllowTroughEntity)))))
                             {
-                                if (!(!(PointMov(this.NowX, actualY, this.PreviousCellId, this.AllowTroughEntity)) && !(PointMov(actualX, this.NowY, this.PreviousCellId, this.AllowTroughEntity)) && !this.IsFighting && (this.AllowDiag)))
+                                if (!(!(PointMov(NowX, actualY, PreviousCellId, AllowTroughEntity)) && !(PointMov(actualX, NowY, PreviousCellId, AllowTroughEntity)) && !IsFighting && (AllowDiag)))
                                 {
-                                    if (PointMov(actualX, actualY, this.PreviousCellId, this.AllowTroughEntity))
+                                    if (PointMov(actualX, actualY, PreviousCellId, AllowTroughEntity))
                                     {
                                         if (!(IsClosed(actualY, actualX)))
                                         {
-                                            if (actualX == this.EndX && actualY == this.EndY)
+                                            if (actualX == EndX && actualY == EndY)
                                             {
                                                 speed = 1;
                                             }
@@ -126,31 +126,31 @@ namespace BlueSheep.Data.Pathfinding
                                                 speed = (int)GetCellSpeed((new MapPoint(actualX, actualY)).CellId, AllowTroughEntity);
                                             }
 
-                                            moveCost = this.GetCellInfo(this.NowY, this.NowX).MovementCost + ((actualY == this.NowY || actualX == this.NowX) ? this.HVCost : this.DCost) * speed;
+                                            moveCost = GetCellInfo(NowY, NowX).MovementCost + ((actualY == NowY || actualX == NowX) ? HVCost : DCost) * speed;
 
                                             if (AllowTroughEntity)
                                             {
-                                                isDownRightEnd = actualX + actualY == this.EndX + this.EndY;
-                                                isDownRightStart = actualX + actualY == this.StartX + this.StartY;
-                                                isTopRightEnd = actualX - actualY == this.EndX - this.EndY;
-                                                isTopRightStart = actualX - actualY == this.StartX - this.StartY;
+                                                isDownRightEnd = actualX + actualY == EndX + EndY;
+                                                isDownRightStart = actualX + actualY == StartX + StartY;
+                                                isTopRightEnd = actualX - actualY == EndX - EndY;
+                                                isTopRightStart = actualX - actualY == StartX - StartY;
                                                 actualPoint = new MapPoint(actualX, actualY);
 
                                                 if (!isDownRightEnd && !isTopRightEnd || !isDownRightStart && !isTopRightStart)
                                                 {
-                                                    moveCost = moveCost + actualPoint.DistanceToCell(this.EndPoint);
-                                                    moveCost = moveCost + actualPoint.DistanceToCell(this.StartPoint);
+                                                    moveCost = moveCost + actualPoint.DistanceToCell(EndPoint);
+                                                    moveCost = moveCost + actualPoint.DistanceToCell(StartPoint);
                                                 }
 
-                                                if (actualX == this.EndX || actualY == this.EndY)
+                                                if (actualX == EndX || actualY == EndY)
                                                 {
                                                     moveCost = moveCost - 3;
                                                 }
-                                                if ((isDownRightEnd) || (isTopRightEnd) || actualX + actualY == this.NowX + this.NowY || actualX - actualY == this.NowX - this.NowY)
+                                                if ((isDownRightEnd) || (isTopRightEnd) || actualX + actualY == NowX + NowY || actualX - actualY == NowX - NowY)
                                                 {
                                                     moveCost = moveCost - 2;
                                                 }
-                                                if (actualX == this.StartX || actualY == this.StartY)
+                                                if (actualX == StartX || actualY == StartY)
                                                 {
                                                     moveCost = moveCost - 3;
                                                 }
@@ -159,30 +159,30 @@ namespace BlueSheep.Data.Pathfinding
                                                     moveCost = moveCost - 2;
                                                 }
 
-                                                actualDistanceToEnd = actualPoint.DistanceToCell(this.EndPoint);
-                                                if (actualDistanceToEnd < this.DistanceToEnd)
+                                                actualDistanceToEnd = actualPoint.DistanceToCell(EndPoint);
+                                                if (actualDistanceToEnd < DistanceToEnd)
                                                 {
-                                                    if (actualX == this.EndX || actualY == this.EndY || actualX + actualY == this.EndX + this.EndY || actualX - actualY == this.EndX - this.EndY)
+                                                    if (actualX == EndX || actualY == EndY || actualX + actualY == EndX + EndY || actualX - actualY == EndX - EndY)
                                                     {
-                                                        this.AuxEndPoint = actualPoint;
-                                                        this.AuxEndX = actualX;
-                                                        this.AuxEndY = actualY;
-                                                        this.DistanceToEnd = actualDistanceToEnd;
+                                                        AuxEndPoint = actualPoint;
+                                                        AuxEndX = actualX;
+                                                        AuxEndY = actualY;
+                                                        DistanceToEnd = actualDistanceToEnd;
                                                     }
                                                 }
                                             }
 
                                             if (IsOpened(actualY, actualX))
                                             {
-                                                if (moveCost < this.GetCellInfo(actualY, actualX).MovementCost)
+                                                if (moveCost < GetCellInfo(actualY, actualX).MovementCost)
                                                 {
-                                                    this.OpenSquare(actualY, actualX, new[] { this.NowY, this.NowX }, moveCost, 0, true);
+                                                    OpenSquare(actualY, actualX, new[] { NowY, NowX }, moveCost, 0, true);
                                                 }
                                             }
                                             else
                                             {
-                                                heuristic = Convert.ToDouble(this.HeuristicCost) * Math.Sqrt((this.EndY - actualY) * (this.EndY - actualY) + (this.EndX - actualX) * (this.EndX - actualX));
-                                                OpenSquare(actualY, actualX, new[] { this.NowY, this.NowX }, moveCost, heuristic, false);
+                                                heuristic = Convert.ToDouble(HeuristicCost) * Math.Sqrt((EndY - actualY) * (EndY - actualY) + (EndX - actualX) * (EndX - actualX));
+                                                OpenSquare(actualY, actualX, new[] { NowY, NowX }, moveCost, heuristic, false);
                                             }
                                         }
                                     }
@@ -213,37 +213,37 @@ namespace BlueSheep.Data.Pathfinding
             int thirdY = 0;
             int btwX = 0;
             int btwY = 0;
-            bool endPointClosed = IsClosed(this.EndY, this.EndX);
+            bool endPointClosed = IsClosed(EndY, EndX);
 
             if (!endPointClosed)
             {
-                this.EndPoint = this.AuxEndPoint;
-                this.EndX = this.AuxEndX;
-                this.EndY = this.AuxEndY;
+                EndPoint = AuxEndPoint;
+                EndX = AuxEndX;
+                EndY = AuxEndY;
                 endPointClosed = true;
-                MovPath.CellEnd = this.EndPoint;
+                MovPath.CellEnd = EndPoint;
             }
-            this.PreviousCellId = -1;
+            PreviousCellId = -1;
             if (endPointClosed)
             {
-                this.NowX = this.EndX;
-                this.NowY = this.EndY;
+                NowX = EndX;
+                NowY = EndY;
 
-                while (!(this.NowX == this.StartX) || !(this.NowY == this.StartY))
+                while (!(NowX == StartX) || !(NowY == StartY))
                 {
-                    mapsArray.Add(new MapPoint(this.NowX, this.NowY));
-                    parentY = this.GetCellInfo(this.NowY, this.NowX).Parent[0];
-                    parentX = this.GetCellInfo(this.NowY, this.NowX).Parent[1];
-                    this.NowX = parentX;
-                    this.NowY = parentY;
+                    mapsArray.Add(new MapPoint(NowX, NowY));
+                    parentY = GetCellInfo(NowY, NowX).Parent[0];
+                    parentX = GetCellInfo(NowY, NowX).Parent[1];
+                    NowX = parentX;
+                    NowY = parentY;
                 }
-                mapsArray.Add(this.StartPoint);
+                mapsArray.Add(StartPoint);
                 if (AllowDiag)
                 {
                     for (i = 0; i < mapsArray.Count; i++)
                     {
                         tempArray.Add(mapsArray[i]);
-                        this.PreviousCellId = mapsArray[i].CellId;
+                        PreviousCellId = mapsArray[i].CellId;
                         if ((mapsArray.Count > i + 2 && !((mapsArray[i + 2] == null)) && (mapsArray[i].DistanceToCell(mapsArray[i + 2]) == 1)) && (!(IsChangeZone(mapsArray[i].CellId, mapsArray[i + 1].CellId))) && !(IsChangeZone(mapsArray[i + 1].CellId, mapsArray[i + 2].CellId)))
                         {
                             i += 1;
@@ -259,10 +259,10 @@ namespace BlueSheep.Data.Pathfinding
                                 btwX = actualX + (int)Math.Round((thirdX - actualX) / 2.0);
                                 btwY = actualY + (int)Math.Round((thirdY - actualY) / 2.0);
                                 btwPoint = new MapPoint(btwX, btwY);
-                                if ((PointMov(btwX, btwY, this.PreviousCellId, true)) && GetCellSpeed(btwPoint.CellId, this.AllowTroughEntity) < 2)
+                                if ((PointMov(btwX, btwY, PreviousCellId, true)) && GetCellSpeed(btwPoint.CellId, AllowTroughEntity) < 2)
                                 {
                                     tempArray.Add(btwPoint);
-                                    this.PreviousCellId = btwPoint.CellId;
+                                    PreviousCellId = btwPoint.CellId;
                                     i += 2;
                                 }
                             }
@@ -289,20 +289,20 @@ namespace BlueSheep.Data.Pathfinding
                                         }
                                         else
                                         {
-                                            if (actualX == thirdX && !(actualX == btwX) && GetCellSpeed((new MapPoint(actualX, btwY)).CellId, this.AllowTroughEntity) < 2 && (PointMov(actualX, btwY, this.PreviousCellId, this.AllowTroughEntity)))
+                                            if (actualX == thirdX && !(actualX == btwX) && GetCellSpeed((new MapPoint(actualX, btwY)).CellId, AllowTroughEntity) < 2 && (PointMov(actualX, btwY, PreviousCellId, AllowTroughEntity)))
                                             {
                                                 btwPoint = new MapPoint(actualX, btwY);
                                                 tempArray.Add(btwPoint);
-                                                this.PreviousCellId = btwPoint.CellId;
+                                                PreviousCellId = btwPoint.CellId;
                                                 i += 1;
                                             }
                                             else
                                             {
-                                                if (actualY == thirdY && !(actualY == btwY) && GetCellSpeed((new MapPoint(btwX, actualY)).CellId, this.AllowTroughEntity) < 2 && (PointMov(btwX, actualY, this.PreviousCellId, this.AllowTroughEntity)))
+                                                if (actualY == thirdY && !(actualY == btwY) && GetCellSpeed((new MapPoint(btwX, actualY)).CellId, AllowTroughEntity) < 2 && (PointMov(btwX, actualY, PreviousCellId, AllowTroughEntity)))
                                                 {
                                                     btwPoint = new MapPoint(btwX, actualY);
                                                     tempArray.Add(btwPoint);
-                                                    this.PreviousCellId = btwPoint.CellId;
+                                                    PreviousCellId = btwPoint.CellId;
                                                     i += 1;
                                                 }
                                             }
@@ -346,7 +346,7 @@ namespace BlueSheep.Data.Pathfinding
             if (actualPoint.IsInMap())
             {
                 fCellData = MapData.Data.Cells[actualPoint.CellId];
-                mov = ((fCellData.Mov()) && (!this.IsFighting || !fCellData.NonWalkableDuringFight()));
+                mov = ((fCellData.Mov()) && (!IsFighting || !fCellData.NonWalkableDuringFight()));
 
                 if (!((mov == false)) && isNewSystem && cellId != -1 && cellId != actualPoint.CellId)
                 {
@@ -443,12 +443,12 @@ namespace BlueSheep.Data.Pathfinding
 
         public bool IsOpened(int y, int x)
         {
-            return this.GetCellInfo(y, x).Opened;
+            return GetCellInfo(y, x).Opened;
         }
 
         public bool IsClosed(int y, int x)
         {
-            CellInfo cellInfo = this.GetCellInfo(y, x);
+            CellInfo cellInfo = GetCellInfo(y, x);
             if ((cellInfo == null) || !cellInfo.Closed)
             {
                 return false;
@@ -462,9 +462,9 @@ namespace BlueSheep.Data.Pathfinding
             double distance = 9999999;
             double tempDistance = 0;
 
-            for (int tempY = 0; tempY < this.OpenList.Count; tempY++)
+            for (int tempY = 0; tempY < OpenList.Count; tempY++)
             {
-                tempDistance = this.GetCellInfo(this.OpenList[tempY].Y, this.OpenList[tempY].X).Heuristic + this.GetCellInfo(this.OpenList[tempY].Y, this.OpenList[tempY].X).MovementCost;
+                tempDistance = GetCellInfo(OpenList[tempY].Y, OpenList[tempY].X).Heuristic + GetCellInfo(OpenList[tempY].Y, OpenList[tempY].X).MovementCost;
                 if (tempDistance <= distance)
                 {
                     distance = tempDistance;
@@ -477,7 +477,7 @@ namespace BlueSheep.Data.Pathfinding
         public void CloseSquare(int y, int x)
         {
             OpenList.RemoveAll((os) => os.X == x && os.Y == y);
-            CellInfo cell = this.GetCellInfo(y, x);
+            CellInfo cell = GetCellInfo(y, x);
             cell.Opened = false;
             cell.Closed = true;
         }
@@ -486,7 +486,7 @@ namespace BlueSheep.Data.Pathfinding
         {
             if (!newSquare)
             {
-                foreach (OpenSquare op in this.OpenList)
+                foreach (OpenSquare op in OpenList)
                 {
                     if (op.Y == y && op.X == x)
                     {
@@ -498,12 +498,12 @@ namespace BlueSheep.Data.Pathfinding
 
             if (!newSquare)
             {
-                this.OpenList.Add(new OpenSquare(y, x));
-                this.MapStatus.RemoveAll((c) => c.X == x && c.Y == y);
-                this.MapStatus.Add(new CellInfo(heuristic, null, true, false, x, y));
+                OpenList.Add(new OpenSquare(y, x));
+                MapStatus.RemoveAll((c) => c.X == x && c.Y == y);
+                MapStatus.Add(new CellInfo(heuristic, null, true, false, x, y));
             }
 
-            CellInfo cell = this.GetCellInfo(y, x);
+            CellInfo cell = GetCellInfo(y, x);
             cell.Parent = parent;
             cell.MovementCost = moveCost;
         }
@@ -517,9 +517,9 @@ namespace BlueSheep.Data.Pathfinding
                 path = new PathElement();
                 path.Cell = squares[i];
                 path.Orientation = squares[i].OrientationTo(squares[i + 1]);
-                this.MovPath.Cells.Add(path);
+                MovPath.Cells.Add(path);
             }
-            this.MovPath.Compress();
+            MovPath.Compress();
         }
 
         public void SetFight(List<BFighter> Fighters, int MovementPoints)
@@ -527,10 +527,10 @@ namespace BlueSheep.Data.Pathfinding
             foreach (BFighter fighter in Fighters)
             {
                 if (fighter.IsAlive)
-                    this.ListCellIdFighters.Add(fighter.CellId);
+                    ListCellIdFighters.Add(fighter.CellId);
             }
-            this.MovePoint = MovementPoints;
-            this.IsFighting = true;
+            MovePoint = MovementPoints;
+            IsFighting = true;
         }
 
         public CellInfo GetCellInfo(int y, int x)

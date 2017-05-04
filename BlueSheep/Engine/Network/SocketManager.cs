@@ -328,7 +328,7 @@ namespace BlueSheep.Engine.Network
         public IPAddress SourceIP;
         public NetSocketConnectedEventArgs(IPAddress ip)
         {
-            this.SourceIP = ip;
+            SourceIP = ip;
         }
     }
 
@@ -337,7 +337,7 @@ namespace BlueSheep.Engine.Network
         public string Reason;
         public NetSocketDisconnectedEventArgs(string reason)
         {
-            this.Reason = reason;
+            Reason = reason;
         }
     }
 
@@ -347,8 +347,8 @@ namespace BlueSheep.Engine.Network
         public SocketState PrevState;
         public NetSockStateChangedEventArgs(SocketState newState, SocketState prevState)
         {
-            this.NewState = newState;
-            this.PrevState = prevState;
+            NewState = newState;
+            PrevState = prevState;
         }
     }
 
@@ -357,7 +357,7 @@ namespace BlueSheep.Engine.Network
         public byte[] Data;
         public NetSockDataArrivalEventArgs(byte[] data)
         {
-            this.Data = data;
+            Data = data;
         }
     }
 
@@ -367,8 +367,8 @@ namespace BlueSheep.Engine.Network
         public Exception Exception;
         public NetSockErrorReceivedEventArgs(string function, Exception ex)
         {
-            this.Function = function;
-            this.Exception = ex;
+            Function = function;
+            Exception = ex;
         }
     }
 
@@ -377,7 +377,7 @@ namespace BlueSheep.Engine.Network
         public Socket Client;
         public NetSockConnectionRequestEventArgs(Socket client)
         {
-            this.Client = client;
+            Client = client;
         }
     }
     #endregion
@@ -420,7 +420,7 @@ namespace BlueSheep.Engine.Network
 
         #region Public Properties
         /// <summary>Current state of the socket</summary>
-        public SocketState State { get { return this.state; } }
+        public SocketState State { get { return state; } }
 
         /// <summary>Port the socket control is listening on.</summary>
         public int LocalPort
@@ -429,7 +429,7 @@ namespace BlueSheep.Engine.Network
             {
                 try
                 {
-                    return ((IPEndPoint)this.socket.LocalEndPoint).Port;
+                    return ((IPEndPoint)socket.LocalEndPoint).Port;
                 }
                 catch
                 {
@@ -470,8 +470,8 @@ namespace BlueSheep.Engine.Network
         /// <summary>Base constructor sets up buffer and timer</summary>
         public NetBase()
         {
-            this.connectionTimer = new Timer(
-                new TimerCallback(this.connectedTimerCallback),
+            connectionTimer = new Timer(
+                new TimerCallback(connectedTimerCallback),
                 null, Timeout.Infinite, Timeout.Infinite);
         }
         #endregion
@@ -489,21 +489,21 @@ namespace BlueSheep.Engine.Network
                     throw new NullReferenceException("data cannot be empty");
                 else
                 {
-                    lock (this.sendBuffer)
+                    lock (sendBuffer)
                     {
-                        this.sendBuffer.Enqueue(data);
+                        sendBuffer.Enqueue(data);
                     }
 
-                    if (!this.isSending)
+                    if (!isSending)
                     {
-                        this.isSending = true;
-                        this.SendNextQueued();
+                        isSending = true;
+                        SendNextQueued();
                     }
                 }
             }
             catch (Exception ex)
             {
-                this.OnErrorReceived("Send", ex);
+                OnErrorReceived("Send", ex);
             }
         }
 
@@ -512,24 +512,24 @@ namespace BlueSheep.Engine.Network
         {
             try
             {
-                if (IsConnected(this.socket))
+                if (IsConnected(socket))
                 {
                     List<ArraySegment<byte>> send = new List<ArraySegment<byte>>(3);
                     int length = 0;
-                    lock (this.sendBuffer)
+                    lock (sendBuffer)
                     {
-                        if (this.sendBuffer.Count == 0)
+                        if (sendBuffer.Count == 0)
                         {
-                            this.isSending = false;
+                            isSending = false;
                             return; // nothing more to send
                         }
 
-                        byte[] data = this.sendBuffer.Dequeue();
+                        byte[] data = sendBuffer.Dequeue();
                         send.Add(new ArraySegment<byte>(data));
 
                         length = data.Length;
                     }
-                    this.socket.BeginSend(send, SocketFlags.None, new AsyncCallback(this.SendCallback), this.socket);
+                    socket.BeginSend(send, SocketFlags.None, new AsyncCallback(SendCallback), socket);
                 }
                 else
                 {
@@ -538,7 +538,7 @@ namespace BlueSheep.Engine.Network
             }
             catch (Exception ex)
             {
-                this.OnErrorReceived("Sending", ex);
+                OnErrorReceived("Sending", ex);
             }
         }
 
@@ -551,13 +551,13 @@ namespace BlueSheep.Engine.Network
                 Socket sock = (Socket)ar.AsyncState;
                 int didSend = sock.EndSend(ar);
 
-                if (this.socket != sock)
+                if (socket != sock)
                 {
-                    this.Close("Async Connect Socket mismatched");
+                    Close("Async Connect Socket mismatched");
                     return;
                 }
 
-                this.SendNextQueued();
+                SendNextQueued();
             }
             catch (ObjectDisposedException)
             {
@@ -566,14 +566,14 @@ namespace BlueSheep.Engine.Network
             catch (SocketException ex)
             {
                 if (ex.SocketErrorCode == SocketError.ConnectionReset)
-                    this.Close("Remote Socket Closed");
+                    Close("Remote Socket Closed");
                 else
                     throw;
             }
             catch (Exception ex)
             {
-                this.Close("Socket Send Exception");
-                this.OnErrorReceived("Socket Send", ex);
+                Close("Socket Send Exception");
+                OnErrorReceived("Socket Send", ex);
             }
         }
         #endregion
@@ -585,40 +585,40 @@ namespace BlueSheep.Engine.Network
         {
             try
             {
-                if (this.state == SocketState.Closing || this.state == SocketState.Closed)
+                if (state == SocketState.Closing || state == SocketState.Closed)
                     return; // already closing/closed
 
-                this.OnChangeState(SocketState.Closing);
+                OnChangeState(SocketState.Closing);
 
-                if (this.socket != null)
+                if (socket != null)
                 {
-                    this.socket.Close();
-                    this.socket = null;
+                    socket.Close();
+                    socket = null;
                 }
             }
             catch (Exception ex)
             {
-                this.OnErrorReceived("Close", ex);
+                OnErrorReceived("Close", ex);
             }
 
             try
             {
                 //lock (this.rxBuffer)
                 //{
-                    this.rxBuffer.SetLength(0);
+                rxBuffer.SetLength(0);
                 //}
                 //lock (this.sendBuffer)
                 //{
-                    this.sendBuffer.Clear();
-                    this.isSending = false;
+                sendBuffer.Clear();
+                isSending = false;
                 //}
-                this.OnChangeState(SocketState.Closed);
-                if (this.Disconnected != null)
-                    this.Disconnected(this, new NetSocketDisconnectedEventArgs(reason));
+                OnChangeState(SocketState.Closed);
+                if (Disconnected != null)
+                    Disconnected(this, new NetSocketDisconnectedEventArgs(reason));
             }
             catch (Exception ex)
             {
-                this.OnErrorReceived("Close Cleanup", ex);
+                OnErrorReceived("Close Cleanup", ex);
             }
         }
         #endregion
@@ -629,11 +629,11 @@ namespace BlueSheep.Engine.Network
         {
             try
             {
-                this.socket.BeginReceive(this.byteBuffer, 0, this.byteBuffer.Length, SocketFlags.None, new AsyncCallback(this.ReceiveCallback), this.socket);
+                socket.BeginReceive(byteBuffer, 0, byteBuffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), socket);
             }
             catch (Exception ex)
             {
-                this.OnErrorReceived("Receive", ex);
+                OnErrorReceived("Receive", ex);
             }
         }
 
@@ -645,9 +645,9 @@ namespace BlueSheep.Engine.Network
             {
                 Socket sock = (Socket)ar.AsyncState;
                 int size = sock.EndReceive(ar);
-                if (this.socket != sock)
+                if (socket != sock)
                 {
-                    this.Close("Async Receive Socket mismatched");
+                    Close("Async Receive Socket mismatched");
                     return;
                 }
                 if (size < 1)
@@ -656,11 +656,11 @@ namespace BlueSheep.Engine.Network
                     return;
                 }
 
-                lock (this.rxBuffer)
+                lock (rxBuffer)
                 {
                     // put at the end for safe writing
-                    this.rxBuffer.Position = this.rxBuffer.Length;
-                    this.rxBuffer.Write(this.byteBuffer, 0, size);
+                    rxBuffer.Position = rxBuffer.Length;
+                    rxBuffer.Write(byteBuffer, 0, size);
 
                     bool more = false;
                     do
@@ -668,41 +668,41 @@ namespace BlueSheep.Engine.Network
                         try
                         {
                             //this.rxBuffer.Position = this.rxHeaderIndex + this.bomBytes.Count + sizeof(int);
-                            this.rxBuffer.Position = 0;
-                            byte[] data = new byte[this.rxBuffer.Length];
-                            this.rxBuffer.Read(data, 0, data.Length);
-                            if (this.DataArrived != null)
-                                this.DataArrived(this, new NetSockDataArrivalEventArgs(data));
+                            rxBuffer.Position = 0;
+                            byte[] data = new byte[rxBuffer.Length];
+                            rxBuffer.Read(data, 0, data.Length);
+                            if (DataArrived != null)
+                                DataArrived(this, new NetSockDataArrivalEventArgs(data));
                         }
                         catch (Exception ex)
                         {
-                            this.OnErrorReceived("Receiving", ex);
+                            OnErrorReceived("Receiving", ex);
                         }
 
-                        if (this.rxBuffer.Position == this.rxBuffer.Length)
+                        if (rxBuffer.Position == rxBuffer.Length)
                         {
                             // no bytes left
                             // just resize buffer
-                            this.rxBuffer.SetLength(0);
-                            this.rxBuffer.Capacity = this.byteBuffer.Length;
+                            rxBuffer.SetLength(0);
+                            rxBuffer.Capacity = byteBuffer.Length;
                             more = false;
                         }
                         else
                         {
                             // leftover bytes after current message
                             // copy these bytes to the beginning of the rxBuffer
-                            this.CopyBack();
+                            CopyBack();
                             more = true;
                         }
 
                         // reset header info
-                        this.rxHeaderIndex = -1;
-                        this.rxBodyLen = -1;
+                        rxHeaderIndex = -1;
+                        rxBodyLen = -1;
 
                     } while (more);
                 }
-                if (this.socket != null)
-                    this.socket.BeginReceive(this.byteBuffer, 0, this.byteBuffer.Length, SocketFlags.None, new AsyncCallback(this.ReceiveCallback), this.socket);
+                if (socket != null)
+                    socket.BeginReceive(byteBuffer, 0, byteBuffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), socket);
             }
             catch (ObjectDisposedException)
             {
@@ -711,14 +711,14 @@ namespace BlueSheep.Engine.Network
             catch (SocketException ex)
             {
                 if (ex.SocketErrorCode == SocketError.ConnectionReset)
-                    this.Close("Remote Socket Closed");
+                    Close("Remote Socket Closed");
                 else
-                    this.Close("Unknown error. Code : " + ex.ErrorCode);
+                    Close("Unknown error. Code : " + ex.ErrorCode);
             }
             catch (Exception ex)
             {
-                this.Close("Socket Receive Exception");
-                this.OnErrorReceived("Socket Receive", ex);
+                Close("Socket Receive Exception");
+                OnErrorReceived("Socket Receive", ex);
             }
         }
 
@@ -730,20 +730,20 @@ namespace BlueSheep.Engine.Network
         private void CopyBack()
         {
             int count;
-            long readPos = this.rxBuffer.Position;
+            long readPos = rxBuffer.Position;
             long writePos = 0;
             do
             {
-                count = this.rxBuffer.Read(this.byteBuffer, 0, this.byteBuffer.Length);
-                readPos = this.rxBuffer.Position;
-                this.rxBuffer.Position = writePos;
-                this.rxBuffer.Write(this.byteBuffer, 0, count);
-                writePos = this.rxBuffer.Position;
-                this.rxBuffer.Position = readPos;
+                count = rxBuffer.Read(byteBuffer, 0, byteBuffer.Length);
+                readPos = rxBuffer.Position;
+                rxBuffer.Position = writePos;
+                rxBuffer.Write(byteBuffer, 0, count);
+                writePos = rxBuffer.Position;
+                rxBuffer.Position = readPos;
             }
             while (count > 0);
-            this.rxBuffer.SetLength(writePos);
-            this.rxBuffer.Capacity = (int)this.rxBuffer.Length + this.byteBuffer.Length;
+            rxBuffer.SetLength(writePos);
+            rxBuffer.Capacity = (int)rxBuffer.Length + byteBuffer.Length;
         }
 
         /// <summary>
@@ -785,7 +785,7 @@ namespace BlueSheep.Engine.Network
             int index;
             do
             {
-                index = this.IndexOfByteInStream(ms, find[0]);
+                index = IndexOfByteInStream(ms, find[0]);
 
                 if (index > -1)
                 {
@@ -810,27 +810,27 @@ namespace BlueSheep.Engine.Network
         #region OnEvents
         protected void OnErrorReceived(string function, Exception ex)
         {
-            if (this.ErrorReceived != null)
-                this.ErrorReceived(this, new NetSockErrorReceivedEventArgs(function, ex));
+            if (ErrorReceived != null)
+                ErrorReceived(this, new NetSockErrorReceivedEventArgs(function, ex));
         }
 
         protected void OnConnected(Socket sock)
         {
-            if (this.Connected != null)
-                this.Connected(this, new NetSocketConnectedEventArgs(((IPEndPoint)sock.RemoteEndPoint).Address));
+            if (Connected != null)
+                Connected(this, new NetSocketConnectedEventArgs(((IPEndPoint)sock.RemoteEndPoint).Address));
         }
 
         protected void OnChangeState(SocketState newState)
         {
-            SocketState prev = this.state;
-            this.state = newState;
-            if (this.StateChanged != null)
-                this.StateChanged(this, new NetSockStateChangedEventArgs(this.state, prev));
+            SocketState prev = state;
+            state = newState;
+            if (StateChanged != null)
+                StateChanged(this, new NetSockStateChangedEventArgs(state, prev));
 
-            if (this.state == SocketState.Connected)
-                this.connectionTimer.Change(0, this.ConnectionCheckInterval);
-            else if (this.state == SocketState.Closed)
-                this.connectionTimer.Change(Timeout.Infinite, Timeout.Infinite);
+            if (state == SocketState.Connected)
+                connectionTimer.Change(0, ConnectionCheckInterval);
+            else if (state == SocketState.Closed)
+                connectionTimer.Change(Timeout.Infinite, Timeout.Infinite);
         }
         #endregion
 
@@ -863,8 +863,8 @@ namespace BlueSheep.Engine.Network
             {
                 tcp_keepalive sioKeepAliveVals = new tcp_keepalive();
                 sioKeepAliveVals.onoff = (uint)1; // 1 to enable 0 to disable
-                sioKeepAliveVals.keepalivetime = this.KeepAliveInactivity;
-                sioKeepAliveVals.keepaliveinterval = this.KeepAliveInterval;
+                sioKeepAliveVals.keepalivetime = KeepAliveInactivity;
+                sioKeepAliveVals.keepaliveinterval = KeepAliveInterval;
 
                 IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(sioKeepAliveVals));
                 Marshal.StructureToPtr(sioKeepAliveVals, p, true);
@@ -873,14 +873,14 @@ namespace BlueSheep.Engine.Network
                 Marshal.FreeHGlobal(p);
 
                 byte[] outBytes = BitConverter.GetBytes(0);
-                if (IsConnected(this.socket))
-                    this.socket.IOControl(IOControlCode.KeepAliveValues, inBytes, outBytes);
+                if (IsConnected(socket))
+                    socket.IOControl(IOControlCode.KeepAliveValues, inBytes, outBytes);
                 else
                     Close("Currently disconnected. Try to reconnect.");
             }
             catch (Exception ex)
             {
-                this.OnErrorReceived("Keep Alive", ex);
+                OnErrorReceived("Keep Alive", ex);
             }
         }
         #endregion
@@ -890,14 +890,14 @@ namespace BlueSheep.Engine.Network
         {
             try
             {
-                if (this.state == SocketState.Connected &&
-                    (this.socket == null || !this.socket.Connected))
-                    this.Close("Connect Timer");
+                if (state == SocketState.Connected &&
+                    (socket == null || !socket.Connected))
+                    Close("Connect Timer");
             }
             catch (Exception ex)
             {
-                this.OnErrorReceived("ConnectTimer", ex);
-                this.Close("Connect Timer Exception");
+                OnErrorReceived("ConnectTimer", ex);
+                Close("Connect Timer Exception");
             }
         }
         #endregion
@@ -917,25 +917,25 @@ namespace BlueSheep.Engine.Network
         {
             try
             {
-                if (this.socket != null)
+                if (socket != null)
                 {
                     try
                     {
-                        this.socket.Close();
+                        socket.Close();
                     }
                     catch { }; // ignore problems with old socket
                 }
-                this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
                 IPEndPoint ipLocal = new IPEndPoint(IPAddress.Any, port);
-                this.socket.Bind(ipLocal);
-                this.socket.Listen(1);
-                this.socket.BeginAccept(new AsyncCallback(this.AcceptCallback), this.socket);
-                this.OnChangeState(SocketState.Listening);
+                socket.Bind(ipLocal);
+                socket.Listen(1);
+                socket.BeginAccept(new AsyncCallback(AcceptCallback), socket);
+                OnChangeState(SocketState.Listening);
             }
             catch (Exception ex)
             {
-                this.OnErrorReceived("Listen", ex);
+                OnErrorReceived("Listen", ex);
             }
         }
 
@@ -948,20 +948,20 @@ namespace BlueSheep.Engine.Network
                 Socket listener = (Socket)ar.AsyncState;
                 Socket sock = listener.EndAccept(ar);
 
-                if (this.state == SocketState.Listening)
+                if (state == SocketState.Listening)
                 {
-                    if (this.socket != listener)
+                    if (socket != listener)
                     {
-                        this.Close("Async Listen Socket mismatched");
+                        Close("Async Listen Socket mismatched");
                         return;
                     }
 
-                    if (this.ConnectionRequested != null)
-                        this.ConnectionRequested(this, new NetSockConnectionRequestEventArgs(sock));
+                    if (ConnectionRequested != null)
+                        ConnectionRequested(this, new NetSockConnectionRequestEventArgs(sock));
                 }
 
-                if (this.state == SocketState.Listening)
-                    this.socket.BeginAccept(new AsyncCallback(this.AcceptCallback), listener);
+                if (state == SocketState.Listening)
+                    socket.BeginAccept(new AsyncCallback(AcceptCallback), listener);
                 else
                 {
                     try
@@ -970,7 +970,7 @@ namespace BlueSheep.Engine.Network
                     }
                     catch (Exception ex)
                     {
-                        this.OnErrorReceived("Close Listen Socket", ex);
+                        OnErrorReceived("Close Listen Socket", ex);
                     }
                 }
             }
@@ -980,12 +980,12 @@ namespace BlueSheep.Engine.Network
             }
             catch (SocketException ex)
             {
-                this.Close("Listen Socket Exception");
-                this.OnErrorReceived("Listen Socket", ex);
+                Close("Listen Socket Exception");
+                OnErrorReceived("Listen Socket", ex);
             }
             catch (Exception ex)
             {
-                this.OnErrorReceived("Listen Socket", ex);
+                OnErrorReceived("Listen Socket", ex);
             }
         }
         #endregion
@@ -997,33 +997,33 @@ namespace BlueSheep.Engine.Network
         {
             try
             {
-                if (this.state != SocketState.Listening)
-                    throw new Exception("Cannot accept socket is " + this.state.ToString());
+                if (state != SocketState.Listening)
+                    throw new Exception("Cannot accept socket is " + state.ToString());
 
-                if (this.socket != null)
+                if (socket != null)
                 {
                     try
                     {
-                        this.socket.Close(); // close listening socket
+                        socket.Close(); // close listening socket
                     }
                     catch { } // don't care if this fails
                 }
 
-                this.socket = client;
+                socket = client;
 
-                this.socket.ReceiveBufferSize = this.byteBuffer.Length;
-                this.socket.SendBufferSize = this.byteBuffer.Length;
+                socket.ReceiveBufferSize = byteBuffer.Length;
+                socket.SendBufferSize = byteBuffer.Length;
 
-                this.SetKeepAlive();
+                SetKeepAlive();
 
-                this.OnChangeState(SocketState.Connected);
-                this.OnConnected(this.socket);
+                OnChangeState(SocketState.Connected);
+                OnConnected(socket);
 
-                this.Receive();
+                Receive();
             }
             catch (Exception ex)
             {
-                this.OnErrorReceived("Accept", ex);
+                OnErrorReceived("Accept", ex);
             }
         }
         #endregion
@@ -1039,25 +1039,25 @@ namespace BlueSheep.Engine.Network
         /// <summary>Connect to the computer specified by Host and Port</summary>
         public void Connect(IPEndPoint endPoint)
         {
-            if (this.state == SocketState.Connected)
+            if (state == SocketState.Connected)
                 return; // already connecting to something
 
             try
             {
-                if (this.state != SocketState.Closed)
-                    throw new Exception("Cannot connect socket is " + this.state.ToString());
+                if (state != SocketState.Closed)
+                    throw new Exception("Cannot connect socket is " + state.ToString());
 
-                this.OnChangeState(SocketState.Connecting);
+                OnChangeState(SocketState.Connecting);
 
-                if (this.socket == null)
-                    this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                if (socket == null)
+                    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-                this.socket.BeginConnect(endPoint, new AsyncCallback(this.ConnectCallback), this.socket);
+                socket.BeginConnect(endPoint, new AsyncCallback(ConnectCallback), socket);
             }
             catch (Exception ex)
             {
-                this.OnErrorReceived("Connect", ex);
-                this.Close("Connect Exception");
+                OnErrorReceived("Connect", ex);
+                Close("Connect Exception");
             }
         }
 
@@ -1070,29 +1070,29 @@ namespace BlueSheep.Engine.Network
                 Socket sock = (Socket)ar.AsyncState;
                 sock.EndConnect(ar);
 
-                if (this.socket != sock)
+                if (socket != sock)
                 {
-                    this.Close("Async Connect Socket mismatched");
+                    Close("Async Connect Socket mismatched");
                     return;
                 }
 
-                if (this.state != SocketState.Connecting)
-                    throw new Exception("Cannot connect socket is " + this.state.ToString());
+                if (state != SocketState.Connecting)
+                    throw new Exception("Cannot connect socket is " + state.ToString());
 
-                this.socket.ReceiveBufferSize = this.byteBuffer.Length;
-                this.socket.SendBufferSize = this.byteBuffer.Length;
+                socket.ReceiveBufferSize = byteBuffer.Length;
+                socket.SendBufferSize = byteBuffer.Length;
 
-                this.SetKeepAlive();
+                SetKeepAlive();
 
-                this.OnChangeState(SocketState.Connected);
-                this.OnConnected(this.socket);
+                OnChangeState(SocketState.Connected);
+                OnConnected(socket);
 
-                this.Receive();
+                Receive();
             }
             catch (Exception ex)
             {
-                this.Close("Socket Connect Exception");
-                this.OnErrorReceived("Socket Connect", ex);
+                Close("Socket Connect Exception");
+                OnErrorReceived("Socket Connect", ex);
             }
         }
         #endregion
@@ -1129,11 +1129,11 @@ namespace BlueSheep.Engine.Network
             if (account != null)
                 account.LatencyFrame = new LatencyFrame(accountform);
             client = new NetClient();
-            this.client.Connected += new EventHandler<NetSocketConnectedEventArgs>(client_Connected);
-            this.client.DataArrived += new EventHandler<NetSockDataArrivalEventArgs>(client_DataArrived);
-            this.client.Disconnected += new EventHandler<NetSocketDisconnectedEventArgs>(client_Disconnected);
-            this.client.ErrorReceived += new EventHandler<NetSockErrorReceivedEventArgs>(client_ErrorReceived);
-            this.client.StateChanged += new EventHandler<NetSockStateChangedEventArgs>(client_StateChanged);
+            client.Connected += new EventHandler<NetSocketConnectedEventArgs>(client_Connected);
+            client.DataArrived += new EventHandler<NetSockDataArrivalEventArgs>(client_DataArrived);
+            client.Disconnected += new EventHandler<NetSocketDisconnectedEventArgs>(client_Disconnected);
+            client.ErrorReceived += new EventHandler<NetSockErrorReceivedEventArgs>(client_ErrorReceived);
+            client.StateChanged += new EventHandler<NetSockStateChangedEventArgs>(client_StateChanged);
         }
 
         /// <summary>
@@ -1148,11 +1148,11 @@ namespace BlueSheep.Engine.Network
             {
                 client.Close("Changing server.");
                 client = new NetClient();
-                this.client.Connected += new EventHandler<NetSocketConnectedEventArgs>(client_Connected);
-                this.client.DataArrived += new EventHandler<NetSockDataArrivalEventArgs>(client_DataArrived);
-                this.client.Disconnected += new EventHandler<NetSocketDisconnectedEventArgs>(client_Disconnected);
-                this.client.ErrorReceived += new EventHandler<NetSockErrorReceivedEventArgs>(client_ErrorReceived);
-                this.client.StateChanged += new EventHandler<NetSockStateChangedEventArgs>(client_StateChanged);
+                client.Connected += new EventHandler<NetSocketConnectedEventArgs>(client_Connected);
+                client.DataArrived += new EventHandler<NetSockDataArrivalEventArgs>(client_DataArrived);
+                client.Disconnected += new EventHandler<NetSocketDisconnectedEventArgs>(client_Disconnected);
+                client.ErrorReceived += new EventHandler<NetSockErrorReceivedEventArgs>(client_ErrorReceived);
+                client.StateChanged += new EventHandler<NetSockStateChangedEventArgs>(client_StateChanged);
             }
             try
             {
@@ -1171,12 +1171,12 @@ namespace BlueSheep.Engine.Network
         public void InitMITM()
         {
             server = new NetServer();
-            this.server.Connected += new EventHandler<NetSocketConnectedEventArgs>(server_Connected);
-            this.server.ConnectionRequested += new EventHandler<NetSockConnectionRequestEventArgs>(server_ConnectionRequested);
-            this.server.DataArrived += new EventHandler<NetSockDataArrivalEventArgs>(server_DataArrived);
-            this.server.Disconnected += new EventHandler<NetSocketDisconnectedEventArgs>(server_Disconnected);
-            this.server.ErrorReceived += new EventHandler<NetSockErrorReceivedEventArgs>(server_ErrorReceived);
-            this.server.StateChanged += new EventHandler<NetSockStateChangedEventArgs>(server_StateChanged);
+            server.Connected += new EventHandler<NetSocketConnectedEventArgs>(server_Connected);
+            server.ConnectionRequested += new EventHandler<NetSockConnectionRequestEventArgs>(server_ConnectionRequested);
+            server.DataArrived += new EventHandler<NetSockDataArrivalEventArgs>(server_DataArrived);
+            server.Disconnected += new EventHandler<NetSocketDisconnectedEventArgs>(server_Disconnected);
+            server.ErrorReceived += new EventHandler<NetSockErrorReceivedEventArgs>(server_ErrorReceived);
+            server.StateChanged += new EventHandler<NetSockStateChangedEventArgs>(server_StateChanged);
             ListenDofus();
         }
 
@@ -1185,7 +1185,7 @@ namespace BlueSheep.Engine.Network
         /// </summary>
         public void DisconnectFromGUI()
         {
-            this.client.Close("User forced.");
+            client.Close("User forced.");
         }
 
         /// <summary>
@@ -1193,7 +1193,7 @@ namespace BlueSheep.Engine.Network
         /// </summary>
         public void Disconnect(string reason)
         {
-            this.client.Close(reason);
+            client.Close(reason);
         }
 
 
@@ -1273,18 +1273,18 @@ namespace BlueSheep.Engine.Network
         #region Public Methods
         public void SendToDofusClient(byte[] p)
         {
-            this.server.Send(p);
+            server.Send(p);
         }
 
         public void DisconnectServer(string reason)
         {
-            this.server.Close(reason);
+            server.Close(reason);
         }
 
         public void ListenDofus()
         {
             account.Log(new ConnectionTextInformation("Listening on port 5555"), 0);
-            this.server.Listen(5555);
+            server.Listen(5555);
         }
         #endregion
 
@@ -1322,19 +1322,19 @@ namespace BlueSheep.Engine.Network
 
         private void local_DataArrived(object sender, NetSockDataArrivalEventArgs e)
         {
-            this.server.Send(e.Data);
+            server.Send(e.Data);
         }
 
         private void server_ConnectionRequested(object sender, NetSockConnectionRequestEventArgs e)
         {
             account.Log(new ConnectionTextInformation("Connection Requested: " + ((System.Net.IPEndPoint)e.Client.RemoteEndPoint).Address.ToString()),4);
-            this.server.Accept(e.Client);
+            server.Accept(e.Client);
             account.Init();
         }
 
         private void local_ConnectionRequested(object sender, NetSockConnectionRequestEventArgs e)
         {
-            this.server.Accept(e.Client);
+            server.Accept(e.Client);
             account.Log(new ConnectionTextInformation("Accepted client !"), 0);
             account.Init();
         }

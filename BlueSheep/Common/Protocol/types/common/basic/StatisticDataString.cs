@@ -23,7 +23,7 @@ public StatisticDataString()
 
 public StatisticDataString(string s)
         {
-            this.value = s;
+            value = s;
 
         }
         
@@ -31,7 +31,7 @@ public StatisticDataString(string s)
 public virtual void Serialize(BigEndianWriter writer)
 {
 
-    writer.WriteUTF(this.value);
+    writer.WriteUTF(value);
 
             
 
@@ -39,7 +39,7 @@ public virtual void Serialize(BigEndianWriter writer)
 
 public virtual void Deserialize(BigEndianReader reader)
 {
-    this.value = reader.ReadUTF();
+            value = reader.ReadUTF();
 }
 
     }

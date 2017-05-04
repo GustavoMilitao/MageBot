@@ -15,11 +15,11 @@ namespace BlueSheep.Common.Types
 
         public Lot(int _GID, string _Nom, int _PrixMini, int _PrixDefault, int _Quantity)
         {
-            this.GID = _GID;
-            this.Name = _Nom;
-            this.DefaultPrice = _PrixMini;
-            this.MinimalPrice = _PrixDefault;
-            this.Quantity = _Quantity;
+            GID = _GID;
+            Name = _Nom;
+            DefaultPrice = _PrixMini;
+            MinimalPrice = _PrixDefault;
+            Quantity = _Quantity;
         }
     }
 }

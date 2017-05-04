@@ -23,7 +23,7 @@ namespace BlueSheep.Engine.Types
         #region Constructors
         public ConfigManager(AccountUC Account)
         {
-            this.account = Account;
+            account = Account;
         }
         #endregion
 

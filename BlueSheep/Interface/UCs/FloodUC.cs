@@ -79,7 +79,7 @@ namespace BlueSheep.Interface.UCs
             string pathPlayers = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", m_Account.AccountName, "Flood");
             if (File.Exists(pathPlayers + "\\Players.txt"))
             {
-                this.DeleteLine(pathPlayers + "\\Players.txt", PlayerListLb.SelectedItem.ToString());
+                DeleteLine(pathPlayers + "\\Players.txt", PlayerListLb.SelectedItem.ToString());
             }
             if (PlayerListLb.SelectedItem != null)
             {
@@ -109,14 +109,14 @@ namespace BlueSheep.Interface.UCs
 
         private void FloodPlayersBt_Click(object sender, EventArgs e)
         {
-            this.FloodContent = this.FloodContentRbox.Text;
+            FloodContent = FloodContentRbox.Text;
             foreach (var elem in PlayerListLb.Items)
             {
                 try
                 {
                     string[] parsed = ((string)elem).Split(',');
-                    this.FloodContent = this.FloodContent.Replace("%name%", parsed[0]).Replace("%level%", parsed[1]);
-                    m_Account.Flood.SendPrivateTo((string)parsed[0], this.FloodContent);
+                    FloodContent = FloodContent.Replace("%name%", parsed[0]).Replace("%level%", parsed[1]);
+                    m_Account.Flood.SendPrivateTo((string)parsed[0], FloodContent);
                 }
                 catch (Exception)
                 {

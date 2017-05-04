@@ -14,9 +14,9 @@ namespace BlueSheep.Common.Data.D2o
         // Methods
         internal Class17(string string_1, BigEndianReader dofusReader_0)
         {
-            this.string_0 = string_1;
+            string_0 = string_1;
             int num = dofusReader_0.ReadInt();
-            this.delegate0_0 = this.method_0(num, dofusReader_0);
+            delegate0_0 = method_0(num, dofusReader_0);
         }
 
         private Delegate0 method_0(int int_0, BigEndianReader dofusReader_0)
@@ -24,25 +24,25 @@ namespace BlueSheep.Common.Data.D2o
             switch (int_0)
             {
                 case -1:
-                    return new Delegate0(this.method_9);
+                    return new Delegate0(method_9);
                 case -2:
-                    return new Delegate0(this.method_10);
+                    return new Delegate0(method_10);
                 case -3:
-                    return new Delegate0(this.method_5);
+                    return new Delegate0(method_5);
                 case -4:
-                    return new Delegate0(this.method_11);
+                    return new Delegate0(method_11);
                 case -5:
-                    return new Delegate0(this.method_12);
+                    return new Delegate0(method_12);
                 case -6:
-                    return new Delegate0(this.method_13);
+                    return new Delegate0(method_13);
                 case -99:
                     string str = dofusReader_0.ReadUTF();
-                    this.class17_0 = new Class17(str, dofusReader_0);
-                    return new Delegate0(this.method_1);
+                    class17_0 = new Class17(str, dofusReader_0);
+                    return new Delegate0(method_1);
             }
             if ((int_0 > 0))
             {
-                return new Delegate0(this.method_2);
+                return new Delegate0(method_2);
             }
             return null;
         }
@@ -54,7 +54,7 @@ namespace BlueSheep.Common.Data.D2o
             int i = 1;
             while ((i <= num))
             {
-                list.Add(RuntimeHelpers.GetObjectValue(this.class17_0.delegate0_0.Invoke(string_1, dofusReader_0)));
+                list.Add(RuntimeHelpers.GetObjectValue(class17_0.delegate0_0.Invoke(string_1, dofusReader_0)));
                 i += 1;
             }
             return list;
@@ -63,25 +63,25 @@ namespace BlueSheep.Common.Data.D2o
         [CompilerGenerated()]
         private object method_10(string string_1, BigEndianReader dofusReader_0)
         {
-            return this.method_4(string_1, dofusReader_0);
+            return method_4(string_1, dofusReader_0);
         }
 
         [CompilerGenerated()]
         private object method_11(string string_1, BigEndianReader dofusReader_0)
         {
-            return this.method_6(string_1, dofusReader_0);
+            return method_6(string_1, dofusReader_0);
         }
 
         [CompilerGenerated()]
         private object method_12(string string_1, BigEndianReader dofusReader_0)
         {
-            return this.method_7(string_1, dofusReader_0);
+            return method_7(string_1, dofusReader_0);
         }
 
         [CompilerGenerated()]
         private object method_13(string string_1, BigEndianReader dofusReader_0)
         {
-            return this.method_8(string_1, dofusReader_0);
+            return method_8(string_1, dofusReader_0);
         }
 
         private object method_2(string string_1, BigEndianReader dofusReader_0)
@@ -123,7 +123,7 @@ namespace BlueSheep.Common.Data.D2o
         [CompilerGenerated()]
         private object method_9(string string_1, BigEndianReader dofusReader_0)
         {
-            return this.method_3(string_1, dofusReader_0);
+            return method_3(string_1, dofusReader_0);
         }
 
 

@@ -43,7 +43,7 @@ namespace BlueSheep.Interface
         {
             InitializeComponent();
             ActualMainForm = this;
-            this.Text = "BlueSheep - " + version;
+            Text = "BlueSheep - " + version;
             CheckBlueSheepDatas();
         }
         #endregion
@@ -53,7 +53,7 @@ namespace BlueSheep.Interface
         public void AddForm(Form frm)
         {
             // Add the form in the main form using MDI layers.
-                if (((((this != null)) && !this.IsDisposed) && (((frm != null)) && !frm.IsDisposed)))
+                if (((((this != null)) && !IsDisposed) && (((frm != null)) && !frm.IsDisposed)))
                 {
                     frm.MdiParent = this;
                 }
@@ -107,18 +107,18 @@ namespace BlueSheep.Interface
 
         private void Form_Resize(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized)
+            if (WindowState == FormWindowState.Minimized)
             {
                 notifyIcon.Visible = true;
                 notifyIcon.ShowBalloonTip(3000);
-                this.ShowInTaskbar = false;
+                ShowInTaskbar = false;
             }
         }
 
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            this.WindowState = FormWindowState.Normal;
-            this.ShowInTaskbar = true;
+            WindowState = FormWindowState.Normal;
+            ShowInTaskbar = true;
             notifyIcon.Visible = false;
         }
         #endregion

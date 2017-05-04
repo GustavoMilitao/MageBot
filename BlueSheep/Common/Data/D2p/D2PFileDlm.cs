@@ -13,29 +13,29 @@ namespace BlueSheep.Data.D2p
         // Methods
         internal D2PFileDlm(string D2pFilePath)
         {
-            this.D2pFileStream = new FileStream(D2pFilePath, FileMode.Open, FileAccess.Read);
-            this.Reader = new BigEndianReader(this.D2pFileStream);
-            this.FilenameDataDictionnary = new Dictionary<string, int[]>();
-            this.CheckLock = RuntimeHelpers.GetObjectValue(new object());
-            byte num = Convert.ToByte((this.Reader.ReadByte() + this.Reader.ReadByte()));
+            D2pFileStream = new FileStream(D2pFilePath, FileMode.Open, FileAccess.Read);
+            Reader = new BigEndianReader(D2pFileStream);
+            FilenameDataDictionnary = new Dictionary<string, int[]>();
+            CheckLock = RuntimeHelpers.GetObjectValue(new object());
+            byte num = Convert.ToByte((Reader.ReadByte() + Reader.ReadByte()));
             if ((num == 3))
             {
-                this.D2pFileStream.Position = (this.D2pFileStream.Length - 24);
-                int num2 = Convert.ToInt32(this.Reader.ReadUInt());
-                this.Reader.ReadUInt();
-                int num3 = Convert.ToInt32(this.Reader.ReadUInt());
-                int num4 = Convert.ToInt32(this.Reader.ReadUInt());
-                int num1 = Convert.ToInt32(this.Reader.ReadUInt());
-                int num9 = Convert.ToInt32(this.Reader.ReadUInt());
-                this.D2pFileStream.Position = num3;
+                D2pFileStream.Position = (D2pFileStream.Length - 24);
+                int num2 = Convert.ToInt32(Reader.ReadUInt());
+                Reader.ReadUInt();
+                int num3 = Convert.ToInt32(Reader.ReadUInt());
+                int num4 = Convert.ToInt32(Reader.ReadUInt());
+                int num1 = Convert.ToInt32(Reader.ReadUInt());
+                int num9 = Convert.ToInt32(Reader.ReadUInt());
+                D2pFileStream.Position = num3;
                 int num5 = num4;
                 int i = 1;
                 while ((i <= num5))
                 {
-                    string key = this.Reader.ReadUTF();
-                    int num7 = (this.Reader.ReadInt() + num2);
-                    int num8 = this.Reader.ReadInt();
-                    this.FilenameDataDictionnary.Add(key, new int[] {
+                    string key = Reader.ReadUTF();
+                    int num7 = (Reader.ReadInt() + num2);
+                    int num8 = Reader.ReadInt();
+                    FilenameDataDictionnary.Add(key, new int[] {
 					num7,
 					num8
 				});
@@ -46,16 +46,16 @@ namespace BlueSheep.Data.D2p
 
         internal bool ExistsDlm(string DlmName)
         {
-            return this.FilenameDataDictionnary.ContainsKey(DlmName);
+            return FilenameDataDictionnary.ContainsKey(DlmName);
         }
 
         internal byte[] ReadFile(string fileName)
         {
-            lock (this.CheckLock)
+            lock (CheckLock)
             {
-                int[] numArray = this.FilenameDataDictionnary[fileName];
-                this.D2pFileStream.Position = numArray[0];
-                return this.Reader.ReadBytes(numArray[1]);
+                int[] numArray = FilenameDataDictionnary[fileName];
+                D2pFileStream.Position = numArray[0];
+                return Reader.ReadBytes(numArray[1]);
             }
         }
 

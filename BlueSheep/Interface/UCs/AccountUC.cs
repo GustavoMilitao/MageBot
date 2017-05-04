@@ -136,7 +136,7 @@ namespace BlueSheep.Interface
             AccountName = username;
             AccountPassword = password;
             PetsModifiedList = new List<Pet>();
-            this.IsMITM = !socket;
+            IsMITM = !socket;
             switch (MainForm.ActualMainForm.Lang)
             {
                 case "FR":
@@ -331,7 +331,7 @@ namespace BlueSheep.Interface
                 Directory.CreateDirectory(path);
 
             //Config Manager
-            this.ConfigManager = new ConfigManager(this);
+            ConfigManager = new ConfigManager(this);
            
             Flood = new Core.Misc.Flood(this);
             FightData = new FightData(this);
@@ -350,11 +350,11 @@ namespace BlueSheep.Interface
 
         private void Form_Closed(object sender, EventArgs e)
         {
-            if (this.SocketManager != null)
-                this.SocketManager.DisconnectFromGUI();
+            if (SocketManager != null)
+                SocketManager.DisconnectFromGUI();
             if (IsMITM)
             {
-                this.SocketManager.DisconnectServer("Form closing");
+                SocketManager.DisconnectServer("Form closing");
             }
         }
 
@@ -370,14 +370,14 @@ namespace BlueSheep.Interface
 
         public void InitMITM()
         {
-            this.SocketManager = new SocketManager(this);
-            this.SocketManager.InitMITM();
+            SocketManager = new SocketManager(this);
+            SocketManager.InitMITM();
 
         }
 
         public void Log(TextInformation text,int levelVerbose)
         {
-            if (this.IsDisposed == true)
+            if (IsDisposed == true)
                 return;
             if ((int)NUDVerbose.Value < levelVerbose)
                 return;
@@ -395,7 +395,7 @@ namespace BlueSheep.Interface
                     return;
 
                 if (LogCb.Checked)
-                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + this.CharacterBaseInformations.name +".txt", true))
+                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + CharacterBaseInformations.name +".txt", true))
                         fileWriter.WriteLine(text.Text);
 
                 int startIndex = LogConsole.TextLength;
@@ -479,9 +479,9 @@ namespace BlueSheep.Interface
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if (this.SocketManager.State == SocketState.Connected)
+            if (SocketManager.State == SocketState.Connected)
             {
-                this.SocketManager.DisconnectFromGUI();
+                SocketManager.DisconnectFromGUI();
             }
             else
             {
@@ -533,13 +533,13 @@ namespace BlueSheep.Interface
                         PosLabel.Text = text;
                         break;
                     case 7:
-                        this.ParentForm.Text = text;
+                        ParentForm.Text = text;
                         break;
                     case 8:
-                        this.LevelLb.Text = text;
+                        LevelLb.Text = text;
                         break;
                     case 9:
-                        this.SubcribeLb.Text = text;
+                        SubcribeLb.Text = text;
                         break;
                 }
             }
@@ -576,7 +576,7 @@ namespace BlueSheep.Interface
             if (Path != null)
             {
                 Path.StopPath();
-                this.Log(new BotTextInformation("Trajet arrêté"),1);
+                Log(new BotTextInformation("Trajet arrêté"),1);
             }
         }
 
@@ -600,7 +600,7 @@ namespace BlueSheep.Interface
 
         public void ActualizeInventory()
         {
-            this.BeginInvoke(new MethodInvoker(LVItems.Items.Clear));
+            BeginInvoke(new MethodInvoker(LVItems.Items.Clear));
             foreach (Core.Inventory.Item i in Inventory.Items)
             {
                 string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
@@ -610,7 +610,7 @@ namespace BlueSheep.Interface
             }
             RegenUC.RefreshQuantity();
 
-            this.BeginInvoke(new MethodInvoker(LVItemBag.Items.Clear));
+            BeginInvoke(new MethodInvoker(LVItemBag.Items.Clear));
             foreach (Core.Inventory.Item i in Inventory.Items)
             {
                 string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
@@ -624,7 +624,7 @@ namespace BlueSheep.Interface
         {
             if (labelNextMeal.InvokeRequired)
             {
-                this.BeginInvoke(new MethodInvoker(ActualizeFamis));
+                BeginInvoke(new MethodInvoker(ActualizeFamis));
                 return;
             }
             if (NextMeal.Year != 1)
@@ -635,7 +635,7 @@ namespace BlueSheep.Interface
             Invoke(new DelegLabel(ModLabel), Safe != null ? "Coffre : Oui" : "Coffre : Non", labelSafe);
             
             if (listViewPets.InvokeRequired)
-                this.BeginInvoke(new MethodInvoker(listViewPets.Items.Clear));
+                BeginInvoke(new MethodInvoker(listViewPets.Items.Clear));
             else
                 listViewPets.Items.Clear();
 
@@ -717,7 +717,7 @@ namespace BlueSheep.Interface
 
         public void ActualizeMap()
         {
-            this.BeginInvoke(new MethodInvoker(MapView.Items.Clear)); 
+            BeginInvoke(new MethodInvoker(MapView.Items.Clear)); 
             foreach (BlueSheep.Core.Map.Elements.InteractiveElement e in MapData.InteractiveElements.Keys)
             {
                 BlueSheep.Core.Map.Elements.StatedElement element = MapData.StatedElements.Find(s => s.Id == e.Id);
@@ -827,10 +827,10 @@ namespace BlueSheep.Interface
 
         public void Enable(bool param1)
         {
-            if (this.InvokeRequired)
-                this.Invoke(new DelegBool(Enable), param1);
+            if (InvokeRequired)
+                Invoke(new DelegBool(Enable), param1);
             else
-                this.Enabled = param1;
+                Enabled = param1;
         } 
 
         private void LVItems_ColumnClick(object sender, EventArgs e)
@@ -902,12 +902,12 @@ namespace BlueSheep.Interface
                 p1.LegendText = pair.Key;
                 i += 1;
             }
-            this.XpBarsChart.Series.Clear();
+            XpBarsChart.Series.Clear();
             #if __MonoCS__
 
             #else
             if (XpBarsChart.Titles.Count < 1)
-            this.XpBarsChart.Titles.Add("Experience gagnée");
+                XpBarsChart.Titles.Add("Experience gagnée");
             #endif
             foreach (KeyValuePair<DateTime, int> p in xpwon)
             {
@@ -1031,7 +1031,7 @@ namespace BlueSheep.Interface
 
                Log(new GeneralTextInformation("Prochain repas dans " + difference.Hour + " heure(s) " +
                     difference.Minute + " minute(s)."),3);
-               this.SocketManager.Disconnect("Wait before next meal.");
+                SocketManager.Disconnect("Wait before next meal.");
 
                 if (m_TimerConnectionThread == null)
                     m_TimerConnectionThread = new Timer(TimerConnectionThreadFinished, null,
@@ -1178,15 +1178,15 @@ namespace BlueSheep.Interface
 
             m_Running = new Running(this);
 
-            if (this.SocketManager != null && this.SocketManager.State == SocketState.Connected)
+            if (SocketManager != null && SocketManager.State == SocketState.Connected)
                 return;
 
             Log(new ConnectionTextInformation("Connexion."), 0);
 
-            if (this.SocketManager == null)
-                this.SocketManager = new SocketManager(this);
+            if (SocketManager == null)
+                SocketManager = new SocketManager(this);
 
-            this.SocketManager.Connect(new ConnectionInformations("213.248.126.40", 5555, "d'identification"));
+            SocketManager.Connect(new ConnectionInformations("213.248.126.40", 5555, "d'identification"));
             loginstate = "identification";
             if (checkBoxBegin.Checked == true)
                 GetNextMeal();
@@ -1194,13 +1194,13 @@ namespace BlueSheep.Interface
 
         private void TimerConnectionThreadFinished(object stateInfo)
         {
-            if (this.IsDisposed == true)
+            if (IsDisposed == true)
                 return;
             //Init();
             //AccountUC Uc = new AccountUC(this.AccountName, this.AccountPassword, true);
             //this.ParentForm.Controls.Add(Uc);
             //Uc.Show();
-            if (this.MyGroup == null && m_ParentForm != null)
+            if (MyGroup == null && m_ParentForm != null)
                 m_ParentForm.Reconnect();
             //this.Dispose();
         }
@@ -1339,7 +1339,7 @@ namespace BlueSheep.Interface
                 {
                     Log(new ErrorTextInformation("Impossible de se mettre en mode marchand en combat >.<"), 2);
                 }
-                if (this.SocketManager.State == SocketState.Connected)
+                if (SocketManager.State == SocketState.Connected)
                 {
                     ExchangeShowVendorTaxMessage taxpacket = new ExchangeShowVendorTaxMessage();
                     SocketManager.Send(taxpacket);
@@ -1347,9 +1347,9 @@ namespace BlueSheep.Interface
                     SocketManager.Send(ventepacket);
                     //Thread.Sleep(500);
                     Log(new BotTextInformation("Essai de l'activation du mode marchand"), 1);
-                    if (this.SocketManager.State == SocketState.Closed)
+                    if (SocketManager.State == SocketState.Closed)
                     {
-                        this.SocketManager.DisconnectFromGUI();
+                        SocketManager.DisconnectFromGUI();
                         PlaceTimer.Stop();
                     }
                 }
@@ -1378,7 +1378,7 @@ namespace BlueSheep.Interface
 
         public void actualizeshop(List<ObjectItemToSell>sell)
         {
-            this.BeginInvoke(new MethodInvoker(LVItemShop.Items.Clear));
+            BeginInvoke(new MethodInvoker(LVItemShop.Items.Clear));
 
             foreach (ObjectItemToSell i in sell)
             {

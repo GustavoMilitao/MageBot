@@ -51,12 +51,12 @@ namespace BlueSheep.Common.Protocol.Messages
             //{
             //     writer.WriteSByte(entry);
             //}
-            writer.WriteVarInt(this.data.Count);
+            writer.WriteVarInt(data.Count);
             int _loc_2 = 0;
-            while (_loc_2 < this.data.Count)
+            while (_loc_2 < data.Count)
             {
                 
-                writer.WriteByte((byte)this.data[_loc_2]);
+                writer.WriteByte((byte)data[_loc_2]);
                 _loc_2 = _loc_2 + 1;
             }
         }

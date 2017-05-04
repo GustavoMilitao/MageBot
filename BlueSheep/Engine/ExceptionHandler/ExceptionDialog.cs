@@ -57,12 +57,12 @@ namespace BlueSheep.Engine.ExceptionHandler
         private void UserErrorDialog_Load(System.Object sender, System.EventArgs e)
         {
             //-- make sure our window is on top
-            this.TopMost = true;
-            this.TopMost = false;
+            TopMost = true;
+            TopMost = false;
 
             //-- More >> has to be expanded
-            this.txtMore.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtMore.Visible = false;
+            txtMore.Anchor = System.Windows.Forms.AnchorStyles.None;
+            txtMore.Visible = false;
 
             //-- size the labels' height to accommodate the amount of text in them
             SizeBox(ScopeBox);
@@ -79,9 +79,9 @@ namespace BlueSheep.Engine.ExceptionHandler
             lblMoreHeading.Top = ActionBox.Top + ActionBox.Height + _intSpacing;
             btnMore.Top = lblMoreHeading.Top - 3;
 
-            this.Height = btnMore.Top + btnMore.Height + _intSpacing + 45;
+            Height = btnMore.Top + btnMore.Height + _intSpacing + 45;
 
-            this.CenterToScreen();
+            CenterToScreen();
         }
 
         public void SendMail()
@@ -115,23 +115,23 @@ namespace BlueSheep.Engine.ExceptionHandler
         {
             if (btnMore.Text == ">>")
             {
-                this.Height = this.Height + 300;
+                Height = Height + 300;
                 var _with1 = txtMore;
                 _with1.Location = new System.Drawing.Point(lblMoreHeading.Left, lblMoreHeading.Top + lblMoreHeading.Height + _intSpacing);
-                _with1.Height = this.ClientSize.Height - txtMore.Top - 45;
-                _with1.Width = this.ClientSize.Width - 2 * _intSpacing;
+                _with1.Height = ClientSize.Height - txtMore.Top - 45;
+                _with1.Width = ClientSize.Width - 2 * _intSpacing;
                 _with1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
                 _with1.Visible = true;
                 btnMore.Text = "<<";
             }
             else
             {
-                this.SuspendLayout();
+                SuspendLayout();
                 btnMore.Text = ">>";
-                this.Height = btnMore.Top + btnMore.Height + _intSpacing + 45;
+                Height = btnMore.Top + btnMore.Height + _intSpacing + 45;
                 txtMore.Visible = false;
                 txtMore.Anchor = AnchorStyles.None;
-                this.ResumeLayout();
+                ResumeLayout();
             }
         }
 

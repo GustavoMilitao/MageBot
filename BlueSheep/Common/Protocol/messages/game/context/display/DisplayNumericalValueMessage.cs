@@ -36,7 +36,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public DisplayNumericalValuePaddockMessage(int entityId, int value, sbyte type)
         {
-            this.rideId = entityId;
+            rideId = entityId;
             this.value = value;
             this.type = type;
         }

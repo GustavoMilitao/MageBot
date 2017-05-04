@@ -55,7 +55,7 @@ namespace BlueSheep.Interface
             sadikTabControl1.TabPages[1].Controls.Add(gg);
             sadikTabControl1.TabPages[2].Controls.Add(TV);
             //sadikTabControl1.TabPages[2].Controls.Add(GatherPie);
-            this.Dock = DockStyle.Fill;
+            Dock = DockStyle.Fill;
             g.Columns.Add("SkillName", "Skills");
             g.Columns.Add("RessourceName", "Ressources");
             g.Columns.Add("RessourceId", "Id");
@@ -124,7 +124,7 @@ namespace BlueSheep.Interface
             {
                 //Just a good practice -- change the cursor to a 
                 //wait cursor while the nodes populate
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 //First, we'll load the Xml document
                 XmlDocument xDoc = new XmlDocument();
                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -160,7 +160,7 @@ namespace BlueSheep.Interface
             }
             finally
             {
-                this.Cursor = Cursors.Default; //Change the cursor back
+                Cursor = Cursors.Default; //Change the cursor back
             }
 
         }

@@ -11,15 +11,15 @@ namespace BlueSheep.Data.D2p
         // Methods
         internal void Init(BigEndianReader Reader, int MapVersion)
         {
-            this.LayerId = Reader.ReadInt();
-            this.CellsCount = Reader.ReadShort();
-            int cellsCount = this.CellsCount;
+            LayerId = Reader.ReadInt();
+            CellsCount = Reader.ReadShort();
+            int cellsCount = CellsCount;
             int i = 1;
             while ((i <= cellsCount))
             {
                 Cell item = new Cell();
                 item.Init(Reader, MapVersion);
-                this.Cells.Add(item);
+                Cells.Add(item);
                 i += 1;
             }
         }

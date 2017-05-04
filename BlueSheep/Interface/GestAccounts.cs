@@ -40,9 +40,9 @@ namespace BlueSheep.Interface
                     listViewAccounts.Columns.Add("Password", 0, HorizontalAlignment.Center);
                     DelBt.Text = "Delete";
                     LaunchAccountsSelecBt.Text = "Launch selected accounts";
-                    this.Text = "Accounts manager";
-                    this.sadikTabControl1.TabPages[0].Text = "Launch";
-                    this.sadikTabControl1.TabPages[1].Text = "Add";
+                    Text = "Accounts manager";
+                    sadikTabControl1.TabPages[0].Text = "Launch";
+                    sadikTabControl1.TabPages[1].Text = "Add";
                     AddBt.Text = "Add";
                     sadikLabel1.Text = "Username";
                     sadikLabel2.Text = "Password";
@@ -52,9 +52,9 @@ namespace BlueSheep.Interface
                     listViewAccounts.Columns.Add("Contraseña", 0, HorizontalAlignment.Center);
                     DelBt.Text = "Suprimir";
                     LaunchAccountsSelecBt.Text = "Lanzar las cuentas seleccionadas";
-                    this.Text = "Gestión de cuentas";
-                    this.sadikTabControl1.TabPages[0].Text = "Lanzar";
-                    this.sadikTabControl1.TabPages[1].Text = "Añadir";
+                    Text = "Gestión de cuentas";
+                    sadikTabControl1.TabPages[0].Text = "Lanzar";
+                    sadikTabControl1.TabPages[1].Text = "Añadir";
                     AddBt.Text = "Añadir";
                     sadikLabel1.Text = "Nombre de cuenta";
                     sadikLabel2.Text = "Contraseña";
@@ -64,9 +64,9 @@ namespace BlueSheep.Interface
                     listViewAccounts.Columns.Add("Contra-senha", 0, HorizontalAlignment.Center);
                     DelBt.Text = "Escamotear";
                     LaunchAccountsSelecBt.Text = "Lance as contas selecionadas";
-                    this.Text = "Administração de contas";
-                    this.sadikTabControl1.TabPages[0].Text = "Lance";
-                    this.sadikTabControl1.TabPages[1].Text = "Acrescentar";
+                    Text = "Administração de contas";
+                    sadikTabControl1.TabPages[0].Text = "Lance";
+                    sadikTabControl1.TabPages[1].Text = "Acrescentar";
                     AddBt.Text = "Acrescentar";
                     sadikLabel1.Text = "Nome de conta";
                     sadikLabel2.Text = "Contra-senha";
@@ -125,7 +125,7 @@ namespace BlueSheep.Interface
                     MainForm.AccFrm = frm;
                 }
             }
-            this.Close();
+            Close();
         }
         private void buttonAddAccount_Click(object sender, EventArgs e)
         {

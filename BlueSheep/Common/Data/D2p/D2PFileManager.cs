@@ -18,14 +18,14 @@ namespace BlueSheep.Data.D2p
                 FileInfo info = new FileInfo(File);
                 if ((info.Extension.ToUpper() == ".D2P"))
                 {
-                    this.ListD2pFileDlm.Add(new D2PFileDlm(File));
+                    ListD2pFileDlm.Add(new D2PFileDlm(File));
                 }
             }
         }
 
         internal bool MapExists(string DlmName)
         {
-            foreach (D2PFileDlm D2pFileDlm in this.ListD2pFileDlm)
+            foreach (D2PFileDlm D2pFileDlm in ListD2pFileDlm)
             {
                 if (D2pFileDlm.ExistsDlm(DlmName))
                 {
@@ -37,7 +37,7 @@ namespace BlueSheep.Data.D2p
 
         internal byte[] method_1(string string_0)
         {
-            foreach (D2PFileDlm D2pFileDlm in this.ListD2pFileDlm)
+            foreach (D2PFileDlm D2pFileDlm in ListD2pFileDlm)
             {
                 if (D2pFileDlm.ExistsDlm(string_0))
                 {

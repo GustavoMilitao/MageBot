@@ -20,24 +20,24 @@ namespace BlueSheep.Engine.Constants
 
         public HumanCheck(AccountUC account)
         {
-            this._hashKey = hashKey_Gen(account);
+            _hashKey = hashKey_Gen(account);
         }
 
         public byte[] hash_function(byte[] packet)
         {
             /* Hello Mr.Fourbasse :hap: */
-            if (this._hashKey == null)
+            if (_hashKey == null)
                 return packet;
             using (BigEndianWriter writer = new BigEndianWriter())
             {
                 writer.WriteBytes(packet);
                 BigEndianWriter writer2 = new BigEndianWriter();
-                writer2.WriteBytes(this.hash(packet));
+                writer2.WriteBytes(hash(packet));
                 using (RijndaelManaged myRijndael = new RijndaelManaged())
                 {
                     myRijndael.GenerateIV();
                     // Encrypt the string to an array of bytes. 
-                    byte[] encrypted = EncryptStringToBytes(writer2.Content.ToString(), this._hashKey, myRijndael.IV);
+                    byte[] encrypted = EncryptStringToBytes(writer2.Content.ToString(), _hashKey, myRijndael.IV);
                 }
                 writer.WriteBytes(writer2.Content);
                 return writer.Content;
@@ -290,8 +290,8 @@ namespace BlueSheep.Engine.Constants
         #region Private Methods
         private string dec(string param1, string param2)
         {
-            byte[] _loc3_ = this.decodeToByteArray(param1);
-            byte[] _loc4_ = this.decodeToByteArray(param2);
+            byte[] _loc3_ = decodeToByteArray(param1);
+            byte[] _loc4_ = decodeToByteArray(param2);
             uint _loc5_ = 0;
             while (_loc5_ < _loc3_.Length)
             {

@@ -15,7 +15,7 @@ namespace BlueSheep.Common.IO
 
         public long toNumber()
         {
-            return this.high * 4294967296 + low;
+            return high * 4294967296 + low;
         }
 
         public static Int64 fromNumber(double param1) 

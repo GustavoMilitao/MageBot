@@ -12,8 +12,8 @@ namespace BlueSheep.Data.Pathfinding
 
         public OpenSquare(int y, int x)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
     }
 

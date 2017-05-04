@@ -69,7 +69,7 @@ namespace BlueSheep.Common.Protocol.Messages
             }
             writer.WriteShort(serverId);
             writer.WriteDouble(sessionOptionalSalt);
-            writer.WriteShort((short)this.failedAttempts.Count);
+            writer.WriteShort((short)failedAttempts.Count);
             foreach (short s in failedAttempts)
                 writer.WriteShort(s);
         }

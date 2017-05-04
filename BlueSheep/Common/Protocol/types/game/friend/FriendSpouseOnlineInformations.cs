@@ -70,8 +70,8 @@ public override void Deserialize(BigEndianReader reader)
 
 base.Deserialize(reader);
             byte b  = reader.ReadByte();
-         this.inFight = BooleanByteWrapper.GetFlag(b,0);
-         this.followSpouse = BooleanByteWrapper.GetFlag(b,1);
+            inFight = BooleanByteWrapper.GetFlag(b,0);
+            followSpouse = BooleanByteWrapper.GetFlag(b,1);
             mapId = reader.ReadInt();
             if (mapId < 0)
                 throw new Exception("Forbidden value on mapId = " + mapId + ", it doesn't respect the following condition : mapId < 0");

@@ -10,9 +10,9 @@ namespace BlueSheep.Data.D2p
         // Methods
         public ColorMultiplicator(int red, int green, int blue)
         {
-            this.Red = red;
-            this.Green = green;
-            this.Blue = blue;
+            Red = red;
+            Green = green;
+            Blue = blue;
         }
 
         // Fields

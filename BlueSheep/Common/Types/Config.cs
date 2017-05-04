@@ -30,20 +30,20 @@ namespace BlueSheep.Common.Types
             bool autoDel, bool RelaunchPath /*, System.Windows.Forms.ListView.ListViewItemCollection gestItems*/)//,Dictionary<string, int> ressources,Dictionary<DateTime, int> xpWon,
         //Dictionary<string, int> winLoseDic)
         {
-            this.m_Path = path;
-            this.m_FloodContent = flood;
-            this.m_BotPath = botpath;
-            this.m_IA = ia;
+            m_Path = path;
+            m_FloodContent = flood;
+            m_BotPath = botpath;
+            m_IA = ia;
             //this.m_L1R = L1R;
             //this.m_L2R = L2R;
-            this.m_AIPath = aipath;
-            this.m_Elevage = elevage;
-            this.m_AutoUp = autoUp;
-            this.m_IsLockingFight = isLockingFight;
-            this.m_RegenValue = RegenValue;
-            this.m_Restrictions = restrictions;
-            this.m_AutoDeletion = autoDel;
-            this.m_RelaunchPath = RelaunchPath;
+            m_AIPath = aipath;
+            m_Elevage = elevage;
+            m_AutoUp = autoUp;
+            m_IsLockingFight = isLockingFight;
+            m_RegenValue = RegenValue;
+            m_Restrictions = restrictions;
+            m_AutoDeletion = autoDel;
+            m_RelaunchPath = RelaunchPath;
             //this.m_GestItems = gestItems;
             //this.m_Ressources = ressources;
             //this.m_xpWon = xpWon;

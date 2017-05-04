@@ -11,17 +11,17 @@ namespace BlueSheep.Data.D2p
         // Methods
         internal void Init(BigEndianReader Reader)
         {
-            this.FixtureId = Reader.ReadInt();
-            this.OffsetX = Reader.ReadShort();
-            this.OffsetY = Reader.ReadShort();
-            this.Rotation = Reader.ReadShort();
-            this.xScale = Reader.ReadShort();
-            this.yScale = Reader.ReadShort();
-            this.RedMultiplier = Reader.ReadSByte();
-            this.GreenMultiplier = Reader.ReadSByte();
-            this.BlueMultiplier = Reader.ReadSByte();
-            this.Hue = ((this.RedMultiplier | this.GreenMultiplier) | this.BlueMultiplier);
-            this.Alpha = Reader.ReadByte();
+            FixtureId = Reader.ReadInt();
+            OffsetX = Reader.ReadShort();
+            OffsetY = Reader.ReadShort();
+            Rotation = Reader.ReadShort();
+            xScale = Reader.ReadShort();
+            yScale = Reader.ReadShort();
+            RedMultiplier = Reader.ReadSByte();
+            GreenMultiplier = Reader.ReadSByte();
+            BlueMultiplier = Reader.ReadSByte();
+            Hue = ((RedMultiplier | GreenMultiplier) | BlueMultiplier);
+            Alpha = Reader.ReadByte();
         }
 
 

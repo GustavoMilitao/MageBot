@@ -13,63 +13,63 @@ namespace BlueSheep.Common.Data.D2o
         // Methods
         internal D2oData(string D2oFile)
         {
-            this.D2oFileStream = new FileStream(D2oFile, FileMode.Open, FileAccess.Read);
-            this.dictionary_1 = new Dictionary<int, int>();
-            this.dictionary_0 = new Dictionary<int, Class16>();
-            this.Reader = new BigEndianReader(this.D2oFileStream);
-            Encoding.Default.GetString(this.Reader.ReadBytes(3));
-            this.D2oFileStream.Position = this.Reader.ReadInt();
-            int num = this.Reader.ReadInt();
+            D2oFileStream = new FileStream(D2oFile, FileMode.Open, FileAccess.Read);
+            dictionary_1 = new Dictionary<int, int>();
+            dictionary_0 = new Dictionary<int, Class16>();
+            Reader = new BigEndianReader(D2oFileStream);
+            Encoding.Default.GetString(Reader.ReadBytes(3));
+            D2oFileStream.Position = Reader.ReadInt();
+            int num = Reader.ReadInt();
             int i = 1;
             while ((i <= num))
             {
-                this.dictionary_1.Add(this.Reader.ReadInt(), this.Reader.ReadInt());
-                this.int_0 += 1;
+                dictionary_1.Add(Reader.ReadInt(), Reader.ReadInt());
+                int_0 += 1;
                 i = (i + 8);
             }
-            int num3 = this.Reader.ReadInt();
+            int num3 = Reader.ReadInt();
             int j = 1;
             while ((j <= num3))
             {
-                this.method_2(this.Reader.ReadInt());
+                method_2(Reader.ReadInt());
                 j += 1;
             }
         }
 
         internal DataClass DataObject(string File, int Id)
         {
-            if (!this.Id_Data.ContainsKey(Id))
+            if (!Id_Data.ContainsKey(Id))
             {
-                if (!this.dictionary_1.ContainsKey(Id))
+                if (!dictionary_1.ContainsKey(Id))
                 {
                     return null;
                 }
-                this.D2oFileStream.Position = Convert.ToInt64(this.dictionary_1[Id]);
-                int key = this.Reader.ReadInt();
-                if (this.dictionary_0.ContainsKey(key))
+                D2oFileStream.Position = Convert.ToInt64(dictionary_1[Id]);
+                int key = Reader.ReadInt();
+                if (dictionary_0.ContainsKey(key))
                 {
-                    this.Id_Data.Add(Id, this.dictionary_0[key].method_0(File, this.Reader));
+                    Id_Data.Add(Id, dictionary_0[key].method_0(File, Reader));
                 }
                 else
                 {
-                    this.Id_Data.Add(Id, null);
+                    Id_Data.Add(Id, null);
                 }
             }
-            return this.Id_Data[Id];
+            return Id_Data[Id];
         }
 
         internal DataClass[] DataObjects(string string_0)
         {
             List<DataClass> list = new List<DataClass>();
             int num = 0;
-            foreach (int num_loopVariable in this.dictionary_1.Keys)
+            foreach (int num_loopVariable in dictionary_1.Keys)
             {
                 num = num_loopVariable;
-                this.D2oFileStream.Position = Convert.ToInt64(this.dictionary_1[num]);
-                int key = this.Reader.ReadInt();
-                if (this.dictionary_0.ContainsKey(key))
+                D2oFileStream.Position = Convert.ToInt64(dictionary_1[num]);
+                int key = Reader.ReadInt();
+                if (dictionary_0.ContainsKey(key))
                 {
-                    list.Add(this.dictionary_0[key].method_0(string_0, this.Reader));
+                    list.Add(dictionary_0[key].method_0(string_0, Reader));
                 }
             }
             return list.ToArray();
@@ -77,15 +77,15 @@ namespace BlueSheep.Common.Data.D2o
 
         private void method_2(int int_1)
         {
-            Class16 class2 = new Class16(this.Reader.ReadUTF(), this.Reader.ReadUTF());
-            int num2 = this.Reader.ReadInt();
+            Class16 class2 = new Class16(Reader.ReadUTF(), Reader.ReadUTF());
+            int num2 = Reader.ReadInt();
             int i = 1;
             while ((i <= num2))
             {
-                class2.method_1(this.Reader.ReadUTF(), this.Reader);
+                class2.method_1(Reader.ReadUTF(), Reader);
                 i += 1;
             }
-            this.dictionary_0.Add(int_1, class2);
+            dictionary_0.Add(int_1, class2);
         }
 
 

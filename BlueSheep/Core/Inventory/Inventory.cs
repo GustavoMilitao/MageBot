@@ -25,7 +25,7 @@ namespace BlueSheep.Core.Inventory
         {
             get
             {
-                double per = (double)this.weight / (double)this.maxWeight;
+                double per = (double)weight / (double)maxWeight;
                 return (int)(per * 100);
             }
 

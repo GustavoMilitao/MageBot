@@ -32,7 +32,7 @@ namespace BlueSheep.Interface
             switch (MainForm.ActualMainForm.Lang)
             {
                 case "EN":
-                    this.Text = "AI Manager";
+                    Text = "AI Manager";
                     DelBt.Text = "Delete";
                     LoadBt.Text = "Load";
                     AddBt.Text = "Add";
@@ -160,7 +160,7 @@ namespace BlueSheep.Interface
                 Account.FightParser.Name = FilesList.SelectedItems[0].Text;
                 Account.NomIA.Text = Account.FightParser.Name;
                 Account.Fight = new BFight(Account, Account.FightParser, Account.FightData);
-                this.Close();
+                Close();
             }
         }
         #endregion

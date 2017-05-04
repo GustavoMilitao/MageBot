@@ -69,7 +69,7 @@ namespace BlueSheep.Common
         #region Constructors
         public CLIParser(AccountUC Account)
         {
-            this.account = Account;
+            account = Account;
         }
         #endregion
 

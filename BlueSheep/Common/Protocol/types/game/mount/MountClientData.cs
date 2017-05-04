@@ -157,10 +157,10 @@ writer.WriteDouble(id);
 public virtual void Deserialize(BigEndianReader reader)
 {
              byte b = reader.ReadByte();
-         this.sex = BooleanByteWrapper.GetFlag(b,0);
-         this.isRideable = BooleanByteWrapper.GetFlag(b,1);
-         this.isWild = BooleanByteWrapper.GetFlag(b,2);
-         this.isFecondationReady = BooleanByteWrapper.GetFlag(b,3);
+            sex = BooleanByteWrapper.GetFlag(b,0);
+            isRideable = BooleanByteWrapper.GetFlag(b,1);
+            isWild = BooleanByteWrapper.GetFlag(b,2);
+            isFecondationReady = BooleanByteWrapper.GetFlag(b,3);
 id = reader.ReadDouble();
             if (id < -9.007199254740992E15 || id > 9.007199254740992E15)
                 throw new Exception("Forbidden value on id = " + id + ", it doesn't respect the following condition : id < -9.007199254740992E15 || id > 9.007199254740992E15");

@@ -17,8 +17,8 @@ namespace BlueSheep.Data.Pathfinding.Positions
         public MapPoint(int CellId)
         {
             this.CellId = 0;
-            this.X = 0;
-            this.Y = 0;
+            X = 0;
+            Y = 0;
             if (!MapPoint.IsInit)
             {
                 MapPoint.Init();
@@ -27,8 +27,8 @@ namespace BlueSheep.Data.Pathfinding.Positions
             if (MapPoint.dictionary_0.ContainsKey(CellId))
             {
                 MapPoint point = MapPoint.dictionary_0[CellId];
-                this.Y = point.Y;
-                this.X = point.X;
+                Y = point.Y;
+                X = point.X;
             }
         }
 
@@ -37,19 +37,19 @@ namespace BlueSheep.Data.Pathfinding.Positions
         /// <param name="Y">Ordonnée</param>
         public MapPoint(int X, int Y)
         {
-            this.CellId = 0;
+            CellId = 0;
             this.X = 0;
             this.Y = 0;
             this.X = X;
             this.Y = Y;
-            this.CellId = Convert.ToInt32(Math.Round(Convert.ToDouble(((((X - Y) * 14) + Y) + Math.Floor(Convert.ToDouble((Convert.ToDouble((X - Y)) / 2)))))));
+            CellId = Convert.ToInt32(Math.Round(Convert.ToDouble(((((X - Y) * 14) + Y) + Math.Floor(Convert.ToDouble((Convert.ToDouble((X - Y)) / 2)))))));
         }
 
         public int AdvancedOrientationTo(MapPoint point, bool b)
         {
-            int num = (point.X - this.X);
-            int num2 = (this.Y - point.Y);
-            int num3 = Convert.ToInt32(Math.Round(Convert.ToDouble((Math.Floor(Convert.ToDouble(((Math.Acos((Convert.ToDouble(num) / Math.Sqrt((Math.Pow(Convert.ToDouble(num), 2) + Math.Pow(Convert.ToDouble(num2), 2))))) * 180) / 3.14159265358979))) * ((point.Y > this.Y) ? Convert.ToDouble(-1) : Convert.ToDouble(1))))));
+            int num = (point.X - X);
+            int num2 = (Y - point.Y);
+            int num3 = Convert.ToInt32(Math.Round(Convert.ToDouble((Math.Floor(Convert.ToDouble(((Math.Acos((Convert.ToDouble(num) / Math.Sqrt((Math.Pow(Convert.ToDouble(num), 2) + Math.Pow(Convert.ToDouble(num2), 2))))) * 180) / 3.14159265358979))) * ((point.Y > Y) ? Convert.ToDouble(-1) : Convert.ToDouble(1))))));
             if (b)
             {
                 num3 = Convert.ToInt32(Math.Round(Convert.ToDouble(((Math.Round(Math.Floor(Convert.ToDouble((Convert.ToDouble(num3) / 90)))) * 2) + 1))));
@@ -70,7 +70,7 @@ namespace BlueSheep.Data.Pathfinding.Positions
         /// <returns>La distance entre les deux points</returns>
         public int DistanceTo(MapPoint Point)
         {
-            return Convert.ToInt32(Math.Round(Math.Sqrt((Math.Pow(Convert.ToDouble((Point.X - this.X)), 2) + Math.Pow(Convert.ToDouble((Point.Y - this.Y)), 2)))));
+            return Convert.ToInt32(Math.Round(Math.Sqrt((Math.Pow(Convert.ToDouble((Point.X - X)), 2) + Math.Pow(Convert.ToDouble((Point.Y - Y)), 2)))));
         }
 
         /// <summary>Obtient la distance entre ce point et le point donné</summary>
@@ -78,7 +78,7 @@ namespace BlueSheep.Data.Pathfinding.Positions
         /// <returns>La distance entre les deux points</returns>
         public int DistanceToCell(MapPoint Point)
         {
-            return (Math.Abs(Convert.ToInt32((this.X - Point.X))) + Math.Abs(Convert.ToInt32((this.Y - Point.Y))));
+            return (Math.Abs(Convert.ToInt32((X - Point.X))) + Math.Abs(Convert.ToInt32((Y - Point.Y))));
         }
 
         /// <summary>Obtient le prochain point dans une dirrection donnée et à une distance donnée</summary>
@@ -90,21 +90,21 @@ namespace BlueSheep.Data.Pathfinding.Positions
             switch (Direction)
             {
                 case 0:
-                    return new MapPoint((this.X + i), (this.Y + i));
+                    return new MapPoint((X + i), (Y + i));
                 case 1:
-                    return new MapPoint((this.X + i), this.Y);
+                    return new MapPoint((X + i), Y);
                 case 2:
-                    return new MapPoint((this.X + i), (this.Y - i));
+                    return new MapPoint((X + i), (Y - i));
                 case 3:
-                    return new MapPoint(this.X, (this.Y - i));
+                    return new MapPoint(X, (Y - i));
                 case 4:
-                    return new MapPoint((this.X - i), (this.Y - i));
+                    return new MapPoint((X - i), (Y - i));
                 case 5:
-                    return new MapPoint((this.X - i), this.Y);
+                    return new MapPoint((X - i), Y);
                 case 6:
-                    return new MapPoint((this.X - i), (this.Y + i));
+                    return new MapPoint((X - i), (Y + i));
                 case 7:
-                    return new MapPoint(this.X, (this.Y + i));
+                    return new MapPoint(X, (Y + i));
             }
             return null;
         }
@@ -113,7 +113,7 @@ namespace BlueSheep.Data.Pathfinding.Positions
         /// <returns>True si le point est sur la map, sinon False</returns>
         public bool IsInMap()
         {
-            return ((((this.X + this.Y) >= 0) && ((this.X - this.Y) >= 0)) && (((this.X - this.Y) < 40) && ((this.X + this.Y) < 0x1c)));
+            return ((((X + Y) >= 0) && ((X - Y) >= 0)) && (((X - Y) < 40) && ((X + Y) < 0x1c)));
         }
 
         /// <summary>Donne l'orientation du point vers le point donné</summary>
@@ -121,8 +121,8 @@ namespace BlueSheep.Data.Pathfinding.Positions
         /// <returns>La valeur de l'orientation vers le point donné</returns>
         public int OrientationTo(MapPoint Point)
         {
-            int num = (Point.X > this.X) ? 1 : (Point.X < this.X) ? -1 : 0;
-            int num2 = (Point.Y > this.Y) ? 1 : (Point.Y < this.Y) ? -1 : 0;
+            int num = (Point.X > X) ? 1 : (Point.X < X) ? -1 : 0;
+            int num2 = (Point.Y > Y) ? 1 : (Point.Y < Y) ? -1 : 0;
             if (((num == 1) && (num2 == 1)))
             {
                 return 0;

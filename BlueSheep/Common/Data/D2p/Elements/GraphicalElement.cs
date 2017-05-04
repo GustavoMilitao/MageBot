@@ -11,25 +11,25 @@ namespace BlueSheep.Data.D2p.Elements
         // Methods
         internal override void Init(BigEndianReader Reader, int MapVersion)
         {
-            this.ElementId = Convert.ToInt32(Reader.ReadUInt());
-            this.Hue = new ColorMultiplicator(Reader.ReadSByte(), Reader.ReadSByte(), Reader.ReadSByte());
-            this.Shadow = new ColorMultiplicator(Reader.ReadSByte(), Reader.ReadSByte(), Reader.ReadSByte());
+            ElementId = Convert.ToInt32(Reader.ReadUInt());
+            Hue = new ColorMultiplicator(Reader.ReadSByte(), Reader.ReadSByte(), Reader.ReadSByte());
+            Shadow = new ColorMultiplicator(Reader.ReadSByte(), Reader.ReadSByte(), Reader.ReadSByte());
             if ((MapVersion <= 4))
             {
-                this.OffsetX = Reader.ReadSByte();
-                this.OffsetY = Reader.ReadSByte();
-                this.PixelOffsetX = (this.OffsetX * 43);
-                this.PixelOffsetY = (this.OffsetY * 21.5);
+                OffsetX = Reader.ReadSByte();
+                OffsetY = Reader.ReadSByte();
+                PixelOffsetX = (OffsetX * 43);
+                PixelOffsetY = (OffsetY * 21.5);
             }
             else
             {
-                this.PixelOffsetX = Reader.ReadShort();
-                this.PixelOffsetY = Reader.ReadShort();
-                this.OffsetX = (this.PixelOffsetX / 43);
-                this.OffsetY = (this.PixelOffsetY / 21.5);
+                PixelOffsetX = Reader.ReadShort();
+                PixelOffsetY = Reader.ReadShort();
+                OffsetX = (PixelOffsetX / 43);
+                OffsetY = (PixelOffsetY / 21.5);
             }
-            this.Altitude = Reader.ReadSByte();
-            this.Identifier = Convert.ToInt32(Reader.ReadUInt());
+            Altitude = Reader.ReadSByte();
+            Identifier = Convert.ToInt32(Reader.ReadUInt());
         }
 
 

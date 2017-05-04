@@ -42,12 +42,12 @@ namespace BlueSheep.Interface
 
         public void Reconnect()
         {
-            if (this.Controls[0].InvokeRequired)
+            if (Controls[0].InvokeRequired)
             {
                 Invoke(new Callback(Reconnect));
                 return;
-            }                
-            this.Controls.Remove(UC);
+            }
+            Controls.Remove(UC);
             Init();
         }
 
@@ -56,11 +56,11 @@ namespace BlueSheep.Interface
             AccountUC Uc = new AccountUC(m_user, m_pass, m_socket, this);
             Uc.DebugMode.Checked = true;
             UC = Uc;
-            this.Controls.Add(Uc);
+            Controls.Add(Uc);
             Uc.Show();
 
             // Show the form
-            this.Show();
+            Show();
 
             // Not in a group
             Uc.IsMaster = false;

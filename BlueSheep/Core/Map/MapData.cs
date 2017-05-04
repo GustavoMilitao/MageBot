@@ -193,7 +193,7 @@ namespace BlueSheep.Core.Map
                 InteractiveElements.Add(Ielement, -1);
                 if (Ielement.EnabledSkills.Count > 0)
                 {
-                    foreach (var layer in this.Data.Layers)
+                    foreach (var layer in Data.Layers)
                     {
                         foreach (var cell in layer.Cells)
                         {

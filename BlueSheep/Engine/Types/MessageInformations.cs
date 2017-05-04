@@ -51,7 +51,7 @@ namespace BlueSheep.Engine.Types
                     // @"\BlueSheep\Packets.txt", true))
                     // fileWriter.WriteLine("[" + DateTime.Now.ToShortTimeString() + "] Paquet reçu : " + m_ProtocolID);
                     Treatment.Treatment treatment = new Treatment.Treatment(account);
-                    if (m_ProtocolID == 6372)
+                    if (m_ID == 6372)
                     {
                         using (BigEndianWriter writer = new BigEndianWriter())
                         {
@@ -67,7 +67,7 @@ namespace BlueSheep.Engine.Types
                     m_Length = null;
                     m_Data = null;
                     m_LenghtType = null;
-                    m_ProtocolID = null;
+                    m_ID = null;
                 }
                 else
                     break;
@@ -83,7 +83,7 @@ namespace BlueSheep.Engine.Types
             if ((m_Reader.BytesAvailable >= 2) && (!m_Header.HasValue))
             {
                 m_Header = m_Reader.ReadShort();
-                m_ProtocolID = m_Header >> 2;
+                m_ID = m_Header >> 2;
                 m_LenghtType = m_Header & 0x3;
             }
             if ((m_LenghtType.HasValue) &&

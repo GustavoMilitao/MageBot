@@ -49,11 +49,11 @@ public ObjectItem()
 
 public ObjectItem(byte position, short objectGID, Types.ObjectEffect[] effects, int objectUID, int quantity)
         {
-            this.Position = position;
-            this.ObjectGID = objectGID;
-            this.Effects = effects;
-            this.ObjectUID = objectUID;
-            this.Quantity = quantity;
+            Position = position;
+            ObjectGID = objectGID;
+            Effects = effects;
+            ObjectUID = objectUID;
+            Quantity = quantity;
         }
         
 

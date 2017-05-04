@@ -65,7 +65,7 @@ namespace BlueSheep.Core.Fight
         {
             get
             {
-                if (this.followingGroup != null)
+                if (followingGroup != null)
                     return true;
                 else
                     return false;
@@ -542,7 +542,7 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public BFighter NearestMonster(List<BFighter> LFighters)
         {
-            MapPoint CharacterPoint = new MapPoint(this.Fighter.CellId);
+            MapPoint CharacterPoint = new MapPoint(Fighter.CellId);
             BFighter Fighterr = null;
             int SavDistance = -1;
             foreach (BFighter TestFighter in LFighters)
@@ -552,7 +552,7 @@ namespace BlueSheep.Core.Fight
                 MapPoint TestFighterPoint = new MapPoint(TestFighter.CellId);
                 int dist = new SimplePathfinder(m_Account.MapData).FindPath(CharacterPoint.CellId, TestFighterPoint.CellId).Cells.Count();
                 dist += CharacterPoint.DistanceToCell(TestFighterPoint);
-                if (((dist < SavDistance) || (SavDistance == -1)) && TestFighter != this.Fighter)
+                if (((dist < SavDistance) || (SavDistance == -1)) && TestFighter != Fighter)
                 {
                     SavDistance = dist;
                     Fighterr = TestFighter;
@@ -860,7 +860,7 @@ namespace BlueSheep.Core.Fight
                     i += 1;
                 }
             }
-            if ((TotalLaunchByCellBySpell.ContainsKey(spellId) && TotalLaunchByCellBySpell[spellId].ContainsKey(targetPoint.CellId)) && this.TotalLaunchByCellBySpell[spellId][targetPoint.CellId] >= (int)spellLevelsData.Fields["maxCastPerTarget"] && (int)spellLevelsData.Fields["maxCastPerTarget"] > 0)
+            if ((TotalLaunchByCellBySpell.ContainsKey(spellId) && TotalLaunchByCellBySpell[spellId].ContainsKey(targetPoint.CellId)) && TotalLaunchByCellBySpell[spellId][targetPoint.CellId] >= (int)spellLevelsData.Fields["maxCastPerTarget"] && (int)spellLevelsData.Fields["maxCastPerTarget"] > 0)
                 return SpellInabilityReason.TooManyLaunchOnCell;
             if (IsFreeCell(cellId))
             {
@@ -907,7 +907,7 @@ namespace BlueSheep.Core.Fight
 
             if (TotalLaunchBySpell.ContainsKey(spellId) && TotalLaunchBySpell[spellId] >= (int)spellLevelsData.Fields["maxCastPerTurn"] && (int)spellLevelsData.Fields["maxCastPerTurn"] > 0)
                 return SpellInabilityReason.TooManyLaunch;
-            if (this.LastTurnLaunchBySpell.ContainsKey(spellId))
+            if (LastTurnLaunchBySpell.ContainsKey(spellId))
                 return SpellInabilityReason.Cooldown;
 
             ArrayList listEffects = (ArrayList)spellLevelsData.Fields["effects"];
@@ -916,7 +916,7 @@ namespace BlueSheep.Core.Fight
             {
                 CharacterCharacteristicsInformations stats = m_Account.CharacterStats;
                 int total = stats.summonableCreaturesBoost.@base + stats.summonableCreaturesBoost.objectsAndMountBonus + stats.summonableCreaturesBoost.alignGiftBonus + stats.summonableCreaturesBoost.contextModif;
-                if (this.GetInvokationNumber() >= total)
+                if (GetInvokationNumber() >= total)
                     return SpellInabilityReason.TooManyInvocations;
             }
             ArrayList listOfStates = (ArrayList)spellLevelsData.Fields["statesRequired"];

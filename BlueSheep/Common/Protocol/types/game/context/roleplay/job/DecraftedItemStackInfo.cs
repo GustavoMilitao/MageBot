@@ -35,34 +35,34 @@ namespace BlueSheep.Common.Protocol.types.game.context.roleplay.job
 
         public virtual void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarInt(this.objectUID);
-            writer.WriteFloat(this.bonusMin);
-            writer.WriteFloat(this.bonusMax);
-            writer.WriteShort((short)this.runesId.Count);
+            writer.WriteVarInt(objectUID);
+            writer.WriteFloat(bonusMin);
+            writer.WriteFloat(bonusMax);
+            writer.WriteShort((short)runesId.Count);
             for(int i=0;i<runesId.Count;i++)
             {
-                writer.WriteVarShort(this.runesId[i]);
+                writer.WriteVarShort(runesId[i]);
             }
-            writer.WriteShort((short)this.runesQty.Count);
+            writer.WriteShort((short)runesQty.Count);
             for(int i=0;i<runesQty.Count;i++)
             {
-                writer.WriteVarInt(this.runesQty[i]);
+                writer.WriteVarInt(runesQty[i]);
             }
         }
         public virtual void Deserialize(BigEndianReader reader)
         {
-            this.objectUID = reader.ReadVarInt();
-            this.bonusMin = reader.ReadFloat();
-            this.bonusMax = reader.ReadFloat();
+            objectUID = reader.ReadVarInt();
+            bonusMin = reader.ReadFloat();
+            bonusMax = reader.ReadFloat();
             var limit = reader.ReadUShort();
             for(int i=0;i<limit;i++)
             {
-                this.runesId.Add(reader.ReadVarShort());
+                runesId.Add(reader.ReadVarShort());
             }
             var newLimit = reader.ReadUShort();
             for(int i=0;i<newLimit;i++)
             {
-                this.runesQty.Add(reader.ReadVarInt());
+                runesQty.Add(reader.ReadVarInt());
             }
         }
     }

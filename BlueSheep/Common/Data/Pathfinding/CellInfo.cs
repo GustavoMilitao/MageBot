@@ -10,12 +10,12 @@ namespace BlueSheep.Data.Pathfinding
         // Methods
         internal CellInfo(double heuristic, int[] parent, bool opened, bool closed, int x, int y)
         {
-            this.Heuristic = heuristic;
-            this.Parent = parent;
-            this.Opened = opened;
-            this.Closed = closed;
-            this.X = x;
-            this.Y = y;
+            Heuristic = heuristic;
+            Parent = parent;
+            Opened = opened;
+            Closed = closed;
+            X = x;
+            Y = y;
         }
 
         public double Heuristic { get; set; }

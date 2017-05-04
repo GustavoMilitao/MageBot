@@ -77,9 +77,9 @@ public override void Deserialize(BigEndianReader reader)
 
 base.Deserialize(reader);
 byte b = reader.ReadByte();
-this.keyRingBonus = BooleanByteWrapper.GetFlag(b, 0);
-this.hasHardcoreDrop = BooleanByteWrapper.GetFlag(b, 1);
-this.hasAVARewardToken = BooleanByteWrapper.GetFlag(b, 2);
+            keyRingBonus = BooleanByteWrapper.GetFlag(b, 0);
+            hasHardcoreDrop = BooleanByteWrapper.GetFlag(b, 1);
+            hasAVARewardToken = BooleanByteWrapper.GetFlag(b, 2);
 short s = reader.ReadShort();
             staticInfos = Types.ProtocolTypeManager.GetInstance<Types.GroupMonsterStaticInformations>(s);
             staticInfos.Deserialize(reader);

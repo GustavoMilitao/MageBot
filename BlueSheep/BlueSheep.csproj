@@ -1094,7 +1094,6 @@
     <Compile Include="Common\Protocol\types\common\basic\StatisticDataInt.cs" />
     <Compile Include="Common\Protocol\types\common\basic\StatisticDataShort.cs" />
     <Compile Include="Common\Protocol\types\common\basic\StatisticDataString.cs" />
-    <Compile Include="Common\Protocol\types\ProtocolTypeManager.cs" />
     <Compile Include="Common\Protocol\types\connection\GameServerInformations.cs" />
     <Compile Include="Common\Protocol\types\game\achievement\Achievement.cs" />
     <Compile Include="Common\Protocol\types\game\achievement\AchievementObjective.cs" />
@@ -1117,6 +1116,7 @@
     <Compile Include="Common\Protocol\types\game\character\AbstractCharacterInformation.cs" />
     <Compile Include="Common\Protocol\types\game\character\alignment\ActorAlignmentInformations.cs" />
     <Compile Include="Common\Protocol\types\game\character\alignment\ActorExtendedAlignmentInformations.cs" />
+    <Compile Include="Common\Protocol\types\game\character\CharacterBasicMinimalInformations.cs" />
     <Compile Include="Common\Protocol\types\game\character\characteristic\CharacterBaseCharacteristic.cs" />
     <Compile Include="Common\Protocol\types\game\character\characteristic\CharacterCharacteristicsInformations.cs" />
     <Compile Include="Common\Protocol\types\game\character\characteristic\CharacterSpellModification.cs" />
@@ -1154,6 +1154,7 @@
     <Compile Include="Common\Protocol\types\game\context\fight\FightResultPlayerListEntry.cs" />
     <Compile Include="Common\Protocol\types\game\context\fight\FightResultPvpData.cs" />
     <Compile Include="Common\Protocol\types\game\context\fight\FightResultTaxCollectorListEntry.cs" />
+    <Compile Include="Common\Protocol\types\game\context\fight\FightStartingPositions.cs" />
     <Compile Include="Common\Protocol\types\game\context\fight\FightTeamInformations.cs" />
     <Compile Include="Common\Protocol\types\game\context\fight\FightTeamLightInformations.cs" />
     <Compile Include="Common\Protocol\types\game\context\fight\FightTeamMemberCharacterInformations.cs" />
@@ -1192,6 +1193,7 @@
     <Compile Include="Common\Protocol\types\game\context\roleplay\BasicAllianceInformations.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\BasicGuildInformations.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\BasicNamedAllianceInformations.cs" />
+    <Compile Include="Common\Protocol\types\game\context\roleplay\fight\arena\ArenaRankInfos.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\GameRolePlayActorInformations.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\GameRolePlayCharacterInformations.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\GameRolePlayGroupMonsterInformations.cs" />
@@ -1218,13 +1220,17 @@
     <Compile Include="Common\Protocol\types\game\context\roleplay\HumanOptionGuild.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\HumanOptionObjectUse.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\HumanOptionOrnament.cs" />
+    <Compile Include="Common\Protocol\types\game\context\roleplay\HumanOptionSkillUse.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\HumanOptionTitle.cs" />
+    <Compile Include="Common\Protocol\types\game\context\roleplay\job\DecraftedItemStackInfo.cs" />
+    <Compile Include="Common\Protocol\types\game\context\roleplay\job\JobBookSubscription.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\job\JobCrafterDirectoryEntryJobInfo.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\job\JobCrafterDirectoryEntryPlayerInfo.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\job\JobCrafterDirectoryListEntry.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\job\JobCrafterDirectorySettings.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\job\JobDescription.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\job\JobExperience.cs" />
+    <Compile Include="Common\Protocol\types\game\context\roleplay\MonsterBoosts.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\MonsterInGroupInformations.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\MonsterInGroupLightInformations.cs" />
     <Compile Include="Common\Protocol\types\game\context\roleplay\ObjectItemInRolePlay.cs" />
@@ -1253,6 +1259,10 @@
     <Compile Include="Common\Protocol\types\game\context\roleplay\treasureHunt\TreasureHuntStepFollowDirectionToPOI.cs" />
     <Compile Include="Common\Protocol\types\game\context\TaxCollectorStaticExtendedInformations.cs" />
     <Compile Include="Common\Protocol\types\game\context\TaxCollectorStaticInformations.cs" />
+    <Compile Include="Common\Protocol\types\game\dare\DareCriteria.cs" />
+    <Compile Include="Common\Protocol\types\game\dare\DareInformations.cs" />
+    <Compile Include="Common\Protocol\types\game\dare\DareReward.cs" />
+    <Compile Include="Common\Protocol\types\game\dare\DareVersatileInformations.cs" />
     <Compile Include="Common\Protocol\types\game\data\items\BidExchangerObjectInfo.cs" />
     <Compile Include="Common\Protocol\types\game\data\items\effects\ObjectEffect.cs" />
     <Compile Include="Common\Protocol\types\game\data\items\effects\ObjectEffectCreature.cs" />
@@ -1267,6 +1277,8 @@
     <Compile Include="Common\Protocol\types\game\data\items\GoldItem.cs" />
     <Compile Include="Common\Protocol\types\game\data\items\Item.cs" />
     <Compile Include="Common\Protocol\types\game\data\items\ObjectItem.cs" />
+    <Compile Include="Common\Protocol\types\game\data\items\ObjectItemGenericQuantity.cs" />
+    <Compile Include="Common\Protocol\types\game\data\items\ObjectItemGenericQuantityPrice.cs" />
     <Compile Include="Common\Protocol\types\game\data\items\ObjectItemInformationWithQuantity.cs" />
     <Compile Include="Common\Protocol\types\game\data\items\ObjectItemMinimalInformation.cs" />
     <Compile Include="Common\Protocol\types\game\data\items\ObjectItemNotInContainer.cs" />
@@ -1278,6 +1290,7 @@
     <Compile Include="Common\Protocol\types\game\data\items\SellerBuyerDescriptor.cs" />
     <Compile Include="Common\Protocol\types\game\data\items\SpellItem.cs" />
     <Compile Include="Common\Protocol\types\game\fight\ProtectedEntityWaitingForHelpInfo.cs" />
+    <Compile Include="Common\Protocol\types\game\finishmoves\FinishMoveInformations.cs" />
     <Compile Include="Common\Protocol\types\game\friend\AbstractContactInformations.cs" />
     <Compile Include="Common\Protocol\types\game\friend\FriendInformations.cs" />
     <Compile Include="Common\Protocol\types\game\friend\FriendOnlineInformations.cs" />
@@ -1287,6 +1300,7 @@
     <Compile Include="Common\Protocol\types\game\friend\IgnoredOnlineInformations.cs" />
     <Compile Include="Common\Protocol\types\game\guild\GuildEmblem.cs" />
     <Compile Include="Common\Protocol\types\game\guild\GuildMember.cs" />
+    <Compile Include="Common\Protocol\types\game\guild\HavenBagFurnitureInformation.cs" />
     <Compile Include="Common\Protocol\types\game\guild\tax\AdditionalTaxCollectorInformations.cs" />
     <Compile Include="Common\Protocol\types\game\guild\tax\TaxCollectorBasicInformations.cs" />
     <Compile Include="Common\Protocol\types\game\guild\tax\TaxCollectorComplementaryInformations.cs" />
@@ -1294,13 +1308,19 @@
     <Compile Include="Common\Protocol\types\game\guild\tax\TaxCollectorGuildInformations.cs" />
     <Compile Include="Common\Protocol\types\game\guild\tax\TaxCollectorInformations.cs" />
     <Compile Include="Common\Protocol\types\game\guild\tax\TaxCollectorLootInformations.cs" />
+    <Compile Include="Common\Protocol\types\game\guild\tax\TaxCollectorMovement.cs" />
     <Compile Include="Common\Protocol\types\game\guild\tax\TaxCollectorWaitingForHelpInformations.cs" />
     <Compile Include="Common\Protocol\types\game\house\AccountHouseInformations.cs" />
+    <Compile Include="Common\Protocol\types\game\house\HouseGuildedInformations.cs" />
     <Compile Include="Common\Protocol\types\game\house\HouseInformations.cs" />
     <Compile Include="Common\Protocol\types\game\house\HouseInformationsExtended.cs" />
     <Compile Include="Common\Protocol\types\game\house\HouseInformationsForGuild.cs" />
     <Compile Include="Common\Protocol\types\game\house\HouseInformationsForSell.cs" />
     <Compile Include="Common\Protocol\types\game\house\HouseInformationsInside.cs" />
+    <Compile Include="Common\Protocol\types\game\house\HouseInstanceInformations.cs" />
+    <Compile Include="Common\Protocol\types\game\house\HouseOnMapInformations.cs" />
+    <Compile Include="Common\Protocol\types\game\idol\Idol.cs" />
+    <Compile Include="Common\Protocol\types\game\idol\PartyIdol.cs" />
     <Compile Include="Common\Protocol\types\game\interactive\InteractiveElement.cs" />
     <Compile Include="Common\Protocol\types\game\interactive\InteractiveElementNamedSkill.cs" />
     <Compile Include="Common\Protocol\types\game\interactive\InteractiveElementSkill.cs" />
@@ -1311,6 +1331,7 @@
     <Compile Include="Common\Protocol\types\game\interactive\skill\SkillActionDescriptionCraft.cs" />
     <Compile Include="Common\Protocol\types\game\interactive\skill\SkillActionDescriptionTimed.cs" />
     <Compile Include="Common\Protocol\types\game\interactive\StatedElement.cs" />
+    <Compile Include="Common\Protocol\types\game\inventory\preset\IdolsPreset.cs" />
     <Compile Include="Common\Protocol\types\game\inventory\preset\Preset.cs" />
     <Compile Include="Common\Protocol\types\game\inventory\preset\PresetItem.cs" />
     <Compile Include="Common\Protocol\types\game\look\EntityLook.cs" />
@@ -1324,8 +1345,10 @@
     <Compile Include="Common\Protocol\types\game\paddock\PaddockAbandonnedInformations.cs" />
     <Compile Include="Common\Protocol\types\game\paddock\PaddockBuyableInformations.cs" />
     <Compile Include="Common\Protocol\types\game\paddock\PaddockContentInformations.cs" />
+    <Compile Include="Common\Protocol\types\game\paddock\PaddockGuildedInformations.cs" />
     <Compile Include="Common\Protocol\types\game\paddock\PaddockInformations.cs" />
     <Compile Include="Common\Protocol\types\game\paddock\PaddockInformationsForSell.cs" />
+    <Compile Include="Common\Protocol\types\game\paddock\PaddockInstancesInformations.cs" />
     <Compile Include="Common\Protocol\types\game\paddock\PaddockItem.cs" />
     <Compile Include="Common\Protocol\types\game\paddock\PaddockPrivateInformations.cs" />
     <Compile Include="Common\Protocol\types\game\prism\AllianceInsiderPrismInformation.cs" />
@@ -1337,6 +1360,7 @@
     <Compile Include="Common\Protocol\types\game\shortcut\Shortcut.cs" />
     <Compile Include="Common\Protocol\types\game\shortcut\ShortcutEmote.cs" />
     <Compile Include="Common\Protocol\types\game\shortcut\ShortcutObject.cs" />
+    <Compile Include="Common\Protocol\types\game\shortcut\ShortcutObjectIdolsPreset.cs" />
     <Compile Include="Common\Protocol\types\game\shortcut\ShortcutObjectItem.cs" />
     <Compile Include="Common\Protocol\types\game\shortcut\ShortcutObjectPreset.cs" />
     <Compile Include="Common\Protocol\types\game\shortcut\ShortcutSmiley.cs" />
@@ -1350,6 +1374,7 @@
     <Compile Include="Common\Protocol\types\game\social\GuildInsiderFactSheetInformations.cs" />
     <Compile Include="Common\Protocol\types\game\social\GuildVersatileInformations.cs" />
     <Compile Include="Common\Protocol\types\game\startup\StartupActionAddObject.cs" />
+    <Compile Include="Common\Protocol\types\ProtocolTypeManager.cs" />
     <Compile Include="Common\Protocol\types\secure\TrustCertificate.cs" />
     <Compile Include="Common\Protocol\types\updater\ContentPart.cs" />
     <Compile Include="Common\Protocol\types\version\Version.cs" />

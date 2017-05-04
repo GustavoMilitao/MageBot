@@ -12,14 +12,14 @@ namespace BlueSheep.Data.Pathfinding.Positions
         // Methods
         internal void Compress()
         {
-            if ((this.Cells.Count > 0))
+            if ((Cells.Count > 0))
             {
-                int i = (this.Cells.Count - 1);
+                int i = (Cells.Count - 1);
                 while ((i > 0))
                 {
-                    if ((this.Cells[i].Orientation == this.Cells[(i - 1)].Orientation))
+                    if ((Cells[i].Orientation == Cells[(i - 1)].Orientation))
                     {
-                        this.Cells.RemoveAt(i);
+                        Cells.RemoveAt(i);
                         i -= 1;
                     }
                     i -= 1;

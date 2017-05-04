@@ -29,15 +29,15 @@ namespace BlueSheep.Core.Fight
 
         public BSpell(int spellId, string name)
         {
-            this.SpellId = spellId;
-            this.Name = name;
+            SpellId = spellId;
+            Name = name;
         }
 
         public DataClass data
         {
             get
             {
-                return GameData.GetDataObject(D2oFileEnum.Spells, this.m_SpellId);
+                return GameData.GetDataObject(D2oFileEnum.Spells, m_SpellId);
             }
         }
     }

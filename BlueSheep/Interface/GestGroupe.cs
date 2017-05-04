@@ -45,9 +45,9 @@ namespace BlueSheep.Interface
                     listViewGroups.Columns.Add("Name", -2, HorizontalAlignment.Center);
                     DelBt.Text = "Delete";
                     LaunchGroupsSelecBt.Text = "Launch selected groups";
-                    this.Text = "Groups manager";
-                    this.sadikTabControl1.TabPages[0].Text = "Launch";
-                    this.sadikTabControl1.TabPages[1].Text = "Create";
+                    Text = "Groups manager";
+                    sadikTabControl1.TabPages[0].Text = "Launch";
+                    sadikTabControl1.TabPages[1].Text = "Create";
                     AddBt.Text = "Create";
                     break;
                 default:
@@ -56,9 +56,9 @@ namespace BlueSheep.Interface
                     listViewGroups.Columns.Add("Name", -2, HorizontalAlignment.Center);
                     DelBt.Text = "Delete";
                     LaunchGroupsSelecBt.Text = "Launch selected groups";
-                    this.Text = "Groups manager";
-                    this.sadikTabControl1.TabPages[0].Text = "Launch";
-                    this.sadikTabControl1.TabPages[1].Text = "Create";
+                    Text = "Groups manager";
+                    sadikTabControl1.TabPages[0].Text = "Launch";
+                    sadikTabControl1.TabPages[1].Text = "Create";
                     AddBt.Text = "Create";
                     break;
             }
@@ -86,7 +86,7 @@ namespace BlueSheep.Interface
                 frm.Show();
                 MainForm.ActualMainForm.AddForm(frm);
             }
-            this.Close();
+            Close();
         }
 
         private void DelBt_Click(object sender, EventArgs e)

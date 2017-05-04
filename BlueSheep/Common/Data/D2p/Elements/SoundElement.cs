@@ -11,12 +11,12 @@ namespace BlueSheep.Data.D2p.Elements
         // Methods
         internal override void Init(BigEndianReader Reader, int MapVersion)
         {
-            this.SoundId = Reader.ReadInt();
-            this.BaseVolume = Reader.ReadShort();
-            this.FullVolumeDistance = Reader.ReadInt();
-            this.NullVolumeDistance = Reader.ReadInt();
-            this.MinDelayBetweenLoops = Reader.ReadShort();
-            this.MaxDelayBetweenLoops = Reader.ReadShort();
+            SoundId = Reader.ReadInt();
+            BaseVolume = Reader.ReadShort();
+            FullVolumeDistance = Reader.ReadInt();
+            NullVolumeDistance = Reader.ReadInt();
+            MinDelayBetweenLoops = Reader.ReadShort();
+            MaxDelayBetweenLoops = Reader.ReadShort();
         }
 
         // Fields

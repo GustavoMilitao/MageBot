@@ -31,7 +31,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
 
-            writer.WriteByte(this.value);
+            writer.WriteByte(value);
 
 
 
@@ -39,7 +39,7 @@ namespace BlueSheep.Common.Protocol.Types
 
         public virtual void Deserialize(BigEndianReader reader)
         {
-            this.value = reader.ReadByte();
+            value = reader.ReadByte();
         }
     }
 }

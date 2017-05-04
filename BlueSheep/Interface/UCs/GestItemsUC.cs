@@ -20,9 +20,9 @@ namespace BlueSheep.Interface.UCs
             account = Account;
             LVGestItems.Columns.Add("Nom", 200, HorizontalAlignment.Center);
             LVGestItems.Columns.Add("Action", 200, HorizontalAlignment.Center);
-            this.ItemTxtBox.KeyUp += (s, e) =>
+            ItemTxtBox.KeyUp += (s, e) =>
             {
-                IntelliSense.AutoCompleteTextBox(ItemTxtBox, this.litPopup, IntelliSense.ItemsList, e);
+                IntelliSense.AutoCompleteTextBox(ItemTxtBox, litPopup, IntelliSense.ItemsList, e);
             };
             AutoDeletionTimer = new System.Timers.Timer(Convert.ToDouble(NUDAutoDeletion.Value * 10000)) { AutoReset = false };
             AutoDeletionTimer.Elapsed += new System.Timers.ElapsedEventHandler(PerformAutoDeletion);

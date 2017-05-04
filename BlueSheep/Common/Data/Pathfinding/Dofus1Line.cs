@@ -253,14 +253,14 @@ namespace BlueSheep.Data.Pathfinding
             // Properties
             public double X
             {
-                get { return this.double_0; }
-                set { this.double_0 = value; }
+                get { return double_0; }
+                set { double_0 = value; }
             }
 
             public double Y
             {
-                get { return this.double_1; }
-                set { this.double_1 = value; }
+                get { return double_1; }
+                set { double_1 = value; }
             }
 
 
@@ -285,20 +285,20 @@ namespace BlueSheep.Data.Pathfinding
             // Properties
             public double X
             {
-                get { return this.double_0; }
-                set { this.double_0 = value; }
+                get { return double_0; }
+                set { double_0 = value; }
             }
 
             public double Y
             {
-                get { return this.double_1; }
-                set { this.double_1 = value; }
+                get { return double_1; }
+                set { double_1 = value; }
             }
 
             public double Z
             {
-                get { return this.double_2; }
-                set { this.double_2 = value; }
+                get { return double_2; }
+                set { double_2 = value; }
             }
 
 

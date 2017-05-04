@@ -147,19 +147,19 @@ namespace BlueSheep.Interface
 
             if (_image == null)
             {
-                float textX = ((this.Width - 1) / 2) - (G.MeasureString(Text, Font).Width / 2);
-                float textY = ((this.Height - 1) / 2) - (G.MeasureString(Text, Font).Height / 2);
+                float textX = ((Width - 1) / 2) - (G.MeasureString(Text, Font).Width / 2);
+                float textY = ((Height - 1) / 2) - (G.MeasureString(Text, Font).Height / 2);
                 G.DrawString(Text, Font, Brushes.White, textX, textY);
             }
             else
             {
                 Size textSize = new Size((int)G.MeasureString(Text, Font).Width, (int)G.MeasureString(Text, Font).Height);
-                int imageWidth = this.Height - 19;
-                int imageHeight = this.Height - 19;
-                int imageX = ((this.Width - 1) / 2) - ((imageWidth + 4 + textSize.Width) / 2);
-                int imageY = ((this.Height - 1) / 2) - (imageHeight / 2);
+                int imageWidth = Height - 19;
+                int imageHeight = Height - 19;
+                int imageX = ((Width - 1) / 2) - ((imageWidth + 4 + textSize.Width) / 2);
+                int imageY = ((Height - 1) / 2) - (imageHeight / 2);
                 G.DrawImage(_image, imageX, imageY, imageWidth, imageHeight);
-                G.DrawString(Text, Font, Brushes.White, new Point(imageX + imageWidth + 4, ((this.Height - 1) / 2) - textSize.Height / 2));
+                G.DrawString(Text, Font, Brushes.White, new Point(imageX + imageWidth + 4, ((Height - 1) / 2) - textSize.Height / 2));
             }
 
             if (MouseState == State.Over)
@@ -379,7 +379,7 @@ namespace BlueSheep.Interface
                 G.DrawLine(new Pen(Color.DeepSkyBlue), new Point(barRect.X, barRect.Height), new Point(barRect.Width, barRect.Height));
 
             int textX = 12;
-            float textY = ((this.Height - 1) / 2) - (G.MeasureString(Text, Font).Height / 2);
+            float textY = ((Height - 1) / 2) - (G.MeasureString(Text, Font).Height / 2);
             float percent = (_Value / _Maximum) * 100;
             string txt = Text + " " + Convert.ToString(percent) + "%";
             G.DrawString(txt, Font, new SolidBrush(Color.Black), new Point(textX + 1, (int)textY + 1));
@@ -399,7 +399,7 @@ namespace BlueSheep.Interface
         protected override void OnResize(EventArgs e)
         {
             // Invalidate the control to get a repaint.
-            this.Invalidate();
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -408,7 +408,7 @@ namespace BlueSheep.Interface
             SolidBrush brush = new SolidBrush(BarColor);
             float percent = (float)(val - min) / (float)(max - min);
             double p = Math.Truncate(100 * percent);
-            Rectangle rect = this.ClientRectangle;
+            Rectangle rect = ClientRectangle;
 
             // Calculate area for drawing the progress.
             rect.Width = (int)((float)rect.Width * percent);
@@ -416,7 +416,7 @@ namespace BlueSheep.Interface
             // Draw the progress meter.
             g.FillRectangle(brush, rect);
             int textX = 12;
-            float textY = ((this.Height - 1) / 2) - (g.MeasureString(Text, Font).Height / 2);
+            float textY = ((Height - 1) / 2) - (g.MeasureString(Text, Font).Height / 2);
             string txt = Text + " " + p + "%";
             g.DrawString(txt, Font, new SolidBrush(Color.White), new Point(textX + 1, (int)textY + 1));
             g.DrawString(txt, Font, Brushes.Black, new Point(textX, (int)textY));
@@ -458,7 +458,7 @@ namespace BlueSheep.Interface
                 }
 
                 // Invalidate the control to get a repaint.
-                this.Invalidate();
+                Invalidate();
             }
         }
 
@@ -486,7 +486,7 @@ namespace BlueSheep.Interface
                 }
 
                 // Invalidate the control to get a repaint.
-                this.Invalidate();
+                Invalidate();
             }
         }
 
@@ -518,8 +518,8 @@ namespace BlueSheep.Interface
                 // Invalidate only the changed area.
                 float percent;
 
-                Rectangle newValueRect = this.ClientRectangle;
-                Rectangle oldValueRect = this.ClientRectangle;
+                Rectangle newValueRect = ClientRectangle;
+                Rectangle oldValueRect = ClientRectangle;
 
                 // Use a new value to calculate the rectangle for progress.
                 percent = (float)(val - min) / (float)(max - min);
@@ -543,10 +543,10 @@ namespace BlueSheep.Interface
                     updateRect.Width = oldValueRect.Width - newValueRect.Width;
                 }
 
-                updateRect.Height = this.Height;
+                updateRect.Height = Height;
 
                 // Invalidate the intersection region only.
-                this.Invalidate(updateRect);
+                Invalidate(updateRect);
             }
         }
 
@@ -562,7 +562,7 @@ namespace BlueSheep.Interface
                 BarColor = value;
 
                 // Invalidate the control to get a repaint.
-                this.Invalidate();
+                Invalidate();
             }
         }
 
@@ -571,17 +571,17 @@ namespace BlueSheep.Interface
             int PenWidth = (int)Pens.White.Width;
 
             g.DrawLine(Pens.DarkGray,
-                new Point(this.ClientRectangle.Left, this.ClientRectangle.Top),
-                new Point(this.ClientRectangle.Width - PenWidth, this.ClientRectangle.Top));
+                new Point(ClientRectangle.Left, ClientRectangle.Top),
+                new Point(ClientRectangle.Width - PenWidth, ClientRectangle.Top));
             g.DrawLine(Pens.DarkGray,
-                new Point(this.ClientRectangle.Left, this.ClientRectangle.Top),
-                new Point(this.ClientRectangle.Left, this.ClientRectangle.Height - PenWidth));
+                new Point(ClientRectangle.Left, ClientRectangle.Top),
+                new Point(ClientRectangle.Left, ClientRectangle.Height - PenWidth));
             g.DrawLine(Pens.White,
-                new Point(this.ClientRectangle.Left, this.ClientRectangle.Height - PenWidth),
-                new Point(this.ClientRectangle.Width - PenWidth, this.ClientRectangle.Height - PenWidth));
+                new Point(ClientRectangle.Left, ClientRectangle.Height - PenWidth),
+                new Point(ClientRectangle.Width - PenWidth, ClientRectangle.Height - PenWidth));
             g.DrawLine(Pens.White,
-                new Point(this.ClientRectangle.Width - PenWidth, this.ClientRectangle.Top),
-                new Point(this.ClientRectangle.Width - PenWidth, this.ClientRectangle.Height - PenWidth));
+                new Point(ClientRectangle.Width - PenWidth, ClientRectangle.Top),
+                new Point(ClientRectangle.Width - PenWidth, ClientRectangle.Height - PenWidth));
         } 
     }
 
@@ -675,12 +675,12 @@ namespace BlueSheep.Interface
             }
 
             Font styleFont = new Font(Font.FontFamily, Font.Size, FontStyle.Bold);
-            float textY = ((this.Height - 1) / 2) - (G.MeasureString(Text, Font).Height / 2);
+            float textY = ((Height - 1) / 2) - (G.MeasureString(Text, Font).Height / 2);
             G.DrawString(styleText, styleFont, new SolidBrush(textColor), new Point(10, (int)textY));
             G.DrawString(Text, Font, new SolidBrush(textColor), new Point(10 + (int)G.MeasureString(styleText, styleFont).Width + 4, (int)textY));
 
             Font exitFont = new Font("Marlett", 6);
-            float exitY = ((this.Height - 1) / 2) - (G.MeasureString("r", exitFont).Height / 2) + 1;
+            float exitY = ((Height - 1) / 2) - (G.MeasureString("r", exitFont).Height / 2) + 1;
             exitLocation = new Point(Width - 26, (int)exitY - 3);
             G.DrawString("r", exitFont, new SolidBrush(textColor), new Point(Width - 23, (int)exitY));
 
@@ -712,7 +712,7 @@ namespace BlueSheep.Interface
             base.OnMouseDown(e);
 
             if (overExit)
-                this.Visible = false;
+                Visible = false;
 
         }
 
@@ -767,13 +767,13 @@ namespace BlueSheep.Interface
                     if (!(SelectedIndex == -1))
                     {
                         int textX = 6;
-                        int textY = ((this.Height - 1) / 2) - (int)(G.MeasureString((string)Items[SelectedIndex], Font).Height / 2) + 1;
+                        int textY = ((Height - 1) / 2) - (int)(G.MeasureString((string)Items[SelectedIndex], Font).Height / 2) + 1;
                         G.DrawString((string)Items[SelectedIndex], Font, Brushes.Gray, new Point(textX, textY));
                     }
                     else
                     {
                         int textX = 6;
-                        int textY = ((this.Height - 1) / 2) - (int)(G.MeasureString((string)Items[0], Font).Height / 2) + 1;
+                        int textY = ((Height - 1) / 2) - (int)(G.MeasureString((string)Items[0], Font).Height / 2) + 1;
                         G.DrawString(Items[0].ToString(), Font, Brushes.Gray, new Point(textX, textY));
                     }
                 }

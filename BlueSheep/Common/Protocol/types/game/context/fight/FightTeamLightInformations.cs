@@ -66,11 +66,11 @@ public override void Serialize(BigEndianWriter writer)
 
 base.Serialize(writer);
    byte _loc2_ = 0;
-         _loc2_ = BooleanByteWrapper.SetFlag(_loc2_,0,this.hasFriend);
-         _loc2_ = BooleanByteWrapper.SetFlag(_loc2_,1,this.hasGuildMember);
-         _loc2_ = BooleanByteWrapper.SetFlag(_loc2_,2,this.hasAllianceMember);
-         _loc2_ = BooleanByteWrapper.SetFlag(_loc2_,3,this.hasGroupMember);
-         _loc2_ = BooleanByteWrapper.SetFlag(_loc2_,4,this.hasMyTaxCollector);
+         _loc2_ = BooleanByteWrapper.SetFlag(_loc2_,0, hasFriend);
+         _loc2_ = BooleanByteWrapper.SetFlag(_loc2_,1, hasGuildMember);
+         _loc2_ = BooleanByteWrapper.SetFlag(_loc2_,2, hasAllianceMember);
+         _loc2_ = BooleanByteWrapper.SetFlag(_loc2_,3, hasGroupMember);
+         _loc2_ = BooleanByteWrapper.SetFlag(_loc2_,4, hasMyTaxCollector);
          writer.WriteByte(_loc2_);
             writer.WriteSByte(teamMembersCount);
             writer.WriteVarInt(meanLevel);
@@ -83,11 +83,11 @@ public override void Deserialize(BigEndianReader reader)
 
 base.Deserialize(reader);
     byte _loc2_ = reader.ReadByte();
-         this.hasFriend = BooleanByteWrapper.GetFlag(_loc2_,0);
-         this.hasGuildMember = BooleanByteWrapper.GetFlag(_loc2_,1);
-         this.hasAllianceMember = BooleanByteWrapper.GetFlag(_loc2_,2);
-         this.hasGroupMember = BooleanByteWrapper.GetFlag(_loc2_,3);
-         this.hasMyTaxCollector = BooleanByteWrapper.GetFlag(_loc2_,4);
+            hasFriend = BooleanByteWrapper.GetFlag(_loc2_,0);
+            hasGuildMember = BooleanByteWrapper.GetFlag(_loc2_,1);
+            hasAllianceMember = BooleanByteWrapper.GetFlag(_loc2_,2);
+            hasGroupMember = BooleanByteWrapper.GetFlag(_loc2_,3);
+            hasMyTaxCollector = BooleanByteWrapper.GetFlag(_loc2_,4);
             teamMembersCount = reader.ReadSByte();
             if (teamMembersCount < 0)
                 throw new Exception("Forbidden value on teamMembersCount = " + teamMembersCount + ", it doesn't respect the following condition : teamMembersCount < 0");

@@ -29,7 +29,7 @@ namespace BlueSheep.Interface
         public GroupForm(List<AccountUC> accounts, string name)
         {
             InitializeComponent();
-            this.Text = name;
+            Text = name;
             list = new List<Account>();
             foreach (AccountUC account in accounts)
             {
@@ -39,7 +39,7 @@ namespace BlueSheep.Interface
                 tab.Controls.Add(naccount);
                 naccount.Dock = DockStyle.Fill;
                 naccount.Show();
-                naccount.MyGroup = new Group(accounts, this.Name);
+                naccount.MyGroup = new Group(accounts, Name);
                 list.Add(new Account(account.AccountName, account.AccountPassword));
                 naccount.Init();
             }
@@ -65,7 +65,7 @@ namespace BlueSheep.Interface
                     {
                         account.IsSlave = true;
                         account.IsMaster = false;
-                        account.MyGroup = new Group(listAccounts, this.Name);
+                        account.MyGroup = new Group(listAccounts, Name);
                     }
                 }
                 if (item == (string)MasterChoice.SelectedItem)
@@ -76,7 +76,7 @@ namespace BlueSheep.Interface
                         {
                             account.IsSlave = false;
                             account.IsMaster = true;
-                            account.MyGroup = new Group(listAccounts, this.Name);
+                            account.MyGroup = new Group(listAccounts, Name);
                             account.Log(new BotTextInformation("Je suis le chef de groupe biatch !"), 1);
                             account.Focus();
                             foreach (AccountUC slave in listAccounts)

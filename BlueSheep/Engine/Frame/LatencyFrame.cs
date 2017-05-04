@@ -96,7 +96,7 @@ namespace BlueSheep.Engine.Frame
             }
            //(_loc5_) || (h + md5Byte.readByte() + (ct & (i << 1)) % 128);
 
-            return Convert.ToUInt16(this.GetLatencyAvg() + ((pId + h) % 20) - 10);
+            return Convert.ToUInt16(GetLatencyAvg() + ((pId + h) % 20) - 10);
         }
 
         public class Str2
@@ -107,7 +107,7 @@ namespace BlueSheep.Engine.Frame
                 //var _loc1_:* = false;
                 //var _loc2_:* = true;
                 //!_loc1_;
-                //super();
+                //base();
             }
 
             private static byte[] Str8;
@@ -199,10 +199,10 @@ namespace BlueSheep.Engine.Frame
 
             public Str5(byte[] param1 = null)
             {
-                this.Str22 = new List<byte>().ToArray();
+                Str22 = new List<byte>().ToArray();
                 if (param1 != null)
                 {
-                    this.Str23(param1);
+                    Str23(param1);
                 }
                 return;
             }
@@ -220,24 +220,24 @@ namespace BlueSheep.Engine.Frame
                 _loc2_ = 0;
                 while (_loc2_ < 256)
                 {
-                    this.Str22[_loc2_] = (byte)_loc2_;
+                    Str22[_loc2_] = (byte)_loc2_;
                     _loc2_++;
                 }
                 _loc3_ = 0;
                 _loc2_ = 0;
                 for (_loc2_ = 0; _loc2_ < 256; _loc2_++)
                 {
-                    _loc3_ = (_loc3_ + this.Str22[_loc2_] + param1[_loc2_ % param1.Length]) & 255;
+                    _loc3_ = (_loc3_ + Str22[_loc2_] + param1[_loc2_ % param1.Length]) & 255;
                     //goto lab2;
-                    _loc4_ = this.Str22[_loc2_];
+                    _loc4_ = Str22[_loc2_];
                     do
                     {
-                        this.Str22[_loc2_] = this.Str22[_loc3_];
-                        this.Str22[_loc3_] = (byte)_loc4_;
+                        Str22[_loc2_] = Str22[_loc3_];
+                        Str22[_loc3_] = (byte)_loc4_;
                         continue;
 
                     lab1:
-                        _loc4_ = this.Str22[_loc2_];
+                        _loc4_ = Str22[_loc2_];
                     } while (true);
 
                     //lab2:
@@ -245,26 +245,26 @@ namespace BlueSheep.Engine.Frame
                     //    goto lab1;
                     //var _loc6_ = null;
                 }
-                this.Str20 = 0;
-                this.Str21 = 0;
+                Str20 = 0;
+                Str21 = 0;
             }
 
             private uint Str25()
             {
                 int _loc1_ = 0;
-                this.Str20 = (this.Str20 + 1) & 255;
-                this.Str21 = (this.Str21 + this.Str22[this.Str20]) & 255;
-                while (_loc1_ == this.Str22[this.Str20])
+                Str20 = (Str20 + 1) & 255;
+                Str21 = (Str21 + Str22[Str20]) & 255;
+                while (_loc1_ == Str22[Str20])
                 {
-                    this.Str22[this.Str20] = this.Str22[this.Str21];
+                    Str22[Str20] = Str22[Str21];
                     goto lab1;
                 }
                 //var _loc2_ = _loc2_;
                 var _loc0_ = this;
 
             lab1:
-                this.Str22[this.Str21] = (byte)_loc1_;
-                return (this.Str22[(_loc1_ + this.Str22[this.Str20]) & 255]);
+                Str22[Str21] = (byte)_loc1_;
+                return (Str22[(_loc1_ + Str22[Str20]) & 255]);
             }
 
             public uint Str26()
@@ -278,7 +278,7 @@ namespace BlueSheep.Engine.Frame
                 while (_loc2_ < param1.Length)
                 {
                     var _loc3_ = _loc2_++;
-                    param1[_loc3_] = Convert.ToByte((param1[_loc3_] ^ this.Str25()));
+                    param1[_loc3_] = Convert.ToByte((param1[_loc3_] ^ Str25()));
                 }
                 return;
             }

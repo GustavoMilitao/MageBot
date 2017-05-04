@@ -61,8 +61,8 @@ public GameFightFighterLightInformations(int id, sbyte wave, short level, sbyte 
 public virtual void Serialize(BigEndianWriter writer)
 {
     byte b = 0;
-         b = BooleanByteWrapper.SetFlag(b,0,this.sex);
-         b = BooleanByteWrapper.SetFlag(b,1,this.alive);
+         b = BooleanByteWrapper.SetFlag(b,0, sex);
+         b = BooleanByteWrapper.SetFlag(b,1, alive);
          writer.WriteByte(b);
 writer.WriteInt(id);
             writer.WriteSByte(wave);
@@ -75,8 +75,8 @@ writer.WriteInt(id);
 public virtual void Deserialize(BigEndianReader reader)
 {
    byte _loc2_ = reader.ReadByte();
-         this.sex = BooleanByteWrapper.GetFlag(_loc2_,0);
-         this.alive = BooleanByteWrapper.GetFlag(_loc2_,1);
+            sex = BooleanByteWrapper.GetFlag(_loc2_,0);
+            alive = BooleanByteWrapper.GetFlag(_loc2_,1);
 id = reader.ReadInt();
             wave = reader.ReadSByte();
             if (wave < 0)

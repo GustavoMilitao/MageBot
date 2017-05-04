@@ -98,13 +98,13 @@ public override void Deserialize(BigEndianReader reader)
 
 base.Deserialize(reader);
              byte b= reader.ReadByte();
-         this.showExperience = BooleanByteWrapper.GetFlag(b,0);
-         this.showExperienceLevelFloor = BooleanByteWrapper.GetFlag(b, 1);
-         this.showExperienceNextLevelFloor = BooleanByteWrapper.GetFlag(b, 2);
-         this.showExperienceFightDelta = BooleanByteWrapper.GetFlag(b, 3);
-         this.showExperienceForGuild = BooleanByteWrapper.GetFlag(b, 4);
-         this.showExperienceForMount = BooleanByteWrapper.GetFlag(b, 5);
-         this.isIncarnationExperience = BooleanByteWrapper.GetFlag(b, 6);
+            showExperience = BooleanByteWrapper.GetFlag(b,0);
+            showExperienceLevelFloor = BooleanByteWrapper.GetFlag(b, 1);
+            showExperienceNextLevelFloor = BooleanByteWrapper.GetFlag(b, 2);
+            showExperienceFightDelta = BooleanByteWrapper.GetFlag(b, 3);
+            showExperienceForGuild = BooleanByteWrapper.GetFlag(b, 4);
+            showExperienceForMount = BooleanByteWrapper.GetFlag(b, 5);
+            isIncarnationExperience = BooleanByteWrapper.GetFlag(b, 6);
             experience = reader.ReadVarUhLong();
             if (experience < 0 || experience > 9.007199254740992E15)
                 throw new Exception("Forbidden value on experience = " + experience + ", it doesn't respect the following condition : experience < 0 || experience > 9.007199254740992E15");

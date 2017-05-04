@@ -51,7 +51,7 @@ namespace BlueSheep.Interface
                     StreamWriter sr = new StreamWriter(combinedPath);
                     sr.WriteLine(TextBox1.Text);
                     sr.Close();
-                    this.Close();
+                    Close();
                     return;
                 }
                 else

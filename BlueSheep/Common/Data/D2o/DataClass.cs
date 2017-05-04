@@ -15,11 +15,11 @@ namespace BlueSheep.Common.Data.D2o
         {
             get
             {
-                if (!this.Fields.ContainsKey(Name))
+                if (!Fields.ContainsKey(Name))
                 {
                     return null;
                 }
-                return this.Fields[Name];
+                return Fields[Name];
             }
         }
 

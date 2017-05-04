@@ -75,29 +75,29 @@ public virtual void Deserialize(BigEndianReader reader)
 {
 
     var _loc_2 = reader.ReadByte();
-            this.cantBeAggressed = BooleanByteWrapper.GetFlag(_loc_2, 0);
-            this.cantBeChallenged = BooleanByteWrapper.GetFlag(_loc_2, 1);
-            this.cantTrade = BooleanByteWrapper.GetFlag(_loc_2, 2);
-            this.cantBeAttackedByMutant = BooleanByteWrapper.GetFlag(_loc_2, 3);
-            this.cantRun = BooleanByteWrapper.GetFlag(_loc_2, 4);
-            this.forceSlowWalk = BooleanByteWrapper.GetFlag(_loc_2, 5);
-            this.cantMinimize = BooleanByteWrapper.GetFlag(_loc_2, 6);
-            this.cantMove = BooleanByteWrapper.GetFlag(_loc_2, 7);
+            cantBeAggressed = BooleanByteWrapper.GetFlag(_loc_2, 0);
+            cantBeChallenged = BooleanByteWrapper.GetFlag(_loc_2, 1);
+            cantTrade = BooleanByteWrapper.GetFlag(_loc_2, 2);
+            cantBeAttackedByMutant = BooleanByteWrapper.GetFlag(_loc_2, 3);
+            cantRun = BooleanByteWrapper.GetFlag(_loc_2, 4);
+            forceSlowWalk = BooleanByteWrapper.GetFlag(_loc_2, 5);
+            cantMinimize = BooleanByteWrapper.GetFlag(_loc_2, 6);
+            cantMove = BooleanByteWrapper.GetFlag(_loc_2, 7);
             var _loc_3 = reader.ReadByte();
-            this.cantAggress = BooleanByteWrapper.GetFlag(_loc_3, 0);
-            this.cantChallenge = BooleanByteWrapper.GetFlag(_loc_3, 1);
-            this.cantExchange = BooleanByteWrapper.GetFlag(_loc_3, 2);
-            this.cantAttack = BooleanByteWrapper.GetFlag(_loc_3, 3);
-            this.cantChat = BooleanByteWrapper.GetFlag(_loc_3, 4);
-            this.cantBeMerchant = BooleanByteWrapper.GetFlag(_loc_3, 5);
-            this.cantUseObject = BooleanByteWrapper.GetFlag(_loc_3, 6);
-            this.cantUseTaxCollector = BooleanByteWrapper.GetFlag(_loc_3, 7);
+            cantAggress = BooleanByteWrapper.GetFlag(_loc_3, 0);
+            cantChallenge = BooleanByteWrapper.GetFlag(_loc_3, 1);
+            cantExchange = BooleanByteWrapper.GetFlag(_loc_3, 2);
+            cantAttack = BooleanByteWrapper.GetFlag(_loc_3, 3);
+            cantChat = BooleanByteWrapper.GetFlag(_loc_3, 4);
+            cantBeMerchant = BooleanByteWrapper.GetFlag(_loc_3, 5);
+            cantUseObject = BooleanByteWrapper.GetFlag(_loc_3, 6);
+            cantUseTaxCollector = BooleanByteWrapper.GetFlag(_loc_3, 7);
             var _loc_4 = reader.ReadByte();
-            this.cantUseInteractive = BooleanByteWrapper.GetFlag(_loc_4, 0);
-            this.cantSpeakToNPC = BooleanByteWrapper.GetFlag(_loc_4, 1);
-            this.cantChangeZone = BooleanByteWrapper.GetFlag(_loc_4, 2);
-            this.cantAttackMonster = BooleanByteWrapper.GetFlag(_loc_4, 3);
-            this.cantWalk8Directions = BooleanByteWrapper.GetFlag(_loc_4, 4);
+            cantUseInteractive = BooleanByteWrapper.GetFlag(_loc_4, 0);
+            cantSpeakToNPC = BooleanByteWrapper.GetFlag(_loc_4, 1);
+            cantChangeZone = BooleanByteWrapper.GetFlag(_loc_4, 2);
+            cantAttackMonster = BooleanByteWrapper.GetFlag(_loc_4, 3);
+            cantWalk8Directions = BooleanByteWrapper.GetFlag(_loc_4, 4);
 
 }
 

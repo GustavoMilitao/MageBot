@@ -44,7 +44,7 @@ namespace BlueSheep.Common.Protocol.Types
 
         public AbstractCharacterInformation(uint id)
         {
-            this.Id = id;
+            Id = id;
         }
 
 

@@ -23,7 +23,7 @@ namespace BlueSheep.Common.Protocol.Types
 
         public StatisticData(uint value)
         {
-            this.actionId = value;
+            actionId = value;
 
         }
 
@@ -39,7 +39,7 @@ namespace BlueSheep.Common.Protocol.Types
 
         public virtual void Deserialize(BigEndianReader reader)
         {
-            this.actionId = (uint)reader.ReadVarShort();
+            actionId = (uint)reader.ReadVarShort();
         }
     }
 }

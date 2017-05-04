@@ -13,8 +13,8 @@ namespace BlueSheep.Common.IO
 
         public Binary64(uint param1 = 0, uint param2 = 0)
         {
-            this.low = param1;
-            this.high = param2;
+            low = param1;
+            high = param2;
         }
     }
 }

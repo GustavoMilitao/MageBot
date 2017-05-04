@@ -32,7 +32,7 @@ namespace BlueSheep.Interface
         public LoginForm(string ver)
         {
             InitializeComponent();
-            this.Focus();
+            Focus();
             version = ver;
         }
         #endregion

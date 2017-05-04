@@ -14,11 +14,11 @@ namespace BlueSheep.Core.Inventory
     {
         public Item(List<ObjectEffect> effects, int gid, int position, int quantity, int uid, AccountUC account)
         {
-            this.Effects = effects;
-            this.GID = gid;
-            this.Position = position;
-            this.Quantity = quantity;
-            this.UID = uid;
+            Effects = effects;
+            GID = gid;
+            Position = position;
+            Quantity = quantity;
+            UID = uid;
         }
 
         public string Description

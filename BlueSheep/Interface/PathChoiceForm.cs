@@ -30,7 +30,7 @@ namespace BlueSheep.Interface
             switch (MainForm.ActualMainForm.Lang)
             {
                 case "EN":
-                    this.Text = "Path manager";
+                    Text = "Path manager";
                     DelBt.Text = "Delete";
                     LoadBt.Text = "Load";
                     AddBt.Text = "Add";
@@ -161,7 +161,7 @@ namespace BlueSheep.Interface
                 {
                     Account.Log(new ErrorTextInformation("WARNING : T'as chargé aucune IA, fait gaffe mon coco :p"), 0);
                 }
-                this.Close();
+                Close();
             }
         }
         #endregion
