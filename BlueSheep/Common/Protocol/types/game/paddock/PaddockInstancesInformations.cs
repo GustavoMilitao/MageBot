@@ -5,19 +5,22 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class PaddockInstancesInformations : PaddockInformations
     {
-        public new const uint ID = 509;
+        public new const short ID = 509;
 
         public List<PaddockBuyableInformations> paddocks;
+        public PaddockInstancesInformations()
+        {
 
+        }
         public virtual void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
             writer.WriteShort((short)paddocks.Count);
             uint _loc2_ = 0;
-            while (_loc2_ < this.paddocks.Count)
+            while (_loc2_ < paddocks.Count)
             {
-                writer.WriteShort((this.paddocks[(int)_loc2_] as PaddockBuyableInformations).TypeId);
-                (this.paddocks[(int)_loc2_] as PaddockBuyableInformations).Serialize(writer);
+                writer.WriteShort((paddocks[(int)_loc2_] as PaddockBuyableInformations).TypeId);
+                (paddocks[(int)_loc2_] as PaddockBuyableInformations).Serialize(writer);
                 _loc2_++;
             }
         }
@@ -34,7 +37,7 @@ namespace BlueSheep.Common.Protocol.Types
                 _loc4_ = reader.ReadUShort();
                 _loc5_ = ProtocolTypeManager.GetInstance<PaddockBuyableInformations>((short)_loc4_);
                 _loc5_.Deserialize(reader);
-                this.paddocks.Add(_loc5_);
+                paddocks.Add(_loc5_);
                 _loc3_++;
             }
         }

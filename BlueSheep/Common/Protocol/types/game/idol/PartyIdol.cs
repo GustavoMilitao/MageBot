@@ -6,21 +6,25 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class PartyIdol : Idol
     {
-        public new const uint ID = 490;
+        public new const short ID = 490;
         public List<ulong> ownersIds;
+
+        public PartyIdol()
+        {
+        }
 
         public virtual void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteShort((short)this.ownersIds.Count);
+            writer.WriteShort((short)ownersIds.Count);
             uint _loc2_ = 0;
-            while (_loc2_ < this.ownersIds.Count)
+            while (_loc2_ < ownersIds.Count)
             {
-                if (this.ownersIds[(int)_loc2_] < 0 || this.ownersIds[(int)_loc2_] > 9007199254740990)
+                if (ownersIds[(int)_loc2_] < 0 || ownersIds[(int)_loc2_] > 9007199254740990)
                 {
-                    throw new Exception("Forbidden value (" + this.ownersIds[(int)_loc2_] + ") on element 1 (starting at 1) of ownersIds.");
+                    throw new Exception("Forbidden value (" + ownersIds[(int)_loc2_] + ") on element 1 (starting at 1) of ownersIds.");
                 }
-                writer.WriteVarLong(this.ownersIds[(int)_loc2_]);
+                writer.WriteVarLong(ownersIds[(int)_loc2_]);
                 _loc2_++;
             }
         }

@@ -6,7 +6,8 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class DareInformations : CharacterBasicMinimalInformations
     {
-        public const uint ID = 502;
+        public const short ID = 502;
+
         public double dareId = 0;
         public CharacterBasicMinimalInformations creator;
         public double subscriptionFee = 0;

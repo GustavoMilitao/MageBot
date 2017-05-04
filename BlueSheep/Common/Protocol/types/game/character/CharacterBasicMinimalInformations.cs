@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class CharacterBasicMinimalInformations : AbstractCharacterInformation
     {
-        public const uint ID = 503;
+        public new const short ID = 503;
 
 
         public String name = "";

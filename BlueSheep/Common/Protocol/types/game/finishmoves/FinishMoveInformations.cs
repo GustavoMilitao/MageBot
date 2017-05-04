@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class FinishMoveInformations
     {
-        public new const uint ID = 506;
+        public new const short ID = 506;
         public uint finishMoveId = 0;
         public bool finishMoveState = false;
 
@@ -20,7 +20,7 @@ namespace BlueSheep.Common.Protocol.Types
         }
         public void deserializeAs_FinishMoveInformations(BigEndianReader reader)
         {
-            this._finishMoveIdFunc(reader);
+            _finishMoveIdFunc(reader);
             _finishMoveStateFunc(reader);
         }
 
@@ -31,10 +31,10 @@ namespace BlueSheep.Common.Protocol.Types
 
         private void _finishMoveIdFunc(BigEndianReader reader)
         {
-            this.finishMoveId = reader.ReadUInt();
-            if (this.finishMoveId < 0)
+            finishMoveId = reader.ReadUInt();
+            if (finishMoveId < 0)
             {
-                throw new Exception("Forbidden value (" + this.finishMoveId + ") on element of FinishMoveInformations.finishMoveId.");
+                throw new Exception("Forbidden value (" + finishMoveId + ") on element of FinishMoveInformations.finishMoveId.");
             }
         }
 

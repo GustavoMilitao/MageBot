@@ -5,9 +5,14 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class ObjectItemGenericQuantity : Item
     {
-        public new const uint ID = 483;
+        public new const short ID = 483;
         public uint objectGID = 0;
         public uint quantity = 0;
+
+        public ObjectItemGenericQuantity()
+        {
+
+        }
 
         public virtual void Serialize(BigEndianWriter writer)
         {

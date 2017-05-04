@@ -1674,6 +1674,7 @@
   <ItemGroup>
     <Content Include="bluesheep-logo.ico" />
     <Content Include="icon.ico" />
+    <Content Include="TextFile1.txt" />
     <None Include="Resources\group.ico" />
     <None Include="Resources\co.ico" />
     <None Include="Resources\account.ico" />

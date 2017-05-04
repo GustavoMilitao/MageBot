@@ -5,30 +5,35 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class ObjectItemGenericQuantityPrice : ObjectItemGenericQuantity
     {
-        public new const uint ID = 494;
+        public new const short ID = 494;
         public double price = 0;
+
+        public ObjectItemGenericQuantityPrice()
+        {
+
+        }
 
         public virtual void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            if (this.price < 0 || this.price > 9007199254740990)
+            if (price < 0 || price > 9007199254740990)
               {
-                throw new Exception("Forbidden value (" + this.price + ") on element price.");
+                throw new Exception("Forbidden value (" + price + ") on element price.");
                }
             writer.WriteVarLong((long)price);
         }
         public virtual void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            this._priceFunc(reader);
+            _priceFunc(reader);
         }
 
         private void _priceFunc(BigEndianReader reader)
         {
-            this.price = reader.ReadVarUhLong();
-            if (this.price < 0 || this.price > 9007199254740990)
+            price = reader.ReadVarUhLong();
+            if (price < 0 || price > 9007199254740990)
             {
-                throw new Exception("Forbidden value (" + this.price + ") on element of ObjectItemGenericQuantityPrice.price.");
+                throw new Exception("Forbidden value (" + price + ") on element of ObjectItemGenericQuantityPrice.price.");
             }
         }
 

@@ -1,18 +1,22 @@
 using BlueSheep.Common.IO;
+using BlueSheep.Engine.Types;
 using System;
 
 namespace BlueSheep.Common.Protocol.Types
 {
     public class DareReward
     {
-        public new const uint ID = 505;
+        public new const short ID = 505;
         public uint type = 0;
         public uint monsterId = 0;
         public double kamas = 0;
         public double dareId = 0;
 
+        public DareReward()
+        {
+        }
 
-        public void Serialize(BigEndianWriter writer)
+        public virtual void Serialize(BigEndianWriter writer)
         {
             writer.WriteByte((byte)type);
             if (monsterId < 0)
@@ -31,11 +35,12 @@ namespace BlueSheep.Common.Protocol.Types
             }
             writer.WriteDouble(dareId);
         }
-        public void deserializeAs_DareReward(BigEndianReader reader)
+
+        public virtual void Deserialize(BigEndianReader reader)
         {
-            this._typeFunc(reader);
+            _typeFunc(reader);
             _monsterIdFunc(reader);
-            this._kamasFunc(reader);
+            _kamasFunc(reader);
             _dareIdFunc(reader);
         }
         
@@ -58,19 +63,19 @@ namespace BlueSheep.Common.Protocol.Types
 
         private void _typeFunc(BigEndianReader reader)
         {
-            this.type = reader.ReadByte();
-            if (this.type < 0)
+            type = reader.ReadByte();
+            if (type < 0)
             {
-                throw new Exception("Forbidden value (" + this.type + ") on element of DareReward.type.");
+                throw new Exception("Forbidden value (" + type + ") on element of DareReward.type.");
             }
         }
 
         private void _kamasFunc(BigEndianReader reader)
         {
-            this.kamas = reader.ReadVarUhLong();
-            if (this.kamas < 0 || this.kamas > 9007199254740990)
+            kamas = reader.ReadVarUhLong();
+            if (kamas < 0 || kamas > 9007199254740990)
             {
-                throw new Exception("Forbidden value (" + this.kamas + ") on element of DareReward.kamas.");
+                throw new Exception("Forbidden value (" + kamas + ") on element of DareReward.kamas.");
             }
         }
     }

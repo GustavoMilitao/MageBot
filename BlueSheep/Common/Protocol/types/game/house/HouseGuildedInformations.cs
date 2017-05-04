@@ -4,8 +4,13 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class HouseGuildedInformations : HouseInstanceInformations
     {
-        public new const uint ID = 512;
+        public new const short ID = 512;
         public GuildInformations guildInfo;
+
+        public HouseGuildedInformations()
+        {
+
+        }
 
         public virtual void Serialize(BigEndianWriter writer)
         {

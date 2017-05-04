@@ -5,10 +5,14 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class DareVersatileInformations
     {
-        public new const uint ID = 504;
+        public new const short ID = 504;
         public double dareId = 0;
         public uint countEntrants = 0;
         public uint countWinners = 0;
+
+        public DareVersatileInformations()
+        {
+        }
 
         public void Serializer(BigEndianWriter writer)
         {
@@ -30,9 +34,9 @@ namespace BlueSheep.Common.Protocol.Types
         }
         public void deserializeAs_DareVersatileInformations(BigEndianReader reader)
         {
-            this._dareIdFunc(reader);
+            _dareIdFunc(reader);
             _countEntrantsFunc(reader);
-            this._countWinnersFunc(reader);
+            _countWinnersFunc(reader);
         }
 
         private void _countEntrantsFunc(BigEndianReader reader)
@@ -46,19 +50,19 @@ namespace BlueSheep.Common.Protocol.Types
 
         private void _dareIdFunc(BigEndianReader reader)
         {
-            this.dareId = reader.ReadDouble();
-            if (this.dareId < 0 || this.dareId > 9007199254740990)
+            dareId = reader.ReadDouble();
+            if (dareId < 0 || dareId > 9007199254740990)
             {
-                throw new Exception("Forbidden value (" + this.dareId + ") on element of DareInformations.dareId.");
+                throw new Exception("Forbidden value (" + dareId + ") on element of DareInformations.dareId.");
             }
         }
 
         private void _countWinnersFunc(BigEndianReader reader)
         {
             countWinners = reader.ReadUInt();
-            if (this.countWinners < 0)
+            if (countWinners < 0)
             {
-                throw new Exception("Forbidden value (" + this.countWinners + ") on element of DareVersatileInformations.countWinners.");
+                throw new Exception("Forbidden value (" + countWinners + ") on element of DareVersatileInformations.countWinners.");
             }
         }
 

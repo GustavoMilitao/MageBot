@@ -4,16 +4,18 @@ using System;
 
 namespace BlueSheep.Common.Protocol.Types
 {
-    public class Idol : Message
+    public class Idol
     {
-        public const uint ID = 489;
+        public const short ID = 489;
         public uint IdolId = 0;
         public uint xpBonusPercent = 0;
         public uint dropBonusPercent = 0;
 
-        public override uint ProtocolID => ID;
+        public Idol()
+        {
+        }
 
-        public override void Serialize(BigEndianWriter writer)
+        public virtual void Serialize(BigEndianWriter writer)
         {
             if (IdolId < 0)
             {
@@ -32,7 +34,7 @@ namespace BlueSheep.Common.Protocol.Types
             writer.WriteVarShort((short)dropBonusPercent);
         }
 
-        public override void Deserialize(BigEndianReader reader)
+        public virtual void Deserialize(BigEndianReader reader)
         {
             _idFunc(reader);
             _xpBonusPercentFunc(reader);
@@ -51,16 +53,16 @@ namespace BlueSheep.Common.Protocol.Types
         private void _idFunc(BigEndianReader reader)
         {
             IdolId = reader.ReadVarUhShort();
-            if (this.IdolId < 0)
+            if (IdolId < 0)
             {
-                throw new Exception("Forbidden value (" + this.IdolId + ") on element of Idol.id.");
+                throw new Exception("Forbidden value (" + IdolId + ") on element of Idol.id.");
             }
         }
 
         private void _dropBonusPercentFunc(BigEndianReader reader)
         {
-            this.dropBonusPercent = reader.ReadVarUhShort();
-            if (this.dropBonusPercent < 0)
+            dropBonusPercent = reader.ReadVarUhShort();
+            if (dropBonusPercent < 0)
             {
                 throw new Exception("Forbidden value (" + dropBonusPercent + ") on element of Idol.dropBonusPercent.");
             }

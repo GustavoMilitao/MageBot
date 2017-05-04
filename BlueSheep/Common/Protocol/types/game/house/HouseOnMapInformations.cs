@@ -7,9 +7,14 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class HouseOnMapInformations : HouseInformations
     {
-        public new const uint ID = 510;
+        public new const short ID = 510;
 
         public List<HouseInstanceInformations> houseInstances;
+
+        public HouseOnMapInformations()
+        {
+
+        }
 
         public virtual void Serialize(BigEndianWriter writer)
         {
@@ -18,18 +23,18 @@ namespace BlueSheep.Common.Protocol.Types
             uint _loc2_ = 0;
             while (_loc2_ < doorsOnMap.Length)
             {
-                if (this.doorsOnMap[_loc2_] < 0)
+                if (doorsOnMap[_loc2_] < 0)
                 {
-                    throw new Exception("Forbidden value (" + this.doorsOnMap[_loc2_] + ") on element 1 (starting at 1) of doorsOnMap.");
+                    throw new Exception("Forbidden value (" + doorsOnMap[_loc2_] + ") on element 1 (starting at 1) of doorsOnMap.");
                 }
                 writer.WriteInt(doorsOnMap[_loc2_]);
                 _loc2_++;
             }
             writer.WriteShort((short)houseInstances.Count);
             uint _loc3_ = 0;
-            while (_loc3_ < this.houseInstances.Count)
+            while (_loc3_ < houseInstances.Count)
             {
-                (this.houseInstances[(int)_loc3_] as HouseInstanceInformations).Serialize(writer);
+                (houseInstances[(int)_loc3_] as HouseInstanceInformations).Serialize(writer);
                 _loc3_++;
             }
         }

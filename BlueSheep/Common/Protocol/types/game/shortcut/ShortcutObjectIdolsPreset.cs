@@ -5,15 +5,18 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class ShortcutObjectIdolsPreset : ShortcutObject
     {
-        public new const uint ID = 492;
+        public new const short ID = 492;
         public uint presetId = 0;
+        public ShortcutObjectIdolsPreset()
+        {
 
+        }
         public virtual void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            if (this.presetId < 0)
+            if (presetId < 0)
             {
-                throw new Exception("Forbidden value (" + this.presetId + ") on element presetId.");
+                throw new Exception("Forbidden value (" + presetId + ") on element presetId.");
             }
             writer.WriteByte((byte)presetId);
         }
@@ -26,10 +29,10 @@ namespace BlueSheep.Common.Protocol.Types
 
         private void _presetIdFunc(BigEndianReader reader)
         {
-            this.presetId = reader.ReadByte();
-            if (this.presetId < 0)
+            presetId = reader.ReadByte();
+            if (presetId < 0)
             {
-                throw new Exception("Forbidden value (" + this.presetId + ") on element of ShortcutObjectIdolsPreset.presetId.");
+                throw new Exception("Forbidden value (" + presetId + ") on element of ShortcutObjectIdolsPreset.presetId.");
             }
         }
 

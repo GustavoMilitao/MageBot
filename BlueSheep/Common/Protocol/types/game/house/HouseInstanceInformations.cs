@@ -4,18 +4,21 @@ using System;
 
 namespace BlueSheep.Common.Protocol.Types
 {
-    public class HouseInstanceInformations : Message
+    public class HouseInstanceInformations 
     {
-        public const uint ID = 511;
+        public const short ID = 511;
         public uint instanceId = 0;
         public bool secondHand = false;
         public String ownerName = "";
         public bool isOnSale = false;
         public bool isSaleLocked = false;
 
-        public override uint ProtocolID => ID;
+        public HouseInstanceInformations()
+        {
 
-        public override void Serialize(BigEndianWriter writer)
+        }
+
+        public virtual void Serialize(BigEndianWriter writer)
         {
             uint _loc2_ = 0;
             _loc2_ = BooleanByteWrapper.SetFlag((byte)_loc2_, 0, secondHand);
@@ -30,9 +33,9 @@ namespace BlueSheep.Common.Protocol.Types
             writer.WriteUTF(ownerName);
         }
 
-        public override void Deserialize(BigEndianReader reader)
+        public virtual void Deserialize(BigEndianReader reader)
         {
-            this.deserializeByteBoxes(reader);
+            deserializeByteBoxes(reader);
             _instanceIdFunc(reader);
             _ownerNameFunc(reader);
         }
@@ -49,14 +52,14 @@ namespace BlueSheep.Common.Protocol.Types
         private void deserializeByteBoxes(BigEndianReader reader)
         {
             uint _loc2_ = reader.ReadByte();
-            this.secondHand = BooleanByteWrapper.GetFlag((byte)_loc2_, 0);
-            this.isOnSale = BooleanByteWrapper.GetFlag((byte)_loc2_, 1);
-            this.isSaleLocked = BooleanByteWrapper.GetFlag((byte)_loc2_, 2);
+            secondHand = BooleanByteWrapper.GetFlag((byte)_loc2_, 0);
+            isOnSale = BooleanByteWrapper.GetFlag((byte)_loc2_, 1);
+            isSaleLocked = BooleanByteWrapper.GetFlag((byte)_loc2_, 2);
         }
 
         private void _ownerNameFunc(BigEndianReader reader) 
        {
-          this.ownerName = reader.ReadUTF();
+            ownerName = reader.ReadUTF();
        }
 
     }

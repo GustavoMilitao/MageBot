@@ -5,6 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class HumanOptionSkillUse : HumanOption
     {
+        public new const short ID = 495;
 
         public uint elementId = 0;
 
@@ -12,58 +13,63 @@ namespace BlueSheep.Common.Protocol.Types
 
         public double skillEndTime = 0;
 
+        public HumanOptionSkillUse()
+        {
+
+        }
+
         public void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            if (this.elementId < 0)
+            if (elementId < 0)
             {
-                throw new Exception("Forbidden value (" + this.elementId + ") on element elementId.");
+                throw new Exception("Forbidden value (" + elementId + ") on element elementId.");
             }
-            writer.WriteVarInt(this.elementId);
-            if (this.skillId < 0)
+            writer.WriteVarInt(elementId);
+            if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + this.skillId + ") on element skillId.");
+                throw new Exception("Forbidden value (" + skillId + ") on element skillId.");
             }
             writer.WriteVarShort((short)skillId);
-            if (this.skillEndTime < -9007199254740990 || this.skillEndTime > 9007199254740990)
+            if (skillEndTime < -9007199254740990 || skillEndTime > 9007199254740990)
             {
-                throw new Exception("Forbidden value (" + this.skillEndTime + ") on element skillEndTime.");
+                throw new Exception("Forbidden value (" + skillEndTime + ") on element skillEndTime.");
             }
-            writer.WriteDouble(this.skillEndTime);
+            writer.WriteDouble(skillEndTime);
         }
 
         public virtual void Serialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            this._elementIdFunc(reader);
-            this._skillIdFunc(reader);
-            this._skillEndTimeFunc(reader);
+            _elementIdFunc(reader);
+            _skillIdFunc(reader);
+            _skillEndTimeFunc(reader);
         }
 
         private void _elementIdFunc(BigEndianReader reader)
         {
-            this.elementId = reader.ReadVarUhInt();
-            if (this.elementId < 0)
+            elementId = reader.ReadVarUhInt();
+            if (elementId < 0)
             {
-                throw new Exception("Forbidden value (" + this.elementId + ") on element of HumanOptionSkillUse.elementId.");
+                throw new Exception("Forbidden value (" + elementId + ") on element of HumanOptionSkillUse.elementId.");
             }
         }
 
         private void _skillIdFunc(BigEndianReader reader)
         {
-            this.skillId = reader.ReadVarUhShort();
-            if (this.skillId < 0)
+            skillId = reader.ReadVarUhShort();
+            if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + this.skillId + ") on element of HumanOptionSkillUse.skillId.");
+                throw new Exception("Forbidden value (" + skillId + ") on element of HumanOptionSkillUse.skillId.");
             }
         }
 
         private void _skillEndTimeFunc(BigEndianReader reader)
         {
-            this.skillEndTime = reader.ReadDouble();
-            if (this.skillEndTime < -9007199254740990 || this.skillEndTime > 9007199254740990)
+            skillEndTime = reader.ReadDouble();
+            if (skillEndTime < -9007199254740990 || skillEndTime > 9007199254740990)
             {
-                throw new Exception("Forbidden value (" + this.skillEndTime + ") on element of HumanOptionSkillUse.skillEndTime.");
+                throw new Exception("Forbidden value (" + skillEndTime + ") on element of HumanOptionSkillUse.skillEndTime.");
             }
         }
 

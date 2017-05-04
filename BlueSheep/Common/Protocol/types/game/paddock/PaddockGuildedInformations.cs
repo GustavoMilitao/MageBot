@@ -4,7 +4,11 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class PaddockGuildedInformations : PaddockBuyableInformations
     {
-        public new const uint ID = 508;
+        public PaddockGuildedInformations()
+        {
+
+        }
+        public new const short ID = 508;
         public bool deserted = false;
         public GuildInformations guildInfo;
 

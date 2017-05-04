@@ -5,16 +5,18 @@ using System.Collections.Generic;
 
 namespace BlueSheep.Common.Protocol.Types
 {
-    public class IdolsPreset : Message
+    public class IdolsPreset
     {
-        public const uint ID = 491;
+        public const short ID = 491;
         public uint presetId = 0;
         public uint symbolId = 0;
         public List<uint> idolId;
 
-        public override uint ProtocolID => ID;
+        public IdolsPreset()
+        {
 
-        public override void Serialize(BigEndianWriter writer)
+        }
+        public virtual void Serialize(BigEndianWriter writer)
         {
             if (presetId < 0)
             {
@@ -28,20 +30,20 @@ namespace BlueSheep.Common.Protocol.Types
             writer.WriteByte((byte)symbolId);
             writer.WriteShort((short)idolId.Count);
             uint _loc2_ = 0;
-            while (_loc2_ < this.idolId.Count)
+            while (_loc2_ < idolId.Count)
             {
-                if (this.idolId[(int)_loc2_] < 0)
+                if (idolId[(int)_loc2_] < 0)
                 {
-                    throw new Exception("Forbidden value (" + this.idolId[(int)_loc2_] + ") on element 3 (starting at 1) of idolId.");
+                    throw new Exception("Forbidden value (" + idolId[(int)_loc2_] + ") on element 3 (starting at 1) of idolId.");
                 }
                 writer.WriteVarShort((short)idolId[(int)_loc2_]);
                 _loc2_++;
             }
         }
-        public override void Deserialize(BigEndianReader reader)
+        public virtual void Deserialize(BigEndianReader reader)
         {
             uint _loc4_ = 0;
-            this._presetIdFunc(reader);
+            _presetIdFunc(reader);
             _symbolIdFunc(reader);
             uint _loc2_ = reader.ReadUShort();
             uint _loc3_  = 0;
@@ -78,10 +80,10 @@ namespace BlueSheep.Common.Protocol.Types
 
         private void _presetIdFunc(BigEndianReader reader)
         {
-            this.presetId = reader.ReadByte();
-            if (this.presetId < 0)
+            presetId = reader.ReadByte();
+            if (presetId < 0)
             {
-                throw new Exception("Forbidden value (" + this.presetId + ") on element of IdolsPreset.presetId.");
+                throw new Exception("Forbidden value (" + presetId + ") on element of IdolsPreset.presetId.");
             }
         }
 
