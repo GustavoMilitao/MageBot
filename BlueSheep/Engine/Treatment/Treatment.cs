@@ -31,7 +31,7 @@ namespace BlueSheep.Engine.Treatment
 
             foreach (InstanceInfo instance in m_Instances)
             {
-                if (instance.ID == packetID)
+                if (instance.ProtocolID == packetID)
                     enqueue.Add(instance);
             }
 

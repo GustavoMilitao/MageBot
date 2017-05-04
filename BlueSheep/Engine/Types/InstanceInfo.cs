@@ -16,7 +16,7 @@ namespace BlueSheep.Engine.Types
         #region Constructeurs
         public InstanceInfo(uint protocolID, Type messageType, MethodInfo method)
         {
-            ID = protocolID;
+            this.ProtocolID = protocolID;
             MessageType = messageType;
             Method = method;
         }

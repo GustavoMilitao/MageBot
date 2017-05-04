@@ -1,60 +1,47 @@
+using BlueSheep.Common.IO;
+using System;
+
 namespace BlueSheep.Common.Protocol.Types
 {
     public class DareReward
     {
-        public static const uint protocolId = 505;
+        public new const uint ID = 505;
         public uint type = 0;
         public uint monsterId = 0;
         public double kamas = 0;
         public double dareId = 0;
 
-        public uint getTypeId()
+
+        public void Serialize(BigEndianWriter writer)
         {
-            return 505;
-        }
-        public void reset()
-        {
-            type = 0;
-            monsterId = 0;
-            kamas = 0;
-            dareId = 0;
-        }
-        public void serializeAs_DareReward(BigEndianWriter writer)
-        {
-            param1.writeByte(type);
+            writer.WriteByte((byte)type);
             if (monsterId < 0)
             {
                 throw new Exception("Forbidden value (" + monsterId + ") on element monsterId.");
             }
-            param1.writeVarShort(monsterId);
+            writer.WriteVarShort((short)monsterId);
             if (kamas < 0 || kamas > 9007199254740990)
             {
                 throw new Exception("Forbidden value (" + kamas + ") on element kamas.");
             }
-            param1.writeVarLong(kamas);
+            writer.WriteVarLong((long)kamas);
             if (dareId < 0 || dareId > 9007199254740990)
             {
                 throw new Exception("Forbidden value (" + dareId + ") on element dareId.");
             }
-            param1.writeDouble(dareId);
+            writer.WriteDouble(dareId);
         }
         public void deserializeAs_DareReward(BigEndianReader reader)
         {
-            this._typeFunc(param1);
-            _monsterIdFunc(param1);
-            this._kamasFunc(param1);
-            _dareIdFunc(param1);
+            this._typeFunc(reader);
+            _monsterIdFunc(reader);
+            this._kamasFunc(reader);
+            _dareIdFunc(reader);
         }
-        public void deserializeAsyncAs_DareReward(FuncTree param1)
-        {
-            param1.addChild(this._typeFunc);
-            param1.addChild(this._monsterIdFunc);
-            param1.addChild(this._kamasFunc);
-            param1.addChild(this._dareIdFunc);
-        }
+        
         private void _monsterIdFunc(BigEndianReader reader)
         {
-            monsterId = param1.readVarUhShort();
+            monsterId = reader.ReadVarUhShort();
             if (monsterId < 0)
             {
                 throw new Exception("Forbidden value (" + monsterId + ") on element of DareReward.monsterId.");
@@ -62,12 +49,29 @@ namespace BlueSheep.Common.Protocol.Types
         }
         private void _dareIdFunc(BigEndianReader reader)
         {
-            dareId = param1.readDouble();
+            dareId = reader.ReadDouble();
             if (dareId < 0 || dareId > 9007199254740990)
             {
                 throw new Exception("Forbidden value (" + dareId + ") on element of DareReward.dareId.");
             }
         }
 
+        private void _typeFunc(BigEndianReader reader)
+        {
+            this.type = reader.ReadByte();
+            if (this.type < 0)
+            {
+                throw new Exception("Forbidden value (" + this.type + ") on element of DareReward.type.");
+            }
+        }
+
+        private void _kamasFunc(BigEndianReader reader)
+        {
+            this.kamas = reader.ReadVarUhLong();
+            if (this.kamas < 0 || this.kamas > 9007199254740990)
+            {
+                throw new Exception("Forbidden value (" + this.kamas + ") on element of DareReward.kamas.");
+            }
+        }
     }
 }

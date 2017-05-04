@@ -1,46 +1,58 @@
-namespace  BlueSheep.Common.Protocol.Types {
-public  class  TaxCollectorMovement {
-public  static  const  uint protocolId  = 493 ;
-public    uint movementType  = 0 ;
-public    TaxCollectorBasicInformations basicInfos  ;
-public    double playerId  = 0 ;
-public    String playerName  = "" ;
-private    FuncTree _basicInfostree  ;
+using BlueSheep.Common.IO;
+using System;
 
-public  uint getTypeId (  ) {return 493;
-      }
-public  void reset (  ) {
-            movementType = 0;
-            basicInfos = new TaxCollectorBasicInformations();
-            playerName = "";
-      }
-public  void serializeAs_TaxCollectorMovement ( BigEndianWriter writer ) {param1.writeByte(movementType);
-            basicInfos.serializeAs_TaxCollectorBasicInformations(param1);
-         if(playerId < 0 || playerId > 9007199254740990)
-         {
-            throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
-         }
-         param1.writeVarLong(playerId);
-         param1.writeUTF(playerName);
-      }
-public  void deserializeAs_TaxCollectorMovement ( BigEndianReader reader ) {this._movementTypeFunc(param1);
-            basicInfos = new TaxCollectorBasicInformations();
-            basicInfos.Deserialize(param1);
-         this._playerIdFunc(param1);
-            _playerNameFunc(param1);
-      }
-public  void deserializeAsyncAs_TaxCollectorMovement ( FuncTree param1 ) {param1.addChild(this._movementTypeFunc);
-            _basicInfostree = param1.addChild(this._basicInfostreeFunc);
-         param1.addChild(this._playerIdFunc);
-         param1.addChild(this._playerNameFunc);
-      }
-private  void _basicInfostreeFunc ( BigEndianReader reader ) {
-            basicInfos = new TaxCollectorBasicInformations();
-            basicInfos.deserializeAsync(_basicInfostree);
-      }
-private  void _playerNameFunc ( BigEndianReader reader ) {
-            playerName = param1.readUTF();
-      }
+namespace BlueSheep.Common.Protocol.Types
+{
+    public class TaxCollectorMovement
+    {
+        public new const uint ID = 493;
+        public uint movementType = 0;
+        public TaxCollectorBasicInformations basicInfos;
+        public double playerId = 0;
+        public String playerName = "";
 
-}
+        public void Serialize(BigEndianWriter writer)
+        {
+            writer.WriteByte((byte)movementType);
+            basicInfos.Serialize(writer);
+            if (playerId < 0 || playerId > 9007199254740990)
+            {
+                throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
+            }
+            writer.WriteVarLong((long)playerId);
+            writer.WriteUTF(playerName);
+        }
+        public void Deserialize(BigEndianReader reader)
+        {
+            this._movementTypeFunc(reader);
+            basicInfos = new TaxCollectorBasicInformations();
+            basicInfos.Deserialize(reader);
+            this._playerIdFunc(reader);
+            _playerNameFunc(reader);
+        }
+
+        private void _playerNameFunc(BigEndianReader reader)
+        {
+            playerName = reader.ReadUTF();
+        }
+
+        private void _movementTypeFunc(BigEndianReader reader)
+        {
+            this.movementType = reader.ReadByte();
+            if (this.movementType < 0)
+            {
+                throw new Exception("Forbidden value (" + this.movementType + ") on element of TaxCollectorMovement.movementType.");
+            }
+        }
+
+        private void _playerIdFunc(BigEndianReader reader)
+        {
+            this.playerId = reader.ReadVarUhLong();
+            if (this.playerId < 0 || this.playerId > 9007199254740990)
+            {
+                throw new Exception("Forbidden value (" + this.playerId + ") on element of TaxCollectorMovement.playerId.");
+            }
+        }
+
+    }
 }
