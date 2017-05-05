@@ -27,16 +27,16 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class PartyGuestInformations
-{
+    public class PartyGuestInformations
+    {
 
-public new const int ID = 374;
-public virtual int TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 374;
+        public virtual int TypeId
+        {
+            get { return ID; }
+        }
 
-public int guestId;
+        public int guestId;
         public int hostId;
         public string name;
         public Types.EntityLook guestLook;
@@ -44,13 +44,13 @@ public int guestId;
         public bool sex;
         public Types.PlayerStatus status;
         public Types.PartyCompanionBaseInformations[] companions;
-        
 
-public PartyGuestInformations()
-{
-}
 
-public PartyGuestInformations(int guestId, int hostId, string name, Types.EntityLook guestLook, sbyte breed, bool sex, Types.PlayerStatus status, Types.PartyCompanionBaseInformations[] companions)
+        public PartyGuestInformations()
+        {
+        }
+
+        public PartyGuestInformations(int guestId, int hostId, string name, Types.EntityLook guestLook, sbyte breed, bool sex, Types.PlayerStatus status, Types.PartyCompanionBaseInformations[] companions)
         {
             this.guestId = guestId;
             this.hostId = hostId;
@@ -61,12 +61,12 @@ public PartyGuestInformations(int guestId, int hostId, string name, Types.Entity
             this.status = status;
             this.companions = companions;
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
 
-writer.WriteInt(guestId);
+        public virtual void Serialize(BigEndianWriter writer)
+        {
+
+            writer.WriteInt(guestId);
             writer.WriteInt(hostId);
             writer.WriteUTF(name);
             guestLook.Serialize(writer);
@@ -77,16 +77,16 @@ writer.WriteInt(guestId);
             writer.WriteUShort((ushort)companions.Length);
             foreach (var entry in companions)
             {
-                 entry.Serialize(writer);
+                entry.Serialize(writer);
             }
-            
 
-}
 
-public virtual void Deserialize(BigEndianReader reader)
-{
+        }
 
-guestId = reader.ReadInt();
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            guestId = reader.ReadInt();
             if (guestId < 0)
                 throw new Exception("Forbidden value on guestId = " + guestId + ", it doesn't respect the following condition : guestId < 0");
             hostId = reader.ReadInt();
@@ -103,15 +103,15 @@ guestId = reader.ReadInt();
             companions = new Types.PartyCompanionBaseInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                 companions[i] = new Types.PartyCompanionBaseInformations();
-                 companions[i].Deserialize(reader);
+                companions[i] = new Types.PartyCompanionBaseInformations();
+                companions[i].Deserialize(reader);
             }
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }
