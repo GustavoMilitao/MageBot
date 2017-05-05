@@ -26,7 +26,7 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short subAreaId;
+        public ushort subAreaId;
         public int mapId;
         public Types.HouseInformations[] houses;
         public Types.GameRolePlayActorInformations[] actors;
@@ -92,7 +92,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Deserialize(BigEndianReader reader)
         {
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             mapId = reader.ReadInt();
@@ -102,7 +102,7 @@ namespace BlueSheep.Common.Protocol.Messages
             houses = new Types.HouseInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                 houses[i] = Types.ProtocolTypeManager.GetInstance<Types.HouseInformations>(reader.ReadShort());
+                 houses[i] = Types.ProtocolTypeManager.GetInstance<HouseInformations>(reader.ReadUShort());
                  houses[i].Deserialize(reader);
             }
             limit = reader.ReadUShort();
