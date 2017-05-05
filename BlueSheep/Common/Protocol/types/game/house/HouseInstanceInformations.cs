@@ -6,7 +6,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class HouseInstanceInformations 
     {
-        public const short ID = 511;
+        public const int ID = 511;
         public int instanceId = 0;
         public bool secondHand = false;
         public String ownerName = "";

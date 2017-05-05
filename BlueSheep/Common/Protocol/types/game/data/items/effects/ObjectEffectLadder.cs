@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class ObjectEffectLadder : ObjectEffectCreature
 {
 
-public new const short ID = 81;
-public override short TypeId
+public new const int ID = 81;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public ObjectEffectLadder()
 {
 }
 
-public ObjectEffectLadder(short actionId, short monsterFamilyId, int monsterCount)
+public ObjectEffectLadder(int actionId, int monsterFamilyId, int monsterCount)
          : base(actionId, monsterFamilyId)
         {
             this.monsterCount = monsterCount;

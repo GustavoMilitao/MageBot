@@ -11,7 +11,7 @@ namespace BlueSheep.Common.Types
 {
     public class MonsterGroup
     {
-        public MonsterGroup(GroupMonsterStaticInformations staticInfos, int cellId, int contextualId)
+        public MonsterGroup(GroupMonsterStaticInformations staticInfos, int cellId, ulong contextualId)
         {
             m_staticInfos = staticInfos;
             m_cellId = cellId;
@@ -20,7 +20,7 @@ namespace BlueSheep.Common.Types
 
         public GroupMonsterStaticInformations m_staticInfos;
         public int m_cellId;
-        public int m_contextualId;
+        public ulong m_contextualId;
 
         public int monstersCount
         {

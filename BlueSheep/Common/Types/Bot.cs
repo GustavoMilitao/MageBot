@@ -43,7 +43,7 @@ namespace BlueSheep.Common.Types
 
         public string State { get; set; }
 
-        public short Sequence { get; set; }
+        public int Sequence { get; set; }
 
         public LatencyFrame LatencyFrame { get; set; }
 
@@ -53,7 +53,7 @@ namespace BlueSheep.Common.Types
 
         public Running Running { get; set; }
 
-        public Queue<short> LastPacketID { get; set; }
+        public Queue<int> LastPacketID { get; set; }
 
         public int MapID { get; set; }
         #endregion
@@ -84,7 +84,7 @@ namespace BlueSheep.Common.Types
             InventoryItems = new List<ObjectItem>();
             Pods = null;
             SafeItems = new List<ObjectItem>();
-            LastPacketID = new Queue<short>();
+            LastPacketID = new Queue<int>();
             Running = null;
         }
 
@@ -97,7 +97,7 @@ namespace BlueSheep.Common.Types
             InventoryItems = new List<ObjectItem>();
             Pods = null;
             SafeItems = new List<ObjectItem>();
-            LastPacketID = new Queue<short>();
+            LastPacketID = new Queue<int>();
             Running = null;
         }
 

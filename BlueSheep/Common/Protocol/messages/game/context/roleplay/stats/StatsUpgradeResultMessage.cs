@@ -27,13 +27,13 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public sbyte result;
-        public short nbCharacBoost;
+        public int nbCharacBoost;
         
         public StatsUpgradeResultMessage()
         {
         }
         
-        public StatsUpgradeResultMessage(sbyte result, short nbCharacBoost)
+        public StatsUpgradeResultMessage(sbyte result, int nbCharacBoost)
         {
             this.result = result;
             this.nbCharacBoost = nbCharacBoost;
@@ -42,13 +42,13 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteSByte(result);
-            writer.WriteVarShort(nbCharacBoost);
+            writer.WriteVarShort((short)nbCharacBoost);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             result = reader.ReadSByte();
-            nbCharacBoost = reader.ReadVarShort();
+            nbCharacBoost = reader.ReadVarUhShort();
             if (nbCharacBoost < 0)
                 throw new Exception("Forbidden value on nbCharacBoost = " + nbCharacBoost + ", it doesn't respect the following condition : nbCharacBoost < 0");
         }

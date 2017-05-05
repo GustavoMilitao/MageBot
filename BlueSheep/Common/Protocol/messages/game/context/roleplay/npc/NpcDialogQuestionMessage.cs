@@ -26,15 +26,15 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short messageId;
+        public int messageId;
         public string[] dialogParams;
-        public short[] visibleReplies;
+        public int[] visibleReplies;
         
         public NpcDialogQuestionMessage()
         {
         }
         
-        public NpcDialogQuestionMessage(short messageId, string[] dialogParams, short[] visibleReplies)
+        public NpcDialogQuestionMessage(int messageId, string[] dialogParams, int[] visibleReplies)
         {
             this.messageId = messageId;
             this.dialogParams = dialogParams;
@@ -43,7 +43,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(messageId);
+            writer.WriteVarShort((short)messageId);
             writer.WriteUShort((ushort)dialogParams.Length);
             foreach (var entry in dialogParams)
             {
@@ -52,13 +52,13 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)visibleReplies.Length);
             foreach (var entry in visibleReplies)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            messageId = reader.ReadVarShort();
+            messageId = reader.ReadVarUhShort();
             if (messageId < 0)
                 throw new Exception("Forbidden value on messageId = " + messageId + ", it doesn't respect the following condition : messageId < 0");
             var limit = reader.ReadUShort();
@@ -68,10 +68,10 @@ namespace BlueSheep.Common.Protocol.Messages
                  dialogParams[i] = reader.ReadUTF();
             }
             limit = reader.ReadUShort();
-            visibleReplies = new short[limit];
+            visibleReplies = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 visibleReplies[i] = reader.ReadVarShort();
+                 visibleReplies[i] = reader.ReadVarUhShort();
             }
         }
         

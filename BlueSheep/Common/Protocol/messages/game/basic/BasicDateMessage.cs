@@ -28,13 +28,13 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public sbyte day;
         public sbyte month;
-        public short year;
+        public int year;
         
         public BasicDateMessage()
         {
         }
         
-        public BasicDateMessage(sbyte day, sbyte month, short year)
+        public BasicDateMessage(sbyte day, sbyte month, int year)
         {
             this.day = day;
             this.month = month;
@@ -45,7 +45,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
             writer.WriteSByte(day);
             writer.WriteSByte(month);
-            writer.WriteShort(year);
+            writer.WriteShort((short)year);
         }
         
         public override void Deserialize(BigEndianReader reader)

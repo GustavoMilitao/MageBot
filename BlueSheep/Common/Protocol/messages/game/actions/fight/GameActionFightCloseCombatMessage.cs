@@ -26,13 +26,13 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short weaponGenericId;
+        public int weaponGenericId;
         
         public GameActionFightCloseCombatMessage()
         {
         }
         
-        public GameActionFightCloseCombatMessage(short actionId, int sourceId, int targetId, short destinationCellId, sbyte critical, bool silentCast, short weaponGenericId)
+        public GameActionFightCloseCombatMessage(int actionId, ulong sourceId, ulong targetId, int destinationCellId, sbyte critical, bool silentCast, int weaponGenericId)
          : base(actionId, sourceId, targetId, destinationCellId, critical, silentCast)
         {
             this.weaponGenericId = weaponGenericId;
@@ -41,13 +41,13 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarShort(weaponGenericId);
+            writer.WriteVarShort((short)weaponGenericId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            weaponGenericId = reader.ReadVarShort();
+            weaponGenericId = reader.ReadVarUhShort();
             if (weaponGenericId < 0)
                 throw new Exception("Forbidden value on weaponGenericId = " + weaponGenericId + ", it doesn't respect the following condition : weaponGenericId < 0");
         }

@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
     public class CharacterCharacteristicsInformations
     {
 
-        public new const short ID = 8;
-        public virtual short TypeId
+        public new const int ID = 8;
+        public virtual int TypeId
         {
             get { return ID; }
         }
@@ -41,16 +41,16 @@ namespace BlueSheep.Common.Protocol.Types
         public double experienceNextLevelFloor;
         public double experienceBonusLimit { get; set; }
         public ulong kamas;
-        public ushort statsPoints;
-        public ushort additionnalPoints;
-        public ushort spellsPoints;
+        public int statsPoints;
+        public int additionnalPoints;
+        public int spellsPoints;
         public Types.ActorExtendedAlignmentInformations alignmentInfos;
         public uint lifePoints;
         public uint maxLifePoints;
-        public ushort energyPoints;
-        public ushort maxEnergyPoints;
-        public short actionPointsCurrent;
-        public short movementPointsCurrent;
+        public int energyPoints;
+        public int maxEnergyPoints;
+        public int actionPointsCurrent;
+        public int movementPointsCurrent;
         public CharacterBaseCharacteristic initiative;
         public CharacterBaseCharacteristic prospecting;
         public CharacterBaseCharacteristic actionPoints;
@@ -65,7 +65,7 @@ namespace BlueSheep.Common.Protocol.Types
         public CharacterBaseCharacteristic summonableCreaturesBoost;
         public CharacterBaseCharacteristic reflect;
         public CharacterBaseCharacteristic criticalHit;
-        public ushort criticalHitWeapon;
+        public int criticalHitWeapon;
         public CharacterBaseCharacteristic criticalMiss;
         public CharacterBaseCharacteristic healBonus;
         public CharacterBaseCharacteristic allDamagesBonus;
@@ -124,16 +124,16 @@ namespace BlueSheep.Common.Protocol.Types
                                                     double experienceLevelFloor, 
                                                     double experienceNextLevelFloor, 
                                                     ulong kamas, 
-                                                    ushort statsPoints, 
-                                                    ushort additionnalPoints, 
-                                                    ushort spellsPoints, 
+                                                    int statsPoints, 
+                                                    int additionnalPoints, 
+                                                    int spellsPoints, 
                                                     Types.ActorExtendedAlignmentInformations alignmentInfos, 
                                                     uint lifePoints, 
                                                     uint maxLifePoints, 
-                                                    ushort energyPoints, 
-                                                    ushort maxEnergyPoints, 
-                                                    short actionPointsCurrent, 
-                                                    short movementPointsCurrent, 
+                                                    int energyPoints, 
+                                                    int maxEnergyPoints, 
+                                                    int actionPointsCurrent, 
+                                                    int movementPointsCurrent, 
                                                     CharacterBaseCharacteristic initiative, 
                                                     CharacterBaseCharacteristic prospecting, 
                                                     CharacterBaseCharacteristic actionPoints, 
@@ -148,7 +148,7 @@ namespace BlueSheep.Common.Protocol.Types
                                                     CharacterBaseCharacteristic summonableCreaturesBoost, 
                                                     CharacterBaseCharacteristic reflect, 
                                                     CharacterBaseCharacteristic criticalHit, 
-                                                    ushort criticalHitWeapon, 
+                                                    int criticalHitWeapon, 
                                                     CharacterBaseCharacteristic criticalMiss, 
                                                     CharacterBaseCharacteristic healBonus, 
                                                     CharacterBaseCharacteristic allDamagesBonus, 
@@ -283,16 +283,16 @@ namespace BlueSheep.Common.Protocol.Types
             writer.WriteDouble(experienceNextLevelFloor);
             writer.WriteDouble(experienceBonusLimit);
             writer.WriteVarLong(kamas);
-            writer.WriteVarShort(statsPoints);
-            writer.WriteVarShort(additionnalPoints);
-            writer.WriteVarShort(spellsPoints);
+            writer.WriteVarShort((short)statsPoints);
+            writer.WriteVarShort((short)additionnalPoints);
+            writer.WriteVarShort((short)spellsPoints);
             alignmentInfos.Serialize(writer);
             writer.WriteVarInt(lifePoints);
             writer.WriteVarInt(maxLifePoints);
-            writer.WriteVarShort(energyPoints);
-            writer.WriteVarShort(maxEnergyPoints);
-            writer.WriteVarShort(actionPointsCurrent);
-            writer.WriteVarShort(movementPointsCurrent);
+            writer.WriteVarShort((short)energyPoints);
+            writer.WriteVarShort((short)maxEnergyPoints);
+            writer.WriteVarShort((short)actionPointsCurrent);
+            writer.WriteVarShort((short)movementPointsCurrent);
             initiative.Serialize(writer);
             prospecting.Serialize(writer);
             actionPoints.Serialize(writer);
@@ -307,7 +307,7 @@ namespace BlueSheep.Common.Protocol.Types
             summonableCreaturesBoost.Serialize(writer);
             reflect.Serialize(writer);
             criticalHit.Serialize(writer);
-            writer.WriteVarShort(criticalHitWeapon);
+            writer.WriteVarShort((short)criticalHitWeapon);
             criticalMiss.Serialize(writer);
             healBonus.Serialize(writer);
             allDamagesBonus.Serialize(writer);
@@ -401,8 +401,8 @@ namespace BlueSheep.Common.Protocol.Types
             maxEnergyPoints = reader.ReadVarUhShort();
             if (maxEnergyPoints < 0)
                 throw new Exception("Forbidden value on maxEnergyPoints = " + maxEnergyPoints + ", it doesn't respect the following condition : maxEnergyPoints < 0");
-            actionPointsCurrent = reader.ReadVarShort();
-            movementPointsCurrent = reader.ReadVarShort();
+            actionPointsCurrent = reader.ReadVarUhShort();
+            movementPointsCurrent = reader.ReadVarUhShort();
             initiative = new CharacterBaseCharacteristic();
             initiative.Deserialize(reader);
             prospecting = new CharacterBaseCharacteristic();

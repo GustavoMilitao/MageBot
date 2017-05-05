@@ -27,51 +27,51 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class InteractiveElementWithAgeBonus : InteractiveElement
-{
+    public class InteractiveElementWithAgeBonus : InteractiveElement
+    {
 
-public new const short ID = 398;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 398;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public short ageBonus;
-        
+        public int ageBonus;
 
-public InteractiveElementWithAgeBonus()
-{
-}
 
-public InteractiveElementWithAgeBonus(int elementId, int elementTypeId, Types.InteractiveElementSkill[] enabledSkills, Types.InteractiveElementSkill[] disabledSkills, short ageBonus)
-         : base(elementId, elementTypeId, enabledSkills, disabledSkills)
+        public InteractiveElementWithAgeBonus()
+        {
+        }
+
+        public InteractiveElementWithAgeBonus(int elementId, int elementTypeId, Types.InteractiveElementSkill[] enabledSkills, Types.InteractiveElementSkill[] disabledSkills, int ageBonus)
+                 : base(elementId, elementTypeId, enabledSkills, disabledSkills)
         {
             this.ageBonus = ageBonus;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
-            writer.WriteShort(ageBonus);
-            
+        public override void Serialize(BigEndianWriter writer)
+        {
 
-}
+            base.Serialize(writer);
+            writer.WriteShort((short)ageBonus);
 
-public override void Deserialize(BigEndianReader reader)
-{
 
-base.Deserialize(reader);
+        }
+
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
             ageBonus = reader.ReadShort();
             if (ageBonus < -1 || ageBonus > 1000)
                 throw new Exception("Forbidden value on ageBonus = " + ageBonus + ", it doesn't respect the following condition : ageBonus < -1 || ageBonus > 1000");
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

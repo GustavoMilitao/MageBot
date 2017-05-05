@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class Version
 {
 
-public new const short ID = 11;
-public virtual short TypeId
+public new const int ID = 11;
+public virtual int TypeId
 {
     get { return ID; }
 }

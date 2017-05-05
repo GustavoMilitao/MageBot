@@ -76,8 +76,8 @@ namespace BlueSheep.Engine.Handlers.Context
                 = new MapInformationsRequestMessage(account.MapID);
                 account.SocketManager.Send(mapInformationsRequestMessage);
             }
-            
-            
+
+
         }
 
         [MessageHandler(typeof(GameContextCreateMessage))]
@@ -107,7 +107,7 @@ namespace BlueSheep.Engine.Handlers.Context
 
                 account.SocketManager.Send(mapInformationsRequestMessage);
             }
-            
+
         }
 
         [MessageHandler(typeof(TextInformationMessage))]
@@ -165,25 +165,25 @@ namespace BlueSheep.Engine.Handlers.Context
             switch ((int)msg.channel)
             {
                 case 0:
-                    account.Log(new GeneralTextInformation(msg.senderName + ": " + msg.content),1);
+                    account.Log(new GeneralTextInformation(msg.senderName + ": " + msg.content), 1);
                     break;
                 case 1:
                     //account.Log(new DofAlertTextInformation("Bienvenue sur DOFUS, dans le Monde des Douze !" + System.Environment.NewLine + "Il est interdit de transmettre votre identifiant ou votre mot de passe."));
                     break;
                 case 2:
-                    account.Log(new GuildTextInformation(msg.senderName + ": " + msg.content),1);
+                    account.Log(new GuildTextInformation(msg.senderName + ": " + msg.content), 1);
                     break;
                 case 3:
-                    account.Log(new AllianceTextInformation(msg.senderName + ": " + msg.content),1);
+                    account.Log(new AllianceTextInformation(msg.senderName + ": " + msg.content), 1);
                     break;
                 case 5:
-                    account.Log(new CommerceTextInformation(msg.senderName + ": " + msg.content),1);
+                    account.Log(new CommerceTextInformation(msg.senderName + ": " + msg.content), 1);
                     break;
                 case 6:
-                    account.Log(new RecrutementTextInformation(msg.senderName + ": " + msg.content),1);
+                    account.Log(new RecrutementTextInformation(msg.senderName + ": " + msg.content), 1);
                     break;
                 case 9:
-                    account.Log(new PrivateTextInformation("de " + msg.senderName + " : " + msg.content),1);
+                    account.Log(new PrivateTextInformation("de " + msg.senderName + " : " + msg.content), 1);
                     break;
             }
         }
@@ -235,7 +235,7 @@ namespace BlueSheep.Engine.Handlers.Context
                 msg.Deserialize(reader);
             }
             List<uint> keys = new List<uint>();
-            foreach (short s in msg.keyMovements)
+            foreach (int s in msg.keyMovements)
             {
                 keys.Add((uint)s);
             }
@@ -271,7 +271,7 @@ namespace BlueSheep.Engine.Handlers.Context
             //account.Map.ConfirmMove();
             if (account.Path != null)
                 account.Path.PerformActionsStack();
-                
+
             //else if (account.Map.Moving)
             //{
             //    account.SetStatus(Status.None);
@@ -290,10 +290,10 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            account.Log(new ErrorTextInformation("[FROM " + msg.author + " ] : " + msg.content),0);
-            account.Log(new BotTextInformation("You has been locked for " + msg.lockDuration + ". Stopping BlueSheep actions while blocked..."),0);
+            account.Log(new ErrorTextInformation("[FROM " + msg.author + " ] : " + msg.content), 0);
+            account.Log(new BotTextInformation("You has been locked for " + msg.lockDuration + ". Stopping BlueSheep actions while blocked..."), 0);
             account.Log(new ErrorTextInformation("Y a un popup sur l'écran, surement un modo :s"), 0);
-             account.Wait(msg.lockDuration, msg.lockDuration);
+            account.Wait(msg.lockDuration, msg.lockDuration);
             //account.SocketManager.Disconnect("Alerte au modo ! Alerte au modo !");
         }
 
@@ -306,9 +306,9 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-           // account.SocketManager.Disconnect("Alerte au modo ! Alerte au modo !");
+            // account.SocketManager.Disconnect("Alerte au modo ! Alerte au modo !");
         }
-        
+
 
         [MessageHandler(typeof(PartyInvitationMessage))]
         public static void PartyInvitationMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
@@ -322,16 +322,16 @@ namespace BlueSheep.Engine.Handlers.Context
             if (account.MyGroup != null && msg.fromName == account.MyGroup.GetMaster().CharacterBaseInformations.name)
             {
 
-                    PartyAcceptInvitationMessage msg2 = new PartyAcceptInvitationMessage(msg.partyId);
-                    account.SocketManager.Send(msg2);
-                    account.Log(new BotTextInformation("J'ai rejoint le groupe :3"),3);
-                
+                PartyAcceptInvitationMessage msg2 = new PartyAcceptInvitationMessage(msg.partyId);
+                account.SocketManager.Send(msg2);
+                account.Log(new BotTextInformation("J'ai rejoint le groupe :3"), 3);
+
             }
             else
             {
-                    PartyRefuseInvitationMessage msg2 = new PartyRefuseInvitationMessage(msg.partyId);
-                    account.SocketManager.Send(msg2);
-                
+                PartyRefuseInvitationMessage msg2 = new PartyRefuseInvitationMessage(msg.partyId);
+                account.SocketManager.Send(msg2);
+
             }
         }
 
@@ -388,7 +388,7 @@ namespace BlueSheep.Engine.Handlers.Context
             }
             account.MapData.UpdateStatedElement(msg.statedElement);
         }
-        
+
         [MessageHandler(typeof(PurchasableDialogMessage))]
         public static void PurchasableDialogMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
         {
@@ -407,7 +407,7 @@ namespace BlueSheep.Engine.Handlers.Context
                 }
                 else
                 {
-                    account.Log(new ErrorTextInformation("Prix trop élevé..."),2);
+                    account.Log(new ErrorTextInformation("Prix trop élevé..."), 2);
                 }
             }
         }
@@ -421,16 +421,13 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (msg.properties.ownerName == "?")
+            if (account.SearcherLogBox.Text.Length > 0)
             {
-                if (account.SearcherLogBox.Text.Length > 0)
-                {
-                    StreamWriter SourceFile = new StreamWriter(account.SearcherLogBox.Text, true);
-                    SourceFile.WriteLine("Maison abandonnée en : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]");
-                    SourceFile.Close();
-                }
-                account.Log(new BotTextInformation("Maison abandonnée en : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]"),1);
+                StreamWriter SourceFile = new StreamWriter(account.SearcherLogBox.Text, true);
+                SourceFile.WriteLine("Maison abandonnée en : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]");
+                SourceFile.Close();
             }
+            account.Log(new BotTextInformation("Maison abandonnée en : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]"), 1);
         }
 
         [MessageHandler(typeof(GameContextRemoveElementMessage))]
@@ -458,7 +455,7 @@ namespace BlueSheep.Engine.Handlers.Context
             if (account.FloodUC.StartStopFloodingBox.Checked == true && account.FloodUC.PrivateEnterBox.Checked == true && msg.informations is GameRolePlayCharacterInformations)
             {
                 GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.informations;
-                account.Flood.SendPrivateTo(infos); 
+                account.Flood.SendPrivateTo(infos);
             }
             if (account.FloodUC.IsMemoryCheck.Checked == true && msg.informations is GameRolePlayCharacterInformations)
             {
@@ -492,7 +489,7 @@ namespace BlueSheep.Engine.Handlers.Context
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
                 msg.Deserialize(reader);
-            }     
+            }
         }
 
         [MessageHandler(typeof(ObtainedItemMessage))]
@@ -618,7 +615,7 @@ namespace BlueSheep.Engine.Handlers.Context
                 account.Inventory.ExchangeReady();
         }
 
-                        
+
         #endregion
     }
 }

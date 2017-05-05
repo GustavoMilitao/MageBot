@@ -50,7 +50,7 @@ namespace BlueSheep.Core.Npc
 
         public void SendReply(int replyId)
         {
-            NpcDialogReplyMessage msg = new NpcDialogReplyMessage((short)replyId);
+            NpcDialogReplyMessage msg = new NpcDialogReplyMessage((int)replyId);
             account.SocketManager.Send(msg);
         }
 
@@ -78,14 +78,14 @@ namespace BlueSheep.Core.Npc
             }
         }
 
-        public int FindContextIdFromNpcId(int npcid)
+        public int FindContextIdFromNpcId(int npcId)
         {
-            if (npcid == 0)
-                return account.MapData.Npcs[0].contextualId;
+            if (npcId == 0)
+                return (int)account.MapData.Npcs[0].contextualId;
             foreach (BlueSheep.Common.Protocol.Types.GameRolePlayNpcInformations p in account.MapData.Npcs)
             {
-                if (p.npcId == npcid)
-                    return p.contextualId;
+                if (p.npcId == npcId)
+                    return (int)p.contextualId;
             }
             return 0;
         }

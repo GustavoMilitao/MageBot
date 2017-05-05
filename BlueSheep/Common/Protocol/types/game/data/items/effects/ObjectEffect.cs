@@ -30,20 +30,20 @@ namespace BlueSheep.Common.Protocol.Types
     public class ObjectEffect
     {
 
-        public new const short ID = 76;
-        public virtual short TypeId
+        public new const int ID = 76;
+        public virtual int TypeId
         {
             get { return ID; }
         }
 
-        public short actionId;
+        public int actionId;
 
 
         public ObjectEffect()
         {
         }
 
-        public ObjectEffect(short actionId)
+        public ObjectEffect(int actionId)
         {
             this.actionId = actionId;
         }
@@ -52,7 +52,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
 
-            writer.WriteVarShort(actionId);
+            writer.WriteVarShort((short)actionId);
 
 
         }
@@ -60,7 +60,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Deserialize(BigEndianReader reader)
         {
 
-            actionId = reader.ReadVarShort();
+            actionId = reader.ReadVarUhShort();
             if (actionId < 0)
                 throw new Exception("Forbidden value on actionId = " + actionId + ", it doesn't respect the following condition : actionId < 0");
         }

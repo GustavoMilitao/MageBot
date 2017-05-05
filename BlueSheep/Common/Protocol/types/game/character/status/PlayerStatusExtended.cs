@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class PlayerStatusExtended : PlayerStatus
 {
 
-public new const short ID = 414;
-public override short TypeId
+public new const int ID = 414;
+public override int TypeId
 {
     get { return ID; }
 }

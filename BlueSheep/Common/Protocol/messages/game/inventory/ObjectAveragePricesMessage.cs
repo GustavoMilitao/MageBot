@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] ids;
+        public int[] ids;
         public int[] avgPrices;
         
         public ObjectAveragePricesMessage()
         {
         }
         
-        public ObjectAveragePricesMessage(short[] ids, int[] avgPrices)
+        public ObjectAveragePricesMessage(int[] ids, int[] avgPrices)
         {
             this.ids = ids;
             this.avgPrices = avgPrices;
@@ -44,7 +44,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)ids.Length);
             foreach (var entry in ids)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)avgPrices.Length);
             foreach (var entry in avgPrices)
@@ -56,10 +56,10 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            ids = new short[limit];
+            ids = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 ids[i] = reader.ReadVarShort();
+                 ids[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
             avgPrices = new int[limit];

@@ -30,14 +30,14 @@ namespace BlueSheep.Common.Protocol.Types
 public class GameFightTaxCollectorInformations : GameFightAIInformations
 {
 
-public new const short ID = 48;
-public override short TypeId
+public new const int ID = 48;
+public override int TypeId
 {
     get { return ID; }
 }
 
-public short firstNameId;
-        public short lastNameId;
+public int firstNameId;
+        public int lastNameId;
         public byte level;
         
 
@@ -45,7 +45,7 @@ public GameFightTaxCollectorInformations()
 {
 }
 
-public GameFightTaxCollectorInformations(int contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, sbyte teamId, sbyte wave, bool alive, Types.GameFightMinimalStats stats, short[] previousPositions, short firstNameId, short lastNameId, byte level)
+public GameFightTaxCollectorInformations(ulong contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, sbyte teamId, sbyte wave, bool alive, Types.GameFightMinimalStats stats, int[] previousPositions, int firstNameId, int lastNameId, byte level)
          : base(contextualId, look, disposition, teamId, wave, alive, stats, previousPositions)
         {
             this.firstNameId = firstNameId;
@@ -58,8 +58,8 @@ public override void Serialize(BigEndianWriter writer)
 {
 
 base.Serialize(writer);
-            writer.WriteVarShort(firstNameId);
-            writer.WriteVarShort(lastNameId);
+            writer.WriteVarShort((short)firstNameId);
+            writer.WriteVarShort((short)lastNameId);
             writer.WriteByte(level);
             
 
@@ -69,10 +69,10 @@ public override void Deserialize(BigEndianReader reader)
 {
 
 base.Deserialize(reader);
-            firstNameId = reader.ReadVarShort();
+            firstNameId = reader.ReadVarUhShort();
             if (firstNameId < 0)
                 throw new Exception("Forbidden value on firstNameId = " + firstNameId + ", it doesn't respect the following condition : firstNameId < 0");
-            lastNameId = reader.ReadVarShort();
+            lastNameId = reader.ReadVarUhShort();
             if (lastNameId < 0)
                 throw new Exception("Forbidden value on lastNameId = " + lastNameId + ", it doesn't respect the following condition : lastNameId < 0");
             level = reader.ReadByte();

@@ -28,13 +28,13 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public int fightId;
         public int[] alliesId;
-        public short duration;
+        public int duration;
         
         public GameRolePlayArenaFightPropositionMessage()
         {
         }
         
-        public GameRolePlayArenaFightPropositionMessage(int fightId, int[] alliesId, short duration)
+        public GameRolePlayArenaFightPropositionMessage(int fightId, int[] alliesId, int duration)
         {
             this.fightId = fightId;
             this.alliesId = alliesId;
@@ -49,7 +49,7 @@ namespace BlueSheep.Common.Protocol.Messages
             {
                  writer.WriteVarInt(entry);
             }
-            writer.WriteVarShort(duration);
+            writer.WriteVarShort((short)duration);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -63,7 +63,7 @@ namespace BlueSheep.Common.Protocol.Messages
             {
                  alliesId[i] = reader.ReadVarInt();
             }
-            duration = reader.ReadVarShort();
+            duration = reader.ReadVarUhShort();
             if (duration < 0)
                 throw new Exception("Forbidden value on duration = " + duration + ", it doesn't respect the following condition : duration < 0");
         }

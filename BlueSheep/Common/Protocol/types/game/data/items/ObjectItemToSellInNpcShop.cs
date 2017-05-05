@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class ObjectItemToSellInNpcShop : ObjectItemMinimalInformation
 {
 
-public new const short ID = 352;
-public override short TypeId
+public new const int ID = 352;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -44,7 +44,7 @@ public ObjectItemToSellInNpcShop()
 {
 }
 
-public ObjectItemToSellInNpcShop(short objectGID, Types.ObjectEffect[] effects, int objectPrice, string buyCriterion)
+public ObjectItemToSellInNpcShop(int objectGID, Types.ObjectEffect[] effects, int objectPrice, string buyCriterion)
          : base(objectGID, effects)
         {
             this.objectPrice = objectPrice;

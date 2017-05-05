@@ -27,8 +27,8 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int duration;
-        public short ageBonus;
-        public short lootShareLimitMalus;
+        public int ageBonus;
+        public int lootShareLimitMalus;
         public Types.FightResultListEntry[] results;
         public Types.NamedPartyTeamWithOutcome[] namedPartyTeamsOutcomes;
         
@@ -36,7 +36,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameFightEndMessage(int duration, short ageBonus, short lootShareLimitMalus, Types.FightResultListEntry[] results, Types.NamedPartyTeamWithOutcome[] namedPartyTeamsOutcomes)
+        public GameFightEndMessage(int duration, int ageBonus, int lootShareLimitMalus, Types.FightResultListEntry[] results, Types.NamedPartyTeamWithOutcome[] namedPartyTeamsOutcomes)
         {
             this.duration = duration;
             this.ageBonus = ageBonus;
@@ -48,12 +48,12 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteInt(duration);
-            writer.WriteShort(ageBonus);
-            writer.WriteShort(lootShareLimitMalus);
+            writer.WriteShort((short)ageBonus);
+            writer.WriteShort((short)lootShareLimitMalus);
             writer.WriteUShort((ushort)results.Length);
             foreach (var entry in results)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             writer.WriteUShort((ushort)namedPartyTeamsOutcomes.Length);
@@ -74,7 +74,7 @@ namespace BlueSheep.Common.Protocol.Messages
             results = new Types.FightResultListEntry[limit];
             for (int i = 0; i < limit; i++)
             {
-                 results[i] = Types.ProtocolTypeManager.GetInstance<Types.FightResultListEntry>(reader.ReadShort());
+                 results[i] = Types.ProtocolTypeManager.GetInstance<Types.FightResultListEntry>(reader.ReadUShort());
                  results[i].Deserialize(reader);
             }
             limit = reader.ReadUShort();

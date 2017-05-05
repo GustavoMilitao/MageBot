@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class DungeonPartyFinderPlayer
 {
 
-public new const short ID = 373;
-public virtual short TypeId
+public new const int ID = 373;
+public virtual int TypeId
 {
     get { return ID; }
 }

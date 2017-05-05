@@ -27,46 +27,46 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class FightTeamMemberInformations
-{
+    public class FightTeamMemberInformations
+    {
 
-public new const short ID = 44;
-public virtual short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 44;
+        public virtual int TypeId
+        {
+            get { return ID; }
+        }
 
-public int id;
-        
+        public double id;
 
-public FightTeamMemberInformations()
-{
-}
 
-public FightTeamMemberInformations(int id)
+        public FightTeamMemberInformations()
+        {
+        }
+
+        public FightTeamMemberInformations(double id)
         {
             this.id = id;
         }
-        
-
-public virtual void Serialize(BigEndianWriter writer)
-{
-
-writer.WriteInt(id);
-            
-
-}
-
-public virtual void Deserialize(BigEndianReader reader)
-{
-
-id = reader.ReadInt();
-            
-
-}
 
 
-}
+        public virtual void Serialize(BigEndianWriter writer)
+        {
+
+            writer.WriteDouble(id);
+
+
+        }
+
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            id = reader.ReadDouble();
+
+
+        }
+
+
+    }
 
 
 }

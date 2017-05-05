@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class TaxCollectorStaticExtendedInformations : TaxCollectorStaticInformations
 {
 
-public new const short ID = 440;
-public override short TypeId
+public new const int ID = 440;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public TaxCollectorStaticExtendedInformations()
 {
 }
 
-public TaxCollectorStaticExtendedInformations(short firstNameId, short lastNameId, Types.GuildInformations guildIdentity, Types.AllianceInformations allianceIdentity)
+public TaxCollectorStaticExtendedInformations(int firstNameId, int lastNameId, Types.GuildInformations guildIdentity, Types.AllianceInformations allianceIdentity)
          : base(firstNameId, lastNameId, guildIdentity)
         {
             this.allianceIdentity = allianceIdentity;

@@ -10,7 +10,7 @@ namespace BlueSheep.Common.Data.DataCenter.Map
         {
             public int capabilities;
             public bool hasPriorityOnWorldmap;
-            public int id;
+            public ulong id;
             public int nameId;
             public bool outdoor;
             public int posX;

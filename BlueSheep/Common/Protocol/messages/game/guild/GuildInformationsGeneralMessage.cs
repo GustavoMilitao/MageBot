@@ -33,14 +33,14 @@ namespace BlueSheep.Common.Protocol.Messages
         public double experience;
         public double expNextLevelFloor;
         public int creationDate;
-        public short nbTotalMembers;
-        public short nbConnectedMembers;
+        public int nbTotalMembers;
+        public int nbConnectedMembers;
         
         public GuildInformationsGeneralMessage()
         {
         }
 
-        public GuildInformationsGeneralMessage(bool enabled, bool abandonnedPaddock, byte level, double expLevelFloor, double experience, double expNextLevelFloor, int creationDate, short nbTotalMembers, short nbConnectedMembers)
+        public GuildInformationsGeneralMessage(bool enabled, bool abandonnedPaddock, byte level, double expLevelFloor, double experience, double expNextLevelFloor, int creationDate, int nbTotalMembers, int nbConnectedMembers)
         {
             this.enabled = enabled;
             this.abandonnedPaddock = abandonnedPaddock;
@@ -64,8 +64,8 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteDouble(experience);
             writer.WriteDouble(expNextLevelFloor);
             writer.WriteInt(creationDate);
-            writer.WriteVarShort(nbTotalMembers);
-            writer.WriteVarShort(nbConnectedMembers);
+            writer.WriteVarShort((short)nbTotalMembers);
+            writer.WriteVarShort((short)nbConnectedMembers);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -88,10 +88,10 @@ namespace BlueSheep.Common.Protocol.Messages
             creationDate = reader.ReadInt();
             if (creationDate < 0)
                 throw new Exception("Forbidden value on creationDate = " + creationDate + ", it doesn't respect the following condition : creationDate < 0");
-            nbTotalMembers = reader.ReadVarShort();
+            nbTotalMembers = reader.ReadVarUhShort();
             if (nbTotalMembers < 0)
                 throw new Exception("Forbidden value on nbTotalMembers = " + nbTotalMembers + ", it doesn't respect the following condition : nbTotalMembers < 0");
-            nbConnectedMembers = reader.ReadVarShort();
+            nbConnectedMembers = reader.ReadVarUhShort();
             if (nbConnectedMembers < 0)
                 throw new Exception("Forbidden value on nbConnectedMembers = " + nbConnectedMembers + ", it doesn't respect the following condition : nbConnectedMembers < 0");
         }

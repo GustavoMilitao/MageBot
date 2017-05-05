@@ -97,13 +97,13 @@ namespace BlueSheep.Interface
         public List<int> GiftsList { get; set; }
         public InteractiveElement Safe { get; set; }
         public CharacterBaseInformations CharacterBaseInformations { get; set; }
-        public short Sequence { get; set; }
+        public int Sequence { get; set; }
         public LatencyFrame LatencyFrame { get; set; }
         public Pods Pods { get; set; }
         public List<ObjectItem> SafeItems { get; set; }
         public Running Running { get; set; }
-        public Queue<short> LastPacketID { get; set; }
-        public short LastPacket;
+        public Queue<int> LastPacketID { get; set; }
+        public int LastPacket;
         public int MapID { get; set; }
         public CharacterCharacteristicsInformations CharacterStats { get; set; }
         #endregion
@@ -289,7 +289,7 @@ namespace BlueSheep.Interface
             LatencyFrame = null;
             Pods = null;
             SafeItems = new List<ObjectItem>();
-            LastPacketID = new Queue<short>();
+            LastPacketID = new Queue<int>();
             Running = null;
             //Fight = new BFight(this);
             Fight = null;

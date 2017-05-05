@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class NamedPartyTeam
 {
 
-public new const short ID = 469;
-public virtual short TypeId
+public new const int ID = 469;
+public virtual int TypeId
 {
     get { return ID; }
 }

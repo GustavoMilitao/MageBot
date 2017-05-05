@@ -27,14 +27,14 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int statId;
-        public short spellId;
-        public short value;
+        public int spellId;
+        public int value;
         
         public SpellItemBoostMessage()
         {
         }
         
-        public SpellItemBoostMessage(int statId, short spellId, short value)
+        public SpellItemBoostMessage(int statId, int spellId, int value)
         {
             this.statId = statId;
             this.spellId = spellId;
@@ -44,8 +44,8 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteVarInt(statId);
-            writer.WriteVarShort(spellId);
-            writer.WriteVarShort(value);
+            writer.WriteVarShort((short)spellId);
+            writer.WriteVarShort((short)value);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -53,10 +53,10 @@ namespace BlueSheep.Common.Protocol.Messages
             statId = reader.ReadVarInt();
             if (statId < 0)
                 throw new Exception("Forbidden value on statId = " + statId + ", it doesn't respect the following condition : statId < 0");
-            spellId = reader.ReadVarShort();
+            spellId = reader.ReadVarUhShort();
             if (spellId < 0)
                 throw new Exception("Forbidden value on spellId = " + spellId + ", it doesn't respect the following condition : spellId < 0");
-            value = reader.ReadVarShort();
+            value = reader.ReadVarUhShort();
         }
         
     }

@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class CharacterToRemodelInformations : CharacterRemodelingInformation
 {
 
-public new const short ID = 477;
-public override short TypeId
+public new const int ID = 477;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -44,7 +44,7 @@ public CharacterToRemodelInformations()
 {
 }
 
-public CharacterToRemodelInformations(uint id, string name, sbyte breed, bool sex, short cosmeticId, int[] colors, sbyte possibleChangeMask, sbyte mandatoryChangeMask)
+public CharacterToRemodelInformations(uint id, string name, sbyte breed, bool sex, int cosmeticId, int[] colors, sbyte possibleChangeMask, sbyte mandatoryChangeMask)
          : base(id, name, breed, sex, cosmeticId, colors)
         {
             this.possibleChangeMask = possibleChangeMask;

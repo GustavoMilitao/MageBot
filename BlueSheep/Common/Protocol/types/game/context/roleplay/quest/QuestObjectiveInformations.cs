@@ -30,13 +30,13 @@ namespace BlueSheep.Common.Protocol.Types
 public class QuestObjectiveInformations
 {
 
-public new const short ID = 385;
-public virtual short TypeId
+public new const int ID = 385;
+public virtual int TypeId
 {
     get { return ID; }
 }
 
-public short objectiveId;
+public int objectiveId;
         public bool objectiveStatus;
         public string[] dialogParams;
         
@@ -45,7 +45,7 @@ public QuestObjectiveInformations()
 {
 }
 
-public QuestObjectiveInformations(short objectiveId, bool objectiveStatus, string[] dialogParams)
+public QuestObjectiveInformations(int objectiveId, bool objectiveStatus, string[] dialogParams)
         {
             this.objectiveId = objectiveId;
             this.objectiveStatus = objectiveStatus;
@@ -56,7 +56,7 @@ public QuestObjectiveInformations(short objectiveId, bool objectiveStatus, strin
 public virtual void Serialize(BigEndianWriter writer)
 {
 
-writer.WriteVarShort(objectiveId);
+writer.WriteVarShort((short)objectiveId);
             writer.WriteBoolean(objectiveStatus);
             writer.WriteUShort((ushort)dialogParams.Length);
             foreach (var entry in dialogParams)
@@ -70,7 +70,7 @@ writer.WriteVarShort(objectiveId);
 public virtual void Deserialize(BigEndianReader reader)
 {
 
-objectiveId = reader.ReadVarShort();
+objectiveId = reader.ReadVarUhShort();
             if (objectiveId < 0)
                 throw new Exception("Forbidden value on objectiveId = " + objectiveId + ", it doesn't respect the following condition : objectiveId < 0");
             objectiveStatus = reader.ReadBoolean();

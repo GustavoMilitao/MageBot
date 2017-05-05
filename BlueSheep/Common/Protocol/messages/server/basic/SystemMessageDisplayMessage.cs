@@ -27,14 +27,14 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public bool hangUp;
-        public short msgId;
+        public int msgId;
         public string[] parameters;
         
         public SystemMessageDisplayMessage()
         {
         }
         
-        public SystemMessageDisplayMessage(bool hangUp, short msgId, string[] parameters)
+        public SystemMessageDisplayMessage(bool hangUp, int msgId, string[] parameters)
         {
             this.hangUp = hangUp;
             this.msgId = msgId;
@@ -44,7 +44,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteBoolean(hangUp);
-            writer.WriteVarShort(msgId);
+            writer.WriteVarShort((short)msgId);
             writer.WriteUShort((ushort)parameters.Length);
             foreach (var entry in parameters)
             {
@@ -55,7 +55,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             hangUp = reader.ReadBoolean();
-            msgId = reader.ReadVarShort();
+            msgId = reader.ReadVarUhShort();
             if (msgId < 0)
                 throw new Exception("Forbidden value on msgId = " + msgId + ", it doesn't respect the following condition : msgId < 0");
             var limit = reader.ReadUShort();

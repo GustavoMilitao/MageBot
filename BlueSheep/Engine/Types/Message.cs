@@ -33,8 +33,8 @@ namespace BlueSheep.Engine.Types
             writer.Clear();
 
             byte typeLen = ComputeTypeLen(packet.Length);
-            var header = (short)SubComputeStaticHeader(ProtocolID, typeLen);
-            writer.WriteShort(header);
+            var header = (int)SubComputeStaticHeader(ProtocolID, typeLen);
+            writer.WriteShort((short)header);
 
             switch (typeLen)
             {
@@ -44,11 +44,11 @@ namespace BlueSheep.Engine.Types
                     writer.WriteByte((byte)packet.Length);
                     break;
                 case 2:
-                    writer.WriteShort((short)packet.Length);
+                    writer.WriteShort((short)(int)packet.Length);
                     break;
                 case 3:
                     writer.WriteByte((byte)(packet.Length >> 16 & 255));
-                    writer.WriteShort((short)(packet.Length & 65535));
+                    writer.WriteShort((short)(int)(packet.Length & 65535));
                     break;
                 default:
                     throw new System.Exception("Packet's length can't be encoded on 4 or more bytes");

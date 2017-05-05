@@ -27,15 +27,15 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public string name;
-        public short worldX;
-        public short worldY;
+        public int worldX;
+        public int worldY;
         public string ownername;
         
         public ExchangeMountTakenFromPaddockMessage()
         {
         }
         
-        public ExchangeMountTakenFromPaddockMessage(string name, short worldX, short worldY, string ownername)
+        public ExchangeMountTakenFromPaddockMessage(string name, int worldX, int worldY, string ownername)
         {
             this.name = name;
             this.worldX = worldX;
@@ -46,8 +46,8 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteUTF(name);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             writer.WriteUTF(ownername);
         }
         

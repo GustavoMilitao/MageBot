@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short genericId;
+        public int genericId;
         public int averagePrice;
         
         public ExchangeBidPriceMessage()
         {
         }
         
-        public ExchangeBidPriceMessage(short genericId, int averagePrice)
+        public ExchangeBidPriceMessage(int genericId, int averagePrice)
         {
             this.genericId = genericId;
             this.averagePrice = averagePrice;
@@ -41,13 +41,13 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(genericId);
+            writer.WriteVarShort((short)genericId);
             writer.WriteVarInt(averagePrice);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            genericId = reader.ReadVarShort();
+            genericId = reader.ReadVarUhShort();
             if (genericId < 0)
                 throw new Exception("Forbidden value on genericId = " + genericId + ", it doesn't respect the following condition : genericId < 0");
             averagePrice = reader.ReadVarInt();

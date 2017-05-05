@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameActionFightDispellableEffectMessage(short actionId, int sourceId, Types.AbstractFightDispellableEffect effect)
+        public GameActionFightDispellableEffectMessage(int actionId, ulong sourceId, Types.AbstractFightDispellableEffect effect)
          : base(actionId, sourceId)
         {
             this.effect = effect;
@@ -41,14 +41,14 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteShort(effect.TypeId);
+            writer.WriteShort((short)effect.TypeId);
             effect.Serialize(writer);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            effect = Types.ProtocolTypeManager.GetInstance<Types.AbstractFightDispellableEffect>(reader.ReadShort());
+            effect = Types.ProtocolTypeManager.GetInstance<Types.AbstractFightDispellableEffect>(reader.ReadUShort());
             effect.Deserialize(reader);
         }
         

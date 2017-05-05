@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short replyId;
+        public int replyId;
         
         public NpcDialogReplyMessage()
         {
         }
         
-        public NpcDialogReplyMessage(short replyId)
+        public NpcDialogReplyMessage(int replyId)
         {
             this.replyId = replyId;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(replyId);
+            writer.WriteVarShort((short)replyId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            replyId = reader.ReadVarShort();
+            replyId = reader.ReadVarUhShort();
             if (replyId < 0)
                 throw new Exception("Forbidden value on replyId = " + replyId + ", it doesn't respect the following condition : replyId < 0");
         }

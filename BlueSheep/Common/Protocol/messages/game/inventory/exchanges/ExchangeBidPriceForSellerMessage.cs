@@ -33,7 +33,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public ExchangeBidPriceForSellerMessage(short genericId, int averagePrice, bool allIdentical, int[] minimalPrices)
+        public ExchangeBidPriceForSellerMessage(int genericId, int averagePrice, bool allIdentical, int[] minimalPrices)
          : base(genericId, averagePrice)
         {
             this.allIdentical = allIdentical;

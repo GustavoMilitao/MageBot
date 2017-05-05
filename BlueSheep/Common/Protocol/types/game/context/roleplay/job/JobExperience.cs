@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class JobExperience
 {
 
-public new const short ID = 98;
-public virtual short TypeId
+public new const int ID = 98;
+public virtual int TypeId
 {
     get { return ID; }
 }

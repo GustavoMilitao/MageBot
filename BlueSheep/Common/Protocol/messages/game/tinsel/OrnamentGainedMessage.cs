@@ -26,20 +26,20 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short ornamentId;
+        public int ornamentId;
         
         public OrnamentGainedMessage()
         {
         }
         
-        public OrnamentGainedMessage(short ornamentId)
+        public OrnamentGainedMessage(int ornamentId)
         {
             this.ornamentId = ornamentId;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteShort(ornamentId);
+            writer.WriteShort((short)ornamentId);
         }
         
         public override void Deserialize(BigEndianReader reader)

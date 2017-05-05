@@ -30,20 +30,20 @@ namespace BlueSheep.Common.Protocol.Types
 public class FightTemporaryBoostStateEffect : FightTemporaryBoostEffect
 {
 
-public new const short ID = 214;
-public override short TypeId
+public new const int ID = 214;
+public override int TypeId
 {
     get { return ID; }
 }
 
-public short stateId;
+public int stateId;
         
 
 public FightTemporaryBoostStateEffect()
 {
 }
 
-public FightTemporaryBoostStateEffect(int uid, int targetId, short turnDuration, sbyte dispelable, short spellId, int effectId, int parentBoostUid, short delta, short stateId)
+public FightTemporaryBoostStateEffect(int uid, ulong targetId, int turnDuration, sbyte dispelable, int spellId, int effectId, int parentBoostUid, int delta, int stateId)
          : base(uid, targetId, turnDuration, dispelable, spellId, effectId, parentBoostUid, delta)
         {
             this.stateId = stateId;
@@ -54,7 +54,7 @@ public override void Serialize(BigEndianWriter writer)
 {
 
 base.Serialize(writer);
-            writer.WriteShort(stateId);
+            writer.WriteShort((short)stateId);
             
 
 }

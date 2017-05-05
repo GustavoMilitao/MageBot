@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] finishedAchievementsIds;
+        public int[] finishedAchievementsIds;
         public Types.AchievementRewardable[] rewardableAchievements;
         
         public AchievementListMessage()
         {
         }
         
-        public AchievementListMessage(short[] finishedAchievementsIds, Types.AchievementRewardable[] rewardableAchievements)
+        public AchievementListMessage(int[] finishedAchievementsIds, Types.AchievementRewardable[] rewardableAchievements)
         {
             this.finishedAchievementsIds = finishedAchievementsIds;
             this.rewardableAchievements = rewardableAchievements;
@@ -44,7 +44,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)finishedAchievementsIds.Length);
             foreach (var entry in finishedAchievementsIds)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)rewardableAchievements.Length);
             foreach (var entry in rewardableAchievements)
@@ -56,10 +56,10 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            finishedAchievementsIds = new short[limit];
+            finishedAchievementsIds = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 finishedAchievementsIds[i] = reader.ReadVarShort();
+                 finishedAchievementsIds[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
             rewardableAchievements = new Types.AchievementRewardable[limit];

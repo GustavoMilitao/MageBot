@@ -47,13 +47,13 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)attackers.Length);
             foreach (var entry in attackers)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             writer.WriteUShort((ushort)defenders.Length);
             foreach (var entry in defenders)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
         }
@@ -67,14 +67,14 @@ namespace BlueSheep.Common.Protocol.Messages
             attackers = new Types.GameFightFighterLightInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                 attackers[i] = Types.ProtocolTypeManager.GetInstance<Types.GameFightFighterLightInformations>(reader.ReadShort());
+                 attackers[i] = Types.ProtocolTypeManager.GetInstance<Types.GameFightFighterLightInformations>(reader.ReadUShort());
                  attackers[i].Deserialize(reader);
             }
             limit = reader.ReadUShort();
             defenders = new Types.GameFightFighterLightInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                 defenders[i] = Types.ProtocolTypeManager.GetInstance<Types.GameFightFighterLightInformations>(reader.ReadShort());
+                 defenders[i] = Types.ProtocolTypeManager.GetInstance<Types.GameFightFighterLightInformations>(reader.ReadUShort());
                  defenders[i].Deserialize(reader);
             }
         }

@@ -27,13 +27,13 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public bool ready;
-        public short step;
+        public int step;
         
         public ExchangeReadyMessage()
         {
         }
         
-        public ExchangeReadyMessage(bool ready, short step)
+        public ExchangeReadyMessage(bool ready, int step)
         {
             this.ready = ready;
             this.step = step;
@@ -42,13 +42,13 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteBoolean(ready);
-            writer.WriteVarShort(step);
+            writer.WriteVarShort((short)step);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             ready = reader.ReadBoolean();
-            step = reader.ReadVarShort();
+            step = reader.ReadVarUhShort();
             if (step < 0)
                 throw new Exception("Forbidden value on step = " + step + ", it doesn't respect the following condition : step < 0");
         }

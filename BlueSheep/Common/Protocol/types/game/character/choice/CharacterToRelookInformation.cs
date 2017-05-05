@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class CharacterToRelookInformation : AbstractCharacterToRefurbishInformation
 {
 
-public new const short ID = 399;
-public override short TypeId
+public new const int ID = 399;
+public override int TypeId
 {
     get { return ID; }
 }

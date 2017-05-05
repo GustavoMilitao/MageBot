@@ -27,50 +27,50 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class AllianceInformations : BasicNamedAllianceInformations
-{
+    public class AllianceInformations : BasicNamedAllianceInformations
+    {
 
-public new const short ID = 417;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 417;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public Types.GuildEmblem allianceEmblem;
-        
+        public Types.GuildEmblem allianceEmblem;
 
-public AllianceInformations()
-{
-}
 
-public AllianceInformations(int allianceId, string allianceTag, string allianceName, Types.GuildEmblem allianceEmblem)
-         : base(allianceId, allianceTag, allianceName)
+        public AllianceInformations()
+        {
+        }
+
+        public AllianceInformations(uint allianceId, string allianceTag, string allianceName, Types.GuildEmblem allianceEmblem)
+                 : base(allianceId, allianceTag, allianceName)
         {
             this.allianceEmblem = allianceEmblem;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
             allianceEmblem.Serialize(writer);
-            
 
-}
 
-public override void Deserialize(BigEndianReader reader)
-{
+        }
 
-base.Deserialize(reader);
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
             allianceEmblem = new Types.GuildEmblem();
             allianceEmblem.Deserialize(reader);
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

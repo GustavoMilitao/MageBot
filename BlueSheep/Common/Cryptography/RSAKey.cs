@@ -66,7 +66,7 @@ namespace BlueSheep.Common.Cryptography
             byte[] buffer2 = new byte[15];
             MemoryStream input = new MemoryStream(X509Key);
             BinaryReader reader = new BinaryReader(input);
-            ushort num2 = 0;
+            int num2 = 0;
 
             try
             {

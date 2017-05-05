@@ -34,7 +34,7 @@ namespace BlueSheep.Engine.Handlers.Character
 
             if (!account.IsMITM)
             {
-                CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage((ulong)account.CharacterBaseInformations.Id);
+                CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage(account.CharacterBaseInformations.Id);
                 account.SocketManager.Send(characterSelectionMessage);
             }
             
@@ -146,7 +146,7 @@ namespace BlueSheep.Engine.Handlers.Character
             {
                 msg.Deserialize(reader);
             }
-            DataClass d = GameData.GetDataObject(D2oFileEnum.Achievements, msg.id);
+            DataClass d = GameData.GetDataObject(D2oFileEnum.Achievements, (int)msg.id);
             account.Log(new ActionTextInformation("Succès débloqué : " + I18N.GetText((int)d.Fields["nameId"])),3);
                 AchievementRewardRequestMessage nmsg = new AchievementRewardRequestMessage(-1);
                 account.SocketManager.Send(nmsg);

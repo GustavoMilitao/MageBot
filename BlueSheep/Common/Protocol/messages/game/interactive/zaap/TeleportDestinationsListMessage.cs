@@ -28,15 +28,15 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public sbyte teleporterType;
         public int[] mapIds;
-        public short[] subAreaIds;
-        public short[] costs;
+        public int[] subAreaIds;
+        public int[] costs;
         public sbyte[] destTeleporterType;
         
         public TeleportDestinationsListMessage()
         {
         }
         
-        public TeleportDestinationsListMessage(sbyte teleporterType, int[] mapIds, short[] subAreaIds, short[] costs, sbyte[] destTeleporterType)
+        public TeleportDestinationsListMessage(sbyte teleporterType, int[] mapIds, int[] subAreaIds, int[] costs, sbyte[] destTeleporterType)
         {
             this.teleporterType = teleporterType;
             this.mapIds = mapIds;
@@ -56,12 +56,12 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)subAreaIds.Length);
             foreach (var entry in subAreaIds)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)costs.Length);
             foreach (var entry in costs)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)destTeleporterType.Length);
             foreach (var entry in destTeleporterType)
@@ -82,16 +82,16 @@ namespace BlueSheep.Common.Protocol.Messages
                  mapIds[i] = reader.ReadInt();
             }
             limit = reader.ReadUShort();
-            subAreaIds = new short[limit];
+            subAreaIds = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 subAreaIds[i] = reader.ReadVarShort();
+                 subAreaIds[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
-            costs = new short[limit];
+            costs = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 costs[i] = reader.ReadVarShort();
+                 costs[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
             destTeleporterType = new sbyte[limit];

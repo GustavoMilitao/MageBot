@@ -30,21 +30,21 @@ namespace BlueSheep.Common.Protocol.Types
 public class TreasureHuntStepFollowDirection : TreasureHuntStep
 {
 
-public new const short ID = 468;
-public override short TypeId
+public new const int ID = 468;
+public override int TypeId
 {
     get { return ID; }
 }
 
 public sbyte direction;
-        public short mapCount;
+        public int mapCount;
         
 
 public TreasureHuntStepFollowDirection()
 {
 }
 
-public TreasureHuntStepFollowDirection(sbyte direction, short mapCount)
+public TreasureHuntStepFollowDirection(sbyte direction, int mapCount)
         {
             this.direction = direction;
             this.mapCount = mapCount;
@@ -56,7 +56,7 @@ public override void Serialize(BigEndianWriter writer)
 
 base.Serialize(writer);
             writer.WriteSByte(direction);
-            writer.WriteVarShort(mapCount);
+            writer.WriteVarShort((short)mapCount);
             
 
 }
@@ -68,7 +68,7 @@ base.Deserialize(reader);
             direction = reader.ReadSByte();
             if (direction < 0)
                 throw new Exception("Forbidden value on direction = " + direction + ", it doesn't respect the following condition : direction < 0");
-            mapCount = reader.ReadVarShort();
+            mapCount = reader.ReadVarUhShort();
             if (mapCount < 0)
                 throw new Exception("Forbidden value on mapCount = " + mapCount + ", it doesn't respect the following condition : mapCount < 0");
             

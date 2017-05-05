@@ -42,7 +42,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)ignoredList.Length);
             foreach (var entry in ignoredList)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
         }
@@ -53,7 +53,7 @@ namespace BlueSheep.Common.Protocol.Messages
             ignoredList = new Types.IgnoredInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                 ignoredList[i] = Types.ProtocolTypeManager.GetInstance<Types.IgnoredInformations>(reader.ReadShort());
+                 ignoredList[i] = Types.ProtocolTypeManager.GetInstance<Types.IgnoredInformations>(reader.ReadUShort());
                  ignoredList[i].Deserialize(reader);
             }
         }

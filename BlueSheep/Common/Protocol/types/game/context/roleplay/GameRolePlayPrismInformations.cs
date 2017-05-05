@@ -27,51 +27,51 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class GameRolePlayPrismInformations : GameRolePlayActorInformations
-{
+    public class GameRolePlayPrismInformations : GameRolePlayActorInformations
+    {
 
-public new const short ID = 161;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 161;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public Types.PrismInformation prism;
-        
+        public Types.PrismInformation prism;
 
-public GameRolePlayPrismInformations()
-{
-}
 
-public GameRolePlayPrismInformations(int contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, Types.PrismInformation prism)
-         : base(contextualId, look, disposition)
+        public GameRolePlayPrismInformations()
+        {
+        }
+
+        public GameRolePlayPrismInformations(ulong contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, Types.PrismInformation prism)
+                 : base(contextualId, look, disposition)
         {
             this.prism = prism;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
-            writer.WriteShort(prism.TypeId);
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
+            writer.WriteShort((short)prism.TypeId);
             prism.Serialize(writer);
-            
 
-}
 
-public override void Deserialize(BigEndianReader reader)
-{
+        }
 
-base.Deserialize(reader);
-            prism = Types.ProtocolTypeManager.GetInstance<Types.PrismInformation>(reader.ReadShort());
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
+            prism = Types.ProtocolTypeManager.GetInstance<PrismInformation>(reader.ReadUShort());
             prism.Deserialize(reader);
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

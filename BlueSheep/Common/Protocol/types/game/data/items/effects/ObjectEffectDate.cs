@@ -30,13 +30,13 @@ namespace BlueSheep.Common.Protocol.Types
 public class ObjectEffectDate : ObjectEffect
 {
 
-public new const short ID = 72;
-public override short TypeId
+public new const int ID = 72;
+public override int TypeId
 {
     get { return ID; }
 }
 
-public short year;
+public int year;
         public sbyte month;
         public sbyte day;
         public sbyte hour;
@@ -47,7 +47,7 @@ public ObjectEffectDate()
 {
 }
 
-public ObjectEffectDate(short actionId, short year, sbyte month, sbyte day, sbyte hour, sbyte minute)
+public ObjectEffectDate(int actionId, int year, sbyte month, sbyte day, sbyte hour, sbyte minute)
          : base(actionId)
         {
             this.year = year;
@@ -62,7 +62,7 @@ public override void Serialize(BigEndianWriter writer)
 {
 
 base.Serialize(writer);
-            writer.WriteVarShort(year);
+            writer.WriteVarShort((short)year);
             writer.WriteSByte(month);
             writer.WriteSByte(day);
             writer.WriteSByte(hour);
@@ -75,7 +75,7 @@ public override void Deserialize(BigEndianReader reader)
 {
 
 base.Deserialize(reader);
-            year = reader.ReadVarShort();
+            year = reader.ReadVarUhShort();
             if (year < 0)
                 throw new Exception("Forbidden value on year = " + year + ", it doesn't respect the following condition : year < 0");
             month = reader.ReadSByte();

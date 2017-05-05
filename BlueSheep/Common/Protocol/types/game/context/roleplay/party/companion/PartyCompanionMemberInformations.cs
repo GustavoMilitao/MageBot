@@ -30,16 +30,16 @@ namespace BlueSheep.Common.Protocol.Types
 public class PartyCompanionMemberInformations : PartyCompanionBaseInformations
 {
 
-public new const short ID = 452;
-public override short TypeId
+public new const int ID = 452;
+public override int TypeId
 {
     get { return ID; }
 }
 
-public short initiative;
+public int initiative;
         public int lifePoints;
         public int maxLifePoints;
-        public short prospecting;
+        public int prospecting;
         public byte regenRate;
         
 
@@ -47,7 +47,7 @@ public PartyCompanionMemberInformations()
 {
 }
 
-public PartyCompanionMemberInformations(sbyte indexId, sbyte companionGenericId, Types.EntityLook entityLook, short initiative, int lifePoints, int maxLifePoints, short prospecting, byte regenRate)
+public PartyCompanionMemberInformations(sbyte indexId, sbyte companionGenericId, Types.EntityLook entityLook, int initiative, int lifePoints, int maxLifePoints, int prospecting, byte regenRate)
          : base(indexId, companionGenericId, entityLook)
         {
             this.initiative = initiative;
@@ -62,10 +62,10 @@ public override void Serialize(BigEndianWriter writer)
 {
 
 base.Serialize(writer);
-            writer.WriteVarShort(initiative);
+            writer.WriteVarShort((short)initiative);
             writer.WriteVarInt(lifePoints);
             writer.WriteVarInt(maxLifePoints);
-            writer.WriteVarShort(prospecting);
+            writer.WriteVarShort((short)prospecting);
             writer.WriteByte(regenRate);
             
 
@@ -75,7 +75,7 @@ public override void Deserialize(BigEndianReader reader)
 {
 
 base.Deserialize(reader);
-            initiative = reader.ReadVarShort();
+            initiative = reader.ReadVarUhShort();
             if (initiative < 0)
                 throw new Exception("Forbidden value on initiative = " + initiative + ", it doesn't respect the following condition : initiative < 0");
             lifePoints = reader.ReadVarInt();
@@ -84,7 +84,7 @@ base.Deserialize(reader);
             maxLifePoints = reader.ReadVarInt();
             if (maxLifePoints < 0)
                 throw new Exception("Forbidden value on maxLifePoints = " + maxLifePoints + ", it doesn't respect the following condition : maxLifePoints < 0");
-            prospecting = reader.ReadVarShort();
+            prospecting = reader.ReadVarUhShort();
             if (prospecting < 0)
                 throw new Exception("Forbidden value on prospecting = " + prospecting + ", it doesn't respect the following condition : prospecting < 0");
             regenRate = reader.ReadByte();

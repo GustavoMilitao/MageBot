@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class TreasureHuntStep
 {
 
-public new const short ID = 463;
-public virtual short TypeId
+public new const int ID = 463;
+public virtual int TypeId
 {
     get { return ID; }
 }

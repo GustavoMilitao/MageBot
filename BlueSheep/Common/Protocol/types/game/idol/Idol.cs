@@ -6,7 +6,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class Idol
     {
-        public const short ID = 489;
+        public const int ID = 489;
         public uint IdolId = 0;
         public uint xpBonusPercent = 0;
         public uint dropBonusPercent = 0;
@@ -21,17 +21,17 @@ namespace BlueSheep.Common.Protocol.Types
             {
                 throw new Exception("Forbidden value (" + IdolId + ") on element id.");
             }
-            writer.WriteVarShort((short)IdolId);
+            writer.WriteVarShort((short)(int)IdolId);
             if (xpBonusPercent < 0)
             {
                 throw new Exception("Forbidden value (" + xpBonusPercent + ") on element xpBonusPercent.");
             }
-            writer.WriteVarShort((short)xpBonusPercent);
+            writer.WriteVarShort((short)(int)xpBonusPercent);
             if (dropBonusPercent < 0)
             {
                 throw new Exception("Forbidden value (" + dropBonusPercent + ") on element dropBonusPercent.");
             }
-            writer.WriteVarShort((short)dropBonusPercent);
+            writer.WriteVarShort((short)(int)dropBonusPercent);
         }
 
         public virtual void Deserialize(BigEndianReader reader)

@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class GameActionMark
 {
 
-public new const short ID = 351;
-public virtual short TypeId
+public new const int ID = 351;
+public virtual int TypeId
 {
     get { return ID; }
 }
@@ -40,9 +40,9 @@ public int markAuthorId;
         public sbyte markTeamId;
         public int markSpellId;
         public sbyte markSpellLevel;
-        public short markId;
+        public int markId;
         public sbyte markType;
-        public short markimpactCell;
+        public int markimpactCell;
         public Types.GameActionMarkedCell[] cells;
         public bool active;
         
@@ -51,7 +51,7 @@ public GameActionMark()
 {
 }
 
-public GameActionMark(int markAuthorId, sbyte markTeamId, int markSpellId, sbyte markSpellLevel, short markId, sbyte markType, short markimpactCell, Types.GameActionMarkedCell[] cells, bool active)
+public GameActionMark(int markAuthorId, sbyte markTeamId, int markSpellId, sbyte markSpellLevel, int markId, sbyte markType, int markimpactCell, Types.GameActionMarkedCell[] cells, bool active)
         {
             this.markAuthorId = markAuthorId;
             this.markTeamId = markTeamId;
@@ -72,9 +72,9 @@ writer.WriteInt(markAuthorId);
             writer.WriteSByte(markTeamId);
             writer.WriteInt(markSpellId);
             writer.WriteSByte(markSpellLevel);
-            writer.WriteShort(markId);
+            writer.WriteShort((short)markId);
             writer.WriteSByte(markType);
-            writer.WriteShort(markimpactCell);
+            writer.WriteShort((short)markimpactCell);
             writer.WriteUShort((ushort)cells.Length);
             foreach (var entry in cells)
             {

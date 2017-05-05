@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class StartupActionAddObject
 {
 
-public new const short ID = 52;
-public virtual short TypeId
+public new const int ID = 52;
+public virtual int TypeId
 {
     get { return ID; }
 }

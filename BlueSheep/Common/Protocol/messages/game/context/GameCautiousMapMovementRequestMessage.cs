@@ -31,7 +31,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameCautiousMapMovementRequestMessage(short[] keyMovements, int mapId)
+        public GameCautiousMapMovementRequestMessage(int[] keyMovements, int mapId)
          : base(keyMovements, mapId)
         {
         }

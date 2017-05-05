@@ -27,51 +27,51 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class ShortcutSpell : Shortcut
-{
+    public class ShortcutSpell : Shortcut
+    {
 
-public new const short ID = 368;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 368;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public short spellId;
-        
+        public int spellId;
 
-public ShortcutSpell()
-{
-}
 
-public ShortcutSpell(sbyte slot, short spellId)
-         : base(slot)
+        public ShortcutSpell()
+        {
+        }
+
+        public ShortcutSpell(sbyte slot, int spellId)
+                 : base(slot)
         {
             this.spellId = spellId;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
-            writer.WriteVarShort(spellId);
-            
+        public override void Serialize(BigEndianWriter writer)
+        {
 
-}
+            base.Serialize(writer);
+            writer.WriteVarShort((short)spellId);
 
-public override void Deserialize(BigEndianReader reader)
-{
 
-base.Deserialize(reader);
-            spellId = reader.ReadVarShort();
+        }
+
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
+            spellId = reader.ReadVarUhShort();
             if (spellId < 0)
                 throw new Exception("Forbidden value on spellId = " + spellId + ", it doesn't respect the following condition : spellId < 0");
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

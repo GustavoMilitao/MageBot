@@ -30,14 +30,14 @@ namespace BlueSheep.Common.Protocol.Types
     public class CharacterSpellModification
     {
 
-        public new const short ID = 215;
-        public virtual short TypeId
+        public new const int ID = 215;
+        public virtual int TypeId
         {
             get { return ID; }
         }
 
         public byte modificationType;
-        public ushort spellId;
+        public int spellId;
         public Types.CharacterBaseCharacteristic value;
 
 
@@ -45,7 +45,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public CharacterSpellModification(byte modificationType, ushort spellId, Types.CharacterBaseCharacteristic value)
+        public CharacterSpellModification(byte modificationType, int spellId, Types.CharacterBaseCharacteristic value)
         {
             this.modificationType = modificationType;
             this.spellId = spellId;
@@ -57,7 +57,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
 
             writer.WriteByte(modificationType);
-            writer.WriteVarShort(spellId);
+            writer.WriteVarShort((short)spellId);
             value.Serialize(writer);
 
 

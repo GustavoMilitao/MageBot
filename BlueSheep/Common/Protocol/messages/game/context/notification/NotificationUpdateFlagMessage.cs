@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short index;
+        public int index;
         
         public NotificationUpdateFlagMessage()
         {
         }
         
-        public NotificationUpdateFlagMessage(short index)
+        public NotificationUpdateFlagMessage(int index)
         {
             this.index = index;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(index);
+            writer.WriteVarShort((short)index);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            index = reader.ReadVarShort();
+            index = reader.ReadVarUhShort();
             if (index < 0)
                 throw new Exception("Forbidden value on index = " + index + ", it doesn't respect the following condition : index < 0");
         }

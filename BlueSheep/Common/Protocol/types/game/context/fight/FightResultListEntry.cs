@@ -30,13 +30,13 @@ namespace BlueSheep.Common.Protocol.Types
 public class FightResultListEntry
 {
 
-public new const short ID = 16;
-public virtual short TypeId
+public new const int ID = 16;
+public virtual int TypeId
 {
     get { return ID; }
 }
 
-public short outcome;
+public int outcome;
         public sbyte wave;
         public Types.FightLoot rewards;
         
@@ -45,7 +45,7 @@ public FightResultListEntry()
 {
 }
 
-public FightResultListEntry(short outcome, sbyte wave, Types.FightLoot rewards)
+public FightResultListEntry(int outcome, sbyte wave, Types.FightLoot rewards)
         {
             this.outcome = outcome;
             this.wave = wave;
@@ -56,7 +56,7 @@ public FightResultListEntry(short outcome, sbyte wave, Types.FightLoot rewards)
 public virtual void Serialize(BigEndianWriter writer)
 {
 
-writer.WriteVarShort(outcome);
+writer.WriteVarShort((short)outcome);
             writer.WriteSByte(wave);
             rewards.Serialize(writer);
             
@@ -66,7 +66,7 @@ writer.WriteVarShort(outcome);
 public virtual void Deserialize(BigEndianReader reader)
 {
 
-outcome = reader.ReadVarShort();
+outcome = reader.ReadVarUhShort();
             if (outcome < 0)
                 throw new Exception("Forbidden value on outcome = " + outcome + ", it doesn't respect the following condition : outcome < 0");
             wave = reader.ReadSByte();

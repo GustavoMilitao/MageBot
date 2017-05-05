@@ -28,14 +28,14 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public Types.FightDispellableEffectExtendedInformations[] effects;
         public Types.GameActionMark[] marks;
-        public short gameTurn;
+        public int gameTurn;
         public int fightStart;
         
         public GameFightSpectateMessage()
         {
         }
         
-        public GameFightSpectateMessage(Types.FightDispellableEffectExtendedInformations[] effects, Types.GameActionMark[] marks, short gameTurn, int fightStart)
+        public GameFightSpectateMessage(Types.FightDispellableEffectExtendedInformations[] effects, Types.GameActionMark[] marks, int gameTurn, int fightStart)
         {
             this.effects = effects;
             this.marks = marks;
@@ -55,7 +55,7 @@ namespace BlueSheep.Common.Protocol.Messages
             {
                  entry.Serialize(writer);
             }
-            writer.WriteVarShort(gameTurn);
+            writer.WriteVarShort((short)gameTurn);
             writer.WriteInt(fightStart);
         }
         
@@ -75,7 +75,7 @@ namespace BlueSheep.Common.Protocol.Messages
                  marks[i] = new Types.GameActionMark();
                  marks[i].Deserialize(reader);
             }
-            gameTurn = reader.ReadVarShort();
+            gameTurn = reader.ReadVarUhShort();
             if (gameTurn < 0)
                 throw new Exception("Forbidden value on gameTurn = " + gameTurn + ", it doesn't respect the following condition : gameTurn < 0");
             fightStart = reader.ReadInt();

@@ -30,14 +30,14 @@ namespace BlueSheep.Common.Protocol.Types
 public class CharacterHardcoreOrEpicInformations : CharacterBaseInformations
 {
 
-public new const short ID = 474;
-public override short TypeId
+public new const int ID = 474;
+public override int TypeId
 {
     get { return ID; }
 }
 
 public sbyte deathState;
-        public short deathCount;
+        public int deathCount;
         public byte deathMaxLevel;
         
 
@@ -45,7 +45,7 @@ public CharacterHardcoreOrEpicInformations()
 {
 }
 
-public CharacterHardcoreOrEpicInformations(uint id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex, sbyte deathState, short deathCount, byte deathMaxLevel)
+public CharacterHardcoreOrEpicInformations(uint id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex, sbyte deathState, int deathCount, byte deathMaxLevel)
          : base(id, level, name, entityLook, breed, sex)
         {
             this.deathState = deathState;
@@ -59,7 +59,7 @@ public override void Serialize(BigEndianWriter writer)
 
 base.Serialize(writer);
             writer.WriteSByte(deathState);
-            writer.WriteVarShort(deathCount);
+            writer.WriteVarShort((short)deathCount);
             writer.WriteByte(deathMaxLevel);
             
 
@@ -72,7 +72,7 @@ base.Deserialize(reader);
             deathState = reader.ReadSByte();
             if (deathState < 0)
                 throw new Exception("Forbidden value on deathState = " + deathState + ", it doesn't respect the following condition : deathState < 0");
-            deathCount = reader.ReadVarShort();
+            deathCount = reader.ReadVarUhShort();
             if (deathCount < 0)
                 throw new Exception("Forbidden value on deathCount = " + deathCount + ", it doesn't respect the following condition : deathCount < 0");
             deathMaxLevel = reader.ReadByte();

@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int targetId;
-        public short cellId;
+        public ulong targetId;
+        public int cellId;
         
         public GameActionFightCarryCharacterMessage()
         {
         }
         
-        public GameActionFightCarryCharacterMessage(short actionId, int sourceId, int targetId, short cellId)
+        public GameActionFightCarryCharacterMessage(int actionId, ulong sourceId, ulong targetId, int cellId)
          : base(actionId, sourceId)
         {
             this.targetId = targetId;
@@ -43,14 +43,14 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteInt(targetId);
-            writer.WriteShort(cellId);
+            writer.WriteULong(targetId);
+            writer.WriteShort((short)cellId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            targetId = reader.ReadInt();
+            targetId = reader.ReadULong();
             cellId = reader.ReadShort();
             if (cellId < -1 || cellId > 559)
                 throw new Exception("Forbidden value on cellId = " + cellId + ", it doesn't respect the following condition : cellId < -1 || cellId > 559");

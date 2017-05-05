@@ -27,49 +27,49 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class IdentifiedEntityDispositionInformations : EntityDispositionInformations
-{
+    public class IdentifiedEntityDispositionInformations : EntityDispositionInformations
+    {
 
-public new const short ID = 107;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 107;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public int id;
-        
+        public ulong id;
 
-public IdentifiedEntityDispositionInformations()
-{
-}
 
-public IdentifiedEntityDispositionInformations(short cellId, sbyte direction, int id)
-         : base(cellId, direction)
+        public IdentifiedEntityDispositionInformations()
+        {
+        }
+
+        public IdentifiedEntityDispositionInformations(int cellId, byte direction, ulong id)
+                 : base(cellId, direction)
         {
             this.id = id;
         }
-        
-
-public override void Serialize(BigEndianWriter writer)
-{
-
-base.Serialize(writer);
-            writer.WriteInt(id);
-            
-
-}
-
-public override void Deserialize(BigEndianReader reader)
-{
-
-base.Deserialize(reader);
-            id = reader.ReadInt();
-            
-
-}
 
 
-}
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
+            writer.WriteULong(id);
+
+
+        }
+
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
+            id = reader.ReadULong();
+
+
+        }
+
+
+    }
 
 
 }

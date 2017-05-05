@@ -26,16 +26,16 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] titles;
-        public short[] ornaments;
-        public short activeTitle;
-        public short activeOrnament;
+        public int[] titles;
+        public int[] ornaments;
+        public int activeTitle;
+        public int activeOrnament;
         
         public TitlesAndOrnamentsListMessage()
         {
         }
         
-        public TitlesAndOrnamentsListMessage(short[] titles, short[] ornaments, short activeTitle, short activeOrnament)
+        public TitlesAndOrnamentsListMessage(int[] titles, int[] ornaments, int activeTitle, int activeOrnament)
         {
             this.titles = titles;
             this.ornaments = ornaments;
@@ -48,35 +48,35 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)titles.Length);
             foreach (var entry in titles)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)ornaments.Length);
             foreach (var entry in ornaments)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
-            writer.WriteVarShort(activeTitle);
-            writer.WriteVarShort(activeOrnament);
+            writer.WriteVarShort((short)activeTitle);
+            writer.WriteVarShort((short)activeOrnament);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            titles = new short[limit];
+            titles = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 titles[i] = reader.ReadVarShort();
+                 titles[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
-            ornaments = new short[limit];
+            ornaments = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 ornaments[i] = reader.ReadVarShort();
+                 ornaments[i] = reader.ReadVarUhShort();
             }
-            activeTitle = reader.ReadVarShort();
+            activeTitle = reader.ReadVarUhShort();
             if (activeTitle < 0)
                 throw new Exception("Forbidden value on activeTitle = " + activeTitle + ", it doesn't respect the following condition : activeTitle < 0");
-            activeOrnament = reader.ReadVarShort();
+            activeOrnament = reader.ReadVarUhShort();
             if (activeOrnament < 0)
                 throw new Exception("Forbidden value on activeOrnament = " + activeOrnament + ", it doesn't respect the following condition : activeOrnament < 0");
         }

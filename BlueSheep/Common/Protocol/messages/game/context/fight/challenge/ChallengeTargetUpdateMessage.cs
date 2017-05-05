@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short challengeId;
-        public int targetId;
+        public int challengeId;
+        public ulong targetId;
         
         public ChallengeTargetUpdateMessage()
         {
         }
         
-        public ChallengeTargetUpdateMessage(short challengeId, int targetId)
+        public ChallengeTargetUpdateMessage(int challengeId, ulong targetId)
         {
             this.challengeId = challengeId;
             this.targetId = targetId;
@@ -41,16 +41,16 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(challengeId);
-            writer.WriteInt(targetId);
+            writer.WriteVarShort((short)challengeId);
+            writer.WriteULong(targetId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            challengeId = reader.ReadVarShort();
+            challengeId = reader.ReadVarUhShort();
             if (challengeId < 0)
                 throw new Exception("Forbidden value on challengeId = " + challengeId + ", it doesn't respect the following condition : challengeId < 0");
-            targetId = reader.ReadInt();
+            targetId = reader.ReadULong();
         }
         
     }

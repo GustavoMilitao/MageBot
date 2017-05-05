@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class ContentPart
 {
 
-public new const short ID = 350;
-public virtual short TypeId
+public new const int ID = 350;
+public virtual int TypeId
 {
     get { return ID; }
 }

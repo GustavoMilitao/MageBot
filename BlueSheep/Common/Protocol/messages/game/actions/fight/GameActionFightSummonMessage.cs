@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameActionFightSummonMessage(short actionId, int sourceId, Types.GameFightFighterInformations summon)
+        public GameActionFightSummonMessage(int actionId, ulong sourceId, Types.GameFightFighterInformations summon)
          : base(actionId, sourceId)
         {
             this.summon = summon;
@@ -41,14 +41,14 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteShort(summon.TypeId);
+            writer.WriteShort((short)summon.TypeId);
             summon.Serialize(writer);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            summon = Types.ProtocolTypeManager.GetInstance<Types.GameFightFighterInformations>(reader.ReadShort());
+            summon = Types.ProtocolTypeManager.GetInstance<Types.GameFightFighterInformations>(reader.ReadUShort());
             summon.Deserialize(reader);
         }
         

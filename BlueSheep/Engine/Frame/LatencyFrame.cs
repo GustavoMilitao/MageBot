@@ -47,7 +47,7 @@ namespace BlueSheep.Engine.Frame
             }
         }
 
-        public short GetLatencyAvg()
+        public int GetLatencyAvg()
         {
             if (m_LatencyBuffer.Count == 0)
                 return 0;
@@ -57,23 +57,23 @@ namespace BlueSheep.Engine.Frame
             foreach (uint latency in m_LatencyBuffer)
                 totalLatency += latency;
 
-            return (short)(totalLatency / m_LatencyBuffer.Count);
+            return (int)(totalLatency / m_LatencyBuffer.Count);
         }
 
-        public short GetSamplesCount()
+        public int GetSamplesCount()
         {
-            return (short)m_LatencyBuffer.Count;
+            return (int)m_LatencyBuffer.Count;
         }
 
-        public short GetSamplesMax()
+        public int GetSamplesMax()
         {
-            return (short)m_LatencyAvgBufferSize;
+            return (int)m_LatencyAvgBufferSize;
         }
         #endregion
 
         #region RolePley
 
-        public ushort RolePley()
+        public int RolePley()
         {
             long pId = (long)account.CharacterBaseInformations.Id;
             uint ct = Convert.ToUInt32(account.Ticket);

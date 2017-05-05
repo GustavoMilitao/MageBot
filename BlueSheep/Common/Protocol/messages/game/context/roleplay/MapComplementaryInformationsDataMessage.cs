@@ -26,7 +26,7 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public ushort subAreaId;
+        public int subAreaId;
         public int mapId;
         public Types.HouseInformations[] houses;
         public Types.GameRolePlayActorInformations[] actors;
@@ -39,7 +39,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public MapComplementaryInformationsDataMessage(ushort subAreaId, int mapId, Types.HouseInformations[] houses, Types.GameRolePlayActorInformations[] actors, Types.InteractiveElement[] interactiveElements, Types.StatedElement[] statedElements, Types.MapObstacle[] obstacles, Types.FightCommonInformations[] fights)
+        public MapComplementaryInformationsDataMessage(int subAreaId, int mapId, Types.HouseInformations[] houses, Types.GameRolePlayActorInformations[] actors, Types.InteractiveElement[] interactiveElements, Types.StatedElement[] statedElements, Types.MapObstacle[] obstacles, Types.FightCommonInformations[] fights)
         {
             this.subAreaId = subAreaId;
             this.mapId = mapId;
@@ -53,24 +53,24 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(subAreaId);
+            writer.WriteVarShort((short)subAreaId);
             writer.WriteInt(mapId);
             writer.WriteUShort((ushort)houses.Length);
             foreach (var entry in houses)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             writer.WriteUShort((ushort)actors.Length);
             foreach (var entry in actors)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             writer.WriteUShort((ushort)interactiveElements.Length);
             foreach (var entry in interactiveElements)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             writer.WriteUShort((ushort)statedElements.Length);
@@ -109,7 +109,7 @@ namespace BlueSheep.Common.Protocol.Messages
             actors = new Types.GameRolePlayActorInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                short id = reader.ReadShort();
+                int id = reader.ReadUShort();
                 actors[i] = Types.ProtocolTypeManager.GetInstance<Types.GameRolePlayActorInformations>(id);
                 actors[i].Deserialize(reader);
             }
@@ -117,7 +117,7 @@ namespace BlueSheep.Common.Protocol.Messages
             interactiveElements = new Types.InteractiveElement[limit];
             for (int i = 0; i < limit; i++)
             {
-                 interactiveElements[i] = Types.ProtocolTypeManager.GetInstance<Types.InteractiveElement>(reader.ReadShort());
+                 interactiveElements[i] = Types.ProtocolTypeManager.GetInstance<InteractiveElement>(reader.ReadUShort());
                  interactiveElements[i].Deserialize(reader);
             }
             limit = reader.ReadUShort();

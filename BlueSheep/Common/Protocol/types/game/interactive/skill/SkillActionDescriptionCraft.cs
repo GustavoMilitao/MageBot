@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
     public class SkillActionDescriptionCraft : SkillActionDescription
     {
 
-        public new const short ID = 100;
-        public override short TypeId
+        public new const int ID = 100;
+        public override int TypeId
         {
             get { return ID; }
         }
@@ -43,7 +43,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public SkillActionDescriptionCraft(ushort skillId, byte probability)
+        public SkillActionDescriptionCraft(int skillId, byte probability)
                  : base(skillId)
         {
             this.probability = probability;

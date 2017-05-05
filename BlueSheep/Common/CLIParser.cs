@@ -650,16 +650,16 @@ namespace BlueSheep.Common
         /// <returns>The cell of the specified element.</returns>
         private List<string> Cell()
         {
-            int npcid = Int32.Parse(GetParamValue("-npc"));
+            int npcId = int.Parse(GetParamValue("-npc"));
             int elemid = Int32.Parse(GetParamValue("-elem"));
             string player = GetParamValue("-player");
 
             try
             {
-                if (npcid != 0)
+                if (npcId != 0)
                 {
-                    string name = account.Npc.GetNpcName(npcid);
-                    int cell = account.MapData.GetCellFromContextId(npcid);
+                    string name = account.Npc.GetNpcName(npcId);
+                    int cell = account.MapData.GetCellFromContextId(npcId);
                     if (cell != 0)
                         result.Add("Le pnj " + name + " est à la cellule " + cell + ". \n");
                     else

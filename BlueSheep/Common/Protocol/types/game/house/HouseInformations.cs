@@ -30,21 +30,21 @@ namespace BlueSheep.Common.Protocol.Types
     public class HouseInformations
     {
 
-        public new const short ID = 111;
-        public virtual short TypeId
+        public new const int ID = 111;
+        public virtual int TypeId
         {
             get { return ID; }
         }
 
         public uint houseId;
-        public ushort modelId;
+        public int modelId;
 
 
         public HouseInformations()
         {
         }
 
-        public HouseInformations(uint houseId, ushort modelId)
+        public HouseInformations(uint houseId, int modelId)
         {
             this.houseId = houseId;
             this.modelId = modelId;
@@ -54,7 +54,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
             writer.WriteVarInt(houseId);
-            writer.WriteVarShort(modelId);
+            writer.WriteVarShort((short)modelId);
         }
 
         public virtual void Deserialize(BigEndianReader reader)

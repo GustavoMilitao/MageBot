@@ -27,13 +27,13 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int humanVendorId;
-        public short humanVendorCell;
+        public int humanVendorCell;
         
         public ExchangeOnHumanVendorRequestMessage()
         {
         }
         
-        public ExchangeOnHumanVendorRequestMessage(int humanVendorId, short humanVendorCell)
+        public ExchangeOnHumanVendorRequestMessage(int humanVendorId, int humanVendorCell)
         {
             this.humanVendorId = humanVendorId;
             this.humanVendorCell = humanVendorCell;
@@ -42,7 +42,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteVarInt(humanVendorId);
-            writer.WriteVarShort(humanVendorCell);
+            writer.WriteVarShort((short)humanVendorCell);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -50,7 +50,7 @@ namespace BlueSheep.Common.Protocol.Messages
             humanVendorId = reader.ReadVarInt();
             if (humanVendorId < 0)
                 throw new Exception("Forbidden value on humanVendorId = " + humanVendorId + ", it doesn't respect the following condition : humanVendorId < 0");
-            humanVendorCell = reader.ReadVarShort();
+            humanVendorCell = reader.ReadVarUhShort();
             if (humanVendorCell < 0 || humanVendorCell > 559)
                 throw new Exception("Forbidden value on humanVendorCell = " + humanVendorCell + ", it doesn't respect the following condition : humanVendorCell < 0 || humanVendorCell > 559");
         }

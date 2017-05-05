@@ -30,14 +30,14 @@ namespace BlueSheep.Common.Protocol.Types
 public class PrismGeolocalizedInformation : PrismSubareaEmptyInfo
 {
 
-public new const short ID = 434;
-public override short TypeId
+public new const int ID = 434;
+public override int TypeId
 {
     get { return ID; }
 }
 
-public short worldX;
-        public short worldY;
+public int worldX;
+        public int worldY;
         public int mapId;
         public Types.PrismInformation prism;
         
@@ -46,7 +46,7 @@ public PrismGeolocalizedInformation()
 {
 }
 
-public PrismGeolocalizedInformation(short subAreaId, int allianceId, short worldX, short worldY, int mapId, Types.PrismInformation prism)
+public PrismGeolocalizedInformation(int subAreaId, int allianceId, int worldX, int worldY, int mapId, Types.PrismInformation prism)
          : base(subAreaId, allianceId)
         {
             this.worldX = worldX;
@@ -60,10 +60,10 @@ public override void Serialize(BigEndianWriter writer)
 {
 
 base.Serialize(writer);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             writer.WriteInt(mapId);
-            writer.WriteShort(prism.TypeId);
+            writer.WriteShort((short)prism.TypeId);
             prism.Serialize(writer);
             
 
@@ -80,7 +80,7 @@ base.Deserialize(reader);
             if (worldY < -255 || worldY > 255)
                 throw new Exception("Forbidden value on worldY = " + worldY + ", it doesn't respect the following condition : worldY < -255 || worldY > 255");
             mapId = reader.ReadInt();
-            prism = Types.ProtocolTypeManager.GetInstance<Types.PrismInformation>(reader.ReadShort());
+            prism = Types.ProtocolTypeManager.GetInstance<Types.PrismInformation>(reader.ReadUShort());
             prism.Deserialize(reader);
             
 

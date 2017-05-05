@@ -27,52 +27,52 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class PortalInformation
-{
+    public class PortalInformation
+    {
 
-public new const short ID = 466;
-public virtual short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 466;
+        public virtual int TypeId
+        {
+            get { return ID; }
+        }
 
-public short portalId;
-        public short areaId;
-        
+        public int portalId;
+        public int areaId;
 
-public PortalInformation()
-{
-}
 
-public PortalInformation(short portalId, short areaId)
+        public PortalInformation()
+        {
+        }
+
+        public PortalInformation(int portalId, int areaId)
         {
             this.portalId = portalId;
             this.areaId = areaId;
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
 
-writer.WriteVarShort(portalId);
-            writer.WriteShort(areaId);
-            
+        public virtual void Serialize(BigEndianWriter writer)
+        {
 
-}
+            writer.WriteInt(portalId);
+            writer.WriteShort((short)areaId);
 
-public virtual void Deserialize(BigEndianReader reader)
-{
 
-portalId = reader.ReadVarShort();
+        }
+
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            portalId = reader.ReadInt();
             if (portalId < 0)
                 throw new Exception("Forbidden value on portalId = " + portalId + ", it doesn't respect the following condition : portalId < 0");
             areaId = reader.ReadShort();
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short serverId;
+        public int serverId;
         
         public ServerSelectionMessage()
         {
         }
         
-        public ServerSelectionMessage(short serverId)
+        public ServerSelectionMessage(int serverId)
         {
             this.serverId = serverId;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(serverId);
+            writer.WriteVarShort((short)serverId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            serverId = reader.ReadVarShort();
+            serverId = reader.ReadVarUhShort();
             if (serverId < 0)
                 throw new Exception("Forbidden value on serverId = " + serverId + ", it doesn't respect the following condition : serverId < 0");
         }

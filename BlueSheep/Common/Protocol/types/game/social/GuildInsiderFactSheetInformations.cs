@@ -30,14 +30,14 @@ namespace BlueSheep.Common.Protocol.Types
 public class GuildInsiderFactSheetInformations : GuildFactSheetInformations
 {
 
-public new const short ID = 423;
-public override short TypeId
+public new const int ID = 423;
+public override int TypeId
 {
     get { return ID; }
 }
 
 public string leaderName;
-        public short nbConnectedMembers;
+        public int nbConnectedMembers;
         public sbyte nbTaxCollectors;
         public int lastActivity;
         public bool enabled;
@@ -47,8 +47,8 @@ public GuildInsiderFactSheetInformations()
 {
 }
 
-public GuildInsiderFactSheetInformations(int guildId, string guildName, Types.GuildEmblem guildEmblem, int leaderId, byte guildLevel, short nbMembers, string leaderName, short nbConnectedMembers, sbyte nbTaxCollectors, int lastActivity, bool enabled)
-         : base(guildId, guildName, guildEmblem, leaderId, guildLevel, nbMembers)
+public GuildInsiderFactSheetInformations(uint guildId, string guildName, Types.GuildEmblem guildEmblem, int leaderId, byte guildLevel, int nbMembers, string leaderName, int nbConnectedMembers, sbyte nbTaxCollectors, int lastActivity, bool enabled)
+         : base(guildId, guildName, guildLevel, guildEmblem, leaderId, nbMembers)
         {
             this.leaderName = leaderName;
             this.nbConnectedMembers = nbConnectedMembers;
@@ -63,7 +63,7 @@ public override void Serialize(BigEndianWriter writer)
 
 base.Serialize(writer);
             writer.WriteUTF(leaderName);
-            writer.WriteVarShort(nbConnectedMembers);
+            writer.WriteVarShort((short)nbConnectedMembers);
             writer.WriteSByte(nbTaxCollectors);
             writer.WriteInt(lastActivity);
             writer.WriteBoolean(enabled);
@@ -76,7 +76,7 @@ public override void Deserialize(BigEndianReader reader)
 
 base.Deserialize(reader);
             leaderName = reader.ReadUTF();
-            nbConnectedMembers = reader.ReadVarShort();
+            nbConnectedMembers = reader.ReadVarUhShort();
             if (nbConnectedMembers < 0)
                 throw new Exception("Forbidden value on nbConnectedMembers = " + nbConnectedMembers + ", it doesn't respect the following condition : nbConnectedMembers < 0");
             nbTaxCollectors = reader.ReadSByte();

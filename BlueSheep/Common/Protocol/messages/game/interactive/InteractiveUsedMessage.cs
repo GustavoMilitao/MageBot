@@ -28,14 +28,14 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public int entityId;
         public int elemId;
-        public short skillId;
-        public short duration;
+        public int skillId;
+        public int duration;
         
         public InteractiveUsedMessage()
         {
         }
         
-        public InteractiveUsedMessage(int entityId, int elemId, short skillId, short duration)
+        public InteractiveUsedMessage(int entityId, int elemId, int skillId, int duration)
         {
             this.entityId = entityId;
             this.elemId = elemId;
@@ -47,8 +47,8 @@ namespace BlueSheep.Common.Protocol.Messages
         {
             writer.WriteVarInt(entityId);
             writer.WriteVarInt(elemId);
-            writer.WriteVarShort(skillId);
-            writer.WriteVarShort(duration);
+            writer.WriteVarShort((short)skillId);
+            writer.WriteVarShort((short)duration);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -59,10 +59,10 @@ namespace BlueSheep.Common.Protocol.Messages
             elemId = reader.ReadVarInt();
             if (elemId < 0)
                 throw new Exception("Forbidden value on elemId = " + elemId + ", it doesn't respect the following condition : elemId < 0");
-            skillId = reader.ReadVarShort();
+            skillId = reader.ReadVarUhShort();
             if (skillId < 0)
                 throw new Exception("Forbidden value on skillId = " + skillId + ", it doesn't respect the following condition : skillId < 0");
-            duration = reader.ReadVarShort();
+            duration = reader.ReadVarUhShort();
             if (duration < 0)
                 throw new Exception("Forbidden value on duration = " + duration + ", it doesn't respect the following condition : duration < 0");
         }

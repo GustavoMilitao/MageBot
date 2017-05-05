@@ -26,13 +26,13 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] dungeonIds;
+        public int[] dungeonIds;
         
         public DungeonPartyFinderRegisterSuccessMessage()
         {
         }
         
-        public DungeonPartyFinderRegisterSuccessMessage(short[] dungeonIds)
+        public DungeonPartyFinderRegisterSuccessMessage(int[] dungeonIds)
         {
             this.dungeonIds = dungeonIds;
         }
@@ -42,17 +42,17 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)dungeonIds.Length);
             foreach (var entry in dungeonIds)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            dungeonIds = new short[limit];
+            dungeonIds = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 dungeonIds[i] = reader.ReadVarShort();
+                 dungeonIds[i] = reader.ReadVarUhShort();
             }
         }
         

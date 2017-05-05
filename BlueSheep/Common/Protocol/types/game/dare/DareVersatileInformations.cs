@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class DareVersatileInformations
     {
-        public new const short ID = 504;
+        public new const int ID = 504;
         public double dareId = 0;
         public uint countEntrants = 0;
         public uint countWinners = 0;

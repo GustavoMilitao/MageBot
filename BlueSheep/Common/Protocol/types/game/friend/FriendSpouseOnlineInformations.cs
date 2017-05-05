@@ -30,14 +30,14 @@ namespace BlueSheep.Common.Protocol.Types
 public class FriendSpouseOnlineInformations : FriendSpouseInformations
 {
 
-public new const short ID = 93;
-public override short TypeId
+public new const int ID = 93;
+public override int TypeId
 {
     get { return ID; }
 }
 
 public int mapId;
-        public short subAreaId;
+        public int subAreaId;
           public bool inFight;
       
       public bool followSpouse;
@@ -47,7 +47,7 @@ public FriendSpouseOnlineInformations()
 {
 }
 
-public FriendSpouseOnlineInformations(int spouseAccountId, int spouseId, string spouseName, byte spouseLevel, sbyte breed, sbyte sex, Types.EntityLook spouseEntityLook, Types.BasicGuildInformations guildInfo, sbyte alignmentSide, int mapId, short subAreaId)
+public FriendSpouseOnlineInformations(int spouseAccountId, int spouseId, string spouseName, byte spouseLevel, sbyte breed, sbyte sex, Types.EntityLook spouseEntityLook, Types.BasicGuildInformations guildInfo, sbyte alignmentSide, int mapId, int subAreaId)
          : base(spouseAccountId, spouseId, spouseName, spouseLevel, breed, sex, spouseEntityLook, guildInfo, alignmentSide)
         {
             this.mapId = mapId;
@@ -60,7 +60,7 @@ public override void Serialize(BigEndianWriter writer)
 
 base.Serialize(writer);
             writer.WriteInt(mapId);
-            writer.WriteVarShort(subAreaId);
+            writer.WriteVarShort((short)subAreaId);
             
 
 }
@@ -75,7 +75,7 @@ base.Deserialize(reader);
             mapId = reader.ReadInt();
             if (mapId < 0)
                 throw new Exception("Forbidden value on mapId = " + mapId + ", it doesn't respect the following condition : mapId < 0");
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             

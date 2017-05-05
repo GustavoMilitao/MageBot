@@ -26,20 +26,20 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public ushort number;
+        public int number;
         
         public SequenceNumberMessage()
         {
         }
         
-        public SequenceNumberMessage(ushort number)
+        public SequenceNumberMessage(int number)
         {
             this.number = number;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteUShort(number);
+            writer.WriteUShort((ushort)number);
         }
         
         public override void Deserialize(BigEndianReader reader)

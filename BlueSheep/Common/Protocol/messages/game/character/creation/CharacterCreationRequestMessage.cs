@@ -30,13 +30,13 @@ namespace BlueSheep.Common.Protocol.Messages
         public sbyte breed;
         public bool sex;
         public int[] colors;
-        public short cosmeticId;
+        public int cosmeticId;
         
         public CharacterCreationRequestMessage()
         {
         }
         
-        public CharacterCreationRequestMessage(string name, sbyte breed, bool sex, int[] colors, short cosmeticId)
+        public CharacterCreationRequestMessage(string name, sbyte breed, bool sex, int[] colors, int cosmeticId)
         {
             this.name = name;
             this.breed = breed;
@@ -55,7 +55,7 @@ namespace BlueSheep.Common.Protocol.Messages
             {
                  writer.WriteInt(entry);
             }
-            writer.WriteVarShort(cosmeticId);
+            writer.WriteVarShort((short)cosmeticId);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -69,7 +69,7 @@ namespace BlueSheep.Common.Protocol.Messages
             {
                  colors[i] = reader.ReadInt();
             }
-            cosmeticId = reader.ReadVarShort();
+            cosmeticId = reader.ReadVarUhShort();
             if (cosmeticId < 0)
                 throw new Exception("Forbidden value on cosmeticId = " + cosmeticId + ", it doesn't respect the following condition : cosmeticId < 0");
         }

@@ -30,14 +30,14 @@ namespace BlueSheep.Common.Protocol.Types
 public class FriendInformations : AbstractContactInformations
 {
 
-public new const short ID = 78;
-public override short TypeId
+public new const int ID = 78;
+public override int TypeId
 {
     get { return ID; }
 }
 
 public sbyte playerState;
-        public short lastConnection;
+        public int lastConnection;
         public int achievementPoints;
         
 
@@ -45,7 +45,7 @@ public FriendInformations()
 {
 }
 
-public FriendInformations(int accountId, string accountName, sbyte playerState, short lastConnection, int achievementPoints)
+public FriendInformations(int accountId, string accountName, sbyte playerState, int lastConnection, int achievementPoints)
          : base(accountId, accountName)
         {
             this.playerState = playerState;
@@ -59,7 +59,7 @@ public override void Serialize(BigEndianWriter writer)
 
 base.Serialize(writer);
             writer.WriteSByte(playerState);
-            writer.WriteVarShort(lastConnection);
+            writer.WriteVarShort((short)lastConnection);
             writer.WriteInt(achievementPoints);
             
 
@@ -72,7 +72,7 @@ base.Deserialize(reader);
             playerState = reader.ReadSByte();
             if (playerState < 0)
                 throw new Exception("Forbidden value on playerState = " + playerState + ", it doesn't respect the following condition : playerState < 0");
-            lastConnection = reader.ReadVarShort();
+            lastConnection = reader.ReadVarUhShort();
             if (lastConnection < 0)
                 throw new Exception("Forbidden value on lastConnection = " + lastConnection + ", it doesn't respect the following condition : lastConnection < 0");
             achievementPoints = reader.ReadInt();

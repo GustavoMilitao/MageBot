@@ -32,13 +32,13 @@ namespace BlueSheep.Common.Protocol.Messages
         public string memberName;
         public int fightId;
         public Types.MapCoordinatesExtended fightMap;
-        public short secondsBeforeFightStart;
+        public int secondsBeforeFightStart;
         
         public PartyMemberInFightMessage()
         {
         }
         
-        public PartyMemberInFightMessage(int partyId, sbyte reason, int memberId, int memberAccountId, string memberName, int fightId, Types.MapCoordinatesExtended fightMap, short secondsBeforeFightStart)
+        public PartyMemberInFightMessage(int partyId, sbyte reason, int memberId, int memberAccountId, string memberName, int fightId, Types.MapCoordinatesExtended fightMap, int secondsBeforeFightStart)
          : base(partyId)
         {
             this.reason = reason;
@@ -59,7 +59,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUTF(memberName);
             writer.WriteInt(fightId);
             fightMap.Serialize(writer);
-            writer.WriteVarShort(secondsBeforeFightStart);
+            writer.WriteVarShort((short)secondsBeforeFightStart);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -78,7 +78,7 @@ namespace BlueSheep.Common.Protocol.Messages
             fightId = reader.ReadInt();
             fightMap = new Types.MapCoordinatesExtended();
             fightMap.Deserialize(reader);
-            secondsBeforeFightStart = reader.ReadVarShort();
+            secondsBeforeFightStart = reader.ReadVarUhShort();
         }
         
     }

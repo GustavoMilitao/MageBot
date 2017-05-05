@@ -11,7 +11,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public const short ID = 501;
+        public const int ID = 501;
 
         public List<int> parameters;
 
@@ -35,7 +35,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
             writer.WriteByte((byte)type);
-            writer.WriteShort((short)parameters.Count);
+            writer.WriteShort((short)(int)parameters.Count);
             uint _loc2_ = 0;
             while (_loc2_ < parameters.Count)
             {

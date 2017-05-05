@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public PartyCompanionUpdateLightMessage(int partyId, int id, int lifePoints, int maxLifePoints, short prospecting, byte regenRate, sbyte indexId)
+        public PartyCompanionUpdateLightMessage(int partyId, ulong id, int lifePoints, int maxLifePoints, int prospecting, byte regenRate, sbyte indexId)
          : base(partyId, id, lifePoints, maxLifePoints, prospecting, regenRate)
         {
             this.indexId = indexId;

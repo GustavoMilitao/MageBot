@@ -30,13 +30,13 @@ namespace BlueSheep.Common.Protocol.Types
 public class ObjectEffectDuration : ObjectEffect
 {
 
-public new const short ID = 75;
-public override short TypeId
+public new const int ID = 75;
+public override int TypeId
 {
     get { return ID; }
 }
 
-public short days;
+public int days;
         public sbyte hours;
         public sbyte minutes;
         
@@ -45,7 +45,7 @@ public ObjectEffectDuration()
 {
 }
 
-public ObjectEffectDuration(short actionId, short days, sbyte hours, sbyte minutes)
+public ObjectEffectDuration(int actionId, int days, sbyte hours, sbyte minutes)
          : base(actionId)
         {
             this.days = days;
@@ -58,7 +58,7 @@ public override void Serialize(BigEndianWriter writer)
 {
 
 base.Serialize(writer);
-            writer.WriteVarShort(days);
+            writer.WriteVarShort((short)days);
             writer.WriteSByte(hours);
             writer.WriteSByte(minutes);
             
@@ -69,7 +69,7 @@ public override void Deserialize(BigEndianReader reader)
 {
 
 base.Deserialize(reader);
-            days = reader.ReadVarShort();
+            days = reader.ReadVarUhShort();
             if (days < 0)
                 throw new Exception("Forbidden value on days = " + days + ", it doesn't respect the following condition : days < 0");
             hours = reader.ReadSByte();

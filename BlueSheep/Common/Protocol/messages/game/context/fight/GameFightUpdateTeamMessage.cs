@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short fightId;
+        public int fightId;
         public Types.FightTeamInformations team;
         
         public GameFightUpdateTeamMessage()
         {
         }
         
-        public GameFightUpdateTeamMessage(short fightId, Types.FightTeamInformations team)
+        public GameFightUpdateTeamMessage(int fightId, Types.FightTeamInformations team)
         {
             this.fightId = fightId;
             this.team = team;
@@ -41,7 +41,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteShort(fightId);
+            writer.WriteShort((short)fightId);
             team.Serialize(writer);
         }
         

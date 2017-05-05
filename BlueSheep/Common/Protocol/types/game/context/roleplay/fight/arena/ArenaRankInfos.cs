@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class ArenaRankInfos
     {
-        public new const short ID = 499;
+        public new const int ID = 499;
 
 
         public uint rank = 0;
@@ -26,22 +26,22 @@ namespace BlueSheep.Common.Protocol.Types
             {
                 throw new Exception("Forbidden value (" + rank + ") on element rank.");
             }
-            writer.WriteVarShort((short)rank);
+            writer.WriteVarShort((short)(int)rank);
             if (bestRank < 0 || bestRank > 20000)
             {
                 throw new Exception("Forbidden value (" + bestRank + ") on element bestRank.");
             }
-            writer.WriteVarShort((short)bestRank);
+            writer.WriteVarShort((short)(int)bestRank);
             if (victoryCount < 0)
             {
                 throw new Exception("Forbidden value (" + victoryCount + ") on element victoryCount.");
             }
-            writer.WriteVarShort((short)victoryCount);
+            writer.WriteVarShort((short)(int)victoryCount);
             if (fightcount < 0)
             {
                 throw new Exception("Forbidden value (" + fightcount + ") on element fightcount.");
             }
-            writer.WriteVarShort((short)fightcount);
+            writer.WriteVarShort((short)(int)fightcount);
         }
 
         public void Deserialize(BigEndianReader reader)

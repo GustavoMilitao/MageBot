@@ -10,16 +10,16 @@ namespace BlueSheep.Core.Npc
         public class NpcReply
         {
             public int Id { get; private set; }
-            public int NpcId { get; set; }
+            public int npcId { get; set; }
             public NpcReply(int npcId, int id)
             {
-                NpcId = npcId;
+                npcId = npcId;
                 Id = id;
             }
 
             public string GetText()
             {
-                DataClass npc = GameData.GetDataObject(D2oFileEnum.Npcs, NpcId);
+                DataClass npc = GameData.GetDataObject(D2oFileEnum.Npcs, npcId);
                 if (npc == null)
                     return String.Empty;
 

@@ -30,25 +30,25 @@ namespace BlueSheep.Common.Protocol.Types
 public class AccountHouseInformations
 {
 
-public new const short ID = 390;
-public virtual short TypeId
+public new const int ID = 390;
+public virtual int TypeId
 {
     get { return ID; }
 }
 
 public int houseId;
-        public short modelId;
-        public short worldX;
-        public short worldY;
+        public int modelId;
+        public int worldX;
+        public int worldY;
         public int mapId;
-        public short subAreaId;
+        public int subAreaId;
         
 
 public AccountHouseInformations()
 {
 }
 
-public AccountHouseInformations(int houseId, short modelId, short worldX, short worldY, int mapId, short subAreaId)
+public AccountHouseInformations(int houseId, int modelId, int worldX, int worldY, int mapId, int subAreaId)
         {
             this.houseId = houseId;
             this.modelId = modelId;
@@ -64,11 +64,11 @@ public virtual void Serialize(BigEndianWriter writer)
 
 //writer.WriteInt(houseId);
     writer.WriteVarInt(houseId);
-    writer.WriteVarShort(modelId);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+    writer.WriteVarShort((short)modelId);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             writer.WriteInt(mapId);
-            writer.WriteVarShort(subAreaId);
+            writer.WriteVarShort((short)subAreaId);
             
 
 }
@@ -80,7 +80,7 @@ public virtual void Deserialize(BigEndianReader reader)
     houseId = reader.ReadVarInt();
     if (houseId < 0)
                 throw new Exception("Forbidden value on houseId = " + houseId + ", it doesn't respect the following condition : houseId < 0");
-            modelId = reader.ReadVarShort();
+            modelId = reader.ReadVarUhShort();
             if (modelId < 0)
                 throw new Exception("Forbidden value on modelId = " + modelId + ", it doesn't respect the following condition : modelId < 0");
             worldX = reader.ReadShort();
@@ -90,7 +90,7 @@ public virtual void Deserialize(BigEndianReader reader)
             if (worldY < -255 || worldY > 255)
                 throw new Exception("Forbidden value on worldY = " + worldY + ", it doesn't respect the following condition : worldY < -255 || worldY > 255");
             mapId = reader.ReadInt();
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             

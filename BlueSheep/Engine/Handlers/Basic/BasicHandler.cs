@@ -18,14 +18,14 @@ namespace BlueSheep.Engine.Handlers.Basic
         {
             account.Sequence++;
 
-            SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage((ushort)account.Sequence);
+            SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage((int)account.Sequence);
             account.SocketManager.Send(sequenceNumberMessage);
         }
 
         [MessageHandler(typeof(BasicLatencyStatsRequestMessage))]
         public static void BasicLatencyStatsRequestMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
         {
-            BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage((ushort)account.LatencyFrame.GetLatencyAvg(),
+            BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage((int)account.LatencyFrame.GetLatencyAvg(),
                 account.LatencyFrame.GetSamplesCount(), account.LatencyFrame.GetSamplesMax());
             //account.Log(new BotTextInformation("ROLEPLEY RECU"),0);
             //BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage(account.LatencyFrame.RolePley(),

@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public ZaapListMessage(sbyte teleporterType, int[] mapIds, short[] subAreaIds, short[] costs, sbyte[] destTeleporterType, int spawnMapId)
+        public ZaapListMessage(sbyte teleporterType, int[] mapIds, int[] subAreaIds, int[] costs, sbyte[] destTeleporterType, int spawnMapId)
          : base(teleporterType, mapIds, subAreaIds, costs, destTeleporterType)
         {
             this.spawnMapId = spawnMapId;

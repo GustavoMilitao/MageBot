@@ -27,15 +27,15 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int casterId;
-        public short targetCellId;
-        public short spellId;
+        public int targetCellId;
+        public int spellId;
         public sbyte spellLevel;
         
         public GameRolePlaySpellAnimMessage()
         {
         }
         
-        public GameRolePlaySpellAnimMessage(int casterId, short targetCellId, short spellId, sbyte spellLevel)
+        public GameRolePlaySpellAnimMessage(int casterId, int targetCellId, int spellId, sbyte spellLevel)
         {
             this.casterId = casterId;
             this.targetCellId = targetCellId;
@@ -46,18 +46,18 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteInt(casterId);
-            writer.WriteVarShort(targetCellId);
-            writer.WriteVarShort(spellId);
+            writer.WriteVarShort((short)targetCellId);
+            writer.WriteVarShort((short)spellId);
             writer.WriteSByte(spellLevel);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             casterId = reader.ReadInt();
-            targetCellId = reader.ReadVarShort();
+            targetCellId = reader.ReadVarUhShort();
             if (targetCellId < 0 || targetCellId > 559)
                 throw new Exception("Forbidden value on targetCellId = " + targetCellId + ", it doesn't respect the following condition : targetCellId < 0 || targetCellId > 559");
-            spellId = reader.ReadVarShort();
+            spellId = reader.ReadVarUhShort();
             if (spellId < 0)
                 throw new Exception("Forbidden value on spellId = " + spellId + ", it doesn't respect the following condition : spellId < 0");
             spellLevel = reader.ReadSByte();

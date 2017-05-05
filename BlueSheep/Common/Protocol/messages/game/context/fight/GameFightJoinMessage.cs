@@ -53,7 +53,7 @@ namespace BlueSheep.Common.Protocol.Messages
             flag1 = BooleanByteWrapper.SetFlag(flag1, 2, isFightStarted);
             writer.WriteByte(flag1);
             //writer.WriteInt(timeMaxBeforeFightStart);
-            writer.WriteShort((short)timeMaxBeforeFightStart);
+            writer.WriteShort((short)(int)timeMaxBeforeFightStart);
             writer.WriteSByte(fightType);
         }
         

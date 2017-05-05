@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class ShortcutObjectIdolsPreset : ShortcutObject
     {
-        public new const short ID = 492;
+        public new const int ID = 492;
         public uint presetId = 0;
         public ShortcutObjectIdolsPreset()
         {

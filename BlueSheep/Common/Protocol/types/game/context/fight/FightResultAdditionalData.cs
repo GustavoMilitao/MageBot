@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class FightResultAdditionalData
 {
 
-public new const short ID = 191;
-public virtual short TypeId
+public new const int ID = 191;
+public virtual int TypeId
 {
     get { return ID; }
 }

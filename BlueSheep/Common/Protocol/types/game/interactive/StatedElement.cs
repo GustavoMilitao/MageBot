@@ -27,60 +27,63 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class StatedElement
-{
+    public class StatedElement
+    {
 
-public new const short ID = 108;
-public virtual short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 108;
+        public virtual int TypeId
+        {
+            get { return ID; }
+        }
 
-public int elementId;
-        public short elementCellId;
-        public int elementState;
-        
+        public int elementId;
+        public int elementCellId;
+        public uint elementState;
+        public bool onCurrentMap { get; set; } = false;
 
-public StatedElement()
-{
-}
 
-public StatedElement(int elementId, short elementCellId, int elementState)
+        public StatedElement()
+        {
+        }
+
+        public StatedElement(int elementId, int elementCellId, uint elementState, bool onCurrentMap)
         {
             this.elementId = elementId;
             this.elementCellId = elementCellId;
             this.elementState = elementState;
+            this.onCurrentMap = onCurrentMap;
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
 
-writer.WriteInt(elementId);
-            writer.WriteVarShort(elementCellId);
+        public virtual void Serialize(BigEndianWriter writer)
+        {
+
+            writer.WriteInt(elementId);
+            writer.WriteVarShort((short)elementCellId);
             writer.WriteVarInt(elementState);
-            
+            writer.WriteBoolean(onCurrentMap);
 
-}
 
-public virtual void Deserialize(BigEndianReader reader)
-{
+        }
 
-elementId = reader.ReadInt();
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            elementId = reader.ReadInt();
             if (elementId < 0)
                 throw new Exception("Forbidden value on elementId = " + elementId + ", it doesn't respect the following condition : elementId < 0");
-            elementCellId = reader.ReadVarShort();
+            elementCellId = reader.ReadVarUhShort();
             if (elementCellId < 0 || elementCellId > 559)
                 throw new Exception("Forbidden value on elementCellId = " + elementCellId + ", it doesn't respect the following condition : elementCellId < 0 || elementCellId > 559");
-            elementState = reader.ReadVarInt();
+            elementState = reader.ReadVarUhInt();
             if (elementState < 0)
                 throw new Exception("Forbidden value on elementState = " + elementState + ", it doesn't respect the following condition : elementState < 0");
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

@@ -27,51 +27,51 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class GameRolePlayTreasureHintInformations : GameRolePlayActorInformations
-{
+    public class GameRolePlayTreasureHintInformations : GameRolePlayActorInformations
+    {
 
-public new const short ID = 471;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 471;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public short npcId;
-        
+        public int npcId;
 
-public GameRolePlayTreasureHintInformations()
-{
-}
 
-public GameRolePlayTreasureHintInformations(int contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, short npcId)
-         : base(contextualId, look, disposition)
+        public GameRolePlayTreasureHintInformations()
+        {
+        }
+
+        public GameRolePlayTreasureHintInformations(ulong contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, int npcId)
+                 : base(contextualId, look, disposition)
         {
             this.npcId = npcId;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
-            writer.WriteVarShort(npcId);
-            
+        public override void Serialize(BigEndianWriter writer)
+        {
 
-}
+            base.Serialize(writer);
+            writer.WriteVarShort((short)npcId);
 
-public override void Deserialize(BigEndianReader reader)
-{
 
-base.Deserialize(reader);
-            npcId = reader.ReadVarShort();
+        }
+
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
+            npcId = reader.ReadVarUhShort();
             if (npcId < 0)
                 throw new Exception("Forbidden value on npcId = " + npcId + ", it doesn't respect the following condition : npcId < 0");
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

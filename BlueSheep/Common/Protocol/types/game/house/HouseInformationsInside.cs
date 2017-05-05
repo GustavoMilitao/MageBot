@@ -30,18 +30,18 @@ namespace BlueSheep.Common.Protocol.Types
 public class HouseInformationsInside
 {
 
-public new const short ID = 218;
-public virtual short TypeId
+public new const int ID = 218;
+public virtual int TypeId
 {
     get { return ID; }
 }
 
 public int houseId;
-        public short modelId;
+        public int modelId;
         public int ownerId;
         public string ownerName;
-        public short worldX;
-        public short worldY;
+        public int worldX;
+        public int worldY;
         public int price;
         public bool isLocked;
         
@@ -50,7 +50,7 @@ public HouseInformationsInside()
 {
 }
 
-public HouseInformationsInside(int houseId, short modelId, int ownerId, string ownerName, short worldX, short worldY, int price, bool isLocked)
+public HouseInformationsInside(int houseId, int modelId, int ownerId, string ownerName, int worldX, int worldY, int price, bool isLocked)
         {
             this.houseId = houseId;
             this.modelId = modelId;
@@ -68,11 +68,11 @@ public virtual void Serialize(BigEndianWriter writer)
 
 //writer.WriteInt(houseId);
     writer.WriteVarInt(houseId);
-    writer.WriteVarShort(modelId);
+    writer.WriteVarShort((short)modelId);
             writer.WriteInt(ownerId);
             writer.WriteUTF(ownerName);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             writer.WriteInt(price);
             writer.WriteBoolean(isLocked);
             
@@ -86,7 +86,7 @@ public virtual void Deserialize(BigEndianReader reader)
     houseId = reader.ReadVarInt();
     if (houseId < 0)
                 throw new Exception("Forbidden value on houseId = " + houseId + ", it doesn't respect the following condition : houseId < 0");
-            modelId = reader.ReadVarShort();
+            modelId = reader.ReadVarUhShort();
             if (modelId < 0)
                 throw new Exception("Forbidden value on modelId = " + modelId + ", it doesn't respect the following condition : modelId < 0");
             ownerId = reader.ReadInt();

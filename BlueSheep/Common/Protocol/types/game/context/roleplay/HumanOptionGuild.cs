@@ -27,49 +27,49 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class HumanOptionGuild : HumanOption
-{
+    public class HumanOptionGuild : HumanOption
+    {
 
-public new const short ID = 409;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 409;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public Types.GuildInformations guildInformations;
-        
+        public Types.GuildInformations guildInformations;
 
-public HumanOptionGuild()
-{
-}
 
-public HumanOptionGuild(Types.GuildInformations guildInformations)
+        public HumanOptionGuild()
+        {
+        }
+
+        public HumanOptionGuild(Types.GuildInformations guildInformations)
         {
             this.guildInformations = guildInformations;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
             guildInformations.Serialize(writer);
-            
 
-}
 
-public override void Deserialize(BigEndianReader reader)
-{
+        }
 
-base.Deserialize(reader);
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
             guildInformations = new Types.GuildInformations();
             guildInformations.Deserialize(reader);
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

@@ -26,13 +26,13 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] genericId;
+        public int[] genericId;
         
         public AccessoryPreviewRequestMessage()
         {
         }
         
-        public AccessoryPreviewRequestMessage(short[] genericId)
+        public AccessoryPreviewRequestMessage(int[] genericId)
         {
             this.genericId = genericId;
         }
@@ -42,17 +42,17 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)genericId.Length);
             foreach (var entry in genericId)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            genericId = new short[limit];
+            genericId = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 genericId[i] = reader.ReadVarShort();
+                 genericId[i] = reader.ReadVarUhShort();
             }
         }
         

@@ -27,30 +27,30 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class PaddockContentInformations : PaddockInformations
-{
+    public class PaddockContentInformations : PaddockInformations
+    {
 
-public new const short ID = 183;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 183;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public int paddockId;
-        public short worldX;
-        public short worldY;
+        public int paddockId;
+        public int worldX;
+        public int worldY;
         public int mapId;
-        public short subAreaId;
+        public int subAreaId;
         public bool abandonned;
         public Types.MountInformationsForPaddock[] mountsInformations;
-        
 
-public PaddockContentInformations()
-{
-}
 
-public PaddockContentInformations(short maxOutdoorMount, short maxItems, int paddockId, short worldX, short worldY, int mapId, short subAreaId, bool abandonned, Types.MountInformationsForPaddock[] mountsInformations)
-         : base(maxOutdoorMount, maxItems)
+        public PaddockContentInformations()
+        {
+        }
+
+        public PaddockContentInformations(int maxOutdoorMount, int maxItems, int paddockId, int worldX, int worldY, int mapId, int subAreaId, bool abandonned, Types.MountInformationsForPaddock[] mountsInformations)
+                 : base(maxOutdoorMount, maxItems)
         {
             this.paddockId = paddockId;
             this.worldX = worldX;
@@ -60,31 +60,31 @@ public PaddockContentInformations(short maxOutdoorMount, short maxItems, int pad
             this.abandonned = abandonned;
             this.mountsInformations = mountsInformations;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
             writer.WriteInt(paddockId);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             writer.WriteInt(mapId);
-            writer.WriteVarShort(subAreaId);
+            writer.WriteVarShort((short)subAreaId);
             writer.WriteBoolean(abandonned);
             writer.WriteUShort((ushort)mountsInformations.Length);
             foreach (var entry in mountsInformations)
             {
-                 entry.Serialize(writer);
+                entry.Serialize(writer);
             }
-            
 
-}
 
-public override void Deserialize(BigEndianReader reader)
-{
+        }
 
-base.Deserialize(reader);
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
             paddockId = reader.ReadInt();
             worldX = reader.ReadShort();
             if (worldX < -255 || worldX > 255)
@@ -93,7 +93,7 @@ base.Deserialize(reader);
             if (worldY < -255 || worldY > 255)
                 throw new Exception("Forbidden value on worldY = " + worldY + ", it doesn't respect the following condition : worldY < -255 || worldY > 255");
             mapId = reader.ReadInt();
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             abandonned = reader.ReadBoolean();
@@ -101,15 +101,15 @@ base.Deserialize(reader);
             mountsInformations = new Types.MountInformationsForPaddock[limit];
             for (int i = 0; i < limit; i++)
             {
-                 mountsInformations[i] = new Types.MountInformationsForPaddock();
-                 mountsInformations[i].Deserialize(reader);
+                mountsInformations[i] = new Types.MountInformationsForPaddock();
+                mountsInformations[i].Deserialize(reader);
             }
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

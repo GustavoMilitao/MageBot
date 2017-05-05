@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] keyMovements;
+        public int[] keyMovements;
         public int mapId;
         
         public GameMapMovementRequestMessage()
         {
         }
         
-        public GameMapMovementRequestMessage(short[] keyMovements, int mapId)
+        public GameMapMovementRequestMessage(int[] keyMovements, int mapId)
         {
             this.keyMovements = keyMovements;
             this.mapId = mapId;
@@ -44,7 +44,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)keyMovements.Length);
             foreach (var entry in keyMovements)
             {
-                 writer.WriteShort(entry);
+                 writer.WriteShort((short)entry);
             }
             writer.WriteInt(mapId);
         }
@@ -52,7 +52,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            keyMovements = new short[limit];
+            keyMovements = new int[limit];
             for (int i = 0; i < limit; i++)
             {
                  keyMovements[i] = reader.ReadShort();

@@ -9,7 +9,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public new const short ID = 497;
+        public new const int ID = 497;
 
 
         public uint id = 0;
@@ -29,12 +29,12 @@ namespace BlueSheep.Common.Protocol.Types
             {
                 throw new Exception("Forbidden value (" + xpBoost + ") on element xpBoost.");
             }
-            writer.WriteVarShort((short)xpBoost);
+            writer.WriteVarShort((short)(int)xpBoost);
             if (dropBoost < 0)
             {
                 throw new Exception("Forbidden value (" + dropBoost + ") on element dropBoost.");
             }
-            writer.WriteVarShort((short)dropBoost);
+            writer.WriteVarShort((short)(int)dropBoost);
         }
 
         public void deserialize(BigEndianReader reader)

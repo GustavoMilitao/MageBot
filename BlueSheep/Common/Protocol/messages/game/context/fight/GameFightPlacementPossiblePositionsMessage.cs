@@ -26,15 +26,15 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] positionsForChallengers;
-        public short[] positionsForDefenders;
+        public int[] positionsForChallengers;
+        public int[] positionsForDefenders;
         public sbyte teamNumber;
         
         public GameFightPlacementPossiblePositionsMessage()
         {
         }
         
-        public GameFightPlacementPossiblePositionsMessage(short[] positionsForChallengers, short[] positionsForDefenders, sbyte teamNumber)
+        public GameFightPlacementPossiblePositionsMessage(int[] positionsForChallengers, int[] positionsForDefenders, sbyte teamNumber)
         {
             this.positionsForChallengers = positionsForChallengers;
             this.positionsForDefenders = positionsForDefenders;
@@ -46,12 +46,12 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)positionsForChallengers.Length);
             foreach (var entry in positionsForChallengers)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)positionsForDefenders.Length);
             foreach (var entry in positionsForDefenders)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteSByte(teamNumber);
         }
@@ -59,16 +59,16 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            positionsForChallengers = new short[limit];
+            positionsForChallengers = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 positionsForChallengers[i] = reader.ReadVarShort();
+                 positionsForChallengers[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
-            positionsForDefenders = new short[limit];
+            positionsForDefenders = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 positionsForDefenders[i] = reader.ReadVarShort();
+                 positionsForDefenders[i] = reader.ReadVarUhShort();
             }
             teamNumber = reader.ReadSByte();
             if (teamNumber < 0)

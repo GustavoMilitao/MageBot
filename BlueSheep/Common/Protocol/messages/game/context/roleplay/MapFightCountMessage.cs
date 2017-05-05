@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short fightCount;
+        public int fightCount;
         
         public MapFightCountMessage()
         {
         }
         
-        public MapFightCountMessage(short fightCount)
+        public MapFightCountMessage(int fightCount)
         {
             this.fightCount = fightCount;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(fightCount);
+            writer.WriteVarShort((short)fightCount);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            fightCount = reader.ReadVarShort();
+            fightCount = reader.ReadVarUhShort();
             if (fightCount < 0)
                 throw new Exception("Forbidden value on fightCount = " + fightCount + ", it doesn't respect the following condition : fightCount < 0");
         }

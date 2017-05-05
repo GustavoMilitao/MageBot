@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class TaxCollectorMovement
     {
-        public new const short ID = 493;
+        public new const int ID = 493;
         public uint movementType = 0;
         public TaxCollectorBasicInformations basicInfos;
         public double playerId = 0;

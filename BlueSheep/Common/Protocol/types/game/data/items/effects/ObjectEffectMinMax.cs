@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class ObjectEffectMinMax : ObjectEffect
 {
 
-public new const short ID = 82;
-public override short TypeId
+public new const int ID = 82;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -44,7 +44,7 @@ public ObjectEffectMinMax()
 {
 }
 
-public ObjectEffectMinMax(short actionId, int min, int max)
+public ObjectEffectMinMax(int actionId, int min, int max)
          : base(actionId)
         {
             this.min = min;

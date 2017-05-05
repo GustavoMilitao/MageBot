@@ -7,7 +7,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class HouseOnMapInformations : HouseInformations
     {
-        public new const short ID = 510;
+        public new const int ID = 510;
 
         public List<uint> doorsOnMap;
 
@@ -21,7 +21,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteShort((short)doorsOnMap.Count);
+            writer.WriteShort((short)(int)doorsOnMap.Count);
             int _loc2_ = 0;
             while (_loc2_ < doorsOnMap.Count)
             {
@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Types
                 writer.WriteInt((int)doorsOnMap[_loc2_]);
                 _loc2_++;
             }
-            writer.WriteShort((short)houseInstances.Count);
+            writer.WriteShort((short)(int)houseInstances.Count);
             uint _loc3_ = 0;
             while (_loc3_ < houseInstances.Count)
             {

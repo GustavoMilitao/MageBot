@@ -30,21 +30,21 @@ namespace BlueSheep.Common.Protocol.Types
 public class QuestObjectiveInformationsWithCompletion : QuestObjectiveInformations
 {
 
-public new const short ID = 386;
-public override short TypeId
+public new const int ID = 386;
+public override int TypeId
 {
     get { return ID; }
 }
 
-public short curCompletion;
-        public short maxCompletion;
+public int curCompletion;
+        public int maxCompletion;
         
 
 public QuestObjectiveInformationsWithCompletion()
 {
 }
 
-public QuestObjectiveInformationsWithCompletion(short objectiveId, bool objectiveStatus, string[] dialogParams, short curCompletion, short maxCompletion)
+public QuestObjectiveInformationsWithCompletion(int objectiveId, bool objectiveStatus, string[] dialogParams, int curCompletion, int maxCompletion)
          : base(objectiveId, objectiveStatus, dialogParams)
         {
             this.curCompletion = curCompletion;
@@ -56,8 +56,8 @@ public override void Serialize(BigEndianWriter writer)
 {
 
 base.Serialize(writer);
-            writer.WriteVarShort(curCompletion);
-            writer.WriteVarShort(maxCompletion);
+            writer.WriteVarShort((short)curCompletion);
+            writer.WriteVarShort((short)maxCompletion);
             
 
 }
@@ -66,10 +66,10 @@ public override void Deserialize(BigEndianReader reader)
 {
 
 base.Deserialize(reader);
-            curCompletion = reader.ReadVarShort();
+            curCompletion = reader.ReadVarUhShort();
             if (curCompletion < 0)
                 throw new Exception("Forbidden value on curCompletion = " + curCompletion + ", it doesn't respect the following condition : curCompletion < 0");
-            maxCompletion = reader.ReadVarShort();
+            maxCompletion = reader.ReadVarUhShort();
             if (maxCompletion < 0)
                 throw new Exception("Forbidden value on maxCompletion = " + maxCompletion + ", it doesn't respect the following condition : maxCompletion < 0");
             

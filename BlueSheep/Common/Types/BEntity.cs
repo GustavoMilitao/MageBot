@@ -8,13 +8,13 @@ namespace BlueSheep.Common.Types
 {
     public class BEntity
     {
-        public BEntity(int id, int cellId)
+        public BEntity(double id, int cellId)
         {
             Id = id;
             CellId = cellId;
         }
 
         public int CellId { get; internal set; }
-        public long Id { get; protected set; }
+        public double Id { get; protected set; }
     }
 }

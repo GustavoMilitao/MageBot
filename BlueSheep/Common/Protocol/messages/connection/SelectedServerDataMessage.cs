@@ -28,16 +28,16 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public bool ssl;
         public bool canCreateNewCharacter;
-        public ushort serverId;
+        public int serverId;
         public string address;
-        public ushort port;
+        public int port;
         public List<int> ticket;
         
         public SelectedServerDataMessage()
         {
         }
         
-        public SelectedServerDataMessage(bool canCreateNewCharacter, ushort serverId, string address, ushort port, List<int> ticket)
+        public SelectedServerDataMessage(bool canCreateNewCharacter, int serverId, string address, int port, List<int> ticket)
         {
             this.canCreateNewCharacter = canCreateNewCharacter;
             this.serverId = serverId;
@@ -48,9 +48,9 @@ namespace BlueSheep.Common.Protocol.Messages
 
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(serverId);
+            writer.WriteVarShort((short)serverId);
             writer.WriteUTF(address);
-            writer.WriteUShort(port);
+            writer.WriteUShort((ushort)port);
             writer.WriteBoolean(canCreateNewCharacter);
             for (int i = 0; i < ticket.Count; i++)
             {
@@ -60,7 +60,7 @@ namespace BlueSheep.Common.Protocol.Messages
 
         public override void Deserialize(BigEndianReader reader)
         {
-            serverId = (ushort)reader.ReadVarShort();
+            serverId = (int)reader.ReadVarUhShort();
             address = reader.ReadUTF();
             port = reader.ReadUShort();
             canCreateNewCharacter = reader.ReadBoolean();

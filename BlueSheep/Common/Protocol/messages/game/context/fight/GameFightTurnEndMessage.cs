@@ -20,33 +20,33 @@ namespace BlueSheep.Common.Protocol.Messages
 {
     public class GameFightTurnEndMessage : Message
     {
-        public new const uint ID =719;
+        public new const uint ID = 719;
         public override uint ProtocolID
         {
             get { return ID; }
         }
-        
-        public int id;
-        
+
+        public ulong id;
+
         public GameFightTurnEndMessage()
         {
         }
-        
-        public GameFightTurnEndMessage(int id)
+
+        public GameFightTurnEndMessage(ulong id)
         {
             this.id = id;
         }
-        
+
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteInt(id);
+            writer.WriteULong(id);
         }
-        
+
         public override void Deserialize(BigEndianReader reader)
         {
-            id = reader.ReadInt();
+            id = reader.ReadULong();
         }
-        
+
     }
-    
+
 }

@@ -27,49 +27,49 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class ServerSessionConstantString : ServerSessionConstant
-{
+    public class ServerSessionConstantString : ServerSessionConstant
+    {
 
-public new const short ID = 436;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 436;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public string value;
-        
+        public string value;
 
-public ServerSessionConstantString()
-{
-}
 
-public ServerSessionConstantString(short id, string value)
-         : base(id)
+        public ServerSessionConstantString()
+        {
+        }
+
+        public ServerSessionConstantString(ulong id, string value)
+                 : base(id)
         {
             this.value = value;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
             writer.WriteUTF(value);
-            
 
-}
 
-public override void Deserialize(BigEndianReader reader)
-{
+        }
 
-base.Deserialize(reader);
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
             value = reader.ReadUTF();
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class ObjectItemGenericQuantityPrice : ObjectItemGenericQuantity
     {
-        public new const short ID = 494;
+        public new const int ID = 494;
         public double price = 0;
 
         public ObjectItemGenericQuantityPrice()

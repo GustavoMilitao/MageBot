@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class ShortcutObjectItem : ShortcutObject
 {
 
-public new const short ID = 371;
-public override short TypeId
+public new const int ID = 371;
+public override int TypeId
 {
     get { return ID; }
 }

@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int id;
+        public ulong id;
         public int waitTime;
         
         public GameFightTurnStartMessage()
         {
         }
         
-        public GameFightTurnStartMessage(int id, int waitTime)
+        public GameFightTurnStartMessage(ulong id, int waitTime)
         {
             this.id = id;
             this.waitTime = waitTime;
@@ -41,13 +41,13 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteInt(id);
+            writer.WriteULong(id);
             writer.WriteVarInt(waitTime);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            id = reader.ReadInt();
+            id = reader.ReadULong();
             waitTime = reader.ReadVarInt();
             if (waitTime < 0)
                 throw new Exception("Forbidden value on waitTime = " + waitTime + ", it doesn't respect the following condition : waitTime < 0");

@@ -30,24 +30,24 @@ namespace BlueSheep.Common.Protocol.Types
 public class PartyMemberGeoPosition
 {
 
-public new const short ID = 378;
-public virtual short TypeId
+public new const int ID = 378;
+public virtual int TypeId
 {
     get { return ID; }
 }
 
 public int memberId;
-        public short worldX;
-        public short worldY;
+        public int worldX;
+        public int worldY;
         public int mapId;
-        public short subAreaId;
+        public int subAreaId;
         
 
 public PartyMemberGeoPosition()
 {
 }
 
-public PartyMemberGeoPosition(int memberId, short worldX, short worldY, int mapId, short subAreaId)
+public PartyMemberGeoPosition(int memberId, int worldX, int worldY, int mapId, int subAreaId)
         {
             this.memberId = memberId;
             this.worldX = worldX;
@@ -61,10 +61,10 @@ public virtual void Serialize(BigEndianWriter writer)
 {
 
 writer.WriteInt(memberId);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             writer.WriteInt(mapId);
-            writer.WriteVarShort(subAreaId);
+            writer.WriteVarShort((short)subAreaId);
             
 
 }
@@ -82,7 +82,7 @@ memberId = reader.ReadInt();
             if (worldY < -255 || worldY > 255)
                 throw new Exception("Forbidden value on worldY = " + worldY + ", it doesn't respect the following condition : worldY < -255 || worldY > 255");
             mapId = reader.ReadInt();
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             

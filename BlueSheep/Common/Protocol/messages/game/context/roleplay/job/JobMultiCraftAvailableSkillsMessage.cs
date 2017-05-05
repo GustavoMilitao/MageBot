@@ -27,13 +27,13 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int playerId;
-        public short[] skills;
+        public int[] skills;
         
         public JobMultiCraftAvailableSkillsMessage()
         {
         }
         
-        public JobMultiCraftAvailableSkillsMessage(bool enabled, int playerId, short[] skills)
+        public JobMultiCraftAvailableSkillsMessage(bool enabled, int playerId, int[] skills)
          : base(enabled)
         {
             this.playerId = playerId;
@@ -47,7 +47,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)skills.Length);
             foreach (var entry in skills)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
         }
         
@@ -58,10 +58,10 @@ namespace BlueSheep.Common.Protocol.Messages
             if (playerId < 0)
                 throw new Exception("Forbidden value on playerId = " + playerId + ", it doesn't respect the following condition : playerId < 0");
             var limit = reader.ReadUShort();
-            skills = new short[limit];
+            skills = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 skills[i] = reader.ReadVarShort();
+                 skills[i] = reader.ReadVarUhShort();
             }
         }
         

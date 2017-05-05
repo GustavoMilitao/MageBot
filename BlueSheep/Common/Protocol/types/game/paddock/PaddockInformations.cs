@@ -27,54 +27,54 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class PaddockInformations
-{
+    public class PaddockInformations
+    {
 
-public new const short ID = 132;
-public virtual short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 132;
+        public virtual int TypeId
+        {
+            get { return ID; }
+        }
 
-public short maxOutdoorMount;
-        public short maxItems;
-        
+        public int maxOutdoorMount;
+        public int maxItems;
 
-public PaddockInformations()
-{
-}
 
-public PaddockInformations(short maxOutdoorMount, short maxItems)
+        public PaddockInformations()
+        {
+        }
+
+        public PaddockInformations(int maxOutdoorMount, int maxItems)
         {
             this.maxOutdoorMount = maxOutdoorMount;
             this.maxItems = maxItems;
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
 
-writer.WriteVarShort(maxOutdoorMount);
-            writer.WriteVarShort(maxItems);
-            
+        public virtual void Serialize(BigEndianWriter writer)
+        {
 
-}
+            writer.WriteVarShort((short)maxOutdoorMount);
+            writer.WriteVarShort((short)maxItems);
 
-public virtual void Deserialize(BigEndianReader reader)
-{
 
-maxOutdoorMount = reader.ReadVarShort();
+        }
+
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            maxOutdoorMount = reader.ReadVarUhShort();
             if (maxOutdoorMount < 0)
                 throw new Exception("Forbidden value on maxOutdoorMount = " + maxOutdoorMount + ", it doesn't respect the following condition : maxOutdoorMount < 0");
-            maxItems = reader.ReadVarShort();
+            maxItems = reader.ReadVarUhShort();
             if (maxItems < 0)
                 throw new Exception("Forbidden value on maxItems = " + maxItems + ", it doesn't respect the following condition : maxItems < 0");
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

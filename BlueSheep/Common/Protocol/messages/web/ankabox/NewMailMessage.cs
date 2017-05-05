@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public NewMailMessage(short unread, short total, int[] sendersAccountId)
+        public NewMailMessage(int unread, int total, int[] sendersAccountId)
          : base(unread, total)
         {
             this.sendersAccountId = sendersAccountId;

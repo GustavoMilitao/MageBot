@@ -27,13 +27,13 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int[] targetIds;
-        public short[] targetCells;
+        public int[] targetCells;
         
         public ChallengeTargetsListMessage()
         {
         }
         
-        public ChallengeTargetsListMessage(int[] targetIds, short[] targetCells)
+        public ChallengeTargetsListMessage(int[] targetIds, int[] targetCells)
         {
             this.targetIds = targetIds;
             this.targetCells = targetCells;
@@ -49,7 +49,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)targetCells.Length);
             foreach (var entry in targetCells)
             {
-                 writer.WriteShort(entry);
+                 writer.WriteShort((short)entry);
             }
         }
         
@@ -62,7 +62,7 @@ namespace BlueSheep.Common.Protocol.Messages
                  targetIds[i] = reader.ReadInt();
             }
             limit = reader.ReadUShort();
-            targetCells = new short[limit];
+            targetCells = new int[limit];
             for (int i = 0; i < limit; i++)
             {
                  targetCells[i] = reader.ReadShort();

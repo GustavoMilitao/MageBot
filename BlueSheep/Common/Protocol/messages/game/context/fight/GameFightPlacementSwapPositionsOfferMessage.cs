@@ -28,15 +28,15 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public int requestId;
         public int requesterId;
-        public short requesterCellId;
+        public int requesterCellId;
         public int requestedId;
-        public short requestedCellId;
+        public int requestedCellId;
         
         public GameFightPlacementSwapPositionsOfferMessage()
         {
         }
         
-        public GameFightPlacementSwapPositionsOfferMessage(int requestId, int requesterId, short requesterCellId, int requestedId, short requestedCellId)
+        public GameFightPlacementSwapPositionsOfferMessage(int requestId, int requesterId, int requesterCellId, int requestedId, int requestedCellId)
         {
             this.requestId = requestId;
             this.requesterId = requesterId;
@@ -49,9 +49,9 @@ namespace BlueSheep.Common.Protocol.Messages
         {
             writer.WriteInt(requestId);
             writer.WriteVarInt(requesterId);
-            writer.WriteVarShort(requesterCellId);
+            writer.WriteVarShort((short)requesterCellId);
             writer.WriteVarInt(requestedId);
-            writer.WriteVarShort(requestedCellId);
+            writer.WriteVarShort((short)requestedCellId);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -62,13 +62,13 @@ namespace BlueSheep.Common.Protocol.Messages
             requesterId = reader.ReadVarInt();
             if (requesterId < 0)
                 throw new Exception("Forbidden value on requesterId = " + requesterId + ", it doesn't respect the following condition : requesterId < 0");
-            requesterCellId = reader.ReadVarShort();
+            requesterCellId = reader.ReadVarUhShort();
             if (requesterCellId < 0 || requesterCellId > 559)
                 throw new Exception("Forbidden value on requesterCellId = " + requesterCellId + ", it doesn't respect the following condition : requesterCellId < 0 || requesterCellId > 559");
             requestedId = reader.ReadVarInt();
             if (requestedId < 0)
                 throw new Exception("Forbidden value on requestedId = " + requestedId + ", it doesn't respect the following condition : requestedId < 0");
-            requestedCellId = reader.ReadVarShort();
+            requestedCellId = reader.ReadVarUhShort();
             if (requestedCellId < 0 || requestedCellId > 559)
                 throw new Exception("Forbidden value on requestedCellId = " + requestedCellId + ", it doesn't respect the following condition : requestedCellId < 0 || requestedCellId > 559");
         }

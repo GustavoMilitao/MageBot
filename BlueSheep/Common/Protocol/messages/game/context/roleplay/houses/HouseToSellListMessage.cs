@@ -26,15 +26,15 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short pageIndex;
-        public short totalPage;
+        public int pageIndex;
+        public int totalPage;
         public Types.HouseInformationsForSell[] houseList;
         
         public HouseToSellListMessage()
         {
         }
         
-        public HouseToSellListMessage(short pageIndex, short totalPage, Types.HouseInformationsForSell[] houseList)
+        public HouseToSellListMessage(int pageIndex, int totalPage, Types.HouseInformationsForSell[] houseList)
         {
             this.pageIndex = pageIndex;
             this.totalPage = totalPage;
@@ -43,8 +43,8 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(pageIndex);
-            writer.WriteVarShort(totalPage);
+            writer.WriteVarShort((short)pageIndex);
+            writer.WriteVarShort((short)totalPage);
             writer.WriteUShort((ushort)houseList.Length);
             foreach (var entry in houseList)
             {
@@ -54,10 +54,10 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Deserialize(BigEndianReader reader)
         {
-            pageIndex = reader.ReadVarShort();
+            pageIndex = reader.ReadVarUhShort();
             if (pageIndex < 0)
                 throw new Exception("Forbidden value on pageIndex = " + pageIndex + ", it doesn't respect the following condition : pageIndex < 0");
-            totalPage = reader.ReadVarShort();
+            totalPage = reader.ReadVarUhShort();
             if (totalPage < 0)
                 throw new Exception("Forbidden value on totalPage = " + totalPage + ", it doesn't respect the following condition : totalPage < 0");
             var limit = reader.ReadUShort();

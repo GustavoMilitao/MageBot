@@ -6,7 +6,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class PartyIdol : Idol
     {
-        public new const short ID = 490;
+        public new const int ID = 490;
         public List<ulong> ownersIds;
 
         public PartyIdol()
@@ -16,7 +16,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteShort((short)ownersIds.Count);
+            writer.WriteShort((short)(int)ownersIds.Count);
             uint _loc2_ = 0;
             while (_loc2_ < ownersIds.Count)
             {

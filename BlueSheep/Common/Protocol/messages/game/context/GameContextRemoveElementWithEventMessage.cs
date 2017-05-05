@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameContextRemoveElementWithEventMessage(int id, sbyte elementEventId)
+        public GameContextRemoveElementWithEventMessage(ulong id, sbyte elementEventId)
          : base(id)
         {
             this.elementEventId = elementEventId;

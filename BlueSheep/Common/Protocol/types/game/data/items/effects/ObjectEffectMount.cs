@@ -30,22 +30,22 @@ namespace BlueSheep.Common.Protocol.Types
 public class ObjectEffectMount : ObjectEffect
 {
 
-public new const short ID = 179;
-public override short TypeId
+public new const int ID = 179;
+public override int TypeId
 {
     get { return ID; }
 }
 
 public int mountId;
         public double date;
-        public short modelId;
+        public int modelId;
         
 
 public ObjectEffectMount()
 {
 }
 
-public ObjectEffectMount(short actionId, int mountId, double date, short modelId)
+public ObjectEffectMount(int actionId, int mountId, double date, int modelId)
          : base(actionId)
         {
             this.mountId = mountId;
@@ -60,7 +60,7 @@ public override void Serialize(BigEndianWriter writer)
 base.Serialize(writer);
             writer.WriteInt(mountId);
             writer.WriteDouble(date);
-            writer.WriteVarShort(modelId);
+            writer.WriteVarShort((short)modelId);
             
 
 }
@@ -75,7 +75,7 @@ base.Deserialize(reader);
             date = reader.ReadDouble();
             if (date < -9.007199254740992E15 || date > 9.007199254740992E15)
                 throw new Exception("Forbidden value on date = " + date + ", it doesn't respect the following condition : date < -9.007199254740992E15 || date > 9.007199254740992E15");
-            modelId = reader.ReadVarShort();
+            modelId = reader.ReadVarUhShort();
             if (modelId < 0)
                 throw new Exception("Forbidden value on modelId = " + modelId + ", it doesn't respect the following condition : modelId < 0");
             

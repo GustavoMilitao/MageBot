@@ -143,7 +143,7 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Place the character according to the AI positioning.
         /// </summary>
-        public void PlaceCharacter(List<short> PlacementCells)
+        public void PlaceCharacter(List<int> PlacementCells)
         {
             m_error = 0;
             m_Account.Log(new BotTextInformation("Placement du personnage."),5);
@@ -153,7 +153,7 @@ namespace BlueSheep.Core.Fight
                 int distance = -1;
                 int cell = -1;
                 Dictionary<int, int> cells = new Dictionary<int, int>();
-                foreach (short tempCell in PlacementCells)
+                foreach (int tempCell in PlacementCells)
                 {
                     int tempDistance = 0;
                     MapPoint cellPoint = new MapPoint(Convert.ToInt32(tempCell));
@@ -185,7 +185,7 @@ namespace BlueSheep.Core.Fight
                 }
                 if (cell != -1)
                 {
-                        GameFightPlacementPositionRequestMessage msg = new GameFightPlacementPositionRequestMessage((short)cell);
+                        GameFightPlacementPositionRequestMessage msg = new GameFightPlacementPositionRequestMessage((int)cell);
                         m_Account.SocketManager.Send(msg);
                 }
             }
@@ -245,7 +245,7 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Kick the specified player from the fight.
         /// </summary>
-        private void KickPlayer(int id)
+        private void KickPlayer(ulong id)
         {
             GameContextKickMessage msg = new GameContextKickMessage(id);
             m_Account.SocketManager.Send(msg);
@@ -259,7 +259,7 @@ namespace BlueSheep.Core.Fight
             flag = 1;
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                GameActionFightCastRequestMessage msg = new GameActionFightCastRequestMessage((short)spellId, (short)cellId);
+                GameActionFightCastRequestMessage msg = new GameActionFightCastRequestMessage((int)spellId, (int)cellId);
                 msg.Serialize(writer);
                 writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
@@ -315,7 +315,7 @@ namespace BlueSheep.Core.Fight
                     List<UInt32> serverMovement = MapMovementAdapter.GetServerMovement(path);
                     using (BigEndianWriter writer = new BigEndianWriter())
                     {
-                        GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.ToList().Select<uint, short>(ui => (short)ui).ToArray(), m_Account.MapData.Id);
+                        GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.ToList().Select<uint, int>(ui => (int)ui).ToArray(), m_Account.MapData.Id);
                         msg.Serialize(writer);
                         writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
                         MessagePackaging pack = new MessagePackaging(writer);

@@ -34,7 +34,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameFightResumeMessage(Types.FightDispellableEffectExtendedInformations[] effects, Types.GameActionMark[] marks, short gameTurn, int fightStart, Types.GameFightSpellCooldown[] spellCooldowns, sbyte summonCount, sbyte bombCount)
+        public GameFightResumeMessage(Types.FightDispellableEffectExtendedInformations[] effects, Types.GameActionMark[] marks, int gameTurn, int fightStart, Types.GameFightSpellCooldown[] spellCooldowns, sbyte summonCount, sbyte bombCount)
          : base(effects, marks, gameTurn, fightStart)
         {
             this.spellCooldowns = spellCooldowns;

@@ -30,21 +30,21 @@ namespace BlueSheep.Common.Protocol.Types
 public class MapCoordinates
 {
 
-public new const short ID = 174;
-public virtual short TypeId
+public new const int ID = 174;
+public virtual int TypeId
 {
     get { return ID; }
 }
 
-public short worldX;
-        public short worldY;
+public int worldX;
+        public int worldY;
         
 
 public MapCoordinates()
 {
 }
 
-public MapCoordinates(short worldX, short worldY)
+public MapCoordinates(int worldX, int worldY)
         {
             this.worldX = worldX;
             this.worldY = worldY;
@@ -54,8 +54,8 @@ public MapCoordinates(short worldX, short worldY)
 public virtual void Serialize(BigEndianWriter writer)
 {
 
-writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             
 
 }

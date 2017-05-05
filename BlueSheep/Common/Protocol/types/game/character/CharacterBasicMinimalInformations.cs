@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class CharacterBasicMinimalInformations : AbstractCharacterInformation
     {
-        public new const short ID = 503;
+        public new const int ID = 503;
 
 
         public String name = "";
@@ -14,7 +14,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public CharacterBasicMinimalInformations(double id, string name)
+        public CharacterBasicMinimalInformations(ulong id, string name)
         {
             this.name = name;
             Id = id;

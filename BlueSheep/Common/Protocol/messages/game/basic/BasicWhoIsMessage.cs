@@ -33,7 +33,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public int accountId;
         public string playerName;
         public int playerId;
-        public short areaId;
+        public int areaId;
         public Types.AbstractSocialGroupInfos[] socialGroups;
         public sbyte playerState;
         
@@ -41,7 +41,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public BasicWhoIsMessage(bool self, bool verbose, sbyte position, string accountNickname, int accountId, string playerName, int playerId, short areaId, Types.AbstractSocialGroupInfos[] socialGroups, sbyte playerState)
+        public BasicWhoIsMessage(bool self, bool verbose, sbyte position, string accountNickname, int accountId, string playerName, int playerId, int areaId, Types.AbstractSocialGroupInfos[] socialGroups, sbyte playerState)
         {
             this.self = self;
             this.verbose = verbose;
@@ -66,11 +66,11 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteInt(accountId);
             writer.WriteUTF(playerName);
             writer.WriteVarInt(playerId);
-            writer.WriteShort(areaId);
+            writer.WriteShort((short)areaId);
             writer.WriteUShort((ushort)socialGroups.Length);
             foreach (var entry in socialGroups)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             writer.WriteSByte(playerState);
@@ -95,7 +95,7 @@ namespace BlueSheep.Common.Protocol.Messages
             socialGroups = new Types.AbstractSocialGroupInfos[limit];
             for (int i = 0; i < limit; i++)
             {
-                 socialGroups[i] = Types.ProtocolTypeManager.GetInstance<Types.AbstractSocialGroupInfos>(reader.ReadShort());
+                 socialGroups[i] = Types.ProtocolTypeManager.GetInstance<Types.AbstractSocialGroupInfos>(reader.ReadUShort());
                  socialGroups[i].Deserialize(reader);
             }
             playerState = reader.ReadSByte();

@@ -27,14 +27,14 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public sbyte msgType;
-        public short msgId;
+        public int msgId;
         public string[] parameters;
         
         public TextInformationMessage()
         {
         }
         
-        public TextInformationMessage(sbyte msgType, short msgId, string[] parameters)
+        public TextInformationMessage(sbyte msgType, int msgId, string[] parameters)
         {
             this.msgType = msgType;
             this.msgId = msgId;
@@ -44,7 +44,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteSByte(msgType);
-            writer.WriteVarShort(msgId);
+            writer.WriteVarShort((short)msgId);
             writer.WriteUShort((ushort)parameters.Length);
             foreach (var entry in parameters)
             {
@@ -57,7 +57,7 @@ namespace BlueSheep.Common.Protocol.Messages
             msgType = reader.ReadSByte();
             if (msgType < 0)
                 throw new Exception("Forbidden value on msgType = " + msgType + ", it doesn't respect the following condition : msgType < 0");
-            msgId = reader.ReadVarShort();
+            msgId = reader.ReadVarUhShort();
             if (msgId < 0)
                 throw new Exception("Forbidden value on msgId = " + msgId + ", it doesn't respect the following condition : msgId < 0");
             var limit = reader.ReadUShort();

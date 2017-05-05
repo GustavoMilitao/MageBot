@@ -26,13 +26,13 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short objectGID;
+        public int objectGID;
         
         public GameRolePlayDelayedObjectUseMessage()
         {
         }
         
-        public GameRolePlayDelayedObjectUseMessage(int delayedCharacterId, sbyte delayTypeId, double delayEndTime, short objectGID)
+        public GameRolePlayDelayedObjectUseMessage(int delayedCharacterId, sbyte delayTypeId, double delayEndTime, int objectGID)
          : base(delayedCharacterId, delayTypeId, delayEndTime)
         {
             this.objectGID = objectGID;
@@ -41,13 +41,13 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarShort(objectGID);
+            writer.WriteVarShort((short)objectGID);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            objectGID = reader.ReadVarShort();
+            objectGID = reader.ReadVarUhShort();
             if (objectGID < 0)
                 throw new Exception("Forbidden value on objectGID = " + objectGID + ", it doesn't respect the following condition : objectGID < 0");
         }

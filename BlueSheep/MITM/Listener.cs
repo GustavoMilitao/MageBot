@@ -84,7 +84,7 @@ namespace BlueSheep.MITM
             while (Connected)
             {
                 Thread.Sleep(1);
-                ushort num = m_Reader.ReadUShort();
+                int num = m_Reader.ReadUShort();
             }
         }
 

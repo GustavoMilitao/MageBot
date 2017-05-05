@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] cells;
-        public short[] referenceIds;
+        public int[] cells;
+        public int[] referenceIds;
         
         public ObjectGroundListAddedMessage()
         {
         }
         
-        public ObjectGroundListAddedMessage(short[] cells, short[] referenceIds)
+        public ObjectGroundListAddedMessage(int[] cells, int[] referenceIds)
         {
             this.cells = cells;
             this.referenceIds = referenceIds;
@@ -44,28 +44,28 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)cells.Length);
             foreach (var entry in cells)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)referenceIds.Length);
             foreach (var entry in referenceIds)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            cells = new short[limit];
+            cells = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 cells[i] = reader.ReadVarShort();
+                 cells[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
-            referenceIds = new short[limit];
+            referenceIds = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 referenceIds[i] = reader.ReadVarShort();
+                 referenceIds[i] = reader.ReadVarUhShort();
             }
         }
         

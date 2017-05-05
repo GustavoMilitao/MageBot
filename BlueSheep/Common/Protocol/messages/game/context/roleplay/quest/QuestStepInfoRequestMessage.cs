@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short questId;
+        public int questId;
         
         public QuestStepInfoRequestMessage()
         {
         }
         
-        public QuestStepInfoRequestMessage(short questId)
+        public QuestStepInfoRequestMessage(int questId)
         {
             this.questId = questId;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(questId);
+            writer.WriteVarShort((short)questId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            questId = reader.ReadVarShort();
+            questId = reader.ReadVarUhShort();
             if (questId < 0)
                 throw new Exception("Forbidden value on questId = " + questId + ", it doesn't respect the following condition : questId < 0");
         }

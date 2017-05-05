@@ -26,13 +26,13 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] servers;
+        public int[] servers;
         
         public AcquaintanceServerListMessage()
         {
         }
         
-        public AcquaintanceServerListMessage(short[] servers)
+        public AcquaintanceServerListMessage(int[] servers)
         {
             this.servers = servers;
         }
@@ -42,17 +42,17 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)servers.Length);
             foreach (var entry in servers)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            servers = new short[limit];
+            servers = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 servers[i] = reader.ReadVarShort();
+                 servers[i] = reader.ReadVarUhShort();
             }
         }
         

@@ -6,7 +6,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class DareReward
     {
-        public new const short ID = 505;
+        public new const int ID = 505;
         public uint type = 0;
         public uint monsterId = 0;
         public double kamas = 0;
@@ -23,7 +23,7 @@ namespace BlueSheep.Common.Protocol.Types
             {
                 throw new Exception("Forbidden value (" + monsterId + ") on element monsterId.");
             }
-            writer.WriteVarShort((short)monsterId);
+            writer.WriteVarShort((short)(int)monsterId);
             if (kamas < 0 || kamas > 9007199254740990)
             {
                 throw new Exception("Forbidden value (" + kamas + ") on element kamas.");

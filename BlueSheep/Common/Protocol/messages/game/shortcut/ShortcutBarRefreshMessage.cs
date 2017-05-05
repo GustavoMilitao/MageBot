@@ -42,7 +42,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteSByte(barType);
-            writer.WriteShort(shortcut.TypeId);
+            writer.WriteShort((short)shortcut.TypeId);
             shortcut.Serialize(writer);
         }
         
@@ -51,7 +51,7 @@ namespace BlueSheep.Common.Protocol.Messages
             barType = reader.ReadSByte();
             if (barType < 0)
                 throw new Exception("Forbidden value on barType = " + barType + ", it doesn't respect the following condition : barType < 0");
-            shortcut = Types.ProtocolTypeManager.GetInstance<Types.Shortcut>(reader.ReadShort());
+            shortcut = Types.ProtocolTypeManager.GetInstance<Types.Shortcut>(reader.ReadUShort());
             shortcut.Deserialize(reader);
         }
         

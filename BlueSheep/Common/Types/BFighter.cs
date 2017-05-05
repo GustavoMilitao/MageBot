@@ -10,7 +10,7 @@ namespace BlueSheep.Common.Types
 {
     public class BFighter : BEntity
     {
-        public BFighter(int id, int cellId, int actionPoints, GameFightMinimalStats gameFightMinimalStats, bool isAlive, int lifePoints, int maxLifePoints, int movementPoints, uint teamId, int creatureId) : base(id, cellId)
+        public BFighter(double id, int cellId, int actionPoints, GameFightMinimalStats gameFightMinimalStats, bool isAlive, int lifePoints, int maxLifePoints, int movementPoints, uint teamId, int creatureId) : base(id, cellId)
         {
             ActionPoints = actionPoints;
             GameFightMinimalStats = gameFightMinimalStats;

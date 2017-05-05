@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int targetId;
+        public ulong targetId;
         public sbyte state;
         
         public GameActionFightInvisibilityMessage()
         {
         }
         
-        public GameActionFightInvisibilityMessage(short actionId, int sourceId, int targetId, sbyte state)
+        public GameActionFightInvisibilityMessage(int actionId, ulong sourceId, ulong targetId, sbyte state)
          : base(actionId, sourceId)
         {
             this.targetId = targetId;
@@ -43,14 +43,14 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteInt(targetId);
+            writer.WriteULong(targetId);
             writer.WriteSByte(state);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            targetId = reader.ReadInt();
+            targetId = reader.ReadULong();
             state = reader.ReadSByte();
             if (state < 0)
                 throw new Exception("Forbidden value on state = " + state + ", it doesn't respect the following condition : state < 0");

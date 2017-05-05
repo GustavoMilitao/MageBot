@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short id;
+        public ulong id;
         
         public ExchangeBidHouseListMessage()
         {
         }
         
-        public ExchangeBidHouseListMessage(short id)
+        public ExchangeBidHouseListMessage(ulong id)
         {
             this.id = id;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(id);
+            writer.WriteVarShort((short)id);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            id = reader.ReadVarShort();
+            id = reader.ReadVarUhShort();
             if (id < 0)
                 throw new Exception("Forbidden value on id = " + id + ", it doesn't respect the following condition : id < 0");
         }

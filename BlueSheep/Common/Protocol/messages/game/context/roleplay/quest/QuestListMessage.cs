@@ -26,15 +26,15 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] finishedQuestsIds;
-        public short[] finishedQuestsCounts;
+        public int[] finishedQuestsIds;
+        public int[] finishedQuestsCounts;
         public Types.QuestActiveInformations[] activeQuests;
         
         public QuestListMessage()
         {
         }
         
-        public QuestListMessage(short[] finishedQuestsIds, short[] finishedQuestsCounts, Types.QuestActiveInformations[] activeQuests)
+        public QuestListMessage(int[] finishedQuestsIds, int[] finishedQuestsCounts, Types.QuestActiveInformations[] activeQuests)
         {
             this.finishedQuestsIds = finishedQuestsIds;
             this.finishedQuestsCounts = finishedQuestsCounts;
@@ -46,17 +46,17 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)finishedQuestsIds.Length);
             foreach (var entry in finishedQuestsIds)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)finishedQuestsCounts.Length);
             foreach (var entry in finishedQuestsCounts)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)activeQuests.Length);
             foreach (var entry in activeQuests)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
         }
@@ -64,22 +64,22 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            finishedQuestsIds = new short[limit];
+            finishedQuestsIds = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 finishedQuestsIds[i] = reader.ReadVarShort();
+                 finishedQuestsIds[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
-            finishedQuestsCounts = new short[limit];
+            finishedQuestsCounts = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 finishedQuestsCounts[i] = reader.ReadVarShort();
+                 finishedQuestsCounts[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
             activeQuests = new Types.QuestActiveInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                 activeQuests[i] = Types.ProtocolTypeManager.GetInstance<Types.QuestActiveInformations>(reader.ReadShort());
+                 activeQuests[i] = Types.ProtocolTypeManager.GetInstance<Types.QuestActiveInformations>(reader.ReadUShort());
                  activeQuests[i].Deserialize(reader);
             }
         }

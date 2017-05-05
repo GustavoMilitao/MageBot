@@ -26,13 +26,13 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int target;
+        public ulong target;
         
         public ExchangePlayerRequestMessage()
         {
         }
         
-        public ExchangePlayerRequestMessage(sbyte exchangeType, int target)
+        public ExchangePlayerRequestMessage(sbyte exchangeType, ulong target)
          : base(exchangeType)
         {
             this.target = target;
@@ -41,13 +41,13 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarInt(target);
+            writer.WriteVarLong(target);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            target = reader.ReadVarInt();
+            target = reader.ReadVarUhLong();
             if (target < 0)
                 throw new Exception("Forbidden value on target = " + target + ", it doesn't respect the following condition : target < 0");
         }

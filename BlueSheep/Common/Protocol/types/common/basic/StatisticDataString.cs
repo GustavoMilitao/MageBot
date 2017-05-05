@@ -8,8 +8,8 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class StatisticDataString : StatisticData
     {
-        public new const short ID = 487;
-public virtual short TypeId
+        public new const int ID = 487;
+public virtual int TypeId
 {
     get { return ID; }
 }

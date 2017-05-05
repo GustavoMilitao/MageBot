@@ -27,45 +27,45 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class GameRolePlayActorInformations : GameContextActorInformations
-{
+    public class GameRolePlayActorInformations : GameContextActorInformations
+    {
 
-public new const short ID = 141;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 141;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
 
 
-public GameRolePlayActorInformations()
-{
-}
-
-public GameRolePlayActorInformations(int contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition)
-         : base(contextualId, look, disposition)
+        public GameRolePlayActorInformations()
         {
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
-
-base.Serialize(writer);
-            
-
-}
-
-public override void Deserialize(BigEndianReader reader)
-{
-
-base.Deserialize(reader);
-            
-
-}
+        public GameRolePlayActorInformations(ulong contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition)
+                 : base(contextualId, look, disposition)
+        {
+        }
 
 
-}
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
+
+
+        }
+
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
+
+
+        }
+
+
+    }
 
 
 }

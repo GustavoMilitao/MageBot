@@ -8,7 +8,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
 
         }
-        public new const short ID = 508;
+        public new const int ID = 508;
         public bool deserted = false;
         public GuildInformations guildInfo;
 

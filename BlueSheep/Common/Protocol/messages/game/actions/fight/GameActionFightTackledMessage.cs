@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameActionFightTackledMessage(short actionId, int sourceId, int[] tacklersIds)
+        public GameActionFightTackledMessage(int actionId, ulong sourceId, int[] tacklersIds)
          : base(actionId, sourceId)
         {
             this.tacklersIds = tacklersIds;

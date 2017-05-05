@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class CharacterMinimalPlusLookAndGradeInformations : CharacterMinimalPlusLookInformations
 {
 
-public new const short ID = 193;
-public override short TypeId
+public new const int ID = 193;
+public override int TypeId
 {
     get { return ID; }
 }

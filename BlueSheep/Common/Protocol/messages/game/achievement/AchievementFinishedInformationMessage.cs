@@ -33,7 +33,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public AchievementFinishedInformationMessage(short id, byte finishedlevel, string name, int playerId)
+        public AchievementFinishedInformationMessage(ulong id, byte finishedlevel, string name, int playerId)
          : base(id, finishedlevel)
         {
             this.name = name;

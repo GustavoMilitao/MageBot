@@ -48,7 +48,7 @@ namespace BlueSheep.Engine.Handlers.Context
                 msg.Deserialize(reader);
             }
             account.Npc.Id = msg.npcId;
-            account.Npc.Entity = account.MapData.Npcs.FirstOrDefault((npc) => npc.contextualId == msg.npcId);
+            account.Npc.Entity = account.MapData.Npcs.FirstOrDefault((npc) => (int)npc.contextualId == msg.npcId);
             account.SetStatus(Status.Speaking);
         }
 
@@ -78,7 +78,7 @@ namespace BlueSheep.Engine.Handlers.Context
             if (msg.visibleReplies.Length == 0)
                 account.Npc.CloseDialog();
             account.Npc.Replies.Clear();
-            account.Npc.Replies = msg.visibleReplies.Select<short, BlueSheep.Core.Npc.NpcReply>((id) => new BlueSheep.Core.Npc.NpcReply(account.MapData.Npcs.Find(n => n.contextualId == account.Npc.Id).npcId, id)).ToList();
+            account.Npc.Replies = msg.visibleReplies.Select<int, BlueSheep.Core.Npc.NpcReply>((id) => new BlueSheep.Core.Npc.NpcReply(account.MapData.Npcs.Find(n => (int)n.contextualId == account.Npc.Id).npcId, id)).ToList();
             if (account.Path != null)
             {
                 account.Path.SearchReplies(BlueSheep.Common.Data.I18N.GetText(mess));

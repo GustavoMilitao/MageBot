@@ -30,21 +30,21 @@ namespace BlueSheep.Common.Protocol.Types
 public class ItemDurability
 {
 
-public new const short ID = 168;
-public virtual short TypeId
+public new const int ID = 168;
+public virtual int TypeId
 {
     get { return ID; }
 }
 
-public short durability;
-        public short durabilityMax;
+public int durability;
+        public int durabilityMax;
         
 
 public ItemDurability()
 {
 }
 
-public ItemDurability(short durability, short durabilityMax)
+public ItemDurability(int durability, int durabilityMax)
         {
             this.durability = durability;
             this.durabilityMax = durabilityMax;
@@ -54,8 +54,8 @@ public ItemDurability(short durability, short durabilityMax)
 public virtual void Serialize(BigEndianWriter writer)
 {
 
-writer.WriteShort(durability);
-            writer.WriteShort(durabilityMax);
+writer.WriteShort((short)durability);
+            writer.WriteShort((short)durabilityMax);
             
 
 }

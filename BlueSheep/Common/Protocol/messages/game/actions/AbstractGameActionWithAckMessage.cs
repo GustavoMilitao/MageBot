@@ -26,13 +26,13 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short waitAckId;
+        public int waitAckId;
         
         public AbstractGameActionWithAckMessage()
         {
         }
         
-        public AbstractGameActionWithAckMessage(short actionId, int sourceId, short waitAckId)
+        public AbstractGameActionWithAckMessage(int actionId, ulong sourceId, int waitAckId)
          : base(actionId, sourceId)
         {
             this.waitAckId = waitAckId;
@@ -41,7 +41,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteShort(waitAckId);
+            writer.WriteShort((short)waitAckId);
         }
         
         public override void Deserialize(BigEndianReader reader)

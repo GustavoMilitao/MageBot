@@ -27,10 +27,10 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public string collectorName;
-        public short worldX;
-        public short worldY;
+        public int worldX;
+        public int worldY;
         public int mapId;
-        public short subAreaId;
+        public int subAreaId;
         public string userName;
         public double experience;
         public Types.ObjectItemQuantity[] objectsInfos;
@@ -39,7 +39,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public ExchangeGuildTaxCollectorGetMessage(string collectorName, short worldX, short worldY, int mapId, short subAreaId, string userName, double experience, Types.ObjectItemQuantity[] objectsInfos)
+        public ExchangeGuildTaxCollectorGetMessage(string collectorName, int worldX, int worldY, int mapId, int subAreaId, string userName, double experience, Types.ObjectItemQuantity[] objectsInfos)
         {
             this.collectorName = collectorName;
             this.worldX = worldX;
@@ -54,10 +54,10 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteUTF(collectorName);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             writer.WriteInt(mapId);
-            writer.WriteVarShort(subAreaId);
+            writer.WriteVarShort((short)subAreaId);
             writer.WriteUTF(userName);
             writer.WriteDouble(experience);
             writer.WriteUShort((ushort)objectsInfos.Length);
@@ -77,7 +77,7 @@ namespace BlueSheep.Common.Protocol.Messages
             if (worldY < -255 || worldY > 255)
                 throw new Exception("Forbidden value on worldY = " + worldY + ", it doesn't respect the following condition : worldY < -255 || worldY > 255");
             mapId = reader.ReadInt();
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             userName = reader.ReadUTF();

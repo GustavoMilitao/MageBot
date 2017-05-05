@@ -26,7 +26,7 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short days;
+        public int days;
         public sbyte hours;
         public sbyte minutes;
         
@@ -34,7 +34,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public AccountLoggingKickedMessage(short days, sbyte hours, sbyte minutes)
+        public AccountLoggingKickedMessage(int days, sbyte hours, sbyte minutes)
         {
             this.days = days;
             this.hours = hours;
@@ -43,14 +43,14 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(days);
+            writer.WriteVarShort((short)days);
             writer.WriteSByte(hours);
             writer.WriteSByte(minutes);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            days = reader.ReadVarShort();
+            days = reader.ReadVarUhShort();
             if (days < 0)
                 throw new Exception("Forbidden value on days = " + days + ", it doesn't respect the following condition : days < 0");
             hours = reader.ReadSByte();

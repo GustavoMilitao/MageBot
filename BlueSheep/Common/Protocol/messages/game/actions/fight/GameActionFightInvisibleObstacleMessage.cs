@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameActionFightInvisibleObstacleMessage(short actionId, int sourceId, int sourceSpellId)
+        public GameActionFightInvisibleObstacleMessage(int actionId, ulong sourceId, int sourceSpellId)
          : base(actionId, sourceId)
         {
             this.sourceSpellId = sourceSpellId;

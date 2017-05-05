@@ -27,51 +27,51 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class GameFightFighterMonsterLightInformations : GameFightFighterLightInformations
-{
+    public class GameFightFighterMonsterLightInformations : GameFightFighterLightInformations
+    {
 
-public new const short ID = 455;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 455;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public short creatureGenericId;
-        
+        public int creatureGenericId;
 
-public GameFightFighterMonsterLightInformations()
-{
-}
 
-public GameFightFighterMonsterLightInformations(int id, sbyte wave, short level, sbyte breed, short creatureGenericId)
-         : base(id, wave, level, breed)
+        public GameFightFighterMonsterLightInformations()
+        {
+        }
+
+        public GameFightFighterMonsterLightInformations(ulong id, sbyte wave, int level, sbyte breed, int creatureGenericId)
+                 : base(id, wave, level, breed)
         {
             this.creatureGenericId = creatureGenericId;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
-            writer.WriteVarShort(creatureGenericId);
-            
+        public override void Serialize(BigEndianWriter writer)
+        {
 
-}
+            base.Serialize(writer);
+            writer.WriteVarShort((short)creatureGenericId);
 
-public override void Deserialize(BigEndianReader reader)
-{
 
-base.Deserialize(reader);
-            creatureGenericId = reader.ReadVarShort();
+        }
+
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
+            creatureGenericId = reader.ReadVarUhShort();
             if (creatureGenericId < 0)
                 throw new Exception("Forbidden value on creatureGenericId = " + creatureGenericId + ", it doesn't respect the following condition : creatureGenericId < 0");
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

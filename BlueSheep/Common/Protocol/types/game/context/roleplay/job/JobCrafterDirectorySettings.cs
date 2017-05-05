@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class JobCrafterDirectorySettings
 {
 
-public new const short ID = 97;
-public virtual short TypeId
+public new const int ID = 97;
+public virtual int TypeId
 {
     get { return ID; }
 }

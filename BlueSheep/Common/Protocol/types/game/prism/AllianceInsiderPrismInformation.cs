@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class AllianceInsiderPrismInformation : PrismInformation
 {
 
-public new const short ID = 431;
-public override short TypeId
+public new const int ID = 431;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -47,7 +47,7 @@ public AllianceInsiderPrismInformation()
 {
 }
 
-public AllianceInsiderPrismInformation(sbyte typeId, sbyte state, int nextVulnerabilityDate, int placementDate, int rewardTokenCount, int lastTimeSlotModificationDate, int lastTimeSlotModificationAuthorGuildId, int lastTimeSlotModificationAuthorId, string lastTimeSlotModificationAuthorName, int[] modulesItemIds)
+public AllianceInsiderPrismInformation(byte typeId, byte state, int nextVulnerabilityDate, int placementDate, uint rewardTokenCount, int lastTimeSlotModificationDate, int lastTimeSlotModificationAuthorGuildId, int lastTimeSlotModificationAuthorId, string lastTimeSlotModificationAuthorName, int[] modulesItemIds)
          : base(typeId, state, nextVulnerabilityDate, placementDate, rewardTokenCount)
         {
             this.lastTimeSlotModificationDate = lastTimeSlotModificationDate;

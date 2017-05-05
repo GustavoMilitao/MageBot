@@ -26,7 +26,7 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short houseId;
+        public int houseId;
         public Types.GuildInformations guildInfo;
         public int rights;
         
@@ -34,7 +34,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public HouseGuildRightsMessage(short houseId, Types.GuildInformations guildInfo, int rights)
+        public HouseGuildRightsMessage(int houseId, Types.GuildInformations guildInfo, int rights)
         {
             this.houseId = houseId;
             this.guildInfo = guildInfo;
@@ -43,14 +43,14 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(houseId);
+            writer.WriteVarShort((short)houseId);
             guildInfo.Serialize(writer);
             writer.WriteVarInt(rights);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            houseId = reader.ReadVarShort();
+            houseId = reader.ReadVarUhShort();
             if (houseId < 0)
                 throw new Exception("Forbidden value on houseId = " + houseId + ", it doesn't respect the following condition : houseId < 0");
             guildInfo = new Types.GuildInformations();

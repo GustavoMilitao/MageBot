@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
     public class HouseInformationsExtended : HouseInformations
     {
 
-        public new const short ID = 112;
-        public override short TypeId
+        public new const int ID = 112;
+        public override int TypeId
         {
             get { return ID; }
         }
@@ -43,7 +43,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public HouseInformationsExtended(uint houseId, ushort modelId, Types.GuildInformations guildInfo)
+        public HouseInformationsExtended(uint houseId, int modelId, Types.GuildInformations guildInfo)
                  : base(houseId, modelId)
         {
             this.guildInfo = guildInfo;

@@ -8,8 +8,8 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class StatisticData
     {
-        public new const short ID = 484;
-        public virtual short TypeId
+        public new const int ID = 484;
+        public virtual int TypeId
         {
             get { return ID; }
         }
@@ -39,7 +39,7 @@ namespace BlueSheep.Common.Protocol.Types
 
         public virtual void Deserialize(BigEndianReader reader)
         {
-            actionId = (uint)reader.ReadVarShort();
+            actionId = (uint)reader.ReadVarUhShort();
         }
     }
 }

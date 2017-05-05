@@ -28,7 +28,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public Types.AllianceFactSheetInformations infos;
         public Types.GuildInAllianceInformations[] guilds;
-        public short[] controlledSubareaIds;
+        public int[] controlledSubareaIds;
         public int leaderCharacterId;
         public string leaderCharacterName;
         
@@ -36,7 +36,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public AllianceFactsMessage(Types.AllianceFactSheetInformations infos, Types.GuildInAllianceInformations[] guilds, short[] controlledSubareaIds, int leaderCharacterId, string leaderCharacterName)
+        public AllianceFactsMessage(Types.AllianceFactSheetInformations infos, Types.GuildInAllianceInformations[] guilds, int[] controlledSubareaIds, int leaderCharacterId, string leaderCharacterName)
         {
             this.infos = infos;
             this.guilds = guilds;
@@ -47,7 +47,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteShort(infos.TypeId);
+            writer.WriteShort((short)infos.TypeId);
             infos.Serialize(writer);
             writer.WriteUShort((ushort)guilds.Length);
             foreach (var entry in guilds)
@@ -57,7 +57,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)controlledSubareaIds.Length);
             foreach (var entry in controlledSubareaIds)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteVarInt(leaderCharacterId);
             writer.WriteUTF(leaderCharacterName);
@@ -65,7 +65,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Deserialize(BigEndianReader reader)
         {
-            infos = Types.ProtocolTypeManager.GetInstance<Types.AllianceFactSheetInformations>(reader.ReadShort());
+            infos = Types.ProtocolTypeManager.GetInstance<Types.AllianceFactSheetInformations>(reader.ReadUShort());
             infos.Deserialize(reader);
             var limit = reader.ReadUShort();
             guilds = new Types.GuildInAllianceInformations[limit];
@@ -75,10 +75,10 @@ namespace BlueSheep.Common.Protocol.Messages
                  guilds[i].Deserialize(reader);
             }
             limit = reader.ReadUShort();
-            controlledSubareaIds = new short[limit];
+            controlledSubareaIds = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 controlledSubareaIds[i] = reader.ReadVarShort();
+                 controlledSubareaIds[i] = reader.ReadVarUhShort();
             }
             leaderCharacterId = reader.ReadVarInt();
             if (leaderCharacterId < 0)

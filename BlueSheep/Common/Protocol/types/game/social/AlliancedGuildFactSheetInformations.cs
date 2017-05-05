@@ -27,50 +27,50 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class AlliancedGuildFactSheetInformations : GuildInformations
-{
+    public class AlliancedGuildFactSheetInformations : GuildInformations
+    {
 
-public new const short ID = 422;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 422;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public Types.BasicNamedAllianceInformations allianceInfos;
-        
+        public Types.BasicNamedAllianceInformations allianceInfos;
 
-public AlliancedGuildFactSheetInformations()
-{
-}
 
-public AlliancedGuildFactSheetInformations(int guildId, string guildName, Types.GuildEmblem guildEmblem, Types.BasicNamedAllianceInformations allianceInfos)
-         : base(guildId, guildName, guildEmblem)
+        public AlliancedGuildFactSheetInformations()
+        {
+        }
+
+        public AlliancedGuildFactSheetInformations(uint guildId, string guildName, byte guildLevel, Types.GuildEmblem guildEmblem, Types.BasicNamedAllianceInformations allianceInfos)
+                 : base(guildId, guildName, guildLevel, guildEmblem)
         {
             this.allianceInfos = allianceInfos;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
             allianceInfos.Serialize(writer);
-            
 
-}
 
-public override void Deserialize(BigEndianReader reader)
-{
+        }
 
-base.Deserialize(reader);
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
             allianceInfos = new Types.BasicNamedAllianceInformations();
             allianceInfos.Deserialize(reader);
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

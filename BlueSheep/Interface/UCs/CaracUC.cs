@@ -128,7 +128,7 @@ namespace BlueSheep.Interface.UCs
         #region Private Methods
         private void UpStat(int statId, int boost)
         {
-            StatsUpgradeRequestMessage msg = new StatsUpgradeRequestMessage(false, (sbyte)statId, (short)boost);
+            StatsUpgradeRequestMessage msg = new StatsUpgradeRequestMessage(false, (sbyte)statId, (int)boost);
             account.SocketManager.Send(msg);          
         }
 

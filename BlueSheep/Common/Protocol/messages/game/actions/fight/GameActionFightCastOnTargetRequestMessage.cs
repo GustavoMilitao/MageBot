@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short spellId;
-        public int targetId;
+        public int spellId;
+        public ulong targetId;
         
         public GameActionFightCastOnTargetRequestMessage()
         {
         }
         
-        public GameActionFightCastOnTargetRequestMessage(short spellId, int targetId)
+        public GameActionFightCastOnTargetRequestMessage(int spellId, ulong targetId)
         {
             this.spellId = spellId;
             this.targetId = targetId;
@@ -41,16 +41,16 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(spellId);
-            writer.WriteInt(targetId);
+            writer.WriteVarShort((short)spellId);
+            writer.WriteULong(targetId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            spellId = reader.ReadVarShort();
+            spellId = reader.ReadVarUhShort();
             if (spellId < 0)
                 throw new Exception("Forbidden value on spellId = " + spellId + ", it doesn't respect the following condition : spellId < 0");
-            targetId = reader.ReadInt();
+            targetId = reader.ReadULong();
         }
         
     }

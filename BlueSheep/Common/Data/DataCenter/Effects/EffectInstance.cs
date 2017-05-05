@@ -20,7 +20,7 @@ namespace BlueSheep.Common.Data.DataCenter.Effects
         }
 
         public uint effectId;
-        public int targetId;
+        public ulong targetId;
         public String targetMask;
         public int duration;
         public int delay;

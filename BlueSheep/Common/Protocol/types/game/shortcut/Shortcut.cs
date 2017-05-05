@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class Shortcut
 {
 
-public new const short ID = 369;
-public virtual short TypeId
+public new const int ID = 369;
+public virtual int TypeId
 {
     get { return ID; }
 }

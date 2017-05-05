@@ -119,7 +119,7 @@
 #endregion
 
         #region Private Methods
-        private void Agression(int targetid)
+        private void Agression(ulong targetid)
         {
             GameRolePlayPlayerFightRequestMessage packet = new GameRolePlayPlayerFightRequestMessage
                             {

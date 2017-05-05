@@ -42,7 +42,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)characters.Length);
             foreach (var entry in characters)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
         }
@@ -53,7 +53,7 @@ namespace BlueSheep.Common.Protocol.Messages
             characters = new Types.CharacterBaseInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                var aux = (short)reader.ReadUShort();
+                var aux = (int)reader.ReadUShort();
                  characters[i] = Types.ProtocolTypeManager.GetInstance<Types.CharacterBaseInformations>(aux);
                  characters[i].Deserialize(reader);
             }

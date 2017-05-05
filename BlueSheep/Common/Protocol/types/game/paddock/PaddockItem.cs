@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class PaddockItem : ObjectItemInRolePlay
 {
 
-public new const short ID = 185;
-public override short TypeId
+public new const int ID = 185;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public PaddockItem()
 {
 }
 
-public PaddockItem(short cellId, short objectGID, Types.ItemDurability durability)
+public PaddockItem(int cellId, int objectGID, Types.ItemDurability durability)
          : base(cellId, objectGID)
         {
             this.durability = durability;

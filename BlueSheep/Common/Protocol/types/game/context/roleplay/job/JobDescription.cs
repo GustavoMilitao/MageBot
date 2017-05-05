@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
     public class JobDescription
     {
 
-        public new const short ID = 101;
-        public virtual short TypeId
+        public new const int ID = 101;
+        public virtual int TypeId
         {
             get { return ID; }
         }
@@ -58,7 +58,7 @@ namespace BlueSheep.Common.Protocol.Types
             writer.WriteUShort((ushort)skills.Length);
             foreach (var entry in skills)
             {
-                writer.WriteShort(entry.TypeId);
+                writer.WriteShort((short)entry.TypeId);
                 entry.Serialize(writer);
             }
 

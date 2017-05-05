@@ -27,50 +27,50 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class HumanOptionOrnament : HumanOption
-{
+    public class HumanOptionOrnament : HumanOption
+    {
 
-public new const short ID = 411;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 411;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public short ornamentId;
-        
+        public int ornamentId;
 
-public HumanOptionOrnament()
-{
-}
 
-public HumanOptionOrnament(short ornamentId)
+        public HumanOptionOrnament()
+        {
+        }
+
+        public HumanOptionOrnament(int ornamentId)
         {
             this.ornamentId = ornamentId;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
-            writer.WriteVarShort(ornamentId);
-            
+        public override void Serialize(BigEndianWriter writer)
+        {
 
-}
+            base.Serialize(writer);
+            writer.WriteVarShort((short)ornamentId);
 
-public override void Deserialize(BigEndianReader reader)
-{
 
-base.Deserialize(reader);
-            ornamentId = reader.ReadVarShort();
+        }
+
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
+            ornamentId = reader.ReadVarUhShort();
             if (ornamentId < 0)
                 throw new Exception("Forbidden value on ornamentId = " + ornamentId + ", it doesn't respect the following condition : ornamentId < 0");
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

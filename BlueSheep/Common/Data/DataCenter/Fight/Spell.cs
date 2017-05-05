@@ -12,7 +12,7 @@ namespace BlueSheep.Common.Data.DataCenter.Fight
         {
             get { return "Spells"; }
         }
-        public int id;
+        public ulong id;
         public uint nameId;
         public uint descriptionId;
         public uint typeId;

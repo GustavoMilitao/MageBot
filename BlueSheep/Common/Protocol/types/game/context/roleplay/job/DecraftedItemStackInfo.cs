@@ -8,23 +8,23 @@ namespace BlueSheep.Common.Protocol.types.game.context.roleplay.job
 {
     public class DecraftedItemStackInfo
     {
-        public new const short ID = 481;
-        public virtual short TypeId
+        public new const int ID = 481;
+        public virtual int TypeId
         {
             get { return ID; }
         }
         public int objectUID;
         public float bonusMin;
         public float bonusMax;
-        public List<short> runesId;
+        public List<int> runesId;
         public List<int> runesQty;
 
         public DecraftedItemStackInfo()
         {
-            runesId = new List<short>();
+            runesId = new List<int>();
             runesQty = new List<int>();
         }
-        public DecraftedItemStackInfo(int objectUID, float bonusMin, float bonusMax, List<short> runesId, List<int> runesQty)
+        public DecraftedItemStackInfo(int objectUID, float bonusMin, float bonusMax, List<int> runesId, List<int> runesQty)
         {
             this.objectUID = objectUID;
             this.bonusMin = bonusMin;
@@ -38,12 +38,12 @@ namespace BlueSheep.Common.Protocol.types.game.context.roleplay.job
             writer.WriteVarInt(objectUID);
             writer.WriteFloat(bonusMin);
             writer.WriteFloat(bonusMax);
-            writer.WriteShort((short)runesId.Count);
+            writer.WriteShort((short)(int)runesId.Count);
             for(int i=0;i<runesId.Count;i++)
             {
-                writer.WriteVarShort(runesId[i]);
+                writer.WriteVarShort((short)runesId[i]);
             }
-            writer.WriteShort((short)runesQty.Count);
+            writer.WriteShort((short)(int)runesQty.Count);
             for(int i=0;i<runesQty.Count;i++)
             {
                 writer.WriteVarInt(runesQty[i]);
@@ -57,7 +57,7 @@ namespace BlueSheep.Common.Protocol.types.game.context.roleplay.job
             var limit = reader.ReadUShort();
             for(int i=0;i<limit;i++)
             {
-                runesId.Add(reader.ReadVarShort());
+                runesId.Add(reader.ReadVarUhShort());
             }
             var newLimit = reader.ReadUShort();
             for(int i=0;i<newLimit;i++)

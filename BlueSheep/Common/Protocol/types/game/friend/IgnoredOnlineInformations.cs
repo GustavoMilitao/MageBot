@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class IgnoredOnlineInformations : IgnoredInformations
 {
 
-public new const short ID = 105;
-public override short TypeId
+public new const int ID = 105;
+public override int TypeId
 {
     get { return ID; }
 }

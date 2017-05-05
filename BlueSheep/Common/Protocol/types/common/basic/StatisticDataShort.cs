@@ -8,20 +8,20 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class StatisticDataShort : StatisticData
     {
-        public new const short ID = 488;
-        public virtual short TypeId
+        public new const int ID = 488;
+        public virtual int TypeId
         {
             get { return ID; }
         }
 
-        public short value;
+        public int value;
 
 
         public StatisticDataShort()
         {
         }
 
-        public StatisticDataShort(short value)
+        public StatisticDataShort(int value)
         {
             this.value = value;
 
@@ -31,7 +31,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
 
-            writer.WriteShort(value);
+            writer.WriteShort((short)value);
 
 
 

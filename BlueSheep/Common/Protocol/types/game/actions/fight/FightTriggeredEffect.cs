@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class FightTriggeredEffect : AbstractFightDispellableEffect
 {
 
-public new const short ID = 210;
-public override short TypeId
+public new const int ID = 210;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -39,14 +39,14 @@ public override short TypeId
 public int arg1;
         public int arg2;
         public int arg3;
-        public short delay;
+        public int delay;
         
 
 public FightTriggeredEffect()
 {
 }
 
-public FightTriggeredEffect(int uid, int targetId, short turnDuration, sbyte dispelable, short spellId, int effectId, int parentBoostUid, int arg1, int arg2, int arg3, short delay)
+public FightTriggeredEffect(int uid, ulong targetId, int turnDuration, sbyte dispelable, int spellId, int effectId, int parentBoostUid, int arg1, int arg2, int arg3, int delay)
          : base(uid, targetId, turnDuration, dispelable, spellId, effectId, parentBoostUid)
         {
             this.arg1 = arg1;
@@ -63,7 +63,7 @@ base.Serialize(writer);
             writer.WriteInt(arg1);
             writer.WriteInt(arg2);
             writer.WriteInt(arg3);
-            writer.WriteShort(delay);
+            writer.WriteShort((short)delay);
             
 
 }

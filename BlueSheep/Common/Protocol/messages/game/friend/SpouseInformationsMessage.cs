@@ -39,13 +39,13 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteShort(spouse.TypeId);
+            writer.WriteShort((short)spouse.TypeId);
             spouse.Serialize(writer);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            spouse = Types.ProtocolTypeManager.GetInstance<Types.FriendSpouseInformations>(reader.ReadShort());
+            spouse = Types.ProtocolTypeManager.GetInstance<Types.FriendSpouseInformations>(reader.ReadUShort());
             spouse.Deserialize(reader);
         }
         

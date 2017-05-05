@@ -27,14 +27,14 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int accountId;
-        public int playerId;
+        public ulong playerId;
         public Types.PlayerStatus status;
         
         public PlayerStatusUpdateMessage()
         {
         }
         
-        public PlayerStatusUpdateMessage(int accountId, int playerId, Types.PlayerStatus status)
+        public PlayerStatusUpdateMessage(int accountId, ulong playerId, Types.PlayerStatus status)
         {
             this.accountId = accountId;
             this.playerId = playerId;
@@ -44,8 +44,8 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteInt(accountId);
-            writer.WriteVarInt(playerId);
-            writer.WriteShort(status.TypeId);
+            writer.WriteVarLong(playerId);
+            writer.WriteShort((short)status.TypeId);
             status.Serialize(writer);
         }
         
@@ -54,10 +54,10 @@ namespace BlueSheep.Common.Protocol.Messages
             accountId = reader.ReadInt();
             if (accountId < 0)
                 throw new Exception("Forbidden value on accountId = " + accountId + ", it doesn't respect the following condition : accountId < 0");
-            playerId = reader.ReadVarInt();
+            playerId = reader.ReadVarUhLong();
             if (playerId < 0)
                 throw new Exception("Forbidden value on playerId = " + playerId + ", it doesn't respect the following condition : playerId < 0");
-            status = Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadShort());
+            status = Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadUShort());
             status.Deserialize(reader);
         }
         

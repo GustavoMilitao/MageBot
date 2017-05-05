@@ -30,21 +30,21 @@ namespace BlueSheep.Common.Protocol.Types
     public class GuildMember : CharacterMinimalInformations
     {
 
-        public new const short ID = 88;
-        public override short TypeId
+        public new const int ID = 88;
+        public override int TypeId
         {
             get { return ID; }
         }
 
         public sbyte breed;
         public bool sex;
-        public short rank;
+        public int rank;
         public double givenExperience;
         public sbyte experienceGivenPercent;
         public int rights;
         public sbyte connected;
         public sbyte alignmentSide;
-        public ushort hoursSinceLastConnection;
+        public int hoursSinceLastConnection;
         public sbyte moodSmileyId;
         public int accountId;
         public int achievementPoints;
@@ -55,7 +55,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public GuildMember(uint id, byte level, string name, sbyte breed, bool sex, short rank, double givenExperience, sbyte experienceGivenPercent, int rights, sbyte connected, sbyte alignmentSide, ushort hoursSinceLastConnection, sbyte moodSmileyId, int accountId, int achievementPoints, Types.PlayerStatus status)
+        public GuildMember(uint id, byte level, string name, sbyte breed, bool sex, int rank, double givenExperience, sbyte experienceGivenPercent, int rights, sbyte connected, sbyte alignmentSide, int hoursSinceLastConnection, sbyte moodSmileyId, int accountId, int achievementPoints, Types.PlayerStatus status)
                  : base(id, level, name)
         {
             this.breed = breed;
@@ -80,17 +80,17 @@ namespace BlueSheep.Common.Protocol.Types
             base.Serialize(writer);
             writer.WriteSByte(breed);
             writer.WriteBoolean(sex);
-            writer.WriteVarShort(rank);
+            writer.WriteVarShort((short)rank);
             writer.WriteDouble(givenExperience);
             writer.WriteSByte(experienceGivenPercent);
             writer.WriteVarInt(rights);
             writer.WriteSByte(connected);
             writer.WriteSByte(alignmentSide);
-            writer.WriteUShort(hoursSinceLastConnection);
+            writer.WriteUShort((ushort)hoursSinceLastConnection);
             writer.WriteSByte(moodSmileyId);
             writer.WriteInt(accountId);
             writer.WriteInt(achievementPoints);
-            writer.WriteShort(status.TypeId);
+            writer.WriteShort((short)status.TypeId);
             status.Serialize(writer);
 
 
@@ -102,7 +102,7 @@ namespace BlueSheep.Common.Protocol.Types
             base.Deserialize(reader);
             breed = reader.ReadSByte();
             sex = reader.ReadBoolean();
-            rank = reader.ReadVarShort();
+            rank = reader.ReadVarUhShort();
             if (rank < 0)
                 throw new Exception("Forbidden value on rank = " + rank + ", it doesn't respect the following condition : rank < 0");
             givenExperience = reader.ReadVarUhLong();
@@ -126,7 +126,7 @@ namespace BlueSheep.Common.Protocol.Types
             if (accountId < 0)
                 throw new Exception("Forbidden value on accountId = " + accountId + ", it doesn't respect the following condition : accountId < 0");
             achievementPoints = reader.ReadInt();
-            status = (PlayerStatus)Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadShort());
+            status = (PlayerStatus)Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadUShort());
             status.Deserialize(reader);
 
 

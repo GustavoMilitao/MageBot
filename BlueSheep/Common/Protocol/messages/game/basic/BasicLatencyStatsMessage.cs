@@ -26,15 +26,15 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public ushort latency;
-        public short sampleCount;
-        public short max;
+        public int latency;
+        public int sampleCount;
+        public int max;
         
         public BasicLatencyStatsMessage()
         {
         }
         
-        public BasicLatencyStatsMessage(ushort latency, short sampleCount, short max)
+        public BasicLatencyStatsMessage(int latency, int sampleCount, int max)
         {
             this.latency = latency;
             this.sampleCount = sampleCount;
@@ -43,9 +43,9 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteUShort(latency);
-            writer.WriteVarShort(sampleCount);
-            writer.WriteVarShort(max);
+            writer.WriteUShort((ushort)latency);
+            writer.WriteVarShort((short)sampleCount);
+            writer.WriteVarShort((short)max);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -53,10 +53,10 @@ namespace BlueSheep.Common.Protocol.Messages
             latency = reader.ReadUShort();
             if (latency < 0 || latency > 65535)
                 throw new Exception("Forbidden value on latency = " + latency + ", it doesn't respect the following condition : latency < 0 || latency > 65535");
-            sampleCount = reader.ReadVarShort();
+            sampleCount = reader.ReadVarUhShort();
             if (sampleCount < 0)
                 throw new Exception("Forbidden value on sampleCount = " + sampleCount + ", it doesn't respect the following condition : sampleCount < 0");
-            max = reader.ReadVarShort();
+            max = reader.ReadVarUhShort();
             if (max < 0)
                 throw new Exception("Forbidden value on max = " + max + ", it doesn't respect the following condition : max < 0");
         }

@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class TaxCollectorFightersInformation
 {
 
-public new const short ID = 169;
-public virtual short TypeId
+public new const int ID = 169;
+public virtual int TypeId
 {
     get { return ID; }
 }
@@ -60,13 +60,13 @@ writer.WriteInt(collectorId);
             writer.WriteUShort((ushort)allyCharactersInformations.Length);
             foreach (var entry in allyCharactersInformations)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             writer.WriteUShort((ushort)enemyCharactersInformations.Length);
             foreach (var entry in enemyCharactersInformations)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             
@@ -81,14 +81,14 @@ collectorId = reader.ReadInt();
             allyCharactersInformations = new Types.CharacterMinimalPlusLookInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                 allyCharactersInformations[i] = Types.ProtocolTypeManager.GetInstance<Types.CharacterMinimalPlusLookInformations>(reader.ReadShort());
+                 allyCharactersInformations[i] = Types.ProtocolTypeManager.GetInstance<Types.CharacterMinimalPlusLookInformations>(reader.ReadUShort());
                  allyCharactersInformations[i].Deserialize(reader);
             }
             limit = reader.ReadUShort();
             enemyCharactersInformations = new Types.CharacterMinimalPlusLookInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                 enemyCharactersInformations[i] = Types.ProtocolTypeManager.GetInstance<Types.CharacterMinimalPlusLookInformations>(reader.ReadShort());
+                 enemyCharactersInformations[i] = Types.ProtocolTypeManager.GetInstance<Types.CharacterMinimalPlusLookInformations>(reader.ReadUShort());
                  enemyCharactersInformations[i].Deserialize(reader);
             }
             

@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public ObtainedItemWithBonusMessage(short genericId, int baseQuantity, int bonusQuantity)
+        public ObtainedItemWithBonusMessage(int genericId, int baseQuantity, int bonusQuantity)
          : base(genericId, baseQuantity)
         {
             this.bonusQuantity = bonusQuantity;

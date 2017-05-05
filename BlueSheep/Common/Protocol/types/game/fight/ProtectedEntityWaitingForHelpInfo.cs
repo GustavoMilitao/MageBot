@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class ProtectedEntityWaitingForHelpInfo
 {
 
-public new const short ID = 186;
-public virtual short TypeId
+public new const int ID = 186;
+public virtual int TypeId
 {
     get { return ID; }
 }

@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class GuildVersatileInformations
 {
 
-public new const short ID = 435;
-public virtual short TypeId
+public new const int ID = 435;
+public virtual int TypeId
 {
     get { return ID; }
 }

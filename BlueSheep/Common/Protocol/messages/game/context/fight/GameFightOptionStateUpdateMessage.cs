@@ -26,7 +26,7 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short fightId;
+        public int fightId;
         public sbyte teamId;
         public sbyte option;
         public bool state;
@@ -35,7 +35,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameFightOptionStateUpdateMessage(short fightId, sbyte teamId, sbyte option, bool state)
+        public GameFightOptionStateUpdateMessage(int fightId, sbyte teamId, sbyte option, bool state)
         {
             this.fightId = fightId;
             this.teamId = teamId;
@@ -45,7 +45,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteShort(fightId);
+            writer.WriteShort((short)fightId);
             writer.WriteSByte(teamId);
             writer.WriteSByte(option);
             writer.WriteBoolean(state);

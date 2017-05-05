@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short dungeonId;
+        public int dungeonId;
         public bool available;
         
         public DungeonKeyRingUpdateMessage()
         {
         }
         
-        public DungeonKeyRingUpdateMessage(short dungeonId, bool available)
+        public DungeonKeyRingUpdateMessage(int dungeonId, bool available)
         {
             this.dungeonId = dungeonId;
             this.available = available;
@@ -41,13 +41,13 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(dungeonId);
+            writer.WriteVarShort((short)dungeonId);
             writer.WriteBoolean(available);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            dungeonId = reader.ReadVarShort();
+            dungeonId = reader.ReadVarUhShort();
             if (dungeonId < 0)
                 throw new Exception("Forbidden value on dungeonId = " + dungeonId + ", it doesn't respect the following condition : dungeonId < 0");
             available = reader.ReadBoolean();

@@ -32,15 +32,15 @@ namespace BlueSheep.Common.Protocol.Messages
         public Types.VersionExtended version;
         public string lang;
         public sbyte[] credentials;
-        public short serverId;
+        public int serverId;
         public double sessionOptionalSalt;
-        public List<short> failedAttempts;
+        public List<int> failedAttempts;
         
         public IdentificationMessage()
         {
         }
         
-        public IdentificationMessage(bool autoconnect, bool useCertificate, bool useLoginToken, Types.VersionExtended version, string lang, sbyte[] credentials, short serverId, double sessionOptionalSalt, List<short> failedAttempts)
+        public IdentificationMessage(bool autoconnect, bool useCertificate, bool useLoginToken, Types.VersionExtended version, string lang, sbyte[] credentials, int serverId, double sessionOptionalSalt, List<int> failedAttempts)
         {
             this.autoconnect = autoconnect;
             this.useCertificate = useCertificate;
@@ -67,11 +67,11 @@ namespace BlueSheep.Common.Protocol.Messages
             {
                  writer.WriteSByte(entry);
             }
-            writer.WriteShort(serverId);
+            writer.WriteShort((short)serverId);
             writer.WriteDouble(sessionOptionalSalt);
-            writer.WriteShort((short)failedAttempts.Count);
-            foreach (short s in failedAttempts)
-                writer.WriteShort(s);
+            writer.WriteShort((short)(int)failedAttempts.Count);
+            foreach (int s in failedAttempts)
+                writer.WriteShort((short)s);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -93,11 +93,11 @@ namespace BlueSheep.Common.Protocol.Messages
             sessionOptionalSalt = reader.ReadDouble();
             if (sessionOptionalSalt < -9.007199254740992E15 || sessionOptionalSalt > 9.007199254740992E15)
                 throw new Exception("Forbidden value on sessionOptionalSalt = " + sessionOptionalSalt + ", it doesn't respect the following condition : sessionOptionalSalt < -9.007199254740992E15 || sessionOptionalSalt > 9.007199254740992E15");
-            ushort length = reader.ReadUShort();
-            failedAttempts = new List<short>();
+            int length = reader.ReadUShort();
+            failedAttempts = new List<int>();
             for (int i = 0; i < length; i++)
             {
-                failedAttempts.Add(reader.ReadVarShort());
+                failedAttempts.Add(reader.ReadVarUhShort());
             }
 
         }

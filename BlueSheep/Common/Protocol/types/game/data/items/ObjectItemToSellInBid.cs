@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class ObjectItemToSellInBid : ObjectItemToSell
 {
 
-public new const short ID = 164;
-public override short TypeId
+public new const int ID = 164;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public ObjectItemToSellInBid()
 {
 }
 
-public ObjectItemToSellInBid(short objectGID, Types.ObjectEffect[] effects, int objectUID, int quantity, int objectPrice, int unsoldDelay)
+public ObjectItemToSellInBid(int objectGID, Types.ObjectEffect[] effects, int objectUID, int quantity, int objectPrice, int unsoldDelay)
          : base(objectGID, effects, objectUID, quantity, objectPrice)
         {
             this.unsoldDelay = unsoldDelay;

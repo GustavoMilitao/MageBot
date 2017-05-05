@@ -7,7 +7,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class IdolsPreset
     {
-        public const short ID = 491;
+        public const int ID = 491;
         public uint presetId = 0;
         public uint symbolId = 0;
         public List<uint> idolId;
@@ -28,7 +28,7 @@ namespace BlueSheep.Common.Protocol.Types
                 throw new Exception("Forbidden value (" + symbolId + ") on element symbolId.");
             }
             writer.WriteByte((byte)symbolId);
-            writer.WriteShort((short)idolId.Count);
+            writer.WriteShort((short)(int)idolId.Count);
             uint _loc2_ = 0;
             while (_loc2_ < idolId.Count)
             {
@@ -36,7 +36,7 @@ namespace BlueSheep.Common.Protocol.Types
                 {
                     throw new Exception("Forbidden value (" + idolId[(int)_loc2_] + ") on element 3 (starting at 1) of idolId.");
                 }
-                writer.WriteVarShort((short)idolId[(int)_loc2_]);
+                writer.WriteVarShort((short)(int)idolId[(int)_loc2_]);
                 _loc2_++;
             }
         }

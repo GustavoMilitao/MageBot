@@ -30,17 +30,17 @@ namespace BlueSheep.Common.Protocol.Types
 public class AbstractFightDispellableEffect
 {
 
-public new const short ID = 206;
-public virtual short TypeId
+public new const int ID = 206;
+public virtual int TypeId
 {
     get { return ID; }
 }
 
 public int uid;
-        public int targetId;
-        public short turnDuration;
+        public ulong targetId;
+        public int turnDuration;
         public sbyte dispelable;
-        public short spellId;
+        public int spellId;
         public int effectId;
         public int parentBoostUid;
         
@@ -49,7 +49,7 @@ public AbstractFightDispellableEffect()
 {
 }
 
-public AbstractFightDispellableEffect(int uid, int targetId, short turnDuration, sbyte dispelable, short spellId, int effectId, int parentBoostUid)
+public AbstractFightDispellableEffect(int uid, ulong targetId, int turnDuration, sbyte dispelable, int spellId, int effectId, int parentBoostUid)
         {
             this.uid = uid;
             this.targetId = targetId;
@@ -65,10 +65,10 @@ public virtual void Serialize(BigEndianWriter writer)
 {
 
 writer.WriteVarInt(uid);
-            writer.WriteInt(targetId);
-            writer.WriteShort(turnDuration);
+            writer.WriteULong(targetId);
+            writer.WriteShort((short)turnDuration);
             writer.WriteSByte(dispelable);
-            writer.WriteVarShort(spellId);
+            writer.WriteVarShort((short)spellId);
             writer.WriteVarInt(effectId);
             writer.WriteVarInt(parentBoostUid);
             
@@ -81,12 +81,12 @@ public virtual void Deserialize(BigEndianReader reader)
 uid = reader.ReadVarInt();
             if (uid < 0)
                 throw new Exception("Forbidden value on uid = " + uid + ", it doesn't respect the following condition : uid < 0");
-            targetId = reader.ReadInt();
+            targetId = reader.ReadULong();
             turnDuration = reader.ReadShort();
             dispelable = reader.ReadSByte();
             if (dispelable < 0)
                 throw new Exception("Forbidden value on dispelable = " + dispelable + ", it doesn't respect the following condition : dispelable < 0");
-            spellId = reader.ReadVarShort();
+            spellId = reader.ReadVarUhShort();
             if (spellId < 0)
                 throw new Exception("Forbidden value on spellId = " + spellId + ", it doesn't respect the following condition : spellId < 0");
             effectId = reader.ReadVarInt();

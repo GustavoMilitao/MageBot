@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public ushort position;
-        public ushort total;
+        public int position;
+        public int total;
         
         public QueueStatusMessage()
         {
         }
         
-        public QueueStatusMessage(ushort position, ushort total)
+        public QueueStatusMessage(int position, int total)
         {
             this.position = position;
             this.total = total;
@@ -41,8 +41,8 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteUShort(position);
-            writer.WriteUShort(total);
+            writer.WriteUShort((ushort)position);
+            writer.WriteUShort((ushort)total);
         }
         
         public override void Deserialize(BigEndianReader reader)

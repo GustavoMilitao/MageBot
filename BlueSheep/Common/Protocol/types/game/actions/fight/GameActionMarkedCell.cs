@@ -30,13 +30,13 @@ namespace BlueSheep.Common.Protocol.Types
 public class GameActionMarkedCell
 {
 
-public new const short ID = 85;
-public virtual short TypeId
+public new const int ID = 85;
+public virtual int TypeId
 {
     get { return ID; }
 }
 
-public short cellId;
+public int cellId;
         public sbyte zoneSize;
         public int cellColor;
         public sbyte cellsType;
@@ -46,7 +46,7 @@ public GameActionMarkedCell()
 {
 }
 
-public GameActionMarkedCell(short cellId, sbyte zoneSize, int cellColor, sbyte cellsType)
+public GameActionMarkedCell(int cellId, sbyte zoneSize, int cellColor, sbyte cellsType)
         {
             this.cellId = cellId;
             this.zoneSize = zoneSize;
@@ -58,7 +58,7 @@ public GameActionMarkedCell(short cellId, sbyte zoneSize, int cellColor, sbyte c
 public virtual void Serialize(BigEndianWriter writer)
 {
 
-writer.WriteVarShort(cellId);
+writer.WriteVarShort((short)cellId);
             writer.WriteSByte(zoneSize);
             writer.WriteInt(cellColor);
             writer.WriteSByte(cellsType);
@@ -69,7 +69,7 @@ writer.WriteVarShort(cellId);
 public virtual void Deserialize(BigEndianReader reader)
 {
 
-cellId = reader.ReadVarShort();
+cellId = reader.ReadVarUhShort();
             if (cellId < 0 || cellId > 559)
                 throw new Exception("Forbidden value on cellId = " + cellId + ", it doesn't respect the following condition : cellId < 0 || cellId > 559");
             zoneSize = reader.ReadSByte();

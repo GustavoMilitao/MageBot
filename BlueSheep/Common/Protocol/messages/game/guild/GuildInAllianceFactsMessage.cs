@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GuildInAllianceFactsMessage(Types.GuildFactSheetInformations infos, int creationDate, short nbTaxCollectors, bool enabled, Types.CharacterMinimalInformations[] members, Types.BasicNamedAllianceInformations allianceInfos)
+        public GuildInAllianceFactsMessage(Types.GuildFactSheetInformations infos, int creationDate, int nbTaxCollectors, bool enabled, Types.CharacterMinimalInformations[] members, Types.BasicNamedAllianceInformations allianceInfos)
          : base(infos, creationDate, nbTaxCollectors, enabled, members)
         {
             this.allianceInfos = allianceInfos;

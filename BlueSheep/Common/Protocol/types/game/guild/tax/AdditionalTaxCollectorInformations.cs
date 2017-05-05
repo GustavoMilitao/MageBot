@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class AdditionalTaxCollectorInformations
 {
 
-public new const short ID = 165;
-public virtual short TypeId
+public new const int ID = 165;
+public virtual int TypeId
 {
     get { return ID; }
 }

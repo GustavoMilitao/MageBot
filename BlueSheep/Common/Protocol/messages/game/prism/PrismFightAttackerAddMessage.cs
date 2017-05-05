@@ -26,15 +26,15 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short subAreaId;
-        public short fightId;
+        public int subAreaId;
+        public int fightId;
         public Types.CharacterMinimalPlusLookInformations attacker;
         
         public PrismFightAttackerAddMessage()
         {
         }
         
-        public PrismFightAttackerAddMessage(short subAreaId, short fightId, Types.CharacterMinimalPlusLookInformations attacker)
+        public PrismFightAttackerAddMessage(int subAreaId, int fightId, Types.CharacterMinimalPlusLookInformations attacker)
         {
             this.subAreaId = subAreaId;
             this.fightId = fightId;
@@ -43,21 +43,21 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(subAreaId);
-            writer.WriteVarShort(fightId);
-            writer.WriteShort(attacker.TypeId);
+            writer.WriteVarShort((short)subAreaId);
+            writer.WriteVarShort((short)fightId);
+            writer.WriteShort((short)attacker.TypeId);
             attacker.Serialize(writer);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
-            fightId = reader.ReadVarShort();
+            fightId = reader.ReadVarUhShort();
             if (fightId < 0)
                 throw new Exception("Forbidden value on fightId = " + fightId + ", it doesn't respect the following condition : fightId < 0");
-            attacker = Types.ProtocolTypeManager.GetInstance<Types.CharacterMinimalPlusLookInformations>(reader.ReadShort());
+            attacker = Types.ProtocolTypeManager.GetInstance<Types.CharacterMinimalPlusLookInformations>(reader.ReadUShort());
             attacker.Deserialize(reader);
         }
         

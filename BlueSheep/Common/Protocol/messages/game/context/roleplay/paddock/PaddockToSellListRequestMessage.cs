@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short pageIndex;
+        public int pageIndex;
         
         public PaddockToSellListRequestMessage()
         {
         }
         
-        public PaddockToSellListRequestMessage(short pageIndex)
+        public PaddockToSellListRequestMessage(int pageIndex)
         {
             this.pageIndex = pageIndex;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(pageIndex);
+            writer.WriteVarShort((short)pageIndex);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            pageIndex = reader.ReadVarShort();
+            pageIndex = reader.ReadVarUhShort();
             if (pageIndex < 0)
                 throw new Exception("Forbidden value on pageIndex = " + pageIndex + ", it doesn't respect the following condition : pageIndex < 0");
         }

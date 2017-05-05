@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class JobCrafterDirectoryEntryPlayerInfo
 {
 
-public new const short ID = 194;
-public virtual short TypeId
+public new const int ID = 194;
+public virtual int TypeId
 {
     get { return ID; }
 }
@@ -42,10 +42,10 @@ public int playerId;
         public sbyte breed;
         public bool sex;
         public bool isInWorkshop;
-        public short worldX;
-        public short worldY;
+        public int worldX;
+        public int worldY;
         public int mapId;
-        public short subAreaId;
+        public int subAreaId;
         public Types.PlayerStatus status;
         
 
@@ -53,7 +53,7 @@ public JobCrafterDirectoryEntryPlayerInfo()
 {
 }
 
-public JobCrafterDirectoryEntryPlayerInfo(int playerId, string playerName, sbyte alignmentSide, sbyte breed, bool sex, bool isInWorkshop, short worldX, short worldY, int mapId, short subAreaId, Types.PlayerStatus status)
+public JobCrafterDirectoryEntryPlayerInfo(int playerId, string playerName, sbyte alignmentSide, sbyte breed, bool sex, bool isInWorkshop, int worldX, int worldY, int mapId, int subAreaId, Types.PlayerStatus status)
         {
             this.playerId = playerId;
             this.playerName = playerName;
@@ -78,11 +78,11 @@ writer.WriteVarInt(playerId);
             writer.WriteSByte(breed);
             writer.WriteBoolean(sex);
             writer.WriteBoolean(isInWorkshop);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             writer.WriteInt(mapId);
-            writer.WriteVarShort(subAreaId);
-            writer.WriteShort(status.TypeId);
+            writer.WriteVarShort((short)subAreaId);
+            writer.WriteShort((short)status.TypeId);
             status.Serialize(writer);
             
 
@@ -106,10 +106,10 @@ playerId = reader.ReadVarInt();
             if (worldY < -255 || worldY > 255)
                 throw new Exception("Forbidden value on worldY = " + worldY + ", it doesn't respect the following condition : worldY < -255 || worldY > 255");
             mapId = reader.ReadInt();
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
-            status = Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadShort());
+            status = Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadUShort());
             status.Deserialize(reader);
             
 

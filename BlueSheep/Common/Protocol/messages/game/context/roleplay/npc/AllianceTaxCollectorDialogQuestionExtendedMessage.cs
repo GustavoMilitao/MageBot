@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public AllianceTaxCollectorDialogQuestionExtendedMessage(Types.BasicGuildInformations guildInfo, short maxPods, short prospecting, short wisdom, sbyte taxCollectorsCount, int taxCollectorAttack, int kamas, long experience, int pods, int itemsValue, Types.BasicNamedAllianceInformations alliance)
+        public AllianceTaxCollectorDialogQuestionExtendedMessage(Types.BasicGuildInformations guildInfo, int maxPods, int prospecting, int wisdom, sbyte taxCollectorsCount, int taxCollectorAttack, int kamas, long experience, int pods, int itemsValue, Types.BasicNamedAllianceInformations alliance)
          : base(guildInfo, maxPods, prospecting, wisdom, taxCollectorsCount, taxCollectorAttack, kamas, experience, pods, itemsValue)
         {
             this.alliance = alliance;

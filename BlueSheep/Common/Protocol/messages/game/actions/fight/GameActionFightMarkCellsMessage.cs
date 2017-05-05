@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameActionFightMarkCellsMessage(short actionId, int sourceId, Types.GameActionMark mark)
+        public GameActionFightMarkCellsMessage(int actionId, ulong sourceId, Types.GameActionMark mark)
          : base(actionId, sourceId)
         {
             this.mark = mark;

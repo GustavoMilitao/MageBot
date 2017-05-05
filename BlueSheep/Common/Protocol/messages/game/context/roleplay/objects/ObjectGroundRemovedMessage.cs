@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short cell;
+        public int cell;
         
         public ObjectGroundRemovedMessage()
         {
         }
         
-        public ObjectGroundRemovedMessage(short cell)
+        public ObjectGroundRemovedMessage(int cell)
         {
             this.cell = cell;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(cell);
+            writer.WriteVarShort((short)cell);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            cell = reader.ReadVarShort();
+            cell = reader.ReadVarUhShort();
             if (cell < 0 || cell > 559)
                 throw new Exception("Forbidden value on cell = " + cell + ", it doesn't respect the following condition : cell < 0 || cell > 559");
         }

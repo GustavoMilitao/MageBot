@@ -30,22 +30,22 @@ namespace BlueSheep.Common.Protocol.Types
     public class SpellItem : Item
     {
 
-        public new const short ID = 49;
-        public override short TypeId
+        public new const int ID = 49;
+        public override int TypeId
         {
             get { return ID; }
         }
 
 
         public int spellId;
-        public short spellLevel;
+        public int spellLevel;
 
 
         public SpellItem()
         {
         }
 
-        public SpellItem(int spellId, short spellLevel)
+        public SpellItem(int spellId, int spellLevel)
         {
             this.spellId = spellId;
             this.spellLevel = spellLevel;
@@ -57,7 +57,7 @@ namespace BlueSheep.Common.Protocol.Types
 
             base.Serialize(writer);
             writer.WriteInt(spellId);
-            writer.WriteShort(spellLevel);
+            writer.WriteShort((short)spellLevel);
 
 
         }

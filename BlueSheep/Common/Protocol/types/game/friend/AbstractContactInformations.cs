@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class AbstractContactInformations
 {
 
-public new const short ID = 380;
-public virtual short TypeId
+public new const int ID = 380;
+public virtual int TypeId
 {
     get { return ID; }
 }

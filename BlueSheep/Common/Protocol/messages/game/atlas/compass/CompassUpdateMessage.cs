@@ -42,7 +42,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteSByte(type);
-            writer.WriteShort(coords.TypeId);
+            writer.WriteShort((short)coords.TypeId);
             coords.Serialize(writer);
         }
         
@@ -51,7 +51,7 @@ namespace BlueSheep.Common.Protocol.Messages
             type = reader.ReadSByte();
             if (type < 0)
                 throw new Exception("Forbidden value on type = " + type + ", it doesn't respect the following condition : type < 0");
-            coords = Types.ProtocolTypeManager.GetInstance<Types.MapCoordinates>(reader.ReadShort());
+            coords = Types.ProtocolTypeManager.GetInstance<Types.MapCoordinates>(reader.ReadUShort());
             coords.Deserialize(reader);
         }
         

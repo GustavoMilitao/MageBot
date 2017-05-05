@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int targetId;
-        public short delta;
+        public ulong targetId;
+        public int delta;
         
         public GameActionFightPointsVariationMessage()
         {
         }
         
-        public GameActionFightPointsVariationMessage(short actionId, int sourceId, int targetId, short delta)
+        public GameActionFightPointsVariationMessage(int actionId, ulong sourceId, ulong targetId, int delta)
          : base(actionId, sourceId)
         {
             this.targetId = targetId;
@@ -43,14 +43,14 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteInt(targetId);
-            writer.WriteShort(delta);
+            writer.WriteULong(targetId);
+            writer.WriteShort((short)delta);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            targetId = reader.ReadInt();
+            targetId = reader.ReadULong();
             delta = reader.ReadShort();
         }
         

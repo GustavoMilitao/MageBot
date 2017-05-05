@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class HouseInformationsForGuild
 {
 
-public new const short ID = 170;
-public virtual short TypeId
+public new const int ID = 170;
+public virtual int TypeId
 {
     get { return ID; }
 }
@@ -39,10 +39,10 @@ public virtual short TypeId
 public int houseId;
         public int modelId;
         public string ownerName;
-        public short worldX;
-        public short worldY;
+        public int worldX;
+        public int worldY;
         public int mapId;
-        public short subAreaId;
+        public int subAreaId;
         public int[] skillListIds;
         public int guildshareParams;
         
@@ -51,7 +51,7 @@ public HouseInformationsForGuild()
 {
 }
 
-public HouseInformationsForGuild(int houseId, int modelId, string ownerName, short worldX, short worldY, int mapId, short subAreaId, int[] skillListIds, int guildshareParams)
+public HouseInformationsForGuild(int houseId, int modelId, string ownerName, int worldX, int worldY, int mapId, int subAreaId, int[] skillListIds, int guildshareParams)
         {
             this.houseId = houseId;
             this.modelId = modelId;
@@ -72,10 +72,10 @@ public virtual void Serialize(BigEndianWriter writer)
     writer.WriteVarInt(houseId);
     writer.WriteVarInt(modelId);
             writer.WriteUTF(ownerName);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             writer.WriteInt(mapId);
-            writer.WriteVarShort(subAreaId);
+            writer.WriteVarShort((short)subAreaId);
             writer.WriteUShort((ushort)skillListIds.Length);
             foreach (var entry in skillListIds)
             {
@@ -104,7 +104,7 @@ public virtual void Deserialize(BigEndianReader reader)
             if (worldY < -255 || worldY > 255)
                 throw new Exception("Forbidden value on worldY = " + worldY + ", it doesn't respect the following condition : worldY < -255 || worldY > 255");
             mapId = reader.ReadInt();
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             var limit = reader.ReadUShort();

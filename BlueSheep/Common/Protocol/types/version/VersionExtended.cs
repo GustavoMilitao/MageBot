@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class VersionExtended : Version
 {
 
-public new const short ID = 393;
-public override short TypeId
+public new const int ID = 393;
+public override int TypeId
 {
     get { return ID; }
 }

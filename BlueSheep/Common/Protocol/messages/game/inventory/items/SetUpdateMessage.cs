@@ -26,15 +26,15 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short setId;
-        public short[] setObjects;
+        public int setId;
+        public int[] setObjects;
         public Types.ObjectEffect[] setEffects;
         
         public SetUpdateMessage()
         {
         }
         
-        public SetUpdateMessage(short setId, short[] setObjects, Types.ObjectEffect[] setEffects)
+        public SetUpdateMessage(int setId, int[] setObjects, Types.ObjectEffect[] setEffects)
         {
             this.setId = setId;
             this.setObjects = setObjects;
@@ -43,36 +43,36 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(setId);
+            writer.WriteVarShort((short)setId);
             writer.WriteUShort((ushort)setObjects.Length);
             foreach (var entry in setObjects)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)setEffects.Length);
             foreach (var entry in setEffects)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            setId = reader.ReadVarShort();
+            setId = reader.ReadVarUhShort();
             if (setId < 0)
                 throw new Exception("Forbidden value on setId = " + setId + ", it doesn't respect the following condition : setId < 0");
             var limit = reader.ReadUShort();
-            setObjects = new short[limit];
+            setObjects = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 setObjects[i] = reader.ReadVarShort();
+                 setObjects[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
             setEffects = new Types.ObjectEffect[limit];
             for (int i = 0; i < limit; i++)
             {
-                 setEffects[i] = Types.ProtocolTypeManager.GetInstance<Types.ObjectEffect>(reader.ReadShort());
+                 setEffects[i] = Types.ProtocolTypeManager.GetInstance<Types.ObjectEffect>(reader.ReadUShort());
                  setEffects[i].Deserialize(reader);
             }
         }

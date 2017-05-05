@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class ObjectItemQuantity : Item
 {
 
-public new const short ID = 119;
-public override short TypeId
+public new const int ID = 119;
+public override int TypeId
 {
     get { return ID; }
 }

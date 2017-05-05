@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class ObjectItemInformationWithQuantity : ObjectItemMinimalInformation
 {
 
-public new const short ID = 387;
-public override short TypeId
+public new const int ID = 387;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public ObjectItemInformationWithQuantity()
 {
 }
 
-public ObjectItemInformationWithQuantity(short objectGID, Types.ObjectEffect[] effects, int quantity)
+public ObjectItemInformationWithQuantity(int objectGID, Types.ObjectEffect[] effects, int quantity)
          : base(objectGID, effects)
         {
             this.quantity = quantity;

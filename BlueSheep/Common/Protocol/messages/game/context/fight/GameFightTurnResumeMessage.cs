@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameFightTurnResumeMessage(int id, int waitTime, int remainingTime)
+        public GameFightTurnResumeMessage(ulong id, int waitTime, int remainingTime)
          : base(id, waitTime)
         {
             this.remainingTime = remainingTime;

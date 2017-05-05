@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] spellsId;
-        public short boostPoint;
+        public int[] spellsId;
+        public int boostPoint;
         
         public SpellForgottenMessage()
         {
         }
         
-        public SpellForgottenMessage(short[] spellsId, short boostPoint)
+        public SpellForgottenMessage(int[] spellsId, int boostPoint)
         {
             this.spellsId = spellsId;
             this.boostPoint = boostPoint;
@@ -44,20 +44,20 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)spellsId.Length);
             foreach (var entry in spellsId)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
-            writer.WriteVarShort(boostPoint);
+            writer.WriteVarShort((short)boostPoint);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            spellsId = new short[limit];
+            spellsId = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 spellsId[i] = reader.ReadVarShort();
+                 spellsId[i] = reader.ReadVarUhShort();
             }
-            boostPoint = reader.ReadVarShort();
+            boostPoint = reader.ReadVarUhShort();
             if (boostPoint < 0)
                 throw new Exception("Forbidden value on boostPoint = " + boostPoint + ", it doesn't respect the following condition : boostPoint < 0");
         }

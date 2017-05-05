@@ -30,13 +30,13 @@ namespace BlueSheep.Common.Protocol.Types
 public class GameFightMonsterInformations : GameFightAIInformations
 {
 
-public new const short ID = 29;
-public override short TypeId
+public new const int ID = 29;
+public override int TypeId
 {
     get { return ID; }
 }
 
-public short creatureGenericId;
+public int creatureGenericId;
         public sbyte creatureGrade;
         
 
@@ -44,7 +44,7 @@ public GameFightMonsterInformations()
 {
 }
 
-public GameFightMonsterInformations(int contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, sbyte teamId, sbyte wave, bool alive, Types.GameFightMinimalStats stats, short[] previousPositions, short creatureGenericId, sbyte creatureGrade)
+public GameFightMonsterInformations(ulong contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, sbyte teamId, sbyte wave, bool alive, Types.GameFightMinimalStats stats, int[] previousPositions, int creatureGenericId, sbyte creatureGrade)
          : base(contextualId, look, disposition, teamId, wave, alive, stats, previousPositions)
         {
             this.creatureGenericId = creatureGenericId;
@@ -56,7 +56,7 @@ public override void Serialize(BigEndianWriter writer)
 {
 
 base.Serialize(writer);
-            writer.WriteVarShort(creatureGenericId);
+            writer.WriteVarShort((short)creatureGenericId);
             writer.WriteSByte(creatureGrade);
             
 
@@ -66,7 +66,7 @@ public override void Deserialize(BigEndianReader reader)
 {
 
 base.Deserialize(reader);
-            creatureGenericId = reader.ReadVarShort();
+            creatureGenericId = reader.ReadVarUhShort();
             if (creatureGenericId < 0)
                 throw new Exception("Forbidden value on creatureGenericId = " + creatureGenericId + ", it doesn't respect the following condition : creatureGenericId < 0");
             creatureGrade = reader.ReadSByte();

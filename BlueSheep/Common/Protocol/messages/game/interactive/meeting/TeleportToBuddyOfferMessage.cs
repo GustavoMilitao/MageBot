@@ -26,7 +26,7 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short dungeonId;
+        public int dungeonId;
         public int buddyId;
         public int timeLeft;
         
@@ -34,7 +34,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public TeleportToBuddyOfferMessage(short dungeonId, int buddyId, int timeLeft)
+        public TeleportToBuddyOfferMessage(int dungeonId, int buddyId, int timeLeft)
         {
             this.dungeonId = dungeonId;
             this.buddyId = buddyId;
@@ -43,14 +43,14 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(dungeonId);
+            writer.WriteVarShort((short)dungeonId);
             writer.WriteVarInt(buddyId);
             writer.WriteVarInt(timeLeft);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            dungeonId = reader.ReadVarShort();
+            dungeonId = reader.ReadVarUhShort();
             if (dungeonId < 0)
                 throw new Exception("Forbidden value on dungeonId = " + dungeonId + ", it doesn't respect the following condition : dungeonId < 0");
             buddyId = reader.ReadVarInt();

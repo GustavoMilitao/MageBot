@@ -27,48 +27,48 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class ServerSessionConstant
-{
+    public class ServerSessionConstant
+    {
 
-public new const short ID = 430;
-public virtual short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 430;
+        public virtual int TypeId
+        {
+            get { return ID; }
+        }
 
-public short id;
-        
+        public ulong id;
 
-public ServerSessionConstant()
-{
-}
 
-public ServerSessionConstant(short id)
+        public ServerSessionConstant()
+        {
+        }
+
+        public ServerSessionConstant(ulong id)
         {
             this.id = id;
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
 
-writer.WriteVarShort(id);
-            
+        public virtual void Serialize(BigEndianWriter writer)
+        {
 
-}
+            writer.WriteVarShort((short)id);
 
-public virtual void Deserialize(BigEndianReader reader)
-{
 
-id = reader.ReadVarShort();
+        }
+
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            id = reader.ReadVarUhShort();
             if (id < 0)
                 throw new Exception("Forbidden value on id = " + id + ", it doesn't respect the following condition : id < 0");
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

@@ -30,21 +30,21 @@ namespace BlueSheep.Common.Protocol.Types
     public class SkillActionDescriptionCollect : SkillActionDescriptionTimed
     {
 
-        public new const short ID = 99;
-        public override short TypeId
+        public new const int ID = 99;
+        public override int TypeId
         {
             get { return ID; }
         }
 
-        public ushort min;
-        public ushort max;
+        public int min;
+        public int max;
 
 
         public SkillActionDescriptionCollect()
         {
         }
 
-        public SkillActionDescriptionCollect(ushort skillId, byte time, ushort min, ushort max)
+        public SkillActionDescriptionCollect(int skillId, byte time, int min, int max)
                  : base(skillId, time)
         {
             this.min = min;
@@ -56,8 +56,8 @@ namespace BlueSheep.Common.Protocol.Types
         {
 
             base.Serialize(writer);
-            writer.WriteVarShort(min);
-            writer.WriteVarShort(max);
+            writer.WriteVarShort((short)min);
+            writer.WriteVarShort((short)max);
 
 
         }

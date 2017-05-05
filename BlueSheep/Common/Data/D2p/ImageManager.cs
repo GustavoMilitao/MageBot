@@ -50,7 +50,7 @@ namespace BlueSheep.Data.D2p
             }
         }
 
-        private static short readShort()
+        private static int readShort()
         {
             return BitConverter.ToInt16(ImageManager._InverseArray(ImageManager.readBytes(2)), 0);
         }

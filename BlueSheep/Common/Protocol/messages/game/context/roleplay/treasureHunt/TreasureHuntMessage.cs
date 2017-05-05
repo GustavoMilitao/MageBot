@@ -58,7 +58,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)knownStepsList.Length);
             foreach (var entry in knownStepsList)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             writer.WriteSByte(totalStepCount);
@@ -82,7 +82,7 @@ namespace BlueSheep.Common.Protocol.Messages
             knownStepsList = new Types.TreasureHuntStep[limit];
             for (int i = 0; i < limit; i++)
             {
-                 knownStepsList[i] = Types.ProtocolTypeManager.GetInstance<Types.TreasureHuntStep>(reader.ReadShort());
+                 knownStepsList[i] = Types.ProtocolTypeManager.GetInstance<Types.TreasureHuntStep>(reader.ReadUShort());
                  knownStepsList[i].Deserialize(reader);
             }
             totalStepCount = reader.ReadSByte();

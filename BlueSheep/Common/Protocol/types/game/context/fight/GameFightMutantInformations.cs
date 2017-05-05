@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class GameFightMutantInformations : GameFightFighterNamedInformations
 {
 
-public new const short ID = 50;
-public override short TypeId
+public new const int ID = 50;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public GameFightMutantInformations()
 {
 }
 
-public GameFightMutantInformations(int contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, sbyte teamId, sbyte wave, bool alive, Types.GameFightMinimalStats stats, short[] previousPositions, string name, Types.PlayerStatus status, sbyte powerLevel)
+public GameFightMutantInformations(ulong contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, sbyte teamId, sbyte wave, bool alive, Types.GameFightMinimalStats stats, int[] previousPositions, string name, Types.PlayerStatus status, sbyte powerLevel)
          : base(contextualId, look, disposition, teamId, wave, alive, stats, previousPositions, name, status)
         {
             this.powerLevel = powerLevel;

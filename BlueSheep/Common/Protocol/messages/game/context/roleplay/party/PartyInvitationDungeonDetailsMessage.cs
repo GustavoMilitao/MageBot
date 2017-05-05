@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short dungeonId;
+        public int dungeonId;
         public bool[] playersDungeonReady;
         
         public PartyInvitationDungeonDetailsMessage()
         {
         }
         
-        public PartyInvitationDungeonDetailsMessage(int partyId, sbyte partyType, string partyName, int fromId, string fromName, int leaderId, Types.PartyInvitationMemberInformations[] members, Types.PartyGuestInformations[] guests, short dungeonId, bool[] playersDungeonReady)
+        public PartyInvitationDungeonDetailsMessage(int partyId, sbyte partyType, string partyName, int fromId, string fromName, int leaderId, Types.PartyInvitationMemberInformations[] members, Types.PartyGuestInformations[] guests, int dungeonId, bool[] playersDungeonReady)
          : base(partyId, partyType, partyName, fromId, fromName, leaderId, members, guests)
         {
             this.dungeonId = dungeonId;
@@ -43,7 +43,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarShort(dungeonId);
+            writer.WriteVarShort((short)dungeonId);
             writer.WriteUShort((ushort)playersDungeonReady.Length);
             foreach (var entry in playersDungeonReady)
             {
@@ -54,7 +54,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            dungeonId = reader.ReadVarShort();
+            dungeonId = reader.ReadVarUhShort();
             if (dungeonId < 0)
                 throw new Exception("Forbidden value on dungeonId = " + dungeonId + ", it doesn't respect the following condition : dungeonId < 0");
             var limit = reader.ReadUShort();

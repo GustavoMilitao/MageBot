@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int sourceId;
-        public short cellId;
+        public ulong sourceId;
+        public int cellId;
         
         public ShowCellMessage()
         {
         }
         
-        public ShowCellMessage(int sourceId, short cellId)
+        public ShowCellMessage(ulong sourceId, int cellId)
         {
             this.sourceId = sourceId;
             this.cellId = cellId;
@@ -41,14 +41,14 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteInt(sourceId);
-            writer.WriteVarShort(cellId);
+            writer.WriteULong(sourceId);
+            writer.WriteVarShort((short)cellId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            sourceId = reader.ReadInt();
-            cellId = reader.ReadVarShort();
+            sourceId = reader.ReadULong();
+            cellId = reader.ReadVarUhShort();
             if (cellId < 0 || cellId > 559)
                 throw new Exception("Forbidden value on cellId = " + cellId + ", it doesn't respect the following condition : cellId < 0 || cellId > 559");
         }

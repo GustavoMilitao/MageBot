@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short subAreaId;
-        public int targetId;
+        public int subAreaId;
+        public ulong targetId;
         
         public PrismFightSwapRequestMessage()
         {
         }
         
-        public PrismFightSwapRequestMessage(short subAreaId, int targetId)
+        public PrismFightSwapRequestMessage(int subAreaId, ulong targetId)
         {
             this.subAreaId = subAreaId;
             this.targetId = targetId;
@@ -41,16 +41,16 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(subAreaId);
-            writer.WriteVarInt(targetId);
+            writer.WriteVarShort((short)subAreaId);
+            writer.WriteVarLong(targetId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
-            targetId = reader.ReadVarInt();
+            targetId = reader.ReadVarUhLong();
             if (targetId < 0)
                 throw new Exception("Forbidden value on targetId = " + targetId + ", it doesn't respect the following condition : targetId < 0");
         }

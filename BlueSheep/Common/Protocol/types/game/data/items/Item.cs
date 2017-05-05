@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
     public class Item
     {
 
-        public new const short ID = 7;
-        public virtual short TypeId
+        public new const int ID = 7;
+        public virtual int TypeId
         {
             get { return ID; }
         }

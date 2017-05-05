@@ -28,13 +28,13 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public bool useAdditionnal;
         public sbyte statId;
-        public short boostPoint;
+        public int boostPoint;
         
         public StatsUpgradeRequestMessage()
         {
         }
         
-        public StatsUpgradeRequestMessage(bool useAdditionnal, sbyte statId, short boostPoint)
+        public StatsUpgradeRequestMessage(bool useAdditionnal, sbyte statId, int boostPoint)
         {
             this.useAdditionnal = useAdditionnal;
             this.statId = statId;
@@ -45,7 +45,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
             writer.WriteBoolean(useAdditionnal);
             writer.WriteSByte(statId);
-            writer.WriteVarShort(boostPoint);
+            writer.WriteVarShort((short)boostPoint);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -54,7 +54,7 @@ namespace BlueSheep.Common.Protocol.Messages
             statId = reader.ReadSByte();
             if (statId < 0)
                 throw new Exception("Forbidden value on statId = " + statId + ", it doesn't respect the following condition : statId < 0");
-            boostPoint = reader.ReadVarShort();
+            boostPoint = reader.ReadVarUhShort();
             if (boostPoint < 0)
                 throw new Exception("Forbidden value on boostPoint = " + boostPoint + ", it doesn't respect the following condition : boostPoint < 0");
         }

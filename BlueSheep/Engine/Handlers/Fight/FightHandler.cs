@@ -280,7 +280,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            MovementPath clientMovement = MapMovementAdapter.GetClientMovement(msg.keyMovements.Select<short, uint>(k => (uint)k).ToList());
+            MovementPath clientMovement = MapMovementAdapter.GetClientMovement(msg.keyMovements.Select<int, uint>(k => (uint)k).ToList());
             if (account.state == Enums.Status.Fighting)
             {
                 account.FightData.UpdateFighterCell(msg.actorId, clientMovement.CellEnd.CellId);

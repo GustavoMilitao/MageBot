@@ -52,7 +52,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)prisms.Length);
             foreach (var entry in prisms)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
         }
@@ -72,7 +72,7 @@ namespace BlueSheep.Common.Protocol.Messages
             prisms = new Types.PrismSubareaEmptyInfo[limit];
             for (int i = 0; i < limit; i++)
             {
-                 prisms[i] = Types.ProtocolTypeManager.GetInstance<Types.PrismSubareaEmptyInfo>(reader.ReadShort());
+                 prisms[i] = Types.ProtocolTypeManager.GetInstance<Types.PrismSubareaEmptyInfo>(reader.ReadUShort());
                  prisms[i].Deserialize(reader);
             }
         }

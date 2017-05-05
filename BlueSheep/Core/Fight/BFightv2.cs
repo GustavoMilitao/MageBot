@@ -285,10 +285,10 @@ namespace BlueSheep.Core.Fight
                 if (path != null)
                 {
                     List<UInt32> serverMovement = MapMovementAdapter.GetServerMovement(path);
-                    //Account.Network.SendToServer(new GameMapMovementRequestMessage(serverMovement.ToList().Select<uint, short>(ui => (short)ui).ToArray(), Account.Game.Map.Id));
+                    //Account.Network.SendToServer(new GameMapMovementRequestMessage(serverMovement.ToList().Select<uint, int>(ui => (int)ui).ToArray(), Account.Game.Map.Id));
                     using (BigEndianWriter writer = new BigEndianWriter())
                     {
-                        GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.ToList().Select<uint, short>(ui => (short)ui).ToArray(), Account.Map.Id);
+                        GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.ToList().Select<uint, int>(ui => (int)ui).ToArray(), Account.Map.Id);
                         msg.Serialize(writer);
                         writer.Content = Account.HumanCheck.hash_function(writer.Content);
                         MessagePackaging pack = new MessagePackaging(writer);
@@ -392,7 +392,7 @@ namespace BlueSheep.Core.Fight
         {
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                GameActionFightCastRequestMessage msg = new GameActionFightCastRequestMessage((short)spellId, (short)cellId);
+                GameActionFightCastRequestMessage msg = new GameActionFightCastRequestMessage((int)spellId, (int)cellId);
                 msg.Serialize(writer);
                 writer.Content = Account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);

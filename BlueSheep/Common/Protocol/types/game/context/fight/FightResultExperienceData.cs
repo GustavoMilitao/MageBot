@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class FightResultExperienceData : FightResultAdditionalData
 {
 
-public new const short ID = 192;
-public override short TypeId
+public new const int ID = 192;
+public override int TypeId
 {
     get { return ID; }
 }

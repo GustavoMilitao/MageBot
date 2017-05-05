@@ -302,7 +302,7 @@ namespace BlueSheep.Core.Map
         /// <summary>
         /// Remove an entity with the specified contextual id.
         /// </summary>
-        public void Remove(int id)
+        public void Remove(ulong id)
         {
             Players.RemoveAll(p => p.contextualId == id);
             Others.RemoveAll(o => o.contextualId == id);
@@ -359,7 +359,7 @@ namespace BlueSheep.Core.Map
         /// <summary>
         /// Returns the cellId from the contextualId.
         /// </summary>
-        public int GetCellFromContextId(int contextId)
+        public int GetCellFromContextId(double contextId)
         {
             GameRolePlayCharacterInformations pl = Players.Find(p => p.contextualId == contextId);
             if (pl != null)
@@ -379,14 +379,14 @@ namespace BlueSheep.Core.Map
         /// <summary>
         /// Update the cellId of an entity.
         /// </summary>
-        public void UpdateEntityCell(int id, int cell)
+        public void UpdateEntityCell(ulong id, int cell)
         {
             if (Monsters.Find(m => m.m_contextualId == id) != null)
                 Monsters.Find(m => m.m_contextualId == id).m_cellId = cell;
             else if (Players.Find(p => p.contextualId == id) != null)
-                Players.Find(p => p.contextualId == id).disposition.cellId = (short)cell;
+                Players.Find(p => p.contextualId == id).disposition.cellId = (int)cell;
             else if (Others.Find(p => p.contextualId == id) != null)
-                Others.Find(p => p.contextualId == id).disposition.cellId = (short)cell;
+                Others.Find(p => p.contextualId == id).disposition.cellId = (int)cell;
         }
 
         public List<MapPoint> GetListPointAtGoodDistance(MapPoint characterPoint, MapPoint elementPoint, int weaponRange)

@@ -27,14 +27,14 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int fightId;
-        public int sourceId;
-        public int targetId;
+        public ulong sourceId;
+        public ulong targetId;
         
         public GameRolePlayFightRequestCanceledMessage()
         {
         }
         
-        public GameRolePlayFightRequestCanceledMessage(int fightId, int sourceId, int targetId)
+        public GameRolePlayFightRequestCanceledMessage(int fightId, ulong sourceId, ulong targetId)
         {
             this.fightId = fightId;
             this.sourceId = sourceId;
@@ -44,17 +44,17 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteInt(fightId);
-            writer.WriteVarInt(sourceId);
-            writer.WriteInt(targetId);
+            writer.WriteVarLong(sourceId);
+            writer.WriteULong(targetId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             fightId = reader.ReadInt();
-            sourceId = reader.ReadVarInt();
+            sourceId = reader.ReadVarUhLong();
             if (sourceId < 0)
                 throw new Exception("Forbidden value on sourceId = " + sourceId + ", it doesn't respect the following condition : sourceId < 0");
-            targetId = reader.ReadInt();
+            targetId = reader.ReadULong();
         }
         
     }

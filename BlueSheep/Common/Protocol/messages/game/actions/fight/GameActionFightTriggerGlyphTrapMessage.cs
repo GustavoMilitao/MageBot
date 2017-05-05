@@ -26,15 +26,15 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short markId;
+        public int markId;
         public int triggeringCharacterId;
-        public short triggeredSpellId;
+        public int triggeredSpellId;
         
         public GameActionFightTriggerGlyphTrapMessage()
         {
         }
         
-        public GameActionFightTriggerGlyphTrapMessage(short actionId, int sourceId, short markId, int triggeringCharacterId, short triggeredSpellId)
+        public GameActionFightTriggerGlyphTrapMessage(int actionId, ulong sourceId, int markId, int triggeringCharacterId, int triggeredSpellId)
          : base(actionId, sourceId)
         {
             this.markId = markId;
@@ -45,9 +45,9 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteShort(markId);
+            writer.WriteShort((short)markId);
             writer.WriteInt(triggeringCharacterId);
-            writer.WriteVarShort(triggeredSpellId);
+            writer.WriteVarShort((short)triggeredSpellId);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -55,7 +55,7 @@ namespace BlueSheep.Common.Protocol.Messages
             base.Deserialize(reader);
             markId = reader.ReadShort();
             triggeringCharacterId = reader.ReadInt();
-            triggeredSpellId = reader.ReadVarShort();
+            triggeredSpellId = reader.ReadVarUhShort();
             if (triggeredSpellId < 0)
                 throw new Exception("Forbidden value on triggeredSpellId = " + triggeredSpellId + ", it doesn't respect the following condition : triggeredSpellId < 0");
         }

@@ -31,13 +31,13 @@ namespace BlueSheep.Common.Protocol.Types
     public class GameServerInformations
     {
 
-        public new const short ID = 25;
-        public virtual short TypeId
+        public new const int ID = 25;
+        public virtual int TypeId
         {
             get { return ID; }
         }
 
-        public ushort id;
+        public ulong id;
         public ServerStatusEnum status;
         public byte completion;
         public bool isSelectable;
@@ -55,7 +55,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
 
-            writer.WriteVarShort(id);
+            writer.WriteVarShort((short)id);
             writer.WriteByte(Convert.ToByte(ServerType));
             writer.WriteByte(Convert.ToByte(status));
             writer.WriteByte(completion);

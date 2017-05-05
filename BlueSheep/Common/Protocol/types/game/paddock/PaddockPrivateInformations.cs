@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class PaddockPrivateInformations : PaddockAbandonnedInformations
 {
 
-public new const short ID = 131;
-public override short TypeId
+public new const int ID = 131;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public PaddockPrivateInformations()
 {
 }
 
-public PaddockPrivateInformations(short maxOutdoorMount, short maxItems, int price, bool locked, int guildId, Types.GuildInformations guildInfo)
+public PaddockPrivateInformations(int maxOutdoorMount, int maxItems, int price, bool locked, int guildId, Types.GuildInformations guildInfo)
          : base(maxOutdoorMount, maxItems, price, locked, guildId)
         {
             this.guildInfo = guildInfo;

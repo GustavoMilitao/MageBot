@@ -27,75 +27,76 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class GameRolePlayGroupMonsterInformations : GameRolePlayActorInformations
-{
+    public class GameRolePlayGroupMonsterInformations : GameRolePlayActorInformations
+    {
 
-public new const short ID = 160;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 160;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public Types.GroupMonsterStaticInformations staticInfos;
-        public short ageBonus;
-        public sbyte lootShare;
-        public sbyte alignmentSide;
+        public Types.GroupMonsterStaticInformations staticInfos;
+        public double creationTime { get; set; }
+        public int ageBonus;
+        public byte lootShare;
+        public byte alignmentSide;
         public bool keyRingBonus;
         public bool hasHardcoreDrop;
         public bool hasAVARewardToken;
-        
 
-public GameRolePlayGroupMonsterInformations()
-{
-}
 
-public GameRolePlayGroupMonsterInformations(int contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, Types.GroupMonsterStaticInformations staticInfos, short ageBonus, sbyte lootShare, sbyte alignmentSide)
-         : base(contextualId, look, disposition)
+        public GameRolePlayGroupMonsterInformations()
         {
+        }
+
+        public GameRolePlayGroupMonsterInformations(ulong contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, Types.GroupMonsterStaticInformations staticInfos, int ageBonus, byte lootShare, byte alignmentSide, double creationTime)
+                 : base(contextualId, look, disposition)
+        {
+            this.creationTime = creationTime;
             this.staticInfos = staticInfos;
             this.ageBonus = ageBonus;
             this.lootShare = lootShare;
             this.alignmentSide = alignmentSide;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
-            writer.WriteShort(staticInfos.TypeId);
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
+            writer.WriteShort((short)staticInfos.TypeId);
             staticInfos.Serialize(writer);
-            writer.WriteShort(ageBonus);
-            writer.WriteSByte(lootShare);
-            writer.WriteSByte(alignmentSide);
-            
+            writer.WriteInt(ageBonus);
+            writer.WriteByte(lootShare);
+            writer.WriteByte(alignmentSide);
 
-}
 
-public override void Deserialize(BigEndianReader reader)
-{
+        }
 
-base.Deserialize(reader);
-byte b = reader.ReadByte();
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
+            byte b = reader.ReadByte();
             keyRingBonus = BooleanByteWrapper.GetFlag(b, 0);
             hasHardcoreDrop = BooleanByteWrapper.GetFlag(b, 1);
             hasAVARewardToken = BooleanByteWrapper.GetFlag(b, 2);
-short s = reader.ReadShort();
-            staticInfos = Types.ProtocolTypeManager.GetInstance<Types.GroupMonsterStaticInformations>(s);
+            int s = reader.ReadUShort();
+            staticInfos = Types.ProtocolTypeManager.GetInstance<GroupMonsterStaticInformations>(s);
             staticInfos.Deserialize(reader);
-            ageBonus = reader.ReadShort();
-            if (ageBonus < -1 || ageBonus > 1000)
-                throw new Exception("Forbidden value on ageBonus = " + ageBonus + ", it doesn't respect the following condition : ageBonus < -1 || ageBonus > 1000");
-            lootShare = reader.ReadSByte();
-            if (lootShare < -1 || lootShare > 8)
-                throw new Exception("Forbidden value on lootShare = " + lootShare + ", it doesn't respect the following condition : lootShare < -1 || lootShare > 8");
-            alignmentSide = reader.ReadSByte();
-            
-
-}
+            creationTime = reader.ReadDouble();
+            ageBonus = reader.ReadInt();
+            if (ageBonus < 0 )
+                throw new Exception("Forbidden value on ageBonus = " + ageBonus + ", it doesn't respect the following condition : ageBonus < 0");
+            lootShare = reader.ReadByte();
+            alignmentSide = reader.ReadByte();
 
 
-}
+        }
+
+
+    }
 
 
 }

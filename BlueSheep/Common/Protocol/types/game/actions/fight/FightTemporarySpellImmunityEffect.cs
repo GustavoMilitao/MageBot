@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class FightTemporarySpellImmunityEffect : AbstractFightDispellableEffect
 {
 
-public new const short ID = 366;
-public override short TypeId
+public new const int ID = 366;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public FightTemporarySpellImmunityEffect()
 {
 }
 
-public FightTemporarySpellImmunityEffect(int uid, int targetId, short turnDuration, sbyte dispelable, short spellId, int effectId, int parentBoostUid, int immuneSpellId)
+public FightTemporarySpellImmunityEffect(int uid, ulong targetId, int turnDuration, sbyte dispelable, int spellId, int effectId, int parentBoostUid, int immuneSpellId)
          : base(uid, targetId, turnDuration, dispelable, spellId, effectId, parentBoostUid)
         {
             this.immuneSpellId = immuneSpellId;

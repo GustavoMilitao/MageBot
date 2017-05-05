@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short markId;
+        public int markId;
         public bool active;
         
         public GameActionFightActivateGlyphTrapMessage()
         {
         }
         
-        public GameActionFightActivateGlyphTrapMessage(short actionId, int sourceId, short markId, bool active)
+        public GameActionFightActivateGlyphTrapMessage(int actionId, ulong sourceId, int markId, bool active)
          : base(actionId, sourceId)
         {
             this.markId = markId;
@@ -43,7 +43,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteShort(markId);
+            writer.WriteShort((short)markId);
             writer.WriteBoolean(active);
         }
         

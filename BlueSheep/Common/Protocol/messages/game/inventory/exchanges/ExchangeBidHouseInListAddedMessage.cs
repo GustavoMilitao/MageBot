@@ -50,7 +50,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)effects.Length);
             foreach (var entry in effects)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             writer.WriteUShort((ushort)prices.Length);
@@ -68,7 +68,7 @@ namespace BlueSheep.Common.Protocol.Messages
             effects = new Types.ObjectEffect[limit];
             for (int i = 0; i < limit; i++)
             {
-                 effects[i] = Types.ProtocolTypeManager.GetInstance<Types.ObjectEffect>(reader.ReadShort());
+                 effects[i] = Types.ProtocolTypeManager.GetInstance<Types.ObjectEffect>(reader.ReadUShort());
                  effects[i].Deserialize(reader);
             }
             limit = reader.ReadUShort();

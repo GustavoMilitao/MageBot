@@ -58,7 +58,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)shortcuts.Length);
             foreach (var entry in shortcuts)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
         }
@@ -80,7 +80,7 @@ namespace BlueSheep.Common.Protocol.Messages
             shortcuts = new Types.Shortcut[limit];
             for (int i = 0; i < limit; i++)
             {
-                 shortcuts[i] = Types.ProtocolTypeManager.GetInstance<Types.Shortcut>(reader.ReadShort());
+                 shortcuts[i] = Types.ProtocolTypeManager.GetInstance<Types.Shortcut>(reader.ReadUShort());
                  shortcuts[i].Deserialize(reader);
             }
         }

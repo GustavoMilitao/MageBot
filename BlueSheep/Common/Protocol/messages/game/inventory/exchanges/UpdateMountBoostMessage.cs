@@ -45,7 +45,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)boostToUpdateList.Length);
             foreach (var entry in boostToUpdateList)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
         }
@@ -59,7 +59,7 @@ namespace BlueSheep.Common.Protocol.Messages
             boostToUpdateList = new Types.UpdateMountBoost[limit];
             for (int i = 0; i < limit; i++)
             {
-                 boostToUpdateList[i] = Types.ProtocolTypeManager.GetInstance<Types.UpdateMountBoost>(reader.ReadShort());
+                 boostToUpdateList[i] = Types.ProtocolTypeManager.GetInstance<Types.UpdateMountBoost>(reader.ReadUShort());
                  boostToUpdateList[i].Deserialize(reader);
             }
         }

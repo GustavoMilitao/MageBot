@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class FightEntityDispositionInformations : EntityDispositionInformations
 {
 
-public new const short ID = 217;
-public override short TypeId
+public new const int ID = 217;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public FightEntityDispositionInformations()
 {
 }
 
-public FightEntityDispositionInformations(short cellId, sbyte direction, int carryingCharacterId)
+public FightEntityDispositionInformations(int cellId, byte direction, int carryingCharacterId)
          : base(cellId, direction)
         {
             this.carryingCharacterId = carryingCharacterId;

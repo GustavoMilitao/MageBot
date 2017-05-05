@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class GameFightResumeSlaveInfo
 {
 
-public new const short ID = 364;
-public virtual short TypeId
+public new const int ID = 364;
+public virtual int TypeId
 {
     get { return ID; }
 }

@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class CharacterRemodelingInformation : AbstractCharacterInformation
 {
 
-public new const short ID = 479;
-public override short TypeId
+public new const int ID = 479;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -39,7 +39,7 @@ public override short TypeId
 public string name;
         public sbyte breed;
         public bool sex;
-        public short cosmeticId;
+        public int cosmeticId;
         public int[] colors;
         
 
@@ -47,7 +47,7 @@ public CharacterRemodelingInformation()
 {
 }
 
-public CharacterRemodelingInformation(uint id, string name, sbyte breed, bool sex, short cosmeticId, int[] colors)
+public CharacterRemodelingInformation(uint id, string name, sbyte breed, bool sex, int cosmeticId, int[] colors)
          : base(id)
         {
             this.name = name;
@@ -65,7 +65,7 @@ base.Serialize(writer);
             writer.WriteUTF(name);
             writer.WriteSByte(breed);
             writer.WriteBoolean(sex);
-            writer.WriteVarShort(cosmeticId);
+            writer.WriteVarShort((short)cosmeticId);
             writer.WriteUShort((ushort)colors.Length);
             foreach (var entry in colors)
             {
@@ -82,7 +82,7 @@ base.Deserialize(reader);
             name = reader.ReadUTF();
             breed = reader.ReadSByte();
             sex = reader.ReadBoolean();
-            cosmeticId = reader.ReadVarShort();
+            cosmeticId = reader.ReadVarUhShort();
             if (cosmeticId < 0)
                 throw new Exception("Forbidden value on cosmeticId = " + cosmeticId + ", it doesn't respect the following condition : cosmeticId < 0");
             var limit = reader.ReadUShort();

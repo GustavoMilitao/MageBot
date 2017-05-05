@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] availables;
-        public short[] unavailables;
+        public int[] availables;
+        public int[] unavailables;
         
         public DungeonKeyRingMessage()
         {
         }
         
-        public DungeonKeyRingMessage(short[] availables, short[] unavailables)
+        public DungeonKeyRingMessage(int[] availables, int[] unavailables)
         {
             this.availables = availables;
             this.unavailables = unavailables;
@@ -44,28 +44,28 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)availables.Length);
             foreach (var entry in availables)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)unavailables.Length);
             foreach (var entry in unavailables)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            availables = new short[limit];
+            availables = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 availables[i] = reader.ReadVarShort();
+                 availables[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
-            unavailables = new short[limit];
+            unavailables = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 unavailables[i] = reader.ReadVarShort();
+                 unavailables[i] = reader.ReadVarUhShort();
             }
         }
         

@@ -27,7 +27,7 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public Types.AllianceInformations[] alliances;
-        public short[] allianceNbMembers;
+        public int[] allianceNbMembers;
         public int[] allianceRoundWeigth;
         public sbyte[] allianceMatchScore;
         public Types.BasicAllianceInformations allianceMapWinner;
@@ -39,7 +39,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public KohUpdateMessage(Types.AllianceInformations[] alliances, short[] allianceNbMembers, int[] allianceRoundWeigth, sbyte[] allianceMatchScore, Types.BasicAllianceInformations allianceMapWinner, int allianceMapWinnerScore, int allianceMapMyAllianceScore, double nextTickTime)
+        public KohUpdateMessage(Types.AllianceInformations[] alliances, int[] allianceNbMembers, int[] allianceRoundWeigth, sbyte[] allianceMatchScore, Types.BasicAllianceInformations allianceMapWinner, int allianceMapWinnerScore, int allianceMapMyAllianceScore, double nextTickTime)
         {
             this.alliances = alliances;
             this.allianceNbMembers = allianceNbMembers;
@@ -61,7 +61,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)allianceNbMembers.Length);
             foreach (var entry in allianceNbMembers)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)allianceRoundWeigth.Length);
             foreach (var entry in allianceRoundWeigth)
@@ -89,10 +89,10 @@ namespace BlueSheep.Common.Protocol.Messages
                  alliances[i].Deserialize(reader);
             }
             limit = reader.ReadUShort();
-            allianceNbMembers = new short[limit];
+            allianceNbMembers = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 allianceNbMembers[i] = reader.ReadVarShort();
+                 allianceNbMembers[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
             allianceRoundWeigth = new int[limit];

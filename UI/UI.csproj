@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0B41509E-3EAA-48AB-A343-71CB4F4A4F20}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UI</RootNamespace>
+    <AssemblyName>UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interface\AccountFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\AccountFrm.Designer.cs">
+      <DependentUpon>AccountFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\DofusPathForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\DofusPathForm.Designer.cs">
+      <DependentUpon>DofusPathForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\GestAccounts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\GestAccounts.Designer.cs">
+      <DependentUpon>GestAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\GestGroupe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\GestGroupe.Designer.cs">
+      <DependentUpon>GestGroupe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\GroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\GroupForm.Designer.cs">
+      <DependentUpon>GroupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\IAChoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\IAChoice.Designer.cs">
+      <DependentUpon>IAChoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\PathChoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\PathChoiceForm.Designer.cs">
+      <DependentUpon>PathChoiceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Text\ActionTextInformation.cs" />
+    <Compile Include="Interface\Text\BotTextInformation.cs" />
+    <Compile Include="Interface\Text\CharacterTextInformation.cs" />
+    <Compile Include="Interface\Text\Chat\AllianceTextInformation.cs" />
+    <Compile Include="Interface\Text\Chat\CommerceTextInformation.cs" />
+    <Compile Include="Interface\Text\Chat\GeneralTextInformation.cs" />
+    <Compile Include="Interface\Text\Chat\GuildTextInformation.cs" />
+    <Compile Include="Interface\Text\Chat\PrivateTextInformation.cs" />
+    <Compile Include="Interface\Text\Chat\RecrutementTextInformation.cs" />
+    <Compile Include="Interface\Text\ConnectionTextInformation.cs" />
+    <Compile Include="Interface\Text\DebugTextInformation.cs" />
+    <Compile Include="Interface\Text\DofAlertTextInformation.cs" />
+    <Compile Include="Interface\Text\DofInfoCanal.cs" />
+    <Compile Include="Interface\Text\ErrorTextInformation.cs" />
+    <Compile Include="Interface\Text\QueueTextInformation.cs" />
+    <Compile Include="Interface\Text\TextInformation.cs" />
+    <Compile Include="Interface\Theme.cs" />
+    <Compile Include="Interface\UCs\AccountUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\UCs\AccountUC.Designer.cs">
+      <DependentUpon>AccountUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\UCs\CaracUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\UCs\CaracUC.Designer.cs">
+      <DependentUpon>CaracUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\UCs\FloodUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\UCs\FloodUC.Designer.cs">
+      <DependentUpon>FloodUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\UCs\GestItemsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\UCs\GestItemsUC.Designer.cs">
+      <DependentUpon>GestItemsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\UCs\HeroicUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\UCs\JobUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\UCs\JobUC.Designer.cs">
+      <DependentUpon>JobUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\UCs\RegenUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\UCs\RegenUC.Designer.cs">
+      <DependentUpon>RegenUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Interface\AccountFrm.resx">
+      <DependentUpon>AccountFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\DofusPathForm.resx">
+      <DependentUpon>DofusPathForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\GestAccounts.resx">
+      <DependentUpon>GestAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\GestGroupe.resx">
+      <DependentUpon>GestGroupe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\GroupForm.resx">
+      <DependentUpon>GroupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\IAChoice.resx">
+      <DependentUpon>IAChoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\PathChoiceForm.resx">
+      <DependentUpon>PathChoiceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\UCs\AccountUC.resx">
+      <DependentUpon>AccountUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\UCs\CaracUC.resx">
+      <DependentUpon>CaracUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\UCs\FloodUC.resx">
+      <DependentUpon>FloodUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\UCs\GestItemsUC.resx">
+      <DependentUpon>GestItemsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\UCs\HeroicUC.resx">
+      <DependentUpon>HeroicUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\UCs\JobUC.resx">
+      <DependentUpon>JobUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\UCs\RegenUC.resx">
+      <DependentUpon>RegenUC.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

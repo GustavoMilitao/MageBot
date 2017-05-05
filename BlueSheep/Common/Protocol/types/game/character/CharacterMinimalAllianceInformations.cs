@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class CharacterMinimalAllianceInformations : CharacterMinimalGuildInformations
 {
 
-public new const short ID = 444;
-public override short TypeId
+public new const int ID = 444;
+public override int TypeId
 {
     get { return ID; }
 }

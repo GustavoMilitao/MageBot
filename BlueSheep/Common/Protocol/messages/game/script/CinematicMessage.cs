@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short cinematicId;
+        public int cinematicId;
         
         public CinematicMessage()
         {
         }
         
-        public CinematicMessage(short cinematicId)
+        public CinematicMessage(int cinematicId)
         {
             this.cinematicId = cinematicId;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(cinematicId);
+            writer.WriteVarShort((short)cinematicId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            cinematicId = reader.ReadVarShort();
+            cinematicId = reader.ReadVarUhShort();
             if (cinematicId < 0)
                 throw new Exception("Forbidden value on cinematicId = " + cinematicId + ", it doesn't respect the following condition : cinematicId < 0");
         }

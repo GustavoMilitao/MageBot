@@ -27,13 +27,13 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int seq;
-        public short lastPacketId;
+        public int lastPacketId;
         
         public BasicAckMessage()
         {
         }
         
-        public BasicAckMessage(int seq, short lastPacketId)
+        public BasicAckMessage(int seq, int lastPacketId)
         {
             this.seq = seq;
             this.lastPacketId = lastPacketId;
@@ -42,7 +42,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteVarInt(seq);
-            writer.WriteVarShort(lastPacketId);
+            writer.WriteVarShort((short)lastPacketId);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -50,7 +50,7 @@ namespace BlueSheep.Common.Protocol.Messages
             seq = reader.ReadVarInt();
             if (seq < 0)
                 throw new Exception("Forbidden value on seq = " + seq + ", it doesn't respect the following condition : seq < 0");
-            lastPacketId = reader.ReadVarShort();
+            lastPacketId = reader.ReadVarUhShort();
             if (lastPacketId < 0)
                 throw new Exception("Forbidden value on lastPacketId = " + lastPacketId + ", it doesn't respect the following condition : lastPacketId < 0");
         }

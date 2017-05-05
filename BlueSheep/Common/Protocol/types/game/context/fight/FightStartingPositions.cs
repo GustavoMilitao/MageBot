@@ -7,7 +7,7 @@ namespace BlueSheep.Common.Protocol.Types
     public class FightStartingPositions
     {
 
-        public new const short ID = 513;
+        public new const int ID = 513;
 
 
         public List<uint> positionsForChallengers;
@@ -20,7 +20,7 @@ namespace BlueSheep.Common.Protocol.Types
 
         public void Serialize(BigEndianWriter writer)
         {
-            writer.WriteShort((short)positionsForChallengers.Count);
+            writer.WriteShort((short)(int)positionsForChallengers.Count);
             uint _loc2_ = 0;
             while (_loc2_ < positionsForChallengers.Count)
             {
@@ -28,10 +28,10 @@ namespace BlueSheep.Common.Protocol.Types
                 {
                     throw new Exception("Forbidden value (" + positionsForChallengers[(int)_loc2_] + ") on element 1 (starting at 1) of positionsForChallengers.");
                 }
-                writer.WriteVarShort((short)positionsForChallengers[(int)_loc2_]);
+                writer.WriteVarShort((short)(int)positionsForChallengers[(int)_loc2_]);
                 _loc2_++;
             }
-            writer.WriteShort((short)positionsForDefenders.Count);
+            writer.WriteShort((short)(int)positionsForDefenders.Count);
             uint _loc3_ = 0;
             while (_loc3_ < positionsForDefenders.Count)
             {
@@ -39,7 +39,7 @@ namespace BlueSheep.Common.Protocol.Types
                 {
                     throw new Exception("Forbidden value (" + positionsForDefenders[(int)_loc3_] + ") on element 2 (starting at 1) of positionsForDefenders.");
                 }
-                writer.WriteVarShort((short)positionsForDefenders[(int)_loc3_]);
+                writer.WriteVarShort((short)(int)positionsForDefenders[(int)_loc3_]);
                 _loc3_++;
             }
         }

@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class BidExchangerObjectInfo
 {
 
-public new const short ID = 122;
-public virtual short TypeId
+public new const int ID = 122;
+public virtual int TypeId
 {
     get { return ID; }
 }
@@ -60,7 +60,7 @@ writer.WriteVarInt(objectUID);
             writer.WriteUShort((ushort)effects.Length);
             foreach (var entry in effects)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             writer.WriteUShort((ushort)prices.Length);
@@ -82,7 +82,7 @@ objectUID = reader.ReadVarInt();
             effects = new Types.ObjectEffect[limit];
             for (int i = 0; i < limit; i++)
             {
-                 effects[i] = Types.ProtocolTypeManager.GetInstance<Types.ObjectEffect>(reader.ReadShort());
+                 effects[i] = Types.ProtocolTypeManager.GetInstance<Types.ObjectEffect>(reader.ReadUShort());
                  effects[i].Deserialize(reader);
             }
             limit = reader.ReadUShort();

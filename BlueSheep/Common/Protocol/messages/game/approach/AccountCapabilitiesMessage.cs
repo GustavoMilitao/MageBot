@@ -28,15 +28,15 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public int accountId;
         public bool tutorialAvailable;
-        public ushort breedsVisible;
-        public ushort breedsAvailable;
+        public int breedsVisible;
+        public int breedsAvailable;
         public sbyte status;
         
         public AccountCapabilitiesMessage()
         {
         }
         
-        public AccountCapabilitiesMessage(int accountId, bool tutorialAvailable, ushort breedsVisible, ushort breedsAvailable, sbyte status)
+        public AccountCapabilitiesMessage(int accountId, bool tutorialAvailable, int breedsVisible, int breedsAvailable, sbyte status)
         {
             this.accountId = accountId;
             this.tutorialAvailable = tutorialAvailable;
@@ -49,8 +49,8 @@ namespace BlueSheep.Common.Protocol.Messages
         {
             writer.WriteInt(accountId);
             writer.WriteBoolean(tutorialAvailable);
-            writer.WriteUShort(breedsVisible);
-            writer.WriteUShort(breedsAvailable);
+            writer.WriteUShort((ushort)breedsVisible);
+            writer.WriteUShort((ushort)breedsAvailable);
             writer.WriteSByte(status);
         }
         

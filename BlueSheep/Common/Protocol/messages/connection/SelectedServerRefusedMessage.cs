@@ -26,7 +26,7 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short serverId;
+        public int serverId;
         public sbyte error;
         public sbyte serverStatus;
         
@@ -34,7 +34,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public SelectedServerRefusedMessage(short serverId, sbyte error, sbyte serverStatus)
+        public SelectedServerRefusedMessage(int serverId, sbyte error, sbyte serverStatus)
         {
             this.serverId = serverId;
             this.error = error;
@@ -43,14 +43,14 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(serverId);
+            writer.WriteVarShort((short)serverId);
             writer.WriteSByte(error);
             writer.WriteSByte(serverStatus);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            serverId = reader.ReadVarShort();
+            serverId = reader.ReadVarUhShort();
             if (serverId < 0)
                 throw new Exception("Forbidden value on serverId = " + serverId + ", it doesn't respect the following condition : serverId < 0");
             error = reader.ReadSByte();

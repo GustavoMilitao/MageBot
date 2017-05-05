@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
     public class TaxCollectorLootInformations : TaxCollectorComplementaryInformations
     {
 
-        public new const short ID = 372;
-        public override short TypeId
+        public new const int ID = 372;
+        public override int TypeId
         {
             get { return ID; }
         }

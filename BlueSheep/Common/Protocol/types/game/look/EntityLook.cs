@@ -30,16 +30,16 @@ namespace BlueSheep.Common.Protocol.Types
     public class EntityLook
     {
 
-        public new const short ID = 55;
-        public virtual short TypeId
+        public new const int ID = 55;
+        public virtual int TypeId
         {
             get { return ID; }
         }
 
-        public short bonesId;
-        public short[] skins;
+        public int bonesId;
+        public int[] skins;
         public int[] indexedColors;
-        public short[] scales;
+        public int[] scales;
         public Types.SubEntity[] subentities;
 
 
@@ -47,7 +47,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public EntityLook(short bonesId, short[] skins, int[] indexedColors, short[] scales, Types.SubEntity[] subentities)
+        public EntityLook(int bonesId, int[] skins, int[] indexedColors, int[] scales, Types.SubEntity[] subentities)
         {
             this.bonesId = bonesId;
             this.skins = skins;
@@ -60,11 +60,11 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
 
-            writer.WriteVarShort(bonesId);
+            writer.WriteVarShort((short)bonesId);
             writer.WriteUShort((ushort)skins.Length);
             foreach (var entry in skins)
             {
-                writer.WriteVarShort(entry);
+                writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)indexedColors.Length);
             foreach (var entry in indexedColors)
@@ -74,7 +74,7 @@ namespace BlueSheep.Common.Protocol.Types
             writer.WriteUShort((ushort)scales.Length);
             foreach (var entry in scales)
             {
-                writer.WriteVarShort(entry);
+                writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)subentities.Length);
             foreach (var entry in subentities)
@@ -88,14 +88,14 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Deserialize(BigEndianReader reader)
         {
 
-            bonesId = reader.ReadVarShort();
+            bonesId = reader.ReadVarUhShort();
             if (bonesId < 0)
                 throw new Exception("Forbidden value on bonesId = " + bonesId + ", it doesn't respect the following condition : bonesId < 0");
             var limit = reader.ReadUShort();
-            skins = new short[limit];
+            skins = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                skins[i] = reader.ReadVarShort();
+                skins[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
             indexedColors = new int[limit];
@@ -104,10 +104,10 @@ namespace BlueSheep.Common.Protocol.Types
                 indexedColors[i] = reader.ReadInt();
             }
             limit = reader.ReadUShort();
-            scales = new short[limit];
+            scales = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                scales[i] = reader.ReadVarShort();
+                scales[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
             subentities = new Types.SubEntity[limit];

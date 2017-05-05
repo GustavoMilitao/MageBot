@@ -27,13 +27,13 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int type;
-        public short genId;
+        public int genId;
         
         public ExchangeBidHouseSearchMessage()
         {
         }
         
-        public ExchangeBidHouseSearchMessage(int type, short genId)
+        public ExchangeBidHouseSearchMessage(int type, int genId)
         {
             this.type = type;
             this.genId = genId;
@@ -42,7 +42,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteVarInt(type);
-            writer.WriteVarShort(genId);
+            writer.WriteVarShort((short)genId);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -50,7 +50,7 @@ namespace BlueSheep.Common.Protocol.Messages
             type = reader.ReadVarInt();
             if (type < 0)
                 throw new Exception("Forbidden value on type = " + type + ", it doesn't respect the following condition : type < 0");
-            genId = reader.ReadVarShort();
+            genId = reader.ReadVarUhShort();
             if (genId < 0)
                 throw new Exception("Forbidden value on genId = " + genId + ", it doesn't respect the following condition : genId < 0");
         }

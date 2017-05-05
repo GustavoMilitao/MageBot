@@ -32,9 +32,9 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ServerPacketEnum.SelectedServerDataExtendedMessage; }
         }
 
-        public List<ushort> serverIds;
+        public List<int> serverIds;
 
-        public SelectedServerDataExtendedMessage(bool canCreateNewCharacter, ushort serverId, string address, ushort port, List<int> ticket, List<ushort> serverIds)
+        public SelectedServerDataExtendedMessage(bool canCreateNewCharacter, int serverId, string address, int port, List<int> ticket, List<int> serverIds)
          : base(canCreateNewCharacter, serverId, address, port, ticket)
         {
             this.serverIds = serverIds;
@@ -47,21 +47,21 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteShort((short)serverIds.Count);
+            writer.WriteShort((short)(int)serverIds.Count);
             for (int i = 0; i < serverIds.Count; i++)
             {
-                writer.WriteVarShort(serverIds[i]);
+                writer.WriteVarShort((short)serverIds[i]);
             }
         }
 
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            ushort length = reader.ReadUShort();
-            serverIds = new List<ushort>();
+            int length = reader.ReadUShort();
+            serverIds = new List<int>();
             for (int i = 0; i < length; i++)
             {
-                serverIds.Add((ushort)reader.ReadVarShort());
+                serverIds.Add((int)reader.ReadVarUhShort());
             }
         }
 

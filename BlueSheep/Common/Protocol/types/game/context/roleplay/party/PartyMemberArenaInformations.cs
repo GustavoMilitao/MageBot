@@ -30,20 +30,20 @@ namespace BlueSheep.Common.Protocol.Types
 public class PartyMemberArenaInformations : PartyMemberInformations
 {
 
-public new const short ID = 391;
-public override short TypeId
+public new const int ID = 391;
+public override int TypeId
 {
     get { return ID; }
 }
 
-public short rank;
+public int rank;
         
 
 public PartyMemberArenaInformations()
 {
 }
 
-public PartyMemberArenaInformations(uint id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex, int lifePoints, int maxLifePoints, short prospecting, byte regenRate, short initiative, sbyte alignmentSide, short worldX, short worldY, int mapId, short subAreaId, Types.PlayerStatus status, Types.PartyCompanionMemberInformations[] companions, short rank)
+public PartyMemberArenaInformations(uint id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex, int lifePoints, int maxLifePoints, int prospecting, byte regenRate, int initiative, sbyte alignmentSide, int worldX, int worldY, int mapId, int subAreaId, Types.PlayerStatus status, Types.PartyCompanionMemberInformations[] companions, int rank)
          : base(id, level, name, entityLook, breed, sex, lifePoints, maxLifePoints, prospecting, regenRate, initiative, alignmentSide, worldX, worldY, mapId, subAreaId, status, companions)
         {
             this.rank = rank;
@@ -54,7 +54,7 @@ public override void Serialize(BigEndianWriter writer)
 {
 
 base.Serialize(writer);
-            writer.WriteVarShort(rank);
+            writer.WriteVarShort((short)rank);
             
 
 }
@@ -63,7 +63,7 @@ public override void Deserialize(BigEndianReader reader)
 {
 
 base.Deserialize(reader);
-            rank = reader.ReadVarShort();
+            rank = reader.ReadVarUhShort();
             if (rank < 0 || rank > 2300)
                 throw new Exception("Forbidden value on rank = " + rank + ", it doesn't respect the following condition : rank < 0 || rank > 2300");
             

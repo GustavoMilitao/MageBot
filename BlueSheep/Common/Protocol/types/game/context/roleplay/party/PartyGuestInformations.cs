@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class PartyGuestInformations
 {
 
-public new const short ID = 374;
-public virtual short TypeId
+public new const int ID = 374;
+public virtual int TypeId
 {
     get { return ID; }
 }
@@ -72,7 +72,7 @@ writer.WriteInt(guestId);
             guestLook.Serialize(writer);
             writer.WriteSByte(breed);
             writer.WriteBoolean(sex);
-            writer.WriteShort(status.TypeId);
+            writer.WriteShort((short)status.TypeId);
             status.Serialize(writer);
             writer.WriteUShort((ushort)companions.Length);
             foreach (var entry in companions)
@@ -97,7 +97,7 @@ guestId = reader.ReadInt();
             guestLook.Deserialize(reader);
             breed = reader.ReadSByte();
             sex = reader.ReadBoolean();
-            status = Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadShort());
+            status = Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadUShort());
             status.Deserialize(reader);
             var limit = reader.ReadUShort();
             companions = new Types.PartyCompanionBaseInformations[limit];

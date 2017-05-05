@@ -27,13 +27,13 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public string name;
-        public int id;
+        public ulong id;
         
         public CharacterLevelUpInformationMessage()
         {
         }
         
-        public CharacterLevelUpInformationMessage(byte newLevel, string name, int id)
+        public CharacterLevelUpInformationMessage(byte newLevel, string name, ulong id)
          : base(newLevel)
         {
             this.name = name;
@@ -44,14 +44,14 @@ namespace BlueSheep.Common.Protocol.Messages
         {
             base.Serialize(writer);
             writer.WriteUTF(name);
-            writer.WriteVarInt(id);
+            writer.WriteVarLong(id);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
             name = reader.ReadUTF();
-            id = reader.ReadVarInt();
+            id = reader.ReadVarUhLong();
             if (id < 0)
                 throw new Exception("Forbidden value on id = " + id + ", it doesn't respect the following condition : id < 0");
         }

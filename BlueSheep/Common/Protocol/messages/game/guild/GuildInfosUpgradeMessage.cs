@@ -28,20 +28,20 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public sbyte maxTaxCollectorsCount;
         public sbyte taxCollectorsCount;
-        public short taxCollectorLifePoints;
-        public short taxCollectorDamagesBonuses;
-        public short taxCollectorPods;
-        public short taxCollectorProspecting;
-        public short taxCollectorWisdom;
-        public short boostPoints;
-        public short[] spellId;
+        public int taxCollectorLifePoints;
+        public int taxCollectorDamagesBonuses;
+        public int taxCollectorPods;
+        public int taxCollectorProspecting;
+        public int taxCollectorWisdom;
+        public int boostPoints;
+        public int[] spellId;
         public sbyte[] spellLevel;
         
         public GuildInfosUpgradeMessage()
         {
         }
         
-        public GuildInfosUpgradeMessage(sbyte maxTaxCollectorsCount, sbyte taxCollectorsCount, short taxCollectorLifePoints, short taxCollectorDamagesBonuses, short taxCollectorPods, short taxCollectorProspecting, short taxCollectorWisdom, short boostPoints, short[] spellId, sbyte[] spellLevel)
+        public GuildInfosUpgradeMessage(sbyte maxTaxCollectorsCount, sbyte taxCollectorsCount, int taxCollectorLifePoints, int taxCollectorDamagesBonuses, int taxCollectorPods, int taxCollectorProspecting, int taxCollectorWisdom, int boostPoints, int[] spellId, sbyte[] spellLevel)
         {
             this.maxTaxCollectorsCount = maxTaxCollectorsCount;
             this.taxCollectorsCount = taxCollectorsCount;
@@ -59,16 +59,16 @@ namespace BlueSheep.Common.Protocol.Messages
         {
             writer.WriteSByte(maxTaxCollectorsCount);
             writer.WriteSByte(taxCollectorsCount);
-            writer.WriteVarShort(taxCollectorLifePoints);
-            writer.WriteVarShort(taxCollectorDamagesBonuses);
-            writer.WriteVarShort(taxCollectorPods);
-            writer.WriteVarShort(taxCollectorProspecting);
-            writer.WriteVarShort(taxCollectorWisdom);
-            writer.WriteVarShort(boostPoints);
+            writer.WriteVarShort((short)taxCollectorLifePoints);
+            writer.WriteVarShort((short)taxCollectorDamagesBonuses);
+            writer.WriteVarShort((short)taxCollectorPods);
+            writer.WriteVarShort((short)taxCollectorProspecting);
+            writer.WriteVarShort((short)taxCollectorWisdom);
+            writer.WriteVarShort((short)boostPoints);
             writer.WriteUShort((ushort)spellId.Length);
             foreach (var entry in spellId)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)spellLevel.Length);
             foreach (var entry in spellLevel)
@@ -85,29 +85,29 @@ namespace BlueSheep.Common.Protocol.Messages
             taxCollectorsCount = reader.ReadSByte();
             if (taxCollectorsCount < 0)
                 throw new Exception("Forbidden value on taxCollectorsCount = " + taxCollectorsCount + ", it doesn't respect the following condition : taxCollectorsCount < 0");
-            taxCollectorLifePoints = reader.ReadVarShort();
+            taxCollectorLifePoints = reader.ReadVarUhShort();
             if (taxCollectorLifePoints < 0)
                 throw new Exception("Forbidden value on taxCollectorLifePoints = " + taxCollectorLifePoints + ", it doesn't respect the following condition : taxCollectorLifePoints < 0");
-            taxCollectorDamagesBonuses = reader.ReadVarShort();
+            taxCollectorDamagesBonuses = reader.ReadVarUhShort();
             if (taxCollectorDamagesBonuses < 0)
                 throw new Exception("Forbidden value on taxCollectorDamagesBonuses = " + taxCollectorDamagesBonuses + ", it doesn't respect the following condition : taxCollectorDamagesBonuses < 0");
-            taxCollectorPods = reader.ReadVarShort();
+            taxCollectorPods = reader.ReadVarUhShort();
             if (taxCollectorPods < 0)
                 throw new Exception("Forbidden value on taxCollectorPods = " + taxCollectorPods + ", it doesn't respect the following condition : taxCollectorPods < 0");
-            taxCollectorProspecting = reader.ReadVarShort();
+            taxCollectorProspecting = reader.ReadVarUhShort();
             if (taxCollectorProspecting < 0)
                 throw new Exception("Forbidden value on taxCollectorProspecting = " + taxCollectorProspecting + ", it doesn't respect the following condition : taxCollectorProspecting < 0");
-            taxCollectorWisdom = reader.ReadVarShort();
+            taxCollectorWisdom = reader.ReadVarUhShort();
             if (taxCollectorWisdom < 0)
                 throw new Exception("Forbidden value on taxCollectorWisdom = " + taxCollectorWisdom + ", it doesn't respect the following condition : taxCollectorWisdom < 0");
-            boostPoints = reader.ReadVarShort();
+            boostPoints = reader.ReadVarUhShort();
             if (boostPoints < 0)
                 throw new Exception("Forbidden value on boostPoints = " + boostPoints + ", it doesn't respect the following condition : boostPoints < 0");
             var limit = reader.ReadUShort();
-            spellId = new short[limit];
+            spellId = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 spellId[i] = reader.ReadVarShort();
+                 spellId[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
             spellLevel = new sbyte[limit];

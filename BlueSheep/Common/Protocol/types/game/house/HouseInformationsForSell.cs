@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class HouseInformationsForSell
 {
 
-public new const short ID = 221;
-public virtual short TypeId
+public new const int ID = 221;
+public virtual int TypeId
 {
     get { return ID; }
 }
@@ -39,9 +39,9 @@ public virtual short TypeId
 public int modelId;
         public string ownerName;
         public bool ownerConnected;
-        public short worldX;
-        public short worldY;
-        public short subAreaId;
+        public int worldX;
+        public int worldY;
+        public int subAreaId;
         public sbyte nbRoom;
         public sbyte nbChest;
         public int[] skillListIds;
@@ -53,7 +53,7 @@ public HouseInformationsForSell()
 {
 }
 
-public HouseInformationsForSell(int modelId, string ownerName, bool ownerConnected, short worldX, short worldY, short subAreaId, sbyte nbRoom, sbyte nbChest, int[] skillListIds, bool isLocked, int price)
+public HouseInformationsForSell(int modelId, string ownerName, bool ownerConnected, int worldX, int worldY, int subAreaId, sbyte nbRoom, sbyte nbChest, int[] skillListIds, bool isLocked, int price)
         {
             this.modelId = modelId;
             this.ownerName = ownerName;
@@ -75,9 +75,9 @@ public virtual void Serialize(BigEndianWriter writer)
 writer.WriteVarInt(modelId);
             writer.WriteUTF(ownerName);
             writer.WriteBoolean(ownerConnected);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
-            writer.WriteVarShort(subAreaId);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
+            writer.WriteVarShort((short)subAreaId);
             writer.WriteSByte(nbRoom);
             writer.WriteSByte(nbChest);
             writer.WriteUShort((ushort)skillListIds.Length);
@@ -105,7 +105,7 @@ modelId = reader.ReadVarInt();
             worldY = reader.ReadShort();
             if (worldY < -255 || worldY > 255)
                 throw new Exception("Forbidden value on worldY = " + worldY + ", it doesn't respect the following condition : worldY < -255 || worldY > 255");
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             nbRoom = reader.ReadSByte();

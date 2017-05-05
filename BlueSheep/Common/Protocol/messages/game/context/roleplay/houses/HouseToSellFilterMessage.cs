@@ -29,14 +29,14 @@ namespace BlueSheep.Common.Protocol.Messages
         public int areaId;
         public sbyte atLeastNbRoom;
         public sbyte atLeastNbChest;
-        public short skillRequested;
+        public int skillRequested;
         public int maxPrice;
         
         public HouseToSellFilterMessage()
         {
         }
         
-        public HouseToSellFilterMessage(int areaId, sbyte atLeastNbRoom, sbyte atLeastNbChest, short skillRequested, int maxPrice)
+        public HouseToSellFilterMessage(int areaId, sbyte atLeastNbRoom, sbyte atLeastNbChest, int skillRequested, int maxPrice)
         {
             this.areaId = areaId;
             this.atLeastNbRoom = atLeastNbRoom;
@@ -50,7 +50,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteInt(areaId);
             writer.WriteSByte(atLeastNbRoom);
             writer.WriteSByte(atLeastNbChest);
-            writer.WriteVarShort(skillRequested);
+            writer.WriteVarShort((short)skillRequested);
             writer.WriteVarInt(maxPrice);
         }
         
@@ -63,7 +63,7 @@ namespace BlueSheep.Common.Protocol.Messages
             atLeastNbChest = reader.ReadSByte();
             if (atLeastNbChest < 0)
                 throw new Exception("Forbidden value on atLeastNbChest = " + atLeastNbChest + ", it doesn't respect the following condition : atLeastNbChest < 0");
-            skillRequested = reader.ReadVarShort();
+            skillRequested = reader.ReadVarUhShort();
             if (skillRequested < 0)
                 throw new Exception("Forbidden value on skillRequested = " + skillRequested + ", it doesn't respect the following condition : skillRequested < 0");
             maxPrice = reader.ReadVarInt();

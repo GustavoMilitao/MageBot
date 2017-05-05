@@ -30,15 +30,15 @@ namespace BlueSheep.Common.Protocol.Types
     public class ActorExtendedAlignmentInformations : ActorAlignmentInformations
     {
 
-        public new const short ID = 202;
-        public override short TypeId
+        public new const int ID = 202;
+        public override int TypeId
         {
             get { return ID; }
         }
 
-        public ushort honor;
-        public ushort honorGradeFloor;
-        public ushort honorNextGradeFloor;
+        public int honor;
+        public int honorGradeFloor;
+        public int honorNextGradeFloor;
         public byte aggressable;
 
 
@@ -46,7 +46,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public ActorExtendedAlignmentInformations(byte alignmentSide, byte alignmentValue, byte alignmentGrade, double characterPower, ushort honor, ushort honorGradeFloor, ushort honorNextGradeFloor, byte aggressable)
+        public ActorExtendedAlignmentInformations(byte alignmentSide, byte alignmentValue, byte alignmentGrade, double characterPower, int honor, int honorGradeFloor, int honorNextGradeFloor, byte aggressable)
                  : base(alignmentSide, alignmentValue, alignmentGrade, characterPower)
         {
             this.honor = honor;
@@ -60,9 +60,9 @@ namespace BlueSheep.Common.Protocol.Types
         {
 
             base.Serialize(writer);
-            writer.WriteVarShort(honor);
-            writer.WriteVarShort(honorGradeFloor);
-            writer.WriteVarShort(honorNextGradeFloor);
+            writer.WriteVarShort((short)honor);
+            writer.WriteVarShort((short)honorGradeFloor);
+            writer.WriteVarShort((short)honorNextGradeFloor);
             writer.WriteByte(aggressable);
         }
 

@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class HavenBagFurnitureInformation
     {
-        public new const short ID = 498;
+        public new const int ID = 498;
         public uint cellId = 0;
         public int funitureId = 0;
         public uint orientation = 0;
@@ -21,7 +21,7 @@ namespace BlueSheep.Common.Protocol.Types
             {
                 throw new Exception("Forbidden value (" + cellId + ") on element cellId.");
             }
-            writer.WriteVarShort((short)cellId);
+            writer.WriteVarShort((short)(int)cellId);
             writer.WriteInt(funitureId);
             if (orientation < 0)
             {

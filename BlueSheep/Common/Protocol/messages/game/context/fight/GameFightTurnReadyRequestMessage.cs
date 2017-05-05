@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int id;
+        public ulong id;
         
         public GameFightTurnReadyRequestMessage()
         {
         }
         
-        public GameFightTurnReadyRequestMessage(int id)
+        public GameFightTurnReadyRequestMessage(ulong id)
         {
             this.id = id;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteInt(id);
+            writer.WriteULong(id);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            id = reader.ReadInt();
+            id = reader.ReadULong();
         }
         
     }

@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
     public class ActorAlignmentInformations
     {
 
-        public new const short ID = 201;
-        public virtual short TypeId
+        public new const int ID = 201;
+        public virtual int TypeId
         {
             get { return ID; }
         }

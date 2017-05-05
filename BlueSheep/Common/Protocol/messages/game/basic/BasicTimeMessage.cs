@@ -27,13 +27,13 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public double timestamp;
-        public short timezoneOffset;
+        public int timezoneOffset;
         
         public BasicTimeMessage()
         {
         }
         
-        public BasicTimeMessage(double timestamp, short timezoneOffset)
+        public BasicTimeMessage(double timestamp, int timezoneOffset)
         {
             this.timestamp = timestamp;
             this.timezoneOffset = timezoneOffset;
@@ -42,7 +42,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteDouble(timestamp);
-            writer.WriteShort(timezoneOffset);
+            writer.WriteShort((short)timezoneOffset);
         }
         
         public override void Deserialize(BigEndianReader reader)

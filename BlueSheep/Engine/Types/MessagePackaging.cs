@@ -32,7 +32,7 @@ namespace BlueSheep.Engine.Types
             int index = 0;
             int packetLenght = m_Writer.Content.Length;
             int packetLenghtType = GetLenghtType();
-            short packetHeader = GetHeader(protocolID);
+            int packetHeader = GetHeader(protocolID);
 
             // Création du Header
             m_Packet = new byte[2 + packetLenghtType + packetLenght];
@@ -80,7 +80,7 @@ namespace BlueSheep.Engine.Types
             // Différents types de tailles
             int packetLenghtType = 0;
 
-            if (m_Writer.Content.Length > short.MaxValue)
+            if (m_Writer.Content.Length > int.MaxValue)
                 packetLenghtType = 3;
             else if (m_Writer.Content.Length > byte.MaxValue)
                 packetLenghtType = 2;
@@ -90,10 +90,10 @@ namespace BlueSheep.Engine.Types
             return packetLenghtType;
         }
 
-        private short GetHeader(int protocolID)
+        private int GetHeader(int protocolID)
         {
             // Création du Header
-            return (short)((protocolID << 2) | GetLenghtType());
+            return (int)((protocolID << 2) | GetLenghtType());
         }
         #endregion
     }

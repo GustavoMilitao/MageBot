@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class AlternativeMonstersInGroupLightInformations
 {
 
-public new const short ID = 394;
-public virtual short TypeId
+public new const int ID = 394;
+public virtual int TypeId
 {
     get { return ID; }
 }

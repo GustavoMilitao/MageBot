@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class FinishMoveInformations
     {
-        public new const short ID = 506;
+        public new const int ID = 506;
         public uint finishMoveId = 0;
         public bool finishMoveState = false;
 

@@ -27,13 +27,13 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int elemId;
-        public short skillId;
+        public int skillId;
         
         public InteractiveUseEndedMessage()
         {
         }
         
-        public InteractiveUseEndedMessage(int elemId, short skillId)
+        public InteractiveUseEndedMessage(int elemId, int skillId)
         {
             this.elemId = elemId;
             this.skillId = skillId;
@@ -42,7 +42,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteVarInt(elemId);
-            writer.WriteVarShort(skillId);
+            writer.WriteVarShort((short)skillId);
         }
         
         public override void Deserialize(BigEndianReader reader)
@@ -50,7 +50,7 @@ namespace BlueSheep.Common.Protocol.Messages
             elemId = reader.ReadVarInt();
             if (elemId < 0)
                 throw new Exception("Forbidden value on elemId = " + elemId + ", it doesn't respect the following condition : elemId < 0");
-            skillId = reader.ReadVarShort();
+            skillId = reader.ReadVarUhShort();
             if (skillId < 0)
                 throw new Exception("Forbidden value on skillId = " + skillId + ", it doesn't respect the following condition : skillId < 0");
         }

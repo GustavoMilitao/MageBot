@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public ShowCellSpectatorMessage(int sourceId, short cellId, string playerName)
+        public ShowCellSpectatorMessage(ulong sourceId, int cellId, string playerName)
          : base(sourceId, cellId)
         {
             this.playerName = playerName;

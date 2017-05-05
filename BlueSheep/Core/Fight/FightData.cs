@@ -28,7 +28,7 @@ namespace BlueSheep.Core.Fight
         public Dictionary<int, int> LastTurnLaunchBySpell = new Dictionary<int, int>();
         public Dictionary<int, int> TotalLaunchBySpell = new Dictionary<int, int>();
         public Dictionary<int, Dictionary<int, int>> TotalLaunchByCellBySpell = new Dictionary<int, Dictionary<int, int>>();
-        private Dictionary<int, List<BFighter>> m_Summons = new Dictionary<int, List<BFighter>>();
+        private Dictionary<ulong, List<BFighter>> m_Summons = new Dictionary<ulong, List<BFighter>>();
         #endregion
 
         #region Public Fields
@@ -53,7 +53,7 @@ namespace BlueSheep.Core.Fight
         #region Properties
         public BFighter Fighter
         {
-            get { return GetFighter((long)m_Account.CharacterBaseInformations.Id); }
+            get { return GetFighter(m_Account.CharacterBaseInformations.Id); }
         }
 
         public int MonsterNumber
@@ -156,7 +156,7 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Add the summoner and its summon.
         /// </summary>
-        public void AddSummon(int sourceId, BFighter summon)
+        public void AddSummon(ulong sourceId, BFighter summon)
         {
             Fighters.Add(summon);
             List<BFighter> summoned = new List<BFighter>();
@@ -179,12 +179,12 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public BFighter GetSummoner()
         {
-            Tuple<int,int> temp = new Tuple<int,int>(0, -1);
-            foreach (KeyValuePair<int, List<BFighter>> pair in m_Summons)
+            Tuple<ulong, int> temp = new Tuple<ulong,int>(0, -1);
+            foreach (KeyValuePair<ulong, List<BFighter>> pair in m_Summons)
             {
                 if (pair.Value.Count > temp.Item2)
                 {
-                    temp = new Tuple<int, int>(pair.Key, pair.Value.Count);
+                    temp = new Tuple<ulong, int>(pair.Key, pair.Value.Count);
                 }
             }
             if (temp.Item1 != 0)
@@ -196,7 +196,7 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Removes the fighter from the fighters and add it to the dead ennemies' list.
         /// </summary>
-        public void SetFighterDeath(int id)
+        public void SetFighterDeath(ulong id)
         {
             BFighter fighter = GetFighter(id);
             DeadEnnemies.Add(fighter);
@@ -243,7 +243,7 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Affect the specified variation on the specified target.
         /// </summary>
-        public void SetPointsVariation(int targetId, int actionId, int delta)
+        public void SetPointsVariation(ulong targetId, int actionId, int delta)
         {
             BFighter fighter = GetFighter(targetId);
             if (fighter != null)
@@ -267,7 +267,7 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Update the life points of the specified fighter.
         /// </summary>
-        public void UpdateFighterLifePoints(int id, int delta)
+        public void UpdateFighterLifePoints(ulong id, int delta)
         {
             BFighter fighter = GetFighter(id);
             if (fighter != null)
@@ -285,7 +285,7 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Set a spell casted by the player.
         /// </summary>
-        public void SetSpellCasted(int id, int spellId, int destinationCellId)
+        public void SetSpellCasted(ulong id, int spellId, int destinationCellId)
         {
             BFighter fighter = GetFighter(id);
             if (fighter != null && fighter.Id == Fighter.Id)
@@ -331,7 +331,7 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Update the cellId of the specified fighter.
         /// </summary>
-        public void UpdateFighterCell(int id, int cell)
+        public void UpdateFighterCell(ulong id, int cell)
         {
             BFighter fighter = GetFighter(id);
             if (fighter != null)
@@ -408,7 +408,7 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Set turn as started.
         /// </summary>
-        public void TurnStarted(int id = 0)
+        public void TurnStarted(ulong id = 0)
         {
             if (!IsFightStarted)
                 IsFightStarted = true;
@@ -424,7 +424,7 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Set turn as ended.
         /// </summary>
-        public void TurnEnded(int id)
+        public void TurnEnded(ulong id)
         {
             if (id == m_Account.CharacterBaseInformations.Id)
             {
@@ -712,7 +712,7 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         /// <param name="id">ID du fighter</param>
         /// <returns>BFighter fighter.</returns>
-        private BFighter GetFighter(long id)
+        private BFighter GetFighter(ulong id)
         {
             return Fighters.FirstOrDefault(f => f.Id == id);
         }

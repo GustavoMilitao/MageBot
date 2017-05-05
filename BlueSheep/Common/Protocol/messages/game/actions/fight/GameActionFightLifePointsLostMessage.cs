@@ -26,15 +26,15 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int targetId;
-        public short loss;
-        public short permanentDamages;
+        public ulong targetId;
+        public int loss;
+        public int permanentDamages;
         
         public GameActionFightLifePointsLostMessage()
         {
         }
         
-        public GameActionFightLifePointsLostMessage(short actionId, int sourceId, int targetId, short loss, short permanentDamages)
+        public GameActionFightLifePointsLostMessage(int actionId, ulong sourceId, ulong targetId, int loss, int permanentDamages)
          : base(actionId, sourceId)
         {
             this.targetId = targetId;
@@ -45,19 +45,19 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteInt(targetId);
-            writer.WriteVarShort(loss);
-            writer.WriteVarShort(permanentDamages);
+            writer.WriteULong(targetId);
+            writer.WriteVarShort((short)loss);
+            writer.WriteVarShort((short)permanentDamages);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            targetId = reader.ReadInt();
-            loss = reader.ReadVarShort();
+            targetId = reader.ReadULong();
+            loss = reader.ReadVarUhShort();
             if (loss < 0)
                 throw new Exception("Forbidden value on loss = " + loss + ", it doesn't respect the following condition : loss < 0");
-            permanentDamages = reader.ReadVarShort();
+            permanentDamages = reader.ReadVarUhShort();
             if (permanentDamages < 0)
                 throw new Exception("Forbidden value on permanentDamages = " + permanentDamages + ", it doesn't respect the following condition : permanentDamages < 0");
         }

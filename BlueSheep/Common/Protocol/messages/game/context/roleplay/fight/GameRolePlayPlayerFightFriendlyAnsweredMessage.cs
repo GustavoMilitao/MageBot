@@ -27,15 +27,15 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int fightId;
-        public int sourceId;
-        public int targetId;
+        public ulong sourceId;
+        public ulong targetId;
         public bool accept;
         
         public GameRolePlayPlayerFightFriendlyAnsweredMessage()
         {
         }
         
-        public GameRolePlayPlayerFightFriendlyAnsweredMessage(int fightId, int sourceId, int targetId, bool accept)
+        public GameRolePlayPlayerFightFriendlyAnsweredMessage(int fightId, ulong sourceId, ulong targetId, bool accept)
         {
             this.fightId = fightId;
             this.sourceId = sourceId;
@@ -46,18 +46,18 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteInt(fightId);
-            writer.WriteVarInt(sourceId);
-            writer.WriteVarInt(targetId);
+            writer.WriteVarLong(sourceId);
+            writer.WriteVarLong(targetId);
             writer.WriteBoolean(accept);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             fightId = reader.ReadInt();
-            sourceId = reader.ReadVarInt();
+            sourceId = reader.ReadVarUhLong();
             if (sourceId < 0)
                 throw new Exception("Forbidden value on sourceId = " + sourceId + ", it doesn't respect the following condition : sourceId < 0");
-            targetId = reader.ReadVarInt();
+            targetId = reader.ReadVarUhLong();
             if (targetId < 0)
                 throw new Exception("Forbidden value on targetId = " + targetId + ", it doesn't respect the following condition : targetId < 0");
             accept = reader.ReadBoolean();

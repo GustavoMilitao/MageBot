@@ -27,68 +27,66 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class GameRolePlayNpcQuestFlag
-{
+    public class GameRolePlayNpcQuestFlag
+    {
 
-public new const short ID = 384;
-public virtual short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 384;
+        public virtual int TypeId
+        {
+            get { return ID; }
+        }
 
-public short[] questsToValidId;
-        public short[] questsToStartId;
-        
+        public int[] questsToValidId;
+        public int[] questsToStartId;
 
-public GameRolePlayNpcQuestFlag()
-{
-}
 
-public GameRolePlayNpcQuestFlag(short[] questsToValidId, short[] questsToStartId)
+        public GameRolePlayNpcQuestFlag()
+        {
+        }
+
+        public GameRolePlayNpcQuestFlag(int[] questsToValidId, int[] questsToStartId)
         {
             this.questsToValidId = questsToValidId;
             this.questsToStartId = questsToStartId;
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
 
-writer.WriteUShort((ushort)questsToValidId.Length);
+        public virtual void Serialize(BigEndianWriter writer)
+        {
+
+            writer.WriteUShort((ushort)questsToValidId.Length);
             foreach (var entry in questsToValidId)
             {
-                 writer.WriteVarShort(entry);
+                writer.WriteVarShort((short)entry);
             }
             writer.WriteUShort((ushort)questsToStartId.Length);
             foreach (var entry in questsToStartId)
             {
-                 writer.WriteVarShort(entry);
+                writer.WriteVarShort((short)entry);
             }
-            
 
-}
 
-public virtual void Deserialize(BigEndianReader reader)
-{
+        }
 
-var limit = reader.ReadUShort();
-            questsToValidId = new short[limit];
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            var limit = reader.ReadUShort();
+            questsToValidId = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 questsToValidId[i] = reader.ReadVarShort();
+                questsToValidId[i] = reader.ReadVarUhShort();
             }
             limit = reader.ReadUShort();
-            questsToStartId = new short[limit];
+            questsToStartId = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 questsToStartId[i] = reader.ReadVarShort();
+                questsToStartId[i] = reader.ReadVarUhShort();
             }
-            
-
-}
+        }
 
 
-}
+    }
 
 
 }

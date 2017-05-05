@@ -26,9 +26,9 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short maxPods;
-        public short prospecting;
-        public short wisdom;
+        public int maxPods;
+        public int prospecting;
+        public int wisdom;
         public sbyte taxCollectorsCount;
         public int taxCollectorAttack;
         public int kamas;
@@ -40,7 +40,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public TaxCollectorDialogQuestionExtendedMessage(Types.BasicGuildInformations guildInfo, short maxPods, short prospecting, short wisdom, sbyte taxCollectorsCount, int taxCollectorAttack, int kamas, double experience, int pods, int itemsValue)
+        public TaxCollectorDialogQuestionExtendedMessage(Types.BasicGuildInformations guildInfo, int maxPods, int prospecting, int wisdom, sbyte taxCollectorsCount, int taxCollectorAttack, int kamas, double experience, int pods, int itemsValue)
          : base(guildInfo)
         {
             this.maxPods = maxPods;
@@ -57,9 +57,9 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarShort(maxPods);
-            writer.WriteVarShort(prospecting);
-            writer.WriteVarShort(wisdom);
+            writer.WriteVarShort((short)maxPods);
+            writer.WriteVarShort((short)prospecting);
+            writer.WriteVarShort((short)wisdom);
             writer.WriteSByte(taxCollectorsCount);
             writer.WriteInt(taxCollectorAttack);
             writer.WriteVarInt(kamas);
@@ -71,13 +71,13 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            maxPods = reader.ReadVarShort();
+            maxPods = reader.ReadVarUhShort();
             if (maxPods < 0)
                 throw new Exception("Forbidden value on maxPods = " + maxPods + ", it doesn't respect the following condition : maxPods < 0");
-            prospecting = reader.ReadVarShort();
+            prospecting = reader.ReadVarUhShort();
             if (prospecting < 0)
                 throw new Exception("Forbidden value on prospecting = " + prospecting + ", it doesn't respect the following condition : prospecting < 0");
-            wisdom = reader.ReadVarShort();
+            wisdom = reader.ReadVarUhShort();
             if (wisdom < 0)
                 throw new Exception("Forbidden value on wisdom = " + wisdom + ", it doesn't respect the following condition : wisdom < 0");
             taxCollectorsCount = reader.ReadSByte();

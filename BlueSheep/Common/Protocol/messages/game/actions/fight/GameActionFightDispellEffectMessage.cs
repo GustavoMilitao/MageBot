@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameActionFightDispellEffectMessage(short actionId, int sourceId, int targetId, int boostUID)
+        public GameActionFightDispellEffectMessage(int actionId, ulong sourceId, ulong targetId, int boostUID)
          : base(actionId, sourceId, targetId)
         {
             this.boostUID = boostUID;

@@ -121,7 +121,7 @@ namespace BlueSheep.Core.Map
             m_time = timetowait;
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select<uint, short>(ui => (short)ui).ToArray(), m_Account.MapData.Id);
+                GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select<uint, int>(ui => (int)ui).ToArray(), m_Account.MapData.Id);
                 msg.Serialize(writer);
                 writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
@@ -291,7 +291,7 @@ namespace BlueSheep.Core.Map
             m_time = timetowait;
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select<uint, short>(ui => (short)ui).ToArray(), m_Account.MapData.Id);
+                GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select<uint, int>(ui => (int)ui).ToArray(), m_Account.MapData.Id);
                 msg.Serialize(writer);
                 writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
@@ -328,7 +328,7 @@ namespace BlueSheep.Core.Map
                 }
                 if (m_Account.Fight != null && m_Account.FightData.IsFollowingGroup && m_Account.FightData.followingGroup.m_cellId == m_Account.MapData.Character.disposition.cellId)
                 {
-                    m_Account.Fight.LaunchFight(m_Account.FightData.followingGroup.m_contextualId);
+                    m_Account.Fight.LaunchFight((int)m_Account.FightData.followingGroup.m_contextualId);
                 }
                 else if (m_Account.Fight != null && m_Account.FightData.IsFollowingGroup)
                 {

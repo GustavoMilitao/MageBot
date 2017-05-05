@@ -31,7 +31,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameActionFightTriggerEffectMessage(short actionId, int sourceId, int targetId, int boostUID)
+        public GameActionFightTriggerEffectMessage(int actionId, ulong sourceId, ulong targetId, int boostUID)
          : base(actionId, sourceId, targetId, boostUID)
         {
         }

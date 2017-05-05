@@ -32,7 +32,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public ExchangeCraftInformationObjectMessage(sbyte craftResult, short objectGenericId, int playerId)
+        public ExchangeCraftInformationObjectMessage(sbyte craftResult, int objectGenericId, int playerId)
          : base(craftResult, objectGenericId)
         {
             this.playerId = playerId;

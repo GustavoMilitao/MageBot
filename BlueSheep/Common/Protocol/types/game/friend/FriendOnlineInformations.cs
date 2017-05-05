@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class FriendOnlineInformations : FriendInformations
 {
 
-public new const short ID = 92;
-public override short TypeId
+public new const int ID = 92;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -51,7 +51,7 @@ public FriendOnlineInformations()
 {
 }
 
-public FriendOnlineInformations(int accountId, string accountName, sbyte playerState, short lastConnection, int achievementPoints, int playerId, string playerName, byte level, sbyte alignmentSide, sbyte breed, bool sex, Types.BasicGuildInformations guildInfo, sbyte moodSmileyId, Types.PlayerStatus status)
+public FriendOnlineInformations(int accountId, string accountName, sbyte playerState, int lastConnection, int achievementPoints, int playerId, string playerName, byte level, sbyte alignmentSide, sbyte breed, bool sex, Types.BasicGuildInformations guildInfo, sbyte moodSmileyId, Types.PlayerStatus status)
          : base(accountId, accountName, playerState, lastConnection, achievementPoints)
         {
             this.playerId = playerId;
@@ -78,7 +78,7 @@ base.Serialize(writer);
             writer.WriteBoolean(sex);
             guildInfo.Serialize(writer);
             writer.WriteSByte(moodSmileyId);
-            writer.WriteShort(status.TypeId);
+            writer.WriteShort((short)status.TypeId);
             status.Serialize(writer);
             
 
@@ -101,7 +101,7 @@ base.Deserialize(reader);
             guildInfo = new Types.BasicGuildInformations();
             guildInfo.Deserialize(reader);
             moodSmileyId = reader.ReadSByte();
-            status = Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadShort());
+            status = Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadUShort());
             status.Deserialize(reader);
             
 

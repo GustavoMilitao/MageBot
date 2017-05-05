@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short worldX;
-        public short worldY;
+        public int worldX;
+        public int worldY;
         
         public MapComplementaryInformationsWithCoordsMessage()
         {
         }
         
-        public MapComplementaryInformationsWithCoordsMessage(short subAreaId, int mapId, Types.HouseInformations[] houses, Types.GameRolePlayActorInformations[] actors, Types.InteractiveElement[] interactiveElements, Types.StatedElement[] statedElements, Types.MapObstacle[] obstacles, Types.FightCommonInformations[] fights, short worldX, short worldY)
+        public MapComplementaryInformationsWithCoordsMessage(int subAreaId, int mapId, Types.HouseInformations[] houses, Types.GameRolePlayActorInformations[] actors, Types.InteractiveElement[] interactiveElements, Types.StatedElement[] statedElements, Types.MapObstacle[] obstacles, Types.FightCommonInformations[] fights, int worldX, int worldY)
          : base(subAreaId, mapId, houses, actors, interactiveElements, statedElements, obstacles, fights)
         {
             this.worldX = worldX;
@@ -43,8 +43,8 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
         }
         
         public override void Deserialize(BigEndianReader reader)

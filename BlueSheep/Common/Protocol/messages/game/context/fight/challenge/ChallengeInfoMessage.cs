@@ -26,8 +26,8 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short challengeId;
-        public int targetId;
+        public int challengeId;
+        public ulong targetId;
         public int xpBonus;
         public int dropBonus;
         
@@ -35,7 +35,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public ChallengeInfoMessage(short challengeId, int targetId, int xpBonus, int dropBonus)
+        public ChallengeInfoMessage(int challengeId, ulong targetId, int xpBonus, int dropBonus)
         {
             this.challengeId = challengeId;
             this.targetId = targetId;
@@ -45,18 +45,18 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(challengeId);
-            writer.WriteInt(targetId);
+            writer.WriteVarShort((short)challengeId);
+            writer.WriteULong(targetId);
             writer.WriteVarInt(xpBonus);
             writer.WriteVarInt(dropBonus);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            challengeId = reader.ReadVarShort();
+            challengeId = reader.ReadVarUhShort();
             if (challengeId < 0)
                 throw new Exception("Forbidden value on challengeId = " + challengeId + ", it doesn't respect the following condition : challengeId < 0");
-            targetId = reader.ReadInt();
+            targetId = reader.ReadULong();
             xpBonus = reader.ReadVarInt();
             if (xpBonus < 0)
                 throw new Exception("Forbidden value on xpBonus = " + xpBonus + ", it doesn't respect the following condition : xpBonus < 0");

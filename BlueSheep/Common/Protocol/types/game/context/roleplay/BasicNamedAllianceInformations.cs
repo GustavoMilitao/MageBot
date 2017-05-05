@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class BasicNamedAllianceInformations : BasicAllianceInformations
 {
 
-public new const short ID = 418;
-public override short TypeId
+public new const int ID = 418;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public BasicNamedAllianceInformations()
 {
 }
 
-public BasicNamedAllianceInformations(int allianceId, string allianceTag, string allianceName)
+public BasicNamedAllianceInformations(uint allianceId, string allianceTag, string allianceName)
          : base(allianceId, allianceTag)
         {
             this.allianceName = allianceName;

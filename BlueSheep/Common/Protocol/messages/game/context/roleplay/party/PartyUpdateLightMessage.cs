@@ -26,17 +26,17 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int id;
+        public ulong id;
         public int lifePoints;
         public int maxLifePoints;
-        public short prospecting;
+        public int prospecting;
         public byte regenRate;
         
         public PartyUpdateLightMessage()
         {
         }
         
-        public PartyUpdateLightMessage(int partyId, int id, int lifePoints, int maxLifePoints, short prospecting, byte regenRate)
+        public PartyUpdateLightMessage(int partyId, ulong id, int lifePoints, int maxLifePoints, int prospecting, byte regenRate)
          : base(partyId)
         {
             this.id = id;
@@ -49,17 +49,17 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarInt(id);
+            writer.WriteVarLong(id);
             writer.WriteVarInt(lifePoints);
             writer.WriteVarInt(maxLifePoints);
-            writer.WriteVarShort(prospecting);
+            writer.WriteVarShort((short)prospecting);
             writer.WriteByte(regenRate);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            id = reader.ReadVarInt();
+            id = reader.ReadVarUhLong();
             if (id < 0)
                 throw new Exception("Forbidden value on id = " + id + ", it doesn't respect the following condition : id < 0");
             lifePoints = reader.ReadVarInt();
@@ -68,7 +68,7 @@ namespace BlueSheep.Common.Protocol.Messages
             maxLifePoints = reader.ReadVarInt();
             if (maxLifePoints < 0)
                 throw new Exception("Forbidden value on maxLifePoints = " + maxLifePoints + ", it doesn't respect the following condition : maxLifePoints < 0");
-            prospecting = reader.ReadVarShort();
+            prospecting = reader.ReadVarUhShort();
             if (prospecting < 0)
                 throw new Exception("Forbidden value on prospecting = " + prospecting + ", it doesn't respect the following condition : prospecting < 0");
             regenRate = reader.ReadByte();

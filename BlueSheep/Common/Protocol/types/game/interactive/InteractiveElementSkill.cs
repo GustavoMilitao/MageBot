@@ -30,13 +30,13 @@ namespace BlueSheep.Common.Protocol.Types
     public class InteractiveElementSkill
     {
 
-        public new const short ID = 219;
-        public virtual short TypeId
+        public new const int ID = 219;
+        public virtual int TypeId
         {
             get { return ID; }
         }
 
-        public int skillId;
+        public uint skillId;
         public int skillInstanceUid;
 
 
@@ -44,7 +44,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public InteractiveElementSkill(int skillId, int skillInstanceUid)
+        public InteractiveElementSkill(uint skillId, int skillInstanceUid)
         {
             this.skillId = skillId;
             this.skillInstanceUid = skillInstanceUid;
@@ -63,7 +63,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Deserialize(BigEndianReader reader)
         {
 
-            skillId = reader.ReadVarInt();
+            skillId = reader.ReadVarUhInt();
             if (skillId < 0)
                 throw new Exception("Forbidden value on skillId = " + skillId + ", it doesn't respect the following condition : skillId < 0");
             skillInstanceUid = reader.ReadInt();

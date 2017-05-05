@@ -30,16 +30,16 @@ namespace BlueSheep.Common.Protocol.Types
 public class PaddockInformationsForSell
 {
 
-public new const short ID = 222;
-public virtual short TypeId
+public new const int ID = 222;
+public virtual int TypeId
 {
     get { return ID; }
 }
 
 public string guildOwner;
-        public short worldX;
-        public short worldY;
-        public short subAreaId;
+        public int worldX;
+        public int worldY;
+        public int subAreaId;
         public sbyte nbMount;
         public sbyte nbObject;
         public int price;
@@ -49,7 +49,7 @@ public PaddockInformationsForSell()
 {
 }
 
-public PaddockInformationsForSell(string guildOwner, short worldX, short worldY, short subAreaId, sbyte nbMount, sbyte nbObject, int price)
+public PaddockInformationsForSell(string guildOwner, int worldX, int worldY, int subAreaId, sbyte nbMount, sbyte nbObject, int price)
         {
             this.guildOwner = guildOwner;
             this.worldX = worldX;
@@ -65,9 +65,9 @@ public virtual void Serialize(BigEndianWriter writer)
 {
 
 writer.WriteUTF(guildOwner);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
-            writer.WriteVarShort(subAreaId);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
+            writer.WriteVarShort((short)subAreaId);
             writer.WriteSByte(nbMount);
             writer.WriteSByte(nbObject);
             writer.WriteVarInt(price);
@@ -85,7 +85,7 @@ guildOwner = reader.ReadUTF();
             worldY = reader.ReadShort();
             if (worldY < -255 || worldY > 255)
                 throw new Exception("Forbidden value on worldY = " + worldY + ", it doesn't respect the following condition : worldY < -255 || worldY > 255");
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             nbMount = reader.ReadSByte();

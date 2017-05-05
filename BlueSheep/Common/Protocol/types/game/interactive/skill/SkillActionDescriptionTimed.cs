@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
     public class SkillActionDescriptionTimed : SkillActionDescription
     {
 
-        public new const short ID = 103;
-        public override short TypeId
+        public new const int ID = 103;
+        public override int TypeId
         {
             get { return ID; }
         }
@@ -43,7 +43,7 @@ namespace BlueSheep.Common.Protocol.Types
         {
         }
 
-        public SkillActionDescriptionTimed(ushort skillId, byte time)
+        public SkillActionDescriptionTimed(int skillId, byte time)
                  : base(skillId)
         {
             this.time = time;

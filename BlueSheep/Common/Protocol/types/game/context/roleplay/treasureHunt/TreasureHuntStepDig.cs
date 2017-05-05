@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class TreasureHuntStepDig : TreasureHuntStep
 {
 
-public new const short ID = 465;
-public override short TypeId
+public new const int ID = 465;
+public override int TypeId
 {
     get { return ID; }
 }

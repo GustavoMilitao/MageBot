@@ -26,20 +26,20 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short achievementId;
+        public int achievementId;
         
         public AchievementRewardSuccessMessage()
         {
         }
         
-        public AchievementRewardSuccessMessage(short achievementId)
+        public AchievementRewardSuccessMessage(int achievementId)
         {
             this.achievementId = achievementId;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteShort(achievementId);
+            writer.WriteShort((short)achievementId);
         }
         
         public override void Deserialize(BigEndianReader reader)

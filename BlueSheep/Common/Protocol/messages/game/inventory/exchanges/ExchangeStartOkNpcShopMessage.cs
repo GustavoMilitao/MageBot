@@ -27,14 +27,14 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int npcSellerId;
-        public short tokenId;
+        public int tokenId;
         public Types.ObjectItemToSellInNpcShop[] objectsInfos;
         
         public ExchangeStartOkNpcShopMessage()
         {
         }
         
-        public ExchangeStartOkNpcShopMessage(int npcSellerId, short tokenId, Types.ObjectItemToSellInNpcShop[] objectsInfos)
+        public ExchangeStartOkNpcShopMessage(int npcSellerId, int tokenId, Types.ObjectItemToSellInNpcShop[] objectsInfos)
         {
             this.npcSellerId = npcSellerId;
             this.tokenId = tokenId;
@@ -44,7 +44,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteInt(npcSellerId);
-            writer.WriteVarShort(tokenId);
+            writer.WriteVarShort((short)tokenId);
             writer.WriteUShort((ushort)objectsInfos.Length);
             foreach (var entry in objectsInfos)
             {
@@ -55,7 +55,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             npcSellerId = reader.ReadInt();
-            tokenId = reader.ReadVarShort();
+            tokenId = reader.ReadVarUhShort();
             if (tokenId < 0)
                 throw new Exception("Forbidden value on tokenId = " + tokenId + ", it doesn't respect the following condition : tokenId < 0");
             var limit = reader.ReadUShort();

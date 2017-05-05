@@ -185,7 +185,7 @@ namespace BlueSheep.Core.Inventory
 
         public void RequestExchange(string name)
         {
-            int targetId = Account.MapData.Players.Find(p=> p.name == name).contextualId;
+            ulong targetId = Account.MapData.Players.Find(p=> p.name == name).contextualId;
             if (targetId != 0)
             {
                 Account.SocketManager.Send(new ExchangePlayerRequestMessage(1, targetId));

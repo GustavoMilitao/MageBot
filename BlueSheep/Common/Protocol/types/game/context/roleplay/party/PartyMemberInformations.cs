@@ -30,22 +30,22 @@ namespace BlueSheep.Common.Protocol.Types
 public class PartyMemberInformations : CharacterBaseInformations
 {
 
-public new const short ID = 90;
-public override short TypeId
+public new const int ID = 90;
+public override int TypeId
 {
     get { return ID; }
 }
 
 public int lifePoints;
         public int maxLifePoints;
-        public short prospecting;
+        public int prospecting;
         public byte regenRate;
-        public short initiative;
+        public int initiative;
         public sbyte alignmentSide;
-        public short worldX;
-        public short worldY;
+        public int worldX;
+        public int worldY;
         public int mapId;
-        public short subAreaId;
+        public int subAreaId;
         public Types.PlayerStatus status;
         public Types.PartyCompanionMemberInformations[] companions;
         
@@ -54,7 +54,7 @@ public PartyMemberInformations()
 {
 }
 
-public PartyMemberInformations(uint id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex, int lifePoints, int maxLifePoints, short prospecting, byte regenRate, short initiative, sbyte alignmentSide, short worldX, short worldY, int mapId, short subAreaId, Types.PlayerStatus status, Types.PartyCompanionMemberInformations[] companions)
+public PartyMemberInformations(uint id, byte level, string name, Types.EntityLook entityLook, sbyte breed, bool sex, int lifePoints, int maxLifePoints, int prospecting, byte regenRate, int initiative, sbyte alignmentSide, int worldX, int worldY, int mapId, int subAreaId, Types.PlayerStatus status, Types.PartyCompanionMemberInformations[] companions)
          : base(id, level, name, entityLook, breed, sex)
         {
             this.lifePoints = lifePoints;
@@ -78,15 +78,15 @@ public override void Serialize(BigEndianWriter writer)
 base.Serialize(writer);
             writer.WriteVarInt(lifePoints);
             writer.WriteVarInt(maxLifePoints);
-            writer.WriteVarShort(prospecting);
+            writer.WriteVarShort((short)prospecting);
             writer.WriteByte(regenRate);
-            writer.WriteVarShort(initiative);
+            writer.WriteVarShort((short)initiative);
             writer.WriteSByte(alignmentSide);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             writer.WriteInt(mapId);
-            writer.WriteVarShort(subAreaId);
-            writer.WriteShort(status.TypeId);
+            writer.WriteVarShort((short)subAreaId);
+            writer.WriteShort((short)status.TypeId);
             status.Serialize(writer);
             writer.WriteUShort((ushort)companions.Length);
             foreach (var entry in companions)
@@ -107,13 +107,13 @@ base.Deserialize(reader);
             maxLifePoints = reader.ReadVarInt();
             if (maxLifePoints < 0)
                 throw new Exception("Forbidden value on maxLifePoints = " + maxLifePoints + ", it doesn't respect the following condition : maxLifePoints < 0");
-            prospecting = reader.ReadVarShort();
+            prospecting = reader.ReadVarUhShort();
             if (prospecting < 0)
                 throw new Exception("Forbidden value on prospecting = " + prospecting + ", it doesn't respect the following condition : prospecting < 0");
             regenRate = reader.ReadByte();
             if (regenRate < 0 || regenRate > 255)
                 throw new Exception("Forbidden value on regenRate = " + regenRate + ", it doesn't respect the following condition : regenRate < 0 || regenRate > 255");
-            initiative = reader.ReadVarShort();
+            initiative = reader.ReadVarUhShort();
             if (initiative < 0)
                 throw new Exception("Forbidden value on initiative = " + initiative + ", it doesn't respect the following condition : initiative < 0");
             alignmentSide = reader.ReadSByte();
@@ -124,10 +124,10 @@ base.Deserialize(reader);
             if (worldY < -255 || worldY > 255)
                 throw new Exception("Forbidden value on worldY = " + worldY + ", it doesn't respect the following condition : worldY < -255 || worldY > 255");
             mapId = reader.ReadInt();
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
-            status = Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadShort());
+            status = Types.ProtocolTypeManager.GetInstance<Types.PlayerStatus>(reader.ReadUShort());
             status.Deserialize(reader);
             var limit = reader.ReadUShort();
             companions = new Types.PartyCompanionMemberInformations[limit];

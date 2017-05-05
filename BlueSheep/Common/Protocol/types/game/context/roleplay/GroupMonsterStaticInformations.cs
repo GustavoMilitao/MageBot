@@ -27,61 +27,61 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class GroupMonsterStaticInformations
-{
+    public class GroupMonsterStaticInformations
+    {
 
-public new const short ID = 140;
-public virtual short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 140;
+        public virtual int TypeId
+        {
+            get { return ID; }
+        }
 
-public Types.MonsterInGroupLightInformations mainCreatureLightInfos;
+        public Types.MonsterInGroupLightInformations mainCreatureLightInfos;
         public Types.MonsterInGroupInformations[] underlings;
-        
 
-public GroupMonsterStaticInformations()
-{
-}
 
-public GroupMonsterStaticInformations(Types.MonsterInGroupLightInformations mainCreatureLightInfos, Types.MonsterInGroupInformations[] underlings)
+        public GroupMonsterStaticInformations()
+        {
+        }
+
+        public GroupMonsterStaticInformations(Types.MonsterInGroupLightInformations mainCreatureLightInfos, Types.MonsterInGroupInformations[] underlings)
         {
             this.mainCreatureLightInfos = mainCreatureLightInfos;
             this.underlings = underlings;
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
 
-mainCreatureLightInfos.Serialize(writer);
+        public virtual void Serialize(BigEndianWriter writer)
+        {
+
+            mainCreatureLightInfos.Serialize(writer);
             writer.WriteUShort((ushort)underlings.Length);
             foreach (var entry in underlings)
             {
-                 entry.Serialize(writer);
+                entry.Serialize(writer);
             }
-            
 
-}
 
-public virtual void Deserialize(BigEndianReader reader)
-{
+        }
 
-mainCreatureLightInfos = new Types.MonsterInGroupLightInformations();
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            mainCreatureLightInfos = new Types.MonsterInGroupLightInformations();
             mainCreatureLightInfos.Deserialize(reader);
             var limit = reader.ReadUShort();
             underlings = new Types.MonsterInGroupInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                 underlings[i] = new Types.MonsterInGroupInformations();
-                 underlings[i].Deserialize(reader);
+                underlings[i] = new Types.MonsterInGroupInformations();
+                underlings[i].Deserialize(reader);
             }
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

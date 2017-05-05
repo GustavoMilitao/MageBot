@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class HumanOptionSkillUse : HumanOption
     {
-        public new const short ID = 495;
+        public new const int ID = 495;
 
         public uint elementId = 0;
 
@@ -30,7 +30,7 @@ namespace BlueSheep.Common.Protocol.Types
             {
                 throw new Exception("Forbidden value (" + skillId + ") on element skillId.");
             }
-            writer.WriteVarShort((short)skillId);
+            writer.WriteVarShort((short)(int)skillId);
             if (skillEndTime < -9007199254740990 || skillEndTime > 9007199254740990)
             {
                 throw new Exception("Forbidden value (" + skillEndTime + ") on element skillEndTime.");

@@ -26,19 +26,19 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short firstNameId;
-        public short lastNameId;
-        public short worldX;
-        public short worldY;
+        public int firstNameId;
+        public int lastNameId;
+        public int worldX;
+        public int worldY;
         public int mapId;
-        public short subAreaId;
+        public int subAreaId;
         public Types.BasicGuildInformations guild;
         
         public TaxCollectorAttackedMessage()
         {
         }
         
-        public TaxCollectorAttackedMessage(short firstNameId, short lastNameId, short worldX, short worldY, int mapId, short subAreaId, Types.BasicGuildInformations guild)
+        public TaxCollectorAttackedMessage(int firstNameId, int lastNameId, int worldX, int worldY, int mapId, int subAreaId, Types.BasicGuildInformations guild)
         {
             this.firstNameId = firstNameId;
             this.lastNameId = lastNameId;
@@ -51,21 +51,21 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(firstNameId);
-            writer.WriteVarShort(lastNameId);
-            writer.WriteShort(worldX);
-            writer.WriteShort(worldY);
+            writer.WriteVarShort((short)firstNameId);
+            writer.WriteVarShort((short)lastNameId);
+            writer.WriteShort((short)worldX);
+            writer.WriteShort((short)worldY);
             writer.WriteInt(mapId);
-            writer.WriteVarShort(subAreaId);
+            writer.WriteVarShort((short)subAreaId);
             guild.Serialize(writer);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            firstNameId = reader.ReadVarShort();
+            firstNameId = reader.ReadVarUhShort();
             if (firstNameId < 0)
                 throw new Exception("Forbidden value on firstNameId = " + firstNameId + ", it doesn't respect the following condition : firstNameId < 0");
-            lastNameId = reader.ReadVarShort();
+            lastNameId = reader.ReadVarUhShort();
             if (lastNameId < 0)
                 throw new Exception("Forbidden value on lastNameId = " + lastNameId + ", it doesn't respect the following condition : lastNameId < 0");
             worldX = reader.ReadShort();
@@ -75,7 +75,7 @@ namespace BlueSheep.Common.Protocol.Messages
             if (worldY < -255 || worldY > 255)
                 throw new Exception("Forbidden value on worldY = " + worldY + ", it doesn't respect the following condition : worldY < -255 || worldY > 255");
             mapId = reader.ReadInt();
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             guild = new Types.BasicGuildInformations();

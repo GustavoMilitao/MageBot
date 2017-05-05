@@ -26,13 +26,13 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short objectGenericId;
+        public int objectGenericId;
         
         public ExchangeCraftResultWithObjectIdMessage()
         {
         }
         
-        public ExchangeCraftResultWithObjectIdMessage(sbyte craftResult, short objectGenericId)
+        public ExchangeCraftResultWithObjectIdMessage(sbyte craftResult, int objectGenericId)
          : base(craftResult)
         {
             this.objectGenericId = objectGenericId;
@@ -41,13 +41,13 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarShort(objectGenericId);
+            writer.WriteVarShort((short)objectGenericId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            objectGenericId = reader.ReadVarShort();
+            objectGenericId = reader.ReadVarUhShort();
             if (objectGenericId < 0)
                 throw new Exception("Forbidden value on objectGenericId = " + objectGenericId + ", it doesn't respect the following condition : objectGenericId < 0");
         }

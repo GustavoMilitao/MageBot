@@ -26,13 +26,13 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] availableLegendaryIds;
+        public int[] availableLegendaryIds;
         
         public TreasureHuntShowLegendaryUIMessage()
         {
         }
         
-        public TreasureHuntShowLegendaryUIMessage(short[] availableLegendaryIds)
+        public TreasureHuntShowLegendaryUIMessage(int[] availableLegendaryIds)
         {
             this.availableLegendaryIds = availableLegendaryIds;
         }
@@ -42,17 +42,17 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)availableLegendaryIds.Length);
             foreach (var entry in availableLegendaryIds)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            availableLegendaryIds = new short[limit];
+            availableLegendaryIds = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 availableLegendaryIds[i] = reader.ReadVarShort();
+                 availableLegendaryIds[i] = reader.ReadVarUhShort();
             }
         }
         

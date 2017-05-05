@@ -27,7 +27,7 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int memberId;
-        public short rank;
+        public int rank;
         public sbyte experienceGivenPercent;
         public int rights;
         
@@ -35,7 +35,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GuildChangeMemberParametersMessage(int memberId, short rank, sbyte experienceGivenPercent, int rights)
+        public GuildChangeMemberParametersMessage(int memberId, int rank, sbyte experienceGivenPercent, int rights)
         {
             this.memberId = memberId;
             this.rank = rank;
@@ -46,7 +46,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteVarInt(memberId);
-            writer.WriteVarShort(rank);
+            writer.WriteVarShort((short)rank);
             writer.WriteSByte(experienceGivenPercent);
             writer.WriteVarInt(rights);
         }
@@ -56,7 +56,7 @@ namespace BlueSheep.Common.Protocol.Messages
             memberId = reader.ReadVarInt();
             if (memberId < 0)
                 throw new Exception("Forbidden value on memberId = " + memberId + ", it doesn't respect the following condition : memberId < 0");
-            rank = reader.ReadVarShort();
+            rank = reader.ReadVarUhShort();
             if (rank < 0)
                 throw new Exception("Forbidden value on rank = " + rank + ", it doesn't respect the following condition : rank < 0");
             experienceGivenPercent = reader.ReadSByte();

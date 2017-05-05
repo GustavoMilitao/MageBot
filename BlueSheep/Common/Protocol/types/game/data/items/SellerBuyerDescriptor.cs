@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class SellerBuyerDescriptor
 {
 
-public new const short ID = 121;
-public virtual short TypeId
+public new const int ID = 121;
+public virtual int TypeId
 {
     get { return ID; }
 }
@@ -43,14 +43,14 @@ public int[] quantities;
         public byte maxItemLevel;
         public int maxItemPerAccount;
         public int npcContextualId;
-        public short unsoldDelay;
+        public int unsoldDelay;
         
 
 public SellerBuyerDescriptor()
 {
 }
 
-public SellerBuyerDescriptor(int[] quantities, int[] types, float taxPercentage, float taxModificationPercentage, byte maxItemLevel, int maxItemPerAccount, int npcContextualId, short unsoldDelay)
+public SellerBuyerDescriptor(int[] quantities, int[] types, float taxPercentage, float taxModificationPercentage, byte maxItemLevel, int maxItemPerAccount, int npcContextualId, int unsoldDelay)
         {
             this.quantities = quantities;
             this.types = types;
@@ -81,7 +81,7 @@ writer.WriteUShort((ushort)quantities.Length);
             writer.WriteByte(maxItemLevel);
             writer.WriteVarInt(maxItemPerAccount);
             writer.WriteInt(npcContextualId);
-            writer.WriteVarShort(unsoldDelay);
+            writer.WriteVarShort((short)unsoldDelay);
             
 
 }
@@ -110,7 +110,7 @@ var limit = reader.ReadUShort();
             if (maxItemPerAccount < 0)
                 throw new Exception("Forbidden value on maxItemPerAccount = " + maxItemPerAccount + ", it doesn't respect the following condition : maxItemPerAccount < 0");
             npcContextualId = reader.ReadInt();
-            unsoldDelay = reader.ReadVarShort();
+            unsoldDelay = reader.ReadVarUhShort();
             if (unsoldDelay < 0)
                 throw new Exception("Forbidden value on unsoldDelay = " + unsoldDelay + ", it doesn't respect the following condition : unsoldDelay < 0");
             

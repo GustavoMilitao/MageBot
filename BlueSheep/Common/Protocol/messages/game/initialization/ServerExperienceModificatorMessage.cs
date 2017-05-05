@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short experiencePercent;
+        public int experiencePercent;
         
         public ServerExperienceModificatorMessage()
         {
         }
         
-        public ServerExperienceModificatorMessage(short experiencePercent)
+        public ServerExperienceModificatorMessage(int experiencePercent)
         {
             this.experiencePercent = experiencePercent;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(experiencePercent);
+            writer.WriteVarShort((short)experiencePercent);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            experiencePercent = reader.ReadVarShort();
+            experiencePercent = reader.ReadVarUhShort();
             if (experiencePercent < 0)
                 throw new Exception("Forbidden value on experiencePercent = " + experiencePercent + ", it doesn't respect the following condition : experiencePercent < 0");
         }

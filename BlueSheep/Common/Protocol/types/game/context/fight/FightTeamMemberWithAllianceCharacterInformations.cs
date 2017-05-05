@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class FightTeamMemberWithAllianceCharacterInformations : FightTeamMemberCharacterInformations
 {
 
-public new const short ID = 426;
-public override short TypeId
+public new const int ID = 426;
+public override int TypeId
 {
     get { return ID; }
 }

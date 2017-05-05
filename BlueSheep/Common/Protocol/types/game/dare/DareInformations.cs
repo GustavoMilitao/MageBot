@@ -6,7 +6,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class DareInformations : CharacterBasicMinimalInformations
     {
-        public const short ID = 502;
+        public const int ID = 502;
 
         public double dareId = 0;
         public CharacterBasicMinimalInformations creator;
@@ -45,7 +45,7 @@ namespace BlueSheep.Common.Protocol.Types
             {
                 throw new Exception("Forbidden value (" + maxCountWinners + ") on element maxCountWinners.");
             }
-            writer.WriteShort((short)maxCountWinners);
+            writer.WriteShort((short)(int)maxCountWinners);
             if (endDate < 0 || endDate > 9007199254740990)
             {
                 throw new Exception("Forbidden value (" + endDate + ") on element endDate.");
@@ -62,7 +62,7 @@ namespace BlueSheep.Common.Protocol.Types
                 throw new Exception("Forbidden value (" + allianceId + ") on element allianceId.");
             }
             writer.WriteVarInt(allianceId);
-            writer.WriteShort((short)criterions.Count);
+            writer.WriteShort((short)(int)criterions.Count);
             uint _loc2_ = 0;
             while (_loc2_ < criterions.Count)
             {

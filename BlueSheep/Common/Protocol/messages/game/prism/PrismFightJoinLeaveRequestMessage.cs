@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short subAreaId;
+        public int subAreaId;
         public bool join;
         
         public PrismFightJoinLeaveRequestMessage()
         {
         }
         
-        public PrismFightJoinLeaveRequestMessage(short subAreaId, bool join)
+        public PrismFightJoinLeaveRequestMessage(int subAreaId, bool join)
         {
             this.subAreaId = subAreaId;
             this.join = join;
@@ -41,13 +41,13 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(subAreaId);
+            writer.WriteVarShort((short)subAreaId);
             writer.WriteBoolean(join);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             join = reader.ReadBoolean();

@@ -27,55 +27,55 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class FightTeamMemberMonsterInformations : FightTeamMemberInformations
-{
+    public class FightTeamMemberMonsterInformations : FightTeamMemberInformations
+    {
 
-public new const short ID = 6;
-public override short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 6;
+        public override int TypeId
+        {
+            get { return ID; }
+        }
 
-public int monsterId;
-        public sbyte grade;
-        
+        public int monsterId;
+        public byte grade;
 
-public FightTeamMemberMonsterInformations()
-{
-}
 
-public FightTeamMemberMonsterInformations(int id, int monsterId, sbyte grade)
-         : base(id)
+        public FightTeamMemberMonsterInformations()
+        {
+        }
+
+        public FightTeamMemberMonsterInformations(int id, int monsterId, byte grade)
+                 : base(id)
         {
             this.monsterId = monsterId;
             this.grade = grade;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
 
-base.Serialize(writer);
+        public override void Serialize(BigEndianWriter writer)
+        {
+
+            base.Serialize(writer);
             writer.WriteInt(monsterId);
-            writer.WriteSByte(grade);
-            
+            writer.WriteByte(grade);
 
-}
 
-public override void Deserialize(BigEndianReader reader)
-{
+        }
 
-base.Deserialize(reader);
+        public override void Deserialize(BigEndianReader reader)
+        {
+
+            base.Deserialize(reader);
             monsterId = reader.ReadInt();
-            grade = reader.ReadSByte();
+            grade = reader.ReadByte();
             if (grade < 0)
                 throw new Exception("Forbidden value on grade = " + grade + ", it doesn't respect the following condition : grade < 0");
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

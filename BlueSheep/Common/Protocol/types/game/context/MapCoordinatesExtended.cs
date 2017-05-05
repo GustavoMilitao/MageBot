@@ -30,20 +30,20 @@ namespace BlueSheep.Common.Protocol.Types
 public class MapCoordinatesExtended : MapCoordinatesAndId
 {
 
-public new const short ID = 176;
-public override short TypeId
+public new const int ID = 176;
+public override int TypeId
 {
     get { return ID; }
 }
 
-public short subAreaId;
+public int subAreaId;
         
 
 public MapCoordinatesExtended()
 {
 }
 
-public MapCoordinatesExtended(short worldX, short worldY, int mapId, short subAreaId)
+public MapCoordinatesExtended(int worldX, int worldY, int mapId, int subAreaId)
          : base(worldX, worldY, mapId)
         {
             this.subAreaId = subAreaId;
@@ -54,7 +54,7 @@ public override void Serialize(BigEndianWriter writer)
 {
 
 base.Serialize(writer);
-            writer.WriteVarShort(subAreaId);
+            writer.WriteVarShort((short)subAreaId);
             
 
 }
@@ -63,7 +63,7 @@ public override void Deserialize(BigEndianReader reader)
 {
 
 base.Deserialize(reader);
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             

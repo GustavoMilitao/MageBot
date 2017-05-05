@@ -1,0 +1,51 @@
+
+
+
+
+
+
+
+
+
+
+// Generated on 12/11/2014 19:01:33
+using BlueSheep.Common.IO;
+
+namespace BlueSheep.Common.Protocol.Messages
+{
+    public class GameRolePlayPlayerFightFriendlyAnswerMessage : Message
+    {
+        public new const uint ID =5732;
+        public override uint ProtocolID
+        {
+            get { return ID; }
+        }
+        
+        public int fightId;
+        public bool accept;
+        
+        public GameRolePlayPlayerFightFriendlyAnswerMessage()
+        {
+        }
+        
+        public GameRolePlayPlayerFightFriendlyAnswerMessage(int fightId, bool accept)
+        {
+            this.fightId = fightId;
+            this.accept = accept;
+        }
+        
+        public override void Serialize(BigEndianWriter writer)
+        {
+            writer.WriteInt(fightId);
+            writer.WriteBoolean(accept);
+        }
+        
+        public override void Deserialize(BigEndianReader reader)
+        {
+            fightId = reader.ReadInt();
+            accept = reader.ReadBoolean();
+        }
+        
+    }
+    
+}

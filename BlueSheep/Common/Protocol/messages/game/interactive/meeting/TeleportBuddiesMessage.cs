@@ -26,25 +26,25 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short dungeonId;
+        public int dungeonId;
         
         public TeleportBuddiesMessage()
         {
         }
         
-        public TeleportBuddiesMessage(short dungeonId)
+        public TeleportBuddiesMessage(int dungeonId)
         {
             this.dungeonId = dungeonId;
         }
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(dungeonId);
+            writer.WriteVarShort((short)dungeonId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            dungeonId = reader.ReadVarShort();
+            dungeonId = reader.ReadVarUhShort();
             if (dungeonId < 0)
                 throw new Exception("Forbidden value on dungeonId = " + dungeonId + ", it doesn't respect the following condition : dungeonId < 0");
         }

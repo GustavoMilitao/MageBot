@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int targetId;
-        public short delta;
+        public ulong targetId;
+        public int delta;
         
         public GameActionFightLifePointsGainMessage()
         {
         }
         
-        public GameActionFightLifePointsGainMessage(short actionId, int sourceId, int targetId, short delta)
+        public GameActionFightLifePointsGainMessage(int actionId, ulong sourceId, ulong targetId, int delta)
          : base(actionId, sourceId)
         {
             this.targetId = targetId;
@@ -43,15 +43,15 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteInt(targetId);
-            writer.WriteVarShort(delta);
+            writer.WriteULong(targetId);
+            writer.WriteVarShort((short)delta);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            targetId = reader.ReadInt();
-            delta = reader.ReadVarShort();
+            targetId = reader.ReadULong();
+            delta = reader.ReadVarUhShort();
             if (delta < 0)
                 throw new Exception("Forbidden value on delta = " + delta + ", it doesn't respect the following condition : delta < 0");
         }

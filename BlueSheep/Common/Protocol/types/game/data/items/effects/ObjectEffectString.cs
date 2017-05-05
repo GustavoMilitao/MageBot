@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class ObjectEffectString : ObjectEffect
 {
 
-public new const short ID = 74;
-public override short TypeId
+public new const int ID = 74;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public ObjectEffectString()
 {
 }
 
-public ObjectEffectString(short actionId, string value)
+public ObjectEffectString(int actionId, string value)
          : base(actionId)
         {
             this.value = value;

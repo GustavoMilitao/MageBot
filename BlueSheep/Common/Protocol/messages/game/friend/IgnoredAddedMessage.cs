@@ -41,14 +41,14 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteShort(ignoreAdded.TypeId);
+            writer.WriteShort((short)ignoreAdded.TypeId);
             ignoreAdded.Serialize(writer);
             writer.WriteBoolean(session);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            ignoreAdded = Types.ProtocolTypeManager.GetInstance<Types.IgnoredInformations>(reader.ReadShort());
+            ignoreAdded = Types.ProtocolTypeManager.GetInstance<Types.IgnoredInformations>(reader.ReadUShort());
             ignoreAdded.Deserialize(reader);
             session = reader.ReadBoolean();
         }

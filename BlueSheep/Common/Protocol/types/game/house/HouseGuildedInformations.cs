@@ -4,7 +4,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class HouseGuildedInformations : HouseInstanceInformations
     {
-        public new const short ID = 512;
+        public new const int ID = 512;
         public GuildInformations guildInfo;
 
         public HouseGuildedInformations()

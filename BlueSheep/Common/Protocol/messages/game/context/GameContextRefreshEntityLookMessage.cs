@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int id;
+        public ulong id;
         public Types.EntityLook look;
         
         public GameContextRefreshEntityLookMessage()
         {
         }
         
-        public GameContextRefreshEntityLookMessage(int id, Types.EntityLook look)
+        public GameContextRefreshEntityLookMessage(ulong id, Types.EntityLook look)
         {
             this.id = id;
             this.look = look;
@@ -41,13 +41,13 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteInt(id);
+            writer.WriteULong(id);
             look.Serialize(writer);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            id = reader.ReadInt();
+            id = reader.ReadULong();
             look = new Types.EntityLook();
             look.Deserialize(reader);
         }

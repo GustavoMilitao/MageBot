@@ -27,62 +27,62 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class GuildEmblem
-{
+    public class GuildEmblem
+    {
 
-public new const short ID = 87;
-public virtual short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 87;
+        public virtual int TypeId
+        {
+            get { return ID; }
+        }
 
-public short symbolShape;
+        public int symbolShape;
         public int symbolColor;
-        public sbyte backgroundShape;
+        public byte backgroundShape;
         public int backgroundColor;
-        
 
-public GuildEmblem()
-{
-}
 
-public GuildEmblem(short symbolShape, int symbolColor, sbyte backgroundShape, int backgroundColor)
+        public GuildEmblem()
+        {
+        }
+
+        public GuildEmblem(int symbolShape, int symbolColor, byte backgroundShape, int backgroundColor)
         {
             this.symbolShape = symbolShape;
             this.symbolColor = symbolColor;
             this.backgroundShape = backgroundShape;
             this.backgroundColor = backgroundColor;
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
 
-writer.WriteVarShort(symbolShape);
+        public virtual void Serialize(BigEndianWriter writer)
+        {
+
+            writer.WriteVarShort((short)symbolShape);
             writer.WriteInt(symbolColor);
-            writer.WriteSByte(backgroundShape);
+            writer.WriteByte(backgroundShape);
             writer.WriteInt(backgroundColor);
-            
 
-}
 
-public virtual void Deserialize(BigEndianReader reader)
-{
+        }
 
-symbolShape = reader.ReadVarShort();
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            symbolShape = reader.ReadVarUhShort();
             if (symbolShape < 0)
                 throw new Exception("Forbidden value on symbolShape = " + symbolShape + ", it doesn't respect the following condition : symbolShape < 0");
             symbolColor = reader.ReadInt();
-            backgroundShape = reader.ReadSByte();
+            backgroundShape = reader.ReadByte();
             if (backgroundShape < 0)
                 throw new Exception("Forbidden value on backgroundShape = " + backgroundShape + ", it doesn't respect the following condition : backgroundShape < 0");
             backgroundColor = reader.ReadInt();
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }

@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] keyMovements;
-        public int actorId;
+        public int[] keyMovements;
+        public ulong actorId;
         
         public GameMapMovementMessage()
         {
         }
         
-        public GameMapMovementMessage(short[] keyMovements, int actorId)
+        public GameMapMovementMessage(int[] keyMovements, ulong actorId)
         {
             this.keyMovements = keyMovements;
             this.actorId = actorId;
@@ -44,20 +44,20 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)keyMovements.Length);
             foreach (var entry in keyMovements)
             {
-                 writer.WriteShort(entry);
+                 writer.WriteShort((short)entry);
             }
-            writer.WriteInt(actorId);
+            writer.WriteULong(actorId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            keyMovements = new short[limit];
+            keyMovements = new int[limit];
             for (int i = 0; i < limit; i++)
             {
                  keyMovements[i] = reader.ReadShort();
             }
-            actorId = reader.ReadInt();
+            actorId = reader.ReadULong();
         }
         
     }

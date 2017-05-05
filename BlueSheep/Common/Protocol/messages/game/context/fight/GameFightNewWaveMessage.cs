@@ -28,13 +28,13 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public sbyte id;
         public sbyte teamId;
-        public short nbTurnBeforeNextWave;
+        public int nbTurnBeforeNextWave;
         
         public GameFightNewWaveMessage()
         {
         }
         
-        public GameFightNewWaveMessage(sbyte id, sbyte teamId, short nbTurnBeforeNextWave)
+        public GameFightNewWaveMessage(sbyte id, sbyte teamId, int nbTurnBeforeNextWave)
         {
             this.id = id;
             this.teamId = teamId;
@@ -45,7 +45,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
             writer.WriteSByte(id);
             writer.WriteSByte(teamId);
-            writer.WriteShort(nbTurnBeforeNextWave);
+            writer.WriteShort((short)nbTurnBeforeNextWave);
         }
         
         public override void Deserialize(BigEndianReader reader)

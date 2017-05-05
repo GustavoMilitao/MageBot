@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class JobBookSubscription
     {
-        public const short ID = 500;
+        public const int ID = 500;
 
         public uint jobId = 0;
 

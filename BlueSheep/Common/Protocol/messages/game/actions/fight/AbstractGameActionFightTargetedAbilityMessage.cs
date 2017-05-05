@@ -26,8 +26,8 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public int targetId;
-        public short destinationCellId;
+        public ulong targetId;
+        public int destinationCellId;
         public sbyte critical;
         public bool silentCast;
         
@@ -35,7 +35,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public AbstractGameActionFightTargetedAbilityMessage(short actionId, int sourceId, int targetId, short destinationCellId, sbyte critical, bool silentCast)
+        public AbstractGameActionFightTargetedAbilityMessage(int actionId, ulong sourceId, ulong targetId, int destinationCellId, sbyte critical, bool silentCast)
          : base(actionId, sourceId)
         {
             this.targetId = targetId;
@@ -47,8 +47,8 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteInt(targetId);
-            writer.WriteShort(destinationCellId);
+            writer.WriteULong(targetId);
+            writer.WriteShort((short)destinationCellId);
             writer.WriteSByte(critical);
             writer.WriteBoolean(silentCast);
         }
@@ -56,7 +56,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            targetId = reader.ReadInt();
+            targetId = reader.ReadULong();
             destinationCellId = reader.ReadShort();
             if (destinationCellId < -1 || destinationCellId > 559)
                 throw new Exception("Forbidden value on destinationCellId = " + destinationCellId + ", it doesn't respect the following condition : destinationCellId < -1 || destinationCellId > 559");

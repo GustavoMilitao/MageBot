@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short oldCellId;
-        public short newCellId;
+        public int oldCellId;
+        public int newCellId;
         
         public PaddockMoveItemRequestMessage()
         {
         }
         
-        public PaddockMoveItemRequestMessage(short oldCellId, short newCellId)
+        public PaddockMoveItemRequestMessage(int oldCellId, int newCellId)
         {
             this.oldCellId = oldCellId;
             this.newCellId = newCellId;
@@ -41,16 +41,16 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(oldCellId);
-            writer.WriteVarShort(newCellId);
+            writer.WriteVarShort((short)oldCellId);
+            writer.WriteVarShort((short)newCellId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            oldCellId = reader.ReadVarShort();
+            oldCellId = reader.ReadVarUhShort();
             if (oldCellId < 0 || oldCellId > 559)
                 throw new Exception("Forbidden value on oldCellId = " + oldCellId + ", it doesn't respect the following condition : oldCellId < 0 || oldCellId > 559");
-            newCellId = reader.ReadVarShort();
+            newCellId = reader.ReadVarUhShort();
             if (newCellId < 0 || newCellId > 559)
                 throw new Exception("Forbidden value on newCellId = " + newCellId + ", it doesn't respect the following condition : newCellId < 0 || newCellId > 559");
         }

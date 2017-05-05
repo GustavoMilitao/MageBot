@@ -26,15 +26,15 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short subAreaId;
-        public short fightId;
+        public int subAreaId;
+        public int fightId;
         public int fighterToRemoveId;
         
         public PrismFightAttackerRemoveMessage()
         {
         }
         
-        public PrismFightAttackerRemoveMessage(short subAreaId, short fightId, int fighterToRemoveId)
+        public PrismFightAttackerRemoveMessage(int subAreaId, int fightId, int fighterToRemoveId)
         {
             this.subAreaId = subAreaId;
             this.fightId = fightId;
@@ -43,17 +43,17 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(subAreaId);
-            writer.WriteVarShort(fightId);
+            writer.WriteVarShort((short)subAreaId);
+            writer.WriteVarShort((short)fightId);
             writer.WriteVarInt(fighterToRemoveId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
-            fightId = reader.ReadVarShort();
+            fightId = reader.ReadVarUhShort();
             if (fightId < 0)
                 throw new Exception("Forbidden value on fightId = " + fightId + ", it doesn't respect the following condition : fightId < 0");
             fighterToRemoveId = reader.ReadVarInt();

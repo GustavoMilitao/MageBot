@@ -28,7 +28,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public Types.GuildFactSheetInformations infos;
         public int creationDate;
-        public short nbTaxCollectors;
+        public int nbTaxCollectors;
         public bool enabled;
         public Types.CharacterMinimalInformations[] members;
         
@@ -36,7 +36,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GuildFactsMessage(Types.GuildFactSheetInformations infos, int creationDate, short nbTaxCollectors, bool enabled, Types.CharacterMinimalInformations[] members)
+        public GuildFactsMessage(Types.GuildFactSheetInformations infos, int creationDate, int nbTaxCollectors, bool enabled, Types.CharacterMinimalInformations[] members)
         {
             this.infos = infos;
             this.creationDate = creationDate;
@@ -47,10 +47,10 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteShort(infos.TypeId);
+            writer.WriteShort((short)infos.TypeId);
             infos.Serialize(writer);
             writer.WriteInt(creationDate);
-            writer.WriteVarShort(nbTaxCollectors);
+            writer.WriteVarShort((short)nbTaxCollectors);
             writer.WriteBoolean(enabled);
             writer.WriteUShort((ushort)members.Length);
             foreach (var entry in members)
@@ -61,12 +61,12 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Deserialize(BigEndianReader reader)
         {
-            infos = Types.ProtocolTypeManager.GetInstance<Types.GuildFactSheetInformations>(reader.ReadShort());
+            infos = Types.ProtocolTypeManager.GetInstance<Types.GuildFactSheetInformations>(reader.ReadUShort());
             infos.Deserialize(reader);
             creationDate = reader.ReadInt();
             if (creationDate < 0)
                 throw new Exception("Forbidden value on creationDate = " + creationDate + ", it doesn't respect the following condition : creationDate < 0");
-            nbTaxCollectors = reader.ReadVarShort();
+            nbTaxCollectors = reader.ReadVarUhShort();
             if (nbTaxCollectors < 0)
                 throw new Exception("Forbidden value on nbTaxCollectors = " + nbTaxCollectors + ", it doesn't respect the following condition : nbTaxCollectors < 0");
             enabled = reader.ReadBoolean();

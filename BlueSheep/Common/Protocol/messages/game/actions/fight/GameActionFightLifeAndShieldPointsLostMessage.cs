@@ -26,13 +26,13 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short shieldLoss;
+        public int shieldLoss;
         
         public GameActionFightLifeAndShieldPointsLostMessage()
         {
         }
         
-        public GameActionFightLifeAndShieldPointsLostMessage(short actionId, int sourceId, int targetId, short loss, short permanentDamages, short shieldLoss)
+        public GameActionFightLifeAndShieldPointsLostMessage(int actionId, ulong sourceId, ulong targetId, int loss, int permanentDamages, int shieldLoss)
          : base(actionId, sourceId, targetId, loss, permanentDamages)
         {
             this.shieldLoss = shieldLoss;
@@ -41,13 +41,13 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarShort(shieldLoss);
+            writer.WriteVarShort((short)shieldLoss);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            shieldLoss = reader.ReadVarShort();
+            shieldLoss = reader.ReadVarUhShort();
             if (shieldLoss < 0)
                 throw new Exception("Forbidden value on shieldLoss = " + shieldLoss + ", it doesn't respect the following condition : shieldLoss < 0");
         }

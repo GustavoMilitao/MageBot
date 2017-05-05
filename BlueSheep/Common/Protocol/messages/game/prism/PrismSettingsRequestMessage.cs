@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short subAreaId;
+        public int subAreaId;
         public sbyte startDefenseTime;
         
         public PrismSettingsRequestMessage()
         {
         }
         
-        public PrismSettingsRequestMessage(short subAreaId, sbyte startDefenseTime)
+        public PrismSettingsRequestMessage(int subAreaId, sbyte startDefenseTime)
         {
             this.subAreaId = subAreaId;
             this.startDefenseTime = startDefenseTime;
@@ -41,13 +41,13 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(subAreaId);
+            writer.WriteVarShort((short)subAreaId);
             writer.WriteSByte(startDefenseTime);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            subAreaId = reader.ReadVarShort();
+            subAreaId = reader.ReadVarUhShort();
             if (subAreaId < 0)
                 throw new Exception("Forbidden value on subAreaId = " + subAreaId + ", it doesn't respect the following condition : subAreaId < 0");
             startDefenseTime = reader.ReadSByte();

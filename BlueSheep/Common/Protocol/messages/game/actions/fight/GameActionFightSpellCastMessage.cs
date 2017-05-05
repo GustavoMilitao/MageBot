@@ -26,15 +26,15 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short spellId;
+        public int spellId;
         public sbyte spellLevel;
-        public short[] portalsIds;
+        public int[] portalsIds;
         
         public GameActionFightSpellCastMessage()
         {
         }
         
-        public GameActionFightSpellCastMessage(short actionId, int sourceId, int targetId, short destinationCellId, sbyte critical, bool silentCast, short spellId, sbyte spellLevel, short[] portalsIds)
+        public GameActionFightSpellCastMessage(int actionId, ulong sourceId, ulong targetId, int destinationCellId, sbyte critical, bool silentCast, int spellId, sbyte spellLevel, int[] portalsIds)
          : base(actionId, sourceId, targetId, destinationCellId, critical, silentCast)
         {
             this.spellId = spellId;
@@ -45,26 +45,26 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarShort(spellId);
+            writer.WriteVarShort((short)spellId);
             writer.WriteSByte(spellLevel);
             writer.WriteUShort((ushort)portalsIds.Length);
             foreach (var entry in portalsIds)
             {
-                 writer.WriteShort(entry);
+                 writer.WriteShort((short)entry);
             }
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            spellId = reader.ReadVarShort();
+            spellId = reader.ReadVarUhShort();
             if (spellId < 0)
                 throw new Exception("Forbidden value on spellId = " + spellId + ", it doesn't respect the following condition : spellId < 0");
             spellLevel = reader.ReadSByte();
             if (spellLevel < 1 || spellLevel > 6)
                 throw new Exception("Forbidden value on spellLevel = " + spellLevel + ", it doesn't respect the following condition : spellLevel < 1 || spellLevel > 6");
             var limit = reader.ReadUShort();
-            portalsIds = new short[limit];
+            portalsIds = new int[limit];
             for (int i = 0; i < limit; i++)
             {
                  portalsIds[i] = reader.ReadShort();

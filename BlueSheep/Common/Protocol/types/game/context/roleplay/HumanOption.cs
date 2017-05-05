@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class HumanOption
 {
 
-public new const short ID = 406;
-public virtual short TypeId
+public new const int ID = 406;
+public virtual int TypeId
 {
     get { return ID; }
 }

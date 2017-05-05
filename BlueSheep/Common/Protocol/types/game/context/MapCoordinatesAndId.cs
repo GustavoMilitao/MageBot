@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class MapCoordinatesAndId : MapCoordinates
 {
 
-public new const short ID = 392;
-public override short TypeId
+public new const int ID = 392;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public MapCoordinatesAndId()
 {
 }
 
-public MapCoordinatesAndId(short worldX, short worldY, int mapId)
+public MapCoordinatesAndId(int worldX, int worldY, int mapId)
          : base(worldX, worldY)
         {
             this.mapId = mapId;

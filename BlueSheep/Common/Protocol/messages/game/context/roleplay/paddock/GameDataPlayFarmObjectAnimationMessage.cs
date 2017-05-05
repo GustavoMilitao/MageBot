@@ -26,13 +26,13 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short[] cellId;
+        public int[] cellId;
         
         public GameDataPlayFarmObjectAnimationMessage()
         {
         }
         
-        public GameDataPlayFarmObjectAnimationMessage(short[] cellId)
+        public GameDataPlayFarmObjectAnimationMessage(int[] cellId)
         {
             this.cellId = cellId;
         }
@@ -42,17 +42,17 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)cellId.Length);
             foreach (var entry in cellId)
             {
-                 writer.WriteVarShort(entry);
+                 writer.WriteVarShort((short)entry);
             }
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
             var limit = reader.ReadUShort();
-            cellId = new short[limit];
+            cellId = new int[limit];
             for (int i = 0; i < limit; i++)
             {
-                 cellId[i] = reader.ReadVarShort();
+                 cellId[i] = reader.ReadVarUhShort();
             }
         }
         

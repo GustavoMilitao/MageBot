@@ -5,7 +5,7 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class ObjectItemGenericQuantity : Item
     {
-        public new const short ID = 483;
+        public new const int ID = 483;
         public uint objectGID = 0;
         public uint quantity = 0;
 
@@ -21,7 +21,7 @@ namespace BlueSheep.Common.Protocol.Types
             {
                 throw new Exception("Forbidden value ("  + objectGID +  ") on element objectGID.");
             }
-            writer.WriteVarShort((short)objectGID);
+            writer.WriteVarShort((short)(int)objectGID);
             if (quantity < 0)
             {
                 throw new Exception("Forbidden value (" +  quantity + ") on element quantity.");

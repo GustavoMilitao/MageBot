@@ -26,7 +26,7 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short actionId;
+        public int actionId;
         public int authorId;
         public sbyte sequenceType;
         
@@ -34,7 +34,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public SequenceEndMessage(short actionId, int authorId, sbyte sequenceType)
+        public SequenceEndMessage(int actionId, int authorId, sbyte sequenceType)
         {
             this.actionId = actionId;
             this.authorId = authorId;
@@ -43,14 +43,14 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(actionId);
+            writer.WriteVarShort((short)actionId);
             writer.WriteInt(authorId);
             writer.WriteSByte(sequenceType);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            actionId = reader.ReadVarShort();
+            actionId = reader.ReadVarUhShort();
             if (actionId < 0)
                 throw new Exception("Forbidden value on actionId = " + actionId + ", it doesn't respect the following condition : actionId < 0");
             authorId = reader.ReadInt();

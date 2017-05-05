@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Types
 public class GameFightMonsterWithAlignmentInformations : GameFightMonsterInformations
 {
 
-public new const short ID = 203;
-public override short TypeId
+public new const int ID = 203;
+public override int TypeId
 {
     get { return ID; }
 }
@@ -43,7 +43,7 @@ public GameFightMonsterWithAlignmentInformations()
 {
 }
 
-public GameFightMonsterWithAlignmentInformations(int contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, sbyte teamId, sbyte wave, bool alive, Types.GameFightMinimalStats stats, short[] previousPositions, short creatureGenericId, sbyte creatureGrade, Types.ActorAlignmentInformations alignmentInfos)
+public GameFightMonsterWithAlignmentInformations(ulong contextualId, Types.EntityLook look, Types.EntityDispositionInformations disposition, sbyte teamId, sbyte wave, bool alive, Types.GameFightMinimalStats stats, int[] previousPositions, int creatureGenericId, sbyte creatureGrade, Types.ActorAlignmentInformations alignmentInfos)
          : base(contextualId, look, disposition, teamId, wave, alive, stats, previousPositions, creatureGenericId, creatureGrade)
         {
             this.alignmentInfos = alignmentInfos;

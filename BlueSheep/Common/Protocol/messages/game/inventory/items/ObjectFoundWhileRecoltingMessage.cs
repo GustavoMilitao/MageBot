@@ -26,7 +26,7 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short genericId;
+        public int genericId;
         public int quantity;
         public int resourceGenericId;
         
@@ -34,7 +34,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public ObjectFoundWhileRecoltingMessage(short genericId, int quantity, int resourceGenericId)
+        public ObjectFoundWhileRecoltingMessage(int genericId, int quantity, int resourceGenericId)
         {
             this.genericId = genericId;
             this.quantity = quantity;
@@ -43,14 +43,14 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(genericId);
+            writer.WriteVarShort((short)genericId);
             writer.WriteVarInt(quantity);
             writer.WriteVarInt(resourceGenericId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            genericId = reader.ReadVarShort();
+            genericId = reader.ReadVarUhShort();
             if (genericId < 0)
                 throw new Exception("Forbidden value on genericId = " + genericId + ", it doesn't respect the following condition : genericId < 0");
             quantity = reader.ReadVarInt();

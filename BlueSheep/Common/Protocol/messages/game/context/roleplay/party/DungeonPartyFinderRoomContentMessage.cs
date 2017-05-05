@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short dungeonId;
+        public int dungeonId;
         public Types.DungeonPartyFinderPlayer[] players;
         
         public DungeonPartyFinderRoomContentMessage()
         {
         }
         
-        public DungeonPartyFinderRoomContentMessage(short dungeonId, Types.DungeonPartyFinderPlayer[] players)
+        public DungeonPartyFinderRoomContentMessage(int dungeonId, Types.DungeonPartyFinderPlayer[] players)
         {
             this.dungeonId = dungeonId;
             this.players = players;
@@ -41,7 +41,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(dungeonId);
+            writer.WriteVarShort((short)dungeonId);
             writer.WriteUShort((ushort)players.Length);
             foreach (var entry in players)
             {
@@ -51,7 +51,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Deserialize(BigEndianReader reader)
         {
-            dungeonId = reader.ReadVarShort();
+            dungeonId = reader.ReadVarUhShort();
             if (dungeonId < 0)
                 throw new Exception("Forbidden value on dungeonId = " + dungeonId + ", it doesn't respect the following condition : dungeonId < 0");
             var limit = reader.ReadUShort();

@@ -27,14 +27,14 @@ namespace BlueSheep.Common.Protocol.Messages
         }
         
         public int entityId;
-        public short textId;
+        public int textId;
         public string[] parameters;
         
         public EntityTalkMessage()
         {
         }
         
-        public EntityTalkMessage(int entityId, short textId, string[] parameters)
+        public EntityTalkMessage(int entityId, int textId, string[] parameters)
         {
             this.entityId = entityId;
             this.textId = textId;
@@ -44,7 +44,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Serialize(BigEndianWriter writer)
         {
             writer.WriteInt(entityId);
-            writer.WriteVarShort(textId);
+            writer.WriteVarShort((short)textId);
             writer.WriteUShort((ushort)parameters.Length);
             foreach (var entry in parameters)
             {
@@ -55,7 +55,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             entityId = reader.ReadInt();
-            textId = reader.ReadVarShort();
+            textId = reader.ReadVarUhShort();
             if (textId < 0)
                 throw new Exception("Forbidden value on textId = " + textId + ", it doesn't respect the following condition : textId < 0");
             var limit = reader.ReadUShort();

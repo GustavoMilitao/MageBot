@@ -30,20 +30,20 @@ namespace BlueSheep.Common.Protocol.Types
     public class SkillActionDescription
     {
 
-        public const short ID = 102;
-        public virtual short TypeId
+        public const int ID = 102;
+        public virtual int TypeId
         {
             get { return ID; }
         }
 
-        public ushort skillId;
+        public int skillId;
 
 
         public SkillActionDescription()
         {
         }
 
-        public SkillActionDescription(ushort skillId)
+        public SkillActionDescription(int skillId)
         {
             this.skillId = skillId;
         }
@@ -52,7 +52,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
 
-            writer.WriteVarShort(skillId);
+            writer.WriteVarShort((short)skillId);
 
 
         }

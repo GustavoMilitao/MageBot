@@ -26,7 +26,7 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short fightId;
+        public int fightId;
         public sbyte teamId;
         public int charId;
         
@@ -34,7 +34,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public GameFightRemoveTeamMemberMessage(short fightId, sbyte teamId, int charId)
+        public GameFightRemoveTeamMemberMessage(int fightId, sbyte teamId, int charId)
         {
             this.fightId = fightId;
             this.teamId = teamId;
@@ -43,7 +43,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteShort(fightId);
+            writer.WriteShort((short)fightId);
             writer.WriteSByte(teamId);
             writer.WriteInt(charId);
         }

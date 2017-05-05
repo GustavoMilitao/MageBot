@@ -26,14 +26,14 @@ namespace BlueSheep.Common.Protocol.Messages
             get { return ID; }
         }
         
-        public short questId;
-        public short stepId;
+        public int questId;
+        public int stepId;
         
         public QuestStepValidatedMessage()
         {
         }
         
-        public QuestStepValidatedMessage(short questId, short stepId)
+        public QuestStepValidatedMessage(int questId, int stepId)
         {
             this.questId = questId;
             this.stepId = stepId;
@@ -41,16 +41,16 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarShort(questId);
-            writer.WriteVarShort(stepId);
+            writer.WriteVarShort((short)questId);
+            writer.WriteVarShort((short)stepId);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            questId = reader.ReadVarShort();
+            questId = reader.ReadVarUhShort();
             if (questId < 0)
                 throw new Exception("Forbidden value on questId = " + questId + ", it doesn't respect the following condition : questId < 0");
-            stepId = reader.ReadVarShort();
+            stepId = reader.ReadVarUhShort();
             if (stepId < 0)
                 throw new Exception("Forbidden value on stepId = " + stepId + ", it doesn't respect the following condition : stepId < 0");
         }

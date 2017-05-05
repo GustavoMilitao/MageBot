@@ -59,7 +59,7 @@ namespace BlueSheep.Common.Protocol.Messages
             writer.WriteUShort((ushort)members.Length);
             foreach (var entry in members)
             {
-                 writer.WriteShort(entry.TypeId);
+                 writer.WriteShort((short)entry.TypeId);
                  entry.Serialize(writer);
             }
             writer.WriteUShort((ushort)guests.Length);
@@ -87,7 +87,7 @@ namespace BlueSheep.Common.Protocol.Messages
             members = new Types.PartyMemberInformations[limit];
             for (int i = 0; i < limit; i++)
             {
-                 members[i] = Types.ProtocolTypeManager.GetInstance<Types.PartyMemberInformations>(reader.ReadShort());
+                 members[i] = Types.ProtocolTypeManager.GetInstance<Types.PartyMemberInformations>(reader.ReadUShort());
                  members[i].Deserialize(reader);
             }
             limit = reader.ReadUShort();

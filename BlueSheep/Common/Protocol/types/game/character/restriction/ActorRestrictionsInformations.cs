@@ -27,54 +27,54 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class ActorRestrictionsInformations
-{
+    public class ActorRestrictionsInformations
+    {
 
-public new const short ID = 204;
-public virtual short TypeId
-{
-    get { return ID; }
-}
+        public new const int ID = 204;
+        public virtual int TypeId
+        {
+            get { return ID; }
+        }
 
-            public bool cantBeAggressed= false;
-        public bool cantBeChallenged= false;
-        public bool cantTrade= false;
-        public bool cantBeAttackedByMutant= false;
-        public bool cantRun= false;
-        public bool forceSlowWalk= false;
-        public bool cantMinimize= false;
-        public bool cantMove= false;
-        public bool cantAggress= false;
-        public bool cantChallenge= false;
-        public bool cantExchange= false;
-        public bool cantAttack= false;
-        public bool cantChat= false;
-        public bool cantBeMerchant= false;
-        public bool cantUseObject= false;
-        public bool cantUseTaxCollector= false;
-        public bool cantUseInteractive= false;
-        public bool cantSpeakToNPC= false;
-        public bool cantChangeZone= false;
-        public bool cantAttackMonster= false;
-        public bool cantWalk8Directions= false;
+        public bool cantBeAggressed = false;
+        public bool cantBeChallenged = false;
+        public bool cantTrade = false;
+        public bool cantBeAttackedByMutant = false;
+        public bool cantRun = false;
+        public bool forceSlowWalk = false;
+        public bool cantMinimize = false;
+        public bool cantMove = false;
+        public bool cantAggress = false;
+        public bool cantChallenge = false;
+        public bool cantExchange = false;
+        public bool cantAttack = false;
+        public bool cantChat = false;
+        public bool cantBeMerchant = false;
+        public bool cantUseObject = false;
+        public bool cantUseTaxCollector = false;
+        public bool cantUseInteractive = false;
+        public bool cantSpeakToNPC = false;
+        public bool cantChangeZone = false;
+        public bool cantAttackMonster = false;
+        public bool cantWalk8Directions = false;
 
-public ActorRestrictionsInformations()
-{
-}
-
-
-
-public virtual void Serialize(BigEndianWriter writer)
-{
+        public ActorRestrictionsInformations()
+        {
+        }
 
 
 
-}
+        public virtual void Serialize(BigEndianWriter writer)
+        {
 
-public virtual void Deserialize(BigEndianReader reader)
-{
 
-    var _loc_2 = reader.ReadByte();
+
+        }
+
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            var _loc_2 = reader.ReadByte();
             cantBeAggressed = BooleanByteWrapper.GetFlag(_loc_2, 0);
             cantBeChallenged = BooleanByteWrapper.GetFlag(_loc_2, 1);
             cantTrade = BooleanByteWrapper.GetFlag(_loc_2, 2);
@@ -99,10 +99,10 @@ public virtual void Deserialize(BigEndianReader reader)
             cantAttackMonster = BooleanByteWrapper.GetFlag(_loc_4, 3);
             cantWalk8Directions = BooleanByteWrapper.GetFlag(_loc_4, 4);
 
-}
+        }
 
 
-}
+    }
 
 
 }
