@@ -20,7 +20,7 @@ namespace BlueSheep.Core.Misc
         #region Fields
         AccountUC account;
         public bool stop;
-        public Dictionary<string,int> listOfPlayers;
+        public Dictionary<string,long> listOfPlayers;
         
         #endregion
         
@@ -28,7 +28,7 @@ namespace BlueSheep.Core.Misc
         public Flood(AccountUC Account)
         {
             account = Account;
-            listOfPlayers = new Dictionary<string, int>();      
+            listOfPlayers = new Dictionary<string, long>();      
         }
         #endregion
 
@@ -59,7 +59,7 @@ namespace BlueSheep.Core.Misc
         {
             if (content == "")
                 content = account.FloodUC.FloodContent;
-            int level = Math.Abs((infos.alignmentInfos.characterPower - infos.contextualId));
+            long level = (long)Math.Abs((infos.alignmentInfos.characterPower - infos.contextualId));
             content = content.Replace("%name%", infos.name).Replace("%level%", Convert.ToString(level));
             if (account.FloodUC.IsRandomingSmileyBox.Checked == true)
                 content = AddRandomSmiley(content);
@@ -108,7 +108,7 @@ namespace BlueSheep.Core.Misc
                     }                        
                 }
                 var swriter = new StreamWriter(path + @"\Players.txt", true);
-                int level = Math.Abs((infos.alignmentInfos.characterPower - infos.contextualId));
+                long level = (long)Math.Abs((infos.alignmentInfos.characterPower - infos.contextualId));
                 swriter.WriteLine(infos.name + "," + Convert.ToString(level));
                 swriter.Close();
                 listOfPlayers.Add(infos.name, level);

@@ -81,7 +81,7 @@ namespace BlueSheep.Engine.Handlers.Character
             account.CaracUC.Init();
             if (account.MyGroup != null)
                 ((GroupForm)account.ParentForm).AddMember(account.CharacterBaseInformations.name);
-            int percent = (msg.stats.lifePoints / msg.stats.maxLifePoints) * 100;
+            uint percent = (msg.stats.lifePoints / msg.stats.maxLifePoints) * 100;
             string text = msg.stats.lifePoints + "/" + msg.stats.maxLifePoints + "(" + percent + "%)";
             account.ModifBar(2, (int)msg.stats.maxLifePoints, (int)msg.stats.lifePoints, "Vitalité");
             double i = msg.stats.experience - msg.stats.experienceLevelFloor;

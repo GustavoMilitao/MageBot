@@ -27,64 +27,60 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class ActorAlignmentInformations
-{
+    public class ActorAlignmentInformations
+    {
 
-public new const short ID = 201;
-public virtual short TypeId
-{
-    get { return ID; }
-}
+        public new const short ID = 201;
+        public virtual short TypeId
+        {
+            get { return ID; }
+        }
 
-public sbyte alignmentSide;
-        public sbyte alignmentValue;
-        public sbyte alignmentGrade;
-        public int characterPower;
-        
+        public byte alignmentSide;
+        public byte alignmentValue;
+        public byte alignmentGrade;
+        public double characterPower;
 
-public ActorAlignmentInformations()
-{
-}
 
-public ActorAlignmentInformations(sbyte alignmentSide, sbyte alignmentValue, sbyte alignmentGrade, int characterPower)
+        public ActorAlignmentInformations()
+        {
+        }
+
+        public ActorAlignmentInformations(byte alignmentSide, byte alignmentValue, byte alignmentGrade, double characterPower)
         {
             this.alignmentSide = alignmentSide;
             this.alignmentValue = alignmentValue;
             this.alignmentGrade = alignmentGrade;
             this.characterPower = characterPower;
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
 
-writer.WriteSByte(alignmentSide);
-            writer.WriteSByte(alignmentValue);
-            writer.WriteSByte(alignmentGrade);
-            writer.WriteVarInt(characterPower);
-            
+        public virtual void Serialize(BigEndianWriter writer)
+        {
 
-}
+            writer.WriteByte(alignmentSide);
+            writer.WriteByte(alignmentValue);
+            writer.WriteByte(alignmentGrade);
+            writer.WriteDouble(characterPower);
 
-public virtual void Deserialize(BigEndianReader reader)
-{
 
-alignmentSide = reader.ReadSByte();
-            alignmentValue = reader.ReadSByte();
+        }
+
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            alignmentSide = reader.ReadByte();
+            alignmentValue = reader.ReadByte();
             if (alignmentValue < 0)
                 throw new Exception("Forbidden value on alignmentValue = " + alignmentValue + ", it doesn't respect the following condition : alignmentValue < 0");
-            alignmentGrade = reader.ReadSByte();
+            alignmentGrade = reader.ReadByte();
             if (alignmentGrade < 0)
                 throw new Exception("Forbidden value on alignmentGrade = " + alignmentGrade + ", it doesn't respect the following condition : alignmentGrade < 0");
-            characterPower = reader.ReadVarInt();
-            if (characterPower < 0)
-                throw new Exception("Forbidden value on characterPower = " + characterPower + ", it doesn't respect the following condition : characterPower < 0");
-            
-
-}
+            characterPower = reader.ReadDouble();
+        }
 
 
-}
+    }
 
 
 }

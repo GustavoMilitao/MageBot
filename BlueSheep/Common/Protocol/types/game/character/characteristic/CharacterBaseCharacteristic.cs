@@ -27,27 +27,27 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class CharacterBaseCharacteristic
-{
+    public class CharacterBaseCharacteristic
+    {
 
-public new const short ID = 4;
-public virtual short TypeId
-{
-    get { return ID; }
-}
+        public new const short ID = 4;
+        public virtual short TypeId
+        {
+            get { return ID; }
+        }
 
-public short @base;
+        public short @base;
         public short additionnal;
         public short objectsAndMountBonus;
         public short alignGiftBonus;
         public short contextModif;
-        
 
-public CharacterBaseCharacteristic()
-{
-}
 
-public CharacterBaseCharacteristic(short @base, short additionnal, short objectsAndMountBonus, short alignGiftBonus, short contextModif)
+        public CharacterBaseCharacteristic()
+        {
+        }
+
+        public CharacterBaseCharacteristic(short @base, short additionnal, short objectsAndMountBonus, short alignGiftBonus, short contextModif)
         {
             this.@base = @base;
             this.additionnal = additionnal;
@@ -55,34 +55,34 @@ public CharacterBaseCharacteristic(short @base, short additionnal, short objects
             this.alignGiftBonus = alignGiftBonus;
             this.contextModif = contextModif;
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
 
-writer.WriteVarShort(@base);
+        public virtual void Serialize(BigEndianWriter writer)
+        {
+
+            writer.WriteVarShort(@base);
             writer.WriteVarShort(additionnal);
             writer.WriteVarShort(objectsAndMountBonus);
             writer.WriteVarShort(alignGiftBonus);
             writer.WriteVarShort(contextModif);
-            
 
-}
 
-public virtual void Deserialize(BigEndianReader reader)
-{
+        }
 
-@base = reader.ReadVarShort();
+        public virtual void Deserialize(BigEndianReader reader)
+        {
+
+            @base = reader.ReadVarShort();
             additionnal = reader.ReadVarShort();
             objectsAndMountBonus = reader.ReadVarShort();
             alignGiftBonus = reader.ReadVarShort();
             contextModif = reader.ReadVarShort();
-            
-
-}
 
 
-}
+        }
+
+
+    }
 
 
 }
