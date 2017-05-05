@@ -162,23 +162,26 @@ namespace BlueSheep.Engine.Handlers.Character
                 msg.Deserialize(reader);
             }
             account.Log(new ActionTextInformation("Experience gagnée : + " + msg.experienceCharacter + " points d'expérience"), 4);
-            account.CharacterStats.experience += msg.experienceCharacter;
-            double i = account.CharacterStats.experience - account.CharacterStats.experienceLevelFloor;
-            double j = account.CharacterStats.experienceNextLevelFloor - account.CharacterStats.experienceLevelFloor;
-            try
+            if (account.CharacterStats != null)
             {
-                int xppercent = (int)((i / j) * 100);
-            }
-            catch (Exception ex)
-            {
+                account.CharacterStats.experience += msg.experienceCharacter;
 
-            }
-            account.ModifBar(1, (int)account.CharacterStats.experienceNextLevelFloor - (int)account.CharacterStats.experienceLevelFloor, (int)account.CharacterStats.experience - (int)account.CharacterStats.experienceLevelFloor, "Experience");
-            if (account.Fight != null)
-            {
-                account.FightData.xpWon[DateTime.Today] += (int)msg.experienceCharacter;
-            }
+                double i = account.CharacterStats.experience - account.CharacterStats.experienceLevelFloor;
+                double j = account.CharacterStats.experienceNextLevelFloor - account.CharacterStats.experienceLevelFloor;
+                try
+                {
+                    int xppercent = (int)((i / j) * 100);
+                }
+                catch (Exception ex)
+                {
 
+                }
+                account.ModifBar(1, (int)account.CharacterStats.experienceNextLevelFloor - (int)account.CharacterStats.experienceLevelFloor, (int)account.CharacterStats.experience - (int)account.CharacterStats.experienceLevelFloor, "Experience");
+                if (account.Fight != null)
+                {
+                    account.FightData.xpWon[DateTime.Today] += (int)msg.experienceCharacter;
+                }
+            }
         }
 
         [MessageHandler(typeof(StatsUpgradeResultMessage))]
