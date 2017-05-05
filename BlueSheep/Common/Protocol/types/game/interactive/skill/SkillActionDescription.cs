@@ -30,20 +30,20 @@ namespace BlueSheep.Common.Protocol.Types
     public class SkillActionDescription
     {
 
-        public new const short ID = 102;
+        public const short ID = 102;
         public virtual short TypeId
         {
             get { return ID; }
         }
 
-        public short skillId;
+        public ushort skillId;
 
 
         public SkillActionDescription()
         {
         }
 
-        public SkillActionDescription(short skillId)
+        public SkillActionDescription(ushort skillId)
         {
             this.skillId = skillId;
         }
@@ -60,7 +60,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Deserialize(BigEndianReader reader)
         {
 
-            skillId = reader.ReadVarShort();
+            skillId = reader.ReadVarUhShort();
             if (skillId < 0)
                 throw new Exception("Forbidden value on skillId = " + skillId + ", it doesn't respect the following condition : skillId < 0");
 

@@ -20,7 +20,7 @@ namespace BlueSheep.Common.Protocol.Messages
 {
     public class JobDescriptionMessage : Message
     {
-        public new const uint ID =5655;
+        public const uint ID =5655;
         public override uint ProtocolID
         {
             get { return ID; }
@@ -48,7 +48,7 @@ namespace BlueSheep.Common.Protocol.Messages
         
         public override void Deserialize(BigEndianReader reader)
         {
-            var limit = reader.ReadUShort();
+            uint limit = reader.ReadUShort();
             jobsDescription = new Types.JobDescription[limit];
             for (int i = 0; i < limit; i++)
             {

@@ -30,7 +30,7 @@ namespace BlueSheep.Engine.Handlers.Job
                 {
                     skills.Add(s.skillId);
                 }
-                Core.Job.Job j = new Core.Job.Job(job.jobId, skills, account);
+                Core.Job.Job j = new Core.Job.Job((int)job.jobId, skills, account);
                 account.Jobs.Add(j);
             }
         }

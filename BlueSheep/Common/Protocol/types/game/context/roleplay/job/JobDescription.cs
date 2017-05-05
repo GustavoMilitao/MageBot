@@ -36,15 +36,15 @@ namespace BlueSheep.Common.Protocol.Types
             get { return ID; }
         }
 
-        public sbyte jobId;
-        public Types.SkillActionDescription[] skills;
+        public uint jobId;
+        public SkillActionDescription[] skills;
 
 
         public JobDescription()
         {
         }
 
-        public JobDescription(sbyte jobId, Types.SkillActionDescription[] skills)
+        public JobDescription(uint jobId, SkillActionDescription[] skills)
         {
             this.jobId = jobId;
             this.skills = skills;
@@ -54,7 +54,7 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Serialize(BigEndianWriter writer)
         {
 
-            writer.WriteSByte(jobId);
+            writer.WriteUInt(jobId);
             writer.WriteUShort((ushort)skills.Length);
             foreach (var entry in skills)
             {
@@ -68,14 +68,14 @@ namespace BlueSheep.Common.Protocol.Types
         public virtual void Deserialize(BigEndianReader reader)
         {
 
-            jobId = reader.ReadSByte();
+            jobId = reader.ReadByte();
             if (jobId < 0)
                 throw new Exception("Forbidden value on jobId = " + jobId + ", it doesn't respect the following condition : jobId < 0");
-            var limit = reader.ReadUShort();
-            skills = new Types.SkillActionDescription[limit];
+            uint limit = reader.ReadUShort();
+            skills = new SkillActionDescription[limit];
             for (int i = 0; i < limit; i++)
             {
-                skills[i] = Types.ProtocolTypeManager.GetInstance<Types.SkillActionDescription>(reader.ReadShort());
+                skills[i] = Types.ProtocolTypeManager.GetInstance<SkillActionDescription>(reader.ReadUShort());
                 skills[i].Deserialize(reader);
             }
 

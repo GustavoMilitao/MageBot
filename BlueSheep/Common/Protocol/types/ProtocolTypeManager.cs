@@ -13,8 +13,8 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public static class ProtocolTypeManager
     {
-        private static readonly Dictionary<short, Type> m_types = new Dictionary<short, Type>(200);
-        private static readonly Dictionary<short, Func<object>> m_typesConstructors = new Dictionary<short, Func<object>>(200);
+        private static readonly Dictionary<int, Type> m_types = new Dictionary<int, Type>(200);
+        private static readonly Dictionary<int, Func<object>> m_typesConstructors = new Dictionary<int, Func<object>>(200);
 
         static ProtocolTypeManager()
         {
@@ -30,7 +30,7 @@ namespace BlueSheep.Common.Protocol.Types
                 if (field != null)
                 {
                     // le cast uint est obligatoire car l'objet n'a pas de type
-                    short id = (short)(field.GetValue(type));
+                    int id = (short)(field.GetValue(type));
 
                     m_types.Add(id, type);
 
@@ -60,7 +60,7 @@ namespace BlueSheep.Common.Protocol.Types
         /// <typeparam name = "T">Type.</typeparam>
         /// <param name = "id">id.</param>
         /// <returns></returns>
-        public static T GetInstance<T>(short id) where T : class
+        public static T GetInstance<T>(int id) where T : class
         {
             if (!m_types.ContainsKey(id))
             {
