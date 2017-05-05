@@ -20,7 +20,7 @@ namespace BlueSheep.Common.Protocol.Messages
 {
     public class MapComplementaryInformationsDataMessage : Message
     {
-        public new const uint ID = 226;
+        public const uint ID = 226;
         public override uint ProtocolID
         {
             get { return ID; }
@@ -39,7 +39,7 @@ namespace BlueSheep.Common.Protocol.Messages
         {
         }
         
-        public MapComplementaryInformationsDataMessage(short subAreaId, int mapId, Types.HouseInformations[] houses, Types.GameRolePlayActorInformations[] actors, Types.InteractiveElement[] interactiveElements, Types.StatedElement[] statedElements, Types.MapObstacle[] obstacles, Types.FightCommonInformations[] fights)
+        public MapComplementaryInformationsDataMessage(ushort subAreaId, int mapId, Types.HouseInformations[] houses, Types.GameRolePlayActorInformations[] actors, Types.InteractiveElement[] interactiveElements, Types.StatedElement[] statedElements, Types.MapObstacle[] obstacles, Types.FightCommonInformations[] fights)
         {
             this.subAreaId = subAreaId;
             this.mapId = mapId;

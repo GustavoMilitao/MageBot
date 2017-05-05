@@ -7,7 +7,7 @@ namespace BlueSheep.Common.Protocol.Types
     public class HouseInstanceInformations 
     {
         public const short ID = 511;
-        public uint instanceId = 0;
+        public int instanceId = 0;
         public bool secondHand = false;
         public String ownerName = "";
         public bool isOnSale = false;
@@ -42,7 +42,7 @@ namespace BlueSheep.Common.Protocol.Types
 
         private void _instanceIdFunc(BigEndianReader reader)
         {
-            instanceId = reader.ReadUInt();
+            instanceId = reader.ReadInt();
             if (instanceId < 0)
             {
                 throw new Exception("Forbidden value (" + instanceId + ") on element of HouseInstanceInformations.instanceId.");
