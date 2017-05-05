@@ -109,7 +109,7 @@ namespace BlueSheep.Engine.Handlers.Character
 
             account.Spells.Clear();
             foreach (SpellItem spell in msg.spells)
-                account.Spells.Add(new Spell(spell.spellId, spell.spellLevel, spell.position));
+                account.Spells.Add(new Spell(spell.spellId, spell.spellLevel));
         }
 
         [MessageHandler(typeof(CharacterSelectedForceMessage))]

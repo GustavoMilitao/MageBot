@@ -27,39 +27,39 @@ using BlueSheep.Common.IO;
 namespace BlueSheep.Common.Protocol.Types
 {
 
-public class Item
-{
+    public class Item
+    {
 
-public new const short ID = 7;
-public virtual short TypeId
-{
-    get { return ID; }
-}
-
-
-
-public Item()
-{
-}
+        public new const short ID = 7;
+        public virtual short TypeId
+        {
+            get { return ID; }
+        }
 
 
 
-public virtual void Serialize(BigEndianWriter writer)
-{
+        public Item()
+        {
+        }
 
 
 
-}
-
-public virtual void Deserialize(BigEndianReader reader)
-{
+        public virtual void Serialize(BigEndianWriter writer)
+        {
 
 
 
-}
+        }
+
+        public virtual void Deserialize(BigEndianReader reader)
+        {
 
 
-}
+
+        }
+
+
+    }
 
 
 }

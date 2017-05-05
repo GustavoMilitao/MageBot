@@ -52,7 +52,7 @@ namespace BlueSheep.Common.Protocol.Messages
         public override void Deserialize(BigEndianReader reader)
         {
             spellPrevisualization = reader.ReadBoolean();
-            var limit = reader.ReadUShort();
+            uint limit = reader.ReadUShort();
             spells = new Types.SpellItem[limit];
             for (int i = 0; i < limit; i++)
             {

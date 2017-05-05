@@ -10,16 +10,14 @@ namespace BlueSheep.Common.Types
 {
     public class Spell
     {
-        public Spell(int id, int level, int position)
+        public Spell(int id, int level)
         {
             Id = id;
             Level = level;
-            Position = position;
         }
 
         public int Id { get; private set; }
         public int Level { get; internal set; }
-        public int Position { get; private set; }
 
 
         public string GetName()
