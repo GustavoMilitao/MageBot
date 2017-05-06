@@ -1398,7 +1398,21 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
         
         public override void Serialize(IDataWriter writer)
         {
+            writer.WriteVarLong(m_experience);
+            writer.WriteVarLong(m_experienceLevelFloor);
+            writer.WriteVarLong(m_experienceNextLevelFloor);
+            writer.WriteVarLong(m_experienceBonusLimit);
+            writer.WriteVarLong(m_kamas);
+            writer.WriteVarShort(m_statsPoints);
+            writer.WriteVarShort(m_additionnalPoints);
+            writer.WriteVarShort(m_spellsPoints);
             m_alignmentInfos.Serialize(writer);
+            writer.WriteVarInt(m_lifePoints);
+            writer.WriteVarInt(m_maxLifePoints);
+            writer.WriteVarShort(m_energyPoints);
+            writer.WriteVarShort(m_maxEnergyPoints);
+            writer.WriteVarShort(m_actionPointsCurrent);
+            writer.WriteVarShort(m_movementPointsCurrent);
             m_initiative.Serialize(writer);
             m_prospecting.Serialize(writer);
             m_actionPoints.Serialize(writer);
@@ -1413,6 +1427,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
             m_summonableCreaturesBoost.Serialize(writer);
             m_reflect.Serialize(writer);
             m_criticalHit.Serialize(writer);
+            writer.WriteVarShort(m_criticalHitWeapon);
             m_criticalMiss.Serialize(writer);
             m_healBonus.Serialize(writer);
             m_allDamagesBonus.Serialize(writer);
@@ -1473,28 +1488,27 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
                 CharacterSpellModification objectToSend = m_spellModifications[spellModificationsIndex];
                 objectToSend.Serialize(writer);
             }
-            writer.WriteVarLong(m_experience);
-            writer.WriteVarLong(m_experienceLevelFloor);
-            writer.WriteVarLong(m_experienceNextLevelFloor);
-            writer.WriteVarLong(m_experienceBonusLimit);
-            writer.WriteVarLong(m_kamas);
-            writer.WriteVarShort(m_statsPoints);
-            writer.WriteVarShort(m_additionnalPoints);
-            writer.WriteVarShort(m_spellsPoints);
-            writer.WriteVarInt(m_lifePoints);
-            writer.WriteVarInt(m_maxLifePoints);
-            writer.WriteVarShort(m_energyPoints);
-            writer.WriteVarShort(m_maxEnergyPoints);
-            writer.WriteVarShort(m_actionPointsCurrent);
-            writer.WriteVarShort(m_movementPointsCurrent);
-            writer.WriteVarShort(m_criticalHitWeapon);
             writer.WriteInt(m_probationTime);
         }
         
         public override void Deserialize(IDataReader reader)
         {
+            m_experience = reader.ReadVarUhLong();
+            m_experienceLevelFloor = reader.ReadVarUhLong();
+            m_experienceNextLevelFloor = reader.ReadVarUhLong();
+            m_experienceBonusLimit = reader.ReadVarUhLong();
+            m_kamas = reader.ReadVarUhLong();
+            m_statsPoints = reader.ReadVarUhShort();
+            m_additionnalPoints = reader.ReadVarUhShort();
+            m_spellsPoints = reader.ReadVarUhShort();
             m_alignmentInfos = new ActorExtendedAlignmentInformations();
             m_alignmentInfos.Deserialize(reader);
+            m_lifePoints = reader.ReadVarUhInt();
+            m_maxLifePoints = reader.ReadVarUhInt();
+            m_energyPoints = reader.ReadVarUhShort();
+            m_maxEnergyPoints = reader.ReadVarUhShort();
+            m_actionPointsCurrent = reader.ReadVarShort();
+            m_movementPointsCurrent = reader.ReadVarShort();
             m_initiative = new CharacterBaseCharacteristic();
             m_initiative.Deserialize(reader);
             m_prospecting = new CharacterBaseCharacteristic();
@@ -1523,6 +1537,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
             m_reflect.Deserialize(reader);
             m_criticalHit = new CharacterBaseCharacteristic();
             m_criticalHit.Deserialize(reader);
+            m_criticalHitWeapon = reader.ReadVarUhShort();
             m_criticalMiss = new CharacterBaseCharacteristic();
             m_criticalMiss.Deserialize(reader);
             m_healBonus = new CharacterBaseCharacteristic();
@@ -1638,21 +1653,6 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
                 objectToAdd.Deserialize(reader);
                 m_spellModifications.Add(objectToAdd);
             }
-            m_experience = reader.ReadVarUhLong();
-            m_experienceLevelFloor = reader.ReadVarUhLong();
-            m_experienceNextLevelFloor = reader.ReadVarUhLong();
-            m_experienceBonusLimit = reader.ReadVarUhLong();
-            m_kamas = reader.ReadVarUhLong();
-            m_statsPoints = reader.ReadVarUhShort();
-            m_additionnalPoints = reader.ReadVarUhShort();
-            m_spellsPoints = reader.ReadVarUhShort();
-            m_lifePoints = reader.ReadVarUhInt();
-            m_maxLifePoints = reader.ReadVarUhInt();
-            m_energyPoints = reader.ReadVarUhShort();
-            m_maxEnergyPoints = reader.ReadVarUhShort();
-            m_actionPointsCurrent = reader.ReadVarShort();
-            m_movementPointsCurrent = reader.ReadVarShort();
-            m_criticalHitWeapon = reader.ReadVarUhShort();
             m_probationTime = reader.ReadInt();
         }
     }
