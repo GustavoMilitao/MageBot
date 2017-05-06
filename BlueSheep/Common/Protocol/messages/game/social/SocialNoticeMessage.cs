@@ -8,26 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Social
+namespace BlueSheep.Common.Protocol.Messages.Game.Social
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
     
     
-    using DofusBot.Protocol;
+    using BlueSheep.Protocol;
     
     
-    public class SocialNoticeMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class SocialNoticeMessage : Message 
     {
         
-        public const int ProtocolId = 6688;
+        public new const int ID = 6688;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -103,7 +105,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Social
         {
             writer.WriteUTF(m_content);
             writer.WriteInt(m_timestamp);
-            writer.WriteVarUhLong(m_memberId);
+            writer.WriteVarLong(m_memberId);
             writer.WriteUTF(m_memberName);
         }
         

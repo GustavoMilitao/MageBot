@@ -8,25 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Wtf
+namespace BlueSheep.Common.Protocol.Messages.Wtf
 {
-    using DofusBot.Protocol.Network.Messages.Debug;
+    using BlueSheep.Common.Protocol.Messages.Debug;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class ClientYouAreDrunkMessage : DebugInClientMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class ClientYouAreDrunkMessage : DebugInClientMessage 
     {
         
-        public const int ProtocolId = 6594;
+        public new const int ID = 6594;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

@@ -1,5 +1,6 @@
 ﻿using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Items;
 using BlueSheep.Common.Types;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
@@ -28,8 +29,8 @@ namespace BlueSheep.Core.Meal
                 return;
             }
 
-            ObjectFeedMessage objectFeedMessage = new ObjectFeedMessage(pet.Informations.UID,
-                pet.FoodList[0].Informations.UID, 1);
+            ObjectFeedMessage objectFeedMessage = new ObjectFeedMessage((uint)pet.Informations.UID,
+                (uint)pet.FoodList[0].Informations.UID, 1);
 
                 account.SocketManager.Send(objectFeedMessage);
                 account.LastPacketID.Clear();

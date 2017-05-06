@@ -1,6 +1,9 @@
 ﻿using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Job;
 using BlueSheep.Common.Protocol.Types;
+using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job;
+using BlueSheep.Common.Protocol.Types.Game.Interactive.Skill;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using System;
@@ -23,14 +26,14 @@ namespace BlueSheep.Engine.Handlers.Job
                 msg.Deserialize(reader);
             }
 
-            foreach (JobDescription job in msg.jobsDescription)
+            foreach (JobDescription job in msg.JobsDescription)
             {
                 List<int> skills = new List<int>();
-                foreach (SkillActionDescription s in job.skills)
+                foreach (SkillActionDescription s in job.Skills)
                 {
-                    skills.Add(s.skillId);
+                    skills.Add(s.SkillId);
                 }
-                Core.Job.Job j = new Core.Job.Job((int)job.jobId, skills, account);
+                Core.Job.Job j = new Core.Job.Job(job.JobId, skills, account);
                 account.Jobs.Add(j);
             }
         }
@@ -44,16 +47,16 @@ namespace BlueSheep.Engine.Handlers.Job
             {
                 msg.Deserialize(reader);
             }
-            foreach (JobExperience i in msg.experiencesUpdate)
+            foreach (JobExperience i in msg.ExperiencesUpdate)
             {
                 foreach (Core.Job.Job j in account.Jobs)
                 {
-                    if (i.jobId == j.Id)
+                    if (i.JobId == j.Id)
                     {
-                        j.Level = i.jobLevel;
-                        j.XP = (int)i.jobXP;
-                        j.XpLevelFloor =(int)i.jobXpLevelFloor;
-                        j.XpNextLevelFloor = (int)i.jobXpNextLevelFloor;
+                        j.Level = i.JobLevel;
+                        j.XP = (int)i.JobXP;
+                        j.XpLevelFloor =(int)i.JobXpLevelFloor;
+                        j.XpNextLevelFloor = (int)i.JobXpNextLevelFloor;
                         break;
                     }
                 }
@@ -74,15 +77,15 @@ namespace BlueSheep.Engine.Handlers.Job
             {
                 msg.Deserialize(reader);
             }
-            JobExperience i = msg.experiencesUpdate;
+            JobExperience i = msg.ExperiencesUpdate;
             foreach (Core.Job.Job j in account.Jobs)
             {
-                if (i.jobId == j.Id)
+                if (i.JobId == j.Id)
                 {
-                    j.Level = i.jobLevel;
-                    j.XP = (int)i.jobXP;
-                    j.XpLevelFloor = (int)i.jobXpLevelFloor;
-                    j.XpNextLevelFloor = (int)i.jobXpNextLevelFloor;
+                    j.Level = i.JobLevel;
+                    j.XP = (int)i.JobXP;
+                    j.XpLevelFloor = (int)i.JobXpLevelFloor;
+                    j.XpNextLevelFloor = (int)i.JobXpNextLevelFloor;
                     break;
                 }
             }

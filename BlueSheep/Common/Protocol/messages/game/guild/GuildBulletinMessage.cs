@@ -8,25 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Guild
+namespace BlueSheep.Common.Protocol.Messages.Game.Guild
 {
-    using DofusBot.Protocol.Network.Messages.Game.Social;
+    using BlueSheep.Common.Protocol.Messages.Game.Social;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class GuildBulletinMessage : BulletinMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class GuildBulletinMessage : BulletinMessage 
     {
         
-        public const int ProtocolId = 6689;
+        public new const int ID = 6689;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Common.Basic
+namespace BlueSheep.Common.Protocol.Messages.Common.Basic
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class AggregateStatMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class AggregateStatMessage : Message 
     {
         
-        public const int ProtocolId = 6669;
+        public new const int ID = 6669;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -54,7 +56,7 @@ namespace DofusBot.Protocol.Network.Messages.Common.Basic
         
         public override void Serialize(IDataWriter writer)
         {
-            writer.WriteVarUhShort(m_statId);
+            writer.WriteVarShort(m_statId);
         }
         
         public override void Deserialize(IDataReader reader)

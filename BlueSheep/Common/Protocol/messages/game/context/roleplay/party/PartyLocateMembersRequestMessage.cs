@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Party
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class PartyLocateMembersRequestMessage : AbstractPartyMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class PartyLocateMembersRequestMessage : AbstractPartyMessage 
     {
         
-        public const int ProtocolId = 5587;
+        public new const int ID = 5587;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

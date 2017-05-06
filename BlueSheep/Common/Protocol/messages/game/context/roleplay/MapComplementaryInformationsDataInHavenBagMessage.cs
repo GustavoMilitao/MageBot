@@ -8,29 +8,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay
 {
-    using DofusBot.Protocol.Network.Types.Game.Character;
-    using DofusBot.Protocol.Network.Types.Game.House;
-    using DofusBot.Protocol.Network.Types.Game.Context.Roleplay;
-    using DofusBot.Protocol.Network.Types.Game.Interactive;
-    using DofusBot.Protocol.Network.Types.Game.Context.Fight;
+    using BlueSheep.Common.Protocol.Types.Game.Character;
+    using BlueSheep.Common.Protocol.Types.Game.House;
+    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
+    using BlueSheep.Common.Protocol.Types.Game.Interactive;
+    using BlueSheep.Common.Protocol.Types.Game.Context.Fight;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class MapComplementaryInformationsDataInHavenBagMessage : MapComplementaryInformationsDataMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class MapComplementaryInformationsDataInHavenBagMessage : MapComplementaryInformationsDataMessage 
     {
         
-        public const int ProtocolId = 6622;
+        public new const int ID = 6622;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

@@ -8,26 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Havenbag
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Havenbag
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
     
     
-    using DofusBot.Protocol;
+    using BlueSheep.Protocol;
     
     
-    public class EnterHavenBagRequestMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class EnterHavenBagRequestMessage : Message 
     {
         
-        public const int ProtocolId = 6636;
+        public new const int ID = 6636;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -56,7 +58,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Havenbag
         
         public override void Serialize(IDataWriter writer)
         {
-            writer.WriteVarUhLong(m_havenBagOwner);
+            writer.WriteVarLong(m_havenBagOwner);
         }
         
         public override void Deserialize(IDataReader reader)

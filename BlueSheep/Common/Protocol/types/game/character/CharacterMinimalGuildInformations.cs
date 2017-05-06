@@ -1,76 +1,32 @@
+﻿using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:02
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
-
-namespace BlueSheep.Common.Protocol.Types
+namespace BlueSheep.Common.Protocol.Types.Game.Character
 {
+    public class CharacterMinimalGuildInformations : CharacterMinimalPlusLookInformations
+    {
+        public new const int ID = 445;
+        public virtual int TypeID { get { return ID; } }
 
-public class CharacterMinimalGuildInformations : CharacterMinimalPlusLookInformations
-{
+        public BasicGuildInformations Guild { get; set; }
 
-public new const int ID = 445;
-public override int TypeId
-{
-    get { return ID; }
-}
+        public CharacterMinimalGuildInformations() { }
 
-public Types.BasicGuildInformations guild;
-        
-
-public CharacterMinimalGuildInformations()
-{
-}
-
-public CharacterMinimalGuildInformations(uint id, byte level, string name, Types.EntityLook entityLook, Types.BasicGuildInformations guild)
-         : base(id, level, name, entityLook)
+        public CharacterMinimalGuildInformations(BasicGuildInformations guild)
         {
-            this.guild = guild;
+            Guild = guild;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
+        public void Serialize(IDataWriter writer)
+        {
+            base.Serialize(writer);
+            Guild.Serialize(writer);
+        }
 
-base.Serialize(writer);
-            guild.Serialize(writer);
-            
-
-}
-
-public override void Deserialize(BigEndianReader reader)
-{
-
-base.Deserialize(reader);
-            guild = new Types.BasicGuildInformations();
-            guild.Deserialize(reader);
-            
-
-}
-
-
-}
-
-
+        public void Deserialize(IDataReader reader)
+        {
+            base.Deserialize(reader);
+            Guild = new BasicGuildInformations();
+            Guild.Deserialize(reader);
+        }
+    }
 }

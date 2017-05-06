@@ -1,77 +1,31 @@
+﻿using System;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:02
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
-
-namespace BlueSheep.Common.Protocol.Types
+namespace BlueSheep.Common.Protocol.Types.Game.Character
 {
-
-    public class CharacterMinimalInformations : AbstractCharacterInformation
+    public class CharacterMinimalInformations : CharacterBasicMinimalInformations
     {
-
         public new const int ID = 110;
-        public override int TypeId
+        public virtual int TypeID { get { return ID; } }
+
+        public byte Level { get; set; }
+
+        public CharacterMinimalInformations() { }
+
+        public CharacterMinimalInformations(byte level)
         {
-            get { return ID; }
+            Level = level;
         }
 
-        public byte level;
-        public string name;
-
-
-        public CharacterMinimalInformations()
+        public void Serialize(IDataWriter writer)
         {
-        }
-
-        public CharacterMinimalInformations(uint id, byte level, string name)
-                 : base(id)
-        {
-            this.level = level;
-            this.name = name;
-        }
-
-
-        public override void Serialize(BigEndianWriter writer)
-        {
-
             base.Serialize(writer);
-            writer.WriteUTF(name);
-            writer.WriteByte(level);
+            writer.WriteByte(Level);
         }
 
-        public override void Deserialize(BigEndianReader reader)
+        public void Deserialize(IDataReader reader)
         {
-
             base.Deserialize(reader);
-            name = reader.ReadUTF();
-            level = reader.ReadByte();
-            if (level < 1 || level > 200)
-                throw new Exception("Forbidden value on level = " + level + ", it doesn't respect the following condition : level < 1 || level > 200");
+            Level = reader.ReadByte();
         }
-
-
     }
-
-
 }

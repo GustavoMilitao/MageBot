@@ -1,66 +1,27 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:02
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
-
-namespace BlueSheep.Common.Protocol.Types
+﻿namespace BlueSheep.Common.Protocol.Types.Game.Character
 {
-
-    public class AbstractCharacterInformation
+    public class AbstractCharacterInformation 
     {
-
         public new const int ID = 400;
-        public virtual int TypeId
+        public virtual int TypeID { get { return ID; } }
+
+        public double ObjectID { get; set; }
+
+        public AbstractCharacterInformation() { }
+
+        public AbstractCharacterInformation(double objectId)
         {
-            get { return ID; }
+            ObjectID = objectId;
         }
 
-        public ulong Id { get; set; }
-
-        public AbstractCharacterInformation()
+        public void Serialize(IDataWriter writer)
         {
+            writer.WriteVarLong((long)ObjectID);
         }
 
-        public AbstractCharacterInformation(ulong id)
+        public void Deserialize(IDataReader reader)
         {
-            Id = id;
-        }
-
-
-        public virtual void Serialize(BigEndianWriter writer)
-        {
-
-            writer.WriteVarLong(Id);
-        }
-
-        public virtual void Deserialize(BigEndianReader reader)
-        {
-            Id = reader.ReadVarUhLong();
-            if (Id < 0)
-                throw new Exception("Forbidden value on id = " + Id + ", it doesn't respect the following condition : id < 0");
+            ObjectID = reader.ReadVarUhLong();
         }
     }
-
-
 }

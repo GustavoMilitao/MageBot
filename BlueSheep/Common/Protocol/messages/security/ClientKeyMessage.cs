@@ -1,52 +1,34 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:00
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+﻿namespace BlueSheep.Common.Protocol.Messages.Security
 {
-    public class ClientKeyMessage : Message
+    using BlueSheep.Engine.Types;
+
+ 	 public class ClientKeyMessage : Message 
     {
-        public new const uint ID =5607;
-        public override uint ProtocolID
-        {
-            get { return ID; }
-        }
-        
-        public string key;
-        
-        public ClientKeyMessage()
-        {
-        }
-        
+        public new const int ID = 5607;
+        public override int MessageID { get { return ID; } }
+
+        public string Key { get; set; }
+
+        public ClientKeyMessage() { }
+
         public ClientKeyMessage(string key)
         {
-            this.key = key;
+            Key = key;
         }
-        
-        public override void Serialize(BigEndianWriter writer)
+
+        public override void Serialize(IDataWriter writer)
         {
-            writer.WriteUTF(key);
+            writer.WriteUTF(Key);
         }
-        
-        public override void Deserialize(BigEndianReader reader)
+
+        public override void Deserialize(IDataReader reader)
         {
-            key = reader.ReadUTF();
+            _keyFunc(reader);
         }
-        
+
+        private void _keyFunc(IDataReader Reader)
+        {
+            Key = Reader.ReadUTF();
+        }
     }
-    
 }

@@ -1,5 +1,8 @@
 ﻿using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Chat;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Houses;
+using BlueSheep.Common.Protocol.Messages.Game.Interactive;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
@@ -14,7 +17,7 @@ namespace BlueSheep.Core.Misc
     public class HouseBuy
     {
         private AccountUC account;
-        public int priceHouse;
+        public ulong priceHouse;
         public int ElementIdd;
         public int SkillInstanceID;
 
@@ -28,11 +31,11 @@ namespace BlueSheep.Core.Misc
         {
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                ChatClientMultiMessage msg = new ChatClientMultiMessage(sentence, (sbyte)0);
+                ChatClientMultiMessage msg = new ChatClientMultiMessage(sentence, 0);
                 msg.Serialize(writer);
                 writer.Content = account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.ProtocolID);
+                pack.Pack((int)msg.MessageID);
                 account.SocketManager.Send(pack.Writer.Content);
                 if (account.DebugMode.Checked)
                     account.Log(new DebugTextInformation("[SND] 861 (ChatClientMultiMessage)"), 0);
@@ -43,11 +46,11 @@ namespace BlueSheep.Core.Misc
         {
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                InteractiveUseRequestMessage msg = new InteractiveUseRequestMessage(ElementIdd,SkillInstanceID);
+                InteractiveUseRequestMessage msg = new InteractiveUseRequestMessage((uint)ElementIdd,(uint)SkillInstanceID);
                 msg.Serialize(writer);
                 writer.Content = account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.ProtocolID);
+                pack.Pack((int)msg.MessageID);
                 account.SocketManager.Send(pack.Writer.Content);
                 if (account.DebugMode.Checked)
                     account.Log(new DebugTextInformation("[SND] 5001 (InteractiveUseRequestMessage)"), 0);

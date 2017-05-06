@@ -8,25 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Fight
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Fight
 {
-    using DofusBot.Protocol.Network.Types.Game.Context.Fight;
+    using BlueSheep.Common.Protocol.Types.Game.Context.Fight;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class RefreshCharacterStatsMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class RefreshCharacterStatsMessage : Message 
     {
         
-        public const int ProtocolId = 6699;
+        public new const int ID = 6699;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

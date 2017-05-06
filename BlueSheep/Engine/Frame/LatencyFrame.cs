@@ -75,7 +75,7 @@ namespace BlueSheep.Engine.Frame
 
         public int RolePley()
         {
-            long pId = (long)account.CharacterBaseInformations.Id;
+            long pId = (long)account.CharacterBaseInformations.ObjectID;
             uint ct = Convert.ToUInt32(account.Ticket);
             string loaderInfo = "4dd3a4c8490e4517d1883a5c367e1B5f";
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(loaderInfo);

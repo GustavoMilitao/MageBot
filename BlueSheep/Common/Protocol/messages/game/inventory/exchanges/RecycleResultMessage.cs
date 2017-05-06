@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
+namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class RecycleResultMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class RecycleResultMessage : Message 
     {
         
-        public const int ProtocolId = 6601;
+        public new const int ID = 6601;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -69,8 +71,8 @@ namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
         
         public override void Serialize(IDataWriter writer)
         {
-            writer.WriteVarUhInt(m_nuggetsForPrism);
-            writer.WriteVarUhInt(m_nuggetsForPlayer);
+            writer.WriteVarInt(m_nuggetsForPrism);
+            writer.WriteVarInt(m_nuggetsForPlayer);
         }
         
         public override void Deserialize(IDataReader reader)

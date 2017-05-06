@@ -8,26 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Dare
+namespace BlueSheep.Common.Protocol.Messages.Game.Dare
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
     
     
-    using DofusBot.Protocol;
+    using BlueSheep.Protocol;
     
     
-    public class DareInformationsRequestMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class DareInformationsRequestMessage : Message 
     {
         
-        public const int ProtocolId = 6659;
+        public new const int ID = 6659;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

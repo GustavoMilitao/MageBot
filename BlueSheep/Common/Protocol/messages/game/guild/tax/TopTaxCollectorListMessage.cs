@@ -8,25 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Guild.Tax
+namespace BlueSheep.Common.Protocol.Messages.Game.Guild.Tax
 {
-    using DofusBot.Protocol.Network.Types.Game.Guild.Tax;
+    using BlueSheep.Common.Protocol.Types.Game.Guild.Tax;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class TopTaxCollectorListMessage : AbstractTaxCollectorListMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class TopTaxCollectorListMessage : AbstractTaxCollectorListMessage 
     {
         
-        public const int ProtocolId = 6565;
+        public new const int ID = 6565;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

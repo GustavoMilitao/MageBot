@@ -1,54 +1,29 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:14
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+﻿namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    public class ServerSelectionMessage : Message
+    using BlueSheep.Engine.Types;
+
+ 	 public class ServerSelectionMessage : Message 
     {
-        public new const uint ID =40;
-        public override uint ProtocolID
+        public new const int ID = 40;
+        public override int MessageID { get { return ID; } }
+
+        private ushort _serverId;
+
+        public ServerSelectionMessage() { }
+
+        public ServerSelectionMessage(ushort serverId)
         {
-            get { return ID; }
+            _serverId = serverId;
         }
-        
-        public int serverId;
-        
-        public ServerSelectionMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
+            writer.WriteVarShort(_serverId);
         }
-        
-        public ServerSelectionMessage(int serverId)
+
+        public override void Deserialize(IDataReader reader)
         {
-            this.serverId = serverId;
+            _serverId = reader.ReadVarUhShort();
         }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteVarShort((short)serverId);
-        }
-        
-        public override void Deserialize(BigEndianReader reader)
-        {
-            serverId = reader.ReadVarUhShort();
-            if (serverId < 0)
-                throw new Exception("Forbidden value on serverId = " + serverId + ", it doesn't respect the following condition : serverId < 0");
-        }
-        
     }
-    
 }

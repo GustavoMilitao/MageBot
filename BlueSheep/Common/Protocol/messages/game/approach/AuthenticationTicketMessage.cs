@@ -1,56 +1,33 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:21
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+﻿namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
-    public class AuthenticationTicketMessage : Message
+    using BlueSheep.Engine.Types;
+
+ 	 public class AuthenticationTicketMessage : Message 
     {
-        public new const uint ID =110;
-        public override uint ProtocolID
-        {
-            get { return ID; }
-        }
-        
-        public string lang;
-        public string ticket;
-        
-        public AuthenticationTicketMessage()
-        {
-        }
-        
+        public new const int ID = 110;
+        public override int MessageID { get { return ID; } }
+
+        public string Lang { get; set; }
+        public string Ticket { get; set; }
+
+        public AuthenticationTicketMessage() { }
+
         public AuthenticationTicketMessage(string lang, string ticket)
         {
-            this.lang = lang;
-            this.ticket = ticket;
+            Lang = lang;
+            Ticket = ticket;
         }
-        
-        public override void Serialize(BigEndianWriter writer)
+
+        public override void Serialize(IDataWriter writer)
         {
-            writer.WriteUTF(lang);
-            writer.WriteUTF(ticket);
+            writer.WriteUTF(Lang);
+            writer.WriteUTF(Ticket);
         }
-        
-        public override void Deserialize(BigEndianReader reader)
+
+        public override void Deserialize(IDataReader reader)
         {
-            lang = reader.ReadUTF();
-            ticket = reader.ReadUTF();
+            Lang = reader.ReadUTF();
+            Ticket = reader.ReadUTF();
         }
-        
     }
-    
 }

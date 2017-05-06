@@ -1,73 +1,47 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:22
-using System;
+﻿using BlueSheep.Engine.Types;
 using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
 
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Game.Basic
 {
     public class TextInformationMessage : Message
     {
-        public new const uint ID =780;
-        public override uint ProtocolID
+        public new const int ID = 780;
+        public override int MessageID { get { return ID; } }
+
+        public byte MsgType;
+        public ushort MsgId;
+        public List<string> Parameters;
+
+        public TextInformationMessage() { }
+
+        public TextInformationMessage(byte msgType, ushort msgId, List<string> parameters)
         {
-            get { return ID; }
+            MsgType = msgType;
+            MsgId = msgId;
+            Parameters = parameters;
         }
-        
-        public sbyte msgType;
-        public int msgId;
-        public string[] parameters;
-        
-        public TextInformationMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
-        }
-        
-        public TextInformationMessage(sbyte msgType, int msgId, string[] parameters)
-        {
-            this.msgType = msgType;
-            this.msgId = msgId;
-            this.parameters = parameters;
-        }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteSByte(msgType);
-            writer.WriteVarShort((short)msgId);
-            writer.WriteUShort((ushort)parameters.Length);
-            foreach (var entry in parameters)
+            writer.WriteByte(MsgType);
+            writer.WriteVarShort(MsgId);
+            writer.WriteShort((short)Parameters.Count);
+            for (int i = 0; i < Parameters.Count; i++)
             {
-                 writer.WriteUTF(entry);
+                writer.WriteUTF(Parameters[i]);
             }
         }
-        
-        public override void Deserialize(BigEndianReader reader)
+
+        public override void Deserialize(IDataReader reader)
         {
-            msgType = reader.ReadSByte();
-            if (msgType < 0)
-                throw new Exception("Forbidden value on msgType = " + msgType + ", it doesn't respect the following condition : msgType < 0");
-            msgId = reader.ReadVarUhShort();
-            if (msgId < 0)
-                throw new Exception("Forbidden value on msgId = " + msgId + ", it doesn't respect the following condition : msgId < 0");
-            var limit = reader.ReadUShort();
-            parameters = new string[limit];
-            for (int i = 0; i < limit; i++)
+            MsgType = reader.ReadByte();
+            MsgId = reader.ReadVarUhShort();
+            ushort length = reader.ReadUShort();
+            Parameters = new List<string>();
+            for (int i = 0; i < length; i++)
             {
-                 parameters[i] = reader.ReadUTF();
+                Parameters.Add(reader.ReadUTF());
             }
         }
-        
     }
-    
 }

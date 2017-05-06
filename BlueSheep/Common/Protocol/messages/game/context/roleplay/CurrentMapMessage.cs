@@ -1,58 +1,43 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:31
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+﻿namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay
 {
-    public class CurrentMapMessage : Message
+    using BlueSheep.Engine.Types;
+
+ 	 public class CurrentMapMessage : Message 
     {
-        public new const uint ID =220;
-        public override uint ProtocolID
-        {
-            get { return ID; }
-        }
-        
-        public int mapId;
-        public string mapKey;
-        
-        public CurrentMapMessage()
-        {
-        }
-        
+        public new const int ID = 220;
+        public override int MessageID { get { return ID; } }
+
+        public int MapId { get; set; }
+        public string MapKey { get; set; }
+
+        public CurrentMapMessage() { }
+
         public CurrentMapMessage(int mapId, string mapKey)
         {
-            this.mapId = mapId;
-            this.mapKey = mapKey;
+            MapId = mapId;
+            MapKey = mapKey;
         }
-        
-        public override void Serialize(BigEndianWriter writer)
+
+        public override void Serialize(IDataWriter writer)
         {
-            writer.WriteInt(mapId);
-            writer.WriteUTF(mapKey);
+            writer.WriteInt(MapId);
+            writer.WriteUTF(MapKey);
         }
-        
-        public override void Deserialize(BigEndianReader reader)
+
+        public override void Deserialize(IDataReader reader)
         {
-            mapId = reader.ReadInt();
-            if (mapId < 0)
-                throw new Exception("Forbidden value on mapId = " + mapId + ", it doesn't respect the following condition : mapId < 0");
-            mapKey = reader.ReadUTF();
+            _mapIdFunc(reader);
+            _mapKeyFunc(reader);
         }
-        
+
+        private void _mapIdFunc(IDataReader reader)
+        {
+            MapId = reader.ReadInt();
+        }
+
+        private void _mapKeyFunc(IDataReader reader)
+        {
+            MapKey = reader.ReadUTF();
+        }
     }
-    
 }

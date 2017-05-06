@@ -1,58 +1,43 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:25
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+﻿namespace BlueSheep.Common.Protocol.Messages.Game.Chat.Channel
 {
-    public class ChannelEnablingMessage : Message
+    using BlueSheep.Engine.Types;
+
+ 	 public class ChannelEnablingMessage : Message 
     {
-        public new const uint ID =890;
-        public override uint ProtocolID
+        public new const int ID = 890;
+        public override int MessageID { get { return ID; } }
+
+        public uint Channel { get; set; }
+        public bool Enable { get; set; }
+
+        public ChannelEnablingMessage() { }
+
+        public ChannelEnablingMessage(uint channel, bool enable)
         {
-            get { return ID; }
+            Channel = channel;
+            Enable = enable;
         }
-        
-        public sbyte channel;
-        public bool enable;
-        
-        public ChannelEnablingMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
+            writer.WriteByte((byte)Channel);
+            writer.WriteBoolean(Enable);
         }
-        
-        public ChannelEnablingMessage(sbyte channel, bool enable)
+
+        public override void Deserialize(IDataReader reader)
         {
-            this.channel = channel;
-            this.enable = enable;
+            _channelFunc(reader);
+            _enableFunc(reader);
         }
-        
-        public override void Serialize(BigEndianWriter writer)
+
+        private void _channelFunc(IDataReader reader)
         {
-            writer.WriteSByte(channel);
-            writer.WriteBoolean(enable);
+            Channel = reader.ReadByte();
         }
-        
-        public override void Deserialize(BigEndianReader reader)
+
+        private void _enableFunc(IDataReader reader)
         {
-            channel = reader.ReadSByte();
-            if (channel < 0)
-                throw new Exception("Forbidden value on channel = " + channel + ", it doesn't respect the following condition : channel < 0");
-            enable = reader.ReadBoolean();
+            Enable = reader.ReadBoolean();
         }
-        
     }
-    
 }

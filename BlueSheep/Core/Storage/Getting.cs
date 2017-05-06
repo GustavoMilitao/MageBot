@@ -6,6 +6,8 @@ using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Common.Data.D2o;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
+using BlueSheep.Common.Protocol.Types.Game.Data.Items;
 
 namespace BlueSheep.Core.Storage
 {
@@ -50,7 +52,7 @@ namespace BlueSheep.Core.Storage
             int quantity = abbleWeight / objectWeight;
 
             if (objectItem.Quantity < quantity)
-                quantity = objectItem.Quantity;
+                quantity = (int)objectItem.Quantity;
 
             ExchangeObjectMoveMessage exchangeObjectMoveMessage =
                 new ExchangeObjectMoveMessage(objectItem.ObjectUID, -quantity);

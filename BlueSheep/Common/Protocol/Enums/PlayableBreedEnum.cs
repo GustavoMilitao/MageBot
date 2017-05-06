@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Enums
+namespace BlueSheep.Protocol.Enums
 {
     
     

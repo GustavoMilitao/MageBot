@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Common.Data.D2o;
+using BlueSheep.Common.Protocol.Types.Game.Context.Fight;
 
 namespace BlueSheep.Common.Types
 {

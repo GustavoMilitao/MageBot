@@ -1,64 +1,41 @@
+﻿using BlueSheep.Engine.Types;
 
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:21
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
-    public class ServerSettingsMessage : Message
+    class ServerSettingsMessage : Message
     {
-        public new const uint ID =6340;
-        public override uint ProtocolID
+        public new const int ID = 6340;
+        public override int MessageID { get { return ID; } }
+
+        public string Lang;
+        public byte Community;
+        public byte GameType;
+        public ushort ArenaLeaveBanTime;
+
+        public ServerSettingsMessage() { }
+
+        public ServerSettingsMessage(string lang, byte community, byte gameType, ushort arenaLeaveBanTime)
         {
-            get { return ID; }
+            Lang = lang;
+            Community = community;
+            GameType = gameType;
+            ArenaLeaveBanTime = arenaLeaveBanTime;
         }
-        
-        public string lang;
-        public sbyte community;
-        public sbyte gameType;
-        
-        public ServerSettingsMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
+            writer.WriteUTF(Lang);
+            writer.WriteByte(Community);
+            writer.WriteByte(GameType);
+            writer.WriteVarShort(ArenaLeaveBanTime);
         }
-        
-        public ServerSettingsMessage(string lang, sbyte community, sbyte gameType)
+
+        public override void Deserialize(IDataReader reader)
         {
-            this.lang = lang;
-            this.community = community;
-            this.gameType = gameType;
+            Lang = reader.ReadUTF();
+            Community = reader.ReadByte();
+            GameType = reader.ReadByte();
+            ArenaLeaveBanTime = reader.ReadVarUhShort();
         }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteUTF(lang);
-            writer.WriteSByte(community);
-            writer.WriteSByte(gameType);
-        }
-        
-        public override void Deserialize(BigEndianReader reader)
-        {
-            lang = reader.ReadUTF();
-            community = reader.ReadSByte();
-            if (community < 0)
-                throw new Exception("Forbidden value on community = " + community + ", it doesn't respect the following condition : community < 0");
-            gameType = reader.ReadSByte();
-            if (gameType < 0)
-                throw new Exception("Forbidden value on gameType = " + gameType + ", it doesn't respect the following condition : gameType < 0");
-        }
-        
     }
-    
 }

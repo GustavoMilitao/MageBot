@@ -36,6 +36,13 @@ using BlueSheep.Interface.UCs;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Common;
 using System.IO;
+using BlueSheep.Common.Protocol.Types.Game.Data.Items;
+using BlueSheep.Common.Protocol.Types.Game.Interactive;
+using BlueSheep.Common.Protocol.Types.Game.Character.Choice;
+using BlueSheep.Common.Protocol.Types.Game.Character.Characteristic;
+using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
+using BlueSheep.Common.Protocol.Messages.Game.Dialog;
 
 namespace BlueSheep.Interface
 {
@@ -395,7 +402,7 @@ namespace BlueSheep.Interface
                     return;
 
                 if (LogCb.Checked)
-                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + CharacterBaseInformations.name +".txt", true))
+                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + CharacterBaseInformations.Name +".txt", true))
                         fileWriter.WriteLine(text.Text);
 
                 int startIndex = LogConsole.TextLength;
@@ -763,7 +770,7 @@ namespace BlueSheep.Interface
             //}
             foreach (GameRolePlayNpcInformations n in MapData.Npcs)
             {
-                AddItem(new ListViewItem(new string[] { Convert.ToString(n.npcId), "?" , "Pnj" }), MapView);
+                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), "?" , "Pnj" }), MapView);
             }
         }
 
@@ -1315,11 +1322,11 @@ namespace BlueSheep.Interface
             //Inventory.SendItemToShop(Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).UID, Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity, Convert.ToInt32(numericUpDown1.Value));
             ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage();
             //BlueSheep.Core.Inventory.Item item = new BlueSheep.Core.Inventory.Item(null, 0, 0, msg.quantity, msg.objectUID, this);
-            msg.objectUID = Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).UID;
-            msg.quantity = Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity;
-            msg.price = Convert.ToInt32(numericUpDown1.Value);
+            msg.ObjectUID = (uint)Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).UID;
+            msg.Quantity = Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity;
+            msg.Price = Convert.ToUInt64(numericUpDown1.Value);
             SocketManager.Send(msg);
-            Log(new ActionTextInformation("Ajout de " + Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Name + "(x " + Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity + ") dans le magasin au prix de : " + msg.price + " Kamas"), 2);
+            Log(new ActionTextInformation("Ajout de " + Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Name + "(x " + Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity + ") dans le magasin au prix de : " + msg.Price + " Kamas"), 2);
             LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
             Wait(2000, 2000);
             SocketManager.Send(packetleave);
@@ -1382,8 +1389,8 @@ namespace BlueSheep.Interface
 
             foreach (ObjectItemToSell i in sell)
             {
-                BlueSheep.Core.Inventory.Item item = new BlueSheep.Core.Inventory.Item(i.effects.ToList(), i.objectGID,0,i.quantity, i.objectUID, this);
-                string[] row1 = { item.GID.ToString(), item.UID.ToString(), item.Name, item.Quantity.ToString(), item.Type, i.objectPrice.ToString() };
+                BlueSheep.Core.Inventory.Item item = new BlueSheep.Core.Inventory.Item(i.Effects.ToList(), i.ObjectGID,0,(int)i.Quantity, (int)i.ObjectUID, this);
+                string[] row1 = { item.GID.ToString(), item.UID.ToString(), item.Name, item.Quantity.ToString(), item.Type, i.ObjectPrice.ToString() };
                 System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
                 li.ToolTipText = item.Description;
                 AddItem(li, LVItemShop);

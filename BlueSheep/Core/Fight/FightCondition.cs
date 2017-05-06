@@ -36,17 +36,17 @@ namespace BlueSheep.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.FightData.Fighter.GameFightMinimalStats.actionPoints < Convert.ToInt32(m_delta))
+                            if (account.FightData.Fighter.GameFightMinimalStats.ActionPoints < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.FightData.Fighter.GameFightMinimalStats.actionPoints > Convert.ToInt32(m_delta))
+                            if (account.FightData.Fighter.GameFightMinimalStats.ActionPoints > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.FightData.Fighter.GameFightMinimalStats.actionPoints == Convert.ToInt32(m_delta))
+                            if (account.FightData.Fighter.GameFightMinimalStats.ActionPoints == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -57,17 +57,17 @@ namespace BlueSheep.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.FightData.Fighter.GameFightMinimalStats.movementPoints < Convert.ToInt32(m_delta))
+                            if (account.FightData.Fighter.GameFightMinimalStats.MovementPoints < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.FightData.Fighter.GameFightMinimalStats.movementPoints > Convert.ToInt32(m_delta))
+                            if (account.FightData.Fighter.GameFightMinimalStats.MovementPoints > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.FightData.Fighter.GameFightMinimalStats.movementPoints == Convert.ToInt32(m_delta))
+                            if (account.FightData.Fighter.GameFightMinimalStats.MovementPoints == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -168,17 +168,17 @@ namespace BlueSheep.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.FightParser.target.GameFightMinimalStats.airElementResistPercent < Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.AirElementResistPercent < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.FightParser.target.GameFightMinimalStats.airElementResistPercent > Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.AirElementResistPercent > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.FightParser.target.GameFightMinimalStats.airElementResistPercent == Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.AirElementResistPercent == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -189,17 +189,17 @@ namespace BlueSheep.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.FightParser.target.GameFightMinimalStats.earthElementResistPercent < Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.EarthElementResistPercent < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.FightParser.target.GameFightMinimalStats.earthElementResistPercent > Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.EarthElementResistPercent > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.FightParser.target.GameFightMinimalStats.earthElementResistPercent == Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.EarthElementResistPercent == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -210,17 +210,17 @@ namespace BlueSheep.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.FightParser.target.GameFightMinimalStats.fireElementResistPercent < Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.FireElementResistPercent < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.FightParser.target.GameFightMinimalStats.fireElementResistPercent > Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.FireElementResistPercent > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.FightParser.target.GameFightMinimalStats.fireElementResistPercent == Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.FireElementResistPercent == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -231,17 +231,17 @@ namespace BlueSheep.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.FightParser.target.GameFightMinimalStats.neutralElementResistPercent < Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.NeutralElementResistPercent < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.FightParser.target.GameFightMinimalStats.neutralElementResistPercent > Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.NeutralElementResistPercent > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.FightParser.target.GameFightMinimalStats.neutralElementResistPercent == Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.NeutralElementResistPercent == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -252,17 +252,17 @@ namespace BlueSheep.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.FightParser.target.GameFightMinimalStats.waterElementResistPercent < Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.WaterElementResistPercent < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.FightParser.target.GameFightMinimalStats.waterElementResistPercent > Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.WaterElementResistPercent > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.FightParser.target.GameFightMinimalStats.waterElementResistPercent == Convert.ToInt32(m_delta))
+                            if (account.FightParser.target.GameFightMinimalStats.WaterElementResistPercent == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;

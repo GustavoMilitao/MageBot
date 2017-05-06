@@ -41,17 +41,17 @@ namespace BlueSheep.Core.Path
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.CharacterBaseInformations.level < Convert.ToInt32(m_delta))
+                            if (account.CharacterBaseInformations.Level < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if ((int)account.CharacterBaseInformations.level > Convert.ToInt32(m_delta))
+                            if ((int)account.CharacterBaseInformations.Level > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.CharacterBaseInformations.level == Convert.ToInt32(m_delta))
+                            if (account.CharacterBaseInformations.Level == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -85,7 +85,7 @@ namespace BlueSheep.Core.Path
                     switch (m_operateur)
                     {
                         case '=':
-                            if ((account.CharacterStats.energyPoints <= 0) == Convert.ToBoolean(m_delta))
+                            if ((account.CharacterStats.EnergyPoints <= 0) == Convert.ToBoolean(m_delta))
                                 return true;
                             else
                                 return false;

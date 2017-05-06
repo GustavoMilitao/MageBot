@@ -1,6 +1,7 @@
 ﻿using BlueSheep.Common.Data;
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.Protocol.Types;
+using BlueSheep.Common.Protocol.Types.Game.Interactive;
 using System;
 using System.Collections.Generic;
 using System.Linq;

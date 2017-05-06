@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
+namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class FocusedExchangeReadyMessage : ExchangeReadyMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class FocusedExchangeReadyMessage : ExchangeReadyMessage 
     {
         
-        public const int ProtocolId = 6701;
+        public new const int ID = 6701;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -55,7 +57,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarUhInt(m_focusActionId);
+            writer.WriteVarInt(m_focusActionId);
         }
         
         public override void Deserialize(IDataReader reader)

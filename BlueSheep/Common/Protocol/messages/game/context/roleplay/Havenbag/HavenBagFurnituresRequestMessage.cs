@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Havenbag
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Havenbag
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class HavenBagFurnituresRequestMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class HavenBagFurnituresRequestMessage : Message 
     {
         
-        public const int ProtocolId = 6637;
+        public new const int ID = 6637;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -88,7 +90,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Havenbag
             int cellIdsIndex;
             for (cellIdsIndex = 0; (cellIdsIndex < m_cellIds.Count); cellIdsIndex = (cellIdsIndex + 1))
             {
-                writer.WriteVarUhShort(m_cellIds[cellIdsIndex]);
+                writer.WriteVarShort(m_cellIds[cellIdsIndex]);
             }
             writer.WriteShort(((short)(m_funitureIds.Count)));
             int funitureIdsIndex;

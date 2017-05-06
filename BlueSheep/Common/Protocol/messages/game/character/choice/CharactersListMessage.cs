@@ -1,55 +1,31 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:23
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+﻿namespace BlueSheep.Common.Protocol.Messages.Game.Character.Choice
 {
-    public class CharactersListMessage : BasicCharactersListMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class CharactersListMessage : BasicCharactersListMessage 
     {
-        public new const uint ID =151;
-        public override uint ProtocolID
+        public new const int ID = 151;
+        public override int MessageID { get { return ID; } }
+
+        public bool HasStartupActions;
+
+        public CharactersListMessage() { }
+
+        public CharactersListMessage(bool hasStartupActions)
         {
-            get { return ID; }
+            HasStartupActions = hasStartupActions;
         }
-        
-        public bool hasStartupActions;
-        
-        public CharactersListMessage()
-        {
-        }
-        
-        public CharactersListMessage(Types.CharacterBaseInformations[] characters, bool hasStartupActions)
-         : base(characters)
-        {
-            this.hasStartupActions = hasStartupActions;
-        }
-        
-        public override void Serialize(BigEndianWriter writer)
+
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteBoolean(hasStartupActions);
+            writer.WriteBoolean(HasStartupActions);
         }
-        
-        public override void Deserialize(BigEndianReader reader)
+
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
-            hasStartupActions = reader.ReadBoolean();
+            HasStartupActions = reader.ReadBoolean();
         }
-        
     }
-    
 }

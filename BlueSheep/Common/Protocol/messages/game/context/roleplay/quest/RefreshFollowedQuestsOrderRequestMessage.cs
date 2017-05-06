@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Quest
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Quest
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class RefreshFollowedQuestsOrderRequestMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class RefreshFollowedQuestsOrderRequestMessage : Message 
     {
         
-        public const int ProtocolId = 6722;
+        public new const int ID = 6722;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -58,7 +60,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Quest
             int questsIndex;
             for (questsIndex = 0; (questsIndex < m_quests.Count); questsIndex = (questsIndex + 1))
             {
-                writer.WriteVarUhShort(m_quests[questsIndex]);
+                writer.WriteVarShort(m_quests[questsIndex]);
             }
         }
         

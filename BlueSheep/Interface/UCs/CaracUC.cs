@@ -10,6 +10,7 @@ using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Interface.Text;
 using BlueSheep.Common.Data.D2o;
 using System.Collections;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Stats;
 
 namespace BlueSheep.Interface.UCs
 {
@@ -33,15 +34,15 @@ namespace BlueSheep.Interface.UCs
         #region Public Methods
         public void Init()
         {
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.vitality.@base + account.CharacterStats.vitality.additionnal + account.CharacterStats.vitality.objectsAndMountBonus), VitaLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.wisdom.@base + account.CharacterStats.wisdom.additionnal + account.CharacterStats.wisdom.objectsAndMountBonus), WisdomLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.strength.@base + account.CharacterStats.strength.additionnal + account.CharacterStats.strength.objectsAndMountBonus), StreLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.intelligence.@base + account.CharacterStats.intelligence.additionnal + account.CharacterStats.intelligence.objectsAndMountBonus), InteLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.chance.@base + account.CharacterStats.chance.additionnal + account.CharacterStats.chance.objectsAndMountBonus), LuckLb);
-            Invoke(new DelegLabel(ModLabel),  Convert.ToString(account.CharacterStats.agility.@base + account.CharacterStats.agility.additionnal + account.CharacterStats.agility.objectsAndMountBonus), AgiLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.actionPoints.@base + account.CharacterStats.actionPoints.additionnal + account.CharacterStats.actionPoints.objectsAndMountBonus), APLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.movementPoints.@base + account.CharacterStats.movementPoints.additionnal + account.CharacterStats.movementPoints.objectsAndMountBonus),MpLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.statsPoints), AvailabPtLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.Vitality.Base + account.CharacterStats.Vitality.Additionnal + account.CharacterStats.Vitality.ObjectsAndMountBonus), VitaLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.Wisdom.Base + account.CharacterStats.Wisdom.Additionnal + account.CharacterStats.Wisdom.ObjectsAndMountBonus), WisdomLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.Strength.Base + account.CharacterStats.Strength.Additionnal + account.CharacterStats.Strength.ObjectsAndMountBonus), StreLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.Intelligence.Base + account.CharacterStats.Intelligence.Additionnal + account.CharacterStats.Intelligence.ObjectsAndMountBonus), InteLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.Chance.Base + account.CharacterStats.Chance.Additionnal + account.CharacterStats.Chance.ObjectsAndMountBonus), LuckLb);
+            Invoke(new DelegLabel(ModLabel),  Convert.ToString(account.CharacterStats.Agility.Base + account.CharacterStats.Agility.Additionnal + account.CharacterStats.Agility.ObjectsAndMountBonus), AgiLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.ActionPoints.Base + account.CharacterStats.ActionPoints.Additionnal + account.CharacterStats.ActionPoints.ObjectsAndMountBonus), APLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.MovementPoints.Base + account.CharacterStats.MovementPoints.Additionnal + account.CharacterStats.MovementPoints.ObjectsAndMountBonus),MpLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.StatsPoints), AvailabPtLb);
             //GetBoost(10);
         }
 
@@ -128,7 +129,7 @@ namespace BlueSheep.Interface.UCs
         #region Private Methods
         private void UpStat(int statId, int boost)
         {
-            StatsUpgradeRequestMessage msg = new StatsUpgradeRequestMessage(false, (sbyte)statId, (int)boost);
+            StatsUpgradeRequestMessage msg = new StatsUpgradeRequestMessage(false, (byte)statId, (ushort)boost);
             account.SocketManager.Send(msg);          
         }
 
@@ -139,7 +140,7 @@ namespace BlueSheep.Interface.UCs
 
         public int GetBoost(int statId)
         {
-            DataClass d = GameData.GetDataObject(D2oFileEnum.Breeds, (int)account.CharacterBaseInformations.breed);
+            DataClass d = GameData.GetDataObject(D2oFileEnum.Breeds, (int)account.CharacterBaseInformations.Breed);
             switch (statId)
             {
                 case 10:

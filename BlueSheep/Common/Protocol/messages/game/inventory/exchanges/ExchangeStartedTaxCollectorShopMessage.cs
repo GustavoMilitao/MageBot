@@ -8,27 +8,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
+namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using DofusBot.Protocol.Network.Types.Game.Data.Items;
+    using BlueSheep.Common.Protocol.Types.Game.Data.Items;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
     
     
-    using DofusBot.Protocol;
+    using BlueSheep.Protocol;
     
     
-    public class ExchangeStartedTaxCollectorShopMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class ExchangeStartedTaxCollectorShopMessage : Message 
     {
         
-        public const int ProtocolId = 6664;
+        public new const int ID = 6664;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -79,7 +81,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
                 ObjectItem objectToSend = m_objects[objectsIndex];
                 objectToSend.Serialize(writer);
             }
-            writer.WriteVarUhLong(m_kamas);
+            writer.WriteVarLong(m_kamas);
         }
         
         public override void Deserialize(IDataReader reader)

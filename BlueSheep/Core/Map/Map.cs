@@ -1,6 +1,10 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Context;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay;
+using BlueSheep.Common.Protocol.Messages.Game.Interactive;
+using BlueSheep.Common.Protocol.Messages.Game.Interactive.Zaap;
 using BlueSheep.Core.Fight;
 using BlueSheep.Core.Map.Elements;
 using BlueSheep.Data.D2p.Elements;
@@ -67,7 +71,7 @@ namespace BlueSheep.Core.Map
 
             if ((num2 != -1) && (neighbourId >= 0))
             {
-                int cellId = m_Account.MapData.Character.disposition.cellId;
+                int cellId = m_Account.MapData.Character.Disposition.CellId;
                 if ((m_Account.MapData.Data.Cells[cellId].MapChangeData & num2) > 0)
                 {
                     LaunchChangeMap(neighbourId);
@@ -101,11 +105,11 @@ namespace BlueSheep.Core.Map
             if (m_Account.state == Engine.Enums.Status.Fighting)
                 return false;
             m_Account.SetStatus(Status.Moving);
-            MovementPath path = (new Pathfinder(m_Account.MapData)).FindPath(m_Account.MapData.Character.disposition.cellId, cellId);
+            MovementPath path = (new Pathfinder(m_Account.MapData)).FindPath(m_Account.MapData.Character.Disposition.CellId, cellId);
             if (path == null)
                 return false;
             List<UInt32> serverMovement = MapMovementAdapter.GetServerMovement(path);
-            if(serverMovement[serverMovement.Count -1] == m_Account.MapData.Character.disposition.cellId)
+            if(serverMovement[serverMovement.Count -1] == m_Account.MapData.Character.Disposition.CellId)
             {
                 Moving = false;
                 ConfirmMove();
@@ -121,11 +125,11 @@ namespace BlueSheep.Core.Map
             m_time = timetowait;
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select<uint, int>(ui => (int)ui).ToArray(), m_Account.MapData.Id);
+                GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select(ui => (short)ui).ToList(), m_Account.MapData.Id);
                 msg.Serialize(writer);
                 writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.ProtocolID);
+                pack.Pack((int)msg.MessageID);
                 m_Account.SocketManager.Send(pack.Writer.Content);
                 Moving = true;
                 if (m_Account.DebugMode.Checked)
@@ -223,11 +227,11 @@ namespace BlueSheep.Core.Map
         {
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                InteractiveUseRequestMessage msg = new InteractiveUseRequestMessage(id, skillId);
+                InteractiveUseRequestMessage msg = new InteractiveUseRequestMessage((uint)id, (uint)skillId);
                 msg.Serialize(writer);
                 writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.ProtocolID);
+                pack.Pack((int)msg.MessageID);
                 m_Account.SocketManager.Send(pack.Writer.Content);
             }
             if (m_Account.DebugMode.Checked)
@@ -237,7 +241,7 @@ namespace BlueSheep.Core.Map
         public void UseElement(int id)
         {
             InteractiveElement e = m_Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.Id == id);
-            UseElement(id, e.EnabledSkills[0].skillInstanceUid);
+            UseElement(id, e.EnabledSkills[0].SkillInstanceUid);
             m_elemId = -1;
         }
 
@@ -245,7 +249,7 @@ namespace BlueSheep.Core.Map
         {
             MovementPath path = null;
             int savDistance = -1;
-            MapPoint characterPoint = new MapPoint(m_Account.MapData.Character.disposition.cellId);
+            MapPoint characterPoint = new MapPoint(m_Account.MapData.Character.Disposition.CellId);
             MapPoint targetPoint = new MapPoint(cellId);
             foreach (MapPoint point in m_Account.MapData.GetListPointAtGoodDistance(characterPoint, targetPoint, maxDistance))
             {
@@ -265,7 +269,7 @@ namespace BlueSheep.Core.Map
                     continue;
             Label_00A8:
                 pathFinding = new Pathfinder(m_Account.MapData);
-            MovementPath path2 = pathFinding.FindPath(m_Account.MapData.Character.disposition.cellId, point.CellId);
+            MovementPath path2 = pathFinding.FindPath(m_Account.MapData.Character.Disposition.CellId, point.CellId);
                 if (path2 != null)
                 {
                     path = path2;
@@ -275,7 +279,7 @@ namespace BlueSheep.Core.Map
             if (path == null)
                 return false;
             List<UInt32> serverMovement = MapMovementAdapter.GetServerMovement(path);
-            if (serverMovement[serverMovement.Count - 1] == m_Account.MapData.Character.disposition.cellId)
+            if (serverMovement[serverMovement.Count - 1] == m_Account.MapData.Character.Disposition.CellId)
             {
                 Moving = false;
                 ConfirmMove();
@@ -291,11 +295,11 @@ namespace BlueSheep.Core.Map
             m_time = timetowait;
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select<uint, int>(ui => (int)ui).ToArray(), m_Account.MapData.Id);
+                GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select(ui => (short)ui).ToList(), m_Account.MapData.Id);
                 msg.Serialize(writer);
                 writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.ProtocolID);
+                pack.Pack((int)msg.MessageID);
                 m_Account.SocketManager.Send(pack.Writer.Content);
                 m_Account.SetStatus(Status.Moving);
                 Moving = true;
@@ -326,7 +330,7 @@ namespace BlueSheep.Core.Map
                 {
                     UseElement(m_elemId);
                 }
-                if (m_Account.Fight != null && m_Account.FightData.IsFollowingGroup && m_Account.FightData.followingGroup.m_cellId == m_Account.MapData.Character.disposition.cellId)
+                if (m_Account.Fight != null && m_Account.FightData.IsFollowingGroup && m_Account.FightData.followingGroup.m_cellId == m_Account.MapData.Character.Disposition.CellId)
                 {
                     m_Account.Fight.LaunchFight((int)m_Account.FightData.followingGroup.m_contextualId);
                 }
@@ -372,7 +376,7 @@ namespace BlueSheep.Core.Map
             if (e != null)
             {
                 MoveToSecureElement((int)e.Id);
-                UseElement((int)e.Id, e.EnabledSkills[0].skillInstanceUid);
+                UseElement((int)e.Id, e.EnabledSkills[0].SkillInstanceUid);
                 m_Account.Wait(500, 1000);
                 TeleportRequestMessage msg = new TeleportRequestMessage(1, mapid);
                 m_Account.SocketManager.Send(msg);
@@ -386,7 +390,7 @@ namespace BlueSheep.Core.Map
             if (e != null)
             {
                 MoveToSecureElement((int)e.Id);
-                UseElement((int)e.Id, e.EnabledSkills[0].skillInstanceUid);
+                UseElement((int)e.Id, e.EnabledSkills[0].SkillInstanceUid);
                 m_Account.Wait(500, 1000);
                 TeleportRequestMessage msg = new TeleportRequestMessage(0, mapid);
                 m_Account.SocketManager.Send(msg);

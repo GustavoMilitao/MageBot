@@ -1,6 +1,8 @@
 ﻿using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Interactive;
 using BlueSheep.Common.Protocol.Types;
+using BlueSheep.Common.Protocol.Types.Game.Interactive;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 
@@ -13,19 +15,19 @@ namespace BlueSheep.Core.Storage
         {
             int skillUID = 0;
 
-            foreach (InteractiveElementSkill skill in account.Safe.enabledSkills)
+            foreach (InteractiveElementSkill skill in account.Safe.EnabledSkills)
             {
-                if (skill.skillId == 104)
+                if (skill.SkillId == 104)
                 {
-                    skillUID = skill.skillInstanceUid;
+                    skillUID = skill.SkillInstanceUid;
 
                     break;
                 }
             }
 
             InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(
-                account.Safe.elementId,
-                skillUID);
+                (uint)account.Safe.ElementId,
+                (uint)skillUID);
 
             using (BigEndianWriter writer = new BigEndianWriter())
             {
@@ -33,7 +35,7 @@ namespace BlueSheep.Core.Storage
                 writer.Content = account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging messagePackaging = new MessagePackaging(writer);
 
-                messagePackaging.Pack((int)interactiveUseRequestMessage.ProtocolID);
+                messagePackaging.Pack((int)interactiveUseRequestMessage.MessageID);
 
                 account.SocketManager.Send(messagePackaging.Writer.Content);
                 account.LastPacketID.Clear();

@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Basic
+namespace BlueSheep.Common.Protocol.Messages.Game.Basic
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class BasicSetAwayModeRequestMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class BasicSetAwayModeRequestMessage : Message 
     {
         
-        public const int ProtocolId = 5665;
+        public new const int ID = 5665;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

@@ -1,65 +1,20 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:12
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
-
-namespace BlueSheep.Common.Protocol.Types
+﻿namespace BlueSheep.Common.Protocol.Types.Game.Social
 {
-
     public class AbstractSocialGroupInfos
     {
-
         public new const int ID = 416;
-        public virtual int TypeId
+        public virtual int TypeID { get { return ID; } }
+
+        public AbstractSocialGroupInfos() { }
+
+        public virtual void Serialize(IDataWriter writer)
         {
-            get { return ID; }
+            //
         }
 
-
-
-        public AbstractSocialGroupInfos()
+        public virtual void Deserialize(IDataReader reader)
         {
+            //
         }
-
-
-
-        public virtual void Serialize(BigEndianWriter writer)
-        {
-
-
-
-        }
-
-        public virtual void Deserialize(BigEndianReader reader)
-        {
-
-
-
-        }
-
-
     }
-
-
 }

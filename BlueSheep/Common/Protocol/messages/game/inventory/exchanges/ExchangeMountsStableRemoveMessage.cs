@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
+namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class ExchangeMountsStableRemoveMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class ExchangeMountsStableRemoveMessage : Message 
     {
         
-        public const int ProtocolId = 6556;
+        public new const int ID = 6556;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

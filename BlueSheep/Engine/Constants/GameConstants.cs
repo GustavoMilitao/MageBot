@@ -16,7 +16,7 @@
         public const bool AutoConnect = true;
         public const bool UseCertificate = false;
         public const bool UseLoginToken = false;
-        public const double SessionOptionalSalt = 0;
+        public const long SessionOptionalSalt = 0;
         #endregion
     }
 }

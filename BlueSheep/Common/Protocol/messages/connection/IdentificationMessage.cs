@@ -1,107 +1,88 @@
+﻿using System;
 
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:14
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    public class IdentificationMessage : Message
+    using BlueSheep.Engine.Types;
+
+ 	 public class IdentificationMessage : Message 
     {
-        public new const uint ID =4;
-        public override uint ProtocolID
+        public new const int ID = 4;
+        public override int MessageID { get { return ID; } }
+
+        public bool Autoconnect { get; set; }
+        public bool UseCertificate { get; set; }
+        public bool UseLoginToken { get; set; }
+        public Types.VersionExtended Version { get; set; }
+        public string Lang { get; set; }
+        public sbyte[] Credentials { get; set; }
+        public short ServerId { get; set; }
+        public long SessionOptionalSalt { get; set; }
+        public ushort[] FailedAttempts { get; set; }
+
+        public IdentificationMessage() { }
+
+        public IdentificationMessage(bool autoconnect, bool useCertificate, bool useLoginToken, Types.VersionExtended version, string lang, sbyte[] credentials, short serverId, long sessionOptionalSalt, ushort[] failedAttempts)
         {
-            get { return ID; }
+            Autoconnect = autoconnect;
+            UseCertificate = useCertificate;
+            UseLoginToken = useLoginToken;
+            Version = version;
+            Lang = lang;
+            Credentials = credentials;
+            ServerId = serverId;
+            SessionOptionalSalt = sessionOptionalSalt;
+            FailedAttempts = failedAttempts;
         }
-        
-        public bool autoconnect;
-        public bool useCertificate;
-        public bool useLoginToken;
-        public Types.VersionExtended version;
-        public string lang;
-        public sbyte[] credentials;
-        public int serverId;
-        public double sessionOptionalSalt;
-        public List<int> failedAttempts;
-        
-        public IdentificationMessage()
-        {
-        }
-        
-        public IdentificationMessage(bool autoconnect, bool useCertificate, bool useLoginToken, Types.VersionExtended version, string lang, sbyte[] credentials, int serverId, double sessionOptionalSalt, List<int> failedAttempts)
-        {
-            this.autoconnect = autoconnect;
-            this.useCertificate = useCertificate;
-            this.useLoginToken = useLoginToken;
-            this.version = version;
-            this.lang = lang;
-            this.credentials = credentials;
-            this.serverId = serverId;
-            this.sessionOptionalSalt = sessionOptionalSalt;
-            this.failedAttempts = failedAttempts;
-        }
-        
-        public override void Serialize(BigEndianWriter writer)
+
+        public override void Serialize(IDataWriter writer)
         {
             byte flag1 = 0;
-            flag1 = BooleanByteWrapper.SetFlag(flag1, 0, autoconnect);
-            flag1 = BooleanByteWrapper.SetFlag(flag1, 1, useCertificate);
-            flag1 = BooleanByteWrapper.SetFlag(flag1, 2, useLoginToken);
+            flag1 = BooleanByteWrapper.SetFlag(flag1, 0, Autoconnect);
+            flag1 = BooleanByteWrapper.SetFlag(flag1, 1, UseCertificate);
+            flag1 = BooleanByteWrapper.SetFlag(flag1, 2, UseLoginToken);
             writer.WriteByte(flag1);
-            version.Serialize(writer);
-            writer.WriteUTF(lang);
-            writer.WriteVarInt(credentials.Length);
-            foreach (var entry in credentials)
+            Version.Serialize(writer);
+            writer.WriteUTF(Lang);
+            writer.WriteVarInt(Credentials.Length);
+            foreach (var entry in Credentials)
             {
-                 writer.WriteSByte(entry);
+                writer.WriteSByte(entry);
             }
-            writer.WriteShort((short)serverId);
-            writer.WriteDouble(sessionOptionalSalt);
-            writer.WriteShort((short)(int)failedAttempts.Count);
-            foreach (int s in failedAttempts)
-                writer.WriteShort((short)s);
+            writer.WriteShort(ServerId);
+            writer.WriteVarLong(SessionOptionalSalt);
+            writer.WriteShort((short)FailedAttempts.Length);
+            foreach (var entry in FailedAttempts)
+            {
+                writer.WriteVarShort(entry);
+            }
         }
-        
-        public override void Deserialize(BigEndianReader reader)
+
+        public override void Deserialize(IDataReader reader)
         {
             byte flag1 = reader.ReadByte();
-            autoconnect = BooleanByteWrapper.GetFlag(flag1, 0);
-            useCertificate = BooleanByteWrapper.GetFlag(flag1, 1);
-            useLoginToken = BooleanByteWrapper.GetFlag(flag1, 2);
-            version = new Types.VersionExtended();
-            version.Deserialize(reader);
-            lang = reader.ReadUTF();
+            Autoconnect = BooleanByteWrapper.GetFlag(flag1, 0);
+            UseCertificate = BooleanByteWrapper.GetFlag(flag1, 1);
+            UseLoginToken = BooleanByteWrapper.GetFlag(flag1, 2);
+            Version = new Types.VersionExtended();
+            Version.Deserialize(reader);
+            Lang = reader.ReadUTF();
             var limit = reader.ReadVarInt();
-            credentials = new sbyte[limit];
+            Credentials = new sbyte[limit];
             for (int i = 0; i < limit; i++)
             {
-                 credentials[i] = reader.ReadSByte();
+                Credentials[i] = reader.ReadSByte();
             }
-            serverId = reader.ReadShort();
-            sessionOptionalSalt = reader.ReadDouble();
-            if (sessionOptionalSalt < -9.007199254740992E15 || sessionOptionalSalt > 9.007199254740992E15)
-                throw new Exception("Forbidden value on sessionOptionalSalt = " + sessionOptionalSalt + ", it doesn't respect the following condition : sessionOptionalSalt < -9.007199254740992E15 || sessionOptionalSalt > 9.007199254740992E15");
-            int length = reader.ReadUShort();
-            failedAttempts = new List<int>();
-            for (int i = 0; i < length; i++)
+            ServerId = reader.ReadShort();
+            SessionOptionalSalt = reader.ReadVarLong();
+            if (SessionOptionalSalt < -9007199254740990 || SessionOptionalSalt > 9007199254740990)
+                throw new Exception("Forbidden value on SessionOptionalSalt = " + SessionOptionalSalt + ", it doesn't respect the following condition : sessionOptionalSalt < -9007199254740990 || sessionOptionalSalt > 9007199254740990");
+            limit = reader.ReadUShort();
+            FailedAttempts = new ushort[limit];
+            for (int i = 0; i < limit; i++)
             {
-                failedAttempts.Add(reader.ReadVarUhShort());
+                FailedAttempts[i] = reader.ReadVarUhShort();
             }
-
         }
-        
+
     }
-    
 }

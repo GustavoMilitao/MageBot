@@ -9,6 +9,15 @@ using BlueSheep.Interface.Text;
 using System;
 using System.Collections.Generic;
 using BlueSheep.Common.Data.D2o;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Items;
+using BlueSheep.Common.Protocol.Types.Game.Data.Items;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Storage;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
+using BlueSheep.Common.Protocol.Messages.Game.Chat.Channel;
+using BlueSheep.Common.Protocol.Messages.Game.Context;
+using BlueSheep.Common.Protocol.Messages.Security;
+using BlueSheep.Common.Protocol.Messages.Game.Friend;
+
 namespace BlueSheep.Engine.Handlers.Inventory
 {
     class InventoryHandler
@@ -22,9 +31,9 @@ namespace BlueSheep.Engine.Handlers.Inventory
             {
                 inventoryContentMessage.Deserialize(reader);
             }
-            foreach (ObjectItem item in inventoryContentMessage.objects)
+            foreach (ObjectItem item in inventoryContentMessage.Objects)
             {
-                Core.Inventory.Item i = new Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, item.Quantity, item.ObjectUID, account);
+                Core.Inventory.Item i = new Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID, account);
                 account.Inventory.Items.Add(i);
             }
             account.ActualizeInventory();
@@ -68,7 +77,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 account.SocketManager.Send(clientKeyMessage);
                 GameContextCreateRequestMessage gameContextCreateRequestMessage = new GameContextCreateRequestMessage();
                 account.SocketManager.Send(gameContextCreateRequestMessage);
-                ChannelEnablingMessage channelEnablingMessage = new ChannelEnablingMessage((sbyte)7, false);
+                ChannelEnablingMessage channelEnablingMessage = new ChannelEnablingMessage(7, false);
                 account.SocketManager.Send(channelEnablingMessage);
             }
         }
@@ -80,9 +89,9 @@ namespace BlueSheep.Engine.Handlers.Inventory
             {
                 msg.Deserialize(reader);
             }
-            foreach (ObjectItem item in msg.objects)
+            foreach (ObjectItem item in msg.Objects)
             {
-                Core.Inventory.Item i = new Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, item.Quantity, item.ObjectUID, account);
+                Core.Inventory.Item i = new Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID, account);
                 account.Inventory.Items.Add(i);
             }
             account.ActualizeInventory();
@@ -126,7 +135,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 account.SocketManager.Send(clientKeyMessage);
                 GameContextCreateRequestMessage gameContextCreateRequestMessage = new GameContextCreateRequestMessage();
                 account.SocketManager.Send(gameContextCreateRequestMessage);
-                ChannelEnablingMessage channelEnablingMessage = new ChannelEnablingMessage((sbyte)7, false);
+                ChannelEnablingMessage channelEnablingMessage = new ChannelEnablingMessage(7, false);
                 account.SocketManager.Send(channelEnablingMessage);
             }
         }
@@ -141,13 +150,13 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
             for (int index = 0; index < account.Inventory.Items.Count; index++)
             {
-                if (account.Inventory.Items[index].UID == msg.@object.ObjectUID)
-                    account.Inventory.Items[index] = new Core.Inventory.Item(msg.@object.Effects.ToList(), msg.@object.ObjectGID, msg.@object.Position, msg.@object.Quantity, msg.@object.ObjectUID, account);
+                if (account.Inventory.Items[index].UID == msg.Object.ObjectUID)
+                    account.Inventory.Items[index] = new Core.Inventory.Item(msg.Object.Effects, msg.Object.ObjectGID, msg.Object.Position, (int)msg.Object.Quantity, (int)msg.Object.ObjectUID, account);
             }
-            DataClass ItemData = GameData.GetDataObject(D2oFileEnum.Items, msg.@object.ObjectGID);
+            DataClass ItemData = GameData.GetDataObject(D2oFileEnum.Items, msg.Object.ObjectGID);
             if ((int)ItemData.Fields["typeId"] == 18)
             {
-                Pet pet = new Pet(new Core.Inventory.Item(msg.@object.Effects.ToList(), msg.@object.ObjectGID, msg.@object.Position, msg.@object.Quantity, msg.@object.ObjectUID, account), ItemData, account);
+                Pet pet = new Pet(new Core.Inventory.Item(msg.Object.Effects.ToList(), msg.Object.ObjectGID, msg.Object.Position, (int)msg.Object.Quantity, (int)msg.Object.ObjectUID, account), ItemData, account);
                 if (account.PetsModifiedList == null)
                     account.PetsModifiedList = new List<Pet>();
                 account.PetsModifiedList.Add(pet);
@@ -165,9 +174,9 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
             for (int index = 0; index < account.Inventory.Items.Count; index++)
             {
-                if (account.Inventory.Items[index].UID == msg.objectUID)
+                if (account.Inventory.Items[index].UID == msg.ObjectUID)
                 {
-                    account.Inventory.Items[index].Quantity = msg.quantity;
+                    account.Inventory.Items[index].Quantity = (int)msg.Quantity;
                     account.ActualizeInventory();
                 }
             }
@@ -194,7 +203,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             {
                 storageInventoryContentMessage.Deserialize(reader);
             }
-            foreach (ObjectItem item in storageInventoryContentMessage.@objects)
+            foreach (ObjectItem item in storageInventoryContentMessage.Objects)
                 account.SafeItems.Add(item);
         }
 
@@ -206,14 +215,14 @@ namespace BlueSheep.Engine.Handlers.Inventory
             {
                 msg.Deserialize(reader);
             }
-            int Percent = ((msg.weight / msg.weightMax) * 100);
-            string text = Convert.ToString(msg.weight) + "/" + Convert.ToString(msg.weightMax) + "(" + Percent + "% )";
-            int w = Convert.ToInt32(msg.weight);
-            int wmax = Convert.ToInt32(msg.weightMax);
+            int Percent = (((int)msg.Weight / (int)msg.WeightMax) * 100);
+            string text = Convert.ToString(msg.Weight) + "/" + Convert.ToString((int)msg.WeightMax) + "(" + Percent + "% )";
+            int w = Convert.ToInt32(msg.Weight);
+            int wmax = Convert.ToInt32(msg.WeightMax);
             account.ModifBar(3, wmax, w, "Pods");
-            account.Pods = new Pods(msg.weight, msg.weightMax);
-            account.Inventory.weight = msg.weight;
-            account.Inventory.maxWeight = msg.weightMax;
+            account.Pods = new Pods((int)msg.Weight, (int)msg.WeightMax);
+            account.Inventory.weight = (int)msg.Weight;
+            account.Inventory.maxWeight = (int)msg.WeightMax;
         }
 
         [MessageHandler(typeof(ObjectAddedMessage))]
@@ -224,8 +233,8 @@ namespace BlueSheep.Engine.Handlers.Inventory
             {
                 msg.Deserialize(reader);
             }
-            ObjectItem item = msg.@object;
-            Core.Inventory.Item i = new Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, item.Quantity, item.ObjectUID, account);
+            ObjectItem item = msg.Object;
+            Core.Inventory.Item i = new Core.Inventory.Item(item.Effects, item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID, account);
             account.Inventory.Items.Add(i);
             string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
             System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
@@ -258,7 +267,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
             for (int index = 0; index < account.Inventory.Items.Count; index++)
             {
-                if (account.Inventory.Items[index].UID == objectDeletedMessage.objectUID)
+                if (account.Inventory.Items[index].UID == objectDeletedMessage.ObjectUID)
                 {
                     account.Inventory.Items.RemoveAt(index);
                     break;
@@ -283,15 +292,15 @@ namespace BlueSheep.Engine.Handlers.Inventory
             for (int index = 0; index < account.SafeItems.Count; index++)
             {
                 if (account.SafeItems[index].ObjectUID ==
-                storageObjectUpdateMessage.@object.ObjectUID)
+                storageObjectUpdateMessage.Object.ObjectUID)
                 {
                     account.SafeItems[index].Quantity +=
-                    storageObjectUpdateMessage.@object.Quantity;
+                    storageObjectUpdateMessage.Object.Quantity;
                     exists = true;
                 }
             }
             if (!exists)
-                account.SafeItems.Add(storageObjectUpdateMessage.@object);
+                account.SafeItems.Add(storageObjectUpdateMessage.Object);
         }
         [MessageHandler(typeof(StorageObjectRemoveMessage))]
         public static void StorageObjectRemoveMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
@@ -304,7 +313,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             for (int index = 0; index < account.SafeItems.Count; index++)
             {
                 if (account.SafeItems[index].ObjectUID ==
-                storageObjectRemoveMessage.objectUID)
+                storageObjectRemoveMessage.ObjectUID)
                     account.SafeItems.RemoveAt(index);
             }
         }
@@ -323,7 +332,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             {
                 msg.Deserialize(reader);
             }
-            account.actualizeshop(msg.objectsInfos.ToList());
+            account.actualizeshop(msg.ObjectsInfos.ToList());
             if (account.NeedToAddItem())
             { account.addItemToShop(); }
         }

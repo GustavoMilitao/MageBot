@@ -1,127 +1,85 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:10
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
 
-
-namespace BlueSheep.Common.Protocol.Types
+namespace BlueSheep.Common.Protocol.Types.Game.Look
 {
-
-    public class EntityLook
+    public class EntityLook 
     {
-
         public new const int ID = 55;
-        public virtual int TypeId
+        public virtual int TypeID { get { return ID; } }
+
+        public ushort BonesId { get; set; }
+        public List<UInt16> Skins { get; set; }
+        public List<Int32> IndexedColors { get; set; }
+        public List<Int16> Scales { get; set; }
+        public List<SubEntity> SubEntities { get; set; }
+
+        public EntityLook() { }
+
+        public EntityLook(ushort bonesId, List<UInt16> skins, List<Int32> indexedColors, List<Int16> scales, List<SubEntity> subEntities)
         {
-            get { return ID; }
+            BonesId = bonesId;
+            Skins = skins;
+            IndexedColors = indexedColors;
+            Scales = scales;
+            SubEntities = subEntities;
         }
 
-        public int bonesId;
-        public int[] skins;
-        public int[] indexedColors;
-        public int[] scales;
-        public Types.SubEntity[] subentities;
-
-
-        public EntityLook()
+        public void Serialize(IDataWriter writer)
         {
+            writer.WriteVarShort(BonesId);
+            writer.WriteShort(((short)(Skins.Count)));
+            for (int i = 0; (i < Skins.Count); i++)
+            {
+                writer.WriteVarShort(Skins[i]);
+            }
+            writer.WriteShort(((short)(IndexedColors.Count)));
+            for (int i = 0; (i < IndexedColors.Count); i++)
+            {
+                writer.WriteInt(IndexedColors[i]);
+            }
+            writer.WriteShort(((short)(Scales.Count)));
+            for (int i = 0; (i < Scales.Count); i++)
+            {
+                writer.WriteVarShort(Scales[i]);
+            }
+            writer.WriteShort(((short)(SubEntities.Count)));
+            for (int i = 0; (i < SubEntities.Count); i++)
+            {
+                SubEntity objectToSend = SubEntities[i];
+                objectToSend.Serialize(writer);
+            }
         }
 
-        public EntityLook(int bonesId, int[] skins, int[] indexedColors, int[] scales, Types.SubEntity[] subentities)
+        public void Deserialize(IDataReader reader)
         {
-            this.bonesId = bonesId;
-            this.skins = skins;
-            this.indexedColors = indexedColors;
-            this.scales = scales;
-            this.subentities = subentities;
+            BonesId = reader.ReadVarUhShort();
+            ushort skinsLength = reader.ReadUShort();
+            Skins = new List<ushort>();
+            for (int i = 0; (i < skinsLength); i++)
+            {
+                Skins.Add(reader.ReadVarUhShort());
+            }
+            ushort indexLength = reader.ReadUShort();
+            IndexedColors = new List<int>();
+            for (int i = 0; (i < indexLength); i++)
+            {
+                IndexedColors.Add(reader.ReadInt());
+            }
+            ushort scalesLength = reader.ReadUShort();
+            Scales = new List<short>();
+            for (int i = 0; (i < scalesLength); i++)
+            {
+                Scales.Add(reader.ReadVarShort());
+            }
+            ushort entitiesLength = reader.ReadUShort();
+            SubEntities = new List<SubEntity>();
+            for (int i = 0; (i < entitiesLength); i++)
+            {
+                SubEntity objectToAdd = new SubEntity();
+                objectToAdd.Deserialize(reader);
+                SubEntities.Add(objectToAdd);
+            }
         }
-
-
-        public virtual void Serialize(BigEndianWriter writer)
-        {
-
-            writer.WriteVarShort((short)bonesId);
-            writer.WriteUShort((ushort)skins.Length);
-            foreach (var entry in skins)
-            {
-                writer.WriteVarShort((short)entry);
-            }
-            writer.WriteUShort((ushort)indexedColors.Length);
-            foreach (var entry in indexedColors)
-            {
-                writer.WriteInt(entry);
-            }
-            writer.WriteUShort((ushort)scales.Length);
-            foreach (var entry in scales)
-            {
-                writer.WriteVarShort((short)entry);
-            }
-            writer.WriteUShort((ushort)subentities.Length);
-            foreach (var entry in subentities)
-            {
-                entry.Serialize(writer);
-            }
-
-
-        }
-
-        public virtual void Deserialize(BigEndianReader reader)
-        {
-
-            bonesId = reader.ReadVarUhShort();
-            if (bonesId < 0)
-                throw new Exception("Forbidden value on bonesId = " + bonesId + ", it doesn't respect the following condition : bonesId < 0");
-            var limit = reader.ReadUShort();
-            skins = new int[limit];
-            for (int i = 0; i < limit; i++)
-            {
-                skins[i] = reader.ReadVarUhShort();
-            }
-            limit = reader.ReadUShort();
-            indexedColors = new int[limit];
-            for (int i = 0; i < limit; i++)
-            {
-                indexedColors[i] = reader.ReadInt();
-            }
-            limit = reader.ReadUShort();
-            scales = new int[limit];
-            for (int i = 0; i < limit; i++)
-            {
-                scales[i] = reader.ReadVarUhShort();
-            }
-            limit = reader.ReadUShort();
-            subentities = new Types.SubEntity[limit];
-            for (int i = 0; i < limit; i++)
-            {
-                subentities[i] = new Types.SubEntity();
-                subentities[i].Deserialize(reader);
-            }
-
-
-        }
-
-
     }
-
-
 }

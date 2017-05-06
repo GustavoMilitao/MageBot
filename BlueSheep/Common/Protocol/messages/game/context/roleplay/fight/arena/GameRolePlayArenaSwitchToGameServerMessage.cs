@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Fight.Arena
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class GameRolePlayArenaSwitchToGameServerMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class GameRolePlayArenaSwitchToGameServerMessage : Message 
     {
         
-        public const int ProtocolId = 6574;
+        public new const int ID = 6574;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Interface.Text;
 using BlueSheep.Core.Inventory;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Emote;
 
 namespace BlueSheep.Interface.UCs
 {
@@ -30,7 +31,7 @@ namespace BlueSheep.Interface.UCs
         #region Public Methods
         public void PulseRegen()
         {
-            if (((m_Account.CharacterStats.lifePoints / m_Account.CharacterStats.maxLifePoints) * 100) < m_Account.RegenChoice.Value)
+            if (((m_Account.CharacterStats.LifePoints / m_Account.CharacterStats.MaxLifePoints) * 100) < m_Account.RegenChoice.Value)
             {
                 m_Account.SetStatus(Status.Regenerating);
                 List<Item> items = GetRegenItems();
@@ -43,10 +44,10 @@ namespace BlueSheep.Interface.UCs
                         return;
                     }
                 }             
-                int maxLife = Convert.ToInt32(m_Account.CharacterStats.maxLifePoints);
-                int life = Convert.ToInt32(m_Account.CharacterStats.lifePoints);
+                int maxLife = Convert.ToInt32(m_Account.CharacterStats.MaxLifePoints);
+                int life = Convert.ToInt32(m_Account.CharacterStats.LifePoints);
                 int time = Convert.ToInt32(Math.Round(Convert.ToDecimal(maxLife - life) / 2));
-                BlueSheep.Common.Protocol.Messages.EmotePlayRequestMessage msg = new BlueSheep.Common.Protocol.Messages.EmotePlayRequestMessage(1);
+                EmotePlayRequestMessage msg = new EmotePlayRequestMessage(1);
                 m_Account.SocketManager.Send(msg);
                 m_Account.Log(new GeneralTextInformation(String.Format("Régénération pendant {0} secondes.", time)), 2);
                 m_Account.Wait(time * 1000, (time + 1) * 1000);

@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Spell
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Spell
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class SpellVariantActivationRequestMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class SpellVariantActivationRequestMessage : Message 
     {
         
-        public const int ProtocolId = 6707;
+        public new const int ID = 6707;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -54,7 +56,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Spell
         
         public override void Serialize(IDataWriter writer)
         {
-            writer.WriteVarUhShort(m_spellId);
+            writer.WriteVarShort(m_spellId);
         }
         
         public override void Deserialize(IDataReader reader)

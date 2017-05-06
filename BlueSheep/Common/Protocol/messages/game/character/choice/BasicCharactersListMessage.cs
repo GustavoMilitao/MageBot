@@ -1,64 +1,47 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:22
-using System;
+﻿using BlueSheep.Common.Protocol.Types.Game.Character.Choice;
 using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
 
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Game.Character.Choice
 {
-    public class BasicCharactersListMessage : Message
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Engine.Types;
+
+ 	 public class BasicCharactersListMessage : Message 
     {
-        public new const uint ID =6475;
-        public override uint ProtocolID
+        public new const int ID = 6475;
+        public override int MessageID { get { return ID; } }
+
+        public List<CharacterBaseInformations> Characters;
+
+        public BasicCharactersListMessage() { }
+
+        public BasicCharactersListMessage(List<CharacterBaseInformations> characters)
         {
-            get { return ID; }
+            Characters = characters;
         }
-        
-        public Types.CharacterBaseInformations[] characters;
-        
-        public BasicCharactersListMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
-        }
-        
-        public BasicCharactersListMessage(Types.CharacterBaseInformations[] characters)
-        {
-            this.characters = characters;
-        }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteUShort((ushort)characters.Length);
-            foreach (var entry in characters)
+            writer.WriteShort(((short)(Characters.Count)));
+            int charactersIndex;
+            for (charactersIndex = 0; (charactersIndex < Characters.Count); charactersIndex = (charactersIndex + 1))
             {
-                 writer.WriteShort((short)entry.TypeId);
-                 entry.Serialize(writer);
+                CharacterBaseInformations objectToSend = Characters[charactersIndex];
+                writer.WriteUShort(((ushort)(objectToSend.TypeID)));
+                objectToSend.Serialize(writer);
             }
         }
-        
-        public override void Deserialize(BigEndianReader reader)
+
+        public override void Deserialize(IDataReader reader)
         {
-            var limit = reader.ReadUShort();
-            characters = new Types.CharacterBaseInformations[limit];
-            for (int i = 0; i < limit; i++)
+            int charactersCount = reader.ReadUShort();
+            Characters = new List<CharacterBaseInformations>();
+            for (int i = 0; i < charactersCount; i++)
             {
-                var aux = (int)reader.ReadUShort();
-                 characters[i] = Types.ProtocolTypeManager.GetInstance<Types.CharacterBaseInformations>(aux);
-                 characters[i].Deserialize(reader);
+                CharacterBaseInformations objectToAdd = ProtocolTypeManager.GetInstance<CharacterBaseInformations>(reader.ReadUShort());
+                objectToAdd.Deserialize(reader);
+                Characters.Add(objectToAdd);
             }
         }
-        
     }
-    
 }

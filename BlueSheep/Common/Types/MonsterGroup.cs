@@ -1,5 +1,6 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.Protocol.Types;
+using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace BlueSheep.Common.Types
 {
     public class MonsterGroup
     {
-        public MonsterGroup(GroupMonsterStaticInformations staticInfos, int cellId, ulong contextualId)
+        public MonsterGroup(GroupMonsterStaticInformations staticInfos, int cellId, double contextualId)
         {
             m_staticInfos = staticInfos;
             m_cellId = cellId;
@@ -20,11 +21,11 @@ namespace BlueSheep.Common.Types
 
         public GroupMonsterStaticInformations m_staticInfos;
         public int m_cellId;
-        public ulong m_contextualId;
+        public double m_contextualId;
 
         public int monstersCount
         {
-            get { return m_staticInfos.underlings.Count() + 1; }
+            get { return m_staticInfos.Underlings.Count() + 1; }
         }
 
         public int monstersLevel
@@ -32,18 +33,18 @@ namespace BlueSheep.Common.Types
             get
             {
                 int monstersLevel = 0;
-                foreach (MonsterInGroupInformations monster in m_staticInfos.underlings)
+                foreach (MonsterInGroupInformations monster in m_staticInfos.Underlings)
                 {
-                    DataClass monsterData = GameData.GetDataObject(D2oFileEnum.Monsters, monster.creatureGenericId);
+                    DataClass monsterData = GameData.GetDataObject(D2oFileEnum.Monsters, monster.CreatureGenericId);
                     object monsterGrades = monsterData.Fields["grades"];
                     ArrayList monsterGrades2 = (ArrayList)monsterGrades;
-                    DataClass monsterGradeData = (DataClass)monsterGrades2[Convert.ToInt32(monster.grade) - 1];
+                    DataClass monsterGradeData = (DataClass)monsterGrades2[Convert.ToInt32(monster.Grade) - 1];
                     monstersLevel += Convert.ToInt32(monsterGradeData.Fields["level"]);
                 }
-                DataClass mainmonsterData = GameData.GetDataObject(D2oFileEnum.Monsters, m_staticInfos.mainCreatureLightInfos.creatureGenericId);
+                DataClass mainmonsterData = GameData.GetDataObject(D2oFileEnum.Monsters, m_staticInfos.MainCreatureLightInfos.CreatureGenericId);
                 object mainmonsterGrades = mainmonsterData.Fields["grades"];
                 ArrayList mainmonsterGrades2 = (ArrayList)mainmonsterGrades;
-                DataClass mainmonsterGradeData = (DataClass)mainmonsterGrades2[Convert.ToInt32(m_staticInfos.mainCreatureLightInfos.grade) - 1];
+                DataClass mainmonsterGradeData = (DataClass)mainmonsterGrades2[Convert.ToInt32(m_staticInfos.MainCreatureLightInfos.Grade) - 1];
                 monstersLevel += Convert.ToInt32(mainmonsterGradeData.Fields["level"]);
                 return monstersLevel;
             }
@@ -53,21 +54,21 @@ namespace BlueSheep.Common.Types
         {
             List<string> monstersname = new List<string>();
 
-            foreach (MonsterInGroupInformations monster in m_staticInfos.underlings)
+            foreach (MonsterInGroupInformations monster in m_staticInfos.Underlings)
             {
-                DataClass monsterData = GameData.GetDataObject(D2oFileEnum.Monsters, monster.creatureGenericId);
+                DataClass monsterData = GameData.GetDataObject(D2oFileEnum.Monsters, monster.CreatureGenericId);
                 object monsterGrades = monsterData.Fields["grades"];
                 ArrayList monsterGrades2 = (ArrayList)monsterGrades;
-                DataClass monsterGradeData = (DataClass)monsterGrades2[Convert.ToInt32(monster.grade) - 1];
+                DataClass monsterGradeData = (DataClass)monsterGrades2[Convert.ToInt32(monster.Grade) - 1];
                 if (withLevels)
                     monstersname.Add(BlueSheep.Common.Data.I18N.GetText((int)monsterData.Fields["nameId"]) + "(" + monsterGradeData.Fields["level"] + ")");
                 else
                     monstersname.Add(BlueSheep.Common.Data.I18N.GetText((int)monsterData.Fields["nameId"]));
             }
-            DataClass mainmonsterData = GameData.GetDataObject(D2oFileEnum.Monsters, m_staticInfos.mainCreatureLightInfos.creatureGenericId);
+            DataClass mainmonsterData = GameData.GetDataObject(D2oFileEnum.Monsters, m_staticInfos.MainCreatureLightInfos.CreatureGenericId);
             object mainmonsterGrades = mainmonsterData.Fields["grades"];
             ArrayList mainmonsterGrades2 = (ArrayList)mainmonsterGrades;
-            DataClass mainmonsterGradeData = (DataClass)mainmonsterGrades2[Convert.ToInt32(m_staticInfos.mainCreatureLightInfos.grade) - 1];
+            DataClass mainmonsterGradeData = (DataClass)mainmonsterGrades2[Convert.ToInt32(m_staticInfos.MainCreatureLightInfos.Grade) - 1];
             if (withLevels)
                 monstersname.Add(BlueSheep.Common.Data.I18N.GetText((int)mainmonsterData.Fields["nameId"]) + "(" + mainmonsterGradeData.Fields["level"] + ")");
             else
@@ -87,12 +88,12 @@ namespace BlueSheep.Common.Types
         {
             List<string> monstersname = new List<string>();
 
-            foreach (MonsterInGroupInformations monster in m_staticInfos.underlings)
+            foreach (MonsterInGroupInformations monster in m_staticInfos.Underlings)
             {
-                DataClass monsterData = GameData.GetDataObject(D2oFileEnum.Monsters, monster.creatureGenericId);
+                DataClass monsterData = GameData.GetDataObject(D2oFileEnum.Monsters, monster.CreatureGenericId);
                 monstersname.Add(BlueSheep.Common.Data.I18N.GetText((int)monsterData.Fields["nameId"]));
             }
-            DataClass mainmonsterData = GameData.GetDataObject(D2oFileEnum.Monsters, m_staticInfos.mainCreatureLightInfos.creatureGenericId);
+            DataClass mainmonsterData = GameData.GetDataObject(D2oFileEnum.Monsters, m_staticInfos.MainCreatureLightInfos.CreatureGenericId);
             monstersname.Add(BlueSheep.Common.Data.I18N.GetText((int)mainmonsterData.Fields["nameId"]));
             return monstersname;
         }

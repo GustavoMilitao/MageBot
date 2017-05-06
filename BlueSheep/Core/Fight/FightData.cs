@@ -1,6 +1,10 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Preset;
 using BlueSheep.Common.Protocol.Types;
+using BlueSheep.Common.Protocol.Types.Game.Actions.Fight;
+using BlueSheep.Common.Protocol.Types.Game.Character.Characteristic;
+using BlueSheep.Common.Protocol.Types.Game.Context.Fight;
 using BlueSheep.Common.Types;
 using BlueSheep.Core.Inventory;
 using BlueSheep.Data.Pathfinding;
@@ -53,7 +57,7 @@ namespace BlueSheep.Core.Fight
         #region Properties
         public BFighter Fighter
         {
-            get { return GetFighter(m_Account.CharacterBaseInformations.Id); }
+            get { return GetFighter((ulong)m_Account.CharacterBaseInformations.ObjectID); }
         }
 
         public int MonsterNumber
@@ -220,22 +224,22 @@ namespace BlueSheep.Core.Fight
             if (effect is FightTemporaryBoostStateEffect)
             {
                 FightTemporaryBoostStateEffect m_effect = (FightTemporaryBoostStateEffect)effect;
-                if (!IsDead && m_effect.targetId == Fighter.Id)
+                if (!IsDead && m_effect.TargetId == Fighter.Id)
                 {
-                    if (DurationByEffect.ContainsKey(m_effect.stateId))
-                        DurationByEffect.Remove(m_effect.stateId);
-                    DurationByEffect.Add(m_effect.stateId, effect.turnDuration);
+                    if (DurationByEffect.ContainsKey(m_effect.StateId))
+                        DurationByEffect.Remove(m_effect.StateId);
+                    DurationByEffect.Add(m_effect.StateId, effect.TurnDuration);
                 }
             }
             else if (effect is FightTemporaryBoostEffect)
             {
                 FightTemporaryBoostEffect m_effect = (FightTemporaryBoostEffect)effect;
                 if (actionId == 168)
-                    Fighter.ActionPoints -= m_effect.delta;
+                    Fighter.ActionPoints -= m_effect.Delta;
                 else if (actionId == 169)
-                    Fighter.MovementPoints -= m_effect.delta;
-                else if (!IsDead && actionId == 116 && m_effect.targetId == Fighter.Id)
-                    m_Account.CharacterStats.range.contextModif -= m_effect.delta;
+                    Fighter.MovementPoints -= m_effect.Delta;
+                else if (!IsDead && actionId == 116 && m_effect.TargetId == Fighter.Id)
+                    m_Account.CharacterStats.Range.ContextModif -= m_effect.Delta;
 
             }
         }
@@ -359,14 +363,14 @@ namespace BlueSheep.Core.Fight
             if (informations is GameFightMonsterInformations)
             {
                 GameFightMonsterInformations infos = (GameFightMonsterInformations)informations;
-                Fighters.Add(new BFighter(informations.contextualId, informations.disposition.cellId, informations.stats.actionPoints, informations.stats, informations.alive, informations.stats.lifePoints, informations.stats.maxLifePoints, informations.stats.movementPoints, (uint)informations.teamId, infos.creatureGenericId));
+                Fighters.Add(new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, (uint)informations.TeamId, infos.CreatureGenericId));
             }
             else
             {
-                Fighters.Add(new BFighter(informations.contextualId, informations.disposition.cellId, informations.stats.actionPoints, informations.stats, informations.alive, informations.stats.lifePoints, informations.stats.maxLifePoints, informations.stats.movementPoints, (uint)informations.teamId, 0));
+                Fighters.Add(new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, (uint)informations.TeamId, 0));
             }
             if (Fighter != null)
-                Fighter.Name = m_Account.CharacterBaseInformations.name;
+                Fighter.Name = m_Account.CharacterBaseInformations.Name;
         }
 
         /// <summary>
@@ -398,7 +402,7 @@ namespace BlueSheep.Core.Fight
             if (m_Account.WithItemSetBox.Checked == true)
             {
                 sbyte id = (sbyte)m_Account.PresetEndUpD.Value;
-                InventoryPresetUseMessage msg2 = new InventoryPresetUseMessage((sbyte)(id - 1));
+                InventoryPresetUseMessage msg2 = new InventoryPresetUseMessage((byte)(id - 1));
                 m_Account.SocketManager.Send(msg2);
                 m_Account.Log(new ActionTextInformation("Equipement rapide numero " + Convert.ToString(id)), 5);
             }
@@ -426,7 +430,7 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public void TurnEnded(ulong id)
         {
-            if (id == m_Account.CharacterBaseInformations.Id)
+            if (id == m_Account.CharacterBaseInformations.ObjectID)
             {
                 int num4 = 0;
                 List<int> list = new List<int>();
@@ -725,7 +729,7 @@ namespace BlueSheep.Core.Fight
             int num = 0;
             foreach (BFighter fighter in Fighters)
             {
-                if (fighter.GameFightMinimalStats.summoner == Fighter.Id)
+                if (fighter.GameFightMinimalStats.Summoner == Fighter.Id)
                     num++;
             }
             return num;
@@ -813,7 +817,7 @@ namespace BlueSheep.Core.Fight
                 minRange = (minRange * 2);
             if (minRange < 0)
                 minRange = 0;
-            int maxRange = (spellId != 0) ? (int)((int)spellLevelsData.Fields["range"] + ((bool)spellLevelsData.Fields["rangeCanBeBoosted"] ? (m_Account.CharacterStats.range.objectsAndMountBonus + m_Account.CharacterStats.range.contextModif) : 0)) : (int)spellLevelsData.Fields["range"];
+            int maxRange = (spellId != 0) ? (int)((int)spellLevelsData.Fields["range"] + ((bool)spellLevelsData.Fields["rangeCanBeBoosted"] ? (m_Account.CharacterStats.Range.ObjectsAndMountBonus + m_Account.CharacterStats.Range.ContextModif) : 0)) : (int)spellLevelsData.Fields["range"];
             if ((spellId != 0 && (bool)spellLevelsData.Fields["castInDiagonal"]) || (weaponData != null && !(bool)weaponData.Fields["castInLine"]))
                 maxRange = (maxRange * 2);
             if (maxRange < 0)
@@ -915,7 +919,7 @@ namespace BlueSheep.Core.Fight
             if (((listEffects != null) && (listEffects.Count > 0)) && ((int)((DataClass)listEffects[0]).Fields["effectId"]) == 181)
             {
                 CharacterCharacteristicsInformations stats = m_Account.CharacterStats;
-                int total = stats.summonableCreaturesBoost.@base + stats.summonableCreaturesBoost.objectsAndMountBonus + stats.summonableCreaturesBoost.alignGiftBonus + stats.summonableCreaturesBoost.contextModif;
+                int total = stats.SummonableCreaturesBoost.Base + stats.SummonableCreaturesBoost.ObjectsAndMountBonus + stats.SummonableCreaturesBoost.AlignGiftBonus + stats.SummonableCreaturesBoost.ContextModif;
                 if (GetInvokationNumber() >= total)
                     return SpellInabilityReason.TooManyInvocations;
             }

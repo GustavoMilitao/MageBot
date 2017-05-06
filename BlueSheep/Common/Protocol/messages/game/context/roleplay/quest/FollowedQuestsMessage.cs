@@ -8,25 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Quest
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Quest
 {
-    using DofusBot.Protocol.Network.Types.Game.Context.Roleplay.Quest;
+    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Quest;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class FollowedQuestsMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class FollowedQuestsMessage : Message 
     {
         
-        public const int ProtocolId = 6717;
+        public new const int ID = 6717;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

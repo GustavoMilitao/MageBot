@@ -8,26 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay
 {
-    using DofusBot.Protocol.Network.Types.Game.Context.Roleplay;
-    using DofusBot.Protocol.Network;
+    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
+    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class GameRolePlayShowMultipleActorsMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class GameRolePlayShowMultipleActorsMessage : Message 
     {
         
-        public const int ProtocolId = 6712;
+        public new const int ID = 6712;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -73,7 +75,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay
             m_informationsList = new System.Collections.Generic.List<GameRolePlayActorInformations>();
             for (informationsListIndex = 0; (informationsListIndex < informationsListCount); informationsListIndex = (informationsListIndex + 1))
             {
-                GameRolePlayActorInformations objectToAdd = ProtocolManager.GetTypeInstance<GameRolePlayActorInformations>(reader.ReadUShort());
+                GameRolePlayActorInformations objectToAdd = ProtocolTypeManager.GetInstance<GameRolePlayActorInformations>(reader.ReadUShort());
                 objectToAdd.Deserialize(reader);
                 m_informationsList.Add(objectToAdd);
             }

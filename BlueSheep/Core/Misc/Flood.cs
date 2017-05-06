@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Threading;
+using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
+using BlueSheep.Common.Protocol.Messages.Game.Chat;
 
 namespace BlueSheep.Core.Misc
 {
@@ -43,11 +45,11 @@ namespace BlueSheep.Core.Misc
         {
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                ChatClientMultiMessage msg = new ChatClientMultiMessage(content, (sbyte)channel);
+                ChatClientMultiMessage msg = new ChatClientMultiMessage(content, (byte)channel);
                 msg.Serialize(writer);
                 writer.Content = account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.ProtocolID);
+                pack.Pack((int)msg.MessageID);
                 account.SocketManager.Send(pack.Writer.Content);
                 if (account.DebugMode.Checked)
                     account.Log(new DebugTextInformation("[SND] 861 (ChatClientMultiMessage)"), 0);
@@ -55,17 +57,17 @@ namespace BlueSheep.Core.Misc
             }
         }
 
-        public void SendPrivateTo(BlueSheep.Common.Protocol.Types.GameRolePlayCharacterInformations infos, string content = "")
+        public void SendPrivateTo(GameRolePlayCharacterInformations infos, string content = "")
         {
             if (content == "")
                 content = account.FloodUC.FloodContent;
-            long level = (long)Math.Abs((infos.alignmentInfos.characterPower - infos.contextualId));
-            content = content.Replace("%name%", infos.name).Replace("%level%", Convert.ToString(level));
+            long level = (long)Math.Abs((infos.AlignmentInfos.CharacterPower - infos.ContextualId));
+            content = content.Replace("%name%", infos.Name).Replace("%level%", Convert.ToString(level));
             if (account.FloodUC.IsRandomingSmileyBox.Checked == true)
                 content = AddRandomSmiley(content);
             if (account.FloodUC.IsRandomingNumberBox.Checked == true)
                 content = AddRandomNumber(content);
-            SendPrivateTo(infos.name, content);
+            SendPrivateTo(infos.Name, content);
             account.FloodUC.Increase(true);
         }
 
@@ -82,7 +84,7 @@ namespace BlueSheep.Core.Misc
                 msg.Serialize(writer);
                 writer.Content = account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.ProtocolID);
+                pack.Pack((int)msg.MessageID);
                 account.SocketManager.Send(pack.Writer.Content);
                 account.Log(new PrivateTextInformation("à " + name + " : " + content), 1);
                 if (account.DebugMode.Checked)
@@ -91,7 +93,7 @@ namespace BlueSheep.Core.Misc
         }
  
 
-        public void SaveNameInMemory(BlueSheep.Common.Protocol.Types.GameRolePlayCharacterInformations infos)
+        public void SaveNameInMemory(GameRolePlayCharacterInformations infos)
         {
             string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, "Flood");
             if (!Directory.Exists(path))
@@ -101,18 +103,18 @@ namespace BlueSheep.Core.Misc
             {
                 if (listOfPlayers.Count > 0)
                 {
-                    if (listOfPlayers.Keys.ToList().Find(p => p == infos.name) != null)
+                    if (listOfPlayers.Keys.ToList().Find(p => p == infos.Name) != null)
                     {
                         account.Log(new ErrorTextInformation("[ADVANCED FLOOD] Player already loaded !"), 5);
                         return;
                     }                        
                 }
                 var swriter = new StreamWriter(path + @"\Players.txt", true);
-                long level = (long)Math.Abs((infos.alignmentInfos.characterPower - infos.contextualId));
-                swriter.WriteLine(infos.name + "," + Convert.ToString(level));
+                long level = (long)Math.Abs((infos.AlignmentInfos.CharacterPower - infos.ContextualId));
+                swriter.WriteLine(infos.Name + "," + Convert.ToString(level));
                 swriter.Close();
-                listOfPlayers.Add(infos.name, level);
-                account.FloodUC.AddItem(infos.name + "," + Convert.ToString(level));
+                listOfPlayers.Add(infos.Name, level);
+                account.FloodUC.AddItem(infos.Name + "," + Convert.ToString(level));
                 account.Log(new BotTextInformation("[ADVANCED FLOOD] Player added."), 5);
             }
             catch (Exception ex)

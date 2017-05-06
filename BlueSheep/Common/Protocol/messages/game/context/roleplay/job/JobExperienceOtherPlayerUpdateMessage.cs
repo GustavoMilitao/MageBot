@@ -8,27 +8,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Job
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Job
 {
-    using DofusBot.Protocol.Network.Types.Game.Context.Roleplay.Job;
+    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
     
     
-    using DofusBot.Protocol;
+    using BlueSheep.Protocol;
     
     
-    public class JobExperienceOtherPlayerUpdateMessage : JobExperienceUpdateMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class JobExperienceOtherPlayerUpdateMessage : JobExperienceUpdateMessage 
     {
         
-        public const int ProtocolId = 6599;
+        public new const int ID = 6599;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -58,7 +60,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Job
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarUhLong(m_playerId);
+            writer.WriteVarLong(m_playerId);
         }
         
         public override void Deserialize(IDataReader reader)

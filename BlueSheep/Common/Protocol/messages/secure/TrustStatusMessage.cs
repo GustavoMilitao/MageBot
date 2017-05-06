@@ -1,52 +1,36 @@
+﻿using BlueSheep.Engine.Types;
 
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:00
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Secure
 {
     public class TrustStatusMessage : Message
     {
-        public new const uint ID =6267;
-        public override uint ProtocolID
+        public new const int ID = 6267;
+        public override int MessageID { get { return ID; } }
+
+        public bool Trusted;
+        public bool Certified;
+
+        public TrustStatusMessage() { }
+
+        public TrustStatusMessage(bool trusted, bool certified)
         {
-            get { return ID; }
+            Trusted = trusted;
+            Certified = certified;
         }
-        
-        public bool trusted;
-        
-        public TrustStatusMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
+            byte flag = new byte();
+            BooleanByteWrapper.SetFlag(0, flag, Trusted);
+            BooleanByteWrapper.SetFlag(1, flag, Certified);
+            writer.WriteByte(flag);
         }
-        
-        public TrustStatusMessage(bool trusted)
+
+        public override void Deserialize(IDataReader reader)
         {
-            this.trusted = trusted;
+            byte flag = reader.ReadByte();
+            Trusted = BooleanByteWrapper.GetFlag(flag, 0);
+            Certified = BooleanByteWrapper.GetFlag(flag, 1);
         }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteBoolean(trusted);
-        }
-        
-        public override void Deserialize(BigEndianReader reader)
-        {
-            trusted = reader.ReadBoolean();
-        }
-        
     }
-    
 }

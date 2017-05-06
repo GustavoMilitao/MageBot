@@ -1,60 +1,33 @@
+﻿using BlueSheep.Engine.Types;
 
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:21
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Game.Basic
 {
     public class BasicAckMessage : Message
     {
-        public new const uint ID =6362;
-        public override uint ProtocolID
+        public new const int ID = 6362;
+        public override int MessageID { get { return ID; } }
+
+        public uint Seq;
+        public ushort LastProtocolId;
+
+        public BasicAckMessage() { }
+
+        public BasicAckMessage(uint seq, ushort lastProtocolId)
         {
-            get { return ID; }
+            Seq = seq;
+            LastProtocolId = lastProtocolId;
         }
-        
-        public int seq;
-        public int lastPacketId;
-        
-        public BasicAckMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
+            writer.WriteVarInt(Seq);
+            writer.WriteVarShort(LastProtocolId);
         }
-        
-        public BasicAckMessage(int seq, int lastPacketId)
+
+        public override void Deserialize(IDataReader reader)
         {
-            this.seq = seq;
-            this.lastPacketId = lastPacketId;
+            Seq = reader.ReadVarUhInt();
+            LastProtocolId = reader.ReadVarUhShort();
         }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteVarInt(seq);
-            writer.WriteVarShort((short)lastPacketId);
-        }
-        
-        public override void Deserialize(BigEndianReader reader)
-        {
-            seq = reader.ReadVarInt();
-            if (seq < 0)
-                throw new Exception("Forbidden value on seq = " + seq + ", it doesn't respect the following condition : seq < 0");
-            lastPacketId = reader.ReadVarUhShort();
-            if (lastPacketId < 0)
-                throw new Exception("Forbidden value on lastPacketId = " + lastPacketId + ", it doesn't respect the following condition : lastPacketId < 0");
-        }
-        
     }
-    
 }

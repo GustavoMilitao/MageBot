@@ -8,27 +8,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Dare
+namespace BlueSheep.Common.Protocol.Messages.Game.Dare
 {
-    using DofusBot.Protocol.Network.Types.Game.Dare;
+    using BlueSheep.Common.Protocol.Types.Game.Dare;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
     
     
-    using DofusBot.Protocol;
+    using BlueSheep.Protocol;
     
     
-    public class DareCreationRequestMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class DareCreationRequestMessage : Message 
     {
         
-        public const int ProtocolId = 6665;
+        public new const int ID = 6665;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -205,8 +207,8 @@ namespace DofusBot.Protocol.Network.Messages.Game.Dare
                 DareCriteria objectToSend = m_criterions[criterionsIndex];
                 objectToSend.Serialize(writer);
             }
-            writer.WriteVarUhLong(m_subscriptionFee);
-            writer.WriteVarUhLong(m_jackpot);
+            writer.WriteVarLong(m_subscriptionFee);
+            writer.WriteVarLong(m_jackpot);
             writer.WriteUShort(m_maxCountWinners);
             writer.WriteUInt(m_delayBeforeStart);
             writer.WriteUInt(m_duration);

@@ -1,13 +1,14 @@
-﻿using DofusBot.Core.Network;
-using DofusBot.Protocol.Network.Types.Connection;
+﻿using BlueSheep.Common.Protocol.Types.Connection;
 using System.Collections.Generic;
 
-namespace DofusBot.Protocol.Network.Messages.Connection
+namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    public class ServerListMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class ServerListMessage : Message 
     {
-        public const int ProtocolId = 30;
-        public override int MessageID { get { return ProtocolId; } }
+        public new const int ID = 30;
+        public override int MessageID { get { return ID; } }
 
         public List<GameServerInformations> Servers;
         public ushort AlreadyConnectedToServerId;

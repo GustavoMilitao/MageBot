@@ -8,25 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Items
+namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Items
 {
-    using DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges;
+    using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class ExchangePodsModifiedMessage : ExchangeObjectMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class ExchangePodsModifiedMessage : ExchangeObjectMessage 
     {
         
-        public const int ProtocolId = 6670;
+        public new const int ID = 6670;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -71,8 +73,8 @@ namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Items
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteVarUhInt(m_currentWeight);
-            writer.WriteVarUhInt(m_maxWeight);
+            writer.WriteVarInt(m_currentWeight);
+            writer.WriteVarInt(m_maxWeight);
         }
         
         public override void Deserialize(IDataReader reader)

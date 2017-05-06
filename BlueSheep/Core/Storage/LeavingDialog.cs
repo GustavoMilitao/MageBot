@@ -1,5 +1,6 @@
 ﻿using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Dialog;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 

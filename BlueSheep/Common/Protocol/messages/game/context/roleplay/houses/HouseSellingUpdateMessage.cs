@@ -8,26 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Houses
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Houses
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
     
     
-    using DofusBot.Protocol;
+    using BlueSheep.Protocol;
     
     
-    public class HouseSellingUpdateMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class HouseSellingUpdateMessage : Message 
     {
         
-        public const int ProtocolId = 6727;
+        public new const int ID = 6727;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -116,10 +118,10 @@ namespace DofusBot.Protocol.Network.Messages.Game.Context.Roleplay.Houses
         
         public override void Serialize(IDataWriter writer)
         {
-            writer.WriteVarUhInt(m_houseId);
+            writer.WriteVarInt(m_houseId);
             writer.WriteInt(m_instanceId);
             writer.WriteBoolean(m_secondHand);
-            writer.WriteVarUhLong(m_realPrice);
+            writer.WriteVarLong(m_realPrice);
             writer.WriteUTF(m_buyerName);
         }
         

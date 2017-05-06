@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Preset
+namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Preset
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class IdolsPresetUseResultMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class IdolsPresetUseResultMessage : Message 
     {
         
-        public const int ProtocolId = 6614;
+        public new const int ID = 6614;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -88,7 +90,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Preset
             int missingIdolsIndex;
             for (missingIdolsIndex = 0; (missingIdolsIndex < m_missingIdols.Count); missingIdolsIndex = (missingIdolsIndex + 1))
             {
-                writer.WriteVarUhShort(m_missingIdols[missingIdolsIndex]);
+                writer.WriteVarShort(m_missingIdols[missingIdolsIndex]);
             }
             writer.WriteByte(m_presetId);
             writer.WriteByte(m_code);

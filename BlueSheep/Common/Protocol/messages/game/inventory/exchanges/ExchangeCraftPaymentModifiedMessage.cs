@@ -8,26 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
+namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
     
     
-    using DofusBot.Protocol;
+    using BlueSheep.Protocol;
     
     
-    public class ExchangeCraftPaymentModifiedMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class ExchangeCraftPaymentModifiedMessage : Message 
     {
         
-        public const int ProtocolId = 6578;
+        public new const int ID = 6578;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -56,7 +58,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
         
         public override void Serialize(IDataWriter writer)
         {
-            writer.WriteVarUhLong(m_goldSum);
+            writer.WriteVarLong(m_goldSum);
         }
         
         public override void Deserialize(IDataReader reader)

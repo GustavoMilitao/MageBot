@@ -1,6 +1,9 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Connection;
+using BlueSheep.Common.Protocol.Messages.Game.Approach;
+using BlueSheep.Common.Protocol.Messages.Game.Character.Choice;
 using BlueSheep.Engine.Constants;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Engine.Types;
@@ -11,6 +14,7 @@ using BlueSheep.Util.Text.Connection;
 using DofusBot.Enums;
 using RSA;
 using System;
+using System.Collections.Generic;
 
 namespace BlueSheep.Engine.Handlers.Connection
 {
@@ -32,7 +36,7 @@ namespace BlueSheep.Engine.Handlers.Connection
                 account.AccountName,
                 account.AccountPassword,
                 helloConnectMessage.salt);
-                IdentificationMessage msg = new IdentificationMessage(GameConstants.AutoConnect, GameConstants.UseCertificate, GameConstants.UseLoginToken, new Common.Protocol.Types.VersionExtended(GameConstants.Major, GameConstants.Minor, GameConstants.Release, GameConstants.Revision, GameConstants.Patch, GameConstants.BuildType, GameConstants.Install, GameConstants.Technology), GameConstants.Lang, credentials, GameConstants.ServerID, GameConstants.SessionOptionalSalt, new System.Collections.Generic.List<int>() );
+                IdentificationMessage msg = new IdentificationMessage(GameConstants.AutoConnect, GameConstants.UseCertificate, GameConstants.UseLoginToken, new Common.Protocol.Types.VersionExtended(GameConstants.Major, GameConstants.Minor, GameConstants.Release, GameConstants.Revision, GameConstants.Patch, GameConstants.BuildType, GameConstants.Install, GameConstants.Technology), GameConstants.Lang, credentials, GameConstants.ServerID, GameConstants.SessionOptionalSalt, new List<ushort>().ToArray() );
                 account.SocketManager.Send(msg);
             }
             account.Log(new ConnectionTextInformation("Identification en cours."), 0);
@@ -47,7 +51,7 @@ namespace BlueSheep.Engine.Handlers.Connection
                 msg.Deserialize(reader);
             }
             var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            dtDateTime = dtDateTime.AddMilliseconds(msg.subscriptionEndDate).ToLocalTime();
+            dtDateTime = dtDateTime.AddMilliseconds(msg.SubscriptionEndDate).ToLocalTime();
             DateTime subscriptionDate = dtDateTime;
             if (subscriptionDate > DateTime.Now)
                 account.ModifBar(9, 0, 0, subscriptionDate.Date.ToShortDateString());
@@ -63,7 +67,7 @@ namespace BlueSheep.Engine.Handlers.Connection
             {
                 identificationFailedMessage.Deserialize(reader);
             }
-            IdentificationFailureReason.Test((IdentificationFailureReasonEnum)identificationFailedMessage.reason, account);
+            IdentificationFailureReason.Test((IdentificationFailureReasonEnum)identificationFailedMessage.Reason, account);
             account.SocketManager.DisconnectFromGUI();
         }
 
@@ -76,36 +80,36 @@ namespace BlueSheep.Engine.Handlers.Connection
                 msg.Deserialize(reader);
             }
             //account.Log(new BotTextInformation(selectedServerDataExtendedMessage.address + " " + (int)selectedServerDataExtendedMessage.port));
-            account.Ticket = AES.AES.TicketTrans(msg.ticket).ToString();
+            account.Ticket = AES.AES.TicketTrans(msg.Ticket).ToString();
             account.HumanCheck = new HumanCheck(account);
             account.SocketManager.IsChangingServer = true;
             if (!account.IsMITM)
             {
-                account.Log(new ConnectionTextInformation("Connexion au serveur " + BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.serverId).Fields["nameId"])), 0);
-                account.SocketManager.Connect(new ConnectionInformations(msg.address, (int)msg.port, "de jeu"));
+                account.Log(new ConnectionTextInformation("Connexion au serveur " + BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
+                account.SocketManager.Connect(new ConnectionInformations(msg.Address, (int)msg.Port, "de jeu"));
                 account.loginstate = "de jeu";
             }
             else
             {
-                SelectedServerDataExtendedMessage nmsg = new SelectedServerDataExtendedMessage(msg.canCreateNewCharacter,
-                                                                                               msg.serverId,
-                                                                                               msg.address,
-                                                                                               msg.port,
-                                                                                               msg.ticket,
-                                                                                               msg.serverIds);
+                SelectedServerDataExtendedMessage nmsg = new SelectedServerDataExtendedMessage(msg.CanCreateNewCharacter,
+                                                                                               msg.ServerId,
+                                                                                               msg.Address,
+                                                                                               msg.Port,
+                                                                                               msg.Ticket,
+                                                                                               msg.ServerIds);
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
                     nmsg.Serialize(writer);
                     MessagePackaging pack = new MessagePackaging(writer);
-                    pack.Pack((int)nmsg.ProtocolID);
+                    pack.Pack((int)nmsg.MessageID);
                     account.SocketManager.SendToDofusClient(pack.Writer.Content);
                     //account.SocketManager.DisconnectFromDofusClient();
                     account.SocketManager.DisconnectServer("42 packet handling.");
                     account.SocketManager.ListenDofus();
                     account.Wait(100, 200);
                 }
-                account.Log(new ConnectionTextInformation("Connexion au serveur " + BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.serverId).Fields["nameId"])), 0);
-                account.SocketManager.Connect(new ConnectionInformations(msg.address, (int)msg.port, "de jeu"));
+                account.Log(new ConnectionTextInformation("Connexion au serveur " + BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
+                account.SocketManager.Connect(new ConnectionInformations(msg.Address, (int)msg.Port, "de jeu"));
                 account.loginstate = "de jeu";
             }
         }
@@ -120,7 +124,7 @@ namespace BlueSheep.Engine.Handlers.Connection
                 serverStatusUpdateMessage.Deserialize(reader);
             }
             // Cherche le statut du serveur
-            ServerStatus.Test((ServerStatusEnum)serverStatusUpdateMessage.server.status, account);
+            ServerStatus.Test((ServerStatusEnum)serverStatusUpdateMessage.Server.Status, account);
         }
 
         [MessageHandler(typeof(ServersListMessage))]
@@ -185,7 +189,7 @@ namespace BlueSheep.Engine.Handlers.Connection
                 selectedServerRefusedMessage.Deserialize(reader);
             }
             // Cherche le statut du serveur
-            ServerStatus.Test((ServerStatusEnum)selectedServerRefusedMessage.serverStatus, account);
+            ServerStatus.Test((ServerStatusEnum)selectedServerRefusedMessage.ServerStatus, account);
         }
         [MessageHandler(typeof(IdentificationFailedForBadVersionMessage))]
         public static void IdentificationFailedForBadVersionMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
@@ -196,12 +200,12 @@ namespace BlueSheep.Engine.Handlers.Connection
                 identificationFailedForBadVersionMessage.Deserialize(reader);
             }
             account.Log(new ErrorTextInformation("Echec de connexion : Dofus a été mis à jour ("
-            + identificationFailedForBadVersionMessage.requiredVersion.major + "."
-            + identificationFailedForBadVersionMessage.requiredVersion.minor + "."
-            + identificationFailedForBadVersionMessage.requiredVersion.release + "."
-            + identificationFailedForBadVersionMessage.requiredVersion.revision + "."
-            + identificationFailedForBadVersionMessage.requiredVersion.patch + "."
-            + identificationFailedForBadVersionMessage.requiredVersion.buildType + ")."
+            + identificationFailedForBadVersionMessage.RequiredVersion.Major + "."
+            + identificationFailedForBadVersionMessage.RequiredVersion.Minor + "."
+            + identificationFailedForBadVersionMessage.RequiredVersion.Release + "."
+            + identificationFailedForBadVersionMessage.RequiredVersion.Revision + "."
+            + identificationFailedForBadVersionMessage.RequiredVersion.Patch + "."
+            + identificationFailedForBadVersionMessage.RequiredVersion.BuildType + ")."
             + " BlueSheep supporte uniquement la version " + GameConstants.Major + "."
             + GameConstants.Minor + "." + GameConstants.Release + "."
             + GameConstants.Revision + "." + GameConstants.Patch + "."

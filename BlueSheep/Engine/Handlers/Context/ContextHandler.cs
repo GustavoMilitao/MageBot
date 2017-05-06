@@ -2,7 +2,24 @@
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Basic;
+using BlueSheep.Common.Protocol.Messages.Game.Chat;
+using BlueSheep.Common.Protocol.Messages.Game.Context;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Display;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Fight;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Houses;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Purchasable;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Quest;
+using BlueSheep.Common.Protocol.Messages.Game.Interactive;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Items;
+using BlueSheep.Common.Protocol.Messages.Game.Moderation;
+using BlueSheep.Common.Protocol.Messages.Server.Basic;
 using BlueSheep.Common.Protocol.Types;
+using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
+using BlueSheep.Common.Protocol.Types.Game.Interactive;
 using BlueSheep.Common.Types;
 using BlueSheep.Data.D2p;
 using BlueSheep.Data.D2p.Elements;
@@ -39,10 +56,10 @@ namespace BlueSheep.Engine.Handlers.Context
             }
             account.Gather.ClearError();
             account.MapData.Clear();
-            account.MapData.ParseLocation(msg.mapId, msg.subAreaId);
-            account.MapData.ParseStatedElements(msg.statedElements);
-            account.MapData.ParseActors(msg.actors);
-            account.MapData.ParseInteractiveElements(msg.interactiveElements);
+            account.MapData.ParseLocation(msg.MapId, msg.SubAreaId);
+            account.MapData.ParseStatedElements(msg.StatedElements.ToArray());
+            account.MapData.ParseActors(msg.Actors.ToArray());
+            account.MapData.ParseInteractiveElements(msg.InteractiveElements.ToArray());
             account.Enable(true);
             account.MapData.DoAction();
             account.ActualizeMap();
@@ -64,7 +81,7 @@ namespace BlueSheep.Engine.Handlers.Context
                 currentMapMessage.Deserialize(reader);
             }
 
-            account.MapID = currentMapMessage.mapId;
+            account.MapID = currentMapMessage.MapId;
             if (account.MapID == account.MapData.LastMapId && account.Fight != null)
             {
                 account.FightData.winLoseDic["Gagné"]++;
@@ -119,7 +136,7 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            switch (msg.msgId)
+            switch (msg.MsgId)
             {
                 //case 89:
                 //    account.Log(new DofAlertTextInformation("Bienvenue sur DOFUS, dans le Monde des Douze !" + System.Environment.NewLine + "Il est interdit de transmettre votre identifiant ou votre mot de passe."), 1);
@@ -143,11 +160,11 @@ namespace BlueSheep.Engine.Handlers.Context
             //default:
 
 
-            DataClass data = GameData.GetDataObject(D2oFileEnum.InfoMessages, msg.msgType * 10000 + msg.msgId);
+            DataClass data = GameData.GetDataObject(D2oFileEnum.InfoMessages, msg.MsgType * 10000 + msg.MsgId);
             string text = I18N.GetText((int)data.Fields["textId"]);
-            for (int i = 0; i < msg.parameters.Length; i++)
+            for (int i = 0; i < msg.Parameters.Count; i++)
             {
-                var parameter = msg.parameters[i];
+                var parameter = msg.Parameters[i];
                 text = text.Replace("%" + (i + 1), parameter);
             }
             account.Log(new DofAlertTextInformation(text), 0);
@@ -162,28 +179,28 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            switch ((int)msg.channel)
+            switch ((int)msg.Channel)
             {
                 case 0:
-                    account.Log(new GeneralTextInformation(msg.senderName + ": " + msg.content), 1);
+                    account.Log(new GeneralTextInformation(msg.SenderName + ": " + msg.Content), 1);
                     break;
                 case 1:
                     //account.Log(new DofAlertTextInformation("Bienvenue sur DOFUS, dans le Monde des Douze !" + System.Environment.NewLine + "Il est interdit de transmettre votre identifiant ou votre mot de passe."));
                     break;
                 case 2:
-                    account.Log(new GuildTextInformation(msg.senderName + ": " + msg.content), 1);
+                    account.Log(new GuildTextInformation(msg.SenderName + ": " + msg.Content), 1);
                     break;
                 case 3:
-                    account.Log(new AllianceTextInformation(msg.senderName + ": " + msg.content), 1);
+                    account.Log(new AllianceTextInformation(msg.SenderName + ": " + msg.Content), 1);
                     break;
                 case 5:
-                    account.Log(new CommerceTextInformation(msg.senderName + ": " + msg.content), 1);
+                    account.Log(new CommerceTextInformation(msg.SenderName + ": " + msg.Content), 1);
                     break;
                 case 6:
-                    account.Log(new RecrutementTextInformation(msg.senderName + ": " + msg.content), 1);
+                    account.Log(new RecrutementTextInformation(msg.SenderName + ": " + msg.Content), 1);
                     break;
                 case 9:
-                    account.Log(new PrivateTextInformation("de " + msg.senderName + " : " + msg.content), 1);
+                    account.Log(new PrivateTextInformation("de " + msg.SenderName + " : " + msg.Content), 1);
                     break;
             }
         }
@@ -235,13 +252,13 @@ namespace BlueSheep.Engine.Handlers.Context
                 msg.Deserialize(reader);
             }
             List<uint> keys = new List<uint>();
-            foreach (int s in msg.keyMovements)
+            foreach (int s in msg.KeyMovements)
             {
                 keys.Add((uint)s);
             }
             MovementPath clientMovement = MapMovementAdapter.GetClientMovement(keys);
-            account.MapData.UpdateEntityCell(msg.actorId, clientMovement.CellEnd.CellId);
-            if (account.Map.Moving && msg.actorId == account.MapData.Character.contextualId)
+            account.MapData.UpdateEntityCell((ulong)msg.ActorId, clientMovement.CellEnd.CellId);
+            if (account.Map.Moving && msg.ActorId == account.MapData.Character.ContextualId)
             {
                 account.Map.ConfirmMove();
             }
@@ -290,10 +307,10 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            account.Log(new ErrorTextInformation("[FROM " + msg.author + " ] : " + msg.content), 0);
-            account.Log(new BotTextInformation("You has been locked for " + msg.lockDuration + ". Stopping BlueSheep actions while blocked..."), 0);
+            account.Log(new ErrorTextInformation("[FROM " + msg.Author + " ] : " + msg.Content), 0);
+            account.Log(new BotTextInformation("You has been locked for " + msg.LockDuration + ". Stopping BlueSheep actions while blocked..."), 0);
             account.Log(new ErrorTextInformation("Y a un popup sur l'écran, surement un modo :s"), 0);
-            account.Wait(msg.lockDuration, msg.lockDuration);
+            account.Wait(msg.LockDuration, msg.LockDuration);
             //account.SocketManager.Disconnect("Alerte au modo ! Alerte au modo !");
         }
 
@@ -319,17 +336,17 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (account.MyGroup != null && msg.fromName == account.MyGroup.GetMaster().CharacterBaseInformations.name)
+            if (account.MyGroup != null && msg.FromName == account.MyGroup.GetMaster().CharacterBaseInformations.Name)
             {
 
-                PartyAcceptInvitationMessage msg2 = new PartyAcceptInvitationMessage(msg.partyId);
+                PartyAcceptInvitationMessage msg2 = new PartyAcceptInvitationMessage(msg.PartyId);
                 account.SocketManager.Send(msg2);
                 account.Log(new BotTextInformation("J'ai rejoint le groupe :3"), 3);
 
             }
             else
             {
-                PartyRefuseInvitationMessage msg2 = new PartyRefuseInvitationMessage(msg.partyId);
+                PartyRefuseInvitationMessage msg2 = new PartyRefuseInvitationMessage(msg.PartyId);
                 account.SocketManager.Send(msg2);
 
             }
@@ -344,12 +361,12 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (msg.fightMap.mapId == account.MapData.Id && msg.memberName == account.MyGroup.GetMaster().CharacterBaseInformations.name)
+            if (msg.FightMap.MapId == account.MapData.Id && msg.MemberName == account.MyGroup.GetMaster().CharacterBaseInformations.Name)
             {
                 account.Wait(500, 1500);
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
-                    GameFightJoinRequestMessage msg2 = new GameFightJoinRequestMessage(msg.memberId, msg.fightId);
+                    GameFightJoinRequestMessage msg2 = new GameFightJoinRequestMessage(msg.MemberId, msg.FightId);
                     account.SocketManager.Send(msg2);
                 }
             }
@@ -367,13 +384,13 @@ namespace BlueSheep.Engine.Handlers.Context
             }
             if (account.House != null)
             {
-                InteractiveElement e = msg.interactiveElement;
-                account.House.ElementIdd = e.elementId;
-                InteractiveElementSkill[] EnabledSkills = e.enabledSkills;
-                account.House.SkillInstanceID = EnabledSkills[1].skillInstanceUid;
+                InteractiveElement e = msg.InteractiveElement;
+                account.House.ElementIdd = e.ElementId;
+                List<InteractiveElementSkill> EnabledSkills = e.EnabledSkills;
+                account.House.SkillInstanceID = EnabledSkills[1].SkillInstanceUid;
                 account.House.UseHouse();
             }
-            account.MapData.UpdateInteractiveElement(msg.interactiveElement);
+            account.MapData.UpdateInteractiveElement(msg.InteractiveElement);
 
         }
 
@@ -386,7 +403,7 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            account.MapData.UpdateStatedElement(msg.statedElement);
+            account.MapData.UpdateStatedElement(msg.StatedElement);
         }
 
         [MessageHandler(typeof(PurchasableDialogMessage))]
@@ -400,8 +417,8 @@ namespace BlueSheep.Engine.Handlers.Context
             }
             if (account.House != null)
             {
-                account.House.priceHouse = msg.price;
-                if (account.House.priceHouse < Convert.ToInt32(account.MaxPrice.Value))
+                account.House.priceHouse = msg.Price;
+                if (account.House.priceHouse < Convert.ToUInt64(account.MaxPrice.Value))
                 {
                     account.House.Buy();
                 }
@@ -439,7 +456,7 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            account.MapData.Remove(msg.id);
+            account.MapData.Remove(msg.ObjectId);
         }
 
         [MessageHandler(typeof(GameRolePlayShowActorMessage))]
@@ -452,14 +469,14 @@ namespace BlueSheep.Engine.Handlers.Context
                 msg.Deserialize(reader);
             }
 
-            if (account.FloodUC.StartStopFloodingBox.Checked == true && account.FloodUC.PrivateEnterBox.Checked == true && msg.informations is GameRolePlayCharacterInformations)
+            if (account.FloodUC.StartStopFloodingBox.Checked == true && account.FloodUC.PrivateEnterBox.Checked == true && msg.Informations is GameRolePlayCharacterInformations)
             {
-                GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.informations;
+                GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.Informations;
                 account.Flood.SendPrivateTo(infos);
             }
-            if (account.FloodUC.IsMemoryCheck.Checked == true && msg.informations is GameRolePlayCharacterInformations)
+            if (account.FloodUC.IsMemoryCheck.Checked == true && msg.Informations is GameRolePlayCharacterInformations)
             {
-                GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.informations;
+                GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.Informations;
                 account.Flood.SaveNameInMemory(infos);
             }
         }
@@ -503,11 +520,11 @@ namespace BlueSheep.Engine.Handlers.Context
             }
             if (account.Gather.Current_El == null)
                 return;
-            account.Log(new ActionTextInformation("Ressource récoltée : " + account.Gather.resourceName + " +" + msg.baseQuantity), 3);
+            account.Log(new ActionTextInformation("Ressource récoltée : " + account.Gather.resourceName + " +" + msg.BaseQuantity), 3);
             if (account.Gather.Stats.ContainsKey(account.Gather.resourceName))
-                account.Gather.Stats[account.Gather.resourceName] += msg.baseQuantity;
+                account.Gather.Stats[account.Gather.resourceName] += (int)msg.BaseQuantity;
             else
-                account.Gather.Stats.Add(account.Gather.resourceName, msg.baseQuantity);
+                account.Gather.Stats.Add(account.Gather.resourceName, (int)msg.BaseQuantity);
             account.Gather.Current_Job.ActualizeStats(account.Gather.Stats);
         }
 
@@ -611,7 +628,7 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (msg.ready && account.GestItemsUC.ListenerBox.Checked)
+            if (msg.Ready && account.GestItemsUC.ListenerBox.Checked)
                 account.Inventory.ExchangeReady();
         }
 

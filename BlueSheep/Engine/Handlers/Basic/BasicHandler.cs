@@ -7,6 +7,12 @@ using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
 using BlueSheep.Util.Enums.Servers;
 using BlueSheep.Util.Enums.EnumHelper;
+using BlueSheep.Common.Protocol.Messages.Game.Basic;
+using BlueSheep.Common.Protocol.Messages.Game.Interactive;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Items;
+using BlueSheep.Common.Protocol.Messages.Game.Dialog;
+using BlueSheep.Common.Protocol.Messages.Game.Approach;
 
 namespace BlueSheep.Engine.Handlers.Basic
 {
@@ -18,15 +24,15 @@ namespace BlueSheep.Engine.Handlers.Basic
         {
             account.Sequence++;
 
-            SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage((int)account.Sequence);
+            SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage((ushort)account.Sequence);
             account.SocketManager.Send(sequenceNumberMessage);
         }
 
         [MessageHandler(typeof(BasicLatencyStatsRequestMessage))]
         public static void BasicLatencyStatsRequestMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
         {
-            BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage((int)account.LatencyFrame.GetLatencyAvg(),
-                account.LatencyFrame.GetSamplesCount(), account.LatencyFrame.GetSamplesMax());
+            BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage((ushort)account.LatencyFrame.GetLatencyAvg(),
+                (ushort)account.LatencyFrame.GetSamplesCount(), (ushort)account.LatencyFrame.GetSamplesMax());
             //account.Log(new BotTextInformation("ROLEPLEY RECU"),0);
             //BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage(account.LatencyFrame.RolePley(),
             //    account.LatencyFrame.GetSamplesCount(), account.LatencyFrame.GetSamplesMax());
@@ -38,7 +44,7 @@ namespace BlueSheep.Engine.Handlers.Basic
                     writer.Content = account.HumanCheck.hash_function(writer.Content);
                     MessagePackaging messagePackaging = new MessagePackaging(writer);
 
-                    messagePackaging.Pack((int)basicLatencyStatsMessage.ProtocolID);
+                    messagePackaging.Pack((int)basicLatencyStatsMessage.MessageID);
 
                     account.SocketManager.Send(messagePackaging.Writer.Content);
                     if (account.DebugMode.Checked)
@@ -58,8 +64,8 @@ namespace BlueSheep.Engine.Handlers.Basic
                 basicAckMessage.Deserialize(reader);
             }
 
-            account.LastPacketID.Enqueue(basicAckMessage.lastPacketId);
-            account.LastPacket = basicAckMessage.lastPacketId;
+            account.LastPacketID.Enqueue(basicAckMessage.LastProtocolId);
+            account.LastPacket = basicAckMessage.LastProtocolId;
 
                         
         }
@@ -161,7 +167,7 @@ namespace BlueSheep.Engine.Handlers.Basic
              {
                  btmsg.Deserialize(reader);
              }
-             account.Log(new ErrorTextInformation(String.Format("Compte banni {0} jours, {1} heures, {2} minutes :'( ", btmsg.days, btmsg.hours, btmsg.minutes)), 0);
+             account.Log(new ErrorTextInformation(String.Format("Compte banni {0} jours, {1} heures, {2} minutes :'( ", btmsg.Days, btmsg.Hours, btmsg.Minutes)), 0);
          }
         
         [MessageHandler(typeof(ServerSettingsMessage))]
@@ -174,9 +180,9 @@ namespace BlueSheep.Engine.Handlers.Basic
                 msg.Deserialize(reader);
             }
             account.Log(
-                new ConnectionTextInformation(" Server Settings : Language : " + msg.lang + 
-                                         ", GameType : " + ((GameTypeId)msg.gameType).Description() + 
-                                         ", Comunity : " + ((CommunityId)msg.community).Description()),0);
+                new ConnectionTextInformation(" Server Settings : Language : " + msg.Lang + 
+                                         ", GameType : " + ((GameTypeId)msg.GameType).Description() + 
+                                         ", Comunity : " + ((CommunityId)msg.Community).Description()),0);
         }
 
         #endregion

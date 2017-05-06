@@ -1,81 +1,39 @@
+﻿using BlueSheep.Common.Protocol.Types.Game.Social;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:06
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
-
-namespace BlueSheep.Common.Protocol.Types
+namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
 {
-
     public class BasicGuildInformations : AbstractSocialGroupInfos
     {
-
         public new const int ID = 365;
-        public override int TypeId
+        public virtual int TypeID { get { return ID; } }
+
+        public uint GuildId;
+        public string GuildName;
+        public sbyte GuildLevel;
+
+        public BasicGuildInformations() { }
+
+        public BasicGuildInformations(uint guildId, string guildName, sbyte guildLevel)
         {
-            get { return ID; }
+            GuildId = guildId;
+            GuildName = guildName;
+            GuildLevel = guildLevel;
         }
 
-        public uint guildId;
-        public string guildName;
-        public byte guildLevel { get; set; }
-
-
-        public BasicGuildInformations()
+        public void Serialize(IDataWriter writer)
         {
-        }
-
-        public BasicGuildInformations(uint guildId, string guildName, byte guildLevel)
-        {
-            this.guildId = guildId;
-            this.guildName = guildName;
-            this.guildLevel = guildLevel;
-        }
-
-
-        public override void Serialize(BigEndianWriter writer)
-        {
-
             base.Serialize(writer);
-            writer.WriteVarInt(guildId);
-            writer.WriteUTF(guildName);
-            writer.WriteByte(guildLevel);
-
+            writer.WriteVarInt(GuildId);
+            writer.WriteUTF(GuildName);
+            writer.WriteSByte(GuildLevel);
         }
 
-        public override void Deserialize(BigEndianReader reader)
+        public void Deserialize(IDataReader reader)
         {
-
             base.Deserialize(reader);
-            guildId = reader.ReadVarUhInt();
-            if (guildId < 0)
-                throw new Exception("Forbidden value on guildId = " + guildId + ", it doesn't respect the following condition : guildId < 0");
-            guildName = reader.ReadUTF();
-            guildLevel = reader.ReadByte();
+            GuildId = reader.ReadVarUhInt();
+            GuildName = reader.ReadUTF();
+            GuildLevel = reader.ReadSByte();
         }
-
-
     }
-
-
 }

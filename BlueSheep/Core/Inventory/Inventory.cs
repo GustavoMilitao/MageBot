@@ -1,6 +1,9 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Dialog;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Items;
 using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
@@ -80,7 +83,7 @@ namespace BlueSheep.Core.Inventory
         {
             if (ItemExists(uid) && ItemQuantity(uid) > 0)
             {
-                ObjectDeleteMessage msg = new ObjectDeleteMessage(uid, quantity);
+                ObjectDeleteMessage msg = new ObjectDeleteMessage((uint)uid, (uint)quantity);
                 Account.SocketManager.Send(msg);
                 Account.Log(new ActionTextInformation("Suppression de " + GetItemFromUID(uid).Name + "(x" + quantity + ")."), 2);
             }
@@ -93,7 +96,7 @@ namespace BlueSheep.Core.Inventory
             {
                 ExchangeRequestOnShopStockMessage packetshop = new ExchangeRequestOnShopStockMessage();
                 Account.SocketManager.Send(packetshop);
-                ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage(uid, quantity, price);
+                ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage((uint)uid, quantity, (ulong)price);
                 Account.SocketManager.Send(msg);
                 Account.Log(new ActionTextInformation("Ajout de " + Account.Inventory.GetItemFromUID(uid).Name + "(x " + quantity + ") dans le magasin magasin au prix de : " + price + " Kamas"), 2);
                 LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
@@ -106,7 +109,7 @@ namespace BlueSheep.Core.Inventory
         {
             if (ItemExists(uid) && ItemQuantity(uid) > 0)
             {
-                    ObjectDropMessage msg = new ObjectDropMessage(uid, quantity);
+                    ObjectDropMessage msg = new ObjectDropMessage((uint)uid, (uint)quantity);
                     Account.SocketManager.Send(msg);
                     Account.Log(new ActionTextInformation("Jet de " + GetItemFromUID(uid).Name + "(x" + quantity + ")."), 2);               
             }
@@ -116,7 +119,7 @@ namespace BlueSheep.Core.Inventory
         {
             if (ItemExists(uid) && ItemQuantity(uid) > 0)
             {
-                ObjectSetPositionMessage msg = new ObjectSetPositionMessage(uid, (byte)GetPosition(GetItemFromUID(uid).Type), 1);
+                ObjectSetPositionMessage msg = new ObjectSetPositionMessage((uint)uid, (sbyte)GetPosition(GetItemFromUID(uid).Type), 1);
                 Account.SocketManager.Send(msg);
                 Account.Log(new ActionTextInformation(GetItemFromUID(uid).Name + " équipé."), 2);
 
@@ -143,7 +146,7 @@ namespace BlueSheep.Core.Inventory
             if (!ItemExists(uid))
                 return;
 
-            ObjectUseMessage msg = new ObjectUseMessage(uid);
+            ObjectUseMessage msg = new ObjectUseMessage((uint)uid);
             Account.SocketManager.Send(msg);
             Account.Log(new BotTextInformation("Utilisation de : " + GetItemFromUID(uid).Name), 3);
         }
@@ -154,7 +157,7 @@ namespace BlueSheep.Core.Inventory
             {
                 Account.Log(new ActionTextInformation("Objet transféré : " + GetItemFromUID(i).Name + " (x" + GetItemFromUID(i).Quantity + ")."), 2);
             }
-            ExchangeObjectTransfertListFromInvMessage msg = new ExchangeObjectTransfertListFromInvMessage(items.ToArray());
+            ExchangeObjectTransfertListFromInvMessage msg = new ExchangeObjectTransfertListFromInvMessage(items.Select(item => (uint)item).ToList());
             Account.SocketManager.Send(msg);
             Account.Log(new BotTextInformation("Trajet : Tous les objets transférés."), 3);
             //Account.Npc.CloseDialog();
@@ -170,7 +173,7 @@ namespace BlueSheep.Core.Inventory
                 {
                     Account.Log(new ActionTextInformation("Objet pris du coffre : " + GetItemFromUID(i).Name + " (x" + GetItemFromUID(i).Quantity + ")."), 2);
                 }
-                ExchangeObjectTransfertListToInvMessage msg = new ExchangeObjectTransfertListToInvMessage(items.ToArray());
+                ExchangeObjectTransfertListToInvMessage msg = new ExchangeObjectTransfertListToInvMessage(items.Select(item => (uint)item).ToList());
                 Account.SocketManager.Send(msg);
                 Account.Log(new BotTextInformation("Trajet : Tous les objets pris du coffre."), 3);
             }
@@ -185,7 +188,7 @@ namespace BlueSheep.Core.Inventory
 
         public void RequestExchange(string name)
         {
-            ulong targetId = Account.MapData.Players.Find(p=> p.name == name).contextualId;
+            ulong targetId = (ulong)Account.MapData.Players.Find(p=> p.Name == name).ContextualId;
             if (targetId != 0)
             {
                 Account.SocketManager.Send(new ExchangePlayerRequestMessage(1, targetId));

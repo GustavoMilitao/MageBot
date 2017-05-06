@@ -8,26 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Common.Basic
+namespace BlueSheep.Common.Protocol.Messages.Common.Basic
 {
-    using DofusBot.Protocol.Network.Types.Common.Basic;
-    using DofusBot.Protocol.Network;
+    using BlueSheep.Common.Protocol.Types.Common.Basic;
+    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class BasicStatWithDataMessage : BasicStatMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class BasicStatWithDataMessage : BasicStatMessage 
     {
         
-        public const int ProtocolId = 6573;
+        public new const int ID = 6573;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -75,7 +77,7 @@ namespace DofusBot.Protocol.Network.Messages.Common.Basic
             m_datas = new System.Collections.Generic.List<StatisticData>();
             for (datasIndex = 0; (datasIndex < datasCount); datasIndex = (datasIndex + 1))
             {
-                StatisticData objectToAdd = ProtocolManager.GetTypeInstance<StatisticData>(reader.ReadUShort());
+                StatisticData objectToAdd = ProtocolTypeManager.GetInstance<StatisticData>(reader.ReadUShort());
                 objectToAdd.Deserialize(reader);
                 m_datas.Add(objectToAdd);
             }

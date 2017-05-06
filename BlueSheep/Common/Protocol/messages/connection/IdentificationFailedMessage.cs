@@ -1,54 +1,29 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:14
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+﻿namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    public class IdentificationFailedMessage : Message
+    using BlueSheep.Engine.Types;
+
+ 	 public class IdentificationFailedMessage : Message 
     {
-        public new const uint ID =20;
-        public override uint ProtocolID
+        public new const int ID = 20;
+        public override int MessageID { get { return ID; } }
+
+        public uint Reason = 99;
+
+        public IdentificationFailedMessage() { }
+
+        public IdentificationFailedMessage(uint reason = 99)
         {
-            get { return ID; }
+            Reason = reason;
         }
-        
-        public sbyte reason;
-        
-        public IdentificationFailedMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
+            writer.WriteByte((byte)Reason);
         }
-        
-        public IdentificationFailedMessage(sbyte reason)
+
+        public override void Deserialize(IDataReader reader)
         {
-            this.reason = reason;
+            Reason = reader.ReadByte();
         }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteSByte(reason);
-        }
-        
-        public override void Deserialize(BigEndianReader reader)
-        {
-            reason = reader.ReadSByte();
-            if (reason < 0)
-                throw new Exception("Forbidden value on reason = " + reason + ", it doesn't respect the following condition : reason < 0");
-        }
-        
     }
-    
 }

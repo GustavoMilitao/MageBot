@@ -1,80 +1,35 @@
+﻿using BlueSheep.Common.Protocol.Types.Game.Social;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:06
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
-
-namespace BlueSheep.Common.Protocol.Types
+namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
 {
-
     public class BasicAllianceInformations : AbstractSocialGroupInfos
     {
-
         public new const int ID = 419;
-        public override int TypeId
-        {
-            get { return ID; }
-        }
+        public virtual int TypeID { get { return ID; } }
 
-        public uint allianceId;
-        public string allianceTag;
+        public uint AllianceId;
+        public string AllianceTag;
 
-
-        public BasicAllianceInformations()
-        {
-        }
+        public BasicAllianceInformations() { }
 
         public BasicAllianceInformations(uint allianceId, string allianceTag)
         {
-            this.allianceId = allianceId;
-            this.allianceTag = allianceTag;
+            AllianceId = allianceId;
+            AllianceTag = allianceTag;
         }
 
-
-        public override void Serialize(BigEndianWriter writer)
+        public void Serialize(IDataWriter writer)
         {
-
             base.Serialize(writer);
-            writer.WriteVarInt(allianceId);
-            writer.WriteUTF(allianceTag);
-
-
+            writer.WriteVarInt(AllianceId);
+            writer.WriteUTF(AllianceTag);
         }
 
-        public override void Deserialize(BigEndianReader reader)
+        public void Deserialize(IDataReader reader)
         {
-
             base.Deserialize(reader);
-            allianceId = reader.ReadVarUhInt();
-            if (allianceId < 0)
-                throw new Exception("Forbidden value on allianceId = " + allianceId + ", it doesn't respect the following condition : allianceId < 0");
-            allianceTag = reader.ReadUTF();
-
-
+            AllianceId = reader.ReadVarUhInt();
+            AllianceTag = reader.ReadUTF();
         }
-
-
     }
-
-
 }

@@ -130,7 +130,7 @@ namespace BlueSheep.Core
                         if (UsableElement.Element.IsUsable == false || m_BannedId.Contains((int)UsableElement.Element.Id))
                             continue;
                         Id = (int)UsableElement.Element.Id;
-                        SkillInstanceUid = UsableElement.Skills[0].skillInstanceUid;
+                        SkillInstanceUid = UsableElement.Skills[0].SkillInstanceUid;
                         Current_El = UsableElement.Element;
                         int distance = GetRessourceDistance((int)UsableElement.Element.Id);
                         account.Log(new DebugTextInformation("[Gather] Distance from element " + UsableElement.Element.Id + " = " + distance), 0);
@@ -236,7 +236,7 @@ namespace BlueSheep.Core
         /// </param>
         public int GetRessourceDistance(int Id)
         {
-            MapPoint CharacterMapPoint = new MapPoint(account.MapData.Character.disposition.cellId);
+            MapPoint CharacterMapPoint = new MapPoint(account.MapData.Character.Disposition.CellId);
             StatedElement StatedRessource = account.MapData.StatedElements.FirstOrDefault((se) => se.Id == Id);
             if (StatedRessource != null)
             {

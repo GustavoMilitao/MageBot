@@ -1,74 +1,52 @@
+﻿using BlueSheep.Engine.Types;
 
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:21
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
     public class AccountCapabilitiesMessage : Message
     {
-        public new const uint ID =6216;
-        public override uint ProtocolID
+        public new const int ID = 6216;
+        public override int MessageID { get { return ID; } }
+
+        public int AccountId;
+        public bool TutorialAvailable;
+        public uint BreedsVisible;
+        public uint BreedsAvailable;
+        public byte Status;
+        public bool CanCreateNewCharacter;
+
+        public AccountCapabilitiesMessage() { }
+
+        public AccountCapabilitiesMessage(int accountId, bool tutorialAvailable, uint breedsVisible, uint breedsAvailable, byte status, bool canCreateNewCharacter)
         {
-            get { return ID; }
+            AccountId = accountId;
+            TutorialAvailable = tutorialAvailable;
+            BreedsVisible = breedsVisible;
+            BreedsAvailable = breedsAvailable;
+            Status = status;
+            CanCreateNewCharacter = canCreateNewCharacter;
         }
-        
-        public int accountId;
-        public bool tutorialAvailable;
-        public int breedsVisible;
-        public int breedsAvailable;
-        public sbyte status;
-        
-        public AccountCapabilitiesMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
+            byte flag = new byte();
+            BooleanByteWrapper.SetFlag(0, flag, TutorialAvailable);
+            BooleanByteWrapper.SetFlag(1, flag, CanCreateNewCharacter);
+            writer.WriteByte(flag);
+            writer.WriteInt(AccountId);
+            writer.WriteVarInt(BreedsVisible);
+            writer.WriteVarInt(BreedsAvailable);
+            writer.WriteByte(Status);
         }
-        
-        public AccountCapabilitiesMessage(int accountId, bool tutorialAvailable, int breedsVisible, int breedsAvailable, sbyte status)
+
+        public override void Deserialize(IDataReader reader)
         {
-            this.accountId = accountId;
-            this.tutorialAvailable = tutorialAvailable;
-            this.breedsVisible = breedsVisible;
-            this.breedsAvailable = breedsAvailable;
-            this.status = status;
+            byte flag = reader.ReadByte();
+            TutorialAvailable = BooleanByteWrapper.GetFlag(flag, 0);
+            CanCreateNewCharacter = BooleanByteWrapper.GetFlag(flag, 1);
+            AccountId = reader.ReadInt();
+            BreedsVisible = reader.ReadVarUhInt();
+            BreedsAvailable = reader.ReadVarUhInt();
+            Status = reader.ReadByte();
         }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteInt(accountId);
-            writer.WriteBoolean(tutorialAvailable);
-            writer.WriteUShort((ushort)breedsVisible);
-            writer.WriteUShort((ushort)breedsAvailable);
-            writer.WriteSByte(status);
-        }
-        
-        public override void Deserialize(BigEndianReader reader)
-        {
-            accountId = reader.ReadInt();
-            if (accountId < 0)
-                throw new Exception("Forbidden value on accountId = " + accountId + ", it doesn't respect the following condition : accountId < 0");
-            tutorialAvailable = reader.ReadBoolean();
-            breedsVisible = reader.ReadUShort();
-            if (breedsVisible < 0 || breedsVisible > 65535)
-                throw new Exception("Forbidden value on breedsVisible = " + breedsVisible + ", it doesn't respect the following condition : breedsVisible < 0 || breedsVisible > 65535");
-            breedsAvailable = reader.ReadUShort();
-            if (breedsAvailable < 0 || breedsAvailable > 65535)
-                throw new Exception("Forbidden value on breedsAvailable = " + breedsAvailable + ", it doesn't respect the following condition : breedsAvailable < 0 || breedsAvailable > 65535");
-            status = reader.ReadSByte();
-        }
-        
     }
-    
 }

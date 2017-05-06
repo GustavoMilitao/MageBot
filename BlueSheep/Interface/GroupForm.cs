@@ -1,5 +1,6 @@
 ﻿using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party;
 using BlueSheep.Common.Types;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface.Text;
@@ -85,7 +86,7 @@ namespace BlueSheep.Interface
                                 if (account.AccountName != slave.AccountName)
                                 {
                                     // On l'invite en groupe
-                                    Invite(slave.CharacterBaseInformations.name, account);
+                                    Invite(slave.CharacterBaseInformations.Name, account);
                                 }
                             }
                         }
@@ -103,7 +104,7 @@ namespace BlueSheep.Interface
         }
         private void QuitGroup(int partyid, AccountUC account)
         {
-            PartyLeaveRequestMessage msg = new PartyLeaveRequestMessage(partyid);
+            PartyLeaveRequestMessage msg = new PartyLeaveRequestMessage((uint)partyid);
             account.SocketManager.Send(msg);
         }
         #endregion

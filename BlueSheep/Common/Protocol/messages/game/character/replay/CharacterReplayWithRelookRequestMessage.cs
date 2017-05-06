@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Character.Replay
+namespace BlueSheep.Common.Protocol.Messages.Game.Character.Replay
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class CharacterReplayWithRelookRequestMessage : CharacterReplayRequestMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class CharacterReplayWithRelookRequestMessage : CharacterReplayRequestMessage 
     {
         
-        public const int ProtocolId = 6354;
+        public new const int ID = 6354;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

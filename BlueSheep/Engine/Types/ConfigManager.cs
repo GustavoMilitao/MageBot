@@ -31,7 +31,7 @@ namespace BlueSheep.Engine.Types
         public void RecoverConfig()
         {
             
-            string spath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, account.CharacterBaseInformations.name + ".xml");
+            string spath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
             if (File.Exists(spath))
             {
                 Config conf = DeserializeConfig(spath);
@@ -182,7 +182,7 @@ namespace BlueSheep.Engine.Types
 
             Config conf = new Config(path, flood, pathBot, ia, AIpath, account.checkBoxBegin.Checked, 
                 AutoUp, isLockingFight, RegenValue, Restrictions, AutoDeletion, RelaunchPath/*,GestItems*/);//, ressources, exp, winLose); 
-            string spath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, account.CharacterBaseInformations.name + ".xml");
+            string spath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
             Serialize(conf, spath);
 
 
@@ -190,7 +190,7 @@ namespace BlueSheep.Engine.Types
 
         public void DeleteConfig()
         {
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, account.CharacterBaseInformations.name + ".xml");
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
             if (File.Exists(path))
                 File.Delete(path);
         }

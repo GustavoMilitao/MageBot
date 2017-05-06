@@ -2,11 +2,20 @@
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Achievement;
+using BlueSheep.Common.Protocol.Messages.Game.Character.Choice;
+using BlueSheep.Common.Protocol.Messages.Game.Character.Stats;
+using BlueSheep.Common.Protocol.Messages.Game.Character.Status;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Stats;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Spells;
 using BlueSheep.Common.Protocol.Types;
+using BlueSheep.Common.Protocol.Types.Game.Character.Status;
+using BlueSheep.Common.Protocol.Types.Game.Data.Items;
 using BlueSheep.Common.Types;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
+using BlueSheep.Util.Enums.Char;
 using BlueSheep.Util.Enums.EnumHelper;
 using System;
 using System.Linq;
@@ -28,13 +37,13 @@ namespace BlueSheep.Engine.Handlers.Character
                 charactersListMessage.Deserialize(reader);
             }
 
-            account.CharacterBaseInformations = charactersListMessage.characters[0];
+            account.CharacterBaseInformations = charactersListMessage.Characters[0];
         
             //MainForm.ActualMainForm.ActualizeAccountInformations();
 
             if (!account.IsMITM)
             {
-                CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage(account.CharacterBaseInformations.Id);
+                CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage((ulong)account.CharacterBaseInformations.ObjectID);
                 account.SocketManager.Send(characterSelectionMessage);
             }
             
@@ -50,12 +59,12 @@ namespace BlueSheep.Engine.Handlers.Character
                 characterSelectedSuccessMessage.Deserialize(reader);
             }
 
-            account.CharacterBaseInformations = characterSelectedSuccessMessage.infos;
+            account.CharacterBaseInformations = characterSelectedSuccessMessage.Infos;
 
-            account.Log(new BotTextInformation(account.CharacterBaseInformations.name + " de niveau "+ account.CharacterBaseInformations.level + " est connecté."),1);
-            account.Log(new BotTextInformation("Breed: "+account.CharacterBaseInformations.breed.Description() + " Sex: " + account.CharacterBaseInformations.sex.Description()), 1);
-            account.ModifBar(7,0,0, account.AccountName + " - " + account.CharacterBaseInformations.name);
-            account.ModifBar(8, 0, 0, Convert.ToString(account.CharacterBaseInformations.level));
+            account.Log(new BotTextInformation(account.CharacterBaseInformations.Name + " de niveau "+ account.CharacterBaseInformations.Level + " est connecté."),1);
+            account.Log(new BotTextInformation("Breed: "+ ((Breed)account.CharacterBaseInformations.Breed).Description() + " Sex: " + ((Sex)Convert.ToInt32(account.CharacterBaseInformations.Sex)).Description()), 1);
+            account.ModifBar(7,0,0, account.AccountName + " - " + account.CharacterBaseInformations.Name);
+            account.ModifBar(8, 0, 0, Convert.ToString(account.CharacterBaseInformations.Level));
             
             //MainForm.ActualMainForm.ActualizeAccountInformations();
         }
@@ -77,15 +86,15 @@ namespace BlueSheep.Engine.Handlers.Character
             }
             if (!account.ConfigManager.Restored)
                 account.ConfigManager.RecoverConfig();
-            account.CharacterStats = msg.stats;
+            account.CharacterStats = msg.Stats;
             account.CaracUC.Init();
             if (account.MyGroup != null)
-                ((GroupForm)account.ParentForm).AddMember(account.CharacterBaseInformations.name);
-            uint percent = (msg.stats.lifePoints / msg.stats.maxLifePoints) * 100;
-            string text = msg.stats.lifePoints + "/" + msg.stats.maxLifePoints + "(" + percent + "%)";
-            account.ModifBar(2, (int)msg.stats.maxLifePoints, (int)msg.stats.lifePoints, "Vitalité");
-            double i = msg.stats.experience - msg.stats.experienceLevelFloor;
-            double j = msg.stats.experienceNextLevelFloor - msg.stats.experienceLevelFloor;
+                ((GroupForm)account.ParentForm).AddMember(account.CharacterBaseInformations.Name);
+            uint percent = (msg.Stats.LifePoints / msg.Stats.MaxLifePoints) * 100;
+            string text = msg.Stats.LifePoints + "/" + msg.Stats.MaxLifePoints + "(" + percent + "%)";
+            account.ModifBar(2, (int)msg.Stats.MaxLifePoints, (int)msg.Stats.LifePoints, "Vitalité");
+            double i = msg.Stats.Experience - msg.Stats.ExperienceLevelFloor;
+            double j = msg.Stats.ExperienceNextLevelFloor - msg.Stats.ExperienceLevelFloor;
             try
             {
                 int xppercent = (int)(Math.Round(i / j,2) * 100);
@@ -94,8 +103,8 @@ namespace BlueSheep.Engine.Handlers.Character
             {
 
             }
-            account.ModifBar(1, (int)msg.stats.experienceNextLevelFloor - (int)msg.stats.experienceLevelFloor, (int)msg.stats.experience - (int)msg.stats.experienceLevelFloor, "Experience");
-            account.ModifBar(4, 0, 0, msg.stats.kamas.ToString());
+            account.ModifBar(1, (int)msg.Stats.ExperienceNextLevelFloor - (int)msg.Stats.ExperienceLevelFloor, (int)msg.Stats.Experience - (int)msg.Stats.ExperienceLevelFloor, "Experience");
+            account.ModifBar(4, 0, 0, msg.Stats.Kamas.ToString());
         }
         
         [MessageHandler(typeof(SpellListMessage))]
@@ -108,8 +117,8 @@ namespace BlueSheep.Engine.Handlers.Character
             }
 
             account.Spells.Clear();
-            foreach (SpellItem spell in msg.spells)
-                account.Spells.Add(new Spell(spell.spellId, spell.spellLevel));
+            foreach (SpellItem spell in msg.Spells)
+                account.Spells.Add(new Spell(spell.SpellId, spell.SpellLevel));
         }
 
         [MessageHandler(typeof(CharacterSelectedForceMessage))]
@@ -133,8 +142,8 @@ namespace BlueSheep.Engine.Handlers.Character
             {
                 msg.Deserialize(reader);
             }
-            account.ModifBar(8, 0, 0, Convert.ToString(msg.newLevel));
-            account.Log(new BotTextInformation("Level up ! New level : " + Convert.ToString(msg.newLevel)), 3);
+            account.ModifBar(8, 0, 0, Convert.ToString(msg.NewLevel));
+            account.Log(new BotTextInformation("Level up ! New level : " + Convert.ToString(msg.NewLevel)), 3);
             account.CaracUC.UpAuto();
         }
 
@@ -146,7 +155,7 @@ namespace BlueSheep.Engine.Handlers.Character
             {
                 msg.Deserialize(reader);
             }
-            DataClass d = GameData.GetDataObject(D2oFileEnum.Achievements, (int)msg.id);
+            DataClass d = GameData.GetDataObject(D2oFileEnum.Achievements, (int)msg.ObjectId);
             account.Log(new ActionTextInformation("Succès débloqué : " + I18N.GetText((int)d.Fields["nameId"])),3);
                 AchievementRewardRequestMessage nmsg = new AchievementRewardRequestMessage(-1);
                 account.SocketManager.Send(nmsg);
@@ -161,13 +170,13 @@ namespace BlueSheep.Engine.Handlers.Character
             {
                 msg.Deserialize(reader);
             }
-            account.Log(new ActionTextInformation("Experience gagnée : + " + msg.experienceCharacter + " points d'expérience"), 4);
+            account.Log(new ActionTextInformation("Experience gagnée : + " + msg.ExperienceCharacter + " points d'expérience"), 4);
             if (account.CharacterStats != null)
             {
-                account.CharacterStats.experience += msg.experienceCharacter;
+                account.CharacterStats.Experience += msg.ExperienceCharacter;
 
-                double i = account.CharacterStats.experience - account.CharacterStats.experienceLevelFloor;
-                double j = account.CharacterStats.experienceNextLevelFloor - account.CharacterStats.experienceLevelFloor;
+                double i = account.CharacterStats.Experience - account.CharacterStats.ExperienceLevelFloor;
+                double j = account.CharacterStats.ExperienceNextLevelFloor - account.CharacterStats.ExperienceLevelFloor;
                 try
                 {
                     int xppercent = (int)((i / j) * 100);
@@ -176,10 +185,10 @@ namespace BlueSheep.Engine.Handlers.Character
                 {
 
                 }
-                account.ModifBar(1, (int)account.CharacterStats.experienceNextLevelFloor - (int)account.CharacterStats.experienceLevelFloor, (int)account.CharacterStats.experience - (int)account.CharacterStats.experienceLevelFloor, "Experience");
+                account.ModifBar(1, (int)account.CharacterStats.ExperienceNextLevelFloor - (int)account.CharacterStats.ExperienceLevelFloor, (int)account.CharacterStats.Experience - (int)account.CharacterStats.ExperienceLevelFloor, "Experience");
                 if (account.Fight != null)
                 {
-                    account.FightData.xpWon[DateTime.Today] += (int)msg.experienceCharacter;
+                    account.FightData.xpWon[DateTime.Today] += (int)msg.ExperienceCharacter;
                 }
             }
         }
@@ -210,9 +219,9 @@ namespace BlueSheep.Engine.Handlers.Character
             {
                 msg.Deserialize(reader);
             }
-            if (msg.playerId == account.CharacterBaseInformations.Id)
+            if (msg.PlayerId == account.CharacterBaseInformations.ObjectID)
             {
-                switch (msg.status.statusId)
+                switch (msg.Status.StatusId)
                 {
                     case 10:
                         account.Log(new ActionTextInformation("Statut disponible activé."), 3);

@@ -1,74 +1,27 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:02
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
-
-namespace BlueSheep.Common.Protocol.Types
+﻿namespace BlueSheep.Common.Protocol.Types.Game.Approach
 {
-
-    public class ServerSessionConstant
+    public class ServerSessionConstant 
     {
-
         public new const int ID = 430;
-        public virtual int TypeId
+        public virtual int TypeID { get { return ID; } }
+
+        public ushort ObjectID { get; set; }
+
+        public ServerSessionConstant() { }
+
+        public ServerSessionConstant(ushort objectId)
         {
-            get { return ID; }
+            ObjectID = objectId;
         }
 
-        public ulong id;
-
-
-        public ServerSessionConstant()
+        public void Serialize(IDataWriter writer)
         {
+            writer.WriteVarShort(ObjectID);
         }
 
-        public ServerSessionConstant(ulong id)
+        public void Deserialize(IDataReader reader)
         {
-            this.id = id;
+            ObjectID = reader.ReadVarUhShort();
         }
-
-
-        public virtual void Serialize(BigEndianWriter writer)
-        {
-
-            writer.WriteVarShort((short)id);
-
-
-        }
-
-        public virtual void Deserialize(BigEndianReader reader)
-        {
-
-            id = reader.ReadVarUhShort();
-            if (id < 0)
-                throw new Exception("Forbidden value on id = " + id + ", it doesn't respect the following condition : id < 0");
-
-
-        }
-
-
     }
-
-
 }

@@ -5,7 +5,13 @@ namespace BlueSheep.Engine.Types
     public abstract class Message
     {
         #region Properties
-        public abstract uint ProtocolID { get; }
+        public virtual int MessageID
+        {
+            get
+            {
+                return 0;
+            }
+        }
         #endregion
 
         #region Public methods
@@ -23,8 +29,8 @@ namespace BlueSheep.Engine.Types
             WritePacket(writer);
         }
 
-        public abstract void Serialize(BigEndianWriter writer);
-        public abstract void Deserialize(BigEndianReader reader);
+        public abstract void Serialize(IDataWriter writer);
+        public abstract void Deserialize(IDataReader reader);
 
         public virtual void WritePacket(IDataWriter writer)
         {
@@ -33,7 +39,7 @@ namespace BlueSheep.Engine.Types
             writer.Clear();
 
             byte typeLen = ComputeTypeLen(packet.Length);
-            var header = (int)SubComputeStaticHeader(ProtocolID, typeLen);
+            var header = (int)SubComputeStaticHeader((uint)MessageID, typeLen);
             writer.WriteShort((short)header);
 
             switch (typeLen)

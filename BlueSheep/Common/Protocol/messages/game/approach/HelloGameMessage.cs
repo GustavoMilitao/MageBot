@@ -1,45 +1,22 @@
+﻿using BlueSheep.Engine.Types;
 
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:21
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
     public class HelloGameMessage : Message
     {
-        public new const uint ID =101;
-        public override uint ProtocolID
+        public new const int ID = 101;
+        public override int MessageID { get { return ID; } }
+
+        public HelloGameMessage() { }
+
+        public override void Serialize(IDataWriter writer)
         {
-            get { return ID; }
+            //
         }
-        
-        
-        public HelloGameMessage()
+
+        public override void Deserialize(IDataReader reader)
         {
+            //
         }
-        
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-        }
-        
-        public override void Deserialize(BigEndianReader reader)
-        {
-        }
-        
     }
-    
 }

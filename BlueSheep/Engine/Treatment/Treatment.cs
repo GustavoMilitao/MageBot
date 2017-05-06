@@ -70,7 +70,7 @@ namespace BlueSheep.Engine.Treatment
 
                     Message message = (Message)(Activator.CreateInstance(messageHandler.MessageType));
 
-                    InstanceInfo instance = new InstanceInfo(message.ProtocolID, messageHandler.MessageType, method);
+                    InstanceInfo instance = new InstanceInfo((uint)message.MessageID, messageHandler.MessageType, method);
 
                     m_Instances.Add(instance);
                 }

@@ -1,45 +1,22 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:23
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+﻿namespace BlueSheep.Common.Protocol.Messages.Game.Character.Choice
 {
-    public class CharactersListRequestMessage : Message
+    using BlueSheep.Engine.Types;
+
+ 	 public class CharactersListRequestMessage : Message 
     {
-        public new const uint ID =150;
-        public override uint ProtocolID
+        public new const int ID = 150;
+        public override int MessageID { get { return ID; } }
+
+        public CharactersListRequestMessage() { }
+
+        public override void Serialize(IDataWriter writer)
         {
-            get { return ID; }
-        }
-        
-        
-        public CharactersListRequestMessage()
-        {
-        }
-        
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-        }
-        
-        public override void Deserialize(BigEndianReader reader)
-        {
+            //
         }
 
+        public override void Deserialize(IDataReader reader)
+        {
+            //
+        }
     }
-    
 }

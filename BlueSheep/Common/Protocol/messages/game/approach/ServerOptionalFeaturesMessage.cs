@@ -1,61 +1,39 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:21
-using System;
+﻿using BlueSheep.Engine.Types;
 using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
 
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
     public class ServerOptionalFeaturesMessage : Message
     {
-        public new const uint ID =6305;
-        public override uint ProtocolID
+        public new const int ID = 6305;
+        public override int MessageID { get { return ID; } }
+
+        public List<byte> Features;
+
+        public ServerOptionalFeaturesMessage() { }
+
+        public ServerOptionalFeaturesMessage(List<byte> features)
         {
-            get { return ID; }
+            Features = features;
         }
-        
-        public sbyte[] features;
-        
-        public ServerOptionalFeaturesMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
-        }
-        
-        public ServerOptionalFeaturesMessage(sbyte[] features)
-        {
-            this.features = features;
-        }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteUShort((ushort)features.Length);
-            foreach (var entry in features)
+            writer.WriteShort((short)Features.Count);
+            for (int i = 0; i < Features.Count; i++)
             {
-                 writer.WriteSByte(entry);
+                writer.WriteByte(Features[i]);
             }
         }
-        
-        public override void Deserialize(BigEndianReader reader)
+
+        public override void Deserialize(IDataReader reader)
         {
-            var limit = reader.ReadUShort();
-            features = new sbyte[limit];
-            for (int i = 0; i < limit; i++)
+            ushort lenght = reader.ReadUShort();
+            Features = new List<byte>();
+            for (int i = 0; i < lenght; i++)
             {
-                 features[i] = reader.ReadSByte();
+                Features.Add(reader.ReadByte());
             }
         }
-        
     }
-    
 }

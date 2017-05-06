@@ -15,6 +15,16 @@ using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Data.Pathfinding;
 using BlueSheep.Common.Data.D2o;
 using System.Collections;
+using BlueSheep.Common.Protocol.Messages.Game.Actions.Fight;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Fight;
+using BlueSheep.Common.Protocol.Messages.Game.Character.Stats;
+using BlueSheep.Common.Protocol.Messages.Game.Actions;
+using BlueSheep.Common.Protocol.Messages.Game.Actions.Sequence;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Preset;
+using BlueSheep.Common.Protocol.Messages.Game.Context;
+using BlueSheep.Common.Protocol.Types.Game.Context.Fight;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character;
+
 namespace BlueSheep.Engine.Handlers.Fight
 {
     class FightHandler
@@ -28,7 +38,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetFighterDeath(msg.targetId);
+            account.FightData.SetFighterDeath((ulong)msg.TargetId);
         }
 
         [MessageHandler(typeof(GameActionFightDispellableEffectMessage))]
@@ -39,7 +49,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetEffect(msg.effect, msg.actionId);
+            account.FightData.SetEffect(msg.Effect, msg.ActionId);
         }
 
         [MessageHandler(typeof(GameActionFightPointsVariationMessage))]
@@ -50,7 +60,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetPointsVariation(msg.targetId, msg.actionId, msg.delta);
+            account.FightData.SetPointsVariation((ulong)msg.TargetId, msg.ActionId, msg.Delta);
         }
 
         [MessageHandler(typeof(GameActionFightLifePointsLostMessage))]
@@ -61,7 +71,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.UpdateFighterLifePoints(msg.targetId, -msg.loss);
+            account.FightData.UpdateFighterLifePoints((ulong)msg.TargetId, -((int)msg.Loss));
         
         }
 
@@ -73,7 +83,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.UpdateFighterCell(msg.targetId, msg.endCellId);
+            account.FightData.UpdateFighterCell((ulong)msg.TargetId, msg.EndCellId);
         }
 
         [MessageHandler(typeof(GameActionFightSpellCastMessage))]
@@ -84,7 +94,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetSpellCasted(msg.sourceId, msg.spellId, msg.destinationCellId);
+            account.FightData.SetSpellCasted((ulong)msg.SourceId, msg.SpellId, msg.DestinationCellId);
         }
 
         [MessageHandler(typeof(GameActionFightSummonMessage))]
@@ -95,7 +105,14 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.AddSummon(msg.sourceId, new BFighter(msg.summon.contextualId, msg.summon.disposition.cellId, msg.summon.stats.actionPoints, msg.summon.stats, msg.summon.alive, msg.summon.stats.lifePoints, msg.summon.stats.maxLifePoints, msg.summon.stats.movementPoints, (uint)msg.summon.teamId, 0));
+            msg.Summons.ForEach(summon => 
+            account.FightData.AddSummon(
+                (ulong)msg.SourceId, new BFighter(
+                    summon.ContextualId, summon.Disposition.CellId,
+                    summon.Stats.ActionPoints, summon.Stats, summon.Alive, 
+                    (int)summon.Stats.LifePoints, (int)summon.Stats.MaxLifePoints, 
+                    summon.Stats.MovementPoints, (uint)summon.TeamId, 0))
+            );
         }
 
         [MessageHandler(typeof(GameActionFightTeleportOnSameMapMessage))]
@@ -106,7 +123,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.UpdateFighterCell(msg.targetId, msg.cellId);
+            account.FightData.UpdateFighterCell((ulong)msg.TargetId, msg.CellId);
         }
 
         [MessageHandler(typeof(GameEntitiesDispositionMessage))]
@@ -119,9 +136,9 @@ namespace BlueSheep.Engine.Handlers.Fight
             }
             if (account.Fight != null)
             {
-                msg.dispositions.ToList().ForEach(d =>
+                msg.Dispositions.ToList().ForEach(d =>
                 {
-                    account.FightData.UpdateFighterCell(d.id, d.cellId);
+                    account.FightData.UpdateFighterCell((ulong)d.ObjectId, d.CellId);
                 });
             }
             account.SetStatus(Status.Fighting);
@@ -146,8 +163,8 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            if (msg.characterId == account.CharacterBaseInformations.Id)
-                account.FightData.WaitForReady = !msg.isReady;
+            if (msg.CharacterId == account.CharacterBaseInformations.ObjectID)
+                account.FightData.WaitForReady = !msg.IsReady;
         }
 
         [MessageHandler(typeof(GameFightJoinMessage))]
@@ -160,7 +177,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             }
             if (account.Fight != null)
             {
-                account.FightData.Reset(msg.isFightStarted, msg.canSayReady);
+                account.FightData.Reset(msg.IsFightStarted, msg.CanSayReady);
                 if (account.IsLockingFight.Checked && account.Fight != null)
                 {
                     account.FightData.PerformAutoTimeoutFight(2000);
@@ -180,7 +197,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             }
             /* TODO : HANDLE IT */
 
-            if (msg.charId == account.CharacterBaseInformations.Id)
+            if (msg.CharId == account.CharacterBaseInformations.ObjectID)
             {
                 account.FightData.FightStop();
             }
@@ -200,7 +217,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetOption(msg.state, msg.option);         
+            account.FightData.SetOption(msg.State, msg.Option);         
         }
 
         [MessageHandler(typeof(GameFightShowFighterMessage))]
@@ -211,7 +228,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.AddFighter(msg.informations);
+            account.FightData.AddFighter(msg.Informations);
             
         }
 
@@ -223,7 +240,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.AddFighter(msg.informations);
+            account.FightData.AddFighter(msg.Informations);
         }
 
         [MessageHandler(typeof(GameFightStartMessage))]
@@ -246,7 +263,7 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             account.FightData.ClearFighters();
-            foreach (GameFightFighterInformations i in msg.fighters)
+            foreach (GameFightFighterInformations i in msg.Fighters)
                 account.FightData.AddFighter(i);
         }
 
@@ -258,7 +275,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.TurnEnded(msg.id);       
+            account.FightData.TurnEnded((ulong)msg.ObjectId);       
         }
 
         [MessageHandler(typeof(GameFightTurnStartMessage))]
@@ -280,10 +297,10 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            MovementPath clientMovement = MapMovementAdapter.GetClientMovement(msg.keyMovements.Select<int, uint>(k => (uint)k).ToList());
+            MovementPath clientMovement = MapMovementAdapter.GetClientMovement(msg.KeyMovements.Select(k => (uint)k).ToList());
             if (account.state == Enums.Status.Fighting)
             {
-                account.FightData.UpdateFighterCell(msg.actorId, clientMovement.CellEnd.CellId);
+                account.FightData.UpdateFighterCell((ulong)msg.ActorId, clientMovement.CellEnd.CellId);
             }
         }
 
@@ -295,7 +312,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.UpdateTurn(msg.roundNumber);
+            account.FightData.UpdateTurn((int)msg.RoundNumber);
         }
 
         [MessageHandler(typeof(GameFightTurnStartPlayingMessage))]
@@ -328,12 +345,12 @@ namespace BlueSheep.Engine.Handlers.Fight
             account.FightData.UpdateTurn(0);
             if (account.Fight != null)
             {
-                account.Fight.PlaceCharacter(msg.positionsForChallengers.ToList());
+                account.Fight.PlaceCharacter(msg.PositionsForChallengers.Select(item => (int)item).ToList());
             }
             if (account.WithItemSetBox.Checked == true)
             {
-                sbyte id = (sbyte)account.PresetStartUpD.Value;
-                InventoryPresetUseMessage msg2 = new InventoryPresetUseMessage((sbyte)(id - 1));
+                byte id = (byte)account.PresetStartUpD.Value;
+                InventoryPresetUseMessage msg2 = new InventoryPresetUseMessage((byte)(id - 1));
                 account.SocketManager.Send(msg2);
                 account.Log(new ActionTextInformation("Equipement rapide numero " + Convert.ToString(id)), 5);
             }
@@ -362,9 +379,9 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            if (!account.FightData.IsDead && account.FightData.Fighter.Id == msg.authorId && !account.IsMITM && account.Fight != null && account.FightData.IsFighterTurn)
+            if (!account.FightData.IsDead && account.FightData.Fighter.Id == msg.AuthorId && !account.IsMITM && account.Fight != null && account.FightData.IsFighterTurn)
             {
-                GameActionAcknowledgementMessage msg2 = new GameActionAcknowledgementMessage(true, (sbyte)msg.actionId);
+                GameActionAcknowledgementMessage msg2 = new GameActionAcknowledgementMessage(true, (byte)msg.ActionId);
                 account.SocketManager.Send(msg2);
                 switch (account.Fight.flag)
                 {
@@ -396,9 +413,9 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            int percent = (msg.lifePoints / msg.maxLifePoints) * 100;
-            account.Log(new BotTextInformation("Fin de la régénération. + " + msg.lifePointsGained + " points de vie"), 2);
-            account.ModifBar(2, (int)msg.maxLifePoints, (int)msg.lifePoints, "Vitalité");
+            int percent = ((int)msg.LifePoints / (int)msg.MaxLifePoints) * 100;
+            account.Log(new BotTextInformation("Fin de la régénération. + " + msg.LifePointsGained + " points de vie"), 2);
+            account.ModifBar(2, (int)msg.MaxLifePoints, (int)msg.LifePoints, "Vitalité");
         }
 
         [MessageHandler(typeof(GameFightSpectatorJoinMessage))]
@@ -422,9 +439,9 @@ namespace BlueSheep.Engine.Handlers.Fight
             }
             if (account.state == Status.Fighting)
             {
-                if (msg.actionId == 108) // HP Récupérés (delta = combien on a récupérés)
+                if (msg.ActionId == 108) // HP Récupérés (delta = combien on a récupérés)
                 {
-                    account.FightData.UpdateFighterLifePoints(msg.targetId, msg.delta);
+                    account.FightData.UpdateFighterLifePoints((ulong)msg.TargetId,(int) msg.Delta);
                 }
             }    
         }

@@ -8,25 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
+namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using DofusBot.Protocol.Network.Types.Game.Context.Roleplay.Job;
+    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class DecraftResultMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class DecraftResultMessage : Message 
     {
         
-        public const int ProtocolId = 6569;
+        public new const int ID = 6569;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

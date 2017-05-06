@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlueSheep.Common.Data.D2o;
+using BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects;
 
 namespace BlueSheep.Core.Inventory
 {
-    public class Item : BlueSheep.Common.Protocol.Types.Item
+    public class Item
     {
         public Item(List<ObjectEffect> effects, int gid, int position, int quantity, int uid, AccountUC account)
         {

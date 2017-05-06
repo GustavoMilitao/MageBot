@@ -17,6 +17,10 @@ using System.Collections;
 using BlueSheep.Common.Data.D2o;
 using System.Diagnostics;
 using System.Threading;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Fight;
+using BlueSheep.Common.Protocol.Messages.Game.Context;
+using BlueSheep.Common.Protocol.Messages.Game.Actions.Fight;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight;
 
 namespace BlueSheep.Core.Fight
 {
@@ -185,7 +189,7 @@ namespace BlueSheep.Core.Fight
                 }
                 if (cell != -1)
                 {
-                        GameFightPlacementPositionRequestMessage msg = new GameFightPlacementPositionRequestMessage((int)cell);
+                        GameFightPlacementPositionRequestMessage msg = new GameFightPlacementPositionRequestMessage((ushort)cell);
                         m_Account.SocketManager.Send(msg);
                 }
             }
@@ -259,11 +263,11 @@ namespace BlueSheep.Core.Fight
             flag = 1;
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                GameActionFightCastRequestMessage msg = new GameActionFightCastRequestMessage((int)spellId, (int)cellId);
+                GameActionFightCastRequestMessage msg = new GameActionFightCastRequestMessage((ushort)spellId, (short)cellId);
                 msg.Serialize(writer);
                 writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.ProtocolID);
+                pack.Pack((int)msg.MessageID);
                 m_Account.SocketManager.Send(pack.Writer.Content);
                 m_Account.Log(new ActionTextInformation("Lancement d'un sort en " + cellId), 5);
                 if (m_Account.DebugMode.Checked)
@@ -315,11 +319,11 @@ namespace BlueSheep.Core.Fight
                     List<UInt32> serverMovement = MapMovementAdapter.GetServerMovement(path);
                     using (BigEndianWriter writer = new BigEndianWriter())
                     {
-                        GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.ToList().Select<uint, int>(ui => (int)ui).ToArray(), m_Account.MapData.Id);
+                        GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.ToList().Select(ui => (short)ui).ToList(), m_Account.MapData.Id);
                         msg.Serialize(writer);
                         writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
                         MessagePackaging pack = new MessagePackaging(writer);
-                        pack.Pack((int)msg.ProtocolID);
+                        pack.Pack((int)msg.MessageID);
                         flag = 0;
                         m_Account.SocketManager.Send(pack.Writer.Content);
                         if (m_Account.DebugMode.Checked)

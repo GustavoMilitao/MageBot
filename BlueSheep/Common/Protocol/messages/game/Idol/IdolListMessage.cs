@@ -8,26 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Idol
+namespace BlueSheep.Common.Protocol.Messages.Game.Idol
 {
-    using DofusBot.Protocol.Network.Types.Game.Idol;
-    using DofusBot.Protocol.Network;
+    using BlueSheep.Common.Protocol.Types.Game.Idol;
+    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class IdolListMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class IdolListMessage : Message 
     {
         
-        public const int ProtocolId = 6585;
+        public new const int ID = 6585;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -90,13 +92,13 @@ namespace DofusBot.Protocol.Network.Messages.Game.Idol
             int chosenIdolsIndex;
             for (chosenIdolsIndex = 0; (chosenIdolsIndex < m_chosenIdols.Count); chosenIdolsIndex = (chosenIdolsIndex + 1))
             {
-                writer.WriteVarUhShort(m_chosenIdols[chosenIdolsIndex]);
+                writer.WriteVarShort(m_chosenIdols[chosenIdolsIndex]);
             }
             writer.WriteShort(((short)(m_partyChosenIdols.Count)));
             int partyChosenIdolsIndex;
             for (partyChosenIdolsIndex = 0; (partyChosenIdolsIndex < m_partyChosenIdols.Count); partyChosenIdolsIndex = (partyChosenIdolsIndex + 1))
             {
-                writer.WriteVarUhShort(m_partyChosenIdols[partyChosenIdolsIndex]);
+                writer.WriteVarShort(m_partyChosenIdols[partyChosenIdolsIndex]);
             }
             writer.WriteShort(((short)(m_partyIdols.Count)));
             int partyIdolsIndex;
@@ -129,7 +131,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Idol
             m_partyIdols = new System.Collections.Generic.List<PartyIdol>();
             for (partyIdolsIndex = 0; (partyIdolsIndex < partyIdolsCount); partyIdolsIndex = (partyIdolsIndex + 1))
             {
-                PartyIdol objectToAdd = ProtocolManager.GetTypeInstance<PartyIdol>(reader.ReadUShort());
+                PartyIdol objectToAdd = ProtocolTypeManager.GetInstance<PartyIdol>(reader.ReadUShort());
                 objectToAdd.Deserialize(reader);
                 m_partyIdols.Add(objectToAdd);
             }

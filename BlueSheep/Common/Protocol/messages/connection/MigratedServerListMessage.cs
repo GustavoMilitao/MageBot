@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Connection
+namespace BlueSheep.Common.Protocol.Messages.Connection
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class MigratedServerListMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class MigratedServerListMessage : Message 
     {
         
-        public const int ProtocolId = 6731;
+        public new const int ID = 6731;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -58,7 +60,7 @@ namespace DofusBot.Protocol.Network.Messages.Connection
             int migratedServerIdsIndex;
             for (migratedServerIdsIndex = 0; (migratedServerIdsIndex < m_migratedServerIds.Count); migratedServerIdsIndex = (migratedServerIdsIndex + 1))
             {
-                writer.WriteVarUhShort(m_migratedServerIds[migratedServerIdsIndex]);
+                writer.WriteVarShort(m_migratedServerIds[migratedServerIdsIndex]);
             }
         }
         

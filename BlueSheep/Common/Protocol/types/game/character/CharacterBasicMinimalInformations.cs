@@ -1,36 +1,29 @@
-using BlueSheep.Common.IO;
-using System;
-
-namespace BlueSheep.Common.Protocol.Types
+﻿namespace BlueSheep.Common.Protocol.Types.Game.Character
 {
     public class CharacterBasicMinimalInformations : AbstractCharacterInformation
     {
         public new const int ID = 503;
+        public virtual int TypeID { get { return ID; } }
 
+        public string Name { get; set; }
 
-        public String name = "";
+        public CharacterBasicMinimalInformations() { }
 
-        public CharacterBasicMinimalInformations()
+        public CharacterBasicMinimalInformations(string name)
         {
+            Name = name;
         }
 
-        public CharacterBasicMinimalInformations(ulong id, string name)
-        {
-            this.name = name;
-            Id = id;
-        }
-
-
-        public virtual void Serialize(BigEndianWriter writer)
+        public void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteUTF(name);
+            writer.WriteUTF(Name);
         }
 
-        public virtual void Deserialize(BigEndianReader reader)
+        public void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
-            name = reader.ReadUTF();
+            Name = reader.ReadUTF();
         }
     }
 }

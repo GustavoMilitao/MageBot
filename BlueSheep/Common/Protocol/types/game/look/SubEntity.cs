@@ -1,85 +1,36 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:11
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
-
-namespace BlueSheep.Common.Protocol.Types
+﻿namespace BlueSheep.Common.Protocol.Types.Game.Look
 {
-
-    public class SubEntity
+    public class SubEntity 
     {
-
         public new const int ID = 54;
-        public virtual int TypeId
+        public virtual int TypeID { get { return ID; } }
+
+        public byte BindingPointCategory;
+        public byte BindingPointIndex;
+        public EntityLook SubEntityLook;
+
+        public SubEntity() { }
+
+        public SubEntity(byte bindingPointCategory, byte bindingPointIndex, EntityLook subEntityLook)
         {
-            get { return ID; }
+            BindingPointCategory = bindingPointCategory;
+            BindingPointIndex = bindingPointIndex;
+            SubEntityLook = subEntityLook;
         }
 
-        public byte bindingPointCategory;
-        public byte bindingPointIndex;
-        public Types.EntityLook subEntityLook;
-
-
-        public SubEntity()
+        public void Serialize(IDataWriter writer)
         {
+            writer.WriteByte(BindingPointCategory);
+            writer.WriteByte(BindingPointIndex);
+            SubEntityLook.Serialize(writer);
         }
 
-        public SubEntity(byte bindingPointCategory, byte bindingPointIndex, Types.EntityLook subEntityLook)
+        public void Deserialize(IDataReader reader)
         {
-            this.bindingPointCategory = bindingPointCategory;
-            this.bindingPointIndex = bindingPointIndex;
-            this.subEntityLook = subEntityLook;
+            BindingPointCategory = reader.ReadByte();
+            BindingPointIndex = reader.ReadByte();
+            SubEntityLook = new EntityLook();
+            SubEntityLook.Deserialize(reader);
         }
-
-
-        public virtual void Serialize(BigEndianWriter writer)
-        {
-
-            writer.WriteByte(bindingPointCategory);
-            writer.WriteByte(bindingPointIndex);
-            subEntityLook.Serialize(writer);
-
-
-        }
-
-        public virtual void Deserialize(BigEndianReader reader)
-        {
-
-            bindingPointCategory = reader.ReadByte();
-            if (bindingPointCategory < 0)
-                throw new Exception("Forbidden value on bindingPointCategory = " + bindingPointCategory + ", it doesn't respect the following condition : bindingPointCategory < 0");
-            bindingPointIndex = reader.ReadByte();
-            if (bindingPointIndex < 0)
-                throw new Exception("Forbidden value on bindingPointIndex = " + bindingPointIndex + ", it doesn't respect the following condition : bindingPointIndex < 0");
-            subEntityLook = new Types.EntityLook();
-            subEntityLook.Deserialize(reader);
-
-
-        }
-
-
     }
-
-
 }

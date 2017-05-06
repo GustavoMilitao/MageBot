@@ -8,25 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
+namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using DofusBot.Protocol.Network.Types.Game.Data.Items;
+    using BlueSheep.Common.Protocol.Types.Game.Data.Items;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class ExchangeBidHouseUnsoldItemsMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class ExchangeBidHouseUnsoldItemsMessage : Message 
     {
         
-        public const int ProtocolId = 6612;
+        public new const int ID = 6612;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

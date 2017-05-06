@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Idol
+namespace BlueSheep.Common.Protocol.Messages.Game.Idol
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class IdolSelectErrorMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class IdolSelectErrorMessage : Message 
     {
         
-        public const int ProtocolId = 6584;
+        public new const int ID = 6584;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -104,7 +106,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Idol
             BooleanByteWrapper.SetFlag(1, flag, m_party);
             writer.WriteByte(flag);
             writer.WriteByte(m_reason);
-            writer.WriteVarUhShort(m_idolId);
+            writer.WriteVarShort(m_idolId);
         }
         
         public override void Deserialize(IDataReader reader)

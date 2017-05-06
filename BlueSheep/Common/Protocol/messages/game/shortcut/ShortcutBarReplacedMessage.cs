@@ -8,26 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Shortcut
+namespace BlueSheep.Common.Protocol.Messages.Game.Shortcut
 {
-    using DofusBot.Protocol.Network.Types.Game.Shortcut;
-    using DofusBot.Protocol.Network;
+    using BlueSheep.Common.Protocol.Types.Game.Shortcut;
+    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class ShortcutBarReplacedMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class ShortcutBarReplacedMessage : Message 
     {
         
-        public const int ProtocolId = 6706;
+        public new const int ID = 6706;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -78,7 +80,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Shortcut
         
         public override void Deserialize(IDataReader reader)
         {
-            m_shortcut = ProtocolManager.GetTypeInstance<Shortcut>(reader.ReadUShort());
+            m_shortcut = ProtocolTypeManager.GetInstance<Shortcut>(reader.ReadUShort());
             m_shortcut.Deserialize(reader);
             m_barType = reader.ReadByte();
         }

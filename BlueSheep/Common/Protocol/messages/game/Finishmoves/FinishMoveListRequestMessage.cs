@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Finishmoves
+namespace BlueSheep.Common.Protocol.Messages.Game.Finishmoves
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class FinishMoveListRequestMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class FinishMoveListRequestMessage : Message 
     {
         
-        public const int ProtocolId = 6702;
+        public new const int ID = 6702;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

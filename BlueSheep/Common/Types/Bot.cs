@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Core;
 using BlueSheep.Engine.Frame;
 using BlueSheep.Engine.Network;
+using BlueSheep.Common.Protocol.Types.Game.Data.Items;
+using BlueSheep.Common.Protocol.Types.Game.Interactive;
+using BlueSheep.Common.Protocol.Types.Game.Character.Choice;
 
 namespace BlueSheep.Common.Types
 {

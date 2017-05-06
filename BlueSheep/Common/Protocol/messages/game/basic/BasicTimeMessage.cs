@@ -1,58 +1,33 @@
+﻿using BlueSheep.Engine.Types;
 
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:22
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Game.Basic
 {
     public class BasicTimeMessage : Message
     {
-        public new const uint ID =175;
-        public override uint ProtocolID
+        public new const int ID = 175;
+        public override int MessageID { get { return ID; } }
+
+        public double Timestamp;
+        public short TimezoneOffset;
+
+        public BasicTimeMessage() { }
+
+        public BasicTimeMessage(double timestamp, short timezoneOffset)
         {
-            get { return ID; }
+            Timestamp = timestamp;
+            TimezoneOffset = timezoneOffset;
         }
-        
-        public double timestamp;
-        public int timezoneOffset;
-        
-        public BasicTimeMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
+            writer.WriteDouble(Timestamp);
+            writer.WriteShort(TimezoneOffset);
         }
-        
-        public BasicTimeMessage(double timestamp, int timezoneOffset)
+
+        public override void Deserialize(IDataReader reader)
         {
-            this.timestamp = timestamp;
-            this.timezoneOffset = timezoneOffset;
+            Timestamp = reader.ReadDouble();
+            TimezoneOffset = reader.ReadShort();
         }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteDouble(timestamp);
-            writer.WriteShort((short)timezoneOffset);
-        }
-        
-        public override void Deserialize(BigEndianReader reader)
-        {
-            timestamp = reader.ReadDouble();
-            if (timestamp < 0 || timestamp > 9.007199254740992E15)
-                throw new Exception("Forbidden value on timestamp = " + timestamp + ", it doesn't respect the following condition : timestamp < 0 || timestamp > 9.007199254740992E15");
-            timezoneOffset = reader.ReadShort();
-        }
-        
     }
-    
 }

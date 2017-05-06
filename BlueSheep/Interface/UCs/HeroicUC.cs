@@ -2,7 +2,10 @@
 {
     using BlueSheep.Common.IO;
     using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay;
+    using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight;
     using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
     using BlueSheep.Engine.Types;
     using BlueSheep.Interface;
     using System;
@@ -58,18 +61,18 @@
         #region Public Methods
         public void AnalysePacket(BlueSheep.Engine.Types.Message msg, byte[] packetdatas)
         {
-            
+
             using (BigEndianReader reader = new BigEndianReader(packetdatas))
             {
                 msg.Deserialize(reader);
             }
-            switch ((int)msg.ProtocolID)
+            switch ((int)msg.MessageID)
             {
                 case 226:
                     MapComplementaryInformationsDataMessage packet = (MapComplementaryInformationsDataMessage)msg;
                     //if (this.GoAnalyser((int)packet.SubAreaId))
                     //{
-                    foreach (GameRolePlayActorInformations informations in packet.actors)
+                    foreach (GameRolePlayActorInformations informations in packet.Actors)
                     {
                         GameRolePlayCharacterInformations infos;
                         if (!(informations is GameRolePlayCharacterInformations))
@@ -78,7 +81,7 @@
                             infos = (GameRolePlayCharacterInformations)informations;
                         if (GoAgro(infos))
                         {
-                            Agression(informations.contextualId);
+                            Agression((ulong)informations.ContextualId);
                         }
                         if (IsGoingToRun(infos))
                         {
@@ -96,10 +99,10 @@
                     break;
                 case 5632:
                     GameRolePlayShowActorMessage npacket = (GameRolePlayShowActorMessage)msg;
-                    GameRolePlayCharacterInformations infoCharacter = npacket.informations as GameRolePlayCharacterInformations;
+                    GameRolePlayCharacterInformations infoCharacter = npacket.Informations as GameRolePlayCharacterInformations;
                     if (GoAgro(infoCharacter))
                     {
-                        Agression(infoCharacter.contextualId);
+                        Agression((ulong)infoCharacter.ContextualId);
                     }
                     if (IsGoingToRun(infoCharacter))
                     {
@@ -116,19 +119,19 @@
 
             }
         }
-#endregion
+        #endregion
 
         #region Private Methods
         private void Agression(ulong targetid)
         {
             GameRolePlayPlayerFightRequestMessage packet = new GameRolePlayPlayerFightRequestMessage
-                            {
-                                friendly = false,
-                                targetCellId = -1,
-                                targetId = targetid
-                            };
+            {
+                Friendly = false,
+                TargetCellId = -1,
+                TargetId = targetid
+            };
 
-                account.SocketManager.Send(packet);
+            account.SocketManager.Send(packet);
         }
 
         private void Run()
@@ -140,12 +143,12 @@
         {
             if (!sadikCheckbox1.Checked)
                 return false;
-            long num = Math.Abs((long)(infoCharacter.alignmentInfos.characterPower - infoCharacter.contextualId));
-            bool flag = ((sadikCheckbox1.Checked && (infoCharacter.name != account.CharacterBaseInformations.name)) && (num >= NUDLvlAgroMin.Value) && (num <= NUDLvlAgroMax.Value));
-            if (((LViewAgro.Items.Count > 0) && (infoCharacter.humanoidInfo.options[1] != null)) && flag)
+            long num = Math.Abs((long)(infoCharacter.AlignmentInfos.CharacterPower - infoCharacter.ContextualId));
+            bool flag = ((sadikCheckbox1.Checked && (infoCharacter.Name != account.CharacterBaseInformations.Name)) && (num >= NUDLvlAgroMin.Value) && (num <= NUDLvlAgroMax.Value));
+            if (((LViewAgro.Items.Count > 0) && (infoCharacter.HumanoidInfo.Options[1] != null)) && flag)
             {
-                HumanOptionAlliance alliance = infoCharacter.humanoidInfo.options[1] as HumanOptionAlliance;
-                return (flag && ContainslistView(LViewAgro, alliance.allianceInformations.allianceName));
+                HumanOptionAlliance alliance = infoCharacter.HumanoidInfo.Options[1] as HumanOptionAlliance;
+                return (flag && ContainslistView(LViewAgro, alliance.AllianceInformations.AllianceName));
             }
             return flag;
         }
@@ -159,16 +162,16 @@
         {
             if (!sadikCheckbox2.Checked)
                 return false;
-            if (infoCharacter.humanoidInfo.options[1] == null)
+            if (infoCharacter.HumanoidInfo.Options[1] == null)
             {
                 return false;
             }
-            long num = Math.Abs((long)(infoCharacter.alignmentInfos.characterPower - infoCharacter.contextualId));
-            bool flag = ((sadikCheckbox2.Checked && (infoCharacter.name != account.CharacterBaseInformations.name)) && (num >= NUDLvlRunMin.Value) && (num <= NUDLvlRunMax.Value));
-            if (((LViewRun.Items.Count > 0) && (infoCharacter.humanoidInfo.options[1] != null)) && flag)
+            long num = Math.Abs((long)(infoCharacter.AlignmentInfos.CharacterPower - infoCharacter.ContextualId));
+            bool flag = ((sadikCheckbox2.Checked && (infoCharacter.Name != account.CharacterBaseInformations.Name)) && (num >= NUDLvlRunMin.Value) && (num <= NUDLvlRunMax.Value));
+            if (((LViewRun.Items.Count > 0) && (infoCharacter.HumanoidInfo.Options[1] != null)) && flag)
             {
-                HumanOptionAlliance alliance = infoCharacter.humanoidInfo.options[1] as HumanOptionAlliance;
-                return (flag && ContainslistView(LViewRun, alliance.allianceInformations.allianceName));
+                HumanOptionAlliance alliance = infoCharacter.HumanoidInfo.Options[1] as HumanOptionAlliance;
+                return (flag && ContainslistView(LViewRun, alliance.AllianceInformations.AllianceName));
             }
             return flag;
         }

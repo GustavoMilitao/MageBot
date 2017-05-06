@@ -1,76 +1,32 @@
+﻿using BlueSheep.Common.Protocol.Types.Game.Look;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:03
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
-
-namespace BlueSheep.Common.Protocol.Types
+namespace BlueSheep.Common.Protocol.Types.Game.Character
 {
-
     public class CharacterMinimalPlusLookInformations : CharacterMinimalInformations
     {
-
         public new const int ID = 163;
-        public override int TypeId
+        public virtual int TypeID { get { return ID; } }
+
+        public EntityLook EntityLook { get; set; }
+
+        public CharacterMinimalPlusLookInformations() { }
+
+        public CharacterMinimalPlusLookInformations(EntityLook entityLook)
         {
-            get { return ID; }
+            EntityLook = entityLook;
         }
 
-        public Types.EntityLook entityLook;
-
-
-        public CharacterMinimalPlusLookInformations()
+        public void Serialize(IDataWriter writer)
         {
-        }
-
-        public CharacterMinimalPlusLookInformations(uint id, byte level, string name, Types.EntityLook entityLook)
-                 : base(id, level, name)
-        {
-            this.entityLook = entityLook;
-        }
-
-
-        public override void Serialize(BigEndianWriter writer)
-        {
-
             base.Serialize(writer);
-            entityLook.Serialize(writer);
-
-
+            EntityLook.Serialize(writer);
         }
 
-        public override void Deserialize(BigEndianReader reader)
+        public void Deserialize(IDataReader reader)
         {
-
             base.Deserialize(reader);
-            entityLook = new Types.EntityLook();
-            entityLook.Deserialize(reader);
-
-
+            EntityLook = new EntityLook();
+            EntityLook.Deserialize(reader);
         }
-
-
     }
-
-
 }

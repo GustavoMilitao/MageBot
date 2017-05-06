@@ -1,47 +1,36 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:00
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+﻿namespace BlueSheep.Common.Protocol.Messages.Security
 {
-    public class RawDataMessage : Message
+    using BlueSheep.Engine.Types;
+
+ 	 public class RawDataMessage : Message 
     {
-        public new const uint ID =6253;
-        public override uint ProtocolID
+        public new const int ID = 6253;
+        public override int MessageID { get { return ID; } }
+
+        public byte[] Content { get; set; }
+
+        public RawDataMessage() { }
+
+        public RawDataMessage(byte[] content)
         {
-            get { return ID; }
+            Content = content;
         }
-        
-        
-        public RawDataMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
+            int contentLength = Content.Length;
+            writer.WriteVarInt(contentLength);
+            for (int i = 0; i < contentLength; i++)
+            {
+                writer.WriteByte(Content[i]);
+            }
         }
-        
-        
-        public override void Serialize(BigEndianWriter writer)
+
+        public override void Deserialize(IDataReader reader)
         {
+            int contentLength = reader.ReadVarInt();
+            reader.ReadBytes(contentLength);
         }
-        
-        public override void Deserialize(BigEndianReader reader)
-        {
-            var _loc_2 = reader.ReadVarInt();
-            //param1.readBytes(this.content, 0, _loc_2);
-        }
-        
+
     }
-    
 }

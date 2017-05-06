@@ -1,6 +1,9 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Npc;
+using BlueSheep.Common.Protocol.Messages.Game.Dialog;
+using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
 using BlueSheep.Common.Types;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
@@ -16,7 +19,7 @@ namespace BlueSheep.Core.Npc
     {
         #region Fields
         public AccountUC account { get; set; }
-        public BlueSheep.Common.Protocol.Types.GameRolePlayNpcInformations Entity { get; set; }
+        public GameRolePlayNpcInformations Entity { get; set; }
         public int Id { get; set; }
         public int QuestionId { get; set; }
         public string QuestionText
@@ -50,7 +53,7 @@ namespace BlueSheep.Core.Npc
 
         public void SendReply(int replyId)
         {
-            NpcDialogReplyMessage msg = new NpcDialogReplyMessage((int)replyId);
+            NpcDialogReplyMessage msg = new NpcDialogReplyMessage((uint)replyId);
             account.SocketManager.Send(msg);
         }
 
@@ -71,7 +74,7 @@ namespace BlueSheep.Core.Npc
                 msg.Serialize(writer);
                 writer.Content = account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.ProtocolID);
+                pack.Pack((int)msg.MessageID);
                 account.SocketManager.Send(pack.Writer.Content);
                 if (account.DebugMode.Checked)
                     account.Log(new DebugTextInformation("[SND] 5898 (NpcGenericActionRequestMessage)"), 0);
@@ -81,11 +84,11 @@ namespace BlueSheep.Core.Npc
         public int FindContextIdFromNpcId(int npcId)
         {
             if (npcId == 0)
-                return (int)account.MapData.Npcs[0].contextualId;
-            foreach (BlueSheep.Common.Protocol.Types.GameRolePlayNpcInformations p in account.MapData.Npcs)
+                return (int)account.MapData.Npcs[0].ContextualId;
+            foreach (GameRolePlayNpcInformations p in account.MapData.Npcs)
             {
-                if (p.npcId == npcId)
-                    return (int)p.contextualId;
+                if (p.NpcId == npcId)
+                    return (int)p.ContextualId;
             }
             return 0;
         }

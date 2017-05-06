@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Context.Dungeon
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Dungeon
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class DungeonLeftMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class DungeonLeftMessage : Message 
     {
         
-        public const int ProtocolId = 6149;
+        public new const int ID = 6149;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         

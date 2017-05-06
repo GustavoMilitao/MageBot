@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
+namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class ExchangeHandleMountsStableMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class ExchangeHandleMountsStableMessage : Message 
     {
         
-        public const int ProtocolId = 6562;
+        public new const int ID = 6562;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -73,7 +75,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Inventory.Exchanges
             int ridesIdIndex;
             for (ridesIdIndex = 0; (ridesIdIndex < m_ridesId.Count); ridesIdIndex = (ridesIdIndex + 1))
             {
-                writer.WriteVarUhInt(m_ridesId[ridesIdIndex]);
+                writer.WriteVarInt(m_ridesId[ridesIdIndex]);
             }
             writer.WriteByte(m_actionType);
         }

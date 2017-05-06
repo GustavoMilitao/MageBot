@@ -8,26 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.Guild.Tax
+namespace BlueSheep.Common.Protocol.Messages.Game.Guild.Tax
 {
-    using DofusBot.Protocol.Network.Types.Game.Guild.Tax;
-    using DofusBot.Protocol.Network;
+    using BlueSheep.Common.Protocol.Types.Game.Guild.Tax;
+    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class AbstractTaxCollectorListMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class AbstractTaxCollectorListMessage : Message 
     {
         
-        public const int ProtocolId = 6568;
+        public new const int ID = 6568;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -73,7 +75,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.Guild.Tax
             m_informations = new System.Collections.Generic.List<TaxCollectorInformations>();
             for (informationsIndex = 0; (informationsIndex < informationsCount); informationsIndex = (informationsIndex + 1))
             {
-                TaxCollectorInformations objectToAdd = ProtocolManager.GetTypeInstance<TaxCollectorInformations>(reader.ReadUShort());
+                TaxCollectorInformations objectToAdd = ProtocolTypeManager.GetInstance<TaxCollectorInformations>(reader.ReadUShort());
                 objectToAdd.Deserialize(reader);
                 m_informations.Add(objectToAdd);
             }

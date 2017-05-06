@@ -1,5 +1,7 @@
 ﻿using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Chat;
+using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
 using BlueSheep.Common.Types;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Engine.Network;
@@ -101,7 +103,7 @@ namespace BlueSheep.Common
                 case "/mapid":
                     return new List<string>() {"L'id de la map est : " + account.MapData.Id};
                 case "/cellid":
-                    return new List<string>() {"Le joueur se trouve sur la cellule " + account.MapData.Character.disposition.cellId};
+                    return new List<string>() {"Le joueur se trouve sur la cellule " + account.MapData.Character.Disposition.CellId};
                 case "/cell":
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] {"-npc = 0", "-elem = 0", "-player = null"} );
@@ -676,11 +678,11 @@ namespace BlueSheep.Common
                 else if (player != "null")
                 {
                     int cell = 0;
-                    foreach (BlueSheep.Common.Protocol.Types.GameRolePlayCharacterInformations p in account.MapData.Players)
+                    foreach (GameRolePlayCharacterInformations p in account.MapData.Players)
                     {
-                        if (p.name == player)
+                        if (p.Name == player)
                         {
-                            cell = account.MapData.GetCellFromContextId(p.contextualId);
+                            cell = account.MapData.GetCellFromContextId(p.ContextualId);
                         }
                     }
                     if (cell != 0)
@@ -720,7 +722,7 @@ namespace BlueSheep.Common
                         msg.Serialize(writer);
                         writer.Content = account.HumanCheck.hash_function(writer.Content);
                         MessagePackaging pack = new MessagePackaging(writer);
-                        pack.Pack((int)msg.ProtocolID);
+                        pack.Pack((int)msg.MessageID);
                         account.SocketManager.Send(pack.Writer.Content);
                         result.Add("à " + dest + " : " + message + "\n");
                         if (account.DebugMode.Checked)
@@ -775,11 +777,11 @@ namespace BlueSheep.Common
 
             try
             {
-                foreach (BlueSheep.Common.Protocol.Types.GameRolePlayNpcInformations n in account.MapData.Npcs)
+                foreach (GameRolePlayNpcInformations n in account.MapData.Npcs)
                 {
-                    string name = account.Npc.GetNpcName(n.npcId);
-                    int cell = account.MapData.GetCellFromContextId(n.contextualId);
-                    result.Add("[PNJ] " + name + " -> id : +" + n.npcId + " contextual id : " + n.contextualId + " cell : " + cell + ".");
+                    string name = account.Npc.GetNpcName(n.NpcId);
+                    int cell = account.MapData.GetCellFromContextId(n.ContextualId);
+                    result.Add("[PNJ] " + name + " -> id : +" + n.NpcId + " contextual id : " + n.ContextualId + " cell : " + cell + ".");
 
                 }
                 foreach (KeyValuePair<BlueSheep.Core.Map.Elements.InteractiveElement,int > pair in account.MapData.InteractiveElements)
@@ -789,13 +791,13 @@ namespace BlueSheep.Common
                     else
                         result.Add("[INTERACTIVE ELEMENT] " + pair.Key.Name + " -> id " + pair.Key + " cell : " + pair.Value + ".");
                 }
-                foreach (BlueSheep.Common.Protocol.Types.GameRolePlayCharacterInformations p in account.MapData.Players)
+                foreach (GameRolePlayCharacterInformations p in account.MapData.Players)
                 {
-                   int cell = account.MapData.GetCellFromContextId(p.contextualId);
+                   int cell = account.MapData.GetCellFromContextId(p.ContextualId);
                    if (verbose)
-                       result.Add("[PLAYER] " + p.name + " -> contextual id " + p.contextualId + " cell : " + cell + " Sex : " + (p.humanoidInfo.sex ? "Female" : "Male") + ".");
+                       result.Add("[PLAYER] " + p.Name + " -> contextual id " + p.ContextualId + " cell : " + cell + " Sex : " + (p.HumanoidInfo.Sex ? "Female" : "Male") + ".");
                    else
-                       result.Add("[PLAYER] " + p.name + " -> contextual id " + p.contextualId + " cell : " + cell + ".");
+                       result.Add("[PLAYER] " + p.Name + " -> contextual id " + p.ContextualId + " cell : " + cell + ".");
                     
                 }
                 foreach (MonsterGroup m in account.MapData.Monsters)

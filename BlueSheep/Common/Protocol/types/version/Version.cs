@@ -1,104 +1,62 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:12
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
+﻿using System;
 
 namespace BlueSheep.Common.Protocol.Types
 {
+    public class Version
+    {
+        public new const int ID = 11;
+        public virtual int TypeID { get { return ID; } }
 
-public class Version
-{
+        public sbyte Major { get; set; }
+        public sbyte Minor { get; set; }
+        public sbyte Release { get; set; }
+        public int Revision { get; set; }
+        public sbyte Patch { get; set; }
+        public sbyte BuildType { get; set; }
 
-public new const int ID = 11;
-public virtual int TypeId
-{
-    get { return ID; }
-}
+        public Version() { }
 
-public sbyte major;
-        public sbyte minor;
-        public sbyte release;
-        public int revision;
-        public sbyte patch;
-        public sbyte buildType;
-        
-
-public Version()
-{
-}
-
-public Version(sbyte major, sbyte minor, sbyte release, int revision, sbyte patch, sbyte buildType)
+        public Version(sbyte major, sbyte minor, sbyte release, int revision, sbyte patch, sbyte buildType)
         {
-            this.major = major;
-            this.minor = minor;
-            this.release = release;
-            this.revision = revision;
-            this.patch = patch;
-            this.buildType = buildType;
+            this.Major = major;
+            this.Minor = minor;
+            this.Release = release;
+            this.Revision = revision;
+            this.Patch = patch;
+            this.BuildType = buildType;
         }
-        
 
-public virtual void Serialize(BigEndianWriter writer)
-{
+        public virtual void Serialize(IDataWriter writer)
+        {
+            writer.WriteSByte(Major);
+            writer.WriteSByte(Minor);
+            writer.WriteSByte(Release);
+            writer.WriteInt(Revision);
+            writer.WriteSByte(Patch);
+            writer.WriteSByte(BuildType);
+        }
 
-writer.WriteSByte(major);
-            writer.WriteSByte(minor);
-            writer.WriteSByte(release);
-            writer.WriteInt(revision);
-            writer.WriteSByte(patch);
-            writer.WriteSByte(buildType);
-            
+        public virtual void Deserialize(IDataReader reader)
+        {
+            Major = reader.ReadSByte();
+            if (Major < 0)
+                throw new Exception("Forbidden value on Major = " + Major + ", it doesn't respect the following condition : major < 0");
+            Minor = reader.ReadSByte();
+            if (Minor < 0)
+                throw new Exception("Forbidden value on Minor = " + Minor + ", it doesn't respect the following condition : minor < 0");
+            Release = reader.ReadSByte();
+            if (Release < 0)
+                throw new Exception("Forbidden value on Release = " + Release + ", it doesn't respect the following condition : release < 0");
+            Revision = reader.ReadInt();
+            if (Revision < 0)
+                throw new Exception("Forbidden value on Revision = " + Revision + ", it doesn't respect the following condition : revision < 0");
+            Patch = reader.ReadSByte();
+            if (Patch < 0)
+                throw new Exception("Forbidden value on Patch = " + Patch + ", it doesn't respect the following condition : patch < 0");
+            BuildType = reader.ReadSByte();
+            if (BuildType < 0)
+                throw new Exception("Forbidden value on BuildType = " + BuildType + ", it doesn't respect the following condition : buildType < 0");
+        }
 
-}
-
-public virtual void Deserialize(BigEndianReader reader)
-{
-
-major = reader.ReadSByte();
-            if (major < 0)
-                throw new Exception("Forbidden value on major = " + major + ", it doesn't respect the following condition : major < 0");
-            minor = reader.ReadSByte();
-            if (minor < 0)
-                throw new Exception("Forbidden value on minor = " + minor + ", it doesn't respect the following condition : minor < 0");
-            release = reader.ReadSByte();
-            if (release < 0)
-                throw new Exception("Forbidden value on release = " + release + ", it doesn't respect the following condition : release < 0");
-            revision = reader.ReadInt();
-            if (revision < 0)
-                throw new Exception("Forbidden value on revision = " + revision + ", it doesn't respect the following condition : revision < 0");
-            patch = reader.ReadSByte();
-            if (patch < 0)
-                throw new Exception("Forbidden value on patch = " + patch + ", it doesn't respect the following condition : patch < 0");
-            buildType = reader.ReadSByte();
-            if (buildType < 0)
-                throw new Exception("Forbidden value on buildType = " + buildType + ", it doesn't respect the following condition : buildType < 0");
-            
-
-}
-
-
-}
-
-
+    }
 }

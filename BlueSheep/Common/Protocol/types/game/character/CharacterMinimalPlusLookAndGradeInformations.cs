@@ -1,77 +1,29 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:02
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
-
-namespace BlueSheep.Common.Protocol.Types
+﻿namespace BlueSheep.Common.Protocol.Types.Game.Character
 {
+    public class CharacterMinimalPlusLookAndGradeInformations : CharacterMinimalPlusLookInformations
+    {
+        public new const int ID = 193;
+        public virtual int TypeID { get { return ID; } }
 
-public class CharacterMinimalPlusLookAndGradeInformations : CharacterMinimalPlusLookInformations
-{
+        public uint Grade { get; set; }
 
-public new const int ID = 193;
-public override int TypeId
-{
-    get { return ID; }
-}
+        public CharacterMinimalPlusLookAndGradeInformations() { }
 
-public int grade;
-        
-
-public CharacterMinimalPlusLookAndGradeInformations()
-{
-}
-
-public CharacterMinimalPlusLookAndGradeInformations(uint id, byte level, string name, Types.EntityLook entityLook, int grade)
-         : base(id, level, name, entityLook)
+        public CharacterMinimalPlusLookAndGradeInformations(uint grade)
         {
-            this.grade = grade;
+            Grade = grade;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
+        public void Serialize(IDataWriter writer)
+        {
+            base.Serialize(writer);
+            writer.WriteVarInt(Grade);
+        }
 
-base.Serialize(writer);
-            writer.WriteVarInt(grade);
-            
-
-}
-
-public override void Deserialize(BigEndianReader reader)
-{
-
-base.Deserialize(reader);
-            grade = reader.ReadVarInt();
-            if (grade < 0)
-                throw new Exception("Forbidden value on grade = " + grade + ", it doesn't respect the following condition : grade < 0");
-            
-
-}
-
-
-}
-
-
+        public void Deserialize(IDataReader reader)
+        {
+            base.Deserialize(reader);
+            Grade = reader.ReadVarUhInt();
+        }
+    }
 }

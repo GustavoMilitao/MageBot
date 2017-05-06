@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DofusBot.Protocol.Network.Types
+namespace BlueSheep.Common.Protocol.Types
 {
     public abstract class NetworkType : MarshalByRefObject
     {

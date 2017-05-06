@@ -1,54 +1,29 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:23
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+﻿namespace BlueSheep.Common.Protocol.Messages.Game.Character.Choice
 {
-    public class CharacterSelectionMessage : Message
+    using BlueSheep.Engine.Types;
+
+ 	 public class CharacterSelectionMessage : Message 
     {
-        public new const uint ID =152;
-        public override uint ProtocolID
-        {
-            get { return ID; }
-        }
-        
-        public ulong id;
-        
-        public CharacterSelectionMessage()
-        {
-        }
-        
+        public new const int ID = 152;
+        public override int MessageID { get { return ID; } }
+
+        public ulong Id { get; set; }
+
+        public CharacterSelectionMessage() { }
+
         public CharacterSelectionMessage(ulong id)
         {
-            this.id = id;
+            Id = id;
         }
-        
-        public override void Serialize(BigEndianWriter writer)
+
+        public override void Serialize(IDataWriter writer)
         {
-            writer.WriteVarLong(id);
+            writer.WriteVarLong(Id);
         }
-        
-        public override void Deserialize(BigEndianReader reader)
+
+        public override void Deserialize(IDataReader reader)
         {
-            id = reader.ReadVarUhLong();
-            if (id < 1 || id > 2147483647)
-                throw new Exception("Forbidden value on id = " + id + ", it doesn't respect the following condition : id < 1 || id > 2147483647");
+            Id = reader.ReadVarUhLong();
         }
-        
     }
-    
 }

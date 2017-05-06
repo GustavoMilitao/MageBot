@@ -1,60 +1,39 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:00
+﻿using BlueSheep.Engine.Types;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
 
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Handshake
 {
     public class ProtocolRequired : Message
     {
-        public new const uint ID =1;
-        public override uint ProtocolID
+        public new const int ID = 1;
+        public override int MessageID { get { return ID; } }
+
+        public uint RequiredVersion { get; set; }
+        public uint CurrentVersion { get; set; }
+
+        public ProtocolRequired() { }
+
+        public ProtocolRequired(uint requiredVersion, uint currentVersion)
         {
-            get { return ID; }
+            this.RequiredVersion = requiredVersion;
+            this.CurrentVersion = currentVersion;
         }
-        
-        public int requiredVersion;
-        public int currentVersion;
-        
-        public ProtocolRequired()
+
+        public override void Serialize(IDataWriter writer)
         {
+            writer.WriteUInt(RequiredVersion);
+            writer.WriteUInt(CurrentVersion);
         }
-        
-        public ProtocolRequired(int requiredVersion, int currentVersion)
+
+        public override void Deserialize(IDataReader reader)
         {
-            this.requiredVersion = requiredVersion;
-            this.currentVersion = currentVersion;
+            RequiredVersion = reader.ReadUInt();
+            if (RequiredVersion < 0)
+                throw new Exception("Forbidden value on RequiredVersion = " + RequiredVersion + ", it doesn't respect the following condition : requiredVersion < 0");
+            CurrentVersion = reader.ReadUInt();
+            if (CurrentVersion < 0)
+                throw new Exception("Forbidden value on CurrentVersion = " + CurrentVersion + ", it doesn't respect the following condition : currentVersion < 0");
         }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteInt(requiredVersion);
-            writer.WriteInt(currentVersion);
-        }
-        
-        public override void Deserialize(BigEndianReader reader)
-        {
-            requiredVersion = reader.ReadInt();
-            if (requiredVersion < 0)
-                throw new Exception("Forbidden value on requiredVersion = " + requiredVersion + ", it doesn't respect the following condition : requiredVersion < 0");
-            currentVersion = reader.ReadInt();
-            if (currentVersion < 0)
-                throw new Exception("Forbidden value on currentVersion = " + currentVersion + ", it doesn't respect the following condition : currentVersion < 0");
-        }
-        
+
     }
-    
 }

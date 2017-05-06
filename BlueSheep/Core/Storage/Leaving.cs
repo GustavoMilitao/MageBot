@@ -4,6 +4,7 @@ using BlueSheep.Common.Types;
 using BlueSheep.Interface;
 using BlueSheep.Common.IO;
 using BlueSheep.Engine.Types;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
 
 namespace BlueSheep.Core.Storage
 {
@@ -58,7 +59,7 @@ namespace BlueSheep.Core.Storage
             account.Running.OnLeaving = true;
 
             ExchangeObjectMoveMessage exchangeObjectMoveMessage =
-                new ExchangeObjectMoveMessage(objectUID, quantity);
+                new ExchangeObjectMoveMessage((uint)objectUID, quantity);
             account.SocketManager.Send(exchangeObjectMoveMessage);
             account.LastPacketID.Clear();
 

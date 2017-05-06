@@ -4,6 +4,7 @@ using BlueSheep.Common.Constants;
 using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Interface;
 using BlueSheep.Common.Data.D2o;
+using BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects;
 
 namespace BlueSheep.Common.Types
 {
@@ -71,28 +72,28 @@ namespace BlueSheep.Common.Types
 
             foreach (ObjectEffect effect in Informations.Effects)
             {
-                if (effect.actionId == 808)
+                if (effect.ActionId == 808)
                 {
                     ObjectEffectDate effectDate = (ObjectEffectDate)effect;
 
                     int month;
                     int year = 0;
 
-                    if (effectDate.month == 12)
+                    if (effectDate.Month == 12)
                     {
                         month = 1;
-                        year = effectDate.year + 1;
+                        year = effectDate.Year + 1;
                     }
                     else
                     {
-                        month = effectDate.month + 1;
-                        year = effectDate.year;
+                        month = effectDate.Month + 1;
+                        year = effectDate.Year;
                     }
 
                     year += 1370;
 
-                    NextMeal = new DateTime(year, month, effectDate.day, effectDate.hour,
-                        effectDate.minute, 0);
+                    NextMeal = new DateTime(year, month, effectDate.Day, effectDate.Hour,
+                        effectDate.Minute, 0);
 
                     break;
                 }
@@ -108,19 +109,19 @@ namespace BlueSheep.Common.Types
 
             foreach (ObjectEffect effect in Informations.Effects)
             {
-                if (effectIndex != null && effectIndex.Contains(effect.actionId))
+                if (effectIndex != null && effectIndex.Contains(effect.ActionId))
                 {
                     if (effect is ObjectEffectInteger)
                     {
                         ObjectEffectInteger effectInteger = (ObjectEffectInteger) effect;
-                        DataClass effectObject = GameData.GetDataObject(D2oFileEnum.Effects, effect.actionId);
+                        DataClass effectObject = GameData.GetDataObject(D2oFileEnum.Effects, effect.ActionId);
                         //Effect effectEffect = (Effect) effectObject;
                         string effectString = BlueSheep.Common.Data.I18N.GetText((int)effectObject.Fields["descriptionId"]);
                         effectString = effectString.TrimStart('#');
                         int index = effectString.IndexOf("#", StringComparison.Ordinal);
                         index += 2;
                         effectString = effectString.Remove(0, index);
-                        Effect = (string)effectObject.Fields["operator"] + effectInteger.value + effectString;
+                        Effect = (string)effectObject.Fields["operator"] + effectInteger.Value + effectString;
                         break;
                     }
                 }

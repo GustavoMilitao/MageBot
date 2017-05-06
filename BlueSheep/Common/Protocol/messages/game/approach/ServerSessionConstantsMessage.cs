@@ -1,63 +1,44 @@
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:21
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
+﻿using BlueSheep.Common.Protocol.Types.Game.Approach;
 using BlueSheep.Engine.Types;
+using System.Collections.Generic;
 
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
     public class ServerSessionConstantsMessage : Message
     {
-        public new const uint ID =6434;
-        public override uint ProtocolID
+        public new const int ID = 6434;
+        public override int MessageID { get { return ID; } }
+
+        public List<ServerSessionConstant> Variables;
+
+        public ServerSessionConstantsMessage() { }
+
+        public ServerSessionConstantsMessage(List<ServerSessionConstant> variables)
         {
-            get { return ID; }
+            Variables = variables;
         }
-        
-        public Types.ServerSessionConstant[] variables;
-        
-        public ServerSessionConstantsMessage()
+
+        public override void Serialize(IDataWriter writer)
         {
-        }
-        
-        public ServerSessionConstantsMessage(Types.ServerSessionConstant[] variables)
-        {
-            this.variables = variables;
-        }
-        
-        public override void Serialize(BigEndianWriter writer)
-        {
-            writer.WriteUShort((ushort)variables.Length);
-            foreach (var entry in variables)
+            writer.WriteShort((short)(Variables.Count));
+            for (int i = 0; i < Variables.Count; i++)
             {
-                 writer.WriteShort((short)entry.TypeId);
-                 entry.Serialize(writer);
+                ServerSessionConstant objectToSend = Variables[i];
+                writer.WriteShort((short)objectToSend.TypeID);
+                objectToSend.Serialize(writer);
             }
         }
-        
-        public override void Deserialize(BigEndianReader reader)
+
+        public override void Deserialize(IDataReader reader)
         {
-            var limit = reader.ReadUShort();
-            variables = new Types.ServerSessionConstant[limit];
-            for (int i = 0; i < limit; i++)
+            int length = reader.ReadUShort();
+            Variables = new List<ServerSessionConstant>();
+            for (int i = 0; i < length; i++)
             {
-                 variables[i] = Types.ProtocolTypeManager.GetInstance<Types.ServerSessionConstant>(reader.ReadUShort());
-                 variables[i].Deserialize(reader);
+                ServerSessionConstant objectToAdd = new ServerSessionConstant(reader.ReadUShort());
+                objectToAdd.Deserialize(reader);
+                Variables.Add(objectToAdd);
             }
         }
-        
     }
-    
 }

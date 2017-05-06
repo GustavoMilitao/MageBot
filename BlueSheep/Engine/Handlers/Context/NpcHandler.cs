@@ -1,6 +1,9 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Npc;
+using BlueSheep.Common.Protocol.Messages.Game.Dialog;
+using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
@@ -47,8 +50,8 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            account.Npc.Id = msg.npcId;
-            account.Npc.Entity = account.MapData.Npcs.FirstOrDefault((npc) => (int)npc.contextualId == msg.npcId);
+            account.Npc.Id = msg.NpcId;
+            account.Npc.Entity = account.MapData.Npcs.FirstOrDefault((npc) => (int)npc.ContextualId == msg.NpcId);
             account.SetStatus(Status.Speaking);
         }
 
@@ -61,10 +64,10 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            account.Npc.QuestionId = msg.messageId;
+            account.Npc.QuestionId = (int)msg.MessageId;
             int mess = (int)GameData.GetDataObject(D2oFileEnum.NpcMessages, account.Npc.QuestionId).Fields["messageId"];
             account.Log(new BotTextInformation("Dialogue : " + BlueSheep.Common.Data.I18N.GetText(mess)), 0);
-            if (account.Npc.QuestionId == 318 && (int)msg.visibleReplies[0] == 259)
+            if (account.Npc.QuestionId == 318 && (int)msg.VisibleReplies[0] == 259)
             {
                 //Bank
                 account.Npc.SendReply(259);
@@ -75,10 +78,10 @@ namespace BlueSheep.Engine.Handlers.Context
                 account.Log(new ErrorTextInformation("Vous n'êtes pas level 10, vous ne pouvez pas utiliser la banque. Fermeture du dialogue."), 0);
                 account.Npc.CloseDialog();
             }
-            if (msg.visibleReplies.Length == 0)
+            if (msg.VisibleReplies.Count == 0)
                 account.Npc.CloseDialog();
             account.Npc.Replies.Clear();
-            account.Npc.Replies = msg.visibleReplies.Select<int, BlueSheep.Core.Npc.NpcReply>((id) => new BlueSheep.Core.Npc.NpcReply(account.MapData.Npcs.Find(n => (int)n.contextualId == account.Npc.Id).npcId, id)).ToList();
+            account.Npc.Replies = msg.VisibleReplies.Select((id) => new BlueSheep.Core.Npc.NpcReply(account.MapData.Npcs.Find(n => (int)n.ContextualId == account.Npc.Id).NpcId, (int)id)).ToList();
             if (account.Path != null)
             {
                 account.Path.SearchReplies(BlueSheep.Common.Data.I18N.GetText(mess));

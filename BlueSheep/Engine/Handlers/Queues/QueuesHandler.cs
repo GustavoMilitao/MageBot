@@ -1,5 +1,6 @@
 ﻿using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages;
+using BlueSheep.Common.Protocol.Messages.Queues;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
@@ -19,8 +20,8 @@ namespace BlueSheep.Engine.Handlers.Queues
                 loginQueueStatusMessage.Deserialize(reader);
             }
 
-            account.Log(new QueueTextInformation("File d'attente : " + loginQueueStatusMessage.position +
-                "/" + loginQueueStatusMessage.total + "."),0);
+            account.Log(new QueueTextInformation("File d'attente : " + loginQueueStatusMessage.Position +
+                "/" + loginQueueStatusMessage.Total + "."),0);
         }
 
         [MessageHandler(typeof(QueueStatusMessage))]
@@ -33,8 +34,8 @@ namespace BlueSheep.Engine.Handlers.Queues
                 queueStatusMessage.Deserialize(reader);
             }
 
-            account.Log(new QueueTextInformation("File d'attente : " + queueStatusMessage.position + "/"
-                + queueStatusMessage.total + "."),0);
+            account.Log(new QueueTextInformation("File d'attente : " + queueStatusMessage.Position + "/"
+                + queueStatusMessage.Total + "."),0);
         }
         #endregion
     }

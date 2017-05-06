@@ -1,102 +1,56 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:02
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-using BlueSheep.Util.Enums.Servers;
-using DofusBot.Enums;
-
-namespace BlueSheep.Common.Protocol.Types
+﻿namespace BlueSheep.Common.Protocol.Types.Connection
 {
-
-    public class GameServerInformations
+    public class GameServerInformations 
     {
-
         public new const int ID = 25;
-        public virtual int TypeId
-        {
-            get { return ID; }
-        }
+        public virtual int TypeID { get { return ID; } }
 
-        public ulong id;
-        public ServerStatusEnum status;
-        public byte completion;
-        public bool isSelectable;
-        public byte charactersCount;
-        public double date;
+        public ushort ObjectID { get; set; }
+        public byte ServerType { get; set; }
+        public byte Status { get; set; }
+        public byte Completion { get; set; }
+        public bool IsSelectable { get; set; }
+        public byte CharactersCount { get; set; }
         public byte CharactersSlots { get; set; }
-        public GameTypeId ServerType { get; set; }
+        public double Date { get; set; }
 
+        public GameServerInformations() { }
 
-        public GameServerInformations()
+        public GameServerInformations(ushort objectId, byte serverType, byte status, byte completion, bool isSelectable, byte charactersCount, byte charactersSlots, double date)
         {
+            ObjectID = objectId;
+            ServerType = serverType;
+            Status = status;
+            Completion = completion;
+            IsSelectable = isSelectable;
+            CharactersCount = charactersCount;
+            CharactersSlots = charactersSlots;
+            Date = date;
         }
 
-
-        public virtual void Serialize(BigEndianWriter writer)
+        public void Serialize(IDataWriter writer)
         {
-
-            writer.WriteVarShort((short)id);
-            writer.WriteByte(Convert.ToByte(ServerType));
-            writer.WriteByte(Convert.ToByte(status));
-            writer.WriteByte(completion);
-            writer.WriteBoolean(isSelectable);
-            writer.WriteByte(charactersCount);
+            writer.WriteVarShort(ObjectID);
+            writer.WriteByte(ServerType);
+            writer.WriteByte(Status);
+            writer.WriteByte(Completion);
+            writer.WriteBoolean(IsSelectable);
+            writer.WriteByte(CharactersCount);
             writer.WriteByte(CharactersSlots);
-            writer.WriteDouble(date);
-
+            writer.WriteDouble(Date);
         }
 
-        public virtual void Deserialize(BigEndianReader reader)
+        public void Deserialize(IDataReader reader)
         {
-
-            id = reader.ReadVarUhShort();
-            if (id < 0 || id > 65535)
-                throw new Exception("Forbidden value on id = " + id + ", it doesn't respect the following condition : id < 0 || id > 65535");
-            ServerType = (GameTypeId)reader.ReadByte();
-            if(ServerType < 0)
-                throw new Exception("Forbidden value on ServerType = " + ServerType + ", it doesn't respect the following condition : ServerType < 0 ");
-            status = (ServerStatusEnum)reader.ReadByte();
-            if (status < 0)
-                throw new Exception("Forbidden value on status = " + status + ", it doesn't respect the following condition : status < 0");
-            completion = reader.ReadByte();
-            if (completion < 0)
-                throw new Exception("Forbidden value on completion = " + completion + ", it doesn't respect the following condition : completion < 0");
-            isSelectable = reader.ReadBoolean();
-            charactersCount = reader.ReadByte();
-            if (charactersCount < 0)
-                throw new Exception("Forbidden value on charactersCount = " + charactersCount + ", it doesn't respect the following condition : charactersCount < 0");
+            ObjectID = reader.ReadVarUhShort();
+            ServerType = reader.ReadByte();
+            Status = reader.ReadByte();
+            Completion = reader.ReadByte();
+            IsSelectable = reader.ReadBoolean();
+            CharactersCount = reader.ReadByte();
             CharactersSlots = reader.ReadByte();
-            if (CharactersSlots < 0)
-                throw new Exception("Forbidden value on CharactersSlots = " + CharactersSlots + ", it doesn't respect the following condition : CharactersSlots < 0");
-            date = reader.ReadDouble();
-            if (date < -9.007199254740992E15 || date > 9.007199254740992E15)
-                throw new Exception("Forbidden value on date = " + date + ", it doesn't respect the following condition : date < -9.007199254740992E15 || date > 9.007199254740992E15");
-
-
+            Date = reader.ReadDouble();
         }
-
 
     }
-
-
 }

@@ -129,7 +129,7 @@ namespace BlueSheep.Interface
                 XmlDocument xDoc = new XmlDocument();
                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                     "BlueSheep", "Accounts", account.AccountName,
-                    account.CharacterBaseInformations.name + "-" + job.Name + ".xml");
+                    account.CharacterBaseInformations.Name + "-" + job.Name + ".xml");
                 if (!File.Exists(path))
                     return;
                 xDoc.Load(path);
@@ -193,7 +193,7 @@ namespace BlueSheep.Interface
                 return;
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                     "BlueSheep", "Accounts", account.AccountName,
-                    account.CharacterBaseInformations.name + "-" + job.Name + ".xml");
+                    account.CharacterBaseInformations.Name + "-" + job.Name + ".xml");
             sr = new StreamWriter(path, false, System.Text.Encoding.UTF8);
             foreach (DataGridViewRow r in g.Rows)
             {
@@ -273,7 +273,7 @@ namespace BlueSheep.Interface
         {
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                    "BlueSheep", "Accounts", account.AccountName,
-                   account.CharacterBaseInformations.name + "-" + job.Name + ".xml");
+                   account.CharacterBaseInformations.Name + "-" + job.Name + ".xml");
             try
             {
                 StreamReader sr = new StreamReader(path);

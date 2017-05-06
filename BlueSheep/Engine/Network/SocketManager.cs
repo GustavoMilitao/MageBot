@@ -143,10 +143,10 @@
 //            {
 //                msg.Serialize(writer);
 //                MessagePackaging pack = new MessagePackaging(writer);
-//                pack.Pack((int)msg.ProtocolID);
+//                pack.Pack((int)msg.MessageID);
 //                account.SocketManager.Send(pack.Writer.Content);
 //                if (account.DebugMode.Checked)
-//                    account.Log(new DebugTextInformation("[SND] " + msg.ProtocolID), 0);
+//                    account.Log(new DebugTextInformation("[SND] " + msg.MessageID), 0);
 //            }
 //        }
 //        public bool Connected()
@@ -308,6 +308,7 @@ using BlueSheep.Interface;
 using BlueSheep.Engine.Frame;
 using BlueSheep.Interface.Text;
 using BlueSheep.Common.IO;
+using BlueSheep.Common.Protocol.Messages.Common.Basic;
 
 namespace BlueSheep.Engine.Network
 {
@@ -1214,11 +1215,11 @@ namespace BlueSheep.Engine.Network
             {
                 //msg.Serialize(writer);
                 //MessagePackaging pack = new MessagePackaging(writer);
-                //pack.Pack((int)msg.ProtocolID);
+                //pack.Pack((int)msg.MessageID);
                 msg.Pack(writer);
                 account.SocketManager.Send(writer.Content);
                 if (account.DebugMode.Checked)
-                    account.Log(new DebugTextInformation("[SND] " + msg.ProtocolID), 0);
+                    account.Log(new DebugTextInformation("[SND] " + msg.MessageID), 0);
             }
         }
 
@@ -1265,7 +1266,7 @@ namespace BlueSheep.Engine.Network
         private void client_Connected(object sender, NetSocketConnectedEventArgs e)
         {
             account.Log(new ConnectionTextInformation("Connected: " + e.SourceIP), 0);
-            Send(new BlueSheep.Common.Protocol.Messages.BasicPingMessage());
+            Send(new BasicPingMessage());
         }
 
         #region MITM

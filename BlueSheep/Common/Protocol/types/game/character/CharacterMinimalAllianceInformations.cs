@@ -1,76 +1,32 @@
+﻿using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:02:02
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.IO;
-
-
-namespace BlueSheep.Common.Protocol.Types
+namespace BlueSheep.Common.Protocol.Types.Game.Character
 {
+    public class CharacterMinimalAllianceInformations : CharacterMinimalPlusLookInformations
+    {
+        public new const int ID = 444;
+        public virtual int TypeID { get { return ID; } }
 
-public class CharacterMinimalAllianceInformations : CharacterMinimalGuildInformations
-{
+        public BasicAllianceInformations Alliance { get; set; }
 
-public new const int ID = 444;
-public override int TypeId
-{
-    get { return ID; }
-}
+        public CharacterMinimalAllianceInformations() { }
 
-public Types.BasicAllianceInformations alliance;
-        
-
-public CharacterMinimalAllianceInformations()
-{
-}
-
-public CharacterMinimalAllianceInformations(uint id, byte level, string name, Types.EntityLook entityLook, Types.BasicGuildInformations guild, Types.BasicAllianceInformations alliance)
-         : base(id, level, name, entityLook, guild)
+        public CharacterMinimalAllianceInformations(BasicAllianceInformations alliance)
         {
-            this.alliance = alliance;
+            Alliance = alliance;
         }
-        
 
-public override void Serialize(BigEndianWriter writer)
-{
+        public void Serialize(IDataWriter writer)
+        {
+            base.Serialize(writer);
+            Alliance.Serialize(writer);
+        }
 
-base.Serialize(writer);
-            alliance.Serialize(writer);
-            
-
-}
-
-public override void Deserialize(BigEndianReader reader)
-{
-
-base.Deserialize(reader);
-            alliance = new Types.BasicAllianceInformations();
-            alliance.Deserialize(reader);
-            
-
-}
-
-
-}
-
-
+        public void Deserialize(IDataReader reader)
+        {
+            base.Deserialize(reader);
+            Alliance = new BasicAllianceInformations();
+            Alliance.Deserialize(reader);
+        }
+    }
 }

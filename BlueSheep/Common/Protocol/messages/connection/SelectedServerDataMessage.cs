@@ -1,77 +1,64 @@
+﻿using System.Collections.Generic;
 
-
-
-
-
-
-
-
-
-
-// Generated on 12/11/2014 19:01:14
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Common.IO;
-using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages
+namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    public class SelectedServerDataMessage : Message
+    using BlueSheep.Engine.Types;
+
+ 	 public class SelectedServerDataMessage : Message 
     {
-        public const uint ID =42;
-        public override uint ProtocolID
+        public new const int ID = 42;
+        public override int MessageID { get { return ID; } }
+
+        public ushort ServerId;
+        public string Address;
+        public ushort Port;
+        public bool CanCreateNewCharacter = false;
+        public List<int> Ticket;
+
+        public SelectedServerDataMessage() { }
+
+        public SelectedServerDataMessage(bool canCreateNewCharacter, ushort serverId, string address, ushort port, List<int> ticket)
         {
-            get { return ID; }
-        }
-        
-        public bool ssl;
-        public bool canCreateNewCharacter;
-        public int serverId;
-        public string address;
-        public int port;
-        public List<int> ticket;
-        
-        public SelectedServerDataMessage()
-        {
-        }
-        
-        public SelectedServerDataMessage(bool canCreateNewCharacter, int serverId, string address, int port, List<int> ticket)
-        {
-            this.canCreateNewCharacter = canCreateNewCharacter;
-            this.serverId = serverId;
-            this.address = address;
-            this.port = port;
-            this.ticket = ticket;
+            this.CanCreateNewCharacter = canCreateNewCharacter;
+            this.ServerId = serverId;
+            this.Address = address;
+            this.Port = port;
+            this.Ticket = ticket;
         }
 
-        public override void Serialize(BigEndianWriter writer)
+        public SelectedServerDataMessage(ushort serverId, string address, ushort port, bool canCreateNewCharacter, List<int> ticket)
         {
-            writer.WriteVarShort((short)serverId);
-            writer.WriteUTF(address);
-            writer.WriteUShort((ushort)port);
-            writer.WriteBoolean(canCreateNewCharacter);
-            for (int i = 0; i < ticket.Count; i++)
+            ServerId = serverId;
+            Address = address;
+            Port = port;
+            CanCreateNewCharacter = canCreateNewCharacter;
+            Ticket = ticket;
+        }
+
+        public override void Serialize(IDataWriter writer)
+        {
+            writer.WriteVarShort(ServerId);
+            writer.WriteUTF(Address);
+            writer.WriteUShort(Port);
+            writer.WriteBoolean(CanCreateNewCharacter);
+            for (int i = 0; i < Ticket.Count; i++)
             {
-                writer.WriteByte((byte)ticket[i]);
+                writer.WriteByte((byte)Ticket[i]);
             }
         }
 
-        public override void Deserialize(BigEndianReader reader)
+        public override void Deserialize(IDataReader reader)
         {
-            serverId = (int)reader.ReadVarUhShort();
-            address = reader.ReadUTF();
-            port = reader.ReadUShort();
-            canCreateNewCharacter = reader.ReadBoolean();
+            ServerId = reader.ReadVarUhShort();
+            Address = reader.ReadUTF();
+            Port = reader.ReadUShort();
+            CanCreateNewCharacter = reader.ReadBoolean();
             int size = reader.ReadVarInt();
-            ticket = new List<int>();
+            Ticket = new List<int>();
             for (int i = 0; i < size; i++)
             {
-                ticket.Add(reader.ReadByte());
+                Ticket.Add(reader.ReadByte());
             }
         }
-
     }
-    
 }

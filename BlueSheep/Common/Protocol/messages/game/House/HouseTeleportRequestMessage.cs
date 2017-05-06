@@ -8,24 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DofusBot.Protocol.Network.Messages.Game.House
+namespace BlueSheep.Common.Protocol.Messages.Game.House
 {
     using System.Collections.Generic;
-    using DofusBot.Protocol.Network.Messages;
-    using DofusBot.Protocol.Network.Types;
-    using DofusBot.Protocol;
+    using BlueSheep.Common.Protocol.Messages;
+    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Protocol;
     
     
-    public class HouseTeleportRequestMessage : NetworkMessage
+    using BlueSheep.Engine.Types;
+
+ 	 public class HouseTeleportRequestMessage : Message 
     {
         
-        public const int ProtocolId = 6726;
+        public new const int ID = 6726;
         
         public override int MessageID
         {
             get
             {
-                return ProtocolId;
+                return ID;
             }
         }
         
@@ -69,7 +71,7 @@ namespace DofusBot.Protocol.Network.Messages.Game.House
         
         public override void Serialize(IDataWriter writer)
         {
-            writer.WriteVarUhInt(m_houseId);
+            writer.WriteVarInt(m_houseId);
             writer.WriteInt(m_houseInstanceId);
         }
         
