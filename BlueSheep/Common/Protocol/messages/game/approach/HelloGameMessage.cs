@@ -1,11 +1,11 @@
-﻿using BlueSheep.Engine.Types;
+﻿ 
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
     public class HelloGameMessage : Message
     {
-        public new const int ID = 101;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 101;
+        public override int MessageID { get { return ProtocolId; } }
 
         public HelloGameMessage() { }
 

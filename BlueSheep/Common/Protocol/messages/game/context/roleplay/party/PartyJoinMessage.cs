@@ -10,28 +10,21 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party
 {
-    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party;
-    using BlueSheep.Common.Protocol;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party;
+    using System.Collections.Generic;
 
- 	 public class PartyJoinMessage : AbstractPartyMessage 
+
+    public class PartyJoinMessage : AbstractPartyMessage
     {
         
-        public new const int ID = 5576;
+        public const int ProtocolId = 5576;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace BlueSheep.Common.Protocol.Types.Game.Look
 {
-    public class EntityLook 
+    public class EntityLook : NetworkType
     {
-        public new const int ID = 55;
-        public virtual int TypeID { get { return ID; } }
+        public const int ProtocolId = 55;
+        public override int TypeID { get { return ProtocolId; } }
 
         public ushort BonesId { get; set; }
         public List<UInt16> Skins { get; set; }
@@ -25,7 +25,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Look
             SubEntities = subEntities;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(BonesId);
             writer.WriteShort(((short)(Skins.Count)));
@@ -51,7 +51,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Look
             }
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             BonesId = reader.ReadVarUhShort();
             ushort skinsLength = reader.ReadUShort();

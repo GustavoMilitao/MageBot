@@ -11,24 +11,18 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Paddock
 {
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class PaddockPrivateInformations : PaddockAbandonnedInformations
     {
         
-        public new const int ID = 131;
+        public const int ProtocolId = 131;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -55,13 +49,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Paddock
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             m_guildInfo.Serialize(writer);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_guildInfo = new GuildInformations();

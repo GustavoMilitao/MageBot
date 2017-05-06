@@ -11,25 +11,21 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Shortcut
 {
     using BlueSheep.Common.Protocol.Types.Game.Shortcut;
-    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class ShortcutBarContentMessage : Message 
+
+    public class ShortcutBarContentMessage : Message
     {
         
-        public new const int ID = 6231;
+        public const int ProtocolId = 6231;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -73,6 +69,7 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Shortcut
         
         public override void Serialize(IDataWriter writer)
         {
+            writer.WriteByte(m_barType);
             writer.WriteShort(((short)(m_shortcuts.Count)));
             int shortcutsIndex;
             for (shortcutsIndex = 0; (shortcutsIndex < m_shortcuts.Count); shortcutsIndex = (shortcutsIndex + 1))
@@ -81,11 +78,11 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Shortcut
                 writer.WriteUShort(((ushort)(objectToSend.TypeID)));
                 objectToSend.Serialize(writer);
             }
-            writer.WriteByte(m_barType);
         }
         
         public override void Deserialize(IDataReader reader)
         {
+            m_barType = reader.ReadByte();
             int shortcutsCount = reader.ReadUShort();
             int shortcutsIndex;
             m_shortcuts = new System.Collections.Generic.List<Shortcut>();
@@ -95,7 +92,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Shortcut
                 objectToAdd.Deserialize(reader);
                 m_shortcuts.Add(objectToAdd);
             }
-            m_barType = reader.ReadByte();
         }
     }
 }

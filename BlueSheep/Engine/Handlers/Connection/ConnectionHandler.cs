@@ -1,12 +1,12 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Common.Protocol.Messages.Connection;
 using BlueSheep.Common.Protocol.Messages.Game.Approach;
 using BlueSheep.Common.Protocol.Messages.Game.Character.Choice;
 using BlueSheep.Engine.Constants;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Engine.Types;
+using BlueSheep.Common;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
 using BlueSheep.Util.Text;

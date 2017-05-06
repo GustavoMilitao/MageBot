@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class SpellItem : Item
     {
         
-        public new const int ID = 49;
+        public const int ProtocolId = 49;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -69,14 +63,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteInt(m_spellId);
             writer.WriteShort(m_spellLevel);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_spellId = reader.ReadInt();

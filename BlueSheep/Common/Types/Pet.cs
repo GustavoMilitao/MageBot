@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using BlueSheep.Common.Constants;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Interface;
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects;

@@ -11,21 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class SellerBuyerDescriptor 
+
+
+    public class SellerBuyerDescriptor : NetworkType
     {
         
-        public new const int ID = 121;
+        public const int ProtocolId = 121;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -157,7 +155,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteShort(((short)(m_quantities.Count)));
             int quantitiesIndex;
@@ -179,7 +177,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
             writer.WriteVarShort(m_unsoldDelay);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             int quantitiesCount = reader.ReadUShort();
             int quantitiesIndex;

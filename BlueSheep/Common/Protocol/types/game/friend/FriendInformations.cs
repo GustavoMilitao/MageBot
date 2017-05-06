@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Friend
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class FriendInformations : AbstractContactInformations
     {
         
-        public new const int ID = 78;
+        public const int ProtocolId = 78;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -84,7 +78,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Friend
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteByte(m_playerState);
@@ -92,7 +86,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Friend
             writer.WriteInt(m_achievementPoints);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_playerState = reader.ReadByte();

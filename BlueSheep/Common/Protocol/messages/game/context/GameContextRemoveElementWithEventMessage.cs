@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class GameContextRemoveElementWithEventMessage : GameContextRemoveElementMessage 
+
+    public class GameContextRemoveElementWithEventMessage : GameContextRemoveElementMessage
     {
         
-        public new const int ID = 6412;
+        public const int ProtocolId = 6412;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

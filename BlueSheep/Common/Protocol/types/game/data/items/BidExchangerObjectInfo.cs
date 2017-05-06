@@ -11,23 +11,20 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
 {
     using BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects;
-    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class BidExchangerObjectInfo 
+
+
+    public class BidExchangerObjectInfo : NetworkType
     {
         
-        public new const int ID = 122;
+        public const int ProtocolId = 122;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -84,7 +81,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteShort(((short)(m_effects.Count)));
             int effectsIndex;
@@ -103,7 +100,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
             writer.WriteVarInt(m_objectUID);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             int effectsCount = reader.ReadUShort();
             int effectsIndex;

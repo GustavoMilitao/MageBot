@@ -1,12 +1,12 @@
-﻿using BlueSheep.Engine.Types;
+﻿ 
 using System.Collections.Generic;
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Basic
 {
     public class TextInformationMessage : Message
     {
-        public new const int ID = 780;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 780;
+        public override int MessageID { get { return ProtocolId; } }
 
         public byte MsgType;
         public ushort MsgId;

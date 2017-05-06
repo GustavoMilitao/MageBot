@@ -12,23 +12,20 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Job
 {
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class JobBookSubscriptionMessage : Message 
+
+    public class JobBookSubscriptionMessage : Message
     {
         
-        public new const int ID = 6593;
+        public const int ProtocolId = 6593;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Friend
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class AbstractContactInformations 
+
+
+    public class AbstractContactInformations : NetworkType
     {
         
-        public new const int ID = 380;
+        public const int ProtocolId = 380;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -67,13 +64,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Friend
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteInt(m_accountId);
             writer.WriteUTF(m_accountName);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_accountId = reader.ReadInt();
             m_accountName = reader.ReadUTF();

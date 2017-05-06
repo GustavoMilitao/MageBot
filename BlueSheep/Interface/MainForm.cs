@@ -1,18 +1,10 @@
-﻿using BlueSheep.AccountsManager;
-using BlueSheep.Common.Data;
+﻿using BlueSheep.Common.Data;
 using BlueSheep.Common.Data.D2o;
-using BlueSheep.Common.Types;
-using BlueSheep.Core;
 using BlueSheep.Data.D2p;
 using BlueSheep.Engine.Constants;
-using BlueSheep.Engine.Network;
-using BlueSheep.Interface.Text;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Windows.Forms;
 
 namespace BlueSheep.Interface

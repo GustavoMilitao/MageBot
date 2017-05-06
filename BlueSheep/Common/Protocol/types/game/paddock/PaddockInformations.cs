@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Paddock
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class PaddockInformations 
+
+
+    public class PaddockInformations : NetworkType
     {
         
-        public new const int ID = 132;
+        public const int ProtocolId = 132;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -67,13 +64,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Paddock
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(m_maxOutdoorMount);
             writer.WriteVarShort(m_maxItems);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_maxOutdoorMount = reader.ReadVarUhShort();
             m_maxItems = reader.ReadVarUhShort();

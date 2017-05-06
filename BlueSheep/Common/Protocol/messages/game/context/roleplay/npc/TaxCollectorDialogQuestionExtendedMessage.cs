@@ -10,27 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Npc
 {
-    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class TaxCollectorDialogQuestionExtendedMessage : TaxCollectorDialogQuestionBasicMessage 
+
+    public class TaxCollectorDialogQuestionExtendedMessage : TaxCollectorDialogQuestionBasicMessage
     {
         
-        public new const int ID = 5615;
+        public const int ProtocolId = 5615;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

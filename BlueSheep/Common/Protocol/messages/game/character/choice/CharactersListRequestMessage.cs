@@ -1,11 +1,11 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Game.Character.Choice
-{
-    using BlueSheep.Engine.Types;
+﻿ 
 
- 	 public class CharactersListRequestMessage : Message 
+namespace BlueSheep.Common.Protocol.Messages.Game.Character.Choice
+{
+    public class CharactersListRequestMessage : Message
     {
-        public new const int ID = 150;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 150;
+        public override int MessageID { get { return ProtocolId; } }
 
         public CharactersListRequestMessage() { }
 

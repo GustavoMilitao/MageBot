@@ -11,21 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Character.Choice
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class RemodelingInformation 
+
+
+    public class RemodelingInformation : NetworkType
     {
         
-        public new const int ID = 480;
+        public const int ProtocolId = 480;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -112,7 +110,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Choice
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteShort(((short)(m_colors.Count)));
             int colorsIndex;
@@ -126,7 +124,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Choice
             writer.WriteVarShort(m_cosmeticId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             int colorsCount = reader.ReadUShort();
             int colorsIndex;

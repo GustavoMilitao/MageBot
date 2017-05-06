@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
+﻿ 
+using System.Collections.Generic;
 
 namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    using BlueSheep.Engine.Types;
-
- 	 public class SelectedServerDataMessage : Message 
+    public class SelectedServerDataMessage : Message
     {
-        public new const int ID = 42;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 42;
+        public override int MessageID { get { return ProtocolId; } }
 
         public ushort ServerId;
         public string Address;

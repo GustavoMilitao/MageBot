@@ -10,25 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Atlas.Compass
 {
-    using BlueSheep.Common.Protocol.Types.Game.Context;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class CompassUpdatePvpSeekMessage : CompassUpdateMessage 
+
+    public class CompassUpdatePvpSeekMessage : CompassUpdateMessage
     {
         
-        public new const int ID = 6013;
+        public const int ProtocolId = 6013;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -12,23 +12,18 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Chat
 {
     using BlueSheep.Common.Protocol.Types.Game.Data.Items;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class ChatClientMultiWithObjectMessage : ChatClientMultiMessage 
+
+    public class ChatClientMultiWithObjectMessage : ChatClientMultiMessage
     {
         
-        public new const int ID = 862;
+        public const int ProtocolId = 862;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Prism
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class PrismSubareaEmptyInfo 
+
+
+    public class PrismSubareaEmptyInfo : NetworkType
     {
         
-        public new const int ID = 438;
+        public const int ProtocolId = 438;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -67,13 +64,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Prism
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(m_subAreaId);
             writer.WriteVarInt(m_allianceId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_subAreaId = reader.ReadVarUhShort();
             m_allianceId = reader.ReadVarUhInt();

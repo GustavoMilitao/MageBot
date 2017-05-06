@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class ObjectEffectDate : ObjectEffect
     {
         
-        public new const int ID = 72;
+        public const int ProtocolId = 72;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -114,7 +108,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteVarShort(m_year);
@@ -124,7 +118,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects
             writer.WriteByte(m_minute);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_year = reader.ReadVarUhShort();

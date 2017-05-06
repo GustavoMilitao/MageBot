@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Fight.Arena
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class ArenaRankInfos 
+
+
+    public class ArenaRankInfos : NetworkType
     {
         
-        public new const int ID = 499;
+        public const int ProtocolId = 499;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -97,7 +94,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Fight.Arena
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(m_rank);
             writer.WriteVarShort(m_bestRank);
@@ -105,7 +102,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Fight.Arena
             writer.WriteVarShort(m_fightcount);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_rank = reader.ReadVarUhShort();
             m_bestRank = reader.ReadVarUhShort();

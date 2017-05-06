@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BlueSheep.Core.Fight
+﻿namespace BlueSheep.Core.Fight
 {
     public enum SpellCategory
     {

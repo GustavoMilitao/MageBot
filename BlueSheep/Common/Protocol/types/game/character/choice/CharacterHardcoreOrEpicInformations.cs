@@ -10,25 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Character.Choice
 {
-    using BlueSheep.Common.Protocol.Types.Game.Look;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class CharacterHardcoreOrEpicInformations : CharacterBaseInformations
     {
         
-        public new const int ID = 474;
+        public const int ProtocolId = 474;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -85,7 +78,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Choice
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteByte(m_deathState);
@@ -93,7 +86,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Choice
             writer.WriteSByte(m_deathMaxLevel);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_deathState = reader.ReadByte();

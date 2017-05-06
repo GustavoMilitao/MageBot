@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Secure
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class TrustCertificate 
+
+
+    public class TrustCertificate : NetworkType
     {
         
-        public new const int ID = 377;
+        public const int ProtocolId = 377;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -67,13 +64,13 @@ namespace BlueSheep.Common.Protocol.Types.Secure
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteInt(m_ObjectId);
             writer.WriteUTF(m_hash);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_ObjectId = reader.ReadInt();
             m_hash = reader.ReadUTF();

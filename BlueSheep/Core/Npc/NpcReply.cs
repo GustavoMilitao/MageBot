@@ -1,13 +1,10 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BlueSheep.Core.Npc
 {
-        public class NpcReply
+    public class NpcReply
         {
             public int Id { get; private set; }
             public int npcId { get; set; }

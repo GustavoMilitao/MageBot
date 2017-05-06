@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.TreasureHunt
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class TreasureHuntStep 
+
+
+    public class TreasureHuntStep : NetworkType
     {
         
-        public new const int ID = 463;
+        public const int ProtocolId = 463;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -33,11 +30,11 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.TreasureHunt
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
         }
     }

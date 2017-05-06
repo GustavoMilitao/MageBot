@@ -10,24 +10,20 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Items
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class LivingObjectDissociateMessage : Message 
+
+    public class LivingObjectDissociateMessage : Message
     {
         
-        public new const int ID = 5723;
+        public const int ProtocolId = 5723;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

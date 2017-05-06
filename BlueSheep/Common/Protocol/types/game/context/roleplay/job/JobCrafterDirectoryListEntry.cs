@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class JobCrafterDirectoryListEntry 
+
+
+    public class JobCrafterDirectoryListEntry : NetworkType
     {
         
-        public new const int ID = 196;
+        public const int ProtocolId = 196;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -67,13 +64,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             m_playerInfo.Serialize(writer);
             m_jobInfo.Serialize(writer);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_playerInfo = new JobCrafterDirectoryEntryPlayerInfo();
             m_playerInfo.Deserialize(reader);

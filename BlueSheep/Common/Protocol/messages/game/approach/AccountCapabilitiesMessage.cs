@@ -1,11 +1,9 @@
-﻿using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages.Game.Approach
+﻿namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
-    public class AccountCapabilitiesMessage : Message
+    class AccountCapabilitiesMessage : Message
     {
-        public new const int ID = 6216;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 6216;
+        public override int MessageID { get { return ProtocolId; } }
 
         public int AccountId;
         public bool TutorialAvailable;

@@ -11,26 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
 {
     using BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects;
-    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    using System;
-    using System.Linq;
+
 
     public class ObjectItem : Item
     {
         
-        public new const int ID = 37;
+        public const int ProtocolId = 37;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -48,9 +41,9 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
             }
         }
         
-        private byte m_position;
+        private sbyte m_position;
         
-        public virtual byte Position
+        public virtual sbyte Position
         {
             get
             {
@@ -104,7 +97,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
             }
         }
         
-        public ObjectItem(List<ObjectEffect> effects, byte position, ushort objectGID, uint objectUID, uint quantity)
+        public ObjectItem(List<ObjectEffect> effects, sbyte position, ushort objectGID, uint objectUID, uint quantity)
         {
             m_effects = effects;
             m_position = position;
@@ -116,50 +109,40 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
         public ObjectItem()
         {
         }
-
-        public virtual void Serialize(IDataWriter writer)
+        
+        public override void Serialize(IDataWriter writer)
         {
-
             base.Serialize(writer);
-            writer.WriteByte(Position);
-            writer.WriteVarShort((short)ObjectGID);
-            writer.WriteUShort((ushort)Effects.Count);
-            foreach (var entry in Effects)
+            writer.WriteShort(((short)(m_effects.Count)));
+            int effectsIndex;
+            for (effectsIndex = 0; (effectsIndex < m_effects.Count); effectsIndex = (effectsIndex + 1))
             {
-                writer.WriteShort((short)entry.TypeID);
-                entry.Serialize(writer);
+                ObjectEffect objectToSend = m_effects[effectsIndex];
+                writer.WriteUShort(((ushort)(objectToSend.TypeID)));
+                objectToSend.Serialize(writer);
             }
-            writer.WriteVarInt(ObjectUID);
-            writer.WriteVarInt(Quantity);
-
-
+            writer.WriteSByte(m_position);
+            writer.WriteVarShort(m_objectGID);
+            writer.WriteVarInt(m_objectUID);
+            writer.WriteVarInt(m_quantity);
         }
-
-        public virtual void Deserialize(IDataReader reader)
+        
+        public override void Deserialize(IDataReader reader)
         {
-
             base.Deserialize(reader);
-            Position = reader.ReadByte();
-            if (Position < 0 || Position > 255)
-                throw new Exception("Forbidden value on position = " + Position + ", it doesn't respect the following condition : position < 0 || position > 255");
-            ObjectGID = reader.ReadVarUhShort();
-            if (ObjectGID < 0)
-                throw new Exception("Forbidden value on objectGID = " + ObjectGID + ", it doesn't respect the following condition : objectGID < 0");
-            var limit = reader.ReadUShort();
-            Effects = new ObjectEffect[limit].ToList();
-            for (int i = 0; i < limit; i++)
+            int effectsCount = reader.ReadUShort();
+            int effectsIndex;
+            m_effects = new System.Collections.Generic.List<ObjectEffect>();
+            for (effectsIndex = 0; (effectsIndex < effectsCount); effectsIndex = (effectsIndex + 1))
             {
-                Effects[i] = Types.ProtocolTypeManager.GetInstance<ObjectEffect>(reader.ReadUShort());
-                Effects[i].Deserialize(reader);
+                ObjectEffect objectToAdd = ProtocolTypeManager.GetInstance<ObjectEffect>(reader.ReadUShort());
+                objectToAdd.Deserialize(reader);
+                m_effects.Add(objectToAdd);
             }
-            ObjectUID = (uint)reader.ReadVarInt();
-            if (ObjectUID < 0)
-                throw new Exception("Forbidden value on objectUID = " + ObjectUID + ", it doesn't respect the following condition : objectUID < 0");
-            Quantity = (uint)reader.ReadVarInt();
-            if (Quantity < 0)
-                throw new Exception("Forbidden value on quantity = " + Quantity + ", it doesn't respect the following condition : quantity < 0");
-
-
+            m_position = reader.ReadSByte();
+            m_objectGID = reader.ReadVarUhShort();
+            m_objectUID = reader.ReadVarUhInt();
+            m_quantity = reader.ReadVarUhInt();
         }
     }
 }

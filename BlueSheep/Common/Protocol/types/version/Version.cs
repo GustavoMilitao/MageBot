@@ -4,8 +4,8 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class Version
     {
-        public new const int ID = 11;
-        public virtual int TypeID { get { return ID; } }
+        public const int ProtocolId = 11;
+        public virtual int TypeID { get { return ProtocolId; } }
 
         public sbyte Major { get; set; }
         public sbyte Minor { get; set; }

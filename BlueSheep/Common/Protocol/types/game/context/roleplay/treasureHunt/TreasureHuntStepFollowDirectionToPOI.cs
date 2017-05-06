@@ -10,16 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.TreasureHunt
 {
+
+
     public class TreasureHuntStepFollowDirectionToPOI : TreasureHuntStep
     {
         
-        public new const int ID = 461;
+        public const int ProtocolId = 461;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -61,14 +63,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.TreasureHunt
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteByte(m_direction);
             writer.WriteVarShort(m_poiLabelId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_direction = reader.ReadByte();

@@ -4,8 +4,8 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character
 {
     public class CharacterMinimalAllianceInformations : CharacterMinimalPlusLookInformations
     {
-        public new const int ID = 444;
-        public virtual int TypeID { get { return ID; } }
+        public new const int ProtocolId = 444;
+        public override int TypeID { get { return ProtocolId; } }
 
         public BasicAllianceInformations Alliance { get; set; }
 
@@ -16,13 +16,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character
             Alliance = alliance;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             Alliance.Serialize(writer);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             Alliance = new BasicAllianceInformations();

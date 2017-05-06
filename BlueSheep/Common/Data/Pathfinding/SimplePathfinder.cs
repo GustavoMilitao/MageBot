@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BlueSheep.Data.Pathfinding.Positions;
-using BlueSheep.Data.D2p;
-using BlueSheep.Core.Fight;
-using BlueSheep.Engine.Types;
 using BlueSheep.Common.Types;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Core.Map;
 
 namespace BlueSheep.Data.Pathfinding

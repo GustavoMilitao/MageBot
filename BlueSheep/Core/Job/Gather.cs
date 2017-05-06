@@ -1,5 +1,4 @@
-﻿using BlueSheep.Common.Data;
-using BlueSheep.Core.Map.Elements;
+﻿using BlueSheep.Core.Map.Elements;
 using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Interface;
@@ -7,7 +6,6 @@ using BlueSheep.Interface.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BlueSheep.Core
 {

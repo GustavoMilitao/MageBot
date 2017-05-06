@@ -1,5 +1,4 @@
 ﻿using BlueSheep.Common.Data.D2o;
-using BlueSheep.Common.Protocol.Types;
 
 namespace BlueSheep.Common.Types
 {

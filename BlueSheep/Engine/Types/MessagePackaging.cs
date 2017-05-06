@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using BlueSheep.Common.IO;
+﻿using BlueSheep.Common.IO;
 
 namespace BlueSheep.Engine.Types
 {

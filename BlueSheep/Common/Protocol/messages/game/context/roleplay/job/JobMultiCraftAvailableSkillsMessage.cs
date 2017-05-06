@@ -11,25 +11,18 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Job
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class JobMultiCraftAvailableSkillsMessage : JobAllowMultiCraftRequestMessage 
+
+    public class JobMultiCraftAvailableSkillsMessage : JobAllowMultiCraftRequestMessage
     {
         
-        public new const int ID = 5747;
+        public const int ProtocolId = 5747;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

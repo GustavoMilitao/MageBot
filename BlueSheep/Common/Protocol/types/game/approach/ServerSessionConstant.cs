@@ -1,9 +1,9 @@
 ﻿namespace BlueSheep.Common.Protocol.Types.Game.Approach
 {
-    public class ServerSessionConstant 
+    public class ServerSessionConstant : NetworkType
     {
-        public new const int ID = 430;
-        public virtual int TypeID { get { return ID; } }
+        public const int ProtocolId = 430;
+        public override int TypeID { get { return ProtocolId; } }
 
         public ushort ObjectID { get; set; }
 
@@ -14,12 +14,12 @@
             ObjectID = objectId;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(ObjectID);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             ObjectID = reader.ReadVarUhShort();
         }

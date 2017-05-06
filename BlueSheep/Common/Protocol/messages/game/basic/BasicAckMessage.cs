@@ -1,11 +1,10 @@
-﻿using BlueSheep.Engine.Types;
-
+﻿ 
 namespace BlueSheep.Common.Protocol.Messages.Game.Basic
 {
-    public class BasicAckMessage : Message
+    class BasicAckMessage : Message
     {
-        public new const int ID = 6362;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 6362;
+        public override int MessageID { get { return ProtocolId; } }
 
         public uint Seq;
         public ushort LastProtocolId;

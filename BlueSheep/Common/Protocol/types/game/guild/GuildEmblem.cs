@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Guild
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class GuildEmblem 
+
+
+    public class GuildEmblem : NetworkType
     {
         
-        public new const int ID = 87;
+        public const int ProtocolId = 87;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -97,7 +94,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Guild
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(m_symbolShape);
             writer.WriteInt(m_symbolColor);
@@ -105,7 +102,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Guild
             writer.WriteInt(m_backgroundColor);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_symbolShape = reader.ReadVarUhShort();
             m_symbolColor = reader.ReadInt();

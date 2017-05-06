@@ -1,11 +1,11 @@
-﻿using BlueSheep.Engine.Types;
+﻿ 
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
     public class AuthenticationTicketAcceptedMessage : Message
     {
-        public new const int ID = 111;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 111;
+        public override int MessageID { get { return ProtocolId; } }
 
         public AuthenticationTicketAcceptedMessage() { }
 

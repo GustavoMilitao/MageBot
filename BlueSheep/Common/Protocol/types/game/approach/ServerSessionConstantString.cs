@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Approach
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class ServerSessionConstantString : ServerSessionConstant
     {
         
-        public new const int ID = 436;
+        public const int ProtocolId = 436;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -54,13 +48,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Approach
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteUTF(m_value);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_value = reader.ReadUTF();

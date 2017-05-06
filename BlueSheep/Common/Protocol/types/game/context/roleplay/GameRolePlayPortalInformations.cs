@@ -10,20 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
 {
-    using BlueSheep.Protocol;
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.TreasureHunt;
 
 
     public class GameRolePlayPortalInformations : GameRolePlayActorInformations
     {
         
-        public new const int ID = 467;
+        public const int ProtocolId = 467;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -50,14 +49,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteUShort(((ushort)(m_portal.TypeID)));
             m_portal.Serialize(writer);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_portal = ProtocolTypeManager.GetInstance<PortalInformation>(reader.ReadUShort());

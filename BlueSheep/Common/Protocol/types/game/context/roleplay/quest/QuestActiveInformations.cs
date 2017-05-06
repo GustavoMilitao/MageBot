@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Quest
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class QuestActiveInformations 
+
+
+    public class QuestActiveInformations : NetworkType
     {
         
-        public new const int ID = 381;
+        public const int ProtocolId = 381;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -52,12 +49,12 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Quest
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(m_questId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_questId = reader.ReadVarUhShort();
         }

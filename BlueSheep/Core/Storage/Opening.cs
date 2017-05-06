@@ -1,7 +1,5 @@
 ﻿using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Common.Protocol.Messages.Game.Interactive;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Common.Protocol.Types.Game.Interactive;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;

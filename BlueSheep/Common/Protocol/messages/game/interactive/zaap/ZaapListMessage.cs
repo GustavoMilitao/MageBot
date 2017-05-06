@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Interactive.Zaap
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class ZaapListMessage : TeleportDestinationsListMessage 
+
+    public class ZaapListMessage : TeleportDestinationsListMessage
     {
         
-        public new const int ID = 1604;
+        public const int ProtocolId = 1604;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

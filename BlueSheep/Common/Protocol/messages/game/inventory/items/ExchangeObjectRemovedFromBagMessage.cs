@@ -11,24 +11,18 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Items
 {
     using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class ExchangeObjectRemovedFromBagMessage : ExchangeObjectMessage 
+
+    public class ExchangeObjectRemovedFromBagMessage : ExchangeObjectMessage
     {
         
-        public new const int ID = 6010;
+        public const int ProtocolId = 6010;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

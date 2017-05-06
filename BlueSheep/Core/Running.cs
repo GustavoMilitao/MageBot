@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Common.Types;
 using BlueSheep.Core.Meal;
 using BlueSheep.Core.Storage;

@@ -1,11 +1,11 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Game.Friend
-{
-    using BlueSheep.Engine.Types;
+﻿ 
 
- 	 public class FriendsGetListMessage : Message 
+namespace BlueSheep.Common.Protocol.Messages.Game.Friend
+{
+    public class FriendsGetListMessage : Message
     {
-        public new const int ID = 4001;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 4001;
+        public override int MessageID { get { return ProtocolId; } }
 
         public FriendsGetListMessage() { }
 

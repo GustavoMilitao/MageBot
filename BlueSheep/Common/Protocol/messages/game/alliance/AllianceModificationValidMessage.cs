@@ -11,24 +11,20 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Alliance
 {
     using BlueSheep.Common.Protocol.Types.Game.Guild;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class AllianceModificationValidMessage : Message 
+
+    public class AllianceModificationValidMessage : Message
     {
         
-        public new const int ID = 6450;
+        public const int ProtocolId = 6450;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -11,27 +11,19 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Fight
 {
     using BlueSheep.Common.Protocol.Types.Game.Context.Fight;
-    using BlueSheep.Common.Protocol.Types.Game.Action.Fight;
-    using BlueSheep.Common.Protocol.Types.Game.Actions.Fight;
-    using BlueSheep.Common.Protocol.Types.Game.Idol;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class GameFightResumeWithSlavesMessage : GameFightResumeMessage 
+
+    public class GameFightResumeWithSlavesMessage : GameFightResumeMessage
     {
         
-        public new const int ID = 6215;
+        public const int ProtocolId = 6215;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

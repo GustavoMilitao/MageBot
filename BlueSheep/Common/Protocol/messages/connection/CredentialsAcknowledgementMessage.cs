@@ -1,11 +1,11 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Connection
-{
-    using BlueSheep.Engine.Types;
+﻿ 
 
- 	 public class CredentialsAcknowledgementMessage : Message 
+namespace BlueSheep.Common.Protocol.Messages.Connection
+{
+    public class CredentialsAcknowledgementMessage : Message
     {
-        public new const int ID = 6314;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 6314;
+        public override int MessageID { get { return ProtocolId; } }
 
         public CredentialsAcknowledgementMessage() { }
 

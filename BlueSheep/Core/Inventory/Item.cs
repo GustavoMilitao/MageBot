@@ -1,11 +1,7 @@
 ﻿using BlueSheep.Common.Data;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Interface;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects;
 

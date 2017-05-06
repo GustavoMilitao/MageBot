@@ -10,24 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Paddock
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    public class PaddockInformationsForSell 
+
+
+    public class PaddockInformationsForSell : NetworkType
     {
         
-        public new const int ID = 222;
+        public const int ProtocolId = 222;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -144,7 +139,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Paddock
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteUTF(m_guildOwner);
             writer.WriteShort(m_worldX);
@@ -155,7 +150,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Paddock
             writer.WriteVarLong(m_price);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_guildOwner = reader.ReadUTF();
             m_worldX = reader.ReadShort();

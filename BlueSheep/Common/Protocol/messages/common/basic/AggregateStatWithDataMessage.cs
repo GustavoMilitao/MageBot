@@ -10,26 +10,21 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Common.Basic
 {
-    using BlueSheep.Common.Protocol.Types.Common.Basic;
-    using BlueSheep.Common.Protocol;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common.Protocol.Types.Common.Basic;
+    using System.Collections.Generic;
 
- 	 public class AggregateStatWithDataMessage : AggregateStatMessage 
+
+    public class AggregateStatWithDataMessage : AggregateStatMessage
     {
         
-        public new const int ID = 6662;
+        public const int ProtocolId = 6662;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

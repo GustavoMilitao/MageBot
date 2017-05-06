@@ -12,21 +12,19 @@ namespace BlueSheep.Common.Protocol.Types.Game.Startup
 {
     using BlueSheep.Common.Protocol.Types.Game.Data.Items;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class StartupActionAddObject 
+
+
+    public class StartupActionAddObject : NetworkType
     {
         
-        public new const int ID = 52;
+        public const int ProtocolId = 52;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -128,7 +126,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Startup
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteShort(((short)(m_items.Count)));
             int itemsIndex;
@@ -144,7 +142,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Startup
             writer.WriteUTF(m_pictureUrl);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             int itemsCount = reader.ReadUShort();
             int itemsIndex;

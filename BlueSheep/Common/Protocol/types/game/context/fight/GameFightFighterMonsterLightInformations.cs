@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class GameFightFighterMonsterLightInformations : GameFightFighterLightInformations
     {
         
-        public new const int ID = 455;
+        public const int ProtocolId = 455;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -54,13 +48,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteVarShort(m_creatureGenericId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_creatureGenericId = reader.ReadVarUhShort();

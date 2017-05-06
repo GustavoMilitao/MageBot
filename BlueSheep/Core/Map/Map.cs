@@ -1,13 +1,9 @@
-﻿using BlueSheep.Common.Data.D2o;
-using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
+﻿using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages.Game.Context;
 using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay;
 using BlueSheep.Common.Protocol.Messages.Game.Interactive;
 using BlueSheep.Common.Protocol.Messages.Game.Interactive.Zaap;
-using BlueSheep.Core.Fight;
 using BlueSheep.Core.Map.Elements;
-using BlueSheep.Data.D2p.Elements;
 using BlueSheep.Data.Pathfinding;
 using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Engine.Enums;
@@ -17,9 +13,7 @@ using BlueSheep.Interface.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BlueSheep.Core.Map
 {

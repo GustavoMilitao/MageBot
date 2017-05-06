@@ -1,12 +1,9 @@
 ﻿using BlueSheep.Common.Data.D2o;
-using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Common.Protocol.Messages.Game.Inventory.Preset;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Common.Protocol.Types.Game.Actions.Fight;
 using BlueSheep.Common.Protocol.Types.Game.Character.Characteristic;
 using BlueSheep.Common.Protocol.Types.Game.Context.Fight;
 using BlueSheep.Common.Types;
-using BlueSheep.Core.Inventory;
 using BlueSheep.Data.Pathfinding;
 using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Engine.Enums;
@@ -18,7 +15,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace BlueSheep.Core.Fight
 {

@@ -10,24 +10,20 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Actions
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class GameActionNoopMessage : Message 
+
+    public class GameActionNoopMessage : Message
     {
         
-        public new const int ID = 1002;
+        public const int ProtocolId = 1002;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

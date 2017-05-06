@@ -1,11 +1,11 @@
-﻿using BlueSheep.Engine.Types;
+﻿ 
 
 namespace BlueSheep.Common.Protocol.Messages.Queues
 {
     public class QueueStatusMessage : Message
     {
-        public new const int ID = 6100;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 6100;
+        public override int MessageID { get { return ProtocolId; } }
 
         public ushort Position;
         public ushort Total;

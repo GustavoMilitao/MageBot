@@ -10,27 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Job
 {
-    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class JobExperienceOtherPlayerUpdateMessage : JobExperienceUpdateMessage 
+
+    public class JobExperienceOtherPlayerUpdateMessage : JobExperienceUpdateMessage
     {
         
-        public new const int ID = 6599;
+        public const int ProtocolId = 6599;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

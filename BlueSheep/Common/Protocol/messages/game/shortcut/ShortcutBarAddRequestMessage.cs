@@ -11,25 +11,20 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Shortcut
 {
     using BlueSheep.Common.Protocol.Types.Game.Shortcut;
-    using BlueSheep.Common.Protocol;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class ShortcutBarAddRequestMessage : Message 
+
+    public class ShortcutBarAddRequestMessage : Message
     {
         
-        public new const int ID = 6225;
+        public const int ProtocolId = 6225;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

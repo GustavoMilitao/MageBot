@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Dare
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class DareVersatileInformations 
+
+
+    public class DareVersatileInformations : NetworkType
     {
         
-        public new const int ID = 504;
+        public const int ProtocolId = 504;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -82,14 +79,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Dare
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteDouble(m_dareId);
             writer.WriteInt(m_countEntrants);
             writer.WriteInt(m_countWinners);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_dareId = reader.ReadDouble();
             m_countEntrants = reader.ReadInt();

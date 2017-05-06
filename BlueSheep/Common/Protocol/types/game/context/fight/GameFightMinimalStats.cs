@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class GameFightMinimalStats 
+
+
+    public class GameFightMinimalStats : NetworkType
     {
         
-        public new const int ID = 31;
+        public const int ProtocolId = 31;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -725,7 +722,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarInt(m_lifePoints);
             writer.WriteVarInt(m_maxLifePoints);
@@ -772,7 +769,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
             writer.WriteVarShort(m_spellDamageReceivedPercent);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_lifePoints = reader.ReadVarUhInt();
             m_maxLifePoints = reader.ReadVarUhInt();

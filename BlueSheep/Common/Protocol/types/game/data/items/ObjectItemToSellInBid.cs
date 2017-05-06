@@ -10,16 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
 {
+
+
     public class ObjectItemToSellInBid : ObjectItemToSell
     {
         
-        public new const int ID = 164;
+        public const int ProtocolId = 164;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -46,13 +48,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteInt(m_unsoldDelay);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_unsoldDelay = reader.ReadInt();

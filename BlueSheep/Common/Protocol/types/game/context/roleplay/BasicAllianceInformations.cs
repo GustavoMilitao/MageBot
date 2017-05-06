@@ -4,8 +4,8 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
 {
     public class BasicAllianceInformations : AbstractSocialGroupInfos
     {
-        public new const int ID = 419;
-        public virtual int TypeID { get { return ID; } }
+        public new const int ProtocolId = 419;
+        public override int TypeID { get { return ProtocolId; } }
 
         public uint AllianceId;
         public string AllianceTag;
@@ -18,14 +18,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
             AllianceTag = allianceTag;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteVarInt(AllianceId);
             writer.WriteUTF(AllianceTag);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             AllianceId = reader.ReadVarUhInt();

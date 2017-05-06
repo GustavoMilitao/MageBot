@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Updater
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class ContentPart 
+
+
+    public class ContentPart : NetworkType
     {
         
-        public new const int ID = 350;
+        public const int ProtocolId = 350;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -67,13 +64,13 @@ namespace BlueSheep.Common.Protocol.Types.Updater
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteUTF(m_ObjectId);
             writer.WriteByte(m_state);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_ObjectId = reader.ReadUTF();
             m_state = reader.ReadByte();

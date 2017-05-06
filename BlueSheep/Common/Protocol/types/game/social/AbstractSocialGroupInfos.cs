@@ -2,8 +2,8 @@
 {
     public class AbstractSocialGroupInfos
     {
-        public new const int ID = 416;
-        public virtual int TypeID { get { return ID; } }
+        public const int ProtocolId = 416;
+        public virtual int TypeID { get { return ProtocolId; } }
 
         public AbstractSocialGroupInfos() { }
 

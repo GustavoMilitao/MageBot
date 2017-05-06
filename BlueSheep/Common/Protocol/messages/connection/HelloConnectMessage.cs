@@ -1,11 +1,11 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Connection
-{
-    using BlueSheep.Engine.Types;
+﻿ 
 
- 	 public class HelloConnectMessage : Message 
+namespace BlueSheep.Common.Protocol.Messages.Connection
+{
+    public class HelloConnectMessage : Message
     {
-        public new const int ID = 3;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 3;
+        public override int MessageID { get { return ProtocolId; } }
 
         public string salt;
         public sbyte[] key;

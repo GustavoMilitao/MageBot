@@ -1,9 +1,9 @@
 ﻿namespace BlueSheep.Common.Protocol.Types.Game.Character
 {
-    public class AbstractCharacterInformation 
+    public class AbstractCharacterInformation : NetworkType
     {
-        public new const int ID = 400;
-        public virtual int TypeID { get { return ID; } }
+        public const int ProtocolId = 400;
+        public override int TypeID { get { return ProtocolId; } }
 
         public double ObjectID { get; set; }
 
@@ -14,12 +14,12 @@
             ObjectID = objectId;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarLong((long)ObjectID);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             ObjectID = reader.ReadVarUhLong();
         }

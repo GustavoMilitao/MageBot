@@ -10,24 +10,20 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Pvp
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class SetEnablePVPRequestMessage : Message 
+
+    public class SetEnablePVPRequestMessage : Message
     {
         
-        public new const int ID = 1810;
+        public const int ProtocolId = 1810;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

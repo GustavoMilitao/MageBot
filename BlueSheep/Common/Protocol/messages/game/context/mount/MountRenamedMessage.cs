@@ -10,24 +10,20 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Mount
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class MountRenamedMessage : Message 
+
+    public class MountRenamedMessage : Message
     {
         
-        public new const int ID = 5983;
+        public const int ProtocolId = 5983;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

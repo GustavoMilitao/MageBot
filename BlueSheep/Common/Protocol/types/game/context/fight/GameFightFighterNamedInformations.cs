@@ -11,26 +11,18 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
 {
     using BlueSheep.Common.Protocol.Types.Game.Character.Status;
-    using BlueSheep.Common.Protocol.Types.Game.Look;
-    using BlueSheep.Common.Protocol.Types.Game.Context;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class GameFightFighterNamedInformations : GameFightFighterInformations
     {
         
-        public new const int ID = 158;
+        public const int ProtocolId = 158;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -72,14 +64,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             m_status.Serialize(writer);
             writer.WriteUTF(m_name);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_status = new PlayerStatus();

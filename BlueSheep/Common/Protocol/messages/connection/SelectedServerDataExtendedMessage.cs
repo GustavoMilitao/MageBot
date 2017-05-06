@@ -2,26 +2,24 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    using BlueSheep.Engine.Types;
-
- 	 public class SelectedServerDataExtendedMessage : SelectedServerDataMessage
+    public class SelectedServerDataExtendedMessage : SelectedServerDataMessage
     {
-        public new const int ID = 6469;
-        public override int MessageID { get { return ID; } }
+        public new const int ProtocolId = 6469;
+        public override int MessageID { get { return ProtocolId; } }
 
         public List<ushort> ServerIds;
-
-        public SelectedServerDataExtendedMessage(bool canCreateNewCharacter, ushort serverId, string address, ushort port, List<int> ticket, List<ushort> serverIds)
-          : base(canCreateNewCharacter, serverId, address, port, ticket)
-        {
-            this.ServerIds = serverIds;
-        }
 
         public SelectedServerDataExtendedMessage() { }
 
         public SelectedServerDataExtendedMessage(List<ushort> serverIds)
         {
             ServerIds = serverIds;
+        }
+
+        public SelectedServerDataExtendedMessage(bool canCreateNewCharacter, ushort serverId, string address, ushort port, List<int> ticket, List<ushort> serverIds)
+          : base(canCreateNewCharacter, serverId, address, port, ticket)
+        {
+            this.ServerIds = serverIds;
         }
 
         public override void Serialize(IDataWriter writer)

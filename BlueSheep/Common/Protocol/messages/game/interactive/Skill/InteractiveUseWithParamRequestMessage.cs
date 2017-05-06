@@ -11,24 +11,18 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Interactive.Skill
 {
     using BlueSheep.Common.Protocol.Messages.Game.Interactive;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class InteractiveUseWithParamRequestMessage : InteractiveUseRequestMessage 
+
+    public class InteractiveUseWithParamRequestMessage : InteractiveUseRequestMessage
     {
         
-        public new const int ID = 6715;
+        public const int ProtocolId = 6715;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

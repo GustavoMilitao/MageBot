@@ -1,17 +1,11 @@
 ﻿namespace BlueSheep.Interface
 {
     using BlueSheep.Common.IO;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay;
     using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight;
-    using BlueSheep.Common.Protocol.Types;
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
-    using BlueSheep.Engine.Types;
-    using BlueSheep.Interface;
     using System;
     using System.ComponentModel;
-    using System.Drawing;
-    using System.Runtime.CompilerServices;
     using System.Windows.Forms;
 
     public class HeroicUC : MetroFramework.Controls.MetroUserControl
@@ -59,7 +53,7 @@
         #endregion
 
         #region Public Methods
-        public void AnalysePacket(BlueSheep.Engine.Types.Message msg, byte[] packetdatas)
+        public void AnalysePacket(Common.Message msg, byte[] packetdatas)
         {
 
             using (BigEndianReader reader = new BigEndianReader(packetdatas))

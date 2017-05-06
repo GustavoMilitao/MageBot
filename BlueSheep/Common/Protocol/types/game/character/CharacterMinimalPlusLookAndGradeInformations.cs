@@ -2,8 +2,8 @@
 {
     public class CharacterMinimalPlusLookAndGradeInformations : CharacterMinimalPlusLookInformations
     {
-        public new const int ID = 193;
-        public virtual int TypeID { get { return ID; } }
+        public new const int ProtocolId = 193;
+        public override int TypeID { get { return ProtocolId; } }
 
         public uint Grade { get; set; }
 
@@ -14,13 +14,13 @@
             Grade = grade;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteVarInt(Grade);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             Grade = reader.ReadVarUhInt();

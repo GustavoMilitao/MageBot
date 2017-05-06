@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using BlueSheep.Common.IO;
 using BlueSheep.Data.D2p.Elements;
 

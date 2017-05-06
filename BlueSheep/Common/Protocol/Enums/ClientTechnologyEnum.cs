@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Enums
+namespace BlueSheep.Common.Enums
 {
     
     

@@ -1,8 +1,5 @@
-﻿using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
-using BlueSheep.Common.Protocol.Messages.Game.Inventory.Items;
+﻿using BlueSheep.Common.Protocol.Messages.Game.Inventory.Items;
 using BlueSheep.Common.Types;
-using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 
 namespace BlueSheep.Core.Meal

@@ -12,23 +12,20 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Npc
 {
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Quest;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class MapNpcsQuestStatusUpdateMessage : Message 
+
+    public class MapNpcsQuestStatusUpdateMessage : Message
     {
         
-        public new const int ID = 5642;
+        public const int ProtocolId = 5642;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

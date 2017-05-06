@@ -11,24 +11,18 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Actions.Fight
 {
     using BlueSheep.Common.Protocol.Messages.Game.Actions;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class GameActionFightLifePointsGainMessage : AbstractGameActionMessage 
+
+    public class GameActionFightLifePointsGainMessage : AbstractGameActionMessage
     {
         
-        public new const int ID = 6311;
+        public const int ProtocolId = 6311;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

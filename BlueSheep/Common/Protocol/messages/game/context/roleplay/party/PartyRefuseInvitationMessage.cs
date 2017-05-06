@@ -10,27 +10,21 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class PartyRefuseInvitationMessage : AbstractPartyMessage 
+
+    public class PartyRefuseInvitationMessage : AbstractPartyMessage
     {
-        
-        public new const int ID = 5582;
-        
+
+        public const int ProtocolId = 5582;
+
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
-        
+
         public PartyRefuseInvitationMessage()
         {
         }
@@ -43,7 +37,7 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party
         {
             base.Serialize(writer);
         }
-        
+
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);

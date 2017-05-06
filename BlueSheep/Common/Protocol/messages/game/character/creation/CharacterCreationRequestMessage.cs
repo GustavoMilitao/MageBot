@@ -10,21 +10,16 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Character.Creation
 {
-    using BlueSheep.Protocol;
-
-
-    using BlueSheep.Engine.Types;
-
- 	 public class CharacterCreationRequestMessage : Message 
+    public class CharacterCreationRequestMessage : Message
     {
-        
-        public new const int ID = 160;
+
+        public const int ProtocolId = 160;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Character.Choice
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class CharacterToRemodelInformations : CharacterRemodelingInformation
     {
         
-        public new const int ID = 477;
+        public const int ProtocolId = 477;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -69,14 +63,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Choice
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteByte(m_possibleChangeMask);
             writer.WriteByte(m_mandatoryChangeMask);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_possibleChangeMask = reader.ReadByte();

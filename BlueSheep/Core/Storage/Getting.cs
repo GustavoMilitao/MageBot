@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
 using BlueSheep.Common.Constants;
-using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
-using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;

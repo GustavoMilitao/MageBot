@@ -1,11 +1,9 @@
-﻿using BlueSheep.Engine.Types;
-
-namespace BlueSheep.Common.Protocol.Messages.Secure
+﻿namespace BlueSheep.Common.Protocol.Messages.Secure
 {
-    public class TrustStatusMessage : Message
+    class TrustStatusMessage : Message
     {
-        public new const int ID = 6267;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 6267;
+        public override int MessageID { get { return ProtocolId; } }
 
         public bool Trusted;
         public bool Certified;

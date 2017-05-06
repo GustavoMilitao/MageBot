@@ -1,11 +1,11 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Security
-{
-    using BlueSheep.Engine.Types;
+﻿ 
 
- 	 public class ClientKeyMessage : Message 
+namespace BlueSheep.Common.Protocol.Messages.Security
+{
+    public class ClientKeyMessage : Message
     {
-        public new const int ID = 5607;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 5607;
+        public override int MessageID { get { return ProtocolId; } }
 
         public string Key { get; set; }
 

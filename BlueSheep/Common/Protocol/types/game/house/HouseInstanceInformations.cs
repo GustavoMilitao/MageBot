@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.House
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class HouseInstanceInformations 
+
+
+    public class HouseInstanceInformations : NetworkType
     {
         
-        public new const int ID = 511;
+        public const int ProtocolId = 511;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -112,7 +109,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.House
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             byte flag = new byte();
             BooleanByteWrapper.SetFlag(0, flag, m_secondHand);
@@ -123,7 +120,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.House
             writer.WriteUTF(m_ownerName);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             byte flag = reader.ReadByte();
             m_secondHand = BooleanByteWrapper.GetFlag(flag, 0);

@@ -10,27 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
 {
-    using BlueSheep.Common.Protocol.Types.Game.Look;
-    using BlueSheep.Common.Protocol.Types.Game.Context;
-    using BlueSheep.Common.Protocol;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class GameRolePlayHumanoidInformations : GameRolePlayNamedActorInformations
     {
         
-        public new const int ID = 159;
+        public const int ProtocolId = 159;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -72,7 +63,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteUShort(((ushort)(m_humanoidInfo.TypeID)));
@@ -80,7 +71,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
             writer.WriteInt(m_accountId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_humanoidInfo = ProtocolTypeManager.GetInstance<HumanInformations>(reader.ReadUShort());

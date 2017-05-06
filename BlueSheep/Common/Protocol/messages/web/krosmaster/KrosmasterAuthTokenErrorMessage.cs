@@ -10,24 +10,20 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Web.Krosmaster
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class KrosmasterAuthTokenErrorMessage : Message 
+
+    public class KrosmasterAuthTokenErrorMessage : Message
     {
         
-        public new const int ID = 6345;
+        public const int ProtocolId = 6345;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

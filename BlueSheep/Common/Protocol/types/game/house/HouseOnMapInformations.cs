@@ -11,23 +11,18 @@
 namespace BlueSheep.Common.Protocol.Types.Game.House
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class HouseOnMapInformations : HouseInformations
     {
         
-        public new const int ID = 510;
+        public const int ProtocolId = 510;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -69,7 +64,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.House
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteShort(((short)(m_doorsOnMap.Count)));
@@ -87,7 +82,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.House
             }
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             int doorsOnMapCount = reader.ReadUShort();

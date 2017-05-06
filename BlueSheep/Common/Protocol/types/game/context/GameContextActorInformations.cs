@@ -11,23 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Context
 {
     using BlueSheep.Common.Protocol.Types.Game.Look;
-    using BlueSheep.Common.Protocol;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class GameContextActorInformations 
+
+
+    public class GameContextActorInformations : NetworkType
     {
         
-        public new const int ID = 150;
+        public const int ProtocolId = 150;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -84,7 +80,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             m_look.Serialize(writer);
             writer.WriteUShort(((ushort)(m_disposition.TypeID)));
@@ -92,7 +88,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context
             writer.WriteDouble(m_contextualId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_look = new EntityLook();
             m_look.Deserialize(reader);

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Core;
 using BlueSheep.Engine.Frame;
 using BlueSheep.Engine.Network;

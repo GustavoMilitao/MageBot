@@ -11,24 +11,20 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Context
 {
     using BlueSheep.Common.Protocol.Types.Game.Context;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class GameMapChangeOrientationMessage : Message 
+
+    public class GameMapChangeOrientationMessage : Message
     {
         
-        public new const int ID = 946;
+        public const int ProtocolId = 946;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

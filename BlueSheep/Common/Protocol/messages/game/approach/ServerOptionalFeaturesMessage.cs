@@ -1,12 +1,12 @@
-﻿using BlueSheep.Engine.Types;
+﻿ 
 using System.Collections.Generic;
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
-    public class ServerOptionalFeaturesMessage : Message
+    class ServerOptionalFeaturesMessage : Message
     {
-        public new const int ID = 6305;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 6305;
+        public override int MessageID { get { return ProtocolId; } }
 
         public List<byte> Features;
 

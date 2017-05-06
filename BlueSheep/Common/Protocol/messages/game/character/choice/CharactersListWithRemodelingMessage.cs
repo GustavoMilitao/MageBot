@@ -12,23 +12,18 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Character.Choice
 {
     using BlueSheep.Common.Protocol.Types.Game.Character.Choice;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class CharactersListWithRemodelingMessage : CharactersListMessage 
+
+    public class CharactersListWithRemodelingMessage : CharactersListMessage
     {
         
-        public new const int ID = 6550;
+        public const int ProtocolId = 6550;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

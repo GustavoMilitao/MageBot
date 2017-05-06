@@ -11,23 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job
 {
     using BlueSheep.Common.Protocol.Types.Game.Interactive.Skill;
-    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class JobDescription 
+
+
+    public class JobDescription : NetworkType
     {
         
-        public new const int ID = 101;
+        public const int ProtocolId = 101;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -69,8 +65,9 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
+            writer.WriteByte(m_jobId);
             writer.WriteShort(((short)(m_skills.Count)));
             int skillsIndex;
             for (skillsIndex = 0; (skillsIndex < m_skills.Count); skillsIndex = (skillsIndex + 1))
@@ -79,11 +76,11 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job
                 writer.WriteUShort(((ushort)(objectToSend.TypeID)));
                 objectToSend.Serialize(writer);
             }
-            writer.WriteByte(m_jobId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
+            m_jobId = reader.ReadByte();
             int skillsCount = reader.ReadUShort();
             int skillsIndex;
             m_skills = new System.Collections.Generic.List<SkillActionDescription>();
@@ -93,7 +90,6 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job
                 objectToAdd.Deserialize(reader);
                 m_skills.Add(objectToAdd);
             }
-            m_jobId = reader.ReadByte();
         }
     }
 }

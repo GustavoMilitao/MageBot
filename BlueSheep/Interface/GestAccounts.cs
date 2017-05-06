@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using BlueSheep.Core;
-using BlueSheep.Engine;
 using BlueSheep.Common.Types;
 using BlueSheep.AccountsManager;
 using System.Diagnostics;
-using BlueSheep.Engine.Constants;
 namespace BlueSheep.Interface
 {
     public partial class GestAccounts : MetroFramework.Forms.MetroForm

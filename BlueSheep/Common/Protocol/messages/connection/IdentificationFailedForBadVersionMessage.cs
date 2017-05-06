@@ -13,18 +13,16 @@ using BlueSheep.Common.Protocol.Types;
 namespace BlueSheep.Common.Protocol.Messages.Connection
 {
 
-    using BlueSheep.Engine.Types;
-
- 	 public class IdentificationFailedForBadVersionMessage : IdentificationFailedMessage 
+    public class IdentificationFailedForBadVersionMessage : IdentificationFailedMessage
     {
         
-        public new const int ID = 21;
+        public new const int ProtocolId = 21;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

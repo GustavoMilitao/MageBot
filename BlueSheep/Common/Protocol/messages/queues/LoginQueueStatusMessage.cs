@@ -1,11 +1,11 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Queues
-{
-    using BlueSheep.Engine.Types;
+﻿ 
 
- 	 public class LoginQueueStatusMessage : Message 
+namespace BlueSheep.Common.Protocol.Messages.Queues
+{
+    public class LoginQueueStatusMessage : Message
     {
-        public new const int ID = 10;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 10;
+        public override int MessageID { get { return ProtocolId; } }
 
         public ushort Position;
         public ushort Total;

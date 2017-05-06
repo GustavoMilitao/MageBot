@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using System.Windows.Forms;
 using System.Threading;
-using System.Text.RegularExpressions;
-using System.Configuration;
 using System.Net.Mail;
-using System.Text;
 
 namespace BlueSheep.Engine.ExceptionHandler
 {

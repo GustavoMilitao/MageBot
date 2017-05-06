@@ -25,7 +25,7 @@ namespace BlueSheep.Common.Protocol.Types
                 if (type.Namespace == null || !type.Namespace.StartsWith(typeof(ProtocolTypeManager).Namespace))
                     continue;
 
-                FieldInfo field = type.GetField("ID");
+                FieldInfo field = type.GetField("ProtocolId");
 
                 if (field != null)
                 {

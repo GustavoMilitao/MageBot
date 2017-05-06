@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Chat.Smiley
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class LocalizedChatSmileyMessage : ChatSmileyMessage 
+
+    public class LocalizedChatSmileyMessage : ChatSmileyMessage
     {
         
-        public new const int ID = 6185;
+        public const int ProtocolId = 6185;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

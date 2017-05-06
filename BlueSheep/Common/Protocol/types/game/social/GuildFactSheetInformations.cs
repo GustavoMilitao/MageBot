@@ -11,25 +11,18 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Social
 {
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
-    using BlueSheep.Common.Protocol.Types.Game.Guild;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class GuildFactSheetInformations : GuildInformations
     {
         
-        public new const int ID = 424;
+        public const int ProtocolId = 424;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -71,14 +64,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Social
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteVarLong(m_leaderId);
             writer.WriteVarShort(m_nbMembers);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_leaderId = reader.ReadVarUhLong();

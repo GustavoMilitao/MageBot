@@ -11,23 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    public class FightLoot 
+
+
+    public class FightLoot : NetworkType
     {
         
-        public new const int ID = 41;
+        public const int ProtocolId = 41;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -69,7 +65,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteShort(((short)(m_objects.Count)));
             int objectsIndex;
@@ -80,7 +76,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
             writer.WriteVarLong(m_kamas);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             int objectsCount = reader.ReadUShort();
             int objectsIndex;

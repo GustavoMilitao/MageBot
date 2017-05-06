@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
 using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Engine.Types;
+using BlueSheep.Common;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
 using BlueSheep.Util.Enums.Servers;
@@ -84,7 +84,7 @@ namespace BlueSheep.Engine.Handlers.Basic
             //switch ((uint)account.LastPacketID.Dequeue())
             switch ((uint)account.LastPacket)
             {
-                case InteractiveUseRequestMessage.ID:
+                case InteractiveUseRequestMessage.ProtocolId:
                     if (account.Running != null && account.Running.OnSafe)
                     {
                         account.Log(new CharacterTextInformation("Ouverture du coffre."), 2);
@@ -93,7 +93,7 @@ namespace BlueSheep.Engine.Handlers.Basic
                     }
                     return;
 
-                case ExchangeObjectMoveMessage.ID:
+                case ExchangeObjectMoveMessage.ProtocolId:
                     if (account.Running.OnLeaving)
                     {
                         account.Running.OnLeaving = false;
@@ -108,7 +108,7 @@ namespace BlueSheep.Engine.Handlers.Basic
                     }
                     return;
 
-                case ObjectFeedMessage.ID:
+                case ObjectFeedMessage.ProtocolId:
                     if (account.Running != null && !account.Running.Feeding.SecondFeeding)
                         account.Running.CheckStatisticsUp();
                     else if (account.Running != null)
@@ -118,16 +118,16 @@ namespace BlueSheep.Engine.Handlers.Basic
                     }
                     return;
 
-                case LeaveDialogRequestMessage.ID:
+                case LeaveDialogRequestMessage.ProtocolId:
                     account.Log(new ActionTextInformation("Fermeture du coffre."), 3);
                     if (account.Running != null)
                         account.Running.Init();
                     return;
-                //case GameMapMovementRequestMessage.ID:
+                //case GameMapMovementRequestMessage.ProtocolId:
 
                 //    return;
 
-                //case GameMapMovementConfirmMessage.ID:
+                //case GameMapMovementConfirmMessage.ProtocolId:
                 //    account.Fight.LaunchFight(account.Fight.flag);
                 //    return;
 

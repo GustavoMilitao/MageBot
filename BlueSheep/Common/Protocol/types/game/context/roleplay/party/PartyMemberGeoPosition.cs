@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class PartyMemberGeoPosition 
+
+
+    public class PartyMemberGeoPosition : NetworkType
     {
         
-        public new const int ID = 378;
+        public const int ProtocolId = 378;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -112,7 +109,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteInt(m_memberId);
             writer.WriteShort(m_worldX);
@@ -121,7 +118,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
             writer.WriteVarShort(m_subAreaId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_memberId = reader.ReadInt();
             m_worldX = reader.ReadShort();

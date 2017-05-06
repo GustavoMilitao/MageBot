@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Character.Stats
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class CharacterLevelUpInformationMessage : CharacterLevelUpMessage 
+
+    public class CharacterLevelUpInformationMessage : CharacterLevelUpMessage
     {
         
-        public new const int ID = 6076;
+        public const int ProtocolId = 6076;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

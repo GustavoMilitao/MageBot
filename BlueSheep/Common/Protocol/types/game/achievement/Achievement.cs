@@ -11,21 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Achievement
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class Achievement 
+
+
+    public class Achievement : NetworkType
     {
         
-        public new const int ID = 363;
+        public const int ProtocolId = 363;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -82,7 +80,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Achievement
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteShort(((short)(m_finishedObjective.Count)));
             int finishedObjectiveIndex;
@@ -101,7 +99,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Achievement
             writer.WriteVarShort(m_ObjectId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             int finishedObjectiveCount = reader.ReadUShort();
             int finishedObjectiveIndex;

@@ -1,15 +1,10 @@
 ﻿using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Job;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job;
 using BlueSheep.Common.Protocol.Types.Game.Interactive.Skill;
-using BlueSheep.Engine.Types;
+using BlueSheep.Common;
 using BlueSheep.Interface;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BlueSheep.Engine.Handlers.Job
 {

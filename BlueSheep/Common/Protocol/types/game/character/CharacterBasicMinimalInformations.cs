@@ -2,8 +2,8 @@
 {
     public class CharacterBasicMinimalInformations : AbstractCharacterInformation
     {
-        public new const int ID = 503;
-        public virtual int TypeID { get { return ID; } }
+        public new const int ProtocolId = 503;
+        public override int TypeID { get { return ProtocolId; } }
 
         public string Name { get; set; }
 
@@ -14,13 +14,13 @@
             Name = name;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteUTF(Name);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             Name = reader.ReadUTF();

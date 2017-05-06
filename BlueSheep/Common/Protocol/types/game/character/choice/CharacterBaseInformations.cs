@@ -2,8 +2,8 @@
 {
     public class CharacterBaseInformations : CharacterMinimalPlusLookInformations
     {
-        public new const int ID = 45;
-        public virtual int TypeID { get { return ID; } }
+        public new const int ProtocolId = 45;
+        public override int TypeID { get { return ProtocolId; } }
 
         public sbyte Breed { get; set; }
         public bool Sex { get; set; }
@@ -16,14 +16,14 @@
             Sex = sex;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteSByte(Breed);
             writer.WriteBoolean(Sex);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {         
             base.Deserialize(reader);
             Breed = reader.ReadSByte();

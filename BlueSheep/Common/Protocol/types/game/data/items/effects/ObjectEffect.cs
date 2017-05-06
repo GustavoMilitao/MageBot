@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class ObjectEffect 
+
+
+    public class ObjectEffect : NetworkType
     {
         
-        public new const int ID = 76;
+        public const int ProtocolId = 76;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -52,12 +49,12 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(m_actionId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_actionId = reader.ReadVarUhShort();
         }

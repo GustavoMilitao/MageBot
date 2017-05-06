@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class HumanOptionSkillUse : HumanOption
     {
         
-        public new const int ID = 495;
+        public const int ProtocolId = 495;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -84,7 +78,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteVarInt(m_elementId);
@@ -92,7 +86,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
             writer.WriteDouble(m_skillEndTime);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_elementId = reader.ReadVarUhInt();

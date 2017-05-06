@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Houses
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class HouseSellFromInsideRequestMessage : HouseSellRequestMessage 
+
+    public class HouseSellFromInsideRequestMessage : HouseSellRequestMessage
     {
         
-        public new const int ID = 5884;
+        public const int ProtocolId = 5884;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -12,23 +12,20 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Spells
 {
     using BlueSheep.Common.Protocol.Types.Game.Data.Items;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class SpellListMessage : Message 
+
+    public class SpellListMessage : Message
     {
         
-        public new const int ID = 1200;
+        public const int ProtocolId = 1200;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -72,6 +69,7 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Spells
         
         public override void Serialize(IDataWriter writer)
         {
+            writer.WriteBoolean(m_spellPrevisualization);
             writer.WriteShort(((short)(m_spells.Count)));
             int spellsIndex;
             for (spellsIndex = 0; (spellsIndex < m_spells.Count); spellsIndex = (spellsIndex + 1))
@@ -79,11 +77,11 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Spells
                 SpellItem objectToSend = m_spells[spellsIndex];
                 objectToSend.Serialize(writer);
             }
-            writer.WriteBoolean(m_spellPrevisualization);
         }
         
         public override void Deserialize(IDataReader reader)
         {
+            m_spellPrevisualization = reader.ReadBoolean();
             int spellsCount = reader.ReadUShort();
             int spellsIndex;
             m_spells = new System.Collections.Generic.List<SpellItem>();
@@ -93,7 +91,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Spells
                 objectToAdd.Deserialize(reader);
                 m_spells.Add(objectToAdd);
             }
-            m_spellPrevisualization = reader.ReadBoolean();
         }
     }
 }

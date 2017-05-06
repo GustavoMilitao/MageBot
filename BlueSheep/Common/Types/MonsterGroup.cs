@@ -1,12 +1,9 @@
 ﻿using BlueSheep.Common.Data.D2o;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlueSheep.Common.Types
 {

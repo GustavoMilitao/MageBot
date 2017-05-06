@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class PartyLeaveRequestMessage : AbstractPartyMessage 
+
+    public class PartyLeaveRequestMessage : AbstractPartyMessage
     {
         
-        public new const int ID = 5593;
+        public const int ProtocolId = 5593;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -35,8 +29,7 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party
         {
         }
 
-        public PartyLeaveRequestMessage(uint partyId)
-         : base(partyId)
+        public PartyLeaveRequestMessage(uint partyId): base(partyId)
         {
         }
 

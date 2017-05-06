@@ -12,24 +12,19 @@ namespace BlueSheep.Common.Protocol.Types.Game.Friend
 {
     using BlueSheep.Common.Protocol.Types.Game.Look;
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    public class FriendSpouseInformations 
+
+
+    public class FriendSpouseInformations : NetworkType
     {
         
-        public new const int ID = 77;
+        public const int ProtocolId = 77;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -176,7 +171,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Friend
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             m_spouseEntityLook.Serialize(writer);
             m_guildInfo.Serialize(writer);
@@ -189,7 +184,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Friend
             writer.WriteByte(m_alignmentSide);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_spouseEntityLook = new EntityLook();
             m_spouseEntityLook.Deserialize(reader);

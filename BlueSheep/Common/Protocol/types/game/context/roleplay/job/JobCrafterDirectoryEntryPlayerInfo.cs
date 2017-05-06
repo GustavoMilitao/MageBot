@@ -10,19 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job
 {
-    using BlueSheep.Protocol;
     using BlueSheep.Common.Protocol.Types.Game.Character.Status;
 
-    public class JobCrafterDirectoryEntryPlayerInfo 
+    public class JobCrafterDirectoryEntryPlayerInfo : NetworkType
     {
         
-        public new const int ID = 194;
+        public const int ProtocolId = 194;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -199,7 +198,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteUShort(((ushort)(m_status.TypeID)));
             m_status.Serialize(writer);
@@ -215,7 +214,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Job
             writer.WriteVarShort(m_subAreaId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_status = ProtocolTypeManager.GetInstance<PlayerStatus>(reader.ReadUShort());
             m_status.Deserialize(reader);

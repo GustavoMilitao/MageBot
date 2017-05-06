@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Interactive
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class StatedElement 
+
+
+    public class StatedElement : NetworkType
     {
         
-        public new const int ID = 108;
+        public const int ProtocolId = 108;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -97,7 +94,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Interactive
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteInt(m_elementId);
             writer.WriteVarShort(m_elementCellId);
@@ -105,7 +102,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Interactive
             writer.WriteBoolean(m_onCurrentMap);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_elementId = reader.ReadInt();
             m_elementCellId = reader.ReadVarUhShort();

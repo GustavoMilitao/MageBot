@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Idol
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class Idol 
+
+
+    public class Idol : NetworkType
     {
         
-        public new const int ID = 489;
+        public const int ProtocolId = 489;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -82,14 +79,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Idol
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(m_ObjectId);
             writer.WriteVarShort(m_xpBonusPercent);
             writer.WriteVarShort(m_dropBonusPercent);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_ObjectId = reader.ReadVarUhShort();
             m_xpBonusPercent = reader.ReadVarUhShort();

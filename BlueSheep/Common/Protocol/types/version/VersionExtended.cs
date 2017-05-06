@@ -4,9 +4,8 @@ namespace BlueSheep.Common.Protocol.Types
 {
     public class VersionExtended : Version
     {
-        public new const int ID = 393;
-
-        public virtual int TypeID { get { return ID; } }
+        public new const int ProtocolId = 393;
+        public override int TypeID { get { return ProtocolId; } }
 
         public sbyte Install { get; set; }
         public sbyte Technology { get; set; }
@@ -22,14 +21,14 @@ namespace BlueSheep.Common.Protocol.Types
             this.Technology = technology;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteSByte(Install);
             writer.WriteSByte(Technology);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             Install = reader.ReadSByte();

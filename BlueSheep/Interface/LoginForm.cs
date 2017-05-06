@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Management;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;

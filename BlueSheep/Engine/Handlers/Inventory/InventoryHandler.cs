@@ -1,9 +1,7 @@
 ﻿using System.Linq;
 using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Common.Types;
-using BlueSheep.Engine.Types;
+using BlueSheep.Common;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
 using System;

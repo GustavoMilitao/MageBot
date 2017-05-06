@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class CharacterSpellModification 
+
+
+    public class CharacterSpellModification : NetworkType
     {
         
-        public new const int ID = 215;
+        public const int ProtocolId = 215;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -82,14 +79,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             m_value.Serialize(writer);
             writer.WriteByte(m_modificationType);
             writer.WriteVarShort(m_spellId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_value = new CharacterBaseCharacteristic();
             m_value.Deserialize(reader);

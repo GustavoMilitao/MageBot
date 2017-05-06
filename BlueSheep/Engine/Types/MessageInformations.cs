@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using BlueSheep.Common.IO;
 using BlueSheep.Interface;
 using System.Collections.Generic;

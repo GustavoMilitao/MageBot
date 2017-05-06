@@ -11,26 +11,25 @@
 namespace BlueSheep.Common.Protocol.Messages.Authorized
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
+
 
     public class ConsoleCommandsListMessage : Message
     {
-
-        public new const int ID = 6127;
-
+        
+        public const int ProtocolId = 6127;
+        
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
-
+        
         private List<System.String> m_aliases;
-
+        
         public virtual List<System.String> Aliases
         {
             get
@@ -42,9 +41,9 @@ namespace BlueSheep.Common.Protocol.Messages.Authorized
                 m_aliases = value;
             }
         }
-
+        
         private List<System.String> m_args;
-
+        
         public virtual List<System.String> Args
         {
             get
@@ -56,9 +55,9 @@ namespace BlueSheep.Common.Protocol.Messages.Authorized
                 m_args = value;
             }
         }
-
+        
         private List<System.String> m_descriptions;
-
+        
         public virtual List<System.String> Descriptions
         {
             get
@@ -70,18 +69,18 @@ namespace BlueSheep.Common.Protocol.Messages.Authorized
                 m_descriptions = value;
             }
         }
-
+        
         public ConsoleCommandsListMessage(List<System.String> aliases, List<System.String> args, List<System.String> descriptions)
         {
             m_aliases = aliases;
             m_args = args;
             m_descriptions = descriptions;
         }
-
+        
         public ConsoleCommandsListMessage()
         {
         }
-
+        
         public override void Serialize(IDataWriter writer)
         {
             writer.WriteShort(((short)(m_aliases.Count)));
@@ -103,7 +102,7 @@ namespace BlueSheep.Common.Protocol.Messages.Authorized
                 writer.WriteUTF(m_descriptions[descriptionsIndex]);
             }
         }
-
+        
         public override void Deserialize(IDataReader reader)
         {
             int aliasesCount = reader.ReadUShort();

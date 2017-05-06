@@ -11,25 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
 {
     using BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects;
-    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class ObjectItemNotInContainer : Item
     {
         
-        public new const int ID = 134;
+        public const int ProtocolId = 134;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -101,7 +95,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteShort(((short)(m_effects.Count)));
@@ -117,7 +111,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
             writer.WriteVarInt(m_quantity);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             int effectsCount = reader.ReadUShort();

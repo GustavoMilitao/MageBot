@@ -1,11 +1,11 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Game.Context
-{
-    using BlueSheep.Engine.Types;
+﻿ 
 
- 	 public class GameContextCreateRequestMessage : Message 
+namespace BlueSheep.Common.Protocol.Messages.Game.Context
+{
+    public class GameContextCreateRequestMessage : Message
     {
-        public new const int ID = 250;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 250;
+        public override int MessageID { get { return ProtocolId; } }
 
         public GameContextCreateRequestMessage() { }
 

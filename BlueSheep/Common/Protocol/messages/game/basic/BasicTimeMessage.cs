@@ -1,11 +1,11 @@
-﻿using BlueSheep.Engine.Types;
+﻿ 
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Basic
 {
-    public class BasicTimeMessage : Message
+    class BasicTimeMessage : Message
     {
-        public new const int ID = 175;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 175;
+        public override int MessageID { get { return ProtocolId; } }
 
         public double Timestamp;
         public short TimezoneOffset;

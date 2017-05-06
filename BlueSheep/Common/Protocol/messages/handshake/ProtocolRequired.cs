@@ -1,12 +1,12 @@
-﻿using BlueSheep.Engine.Types;
+﻿ 
 using System;
 
 namespace BlueSheep.Common.Protocol.Messages.Handshake
 {
     public class ProtocolRequired : Message
     {
-        public new const int ID = 1;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 1;
+        public override int MessageID { get { return ProtocolId; } }
 
         public uint RequiredVersion { get; set; }
         public uint CurrentVersion { get; set; }

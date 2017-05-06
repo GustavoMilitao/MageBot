@@ -11,23 +11,20 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Guild.Tax
 {
     using BlueSheep.Common.Protocol.Types.Game.Character;
-    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class TaxCollectorFightersInformation 
+
+
+    public class TaxCollectorFightersInformation : NetworkType
     {
         
-        public new const int ID = 169;
+        public const int ProtocolId = 169;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -84,7 +81,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Guild.Tax
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteShort(((short)(m_allyCharactersInformations.Count)));
             int allyCharactersInformationsIndex;
@@ -105,7 +102,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Guild.Tax
             writer.WriteInt(m_collectorId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             int allyCharactersInformationsCount = reader.ReadUShort();
             int allyCharactersInformationsIndex;

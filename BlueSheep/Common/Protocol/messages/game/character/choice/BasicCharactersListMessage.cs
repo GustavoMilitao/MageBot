@@ -1,15 +1,14 @@
-﻿using BlueSheep.Common.Protocol.Types.Game.Character.Choice;
+﻿
+using BlueSheep.Common.Protocol.Types;
+using BlueSheep.Common.Protocol.Types.Game.Character.Choice;
 using System.Collections.Generic;
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Character.Choice
 {
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Engine.Types;
-
- 	 public class BasicCharactersListMessage : Message 
+    public class BasicCharactersListMessage : Message
     {
-        public new const int ID = 6475;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 6475;
+        public override int MessageID { get { return ProtocolId; } }
 
         public List<CharacterBaseInformations> Characters;
 

@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Web.Krosmaster
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class KrosmasterFigure 
+
+
+    public class KrosmasterFigure : NetworkType
     {
         
-        public new const int ID = 397;
+        public const int ProtocolId = 397;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -97,7 +94,7 @@ namespace BlueSheep.Common.Protocol.Types.Web.Krosmaster
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteUTF(m_uid);
             writer.WriteVarShort(m_figure);
@@ -105,7 +102,7 @@ namespace BlueSheep.Common.Protocol.Types.Web.Krosmaster
             writer.WriteBoolean(m_bound);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_uid = reader.ReadUTF();
             m_figure = reader.ReadVarUhShort();

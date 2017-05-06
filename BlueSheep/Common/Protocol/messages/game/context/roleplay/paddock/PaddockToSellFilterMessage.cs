@@ -10,26 +10,20 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Paddock
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class PaddockToSellFilterMessage : Message 
+
+    public class PaddockToSellFilterMessage : Message
     {
         
-        public new const int ID = 6161;
+        public const int ProtocolId = 6161;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

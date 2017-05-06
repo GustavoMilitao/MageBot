@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Fight
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class ProtectedEntityWaitingForHelpInfo 
+
+
+    public class ProtectedEntityWaitingForHelpInfo : NetworkType
     {
         
-        public new const int ID = 186;
+        public const int ProtocolId = 186;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -82,14 +79,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Fight
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteInt(m_timeLeftBeforeFight);
             writer.WriteInt(m_waitTimeForPlacement);
             writer.WriteByte(m_nbPositionForDefensors);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_timeLeftBeforeFight = reader.ReadInt();
             m_waitTimeForPlacement = reader.ReadInt();

@@ -4,8 +4,8 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
 {
     public class BasicGuildInformations : AbstractSocialGroupInfos
     {
-        public new const int ID = 365;
-        public virtual int TypeID { get { return ID; } }
+        public new const int ProtocolId = 365;
+        public override int TypeID { get { return ProtocolId; } }
 
         public uint GuildId;
         public string GuildName;
@@ -20,7 +20,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
             GuildLevel = guildLevel;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteVarInt(GuildId);
@@ -28,7 +28,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
             writer.WriteSByte(GuildLevel);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             GuildId = reader.ReadVarUhInt();

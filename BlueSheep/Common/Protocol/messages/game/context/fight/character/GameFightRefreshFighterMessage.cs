@@ -11,25 +11,20 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character
 {
     using BlueSheep.Common.Protocol.Types.Game.Context;
-    using BlueSheep.Common.Protocol;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class GameFightRefreshFighterMessage : Message 
+
+    public class GameFightRefreshFighterMessage : Message
     {
         
-        public new const int ID = 6309;
+        public const int ProtocolId = 6309;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

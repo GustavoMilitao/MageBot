@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class FightOptionsInformations 
+
+
+    public class FightOptionsInformations : NetworkType
     {
         
-        public new const int ID = 20;
+        public const int ProtocolId = 20;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -97,7 +94,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             byte flag = new byte();
             BooleanByteWrapper.SetFlag(0, flag, m_isSecret);
@@ -107,7 +104,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
             writer.WriteByte(flag);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             byte flag = reader.ReadByte();
             m_isSecret = BooleanByteWrapper.GetFlag(flag, 0);

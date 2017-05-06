@@ -11,25 +11,20 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Pvp
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class UpdateMapPlayersAgressableStatusMessage : Message 
+
+    public class UpdateMapPlayersAgressableStatusMessage : Message
     {
         
-        public new const int ID = 6454;
+        public const int ProtocolId = 6454;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

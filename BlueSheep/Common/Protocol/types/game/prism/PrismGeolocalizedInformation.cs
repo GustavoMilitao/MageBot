@@ -10,25 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Prism
 {
-    using BlueSheep.Common.Protocol;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class PrismGeolocalizedInformation : PrismSubareaEmptyInfo
     {
         
-        public new const int ID = 434;
+        public const int ProtocolId = 434;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -100,7 +93,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Prism
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteUShort(((ushort)(m_prism.TypeID)));
@@ -110,7 +103,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Prism
             writer.WriteInt(m_mapId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_prism = ProtocolTypeManager.GetInstance<PrismInformation>(reader.ReadUShort());

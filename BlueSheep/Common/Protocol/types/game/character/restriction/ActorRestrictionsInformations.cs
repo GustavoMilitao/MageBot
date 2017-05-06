@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Character.Restriction
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class ActorRestrictionsInformations 
+
+
+    public class ActorRestrictionsInformations : NetworkType
     {
         
-        public new const int ID = 204;
+        public const int ProtocolId = 204;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -373,7 +370,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Restriction
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             byte flag = new byte();
             BooleanByteWrapper.SetFlag(0, flag, m_cantBeAggressed);
@@ -399,7 +396,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Restriction
             BooleanByteWrapper.SetFlag(4, flag, m_cantWalk8Directions);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             byte flag = reader.ReadByte();
             m_cantBeAggressed = BooleanByteWrapper.GetFlag(flag, 0);

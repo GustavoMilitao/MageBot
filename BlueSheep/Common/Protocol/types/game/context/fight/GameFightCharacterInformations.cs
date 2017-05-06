@@ -11,27 +11,18 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
 {
     using BlueSheep.Common.Protocol.Types.Game.Character.Alignment;
-    using BlueSheep.Common.Protocol.Types.Game.Look;
-    using BlueSheep.Common.Protocol.Types.Game.Context;
-    using BlueSheep.Common.Protocol.Types.Game.Character.Status;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class GameFightCharacterInformations : GameFightFighterNamedInformations
     {
         
-        public new const int ID = 46;
+        public const int ProtocolId = 46;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -103,7 +94,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             m_alignmentInfos.Serialize(writer);
@@ -112,7 +103,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
             writer.WriteBoolean(m_sex);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_alignmentInfos = new ActorAlignmentInformations();

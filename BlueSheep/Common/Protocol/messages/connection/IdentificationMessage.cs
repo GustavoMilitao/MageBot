@@ -2,12 +2,10 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    using BlueSheep.Engine.Types;
-
- 	 public class IdentificationMessage : Message 
+    public class IdentificationMessage : Message
     {
-        public new const int ID = 4;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 4;
+        public override int MessageID { get { return ProtocolId; } }
 
         public bool Autoconnect { get; set; }
         public bool UseCertificate { get; set; }

@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Actions.Fight
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class AbstractFightDispellableEffect 
+
+
+    public class AbstractFightDispellableEffect : NetworkType
     {
         
-        public new const int ID = 206;
+        public const int ProtocolId = 206;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -142,7 +139,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Actions.Fight
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarInt(m_uid);
             writer.WriteDouble(m_targetId);
@@ -153,7 +150,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Actions.Fight
             writer.WriteVarInt(m_parentBoostUid);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_uid = reader.ReadVarUhInt();
             m_targetId = reader.ReadDouble();

@@ -1,8 +1,6 @@
 ﻿namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    using BlueSheep.Engine.Types;
-
- 	 public class IdentificationSuccessMessage : Message 
+    public class IdentificationSuccessMessage : Message
     {
         public string Login;
         public string Nickname;
@@ -16,8 +14,8 @@
         public bool WasAlreadyConnected;
         public uint HavenbagAvailableRoom;
 
-        public new const int ID = 22;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 22;
+        public override int MessageID { get { return ProtocolId; } }
 
         public IdentificationSuccessMessage() { }
 

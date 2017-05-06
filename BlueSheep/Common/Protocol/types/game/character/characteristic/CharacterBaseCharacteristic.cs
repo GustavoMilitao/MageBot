@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class CharacterBaseCharacteristic 
+
+
+    public class CharacterBaseCharacteristic : NetworkType
     {
         
-        public new const int ID = 4;
+        public const int ProtocolId = 4;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -112,7 +109,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(m_base);
             writer.WriteVarShort(m_additionnal);
@@ -121,7 +118,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
             writer.WriteVarShort(m_contextModif);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_base = reader.ReadVarShort();
             m_additionnal = reader.ReadVarShort();

@@ -11,24 +11,18 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party.Companion
 {
     using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class PartyCompanionUpdateLightMessage : PartyUpdateLightMessage 
+
+    public class PartyCompanionUpdateLightMessage : PartyUpdateLightMessage
     {
         
-        public new const int ID = 6472;
+        public const int ProtocolId = 6472;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Items
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class SymbioticObjectErrorMessage : ObjectErrorMessage 
+
+    public class SymbioticObjectErrorMessage : ObjectErrorMessage
     {
         
-        public new const int ID = 6526;
+        public const int ProtocolId = 6526;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

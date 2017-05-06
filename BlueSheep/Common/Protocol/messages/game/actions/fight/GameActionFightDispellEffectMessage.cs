@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Actions.Fight
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class GameActionFightDispellEffectMessage : GameActionFightDispellMessage 
+
+    public class GameActionFightDispellEffectMessage : GameActionFightDispellMessage
     {
         
-        public new const int ID = 6113;
+        public const int ProtocolId = 6113;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

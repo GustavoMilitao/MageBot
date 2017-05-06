@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Fight
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class GameFightPlacementSwapPositionsRequestMessage : GameFightPlacementPositionRequestMessage 
+
+    public class GameFightPlacementSwapPositionsRequestMessage : GameFightPlacementPositionRequestMessage
     {
         
-        public new const int ID = 6541;
+        public const int ProtocolId = 6541;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

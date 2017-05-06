@@ -10,26 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
 {
-    using BlueSheep.Common.Protocol.Types.Game.Look;
-    using BlueSheep.Common.Protocol.Types.Game.Context;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class GameFightCompanionInformations : GameFightFighterInformations
     {
         
-        public new const int ID = 450;
+        public const int ProtocolId = 450;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -86,7 +78,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteByte(m_companionGenericId);
@@ -94,7 +86,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
             writer.WriteDouble(m_masterId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_companionGenericId = reader.ReadByte();

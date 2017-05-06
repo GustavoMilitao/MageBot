@@ -10,16 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
 {
+
+
     public class ObjectItemInformationWithQuantity : ObjectItemMinimalInformation
     {
         
-        public new const int ID = 387;
+        public const int ProtocolId = 387;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -46,13 +48,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Data.Items
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteVarInt(m_quantity);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_quantity = reader.ReadVarUhInt();

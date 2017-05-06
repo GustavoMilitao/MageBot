@@ -11,21 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class GroupMonsterStaticInformations 
+
+
+    public class GroupMonsterStaticInformations : NetworkType
     {
         
-        public new const int ID = 140;
+        public const int ProtocolId = 140;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -67,7 +65,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             m_mainCreatureLightInfos.Serialize(writer);
             writer.WriteShort(((short)(m_underlings.Count)));
@@ -79,7 +77,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
             }
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_mainCreatureLightInfos = new MonsterInGroupLightInformations();
             m_mainCreatureLightInfos.Deserialize(reader);

@@ -10,24 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Guild.Tax
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    public class TaxCollectorMovement 
+
+
+    public class TaxCollectorMovement : NetworkType
     {
         
-        public new const int ID = 493;
+        public const int ProtocolId = 493;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -99,7 +94,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Guild.Tax
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             m_basicInfos.Serialize(writer);
             writer.WriteByte(m_movementType);
@@ -107,7 +102,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Guild.Tax
             writer.WriteUTF(m_playerName);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_basicInfos = new TaxCollectorBasicInformations();
             m_basicInfos.Deserialize(reader);

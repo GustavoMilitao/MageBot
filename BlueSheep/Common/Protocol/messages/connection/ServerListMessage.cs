@@ -3,12 +3,10 @@ using System.Collections.Generic;
 
 namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    using BlueSheep.Engine.Types;
-
- 	 public class ServerListMessage : Message 
+    public class ServerListMessage : Message
     {
-        public new const int ID = 30;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 30;
+        public override int MessageID { get { return ProtocolId; } }
 
         public List<GameServerInformations> Servers;
         public ushort AlreadyConnectedToServerId;

@@ -10,24 +10,20 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Subscription
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class SubscriptionUpdateMessage : Message 
+
+    public class SubscriptionUpdateMessage : Message
     {
         
-        public new const int ID = 6616;
+        public const int ProtocolId = 6616;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

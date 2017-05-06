@@ -1,9 +1,9 @@
 ﻿namespace BlueSheep.Common.Protocol.Types.Connection
 {
-    public class GameServerInformations 
+    public class GameServerInformations : NetworkType
     {
-        public new const int ID = 25;
-        public virtual int TypeID { get { return ID; } }
+        public const int ProtocolId = 25;
+        public override int TypeID { get { return ProtocolId; } }
 
         public ushort ObjectID { get; set; }
         public byte ServerType { get; set; }
@@ -28,7 +28,7 @@
             Date = date;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(ObjectID);
             writer.WriteByte(ServerType);
@@ -40,7 +40,7 @@
             writer.WriteDouble(Date);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             ObjectID = reader.ReadVarUhShort();
             ServerType = reader.ReadByte();

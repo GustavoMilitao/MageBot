@@ -11,25 +11,20 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay
 {
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
-    using BlueSheep.Common.Protocol;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class GameRolePlayShowActorMessage : Message 
+
+    public class GameRolePlayShowActorMessage : Message
     {
         
-        public new const int ID = 5632;
+        public const int ProtocolId = 5632;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

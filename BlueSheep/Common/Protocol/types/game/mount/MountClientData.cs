@@ -12,23 +12,19 @@ namespace BlueSheep.Common.Protocol.Types.Game.Mount
 {
     using BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    public class MountClientData 
+
+
+    public class MountClientData : NetworkType
     {
         
-        public new const int ID = 178;
+        public const int ProtocolId = 178;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -584,7 +580,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Mount
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             byte flag = new byte();
             BooleanByteWrapper.SetFlag(0, flag, m_sex);
@@ -640,7 +636,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Mount
             writer.WriteVarShort(m_harnessGID);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             byte flag = reader.ReadByte();
             m_sex = BooleanByteWrapper.GetFlag(flag, 0);

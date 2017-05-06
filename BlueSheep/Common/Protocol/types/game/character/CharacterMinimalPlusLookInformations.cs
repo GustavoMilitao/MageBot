@@ -4,8 +4,8 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character
 {
     public class CharacterMinimalPlusLookInformations : CharacterMinimalInformations
     {
-        public new const int ID = 163;
-        public virtual int TypeID { get { return ID; } }
+        public new const int ProtocolId = 163;
+        public override int TypeID { get { return ProtocolId; } }
 
         public EntityLook EntityLook { get; set; }
 
@@ -16,13 +16,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character
             EntityLook = entityLook;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             EntityLook.Serialize(writer);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             EntityLook = new EntityLook();

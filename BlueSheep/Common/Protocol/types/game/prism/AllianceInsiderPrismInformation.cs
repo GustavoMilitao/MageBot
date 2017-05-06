@@ -12,23 +12,18 @@ namespace BlueSheep.Common.Protocol.Types.Game.Prism
 {
     using BlueSheep.Common.Protocol.Types.Game.Data.Items;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class AllianceInsiderPrismInformation : PrismInformation
     {
         
-        public new const int ID = 431;
+        public const int ProtocolId = 431;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -115,7 +110,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Prism
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteShort(((short)(m_modulesObjects.Count)));
@@ -131,7 +126,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Prism
             writer.WriteUTF(m_lastTimeSlotModificationAuthorName);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             int modulesObjectsCount = reader.ReadUShort();

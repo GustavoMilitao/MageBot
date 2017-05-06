@@ -1,11 +1,11 @@
-﻿using BlueSheep.Engine.Types;
+﻿ 
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
     class ServerSettingsMessage : Message
     {
-        public new const int ID = 6340;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 6340;
+        public override int MessageID { get { return ProtocolId; } }
 
         public string Lang;
         public byte Community;

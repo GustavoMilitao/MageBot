@@ -1,11 +1,6 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using BlueSheep.Data.Pathfinding.Positions;
-using BlueSheep.Data.D2p;
 using BlueSheep.Core.Map;
 
 namespace BlueSheep.Data.Pathfinding

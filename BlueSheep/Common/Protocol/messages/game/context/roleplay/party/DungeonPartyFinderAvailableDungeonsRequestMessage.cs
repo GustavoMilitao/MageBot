@@ -10,24 +10,20 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class DungeonPartyFinderAvailableDungeonsRequestMessage : Message 
+
+    public class DungeonPartyFinderAvailableDungeonsRequestMessage : Message
     {
         
-        public new const int ID = 6240;
+        public const int ProtocolId = 6240;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

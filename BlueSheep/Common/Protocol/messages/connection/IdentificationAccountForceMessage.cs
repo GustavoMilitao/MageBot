@@ -10,18 +10,17 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    using BlueSheep.Engine.Types;
 
- 	 public class IdentificationAccountForceMessage : IdentificationMessage 
+    public class IdentificationAccountForceMessage : IdentificationMessage
     {
         
-        public new const int ID = 6119;
+        public const int ProtocolId = 6119;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

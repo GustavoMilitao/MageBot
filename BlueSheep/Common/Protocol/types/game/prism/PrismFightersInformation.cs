@@ -12,23 +12,20 @@ namespace BlueSheep.Common.Protocol.Types.Game.Prism
 {
     using BlueSheep.Common.Protocol.Types.Game.Fight;
     using BlueSheep.Common.Protocol.Types.Game.Character;
-    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class PrismFightersInformation 
+
+
+    public class PrismFightersInformation : NetworkType
     {
         
-        public new const int ID = 443;
+        public const int ProtocolId = 443;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -100,7 +97,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Prism
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             m_waitingForHelpInfo.Serialize(writer);
             writer.WriteShort(((short)(m_allyCharactersInformations.Count)));
@@ -122,7 +119,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Prism
             writer.WriteVarShort(m_subAreaId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_waitingForHelpInfo = new ProtectedEntityWaitingForHelpInfo();
             m_waitingForHelpInfo.Deserialize(reader);

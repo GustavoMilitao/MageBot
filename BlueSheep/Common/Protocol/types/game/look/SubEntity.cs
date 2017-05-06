@@ -1,9 +1,9 @@
 ﻿namespace BlueSheep.Common.Protocol.Types.Game.Look
 {
-    public class SubEntity 
+    public class SubEntity : NetworkType
     {
-        public new const int ID = 54;
-        public virtual int TypeID { get { return ID; } }
+        public const int ProtocolId = 54;
+        public override int TypeID { get { return ProtocolId; } }
 
         public byte BindingPointCategory;
         public byte BindingPointIndex;
@@ -18,14 +18,14 @@
             SubEntityLook = subEntityLook;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteByte(BindingPointCategory);
             writer.WriteByte(BindingPointIndex);
             SubEntityLook.Serialize(writer);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             BindingPointCategory = reader.ReadByte();
             BindingPointIndex = reader.ReadByte();

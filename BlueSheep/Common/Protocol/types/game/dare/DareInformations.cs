@@ -12,23 +12,19 @@ namespace BlueSheep.Common.Protocol.Types.Game.Dare
 {
     using BlueSheep.Common.Protocol.Types.Game.Character;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    public class DareInformations 
+
+
+    public class DareInformations : NetworkType
     {
         
-        public new const int ID = 502;
+        public const int ProtocolId = 502;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -205,7 +201,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Dare
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             m_creator.Serialize(writer);
             writer.WriteShort(((short)(m_criterions.Count)));
@@ -226,7 +222,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Dare
             writer.WriteDouble(m_startDate);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_creator = new CharacterBasicMinimalInformations();
             m_creator.Deserialize(reader);

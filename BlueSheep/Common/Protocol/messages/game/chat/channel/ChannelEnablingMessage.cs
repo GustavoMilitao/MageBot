@@ -1,11 +1,11 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Game.Chat.Channel
-{
-    using BlueSheep.Engine.Types;
+﻿ 
 
- 	 public class ChannelEnablingMessage : Message 
+namespace BlueSheep.Common.Protocol.Messages.Game.Chat.Channel
+{
+    public class ChannelEnablingMessage : Message
     {
-        public new const int ID = 890;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 890;
+        public override int MessageID { get { return ProtocolId; } }
 
         public uint Channel { get; set; }
         public bool Enable { get; set; }

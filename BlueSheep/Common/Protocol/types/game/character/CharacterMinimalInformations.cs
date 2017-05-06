@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace BlueSheep.Common.Protocol.Types.Game.Character
+﻿namespace BlueSheep.Common.Protocol.Types.Game.Character
 {
     public class CharacterMinimalInformations : CharacterBasicMinimalInformations
     {
-        public new const int ID = 110;
-        public virtual int TypeID { get { return ID; } }
+        public new const int ProtocolId = 110;
+        public override int TypeID { get { return ProtocolId; } }
 
         public byte Level { get; set; }
 
@@ -16,13 +14,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character
             Level = level;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteByte(Level);
         }
 
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             Level = reader.ReadByte();

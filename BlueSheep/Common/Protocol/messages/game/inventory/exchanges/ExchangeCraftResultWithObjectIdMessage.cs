@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class ExchangeCraftResultWithObjectIdMessage : ExchangeCraftResultMessage 
+
+    public class ExchangeCraftResultWithObjectIdMessage : ExchangeCraftResultMessage
     {
         
-        public new const int ID = 6000;
+        public const int ProtocolId = 6000;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

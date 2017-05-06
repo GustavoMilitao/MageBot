@@ -12,23 +12,20 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Prism
 {
     using BlueSheep.Common.Protocol.Types.Game.Prism;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class PrismsInfoValidMessage : Message 
+
+    public class PrismsInfoValidMessage : Message
     {
         
-        public new const int ID = 6451;
+        public const int ProtocolId = 6451;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -1,29 +1,29 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Game.Character.Choice
+﻿ 
+
+namespace BlueSheep.Common.Protocol.Messages.Game.Character.Choice
 {
-    using BlueSheep.Engine.Types;
-
- 	 public class CharacterSelectionMessage : Message 
+    public class CharacterSelectionMessage : Message
     {
-        public new const int ID = 152;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 152;
+        public override int MessageID { get { return ProtocolId; } }
 
-        public ulong Id { get; set; }
+        public ulong ID { get; set; }
 
         public CharacterSelectionMessage() { }
 
         public CharacterSelectionMessage(ulong id)
         {
-            Id = id;
+            ID = id;
         }
 
         public override void Serialize(IDataWriter writer)
         {
-            writer.WriteVarLong(Id);
+            writer.WriteVarLong(ID);
         }
 
         public override void Deserialize(IDataReader reader)
         {
-            Id = reader.ReadVarUhLong();
+            ID = reader.ReadVarUhLong();
         }
     }
 }

@@ -1,11 +1,9 @@
 ﻿namespace BlueSheep.Common.Protocol.Messages.Security
 {
-    using BlueSheep.Engine.Types;
-
- 	 public class RawDataMessage : Message 
+    public class RawDataMessage : Message
     {
-        public new const int ID = 6253;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 6253;
+        public override int MessageID { get { return ProtocolId; } }
 
         public byte[] Content { get; set; }
 

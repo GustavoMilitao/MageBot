@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Character.Alignment
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class ActorAlignmentInformations 
+
+
+    public class ActorAlignmentInformations : NetworkType
     {
         
-        public new const int ID = 201;
+        public const int ProtocolId = 201;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -97,7 +94,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Alignment
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteByte(m_alignmentSide);
             writer.WriteByte(m_alignmentValue);
@@ -105,7 +102,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Alignment
             writer.WriteDouble(m_characterPower);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_alignmentSide = reader.ReadByte();
             m_alignmentValue = reader.ReadByte();

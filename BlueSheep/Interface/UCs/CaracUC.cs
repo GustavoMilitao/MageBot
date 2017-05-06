@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Interface.Text;
 using BlueSheep.Common.Data.D2o;
 using System.Collections;

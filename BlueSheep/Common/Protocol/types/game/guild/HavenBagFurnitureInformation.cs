@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Guild
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class HavenBagFurnitureInformation 
+
+
+    public class HavenBagFurnitureInformation : NetworkType
     {
         
-        public new const int ID = 498;
+        public const int ProtocolId = 498;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -82,14 +79,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Guild
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(m_cellId);
             writer.WriteInt(m_funitureId);
             writer.WriteByte(m_orientation);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_cellId = reader.ReadVarUhShort();
             m_funitureId = reader.ReadInt();

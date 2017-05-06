@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BlueSheep.Common.Types
+﻿namespace BlueSheep.Common.Types
 {
     public class Lot
     {

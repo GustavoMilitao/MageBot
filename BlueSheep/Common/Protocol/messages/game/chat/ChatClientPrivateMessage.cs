@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Chat
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class ChatClientPrivateMessage : ChatAbstractClientMessage
+
+    public class ChatClientPrivateMessage : ChatAbstractClientMessage
     {
         
-        public new const int ID = 851;
+        public const int ProtocolId = 851;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -45,11 +39,17 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Chat
             }
         }
         
+        public ChatClientPrivateMessage(string receiver)
+        {
+            m_receiver = receiver;
+        }
+
         public ChatClientPrivateMessage(string content, string receiver) : base(content)
         {
             m_receiver = receiver;
         }
-        
+
+
         public ChatClientPrivateMessage()
         {
         }

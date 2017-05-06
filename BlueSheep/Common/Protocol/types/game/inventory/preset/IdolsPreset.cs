@@ -11,21 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Inventory.Preset
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class IdolsPreset 
+
+
+    public class IdolsPreset : NetworkType
     {
         
-        public new const int ID = 491;
+        public const int ProtocolId = 491;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -82,7 +80,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Inventory.Preset
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteShort(((short)(m_idolId.Count)));
             int idolIdIndex;
@@ -94,7 +92,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Inventory.Preset
             writer.WriteByte(m_symbolId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             int idolIdCount = reader.ReadUShort();
             int idolIdIndex;

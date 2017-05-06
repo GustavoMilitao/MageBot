@@ -13,25 +13,20 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
     using BlueSheep.Common.Protocol.Types.Game.Look;
     using BlueSheep.Common.Protocol.Types.Game.Character.Status;
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party.Companion;
-    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    public class PartyGuestInformations 
+
+
+    public class PartyGuestInformations : NetworkType
     {
         
-        public new const int ID = 374;
+        public const int ProtocolId = 374;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -163,7 +158,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             m_guestLook.Serialize(writer);
             writer.WriteUShort(((ushort)(m_status.TypeID)));
@@ -182,7 +177,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
             writer.WriteBoolean(m_sex);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_guestLook = new EntityLook();
             m_guestLook.Deserialize(reader);

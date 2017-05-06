@@ -1,6 +1,6 @@
 ﻿using BlueSheep.Common.IO;
 
-namespace BlueSheep.Engine.Types
+namespace BlueSheep.Common
 {
     public abstract class Message
     {

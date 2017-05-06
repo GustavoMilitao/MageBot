@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Connection
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class IdentificationSuccessWithLoginTokenMessage : IdentificationSuccessMessage 
+
+    public class IdentificationSuccessWithLoginTokenMessage : IdentificationSuccessMessage
     {
         
-        public new const int ID = 6209;
+        public const int ProtocolId = 6209;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

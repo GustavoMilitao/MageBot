@@ -11,26 +11,18 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
 {
     using BlueSheep.Common.Protocol.Types.Game.Character.Alignment;
-    using BlueSheep.Common.Protocol.Types.Game.Look;
-    using BlueSheep.Common.Protocol.Types.Game.Context;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class GameFightMonsterWithAlignmentInformations : GameFightMonsterInformations
     {
         
-        public new const int ID = 203;
+        public const int ProtocolId = 203;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -57,13 +49,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             m_alignmentInfos.Serialize(writer);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_alignmentInfos = new ActorAlignmentInformations();

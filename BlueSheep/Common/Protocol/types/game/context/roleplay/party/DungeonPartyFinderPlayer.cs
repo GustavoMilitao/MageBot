@@ -10,19 +10,16 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
 {
-    using BlueSheep.Protocol;
-
-
-    public class DungeonPartyFinderPlayer 
+    public class DungeonPartyFinderPlayer : NetworkType
     {
         
-        public new const int ID = 373;
+        public const int ProtocolId = 373;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -109,7 +106,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarLong(m_playerId);
             writer.WriteUTF(m_playerName);
@@ -118,7 +115,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
             writer.WriteSByte(m_level);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_playerId = reader.ReadVarUhLong();
             m_playerName = reader.ReadUTF();

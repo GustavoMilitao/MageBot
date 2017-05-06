@@ -1,24 +1,21 @@
 ﻿using BlueSheep.Common.Data;
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Common.Protocol.Messages.Game.Achievement;
 using BlueSheep.Common.Protocol.Messages.Game.Character.Choice;
 using BlueSheep.Common.Protocol.Messages.Game.Character.Stats;
 using BlueSheep.Common.Protocol.Messages.Game.Character.Status;
 using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Stats;
 using BlueSheep.Common.Protocol.Messages.Game.Inventory.Spells;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Common.Protocol.Types.Game.Character.Status;
 using BlueSheep.Common.Protocol.Types.Game.Data.Items;
 using BlueSheep.Common.Types;
-using BlueSheep.Engine.Types;
+using BlueSheep.Common;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
 using BlueSheep.Util.Enums.Char;
 using BlueSheep.Util.Enums.EnumHelper;
 using System;
-using System.Linq;
 
 namespace BlueSheep.Engine.Handlers.Character
 {

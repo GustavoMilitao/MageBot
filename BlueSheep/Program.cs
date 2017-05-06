@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using BlueSheep.Interface;
 using Microsoft.Win32;
-using System.IO;
 using BlueSheep.Engine.ExceptionHandler;
 
 namespace BlueSheep

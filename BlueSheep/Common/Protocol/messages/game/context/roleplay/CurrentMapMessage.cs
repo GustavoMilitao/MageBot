@@ -1,11 +1,11 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay
-{
-    using BlueSheep.Engine.Types;
+﻿ 
 
- 	 public class CurrentMapMessage : Message 
+namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay
+{
+    public class CurrentMapMessage : Message
     {
-        public new const int ID = 220;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 220;
+        public override int MessageID { get { return ProtocolId; } }
 
         public int MapId { get; set; }
         public string MapKey { get; set; }

@@ -11,25 +11,21 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Guild
 {
     using BlueSheep.Common.Protocol.Types.Game.Social;
-    using BlueSheep.Common.Protocol;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class GuildVersatileInfoListMessage : Message 
+
+    public class GuildVersatileInfoListMessage : Message
     {
         
-        public new const int ID = 6435;
+        public const int ProtocolId = 6435;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -1,6 +1,4 @@
 ﻿using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
-using BlueSheep.Engine.Constants;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
@@ -9,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.IO;
 using System.Threading;
 using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;

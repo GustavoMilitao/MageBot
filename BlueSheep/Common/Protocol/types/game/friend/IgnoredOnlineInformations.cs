@@ -13,13 +13,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Friend
     public class IgnoredOnlineInformations : IgnoredInformations
     {
         
-        public new const int ID = 105;
+        public const int ProtocolId = 105;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -91,7 +91,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Friend
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteVarLong(m_playerId);
@@ -100,7 +100,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Friend
             writer.WriteBoolean(m_sex);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_playerId = reader.ReadVarUhLong();

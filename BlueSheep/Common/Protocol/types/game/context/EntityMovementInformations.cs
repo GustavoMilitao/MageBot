@@ -11,21 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Context
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class EntityMovementInformations 
+
+
+    public class EntityMovementInformations : NetworkType
     {
         
-        public new const int ID = 63;
+        public const int ProtocolId = 63;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -67,7 +65,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteShort(((short)(m_steps.Count)));
             int stepsIndex;
@@ -78,7 +76,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context
             writer.WriteInt(m_ObjectId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             int stepsCount = reader.ReadUShort();
             int stepsIndex;

@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Chat
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class ChatServerCopyMessage : ChatAbstractServerMessage 
+
+    public class ChatServerCopyMessage : ChatAbstractServerMessage
     {
         
-        public new const int ID = 882;
+        public const int ProtocolId = 882;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

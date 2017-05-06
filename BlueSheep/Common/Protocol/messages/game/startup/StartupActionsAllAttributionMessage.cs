@@ -10,26 +10,20 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Startup
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
- 	 public class StartupActionsAllAttributionMessage : Message 
+
+    public class StartupActionsAllAttributionMessage : Message
     {
         
-        public new const int ID = 6537;
+        public const int ProtocolId = 6537;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -12,23 +12,19 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
 {
     using BlueSheep.Common.Protocol.Types.Game.Character.Alignment;
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
-    public class CharacterCharacteristicsInformations 
+
+
+    public class CharacterCharacteristicsInformations : NetworkType
     {
         
-        public new const int ID = 8;
+        public const int ProtocolId = 8;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -1400,7 +1396,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             m_alignmentInfos.Serialize(writer);
             m_initiative.Serialize(writer);
@@ -1495,7 +1491,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Character.Characteristic
             writer.WriteInt(m_probationTime);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_alignmentInfos = new ActorExtendedAlignmentInformations();
             m_alignmentInfos.Deserialize(reader);

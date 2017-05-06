@@ -11,24 +11,18 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
 {
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Fight.Arena;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage : GameRolePlayArenaUpdatePlayerInfosMessage 
+
+    public class GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage : GameRolePlayArenaUpdatePlayerInfosMessage
     {
         
-        public new const int ID = 6728;
+        public const int ProtocolId = 6728;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Actions.Fight
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class GameActionMarkedCell 
+
+
+    public class GameActionMarkedCell : NetworkType
     {
         
-        public new const int ID = 85;
+        public const int ProtocolId = 85;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -97,7 +94,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Actions.Fight
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarShort(m_cellId);
             writer.WriteByte(m_zoneSize);
@@ -105,7 +102,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Actions.Fight
             writer.WriteByte(m_cellsType);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_cellId = reader.ReadVarUhShort();
             m_zoneSize = reader.ReadByte();

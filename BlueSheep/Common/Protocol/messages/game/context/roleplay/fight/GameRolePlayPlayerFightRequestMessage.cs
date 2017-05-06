@@ -10,32 +10,25 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
+    using BlueSheep.Common;
+	using BlueSheep.Common.Protocol.Types;
 
-
-    using BlueSheep.Protocol;
-    using System;
-
-
-    using BlueSheep.Engine.Types;
 
     public class GameRolePlayPlayerFightRequestMessage : Message
     {
-
-        public new const int ID = 5731;
-
+        
+        public const int ProtocolId = 5731;
+        
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
-
+        
         private ulong m_targetId;
-
+        
         public virtual ulong TargetId
         {
             get
@@ -47,9 +40,9 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight
                 m_targetId = value;
             }
         }
-
+        
         private short m_targetCellId;
-
+        
         public virtual short TargetCellId
         {
             get
@@ -61,9 +54,9 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight
                 m_targetCellId = value;
             }
         }
-
+        
         private bool m_friendly;
-
+        
         public virtual bool Friendly
         {
             get
@@ -75,25 +68,25 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight
                 m_friendly = value;
             }
         }
-
+        
         public GameRolePlayPlayerFightRequestMessage(ulong targetId, short targetCellId, bool friendly)
         {
             m_targetId = targetId;
             m_targetCellId = targetCellId;
             m_friendly = friendly;
         }
-
+        
         public GameRolePlayPlayerFightRequestMessage()
         {
         }
-
+        
         public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarLong(m_targetId);
             writer.WriteShort(m_targetCellId);
             writer.WriteBoolean(m_friendly);
         }
-
+        
         public override void Deserialize(IDataReader reader)
         {
             m_targetId = reader.ReadVarUhLong();

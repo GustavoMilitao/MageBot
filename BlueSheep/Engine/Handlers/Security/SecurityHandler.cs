@@ -1,13 +1,6 @@
-﻿using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
-using BlueSheep.Engine.Types;
-using System;
+﻿using BlueSheep.Common;
 using BlueSheep.Interface;
-using System.IO;
-using System.Text;
-using BlueSheep.Interface.Text;
 using System.Collections.Generic;
-using BlueSheep.Engine.Constants;
 using BlueSheep.Common.Protocol.Messages.Security;
 
 namespace BlueSheep.Engine.Handlers.Security

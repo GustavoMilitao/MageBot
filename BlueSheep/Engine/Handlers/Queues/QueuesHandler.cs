@@ -1,7 +1,6 @@
 ﻿using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Common.Protocol.Messages.Queues;
-using BlueSheep.Engine.Types;
+using BlueSheep.Common;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
 

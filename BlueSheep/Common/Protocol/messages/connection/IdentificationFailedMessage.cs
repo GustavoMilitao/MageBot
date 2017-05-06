@@ -1,11 +1,11 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Connection
-{
-    using BlueSheep.Engine.Types;
+﻿ 
 
- 	 public class IdentificationFailedMessage : Message 
+namespace BlueSheep.Common.Protocol.Messages.Connection
+{
+    public class IdentificationFailedMessage : Message
     {
-        public new const int ID = 20;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 20;
+        public override int MessageID { get { return ProtocolId; } }
 
         public uint Reason = 99;
 

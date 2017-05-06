@@ -10,25 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Alliance
 {
-    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class AllianceMembershipMessage : AllianceJoinedMessage 
+
+    public class AllianceMembershipMessage : AllianceJoinedMessage
     {
         
-        public new const int ID = 6390;
+        public const int ProtocolId = 6390;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

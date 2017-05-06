@@ -2,11 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using BlueSheep.Core.Fight;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Core.Map;
-using BlueSheep.Engine.Types;
 using BlueSheep.Common.Types;
 
 namespace BlueSheep.Data.Pathfinding

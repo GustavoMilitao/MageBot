@@ -1,10 +1,8 @@
 ﻿using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Common.Protocol.Messages.Game.Chat;
 using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
 using BlueSheep.Common.Types;
 using BlueSheep.Engine.Enums;
-using BlueSheep.Engine.Network;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;

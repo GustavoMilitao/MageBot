@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlueSheep.Common.Types
+﻿namespace BlueSheep.Common.Types
 {
     public class BEntity
     {

@@ -10,22 +10,19 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.House
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class HouseInformations 
+
+
+    public class HouseInformations : NetworkType
     {
         
-        public new const int ID = 111;
+        public const int ProtocolId = 111;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -67,13 +64,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.House
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarInt(m_houseId);
             writer.WriteVarShort(m_modelId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_houseId = reader.ReadVarUhInt();
             m_modelId = reader.ReadVarUhShort();

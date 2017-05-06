@@ -11,22 +11,19 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party.Companion
 {
     using BlueSheep.Common.Protocol.Types.Game.Look;
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
     using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    public class PartyCompanionBaseInformations 
+
+
+    public class PartyCompanionBaseInformations : NetworkType
     {
         
-        public new const int ID = 453;
+        public const int ProtocolId = 453;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -83,14 +80,14 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party.Companion
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             m_entityLook.Serialize(writer);
             writer.WriteByte(m_indexId);
             writer.WriteByte(m_companionGenericId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             m_entityLook = new EntityLook();
             m_entityLook.Deserialize(reader);

@@ -1,11 +1,9 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Core.Inventory;
 using BlueSheep.Interface;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BlueSheep.Core.Job
 {

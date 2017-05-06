@@ -1,17 +1,13 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
-using BlueSheep.Common.Protocol.Messages;
 using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Npc;
 using BlueSheep.Common.Protocol.Messages.Game.Dialog;
 using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
 using BlueSheep.Engine.Enums;
-using BlueSheep.Engine.Types;
+using BlueSheep.Common;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BlueSheep.Engine.Handlers.Context
 {

@@ -103,7 +103,7 @@
 //        }
 //        public void Disconnect()
 //        {
-            
+
 //            m_ForcedDisconnect = true;
 //            if ((m_Socket != null) && (Connected()))
 //            {
@@ -294,7 +294,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 using System.Net;
 using System.Net.Sockets;
@@ -302,7 +301,6 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
 using BlueSheep.Engine.Frame;
@@ -1209,7 +1207,7 @@ namespace BlueSheep.Engine.Network
         /// <summary>
         /// Serialize and pack the message, and send it.
         /// </summary>
-        public void Send(BlueSheep.Engine.Types.Message msg)
+        public void Send(Common.Message msg)
         {
             using (BigEndianWriter writer = new BigEndianWriter())
             {

@@ -11,23 +11,18 @@
 namespace BlueSheep.Common.Protocol.Types.Game.Idol
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    
-    
-    using BlueSheep.Protocol;
-    
-    
+
+
     public class PartyIdol : Idol
     {
         
-        public new const int ID = 490;
+        public const int ProtocolId = 490;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -54,7 +49,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Idol
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteShort(((short)(m_ownersIds.Count)));
@@ -65,7 +60,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Idol
             }
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             int ownersIdsCount = reader.ReadUShort();

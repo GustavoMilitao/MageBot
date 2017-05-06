@@ -10,24 +10,18 @@
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Lockable
 {
-    using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class LockableStateUpdateStorageMessage : LockableStateUpdateAbstractMessage 
+
+    public class LockableStateUpdateStorageMessage : LockableStateUpdateAbstractMessage
     {
         
-        public new const int ID = 5669;
+        public const int ProtocolId = 5669;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

@@ -11,23 +11,18 @@
 namespace BlueSheep.Common.Protocol.Messages.Web.Ankabox
 {
     using System.Collections.Generic;
-    using BlueSheep.Common.Protocol.Messages;
-    using BlueSheep.Common.Protocol.Types;
-    using BlueSheep.Protocol;
-    
-    
-    using BlueSheep.Engine.Types;
 
- 	 public class NewMailMessage : MailStatusMessage 
+
+    public class NewMailMessage : MailStatusMessage
     {
         
-        public new const int ID = 6292;
+        public const int ProtocolId = 6292;
         
         public override int MessageID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         

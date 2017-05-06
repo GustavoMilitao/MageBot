@@ -1,11 +1,11 @@
-﻿namespace BlueSheep.Common.Protocol.Messages.Game.Initialization
-{
-    using BlueSheep.Engine.Types;
+﻿ 
 
- 	 public class CharacterLoadingCompleteMessage : Message 
+namespace BlueSheep.Common.Protocol.Messages.Game.Initialization
+{
+    public class CharacterLoadingCompleteMessage : Message
     {
-        public new const int ID = 6471;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 6471;
+        public override int MessageID { get { return ProtocolId; } }
 
         public CharacterLoadingCompleteMessage() { }
 

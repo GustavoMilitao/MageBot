@@ -1,10 +1,8 @@
 ﻿using BlueSheep.Common.Data.D2o;
-using BlueSheep.Common.Protocol.Types;
 using BlueSheep.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using BlueSheep.Core.Map.Elements;
 using BlueSheep.Data.D2p.Elements;
 using BlueSheep.Interface.Text;

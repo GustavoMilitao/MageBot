@@ -10,7 +10,6 @@
 
 namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
 {
-    using BlueSheep.Protocol;
     using BlueSheep.Common.Protocol.Types.Game.Character.Choice;
     using BlueSheep.Common.Protocol.Types.Game.Character.Status;
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party.Companion;
@@ -20,13 +19,13 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
     public class PartyMemberInformations : CharacterBaseInformations
     {
         
-        public new const int ID = 90;
+        public const int ProtocolId = 90;
         
-        public virtual int TypeID
+        public override int TypeID
         {
             get
             {
-                return ID;
+                return ProtocolId;
             }
         }
         
@@ -218,7 +217,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
         {
         }
         
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             writer.WriteUShort(((ushort)(m_status.TypeID)));
@@ -242,7 +241,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay.Party
             writer.WriteVarShort(m_subAreaId);
         }
         
-        public void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
             m_status = ProtocolTypeManager.GetInstance<PlayerStatus>(reader.ReadUShort());

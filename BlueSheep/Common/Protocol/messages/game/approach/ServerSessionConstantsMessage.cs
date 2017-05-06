@@ -1,13 +1,13 @@
-﻿using BlueSheep.Common.Protocol.Types.Game.Approach;
-using BlueSheep.Engine.Types;
+﻿ 
+using BlueSheep.Common.Protocol.Types.Game.Approach;
 using System.Collections.Generic;
 
 namespace BlueSheep.Common.Protocol.Messages.Game.Approach
 {
-    public class ServerSessionConstantsMessage : Message
+    class ServerSessionConstantsMessage : Message
     {
-        public new const int ID = 6434;
-        public override int MessageID { get { return ID; } }
+        public const int ProtocolId = 6434;
+        public override int MessageID { get { return ProtocolId; } }
 
         public List<ServerSessionConstant> Variables;
 
