@@ -135,6 +135,8 @@ namespace BlueSheep.Common.Protocol.Types.Game.Interactive
         
         public override void Deserialize(IDataReader reader)
         {
+            m_elementId = reader.ReadInt();
+            m_elementTypeId = reader.ReadInt();
             int enabledSkillsCount = reader.ReadUShort();
             int enabledSkillsIndex;
             m_enabledSkills = new System.Collections.Generic.List<InteractiveElementSkill>();
@@ -153,8 +155,6 @@ namespace BlueSheep.Common.Protocol.Types.Game.Interactive
                 objectToAdd.Deserialize(reader);
                 m_disabledSkills.Add(objectToAdd);
             }
-            m_elementId = reader.ReadInt();
-            m_elementTypeId = reader.ReadInt();
             m_onCurrentMap = reader.ReadBoolean();
         }
     }

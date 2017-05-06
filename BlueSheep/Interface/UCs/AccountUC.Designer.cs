@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountUC));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.PosLabel = new System.Windows.Forms.ToolStripLabel();
             this.ToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -154,13 +154,13 @@
             this.tabPage8 = new MetroFramework.Controls.MetroTabPage();
             this.StatsPage = new MetroFramework.Controls.MetroTabPage();
             this.marchandPage = new MetroFramework.Controls.MetroTabPage();
+            this.BtnActualize = new BlueSheep.Interface.SadikButton();
             this.sadikButton3 = new BlueSheep.Interface.SadikButton();
             this.sadikLabel10 = new BlueSheep.Interface.SadikLabel();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.LVItemShop = new System.Windows.Forms.ListView();
             this.LVItemBag = new System.Windows.Forms.ListView();
             this.sadikCheckbox1 = new BlueSheep.Interface.SadikCheckbox();
-            this.BtnActualize = new BlueSheep.Interface.SadikButton();
             this.toolStrip1.SuspendLayout();
             this.VTabAccount.SuspendLayout();
             this.ConsolePage.SuspendLayout();
@@ -246,7 +246,7 @@
             this.PathDownBt.Image = ((System.Drawing.Image)(resources.GetObject("PathDownBt.Image")));
             this.PathDownBt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.PathDownBt.Name = "PathDownBt";
-            this.PathDownBt.Size = new System.Drawing.Size(66, 22);
+            this.PathDownBt.Size = new System.Drawing.Size(65, 22);
             this.PathDownBt.Text = "Trajet";
             // 
             // LoadPathBt
@@ -1112,33 +1112,33 @@
             // 
             // WinLoseFightPie
             // 
-            chartArea3.Name = "ChartArea1";
-            this.WinLoseFightPie.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.WinLoseFightPie.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.WinLoseFightPie.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.WinLoseFightPie.Legends.Add(legend1);
             this.WinLoseFightPie.Location = new System.Drawing.Point(23, 138);
             this.WinLoseFightPie.Name = "WinLoseFightPie";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.WinLoseFightPie.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.WinLoseFightPie.Series.Add(series1);
             this.WinLoseFightPie.Size = new System.Drawing.Size(233, 135);
             this.WinLoseFightPie.TabIndex = 3;
             this.WinLoseFightPie.Text = "WinLoseFightPie";
             // 
             // XpBarsChart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.XpBarsChart.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.XpBarsChart.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.XpBarsChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.XpBarsChart.Legends.Add(legend2);
             this.XpBarsChart.Location = new System.Drawing.Point(23, 21);
             this.XpBarsChart.Name = "XpBarsChart";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.XpBarsChart.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.XpBarsChart.Series.Add(series2);
             this.XpBarsChart.Size = new System.Drawing.Size(360, 116);
             this.XpBarsChart.TabIndex = 2;
             this.XpBarsChart.Text = "chart1";
@@ -1672,6 +1672,20 @@
             this.marchandPage.VerticalScrollbarHighlightOnWheel = false;
             this.marchandPage.VerticalScrollbarSize = 10;
             // 
+            // BtnActualize
+            // 
+            this.BtnActualize.ButtonStyle = BlueSheep.Interface.SadikButton.Style.Blue;
+            this.BtnActualize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnActualize.Font = new System.Drawing.Font("Verdana", 8F);
+            this.BtnActualize.Image = null;
+            this.BtnActualize.Location = new System.Drawing.Point(222, 133);
+            this.BtnActualize.Name = "BtnActualize";
+            this.BtnActualize.RoundedCorners = false;
+            this.BtnActualize.Size = new System.Drawing.Size(65, 20);
+            this.BtnActualize.TabIndex = 13;
+            this.BtnActualize.Text = "Actualiser";
+            this.BtnActualize.Click += new System.EventHandler(this.BtnActualize_Click);
+            // 
             // sadikButton3
             // 
             this.sadikButton3.ButtonStyle = BlueSheep.Interface.SadikButton.Style.Blue;
@@ -1746,20 +1760,6 @@
             this.sadikCheckbox1.TabIndex = 2;
             this.sadikCheckbox1.Text = "Activer le mode marchand";
             this.sadikCheckbox1.CheckedChanged += new BlueSheep.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox1_CheckedChanged_1);
-            // 
-            // BtnActualize
-            // 
-            this.BtnActualize.ButtonStyle = BlueSheep.Interface.SadikButton.Style.Blue;
-            this.BtnActualize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnActualize.Font = new System.Drawing.Font("Verdana", 8F);
-            this.BtnActualize.Image = null;
-            this.BtnActualize.Location = new System.Drawing.Point(222, 133);
-            this.BtnActualize.Name = "BtnActualize";
-            this.BtnActualize.RoundedCorners = false;
-            this.BtnActualize.Size = new System.Drawing.Size(65, 20);
-            this.BtnActualize.TabIndex = 13;
-            this.BtnActualize.Text = "Actualiser";
-            this.BtnActualize.Click += new System.EventHandler(this.BtnActualize_Click);
             // 
             // AccountUC
             // 

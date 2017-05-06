@@ -99,6 +99,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
         {
             m_restrictions = new ActorRestrictionsInformations();
             m_restrictions.Deserialize(reader);
+            m_sex = reader.ReadBoolean();
             int optionsCount = reader.ReadUShort();
             int optionsIndex;
             m_options = new System.Collections.Generic.List<HumanOption>();
@@ -108,7 +109,6 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Roleplay
                 objectToAdd.Deserialize(reader);
                 m_options.Add(objectToAdd);
             }
-            m_sex = reader.ReadBoolean();
         }
     }
 }

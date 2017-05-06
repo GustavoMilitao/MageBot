@@ -245,6 +245,8 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay
         
         public override void Deserialize(IDataReader reader)
         {
+            m_subAreaId = reader.ReadVarUhShort();
+            m_mapId = reader.ReadInt();
             int housesCount = reader.ReadUShort();
             int housesIndex;
             m_houses = new System.Collections.Generic.List<HouseInformations>();
@@ -254,6 +256,7 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay
                 objectToAdd.Deserialize(reader);
                 m_houses.Add(objectToAdd);
             }
+
             int actorsCount = reader.ReadUShort();
             int actorsIndex;
             m_actors = new System.Collections.Generic.List<GameRolePlayActorInformations>();
@@ -299,11 +302,9 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay
                 objectToAdd.Deserialize(reader);
                 m_fights.Add(objectToAdd);
             }
+            m_hasAggressiveMonsters = reader.ReadBoolean();
             m_fightStartPositions = new FightStartingPositions();
             m_fightStartPositions.Deserialize(reader);
-            m_subAreaId = reader.ReadVarUhShort();
-            m_mapId = reader.ReadInt();
-            m_hasAggressiveMonsters = reader.ReadBoolean();
         }
     }
 }

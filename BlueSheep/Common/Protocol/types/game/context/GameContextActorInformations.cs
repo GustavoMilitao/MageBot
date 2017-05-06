@@ -82,19 +82,19 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context
         
         public override void Serialize(IDataWriter writer)
         {
+            writer.WriteDouble(m_contextualId);
             m_look.Serialize(writer);
             writer.WriteUShort(((ushort)(m_disposition.TypeID)));
             m_disposition.Serialize(writer);
-            writer.WriteDouble(m_contextualId);
         }
         
         public override void Deserialize(IDataReader reader)
         {
+            m_contextualId = reader.ReadDouble();
             m_look = new EntityLook();
             m_look.Deserialize(reader);
             m_disposition = ProtocolTypeManager.GetInstance<EntityDispositionInformations>(reader.ReadUShort());
             m_disposition.Deserialize(reader);
-            m_contextualId = reader.ReadDouble();
         }
     }
 }
