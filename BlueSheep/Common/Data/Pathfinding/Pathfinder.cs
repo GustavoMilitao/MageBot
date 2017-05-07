@@ -342,7 +342,7 @@ namespace BlueSheep.Data.Pathfinding
             if (actualPoint.IsInMap())
             {
                 fCellData = MapData.Data.Cells[actualPoint.CellId];
-                mov = ((fCellData.Mov()) && (!IsFighting || !fCellData.NonWalkableDuringFight()));
+                mov = ((fCellData.Mov) && (!IsFighting || !fCellData.NonWalkableDuringFight));
 
                 if (!((mov == false)) && isNewSystem && cellId != -1 && cellId != actualPoint.CellId)
                 {

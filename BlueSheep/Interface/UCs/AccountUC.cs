@@ -114,7 +114,7 @@ namespace BlueSheep.Interface
         private delegate void DelegListView(ListViewItem delta, ListView gamma);
         private delegate void DelegLabel(string text, Label lab);
         private delegate void DelegBool(bool param1);
-        private delegate void DelegGatherPie(Dictionary<string, int> ressources, Dictionary<DateTime,int> xp);
+        private delegate void DelegGatherPie(Dictionary<string, int> ressources, Dictionary<DateTime, int> xp);
         private delegate bool DelegVerifGroup(List<string> monsters);
         private delegate bool BoolCallback();
         private delegate void Callback();
@@ -138,138 +138,138 @@ namespace BlueSheep.Interface
             switch (MainForm.ActualMainForm.Lang)
             {
                 case "FR":
-            listViewPets.Columns.Add("Nom", 150, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("UID", 0, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Nourriture (Quantité)", -2, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Prochain repas", -2, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Caractéristiques", -2, HorizontalAlignment.Left);
-            LVItems.Columns.Add("GID", 0, HorizontalAlignment.Center);
-            LVItems.Columns.Add("UID", 0, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Nom", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Quantité", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Type", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Prix moyen", -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("GID", 0, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("UID", 0, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("Nom", -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("Quantité", -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("Type", -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("Prix moyen", -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("GID", 0, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("UID", 0, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("Nom", -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("Quantité", -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("Type", -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("Prix de vente", -2, HorizontalAlignment.Center);
+                    listViewPets.Columns.Add("Nom", 150, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("UID", 0, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Nourriture (Quantité)", -2, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Prochain repas", -2, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Caractéristiques", -2, HorizontalAlignment.Left);
+                    LVItems.Columns.Add("GID", 0, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("UID", 0, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Nom", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Quantité", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Type", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Prix moyen", -2, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("GID", 0, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("UID", 0, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("Nom", -2, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("Quantité", -2, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("Type", -2, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("Prix moyen", -2, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("GID", 0, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("UID", 0, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("Nom", -2, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("Quantité", -2, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("Type", -2, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("Prix de vente", -2, HorizontalAlignment.Center);
                     break;
                 case "EN":
                     listViewPets.Columns.Add("Name", 150, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("UID", 0, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Food (Quantity)", -2, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Next meal", -2, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Stats", -2, HorizontalAlignment.Left);
-            LVItems.Columns.Add("GID", 0, HorizontalAlignment.Center);
-            LVItems.Columns.Add("UID", 0, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Name", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Quantity", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Type", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Average Price", -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("GID", 0, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("UID", 0, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("Name", -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("Quantity", -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("Type", -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add("Average Price", -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("GID", 0, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("UID", 0, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("Name", -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("Quantity", -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("Type", -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add("Sell price", -2, HorizontalAlignment.Center);
-            VTabAccount.TabPages[1].Text = "Fight";
-            VTabAccount.TabPages[2].Text = "Pets";
-            VTabAccount.TabPages[3].Text = "Inventory";
-            VTabAccount.TabPages[4].Text = "Misc";
-            VTabAccount.TabPages[5].Text = "Settings";
-            sadikTabControl2.TabPages[0].Text = "Inventory";
-            FloodPage.TabPages[0].Text = "Houses";
-            sadikLabel2.Text = "% of life";
-            GroupBox2.Text = "AI";
-            ChoiceIABt.Text = "Choose an AI";
-            NomIA.Text = "No AI";
-            sadikLabel5.Text = "Numbers of monsters";
-            sadikLabel6.Text = "Levels of monsters";
-            checkBoxBegin.Text = "Start feeding";
-            toolStripButton1.Text = "Connect/Disconnect";
-            PathDownBt.Text = "Path";
-            LaunchPathBt.Text = "Launch path";
-            LoadPathBt.Text = "Load path";
-            StopPathBt.Text = "Stop path";
-            break;
+                    listViewPets.Columns.Add("UID", 0, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Food (Quantity)", -2, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Next meal", -2, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Stats", -2, HorizontalAlignment.Left);
+                    LVItems.Columns.Add("GID", 0, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("UID", 0, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Name", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Quantity", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Type", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Average Price", -2, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("GID", 0, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("UID", 0, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("Name", -2, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("Quantity", -2, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("Type", -2, HorizontalAlignment.Center);
+                    LVItemBag.Columns.Add("Average Price", -2, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("GID", 0, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("UID", 0, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("Name", -2, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("Quantity", -2, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("Type", -2, HorizontalAlignment.Center);
+                    LVItemShop.Columns.Add("Sell price", -2, HorizontalAlignment.Center);
+                    VTabAccount.TabPages[1].Text = "Fight";
+                    VTabAccount.TabPages[2].Text = "Pets";
+                    VTabAccount.TabPages[3].Text = "Inventory";
+                    VTabAccount.TabPages[4].Text = "Misc";
+                    VTabAccount.TabPages[5].Text = "Settings";
+                    sadikTabControl2.TabPages[0].Text = "Inventory";
+                    FloodPage.TabPages[0].Text = "Houses";
+                    sadikLabel2.Text = "% of life";
+                    GroupBox2.Text = "AI";
+                    ChoiceIABt.Text = "Choose an AI";
+                    NomIA.Text = "No AI";
+                    sadikLabel5.Text = "Numbers of monsters";
+                    sadikLabel6.Text = "Levels of monsters";
+                    checkBoxBegin.Text = "Start feeding";
+                    toolStripButton1.Text = "Connect/Disconnect";
+                    PathDownBt.Text = "Path";
+                    LaunchPathBt.Text = "Launch path";
+                    LoadPathBt.Text = "Load path";
+                    StopPathBt.Text = "Stop path";
+                    break;
                 case "ES":
-            listViewPets.Columns.Add("Nombre", 150, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("UID", 0, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Alimento (cantidad)", -2, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Comida próxima", -2, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Características", -2, HorizontalAlignment.Left);
-            LVItems.Columns.Add("GID", 0, HorizontalAlignment.Center);
-            LVItems.Columns.Add("UID", 0, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Nombre", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Cantidad", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Tipo", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Precio medio", -2, HorizontalAlignment.Center);
-            VTabAccount.TabPages[1].Text = "Combate";
-            VTabAccount.TabPages[2].Text = "Mascotas";
-            VTabAccount.TabPages[3].Text = "Inventario";
-            VTabAccount.TabPages[4].Text = "Miscelánea";
-            VTabAccount.TabPages[5].Text = "Parámetros";
-            sadikTabControl2.TabPages[0].Text = "Inventario";
-            FloodPage.TabPages[0].Text = "Casas";
-            sadikLabel2.Text = "% de vida";
-            GroupBox2.Text = "IA";
-            ChoiceIABt.Text = "Choose an IA";
-            NomIA.Text = "No IA";
-            sadikLabel5.Text = "Número de monstruos";
-            sadikLabel6.Text = "Niveles de los monstruos";
-            checkBoxBegin.Text = "Empezar la ganadería";
-            toolStripButton1.Text = "Conectar/Desconectar";
-            PathDownBt.Text = "Trayecto";
-            LaunchPathBt.Text = "Lanzar el trayecto";
-            LoadPathBt.Text = "Cargar un trayecto";
-            StopPathBt.Text = "Parar el trayecto";
-            break;
+                    listViewPets.Columns.Add("Nombre", 150, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("UID", 0, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Alimento (cantidad)", -2, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Comida próxima", -2, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Características", -2, HorizontalAlignment.Left);
+                    LVItems.Columns.Add("GID", 0, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("UID", 0, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Nombre", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Cantidad", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Tipo", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Precio medio", -2, HorizontalAlignment.Center);
+                    VTabAccount.TabPages[1].Text = "Combate";
+                    VTabAccount.TabPages[2].Text = "Mascotas";
+                    VTabAccount.TabPages[3].Text = "Inventario";
+                    VTabAccount.TabPages[4].Text = "Miscelánea";
+                    VTabAccount.TabPages[5].Text = "Parámetros";
+                    sadikTabControl2.TabPages[0].Text = "Inventario";
+                    FloodPage.TabPages[0].Text = "Casas";
+                    sadikLabel2.Text = "% de vida";
+                    GroupBox2.Text = "IA";
+                    ChoiceIABt.Text = "Choose an IA";
+                    NomIA.Text = "No IA";
+                    sadikLabel5.Text = "Número de monstruos";
+                    sadikLabel6.Text = "Niveles de los monstruos";
+                    checkBoxBegin.Text = "Empezar la ganadería";
+                    toolStripButton1.Text = "Conectar/Desconectar";
+                    PathDownBt.Text = "Trayecto";
+                    LaunchPathBt.Text = "Lanzar el trayecto";
+                    LoadPathBt.Text = "Cargar un trayecto";
+                    StopPathBt.Text = "Parar el trayecto";
+                    break;
                 case "PT":
                     listViewPets.Columns.Add("Nome", 150, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("UID", 0, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Comida (quantidade)", -2, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Próxima refeição", -2, HorizontalAlignment.Left);
-            listViewPets.Columns.Add("Características", -2, HorizontalAlignment.Left);
-            LVItems.Columns.Add("GID", 0, HorizontalAlignment.Center);
-            LVItems.Columns.Add("UID", 0, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Nome", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Quantidade", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Tipo", -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add("Preço médio", -2, HorizontalAlignment.Center);
-            VTabAccount.TabPages[1].Text = "Luta";
-            VTabAccount.TabPages[2].Text = "Animais";
-            VTabAccount.TabPages[3].Text = "Inventário";
-            VTabAccount.TabPages[4].Text = "Diverso";
-            VTabAccount.TabPages[5].Text = "Parâmetros";
-            sadikTabControl2.TabPages[0].Text = "Inventário";
-            FloodPage.TabPages[0].Text = "Casas";
-            sadikLabel2.Text = "% de vida";
-            GroupBox2.Text = "IA";
-            ChoiceIABt.Text = "Escolha um IA";
-            NomIA.Text = "No AI";
-            sadikLabel5.Text = "Número de monstros";
-            sadikLabel6.Text = "Nível de monstros";
-            checkBoxBegin.Text = "Comece a procriação";
-            toolStripButton1.Text = "Conecte / desconecte";
-            PathDownBt.Text = "Trajecto";
-            LaunchPathBt.Text = "Lance a trajecto";
-            LoadPathBt.Text = "Carregue (Custo) um trajecto";
-            StopPathBt.Text = "Parada trajecto";
-            break;
+                    listViewPets.Columns.Add("UID", 0, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Comida (quantidade)", -2, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Próxima refeição", -2, HorizontalAlignment.Left);
+                    listViewPets.Columns.Add("Características", -2, HorizontalAlignment.Left);
+                    LVItems.Columns.Add("GID", 0, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("UID", 0, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Nome", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Quantidade", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Tipo", -2, HorizontalAlignment.Center);
+                    LVItems.Columns.Add("Preço médio", -2, HorizontalAlignment.Center);
+                    VTabAccount.TabPages[1].Text = "Luta";
+                    VTabAccount.TabPages[2].Text = "Animais";
+                    VTabAccount.TabPages[3].Text = "Inventário";
+                    VTabAccount.TabPages[4].Text = "Diverso";
+                    VTabAccount.TabPages[5].Text = "Parâmetros";
+                    sadikTabControl2.TabPages[0].Text = "Inventário";
+                    FloodPage.TabPages[0].Text = "Casas";
+                    sadikLabel2.Text = "% de vida";
+                    GroupBox2.Text = "IA";
+                    ChoiceIABt.Text = "Escolha um IA";
+                    NomIA.Text = "No AI";
+                    sadikLabel5.Text = "Número de monstros";
+                    sadikLabel6.Text = "Nível de monstros";
+                    checkBoxBegin.Text = "Comece a procriação";
+                    toolStripButton1.Text = "Conecte / desconecte";
+                    PathDownBt.Text = "Trajecto";
+                    LaunchPathBt.Text = "Lance a trajecto";
+                    LoadPathBt.Text = "Carregue (Custo) um trajecto";
+                    StopPathBt.Text = "Parada trajecto";
+                    break;
             }
             ComparateurBox.SelectedIndex = 0;
             MonstersRestrictionsView.Columns.Add("Nom", -2);
@@ -295,7 +295,7 @@ namespace BlueSheep.Interface
             Inventory = new Inventory(this);
             Spells = new List<Spell>();
             Npc = new Npc(this);
-            
+
             Jobs = new List<Job>();
             Gather = new Gather(this);
 
@@ -330,7 +330,7 @@ namespace BlueSheep.Interface
 
             //Config Manager
             ConfigManager = new ConfigManager(this);
-           
+
             Flood = new Core.Misc.Flood(this);
             FightData = new FightData(this);
             MapData = new MapData(this);
@@ -342,7 +342,7 @@ namespace BlueSheep.Interface
             InitializeComponent();
         }
 
-#endregion
+        #endregion
 
         #region Methodes d'interfaces
 
@@ -373,7 +373,7 @@ namespace BlueSheep.Interface
 
         }
 
-        public void Log(TextInformation text,int levelVerbose)
+        public void Log(TextInformation text, int levelVerbose)
         {
             if (IsDisposed == true)
                 return;
@@ -393,7 +393,7 @@ namespace BlueSheep.Interface
                     return;
 
                 if (LogCb.Checked)
-                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + CharacterBaseInformations.Name +".txt", true))
+                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + CharacterBaseInformations.Name + ".txt", true))
                         fileWriter.WriteLine(text.Text);
 
                 int startIndex = LogConsole.TextLength;
@@ -496,7 +496,7 @@ namespace BlueSheep.Interface
             }
             else
             {
-                Log(new BotTextInformation("L'élevage va être stoppé"),3);
+                Log(new BotTextInformation("L'élevage va être stoppé"), 3);
                 Running = null;
             }
         }
@@ -547,7 +547,7 @@ namespace BlueSheep.Interface
         {
             //this.BeginInvoke(new MethodInvoker(LVItems.Items.Add),li);
             if (list.InvokeRequired == true)
-                Invoke(new DelegListView(AddItem), li,list);
+                Invoke(new DelegListView(AddItem), li, list);
             else
                 list.Items.Add(li);
         }
@@ -562,11 +562,11 @@ namespace BlueSheep.Interface
         {
             if (Path != null)
             {
-                Log(new BotTextInformation("Lancement du trajet"),1);
+                Log(new BotTextInformation("Lancement du trajet"), 1);
                 Path.Start();
             }
             else
-                Log(new ErrorTextInformation("Aucun trajet chargé"),3);
+                Log(new ErrorTextInformation("Aucun trajet chargé"), 3);
         }
 
         private void StopPathBt_Click(object sender, EventArgs e)
@@ -574,7 +574,7 @@ namespace BlueSheep.Interface
             if (Path != null)
             {
                 Path.StopPath();
-                Log(new BotTextInformation("Trajet arrêté"),1);
+                Log(new BotTextInformation("Trajet arrêté"), 1);
             }
         }
 
@@ -587,7 +587,7 @@ namespace BlueSheep.Interface
         private void StartWaitingBt_Click(object sender, EventArgs e)
         {
             House = new HouseBuy(this);
-            Log(new BotTextInformation("En attente de la mise en vente d'une maison..."),1);
+            Log(new BotTextInformation("En attente de la mise en vente d'une maison..."), 1);
         }
 
         private void ParcourirBt_Click(object sender, EventArgs e)
@@ -631,7 +631,7 @@ namespace BlueSheep.Interface
                 Invoke(new DelegLabel(ModLabel), "Pas de prochain repas", labelNextMeal);
 
             Invoke(new DelegLabel(ModLabel), Safe != null ? "Coffre : Oui" : "Coffre : Non", labelSafe);
-            
+
             if (listViewPets.InvokeRequired)
                 BeginInvoke(new MethodInvoker(listViewPets.Items.Clear));
             else
@@ -662,9 +662,9 @@ namespace BlueSheep.Interface
 
                     listViewItem.SubItems.Add(pet.Effect);
 
-                   AddItem(listViewItem, listViewPets);
-                   //if (listViewPets.Items.Count != 0)
-                   //    listViewPets.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                    AddItem(listViewItem, listViewPets);
+                    //if (listViewPets.Items.Count != 0)
+                    //    listViewPets.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                 }
             }
         }
@@ -693,7 +693,7 @@ namespace BlueSheep.Interface
                         Log(new ErrorTextInformation(s), 0);
                     else
                         Log(new BotTextInformation(s), 0);
-                }   
+                }
             }
             else if (e.KeyCode == Keys.Up && CLIParser.CommandsHistory.Count > 0)
             {
@@ -706,7 +706,7 @@ namespace BlueSheep.Interface
             else if (e.KeyCode == Keys.Down && CLIParser.CommandsHistory.Count > 0)
             {
                 int index = CLIParser.CommandsHistory.IndexOf(CommandeBox.Text);
-                if (index != -1 && index != CLIParser.CommandsHistory.Count)
+                if (index != -1 && index != CLIParser.CommandsHistory.Count - 1)
                     CommandeBox.Text = CLIParser.CommandsHistory[index + 1];
                 else
                     CommandeBox.Text = "";
@@ -715,7 +715,7 @@ namespace BlueSheep.Interface
 
         public void ActualizeMap()
         {
-            BeginInvoke(new MethodInvoker(MapView.Items.Clear)); 
+            BeginInvoke(new MethodInvoker(MapView.Items.Clear));
             foreach (BlueSheep.Core.Map.Elements.InteractiveElement e in MapData.InteractiveElements.Keys)
             {
                 BlueSheep.Core.Map.Elements.StatedElement element = MapData.StatedElements.Find(s => s.Id == e.Id);
@@ -723,10 +723,10 @@ namespace BlueSheep.Interface
                 switch (e.TypeId)
                 {
                     case 16:
-                        type = type.Replace("Inconnu","Zaap");
+                        type = type.Replace("Inconnu", "Zaap");
                         break;
                     case 106:
-                        type = type.Replace("Inconnu","Zaapi");
+                        type = type.Replace("Inconnu", "Zaapi");
                         break;
                     case 105:
                         type = type.Replace("Inconnu", "Poubelle");
@@ -745,7 +745,7 @@ namespace BlueSheep.Interface
                 if (element != null)
                     cellId = Convert.ToString(element.CellId);
 
-                AddItem(new ListViewItem(new string[] {Convert.ToString(e.Id), cellId,type}),MapView);
+                AddItem(new ListViewItem(new string[] { Convert.ToString(e.Id), cellId, type }), MapView);
             }
             //foreach (BlueSheep.Core.Map.Elements.InteractiveElement d in Map.Doors.Values)
             //{
@@ -761,7 +761,7 @@ namespace BlueSheep.Interface
             //}
             foreach (GameRolePlayNpcInformations n in MapData.Npcs)
             {
-                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), "?" , "Pnj" }), MapView);
+                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), "?", "Pnj" }), MapView);
             }
         }
 
@@ -791,8 +791,8 @@ namespace BlueSheep.Interface
                         {
                             string name = I18N.GetText((int)d.Fields["nameId"]);
                             int rid = (int)d.Fields["interactiveId"];
-                                string typename = I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Interactives, rid).Fields["nameId"]);
-                                uc.g.Rows.Add(name, typename, rid);
+                            string typename = I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Interactives, rid).Fields["nameId"]);
+                            uc.g.Rows.Add(name, typename, rid);
                         }
                     }
 
@@ -829,7 +829,7 @@ namespace BlueSheep.Interface
                 Invoke(new DelegBool(Enable), param1);
             else
                 Enabled = param1;
-        } 
+        }
 
         private void LVItems_ColumnClick(object sender, EventArgs e)
         {
@@ -868,19 +868,19 @@ namespace BlueSheep.Interface
 
         }
 
-        public void ActualizeFightStats(Dictionary<string, int> winLose, Dictionary<DateTime,int> xpwon)
+        public void ActualizeFightStats(Dictionary<string, int> winLose, Dictionary<DateTime, int> xpwon)
         {
             if (WinLoseFightPie.InvokeRequired)
             {
                 Invoke(new DelegGatherPie(ActualizeFightStats), winLose, xpwon);
                 return;
             }
-            #if __MonoCS__
+#if __MonoCS__
 
-            #else
+#else
             if (WinLoseFightPie.Titles.Count < 1)
-            WinLoseFightPie.Titles.Add("Résultats des combats");
-            #endif
+                WinLoseFightPie.Titles.Add("Résultats des combats");
+#endif
             WinLoseFightPie.Series.Clear();
             WinLoseFightPie.ChartAreas[0].BackColor = Color.Transparent;
             Series series1 = new Series
@@ -901,12 +901,12 @@ namespace BlueSheep.Interface
                 i += 1;
             }
             XpBarsChart.Series.Clear();
-            #if __MonoCS__
+#if __MonoCS__
 
-            #else
+#else
             if (XpBarsChart.Titles.Count < 1)
                 XpBarsChart.Titles.Add("Experience gagnée");
-            #endif
+#endif
             foreach (KeyValuePair<DateTime, int> p in xpwon)
             {
                 Series series = new Series(p.Key.ToShortDateString());
@@ -979,7 +979,7 @@ namespace BlueSheep.Interface
             {
                 nstatus = BlueSheep.Engine.Constants.Translate.GetTranslation(nstatus, MainForm.ActualMainForm.Lang);
             }
-            Invoke(new DelegLabel(ModLabel),nstatus, StatusLb);
+            Invoke(new DelegLabel(ModLabel), nstatus, StatusLb);
         }
         #endregion
 
@@ -1009,17 +1009,17 @@ namespace BlueSheep.Interface
         {
             m_NextMeal = new DateTime();
 
-                if (m_NextMeal.Year == 1)
-                {
-                    m_NextMeal = new DateTime(NextMeal.Year, NextMeal.Month, NextMeal.Day, NextMeal.Hour,
-                        NextMeal.Minute, 0);
-                }
+            if (m_NextMeal.Year == 1)
+            {
+                m_NextMeal = new DateTime(NextMeal.Year, NextMeal.Month, NextMeal.Day, NextMeal.Hour,
+                    NextMeal.Minute, 0);
+            }
 
-                else if (NextMeal <= m_NextMeal)
-                {
-                    m_NextMeal = new DateTime(NextMeal.Year, NextMeal.Month, NextMeal.Day,NextMeal.Hour,
-                        NextMeal.Minute, 0);
-                }
+            else if (NextMeal <= m_NextMeal)
+            {
+                m_NextMeal = new DateTime(NextMeal.Year, NextMeal.Month, NextMeal.Day, NextMeal.Hour,
+                    NextMeal.Minute, 0);
+            }
 
             if (m_NextMeal.Year != 1)
             {
@@ -1027,8 +1027,8 @@ namespace BlueSheep.Interface
 
                 DateTime difference = new DateTime((m_NextMeal - DateTime.Now).Ticks);
 
-               Log(new GeneralTextInformation("Prochain repas dans " + difference.Hour + " heure(s) " +
-                    difference.Minute + " minute(s)."),3);
+                Log(new GeneralTextInformation("Prochain repas dans " + difference.Hour + " heure(s) " +
+                     difference.Minute + " minute(s)."), 3);
                 SocketManager.Disconnect("Wait before next meal.");
 
                 if (m_TimerConnectionThread == null)
@@ -1041,7 +1041,7 @@ namespace BlueSheep.Interface
             }
             else
             {
-               Log(new GeneralTextInformation("Aucune nourriture disponible, pas de prochaine connexion."),1);
+                Log(new GeneralTextInformation("Aucune nourriture disponible, pas de prochaine connexion."), 1);
             }
         }
 
@@ -1236,7 +1236,7 @@ namespace BlueSheep.Interface
 
         }
 
-       
+
 
 
         private void AutoDelAddBt_Click(object sender, EventArgs e)
@@ -1291,10 +1291,10 @@ namespace BlueSheep.Interface
 
         private void sadikButton3_Click(object sender, EventArgs e)
         {
-            
-                        ExchangeRequestOnShopStockMessage packetshop = new ExchangeRequestOnShopStockMessage();
-                        SocketManager.Send(packetshop);
-                    
+
+            ExchangeRequestOnShopStockMessage packetshop = new ExchangeRequestOnShopStockMessage();
+            SocketManager.Send(packetshop);
+
         }
 
         public void addItemToShop()
@@ -1310,17 +1310,17 @@ namespace BlueSheep.Interface
                 {
                     try
                     {
-            //Inventory.SendItemToShop(Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).UID, Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity, Convert.ToInt32(numericUpDown1.Value));
-            ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage();
-            //BlueSheep.Core.Inventory.Item item = new BlueSheep.Core.Inventory.Item(null, 0, 0, msg.quantity, msg.objectUID, this);
-            msg.ObjectUID = (uint)Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).UID;
-            msg.Quantity = Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity;
-            msg.Price = Convert.ToUInt64(numericUpDown1.Value);
-            SocketManager.Send(msg);
-            Log(new ActionTextInformation("Ajout de " + Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Name + "(x " + Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity + ") dans le magasin au prix de : " + msg.Price + " Kamas"), 2);
-            LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
-            Wait(2000, 2000);
-            SocketManager.Send(packetleave);
+                        //Inventory.SendItemToShop(Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).UID, Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity, Convert.ToInt32(numericUpDown1.Value));
+                        ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage();
+                        //BlueSheep.Core.Inventory.Item item = new BlueSheep.Core.Inventory.Item(null, 0, 0, msg.quantity, msg.objectUID, this);
+                        msg.ObjectUID = (uint)Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).UID;
+                        msg.Quantity = Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity;
+                        msg.Price = Convert.ToUInt64(numericUpDown1.Value);
+                        SocketManager.Send(msg);
+                        Log(new ActionTextInformation("Ajout de " + Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Name + "(x " + Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity + ") dans le magasin au prix de : " + msg.Price + " Kamas"), 2);
+                        LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
+                        Wait(2000, 2000);
+                        SocketManager.Send(packetleave);
                     }
                     catch (Exception ex)
                     {
@@ -1374,21 +1374,22 @@ namespace BlueSheep.Interface
             SocketManager.Send(packetleave);
         }
 
-        public void actualizeshop(List<ObjectItemToSell>sell)
+        public void actualizeshop(List<ObjectItemToSell> sell)
         {
             BeginInvoke(new MethodInvoker(LVItemShop.Items.Clear));
 
             foreach (ObjectItemToSell i in sell)
             {
-                BlueSheep.Core.Inventory.Item item = new BlueSheep.Core.Inventory.Item(i.Effects.ToList(), i.ObjectGID,0,(int)i.Quantity, (int)i.ObjectUID, this);
+                BlueSheep.Core.Inventory.Item item = new BlueSheep.Core.Inventory.Item(i.Effects.ToList(), i.ObjectGID, 0, (int)i.Quantity, (int)i.ObjectUID, this);
                 string[] row1 = { item.GID.ToString(), item.UID.ToString(), item.Name, item.Quantity.ToString(), item.Type, i.ObjectPrice.ToString() };
                 System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
                 li.ToolTipText = item.Description;
                 AddItem(li, LVItemShop);
-            }  
+            }
         }
 
-        private void client_shoprequest(){
+        private void client_shoprequest()
+        {
 
         }
     }

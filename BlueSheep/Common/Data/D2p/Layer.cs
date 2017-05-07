@@ -8,7 +8,10 @@ namespace BlueSheep.Data.D2p
         // Methods
         internal void Init(BigEndianReader Reader, int MapVersion)
         {
-            LayerId = Reader.ReadInt();
+            if (MapVersion >= 9)
+                LayerId = Reader.ReadByte();
+            else
+                LayerId = Reader.ReadInt();
             CellsCount = Reader.ReadShort();
             int cellsCount = CellsCount;
             int i = 1;

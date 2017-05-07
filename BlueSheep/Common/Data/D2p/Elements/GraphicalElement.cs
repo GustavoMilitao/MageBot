@@ -15,15 +15,21 @@ namespace BlueSheep.Data.D2p.Elements
             {
                 OffsetX = Reader.ReadSByte();
                 OffsetY = Reader.ReadSByte();
-                PixelOffsetX = (OffsetX * 43);
-                PixelOffsetY = (OffsetY * 21.5);
+                //PixelOffsetX = (OffsetX * 43);
+                //PixelOffsetY = (OffsetY * 21.5);
+                //TODO: Verify
+                PixelOffsetX = OffsetX;
+                PixelOffsetY = OffsetY;
             }
             else
             {
                 PixelOffsetX = Reader.ReadShort();
                 PixelOffsetY = Reader.ReadShort();
-                OffsetX = (PixelOffsetX / 43);
-                OffsetY = (PixelOffsetY / 21.5);
+                //OffsetX = (PixelOffsetX / 43);
+                //OffsetY = (PixelOffsetY / 21.5);
+                //TODO: Verify
+                OffsetX = PixelOffsetX;
+                OffsetY = PixelOffsetY;
             }
             Altitude = Reader.ReadSByte();
             Identifier = Convert.ToInt32(Reader.ReadUInt());

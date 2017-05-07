@@ -1,88 +1,155 @@
 ﻿using BlueSheep.Common.IO;
+using System.Collections.Generic;
 
 namespace BlueSheep.Data.D2p
 {
     public class CellData
     {
         // Methods
-        internal void Init(BigEndianReader Reader, int MapVersion)
+        internal void Init(BigEndianReader Reader, int MapVersion, Map map)
         {
             Floor = (Reader.ReadSByte() * 10);
-            if ((Floor != -1280))
+            if (Floor == -1280)
+                return;
+            if (MapVersion >= 9)
             {
-                LosMov = Reader.ReadSByte();
-                Speed = Reader.ReadSByte();
-                MapChangeData = Reader.ReadByte();
-                if ((MapVersion > 5))
+                var tmp_bytes = Reader.ReadShort();
+                Mov = (tmp_bytes & 1) == 0;
+                NonWalkableDuringFight = (tmp_bytes & 2) != 0;
+                NonWalkableDuringRP = (tmp_bytes & 4) != 0;
+                Los = (tmp_bytes & 8) == 0;
+                Blue = (tmp_bytes & 16) != 0;
+                Red = (tmp_bytes & 32) != 0;
+                Visible = (tmp_bytes & 64) != 0;
+                FarmCell = (tmp_bytes & 128) != 0;
+                if (MapVersion >= 10)
                 {
-                    MoveZone = Reader.ReadByte();
+                    HavenbagCell = (tmp_bytes & 256) != 0;
+                    TopArrow = (tmp_bytes & 512) != 0;
+                    BottomArrow = (tmp_bytes & 1024) != 0;
+                    RightArrow = (tmp_bytes & 2048) != 0;
+                    LeftArrow = (tmp_bytes & 4096) != 0;
                 }
-                if ((MapVersion > 7))
+                else
                 {
-                    int tmp = Reader.ReadSByte();
-                    Arrow = 15 & tmp;
+                    TopArrow = (tmp_bytes & 256) != 0;
+                    BottomArrow = (tmp_bytes & 512) != 0;
+                    RightArrow = (tmp_bytes & 1024) != 0;
+                    LeftArrow = (tmp_bytes & 2048) != 0;
                 }
+                if (TopArrow)
+                    map.TopArrowCells.Add(CellId);
+                if (BottomArrow)
+                    map.BottomArrowCells.Add(CellId);
+                if (RightArrow)
+                    map.RightArrowCells.Add(CellId);
+                if (LeftArrow)
+                    map.LeftArrowCells.Add(CellId);
             }
+            else
+            {
+                LosMov = Reader.ReadByte();
+                Los = (LosMov & 2) >> 1 == 1;
+                Mov = (LosMov & 1) == 1;
+                Visible = (LosMov & 64) >> 6 == 1;
+                FarmCell = (LosMov & 32) >> 5 == 1;
+                Blue = (LosMov & 16) >> 4 == 1;
+                Red = (LosMov & 8) >> 3 == 1;
+                NonWalkableDuringRP = (LosMov & 128) >> 7 == 1;
+                NonWalkableDuringFight = (LosMov & 4) >> 2 == 1;
+            }
+            Speed = Reader.ReadSByte();
+            MapChangeData = Reader.ReadSByte();
+
+            if (MapVersion > 5)
+                MoveZone = Reader.ReadByte();
+            if (MapVersion > 7 && MapVersion < 9)
+            {
+                var tmpBits = Reader.ReadSByte();
+                Arrow = 15 & tmpBits;
+            }
+
+            if (useTopArrow())
+                map.TopArrowCells.Add(CellId);
+
+            if (useBottomArrow())
+                map.BottomArrowCells.Add(CellId);
+
+            if (useLeftArrow())
+                map.LeftArrowCells.Add(CellId);
+
+            if (useRightArrow())
+                map.RightArrowCells.Add(CellId);
         }
 
-        public bool Blue()
+        public CellData(int cellId)
         {
-            return (((LosMov & 16) >> 4) == 1);
+            CellId = cellId;
         }
 
-        public bool FarmCell()
+        public CellData()
         {
-            return (((LosMov & 32) >> 5) == 1);
         }
 
-        public bool Los()
+        private bool useTopArrow()
         {
-            return (((LosMov & 2) >> 1) == 1);
+            if ((Arrow & 1) == 0)
+                return false;
+            return true;
         }
 
-        public bool Mov()
+        private bool useBottomArrow()
         {
-            return ((LosMov & 1) == 1);
+            if ((Arrow & 2) == 0)
+                return false;
+            return true;
         }
 
-        public bool NonWalkableDuringFight()
+        private bool useLeftArrow()
         {
-            return (((LosMov & 4) >> 2) == 1);
+            if ((Arrow & 4) == 0)
+                return false;
+            return true;
         }
 
-        public bool Red()
+        private bool useRightArrow()
         {
-            return (((LosMov & 8) >> 3) == 1);
+            if ((Arrow & 8) == 0)
+                return false;
+            return true;
         }
 
-        public bool Visible()
-        {
-            return (((LosMov & 64) >> 6) == 1);
-        }
+        public int CellId { get; set; }
 
-        public bool TopArrow()
-        {
-            return ((Arrow & 1) != 0);
-        }
+        public bool Blue { get; set; }
 
-        public bool BottomArrow()
-        {
-            return ((Arrow & 2) != 0);
-        }
+        public bool FarmCell { get; set; }
 
-        public bool RightArrow()
-        {
-            return ((Arrow & 4) != 0);
-        }
+        public bool Los { get; set; }
 
-        public bool LeftArrow()
-        {
-            return ((Arrow & 8) != 0);
-        }
+        public bool Mov { get; set; }
+
+        public bool NonWalkableDuringFight { get; set; }
+
+        public bool NonWalkableDuringRP { get; set; }
+
+        public bool HavenbagCell { get; set; }
+
+        public bool Red { get; set; }
+
+        public bool Visible { get; set; }
+
+        public bool TopArrow { get; set; }
+
+        public bool BottomArrow { get; set; }
+
+        public bool RightArrow { get; set; }
+
+        public bool LeftArrow { get; set; }
 
         // Fields
         public int Floor;
-        public int LosMov;
+        public byte LosMov;
         public int MapChangeData;
         public int MoveZone;
         public int Speed;

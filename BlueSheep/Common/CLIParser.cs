@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BlueSheep.Common
 {
@@ -85,22 +86,17 @@ namespace BlueSheep.Common
         {
             CLIParser.CommandsHistory.Add(cmdLine);
             result = new List<string>();
-            List<string> split = cmdLine.Split(';').ToList();
+            List<string> split = cmdLine.Split(' ').ToList();
             string mainComand = split[0];
             split.RemoveAt(0);
-            Dictionary<string, string> passedCommands = new Dictionary<string, string>();
-            foreach(string s in split)
-            {
-                passedCommands.Add(s.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault(), 
-                    String.Join(" ", s.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Skip(1)));
-            }
+            string passedCommands = String.Join(" ", split);
             switch (mainComand)
             {
                 case "/help":
-                    if (passedCommands.Keys.Count() > 0)
-                        return Usage(passedCommands.Keys.ToList()[0]);
+                    if (split.Count > 0)
+                        return Usage(split[0]);
                     else
-                      return Usage("");
+                      return Usage();
                 case "/move":
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] { "-cell = 0", "-dir = null"});
@@ -284,9 +280,27 @@ namespace BlueSheep.Common
         /// Parse the command line arguments.
         /// </summary>
         /// <param name="args">The command line arguments.</param>
-        private void ParseArguments(Dictionary<string, string> passedValues)
+        private void ParseArguments(string commandLine)
         {
-            rawArguments = passedValues;
+            List<string> paramsToSplitInCL = requiredParameters.Keys.ToList();
+            paramsToSplitInCL.AddRange(optionalParameters.Keys.ToList());
+            paramsToSplitInCL = paramsToSplitInCL.Select(param => "(" + param + ")").ToList();
+            string regex = String.Join("|", paramsToSplitInCL);
+
+            string[] splitedParams = Regex.Split(commandLine, regex);
+            List<string> paramsList = splitedParams.Where(item => !String.IsNullOrEmpty(item))
+                .Select(item2 => item2.TrimStart())
+                .Select(item3 => item3.TrimEnd()).ToList();
+
+            Dictionary<string, string> passedCommands = new Dictionary<string, string>();
+            for(int i =0; i < paramsList.Count; i++) 
+            {
+                passedCommands.Add(paramsList[0], paramsList[1]);
+                paramsList.RemoveAt(0);
+                paramsList.RemoveAt(0);
+            }
+
+            rawArguments = passedCommands;
 
             missingRequiredParameters = new List<string>();
             missingValue = new List<string>();
@@ -477,7 +491,7 @@ namespace BlueSheep.Common
             switch (cmd)
             {
                 case "":                 
-                    ls.Add("/command;-arg1;-arg2 ... ;-argn Value;-switch1");
+                    ls.Add("/command -arg1 -arg2 ... -argn Value -switch1");
                     ls.Add("");
                     ls.Add("Below are the available commands. Type /help with the name of the command for a specific help.");
                     ls.Add("  - move");
@@ -493,44 +507,44 @@ namespace BlueSheep.Common
                     ls.Add("   - Display the help of the move command.");
                     return ls;
                 case "move":
-                    ls.Add("/move;[-cell <int>];[-dir <string>]");
+                    ls.Add("/move [-cell <int>] [-dir <string>]");
                     ls.Add("Move to a cell and/or a direction.");
                     ls.Add("OPTIONS:");
                     ls.Add("  - cell: move to the specified cell.");
                     ls.Add("  - dir : move to the specified direction (right, left, bottom or up).");
                     ls.Add("EXAMPLE:");
-                    ls.Add("1. > /move;-cell 150");
+                    ls.Add("1. > /move -cell 150");
                     ls.Add("   - Move to the cell 150.");
                     ls.Add("");
-                    ls.Add("2. > /move;-cell;150;-dir;right");
+                    ls.Add("2. > /move -cell 150 -dir right");
                     ls.Add("   - Move to the cell 150 and then move to the map at the right");
                     return ls;
                 case "cell":
-                    ls.Add("/cell;[-npc <int>];[-elem <int>];[-player <string>]");
+                    ls.Add("/cell [-npc <int>] [-elem <int>] [-player <string>]");
                     ls.Add("Get the cell of an element.");
                     ls.Add("OPTIONS:");
                     ls.Add("  - npc: Get the cell of the specified npc id.");
                     ls.Add("  - elem : Get the cell of the specified element id.");
                     ls.Add("  - player : Get the cell of the player name.");
                     ls.Add("EXAMPLE:");
-                    ls.Add("1. > /cell;-npc;10001");
+                    ls.Add("1. > /cell -npc 10001");
                     ls.Add("   - Get the cell of the npc which has the id 10001.");
                     ls.Add("");
-                    ls.Add("2. > /cell;-player;Mage");
+                    ls.Add("2. > /cell -player Mage");
                     ls.Add("   - Get the cell of the player named Mage.");
                     return ls;
                 case "say":
-                    ls.Add("/say;-c <char>;-m <string>;[-dest <string>]");
+                    ls.Add("/say -c <char> -m <string> [-dest <string>]");
                     ls.Add("Say something in the chat");
                     ls.Add("OPTIONS:");
                     ls.Add("  - c   : Canal where the message will be displayed (ex: s for general canal).");
                     ls.Add("  - m : Message that will be sent.");
                     ls.Add("  - dest    : The dest. player of the message. Only on private message (-canal w)");
                     ls.Add("EXAMPLE:");
-                    ls.Add("1. > /say;-c b;-m I/sell/some/things/pm/me");
+                    ls.Add("1. > /say -c b -m I/sell/some/things/pm/me");
                     ls.Add("   - Send the message \"I sell some things pm me \"in the in the business canal.");
                     ls.Add("");
-                    ls.Add("2. > /say;-c w;-m hi;-dest Mage");
+                    ls.Add("2. > /say -c w -m hi -dest Mage");
                     ls.Add("   - Send the private message \"hi\" to the player named Mage.");
                     return ls;
                 case "entities":
@@ -542,7 +556,7 @@ namespace BlueSheep.Common
                     ls.Add("1. > /entities");
                     ls.Add("   - Display informations about entities on the map.");
                     ls.Add("");
-                    ls.Add("2. > /entities;-v");
+                    ls.Add("2. > /entities -v");
                     ls.Add("   - Display detailed informations about entities on the map");
                     return ls;
                 case "mapid":
@@ -554,7 +568,7 @@ namespace BlueSheep.Common
                     ls.Add("Returns the current player's cellid.");
                     return ls;
                 case "path":
-                    ls.Add("/path;[-start];[-stop];[-load <string>];[-name <string>]");
+                    ls.Add("/path [-start] [-stop] [-load <string>] [-name <string>]");
                     ls.Add("Interface to manage path.");
                     ls.Add("OPTIONS:");
                     ls.Add("  - start   : Start the path.");
@@ -562,14 +576,14 @@ namespace BlueSheep.Common
                     ls.Add("  - load    : Load the path in the specified file.");
                     ls.Add("  - name    : [To use with load] Specify the loaded path's name. Default is Unknown");
                     ls.Add("EXAMPLE:");
-                    ls.Add("1. > /path;-load C:\\Users\\Mage\\path.txt;-name MyPath");
+                    ls.Add("1. > /path -load C:\\Users\\Mage\\path.txt -name MyPath");
                     ls.Add("   - Load the path \"path.txt\" located in Mage's folder, and shows it as \"MyPath\".");
                     ls.Add("");
-                    ls.Add("2. > /path;-start");
+                    ls.Add("2. > /path -start");
                     ls.Add("   - Start the current loaded path.");
                     return ls;
                 case "fight":
-                    ls.Add("/fight;[-launch];[-l];[-lock];[-me];[-v];[-t]");
+                    ls.Add("/fight [-launch] [-l] [-lock] [-me] [-v] [-t]");
                     ls.Add("Interface to manage fights.");
                     ls.Add("OPTIONS:");
                     ls.Add("  - launch  : Research for a fight on the map.");
@@ -579,19 +593,19 @@ namespace BlueSheep.Common
                     ls.Add("  - t   : Display the current turn number.");
                     ls.Add("  - lock   : Lock the fight.");
                     ls.Add("EXAMPLE:");
-                    ls.Add("1. > /fight;-me;-l;-v;-t");
+                    ls.Add("1. > /fight -me -l -v -t");
                     ls.Add("   - Display a verbose output with the informations about all fighters and display the current turn.");
                     ls.Add("");
-                    ls.Add("2. > /fight;-launch");
+                    ls.Add("2. > /fight -launch");
                     ls.Add("   - Research and launch a fight on the map.");
                     return ls;
                 case "gather":
-                    ls.Add("/gather;[-launch];[-stats]");
+                    ls.Add("/gather [-launch] [-stats]");
                     ls.Add("Interface to manage gather.");
                     ls.Add("OPTIONS:");
                     ls.Add("  - launch  : Perform gathering on the map.");
                     ls.Add("EXAMPLE:");
-                    ls.Add("1. > /gather;-launch");
+                    ls.Add("1. > /gather -launch");
                     ls.Add("   - Launch the gathering");
                     return ls;
             }

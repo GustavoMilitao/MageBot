@@ -97,7 +97,7 @@ namespace BlueSheep.Data.Pathfinding
             {
                 return false;
             }
-            return MapData.Data.Cells[int_1].Mov();
+            return MapData.Data.Cells[int_1].Mov;
         }
 
         private MovementPath method_3(SimpleCellInfo class13_0)

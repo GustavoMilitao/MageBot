@@ -259,14 +259,11 @@ namespace BlueSheep.Core.Map
         {
             Data = BlueSheep.Data.D2p.MapsManager.FromId(mapId);
             Data.SubAreaId = subAreaId;
-            Data = new BlueSheep.Data.D2p.Map();
-            Data.Id = mapId;
-            Data.SubAreaId = subAreaId;
             //TODO: Refactor Location
             DataClass subArea = GameData.GetDataObject(D2oFileEnum.SubAreas, subAreaId);
             string mapName = I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Areas, (int)subArea.Fields["areaId"]).Fields["nameId"]);
             string subAreaName = I18N.GetText((int)subArea.Fields["nameId"]);
-            //m_Account.ModifBar(5, 0, 0, "[" + X + ";" + Y + "]" + " " + mapName + " (" + subAreaName + ")");
+            m_Account.ModifBar(5, 0, 0, "[" + X + ";" + Y + "]" + " " + mapName + " (" + subAreaName + ")");
             m_Account.ModifBar(5, 0, 0,  mapName + " (" + subAreaName + ")");
         }
 

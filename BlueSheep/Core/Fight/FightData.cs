@@ -687,7 +687,7 @@ namespace BlueSheep.Core.Fight
         {
             if (m_Account.MapData.Data.IsWalkable(cellId))
             {
-                var selectedFighter = Fighters.FirstOrDefault((f) => f.CellId == cellId || m_Account.MapData.Data.Cells[cellId].NonWalkableDuringFight());
+                var selectedFighter = Fighters.FirstOrDefault((f) => f.CellId == cellId || m_Account.MapData.Data.Cells[cellId].NonWalkableDuringFight);
                 if (selectedFighter != null)
                     return false;
                 else
