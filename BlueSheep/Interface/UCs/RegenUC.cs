@@ -55,8 +55,12 @@ namespace BlueSheep.Interface.UCs
         {
             for (int i = 0; i < LVItems.Items.Count; i++)
             {
-                LVItems.Items[i].SubItems[1].Text = m_Account.Inventory.GetItemFromName(LVItems.Items[i].SubItems[0].Text).Quantity.ToString();
-                LVItems.Invalidate();
+                try
+                {
+                    LVItems.Items[i].SubItems[1].Text = m_Account.Inventory.GetItemFromName(LVItems.Items[i].SubItems[0].Text).Quantity.ToString();
+                    LVItems.Invalidate();
+                }
+                catch { }
             }
         }
         #endregion

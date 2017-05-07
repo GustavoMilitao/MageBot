@@ -54,7 +54,7 @@ namespace BlueSheep.Engine.Handlers.Context
             account.MapData.ParseLocation(msg.MapId, msg.SubAreaId);
             account.MapData.ParseStatedElements(msg.StatedElements.ToArray());
             account.MapData.ParseActors(msg.Actors.ToArray());
-            //account.MapData.ParseInteractiveElements(msg.InteractiveElements.ToArray());
+            account.MapData.ParseInteractiveElements(msg.InteractiveElements.ToArray());
             //TODO: Refactor Interactive and location elements
             account.Enable(true);
             account.MapData.DoAction();

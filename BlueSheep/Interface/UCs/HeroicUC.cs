@@ -233,336 +233,336 @@
 
         private void InitializeComponent()
         {
-            AllianceTxtBAgro = new System.Windows.Forms.TextBox();
-            addAllianceAgro = new BlueSheep.Interface.SadikButton();
-            sadikLabel2 = new BlueSheep.Interface.SadikLabel();
-            NUDLvlAgroMin = new System.Windows.Forms.NumericUpDown();
-            NUDLvlAgroMax = new System.Windows.Forms.NumericUpDown();
-            sadikCheckbox1 = new BlueSheep.Interface.SadikCheckbox();
-            LViewAgro = new System.Windows.Forms.ListView();
-            groupBox3 = new System.Windows.Forms.GroupBox();
-            addAllianceRun = new BlueSheep.Interface.SadikButton();
-            AllianceTxtBRun = new System.Windows.Forms.TextBox();
-            UsedItem = new BlueSheep.Interface.SadikCombo();
-            LViewRun = new System.Windows.Forms.ListView();
-            sadikLabel3 = new BlueSheep.Interface.SadikLabel();
-            sadikLabel4 = new BlueSheep.Interface.SadikLabel();
-            NUDLvlRunMin = new System.Windows.Forms.NumericUpDown();
-            NUDLvlRunMax = new System.Windows.Forms.NumericUpDown();
-            Disconnecting = new BlueSheep.Interface.SadikRadioButton();
-            UsingItem = new BlueSheep.Interface.SadikRadioButton();
-            sadikCheckbox2 = new BlueSheep.Interface.SadikCheckbox();
-            sadikLabel1 = new BlueSheep.Interface.SadikLabel();
-            groupBox2 = new System.Windows.Forms.GroupBox();
-            sadikTabControl1 = new BlueSheep.Interface.SadikTabControl();
-            tabPage1 = new System.Windows.Forms.TabPage();
-            tabPage2 = new System.Windows.Forms.TabPage();
-            ((System.ComponentModel.ISupportInitialize)(NUDLvlAgroMin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(NUDLvlAgroMax)).BeginInit();
-            groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(NUDLvlRunMin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(NUDLvlRunMax)).BeginInit();
-            groupBox2.SuspendLayout();
-            sadikTabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
-            tabPage2.SuspendLayout();
-            SuspendLayout();
+            this.AllianceTxtBAgro = new System.Windows.Forms.TextBox();
+            this.addAllianceAgro = new BlueSheep.Interface.SadikButton();
+            this.sadikLabel2 = new BlueSheep.Interface.SadikLabel();
+            this.NUDLvlAgroMin = new System.Windows.Forms.NumericUpDown();
+            this.NUDLvlAgroMax = new System.Windows.Forms.NumericUpDown();
+            this.sadikCheckbox1 = new BlueSheep.Interface.SadikCheckbox();
+            this.LViewAgro = new System.Windows.Forms.ListView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.addAllianceRun = new BlueSheep.Interface.SadikButton();
+            this.AllianceTxtBRun = new System.Windows.Forms.TextBox();
+            this.UsedItem = new BlueSheep.Interface.SadikCombo();
+            this.LViewRun = new System.Windows.Forms.ListView();
+            this.sadikLabel3 = new BlueSheep.Interface.SadikLabel();
+            this.sadikLabel4 = new BlueSheep.Interface.SadikLabel();
+            this.NUDLvlRunMin = new System.Windows.Forms.NumericUpDown();
+            this.NUDLvlRunMax = new System.Windows.Forms.NumericUpDown();
+            this.Disconnecting = new BlueSheep.Interface.SadikRadioButton();
+            this.UsingItem = new BlueSheep.Interface.SadikRadioButton();
+            this.sadikCheckbox2 = new BlueSheep.Interface.SadikCheckbox();
+            this.sadikLabel1 = new BlueSheep.Interface.SadikLabel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.sadikTabControl1 = new BlueSheep.Interface.SadikTabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDLvlAgroMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDLvlAgroMax)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDLvlRunMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDLvlRunMax)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.sadikTabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.SuspendLayout();
             // 
             // AllianceTxtBAgro
             // 
-            AllianceTxtBAgro.Location = new System.Drawing.Point(18, 68);
-            AllianceTxtBAgro.Name = "AllianceTxtBAgro";
-            AllianceTxtBAgro.Size = new System.Drawing.Size(286, 20);
-            AllianceTxtBAgro.TabIndex = 30;
+            this.AllianceTxtBAgro.Location = new System.Drawing.Point(18, 68);
+            this.AllianceTxtBAgro.Name = "AllianceTxtBAgro";
+            this.AllianceTxtBAgro.Size = new System.Drawing.Size(286, 20);
+            this.AllianceTxtBAgro.TabIndex = 30;
             // 
             // addAllianceAgro
             // 
-            addAllianceAgro.ButtonStyle = BlueSheep.Interface.SadikButton.Style.Blue;
-            addAllianceAgro.Cursor = System.Windows.Forms.Cursors.Hand;
-            addAllianceAgro.Font = new System.Drawing.Font("Verdana", 8F);
-            addAllianceAgro.Image = null;
-            addAllianceAgro.Location = new System.Drawing.Point(18, 94);
-            addAllianceAgro.Name = "addAllianceAgro";
-            addAllianceAgro.RoundedCorners = false;
-            addAllianceAgro.Size = new System.Drawing.Size(286, 22);
-            addAllianceAgro.TabIndex = 29;
-            addAllianceAgro.Text = "Ajouter alliance/guilde";
-            addAllianceAgro.Click += new System.EventHandler(addAllianceAgro_Click);
+            this.addAllianceAgro.ButtonStyle = BlueSheep.Interface.SadikButton.Style.Blue;
+            this.addAllianceAgro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addAllianceAgro.Font = new System.Drawing.Font("Verdana", 8F);
+            this.addAllianceAgro.Image = null;
+            this.addAllianceAgro.Location = new System.Drawing.Point(18, 94);
+            this.addAllianceAgro.Name = "addAllianceAgro";
+            this.addAllianceAgro.RoundedCorners = false;
+            this.addAllianceAgro.Size = new System.Drawing.Size(286, 22);
+            this.addAllianceAgro.TabIndex = 29;
+            this.addAllianceAgro.Text = "Ajouter alliance/guilde";
+            this.addAllianceAgro.Click += new System.EventHandler(this.addAllianceAgro_Click);
             // 
             // sadikLabel2
             // 
-            sadikLabel2.AutoSize = true;
-            sadikLabel2.Font = new System.Drawing.Font("Verdana", 8F);
-            sadikLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            sadikLabel2.Location = new System.Drawing.Point(228, 47);
-            sadikLabel2.Name = "sadikLabel2";
-            sadikLabel2.Size = new System.Drawing.Size(14, 13);
-            sadikLabel2.TabIndex = 20;
-            sadikLabel2.Text = "à";
+            this.sadikLabel2.AutoSize = true;
+            this.sadikLabel2.Font = new System.Drawing.Font("Verdana", 8F);
+            this.sadikLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
+            this.sadikLabel2.Location = new System.Drawing.Point(228, 47);
+            this.sadikLabel2.Name = "sadikLabel2";
+            this.sadikLabel2.Size = new System.Drawing.Size(14, 13);
+            this.sadikLabel2.TabIndex = 20;
+            this.sadikLabel2.Text = "à";
             // 
             // NUDLvlAgroMin
             // 
-            NUDLvlAgroMin.Location = new System.Drawing.Point(171, 45);
-            NUDLvlAgroMin.Maximum = new decimal(new int[] {
+            this.NUDLvlAgroMin.Location = new System.Drawing.Point(171, 45);
+            this.NUDLvlAgroMin.Maximum = new decimal(new int[] {
             200,
             0,
             0,
             0});
-            NUDLvlAgroMin.Name = "NUDLvlAgroMin";
-            NUDLvlAgroMin.Size = new System.Drawing.Size(51, 20);
-            NUDLvlAgroMin.TabIndex = 18;
+            this.NUDLvlAgroMin.Name = "NUDLvlAgroMin";
+            this.NUDLvlAgroMin.Size = new System.Drawing.Size(51, 20);
+            this.NUDLvlAgroMin.TabIndex = 18;
             // 
             // NUDLvlAgroMax
             // 
-            NUDLvlAgroMax.Location = new System.Drawing.Point(248, 45);
-            NUDLvlAgroMax.Maximum = new decimal(new int[] {
+            this.NUDLvlAgroMax.Location = new System.Drawing.Point(248, 45);
+            this.NUDLvlAgroMax.Maximum = new decimal(new int[] {
             200,
             0,
             0,
             0});
-            NUDLvlAgroMax.Name = "NUDLvlAgroMax";
-            NUDLvlAgroMax.Size = new System.Drawing.Size(44, 20);
-            NUDLvlAgroMax.TabIndex = 17;
+            this.NUDLvlAgroMax.Name = "NUDLvlAgroMax";
+            this.NUDLvlAgroMax.Size = new System.Drawing.Size(44, 20);
+            this.NUDLvlAgroMax.TabIndex = 17;
             // 
             // sadikCheckbox1
             // 
-            sadikCheckbox1.Checked = false;
-            sadikCheckbox1.Font = new System.Drawing.Font("Verdana", 8F);
-            sadikCheckbox1.Location = new System.Drawing.Point(18, 19);
-            sadikCheckbox1.Name = "sadikCheckbox1";
-            sadikCheckbox1.Size = new System.Drawing.Size(210, 20);
-            sadikCheckbox1.TabIndex = 16;
-            sadikCheckbox1.Text = "Activer";
+            this.sadikCheckbox1.Checked = false;
+            this.sadikCheckbox1.Font = new System.Drawing.Font("Verdana", 8F);
+            this.sadikCheckbox1.Location = new System.Drawing.Point(18, 19);
+            this.sadikCheckbox1.Name = "sadikCheckbox1";
+            this.sadikCheckbox1.Size = new System.Drawing.Size(210, 20);
+            this.sadikCheckbox1.TabIndex = 16;
+            this.sadikCheckbox1.Text = "Activer";
             // 
             // LViewAgro
             // 
-            LViewAgro.Location = new System.Drawing.Point(18, 122);
-            LViewAgro.Name = "LViewAgro";
-            LViewAgro.Size = new System.Drawing.Size(286, 93);
-            LViewAgro.TabIndex = 15;
-            LViewAgro.UseCompatibleStateImageBehavior = false;
+            this.LViewAgro.Location = new System.Drawing.Point(18, 122);
+            this.LViewAgro.Name = "LViewAgro";
+            this.LViewAgro.Size = new System.Drawing.Size(286, 93);
+            this.LViewAgro.TabIndex = 15;
+            this.LViewAgro.UseCompatibleStateImageBehavior = false;
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(addAllianceRun);
-            groupBox3.Controls.Add(AllianceTxtBRun);
-            groupBox3.Controls.Add(UsedItem);
-            groupBox3.Controls.Add(LViewRun);
-            groupBox3.Controls.Add(sadikLabel3);
-            groupBox3.Controls.Add(sadikLabel4);
-            groupBox3.Controls.Add(NUDLvlRunMin);
-            groupBox3.Controls.Add(NUDLvlRunMax);
-            groupBox3.Controls.Add(Disconnecting);
-            groupBox3.Controls.Add(UsingItem);
-            groupBox3.Controls.Add(sadikCheckbox2);
-            groupBox3.Location = new System.Drawing.Point(6, 6);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new System.Drawing.Size(374, 233);
-            groupBox3.TabIndex = 18;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Fuite";
+            this.groupBox3.Controls.Add(this.addAllianceRun);
+            this.groupBox3.Controls.Add(this.AllianceTxtBRun);
+            this.groupBox3.Controls.Add(this.UsedItem);
+            this.groupBox3.Controls.Add(this.LViewRun);
+            this.groupBox3.Controls.Add(this.sadikLabel3);
+            this.groupBox3.Controls.Add(this.sadikLabel4);
+            this.groupBox3.Controls.Add(this.NUDLvlRunMin);
+            this.groupBox3.Controls.Add(this.NUDLvlRunMax);
+            this.groupBox3.Controls.Add(this.Disconnecting);
+            this.groupBox3.Controls.Add(this.UsingItem);
+            this.groupBox3.Controls.Add(this.sadikCheckbox2);
+            this.groupBox3.Location = new System.Drawing.Point(6, 6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(374, 233);
+            this.groupBox3.TabIndex = 18;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Fuite";
             // 
             // addAllianceRun
             // 
-            addAllianceRun.ButtonStyle = BlueSheep.Interface.SadikButton.Style.Blue;
-            addAllianceRun.Cursor = System.Windows.Forms.Cursors.Hand;
-            addAllianceRun.Font = new System.Drawing.Font("Verdana", 8F);
-            addAllianceRun.Image = null;
-            addAllianceRun.Location = new System.Drawing.Point(215, 132);
-            addAllianceRun.Name = "addAllianceRun";
-            addAllianceRun.RoundedCorners = false;
-            addAllianceRun.Size = new System.Drawing.Size(148, 26);
-            addAllianceRun.TabIndex = 28;
-            addAllianceRun.Text = "Ajouter alliance/guilde";
-            addAllianceRun.Click += new System.EventHandler(addAllianceRun_Click);
+            this.addAllianceRun.ButtonStyle = BlueSheep.Interface.SadikButton.Style.Blue;
+            this.addAllianceRun.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addAllianceRun.Font = new System.Drawing.Font("Verdana", 8F);
+            this.addAllianceRun.Image = null;
+            this.addAllianceRun.Location = new System.Drawing.Point(215, 132);
+            this.addAllianceRun.Name = "addAllianceRun";
+            this.addAllianceRun.RoundedCorners = false;
+            this.addAllianceRun.Size = new System.Drawing.Size(148, 26);
+            this.addAllianceRun.TabIndex = 28;
+            this.addAllianceRun.Text = "Ajouter alliance/guilde";
+            this.addAllianceRun.Click += new System.EventHandler(this.addAllianceRun_Click);
             // 
             // AllianceTxtBRun
             // 
-            AllianceTxtBRun.Location = new System.Drawing.Point(12, 132);
-            AllianceTxtBRun.Name = "AllianceTxtBRun";
-            AllianceTxtBRun.Size = new System.Drawing.Size(197, 20);
-            AllianceTxtBRun.TabIndex = 27;
+            this.AllianceTxtBRun.Location = new System.Drawing.Point(12, 132);
+            this.AllianceTxtBRun.Name = "AllianceTxtBRun";
+            this.AllianceTxtBRun.Size = new System.Drawing.Size(197, 20);
+            this.AllianceTxtBRun.TabIndex = 27;
             // 
             // UsedItem
             // 
-            UsedItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            UsedItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            UsedItem.Font = new System.Drawing.Font("Verdana", 8F);
-            UsedItem.FormattingEnabled = true;
-            UsedItem.ItemHeight = 20;
-            UsedItem.Items.AddRange(new object[] {
+            this.UsedItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.UsedItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.UsedItem.Font = new System.Drawing.Font("Verdana", 8F);
+            this.UsedItem.FormattingEnabled = true;
+            this.UsedItem.ItemHeight = 20;
+            this.UsedItem.Items.AddRange(new object[] {
             "Potion de cité : Bonta",
             "Potion de cité : Brâkmar",
             "Potion de rappel"});
-            UsedItem.Location = new System.Drawing.Point(155, 94);
-            UsedItem.Name = "UsedItem";
-            UsedItem.Size = new System.Drawing.Size(208, 26);
-            UsedItem.TabIndex = 26;
+            this.UsedItem.Location = new System.Drawing.Point(155, 94);
+            this.UsedItem.Name = "UsedItem";
+            this.UsedItem.Size = new System.Drawing.Size(208, 26);
+            this.UsedItem.TabIndex = 26;
             // 
             // LViewRun
             // 
-            LViewRun.Location = new System.Drawing.Point(9, 164);
-            LViewRun.Name = "LViewRun";
-            LViewRun.Size = new System.Drawing.Size(359, 63);
-            LViewRun.TabIndex = 25;
-            LViewRun.UseCompatibleStateImageBehavior = false;
+            this.LViewRun.Location = new System.Drawing.Point(9, 164);
+            this.LViewRun.Name = "LViewRun";
+            this.LViewRun.Size = new System.Drawing.Size(359, 63);
+            this.LViewRun.TabIndex = 25;
+            this.LViewRun.UseCompatibleStateImageBehavior = false;
             // 
             // sadikLabel3
             // 
-            sadikLabel3.AutoSize = true;
-            sadikLabel3.Font = new System.Drawing.Font("Verdana", 8F);
-            sadikLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            sadikLabel3.Location = new System.Drawing.Point(212, 47);
-            sadikLabel3.Name = "sadikLabel3";
-            sadikLabel3.Size = new System.Drawing.Size(14, 13);
-            sadikLabel3.TabIndex = 24;
-            sadikLabel3.Text = "à";
+            this.sadikLabel3.AutoSize = true;
+            this.sadikLabel3.Font = new System.Drawing.Font("Verdana", 8F);
+            this.sadikLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
+            this.sadikLabel3.Location = new System.Drawing.Point(212, 47);
+            this.sadikLabel3.Name = "sadikLabel3";
+            this.sadikLabel3.Size = new System.Drawing.Size(14, 13);
+            this.sadikLabel3.TabIndex = 24;
+            this.sadikLabel3.Text = "à";
             // 
             // sadikLabel4
             // 
-            sadikLabel4.AutoSize = true;
-            sadikLabel4.Font = new System.Drawing.Font("Verdana", 8F);
-            sadikLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            sadikLabel4.Location = new System.Drawing.Point(15, 47);
-            sadikLabel4.Name = "sadikLabel4";
-            sadikLabel4.Size = new System.Drawing.Size(140, 13);
-            sadikLabel4.TabIndex = 23;
-            sadikLabel4.Text = "Personnages de niveau";
+            this.sadikLabel4.AutoSize = true;
+            this.sadikLabel4.Font = new System.Drawing.Font("Verdana", 8F);
+            this.sadikLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
+            this.sadikLabel4.Location = new System.Drawing.Point(15, 47);
+            this.sadikLabel4.Name = "sadikLabel4";
+            this.sadikLabel4.Size = new System.Drawing.Size(140, 13);
+            this.sadikLabel4.TabIndex = 23;
+            this.sadikLabel4.Text = "Personnages de niveau";
             // 
             // NUDLvlRunMin
             // 
-            NUDLvlRunMin.Location = new System.Drawing.Point(161, 45);
-            NUDLvlRunMin.Maximum = new decimal(new int[] {
+            this.NUDLvlRunMin.Location = new System.Drawing.Point(161, 45);
+            this.NUDLvlRunMin.Maximum = new decimal(new int[] {
             200,
             0,
             0,
             0});
-            NUDLvlRunMin.Name = "NUDLvlRunMin";
-            NUDLvlRunMin.Size = new System.Drawing.Size(45, 20);
-            NUDLvlRunMin.TabIndex = 22;
+            this.NUDLvlRunMin.Name = "NUDLvlRunMin";
+            this.NUDLvlRunMin.Size = new System.Drawing.Size(45, 20);
+            this.NUDLvlRunMin.TabIndex = 22;
             // 
             // NUDLvlRunMax
             // 
-            NUDLvlRunMax.Location = new System.Drawing.Point(232, 45);
-            NUDLvlRunMax.Maximum = new decimal(new int[] {
+            this.NUDLvlRunMax.Location = new System.Drawing.Point(232, 45);
+            this.NUDLvlRunMax.Maximum = new decimal(new int[] {
             200,
             0,
             0,
             0});
-            NUDLvlRunMax.Name = "NUDLvlRunMax";
-            NUDLvlRunMax.Size = new System.Drawing.Size(41, 20);
-            NUDLvlRunMax.TabIndex = 21;
+            this.NUDLvlRunMax.Name = "NUDLvlRunMax";
+            this.NUDLvlRunMax.Size = new System.Drawing.Size(41, 20);
+            this.NUDLvlRunMax.TabIndex = 21;
             // 
             // Disconnecting
             // 
-            Disconnecting.Checked = false;
-            Disconnecting.Font = new System.Drawing.Font("Verdana", 8F);
-            Disconnecting.Location = new System.Drawing.Point(9, 74);
-            Disconnecting.Name = "Disconnecting";
-            Disconnecting.Size = new System.Drawing.Size(140, 20);
-            Disconnecting.TabIndex = 2;
-            Disconnecting.Text = "Déconnecter";
+            this.Disconnecting.Checked = false;
+            this.Disconnecting.Font = new System.Drawing.Font("Verdana", 8F);
+            this.Disconnecting.Location = new System.Drawing.Point(9, 74);
+            this.Disconnecting.Name = "Disconnecting";
+            this.Disconnecting.Size = new System.Drawing.Size(140, 20);
+            this.Disconnecting.TabIndex = 2;
+            this.Disconnecting.Text = "Déconnecter";
             // 
             // UsingItem
             // 
-            UsingItem.Checked = false;
-            UsingItem.Font = new System.Drawing.Font("Verdana", 8F);
-            UsingItem.Location = new System.Drawing.Point(9, 100);
-            UsingItem.Name = "UsingItem";
-            UsingItem.Size = new System.Drawing.Size(140, 20);
-            UsingItem.TabIndex = 1;
-            UsingItem.Text = "Prendre une potion";
+            this.UsingItem.Checked = false;
+            this.UsingItem.Font = new System.Drawing.Font("Verdana", 8F);
+            this.UsingItem.Location = new System.Drawing.Point(9, 100);
+            this.UsingItem.Name = "UsingItem";
+            this.UsingItem.Size = new System.Drawing.Size(140, 20);
+            this.UsingItem.TabIndex = 1;
+            this.UsingItem.Text = "Prendre une potion";
             // 
             // sadikCheckbox2
             // 
-            sadikCheckbox2.Checked = false;
-            sadikCheckbox2.Font = new System.Drawing.Font("Verdana", 8F);
-            sadikCheckbox2.Location = new System.Drawing.Point(18, 19);
-            sadikCheckbox2.Name = "sadikCheckbox2";
-            sadikCheckbox2.Size = new System.Drawing.Size(140, 20);
-            sadikCheckbox2.TabIndex = 0;
-            sadikCheckbox2.Text = "Activer";
+            this.sadikCheckbox2.Checked = false;
+            this.sadikCheckbox2.Font = new System.Drawing.Font("Verdana", 8F);
+            this.sadikCheckbox2.Location = new System.Drawing.Point(18, 19);
+            this.sadikCheckbox2.Name = "sadikCheckbox2";
+            this.sadikCheckbox2.Size = new System.Drawing.Size(140, 20);
+            this.sadikCheckbox2.TabIndex = 0;
+            this.sadikCheckbox2.Text = "Activer";
             // 
             // sadikLabel1
             // 
-            sadikLabel1.AutoSize = true;
-            sadikLabel1.Font = new System.Drawing.Font("Verdana", 8F);
-            sadikLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            sadikLabel1.Location = new System.Drawing.Point(15, 47);
-            sadikLabel1.Name = "sadikLabel1";
-            sadikLabel1.Size = new System.Drawing.Size(140, 13);
-            sadikLabel1.TabIndex = 19;
-            sadikLabel1.Text = "Personnages de niveau";
+            this.sadikLabel1.AutoSize = true;
+            this.sadikLabel1.Font = new System.Drawing.Font("Verdana", 8F);
+            this.sadikLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
+            this.sadikLabel1.Location = new System.Drawing.Point(15, 47);
+            this.sadikLabel1.Name = "sadikLabel1";
+            this.sadikLabel1.Size = new System.Drawing.Size(140, 13);
+            this.sadikLabel1.TabIndex = 19;
+            this.sadikLabel1.Text = "Personnages de niveau";
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(AllianceTxtBAgro);
-            groupBox2.Controls.Add(addAllianceAgro);
-            groupBox2.Controls.Add(sadikLabel2);
-            groupBox2.Controls.Add(sadikLabel1);
-            groupBox2.Controls.Add(NUDLvlAgroMin);
-            groupBox2.Controls.Add(NUDLvlAgroMax);
-            groupBox2.Controls.Add(sadikCheckbox1);
-            groupBox2.Controls.Add(LViewAgro);
-            groupBox2.Location = new System.Drawing.Point(29, 18);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(325, 221);
-            groupBox2.TabIndex = 17;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Agression";
+            this.groupBox2.Controls.Add(this.AllianceTxtBAgro);
+            this.groupBox2.Controls.Add(this.addAllianceAgro);
+            this.groupBox2.Controls.Add(this.sadikLabel2);
+            this.groupBox2.Controls.Add(this.sadikLabel1);
+            this.groupBox2.Controls.Add(this.NUDLvlAgroMin);
+            this.groupBox2.Controls.Add(this.NUDLvlAgroMax);
+            this.groupBox2.Controls.Add(this.sadikCheckbox1);
+            this.groupBox2.Controls.Add(this.LViewAgro);
+            this.groupBox2.Location = new System.Drawing.Point(29, 18);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(325, 221);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Agression";
             // 
             // sadikTabControl1
             // 
-            sadikTabControl1.Controls.Add(tabPage1);
-            sadikTabControl1.Controls.Add(tabPage2);
-            sadikTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            sadikTabControl1.Font = new System.Drawing.Font("Verdana", 8F);
-            sadikTabControl1.ItemSize = new System.Drawing.Size(0, 30);
-            sadikTabControl1.Location = new System.Drawing.Point(0, 0);
-            sadikTabControl1.Name = "sadikTabControl1";
-            sadikTabControl1.SelectedIndex = 0;
-            sadikTabControl1.Size = new System.Drawing.Size(410, 283);
-            sadikTabControl1.TabIndex = 19;
+            this.sadikTabControl1.Controls.Add(this.tabPage1);
+            this.sadikTabControl1.Controls.Add(this.tabPage2);
+            this.sadikTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sadikTabControl1.Font = new System.Drawing.Font("Verdana", 8F);
+            this.sadikTabControl1.ItemSize = new System.Drawing.Size(0, 30);
+            this.sadikTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.sadikTabControl1.Name = "sadikTabControl1";
+            this.sadikTabControl1.SelectedIndex = 0;
+            this.sadikTabControl1.Size = new System.Drawing.Size(410, 283);
+            this.sadikTabControl1.TabIndex = 19;
             // 
             // tabPage1
             // 
-            tabPage1.BackColor = System.Drawing.Color.White;
-            tabPage1.Controls.Add(groupBox2);
-            tabPage1.Location = new System.Drawing.Point(4, 34);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            tabPage1.Size = new System.Drawing.Size(402, 245);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Aggression";
+            this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(402, 245);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Aggression";
             // 
             // tabPage2
             // 
-            tabPage2.BackColor = System.Drawing.Color.White;
-            tabPage2.Controls.Add(groupBox3);
-            tabPage2.Location = new System.Drawing.Point(4, 34);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            tabPage2.Size = new System.Drawing.Size(402, 245);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Fuite";
+            this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.groupBox3);
+            this.tabPage2.Location = new System.Drawing.Point(4, 34);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(402, 245);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Fuite";
             // 
             // HeroicUC
             // 
-            Controls.Add(sadikTabControl1);
-            Name = "HeroicUC";
-            Size = new System.Drawing.Size(410, 283);
-            ((System.ComponentModel.ISupportInitialize)(NUDLvlAgroMin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(NUDLvlAgroMax)).EndInit();
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(NUDLvlRunMin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(NUDLvlRunMax)).EndInit();
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
-            sadikTabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage2.ResumeLayout(false);
-            ResumeLayout(false);
+            this.Controls.Add(this.sadikTabControl1);
+            this.Name = "HeroicUC";
+            this.Size = new System.Drawing.Size(410, 283);
+            ((System.ComponentModel.ISupportInitialize)(this.NUDLvlAgroMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDLvlAgroMax)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDLvlRunMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDLvlRunMax)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.sadikTabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.ResumeLayout(false);
 
         }
 

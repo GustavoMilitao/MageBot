@@ -19,7 +19,7 @@ namespace BlueSheep.Data.D2p
 
         internal void Init(BigEndianReader reader)
         {
-            reader.ReadByte();
+            byte b = reader.ReadByte();
             MapVersion = reader.ReadByte();
             Id = (int)reader.ReadUInt();
             if (MapVersion >= 7)
@@ -93,31 +93,32 @@ namespace BlueSheep.Data.D2p
             LayersCount = reader.ReadByte();
             int layersCount = LayersCount;
             int k = 1;
-            while (k <= layersCount)
-            {
-                Layer layer = new Layer();
-                layer.Init(reader, MapVersion);
-                Layers.Add(layer);
-                k += 1;
-            }
-            int cellsCount = CellsCount;
-            int m = 1;
-            uint oldMvtSys = 0;
-            while (m <= cellsCount)
-            {
-                CellData data = new CellData();
-                data.Init(reader, MapVersion);
-                if (oldMvtSys == 0)
-                {
-                    oldMvtSys = (uint)data.MoveZone;
-                }
-                if (data.MoveZone != oldMvtSys)
-                {
-                    IsUsingNewMovementSystem = true;
-                }
-                Cells.Add(data);
-                m += 1;
-            }
+            //while (k <= layersCount)
+            //{
+            //    Layer layer = new Layer();
+            //    layer.Init(reader, MapVersion);
+            //    Layers.Add(layer);
+            //    k += 1;
+            //}
+            //int cellsCount = CellsCount;
+            //int m = 1;
+            //uint oldMvtSys = 0;
+            //while (m <= cellsCount)
+            //{
+            //    CellData data = new CellData();
+            //    data.Init(reader, MapVersion);
+            //    if (oldMvtSys == 0)
+            //    {
+            //        oldMvtSys = (uint)data.MoveZone;
+            //    }
+            //    if (data.MoveZone != oldMvtSys)
+            //    {
+            //        IsUsingNewMovementSystem = true;
+            //    }
+            //    Cells.Add(data);
+            //    m += 1;
+            //}
+            // TODO: Refactor .D2P Layer and Cell Reading
         }
 
         // Fields

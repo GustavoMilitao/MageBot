@@ -499,7 +499,7 @@ namespace BlueSheep.Common
                     ls.Add("  - cell: move to the specified cell.");
                     ls.Add("  - dir : move to the specified direction (right, left, bottom or up).");
                     ls.Add("EXAMPLE:");
-                    ls.Add("1. > /move;-cell;150");
+                    ls.Add("1. > /move;-cell 150");
                     ls.Add("   - Move to the cell 150.");
                     ls.Add("");
                     ls.Add("2. > /move;-cell;150;-dir;right");

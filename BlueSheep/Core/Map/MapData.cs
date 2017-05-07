@@ -10,6 +10,7 @@ using BlueSheep.Common.Data;
 using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Common.Types;
 using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
+using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay;
 
 namespace BlueSheep.Core.Map
 {
@@ -48,6 +49,8 @@ namespace BlueSheep.Core.Map
         /// List containing all the stated elements on the map.
         /// </summary>
         public List<Elements.StatedElement> StatedElements = new List<Elements.StatedElement>();
+
+        public List<Common.Protocol.Types.Game.Interactive.InteractiveElement> InterElements { get; set; }
 
         public int LastMapId;
         #endregion
@@ -173,10 +176,7 @@ namespace BlueSheep.Core.Map
         /// </summary>
         public void ParseStatedElements(BlueSheep.Common.Protocol.Types.Game.Interactive.StatedElement[] statedElements)
         {
-            foreach (var statedElementDofus in statedElements)
-            {
-                 StatedElements.Add(new BlueSheep.Core.Map.Elements.StatedElement((uint)statedElementDofus.ElementCellId, statedElementDofus.ElementId, (uint)statedElementDofus.ElementState));
-            }
+            StatedElements = statedElements.Select(elem => new StatedElement(elem.ElementCellId, elem.ElementId, elem.ElementState)).ToList();
         }
 
         /// <summary>
@@ -256,9 +256,12 @@ namespace BlueSheep.Core.Map
         /// Actualize and display the new location.
         /// </summary>
         public void ParseLocation(int mapId, int subAreaId)
-        {         
-            //Data = BlueSheep.Data.D2p.MapsManager.FromId(mapId);
-            //Data.SubAreaId = subAreaId;
+        {
+            Data = BlueSheep.Data.D2p.MapsManager.FromId(mapId);
+            Data.SubAreaId = subAreaId;
+            Data = new BlueSheep.Data.D2p.Map();
+            Data.Id = mapId;
+            Data.SubAreaId = subAreaId;
             //TODO: Refactor Location
             DataClass subArea = GameData.GetDataObject(D2oFileEnum.SubAreas, subAreaId);
             string mapName = I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Areas, (int)subArea.Fields["areaId"]).Fields["nameId"]);

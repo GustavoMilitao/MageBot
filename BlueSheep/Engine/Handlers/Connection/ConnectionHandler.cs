@@ -1,4 +1,5 @@
-﻿using BlueSheep.Common.Data.D2o;
+﻿using System.Linq;
+using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages.Connection;
 using BlueSheep.Common.Protocol.Messages.Game.Approach;
@@ -15,6 +16,7 @@ using DofusBot.Enums;
 using RSA;
 using System;
 using System.Collections.Generic;
+using BlueSheep.Util.Enums.EnumHelper;
 
 namespace BlueSheep.Engine.Handlers.Connection
 {
@@ -36,7 +38,7 @@ namespace BlueSheep.Engine.Handlers.Connection
                 account.AccountName,
                 account.AccountPassword,
                 helloConnectMessage.salt);
-                IdentificationMessage msg = new IdentificationMessage(GameConstants.AutoConnect, GameConstants.UseCertificate, GameConstants.UseLoginToken, new Common.Protocol.Types.VersionExtended(GameConstants.Major, GameConstants.Minor, GameConstants.Release, GameConstants.Revision, GameConstants.Patch, GameConstants.BuildType, GameConstants.Install, GameConstants.Technology), GameConstants.Lang, credentials, GameConstants.ServerID, GameConstants.SessionOptionalSalt, new List<ushort>().ToArray() );
+                IdentificationMessage msg = new IdentificationMessage(GameConstants.AutoConnect, GameConstants.UseCertificate, GameConstants.UseLoginToken, new Common.Protocol.Types.VersionExtended(GameConstants.Major, GameConstants.Minor, GameConstants.Release, GameConstants.Revision, GameConstants.Patch, GameConstants.BuildType, GameConstants.Install, GameConstants.Technology), GameConstants.Lang, credentials, GameConstants.ServerID, GameConstants.SessionOptionalSalt, new List<ushort>().ToArray());
                 account.SocketManager.Send(msg);
             }
             account.Log(new ConnectionTextInformation("Identification en cours."), 0);
@@ -130,13 +132,16 @@ namespace BlueSheep.Engine.Handlers.Connection
         [MessageHandler(typeof(ServersListMessage))]
         public static void ServerListMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
         {
-            //ServersListMessage msg = new ServersListMessage();
-            //using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            //{
-            //    msg.Deserialize(reader);
-            //}
+            ServersListMessage msg = new ServersListMessage();
+            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            {
+                msg.Deserialize(reader);
+            }
 
-            //account.Log(new ConnectionTextInformation("< --- Available Servers : --- >"),0);
+            account.Log(new ConnectionTextInformation("< --- Probably, your server is under maintenance --- >"), 0);
+            msg.Servers.ForEach(server => account.Log(new ConnectionTextInformation("< --- Server : " +
+                BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, server.ObjectID).Fields["nameId"])
+                         + " Status : " + ((ServerStatusEnum)server.Status).Description() + " --- >"), 0));
 
             //foreach (GameServerInformations gsi in msg.servers)
             //{
