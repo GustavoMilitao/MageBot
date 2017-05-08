@@ -295,6 +295,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 account.FightData.UpdateFighterCell((ulong)msg.ActorId, clientMovement.CellEnd.CellId);
             }
+            account.ActualizeMap();
         }
 
         [MessageHandler(typeof(GameFightNewRoundMessage))]

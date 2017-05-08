@@ -319,6 +319,7 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
+            msg.Parameters.ForEach(item => account.Log(new DofAlertTextInformation(item), 0));
             // account.SocketManager.Disconnect("Alerte au modo ! Alerte au modo !");
         }
 

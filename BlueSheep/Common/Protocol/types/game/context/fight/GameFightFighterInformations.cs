@@ -129,6 +129,9 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
+            m_teamId = reader.ReadByte();
+            m_wave = reader.ReadByte();
+            m_alive = reader.ReadBoolean();
             m_stats = ProtocolTypeManager.GetInstance<GameFightMinimalStats>(reader.ReadUShort());
             m_stats.Deserialize(reader);
             int previousPositionsCount = reader.ReadUShort();
@@ -138,9 +141,6 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
             {
                 m_previousPositions.Add(reader.ReadVarUhShort());
             }
-            m_teamId = reader.ReadByte();
-            m_wave = reader.ReadByte();
-            m_alive = reader.ReadBoolean();
         }
     }
 }

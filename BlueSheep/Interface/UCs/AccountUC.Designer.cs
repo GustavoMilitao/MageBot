@@ -150,6 +150,7 @@ namespace BlueSheep.Interface
             this.metroTabPage9 = new MetroFramework.Controls.MetroTabPage();
             this.MapView = new System.Windows.Forms.ListView();
             this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ContextName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CellId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage2 = new MetroFramework.Controls.MetroTabPage();
@@ -1586,6 +1587,7 @@ namespace BlueSheep.Interface
             // 
             this.MapView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Id,
+            this.ContextName,
             this.CellId,
             this.Type});
             this.MapView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1600,6 +1602,11 @@ namespace BlueSheep.Interface
             // 
             this.Id.Text = "Id";
             this.Id.Width = 86;
+            //
+            // name
+            //
+            this.ContextName.Text = Strings.Name;
+            this.ContextName.Width = 86;
             // 
             // CellId
             // 
@@ -1949,6 +1956,7 @@ namespace BlueSheep.Interface
         private MetroFramework.Controls.MetroTabPage metroTabPage9;
         private System.Windows.Forms.ListView MapView;
         private System.Windows.Forms.ColumnHeader Id;
+        private System.Windows.Forms.ColumnHeader ContextName;
         private System.Windows.Forms.ColumnHeader CellId;
         private System.Windows.Forms.ColumnHeader Type;
         private MetroFramework.Controls.MetroTabPage tabPage8;

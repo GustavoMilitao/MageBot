@@ -74,9 +74,9 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
+            m_name = reader.ReadUTF();
             m_status = new PlayerStatus();
             m_status.Deserialize(reader);
-            m_name = reader.ReadUTF();
         }
     }
 }

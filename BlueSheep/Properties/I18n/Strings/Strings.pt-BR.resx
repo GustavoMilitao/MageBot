@@ -202,7 +202,7 @@
     <value>Última id de célula do Mapa do Jogo</value>
   </data>
   <data name="PositionInQueue" xml:space="preserve">
-    <value>Nova id de célula do Mapa do Jogo</value>
+    <value>Posição na fila</value>
   </data>
   <data name="DisconnectedFromTheServer" xml:space="preserve">
     <value>Enviar pronto</value>

@@ -605,26 +605,26 @@ namespace BlueSheep.Interface
             foreach (BlueSheep.Core.Map.Elements.InteractiveElement e in MapData.InteractiveElements.Keys)
             {
                 BlueSheep.Core.Map.Elements.StatedElement element = MapData.StatedElements.Find(s => s.Id == e.Id);
-                string type = "Inconnu (" + e.TypeId + ")";
+                string type = Strings.Unknown + " (" + e.TypeId + ")";
                 switch (e.TypeId)
                 {
                     case 16:
-                        type = type.Replace("Inconnu", "Zaap");
+                        type = type.Replace(Strings.Unknown, "Zaap");
                         break;
                     case 106:
-                        type = type.Replace("Inconnu", "Zaapi");
+                        type = type.Replace(Strings.Unknown, "Zaapi");
                         break;
                     case 105:
-                        type = type.Replace("Inconnu", "Poubelle");
+                        type = type.Replace(Strings.Unknown, "Poubelle");
                         break;
                     case 120:
-                        type = type.Replace("Inconnu", "Enclos");
+                        type = type.Replace(Strings.Unknown, "Enclos");
                         break;
                     case -1:
-                        type = type.Replace("Inconnu", "Porte/Escalier ?");
+                        type = type.Replace(Strings.Unknown, "Porte/Escalier ?");
                         break;
                     case 119:
-                        type = type.Replace("Inconnu", "Livre d'artisans");
+                        type = type.Replace(Strings.Unknown, "Livre d'artisans");
                         break;
                 }
                 string cellId = "?";
@@ -647,7 +647,11 @@ namespace BlueSheep.Interface
             //}
             foreach (GameRolePlayNpcInformations n in MapData.Npcs)
             {
-                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), "?", "Pnj" }), MapView);
+                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), I18N.GetText((int)n.ContextualId),"?", "NPC" }), MapView);
+            }
+            foreach(GameRolePlayCharacterInformations c in MapData.Players)
+            {
+                AddItem(new ListViewItem(new string[] { Convert.ToString("[CID]:"+c.ContextualId+"[ACCID]:"+c.AccountId), c.Name ,Convert.ToString(c.Disposition.CellId), "Player" }), MapView);
             }
         }
 
@@ -870,7 +874,7 @@ namespace BlueSheep.Interface
 
         public void TryReconnect(int secondes)
         {
-            Log(new ConnectionTextInformation(Strings.AutomaticReconnectionIn + " " + secondes + Strings.Seconds + "."), 0);
+            Log(new ConnectionTextInformation(Strings.AutomaticReconnectionIn + " " + secondes + " " + Strings.Seconds + "."), 0);
             SocketManager.Disconnect("Try Reconnect.");
             //TODO : Make it an ENUM
             m_TimerConnectionThread = new Timer(TimerConnectionThreadFinished, null, (int)TimeSpan.FromSeconds(secondes).TotalMilliseconds,

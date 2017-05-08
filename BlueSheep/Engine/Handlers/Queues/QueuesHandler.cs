@@ -3,6 +3,7 @@ using BlueSheep.Common.Protocol.Messages.Queues;
 using BlueSheep.Common;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
+using BlueSheep.Properties.I18n.Strings;
 
 namespace BlueSheep.Engine.Handlers.Queues
 {
@@ -33,7 +34,7 @@ namespace BlueSheep.Engine.Handlers.Queues
                 queueStatusMessage.Deserialize(reader);
             }
 
-            account.Log(new QueueTextInformation("File d'attente : " + queueStatusMessage.Position + "/"
+            account.Log(new QueueTextInformation(Strings.PositionInQueue + " : " + queueStatusMessage.Position + "/"
                 + queueStatusMessage.Total + "."),0);
         }
         #endregion
