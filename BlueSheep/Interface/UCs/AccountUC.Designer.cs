@@ -761,7 +761,7 @@ namespace BlueSheep.Interface
             this.sadikLabel1.Name = "sadikLabel1";
             this.sadikLabel1.Size = new System.Drawing.Size(156, 13);
             this.sadikLabel1.TabIndex = 2;
-            this.sadikLabel1.Text = "Se régénérer à partir de :";
+            this.sadikLabel1.Text = Strings.RegenerateFrom + ":";
             // 
             // RegenChoice
             // 
@@ -878,7 +878,7 @@ namespace BlueSheep.Interface
             this.metroTabPage4.Name = "metroTabPage4";
             this.metroTabPage4.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage4.TabIndex = 1;
-            this.metroTabPage4.Text = "Restrictions";
+            this.metroTabPage4.Text = Strings.Restrictions;
             this.metroTabPage4.VerticalScrollbarBarColor = true;
             this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage4.VerticalScrollbarSize = 10;
@@ -905,7 +905,7 @@ namespace BlueSheep.Interface
             this.ForceMonstersBt.RoundedCorners = false;
             this.ForceMonstersBt.Size = new System.Drawing.Size(65, 26);
             this.ForceMonstersBt.TabIndex = 31;
-            this.ForceMonstersBt.Text = "Obliger";
+            this.ForceMonstersBt.Text = Strings.Force;
             this.ForceMonstersBt.Click += new System.EventHandler(this.ForceMonstersBt_Click);
             // 
             // ForbidMonsterBt
@@ -919,7 +919,7 @@ namespace BlueSheep.Interface
             this.ForbidMonsterBt.RoundedCorners = false;
             this.ForbidMonsterBt.Size = new System.Drawing.Size(65, 26);
             this.ForbidMonsterBt.TabIndex = 30;
-            this.ForbidMonsterBt.Text = "Interdire";
+            this.ForbidMonsterBt.Text = Strings.Forbidden;
             this.ForbidMonsterBt.Click += new System.EventHandler(this.ForbidMonsterBt_Click);
             // 
             // MonstersRestrictionsView

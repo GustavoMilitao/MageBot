@@ -268,6 +268,24 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Forbidden.
+        /// </summary>
+        public static string Forbidden {
+            get {
+                return ResourceManager.GetString("Forbidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Force.
+        /// </summary>
+        public static string Force {
+            get {
+                return ResourceManager.GetString("Force", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a General.
         /// </summary>
         public static string General {
@@ -412,6 +430,15 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Regenerate from.
+        /// </summary>
+        public static string RegenerateFrom {
+            get {
+                return ResourceManager.GetString("RegenerateFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Regeneration.
         /// </summary>
         public static string Regeneration {
@@ -435,6 +462,15 @@ namespace BlueSheep.Properties.I18n.Strings {
         public static string RestartThePathToReconnect {
             get {
                 return ResourceManager.GetString("RestartThePathToReconnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Restrictions.
+        /// </summary>
+        public static string Restrictions {
+            get {
+                return ResourceManager.GetString("Restrictions", resourceCulture);
             }
         }
         

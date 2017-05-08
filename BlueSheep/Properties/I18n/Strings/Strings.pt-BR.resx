@@ -186,6 +186,12 @@
   <data name="Error" xml:space="preserve">
     <value>Erro</value>
   </data>
+  <data name="Forbidden" xml:space="preserve">
+    <value>Proibido</value>
+  </data>
+  <data name="Force" xml:space="preserve">
+    <value>Forçar</value>
+  </data>
   <data name="General" xml:space="preserve">
     <value>Geral</value>
   </data>
@@ -234,6 +240,9 @@
   <data name="Recruitment" xml:space="preserve">
     <value>Recrutamento</value>
   </data>
+  <data name="RegenerateFrom" xml:space="preserve">
+    <value>Regenerar-se apartir de</value>
+  </data>
   <data name="Regeneration" xml:space="preserve">
     <value>Regeneração</value>
   </data>
@@ -242,6 +251,9 @@
   </data>
   <data name="RestartThePathToReconnect" xml:space="preserve">
     <value>Reiniciar o trajeto para reconectar</value>
+  </data>
+  <data name="Restrictions" xml:space="preserve">
+    <value>Restrições</value>
   </data>
   <data name="SaveConfiguration" xml:space="preserve">
     <value>Salvar configuração</value>
