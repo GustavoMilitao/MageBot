@@ -976,7 +976,7 @@ namespace BlueSheep.Interface
             this.MonsterTextBox.Name = "MonsterTextBox";
             this.MonsterTextBox.Size = new System.Drawing.Size(213, 20);
             this.MonsterTextBox.TabIndex = 27;
-            this.MonsterTextBox.Text = "Entrez le nom du monstre...";
+            this.MonsterTextBox.Text = Strings.EnterTheNameOfTheMonster + "...";
             this.MonsterTextBox.GotFocus += new System.EventHandler(this.MonsterTextBox_GetFocus);
             // 
             // GroupBox1
@@ -995,7 +995,7 @@ namespace BlueSheep.Interface
             this.GroupBox1.Size = new System.Drawing.Size(445, 71);
             this.GroupBox1.TabIndex = 32;
             this.GroupBox1.TabStop = false;
-            this.GroupBox1.Text = "Restrictions de monstres";
+            this.GroupBox1.Text = Strings.MonstersRestrictions;
             // 
             // sadikLabel6
             // 
@@ -1006,7 +1006,7 @@ namespace BlueSheep.Interface
             this.sadikLabel6.Name = "sadikLabel6";
             this.sadikLabel6.Size = new System.Drawing.Size(134, 13);
             this.sadikLabel6.TabIndex = 25;
-            this.sadikLabel6.Text = "Niveaux des monstres";
+            this.sadikLabel6.Text = Strings.MonstersLevels;
             // 
             // sadikLabel5
             // 
@@ -1017,7 +1017,7 @@ namespace BlueSheep.Interface
             this.sadikLabel5.Name = "sadikLabel5";
             this.sadikLabel5.Size = new System.Drawing.Size(127, 13);
             this.sadikLabel5.TabIndex = 24;
-            this.sadikLabel5.Text = "Nombre de monstres";
+            this.sadikLabel5.Text = Strings.MonstersNames;
             // 
             // lbReplaceMonstersLevel
             // 
@@ -1026,7 +1026,7 @@ namespace BlueSheep.Interface
             this.lbReplaceMonstersLevel.Name = "lbReplaceMonstersLevel";
             this.lbReplaceMonstersLevel.Size = new System.Drawing.Size(13, 13);
             this.lbReplaceMonstersLevel.TabIndex = 21;
-            this.lbReplaceMonstersLevel.Text = "à";
+            this.lbReplaceMonstersLevel.Text = Strings.To;
             // 
             // nudMaxMonstersLevel
             // 
@@ -1065,7 +1065,7 @@ namespace BlueSheep.Interface
             this.lbReplaceMonstersNumber.Name = "lbReplaceMonstersNumber";
             this.lbReplaceMonstersNumber.Size = new System.Drawing.Size(13, 13);
             this.lbReplaceMonstersNumber.TabIndex = 18;
-            this.lbReplaceMonstersNumber.Text = "à";
+            this.lbReplaceMonstersNumber.Text = Strings.To;
             // 
             // nudMaxMonstersNumber
             // 
@@ -1107,7 +1107,7 @@ namespace BlueSheep.Interface
             this.metroTabPage5.Name = "metroTabPage5";
             this.metroTabPage5.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage5.TabIndex = 2;
-            this.metroTabPage5.Text = "Statistiques";
+            this.metroTabPage5.Text = Strings.Statistics;
             this.metroTabPage5.VerticalScrollbarBarColor = true;
             this.metroTabPage5.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage5.VerticalScrollbarSize = 10;
@@ -1127,7 +1127,7 @@ namespace BlueSheep.Interface
             this.WinLoseFightPie.Series.Add(series1);
             this.WinLoseFightPie.Size = new System.Drawing.Size(233, 135);
             this.WinLoseFightPie.TabIndex = 3;
-            this.WinLoseFightPie.Text = "WinLoseFightPie";
+            this.WinLoseFightPie.Text = Strings.WinLoseFightPie;
             // 
             // XpBarsChart
             // 
@@ -1143,7 +1143,7 @@ namespace BlueSheep.Interface
             this.XpBarsChart.Series.Add(series2);
             this.XpBarsChart.Size = new System.Drawing.Size(360, 116);
             this.XpBarsChart.TabIndex = 2;
-            this.XpBarsChart.Text = "chart1";
+            this.XpBarsChart.Text = Strings.chart1;
             // 
             // JobPage
             // 
@@ -1153,7 +1153,7 @@ namespace BlueSheep.Interface
             this.JobPage.Padding = new System.Windows.Forms.Padding(3);
             this.JobPage.Size = new System.Drawing.Size(498, 348);
             this.JobPage.TabIndex = 6;
-            this.JobPage.Text = "Métiers";
+            this.JobPage.Text = Strings.Crafts;
             this.JobPage.UseVisualStyleBackColor = true;
             // 
             // JobsTabP
@@ -1175,7 +1175,7 @@ namespace BlueSheep.Interface
             this.FamiPage.Padding = new System.Windows.Forms.Padding(3);
             this.FamiPage.Size = new System.Drawing.Size(498, 348);
             this.FamiPage.TabIndex = 2;
-            this.FamiPage.Text = "Familiers";
+            this.FamiPage.Text = Strings.Pets;
             this.FamiPage.UseVisualStyleBackColor = true;
             // 
             // panelAccountInformations
@@ -1202,7 +1202,7 @@ namespace BlueSheep.Interface
             this.labelSafe.Name = "labelSafe";
             this.labelSafe.Size = new System.Drawing.Size(56, 13);
             this.labelSafe.TabIndex = 12;
-            this.labelSafe.Text = "Coffre : ";
+            this.labelSafe.Text = Strings.SafeBox + " : ";
             // 
             // labelNextMeal
             // 
@@ -1213,7 +1213,7 @@ namespace BlueSheep.Interface
             this.labelNextMeal.Name = "labelNextMeal";
             this.labelNextMeal.Size = new System.Drawing.Size(155, 13);
             this.labelNextMeal.TabIndex = 11;
-            this.labelNextMeal.Text = "Prochain repas : Inconnu.";
+            this.labelNextMeal.Text = Strings.NextMeal + string.Format(" : {0}.", Strings.Unknown);
             // 
             // checkBoxBegin
             // 
@@ -1223,7 +1223,7 @@ namespace BlueSheep.Interface
             this.checkBoxBegin.Name = "checkBoxBegin";
             this.checkBoxBegin.Size = new System.Drawing.Size(140, 20);
             this.checkBoxBegin.TabIndex = 10;
-            this.checkBoxBegin.Text = "Démarrer l\'élevage";
+            this.checkBoxBegin.Text = Strings.StartingProcreation;
             this.checkBoxBegin.CheckedChanged += new BlueSheep.Interface.SadikCheckbox.CheckedChangedEventHandler(this.checkBoxBegin_CheckedChanged);
             // 
             // listViewPets
@@ -1243,7 +1243,7 @@ namespace BlueSheep.Interface
             this.InventairePage.Padding = new System.Windows.Forms.Padding(3);
             this.InventairePage.Size = new System.Drawing.Size(498, 348);
             this.InventairePage.TabIndex = 4;
-            this.InventairePage.Text = "Inventaire";
+            this.InventairePage.Text = Strings.Inventory;
             this.InventairePage.UseVisualStyleBackColor = true;
             // 
             // sadikTabControl2
@@ -1275,7 +1275,7 @@ namespace BlueSheep.Interface
             this.metroTabPage6.Name = "metroTabPage6";
             this.metroTabPage6.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage6.TabIndex = 0;
-            this.metroTabPage6.Text = "Inventaire";
+            this.metroTabPage6.Text = Strings.Inventory;
             this.metroTabPage6.VerticalScrollbarBarColor = true;
             this.metroTabPage6.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage6.VerticalScrollbarSize = 10;
@@ -1291,7 +1291,7 @@ namespace BlueSheep.Interface
             this.RegenAddBt.RoundedCorners = false;
             this.RegenAddBt.Size = new System.Drawing.Size(92, 26);
             this.RegenAddBt.TabIndex = 13;
-            this.RegenAddBt.Text = "Regeneration";
+            this.RegenAddBt.Text = Strings.Regeneration;
             this.RegenAddBt.Click += new System.EventHandler(this.RegenAddBt_Click);
             // 
             // AutoDelAddBt
@@ -1305,7 +1305,7 @@ namespace BlueSheep.Interface
             this.AutoDelAddBt.RoundedCorners = false;
             this.AutoDelAddBt.Size = new System.Drawing.Size(112, 26);
             this.AutoDelAddBt.TabIndex = 12;
-            this.AutoDelAddBt.Text = "Suppression auto.";
+            this.AutoDelAddBt.Text = Strings.AutoDelete + ".";
             this.AutoDelAddBt.Click += new System.EventHandler(this.AutoDelAddBt_Click);
             // 
             // sadikButton2
@@ -1319,7 +1319,7 @@ namespace BlueSheep.Interface
             this.sadikButton2.RoundedCorners = false;
             this.sadikButton2.Size = new System.Drawing.Size(56, 26);
             this.sadikButton2.TabIndex = 11;
-            this.sadikButton2.Text = "Equiper";
+            this.sadikButton2.Text = Strings.Equip;
             this.sadikButton2.Click += new System.EventHandler(this.sadikButton2_Click);
             // 
             // sadikButton1
@@ -1333,7 +1333,7 @@ namespace BlueSheep.Interface
             this.sadikButton1.RoundedCorners = false;
             this.sadikButton1.Size = new System.Drawing.Size(52, 26);
             this.sadikButton1.TabIndex = 10;
-            this.sadikButton1.Text = "Utiliser";
+            this.sadikButton1.Text = Strings.Use;
             this.sadikButton1.Click += new System.EventHandler(this.sadikButton1_Click);
             // 
             // DropItems
@@ -1347,7 +1347,7 @@ namespace BlueSheep.Interface
             this.DropItems.RoundedCorners = false;
             this.DropItems.Size = new System.Drawing.Size(53, 26);
             this.DropItems.TabIndex = 9;
-            this.DropItems.Text = "Jeter";
+            this.DropItems.Text = Strings.Throw;
             this.DropItems.Click += new System.EventHandler(this.DropItems_Click);
             // 
             // DeleteItem
@@ -1361,7 +1361,7 @@ namespace BlueSheep.Interface
             this.DeleteItem.RoundedCorners = false;
             this.DeleteItem.Size = new System.Drawing.Size(77, 26);
             this.DeleteItem.TabIndex = 8;
-            this.DeleteItem.Text = "Supprimer";
+            this.DeleteItem.Text = Strings.Remove;
             this.DeleteItem.Click += new System.EventHandler(this.DeleteItem_Click);
             // 
             // LVItems
@@ -1387,7 +1387,7 @@ namespace BlueSheep.Interface
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Size = new System.Drawing.Size(484, 300);
             this.tabPage9.TabIndex = 1;
-            this.tabPage9.Text = "Gestion";
+            this.tabPage9.Text = Strings.Management;
             this.tabPage9.VerticalScrollbarBarColor = true;
             this.tabPage9.VerticalScrollbarHighlightOnWheel = false;
             this.tabPage9.VerticalScrollbarSize = 10;
@@ -1401,7 +1401,7 @@ namespace BlueSheep.Interface
             this.RegenPage.Name = "RegenPage";
             this.RegenPage.Size = new System.Drawing.Size(484, 300);
             this.RegenPage.TabIndex = 2;
-            this.RegenPage.Text = "Regeneration";
+            this.RegenPage.Text = Strings.Regeneration;
             this.RegenPage.VerticalScrollbarBarColor = true;
             this.RegenPage.VerticalScrollbarHighlightOnWheel = false;
             this.RegenPage.VerticalScrollbarSize = 10;
@@ -1414,7 +1414,7 @@ namespace BlueSheep.Interface
             this.DiversPage.Padding = new System.Windows.Forms.Padding(3);
             this.DiversPage.Size = new System.Drawing.Size(498, 348);
             this.DiversPage.TabIndex = 3;
-            this.DiversPage.Text = "Divers";
+            this.DiversPage.Text = Strings.Miscellaneous;
             this.DiversPage.UseVisualStyleBackColor = true;
             // 
             // FloodPage
@@ -1451,7 +1451,7 @@ namespace BlueSheep.Interface
             this.MaisonsPage.Name = "MaisonsPage";
             this.MaisonsPage.Size = new System.Drawing.Size(484, 300);
             this.MaisonsPage.TabIndex = 0;
-            this.MaisonsPage.Text = "Maisons";
+            this.MaisonsPage.Text = Strings.Houses;
             this.MaisonsPage.VerticalScrollbarBarColor = true;
             this.MaisonsPage.VerticalScrollbarHighlightOnWheel = false;
             this.MaisonsPage.VerticalScrollbarSize = 10;
@@ -1466,7 +1466,7 @@ namespace BlueSheep.Interface
             this.sadikLabel9.Name = "sadikLabel9";
             this.sadikLabel9.Size = new System.Drawing.Size(146, 13);
             this.sadikLabel9.TabIndex = 28;
-            this.sadikLabel9.Text = "Fichier log du searcher :";
+            this.sadikLabel9.Text = Strings.SearchForLogFile + " :";
             // 
             // ParcourirBt
             // 
@@ -1479,7 +1479,7 @@ namespace BlueSheep.Interface
             this.ParcourirBt.RoundedCorners = false;
             this.ParcourirBt.Size = new System.Drawing.Size(95, 26);
             this.ParcourirBt.TabIndex = 27;
-            this.ParcourirBt.Text = "Parcourir";
+            this.ParcourirBt.Text = Strings.Browse;
             this.ParcourirBt.Click += new System.EventHandler(this.ParcourirBt_Click);
             // 
             // SearcherLogBox
@@ -1497,7 +1497,7 @@ namespace BlueSheep.Interface
             this.HouseSearcherBox.Name = "HouseSearcherBox";
             this.HouseSearcherBox.Size = new System.Drawing.Size(166, 22);
             this.HouseSearcherBox.TabIndex = 25;
-            this.HouseSearcherBox.Text = "Activer le searcher";
+            this.HouseSearcherBox.Text = Strings.EnableSearch;
             // 
             // sadikLabel8
             // 
@@ -1509,7 +1509,7 @@ namespace BlueSheep.Interface
             this.sadikLabel8.Name = "sadikLabel8";
             this.sadikLabel8.Size = new System.Drawing.Size(169, 13);
             this.sadikLabel8.TabIndex = 24;
-            this.sadikLabel8.Text = "Phrase à dire après l\'achat :";
+            this.sadikLabel8.Text = Strings.SentenceToSayAfterBuying + " :";
             // 
             // sadikLabel7
             // 
@@ -1521,7 +1521,7 @@ namespace BlueSheep.Interface
             this.sadikLabel7.Name = "sadikLabel7";
             this.sadikLabel7.Size = new System.Drawing.Size(99, 13);
             this.sadikLabel7.TabIndex = 23;
-            this.sadikLabel7.Text = "Prix maximum :";
+            this.sadikLabel7.Text = Strings.MaximumPrice + " :";
             // 
             // StartWaitingBt
             // 
@@ -1534,7 +1534,7 @@ namespace BlueSheep.Interface
             this.StartWaitingBt.RoundedCorners = false;
             this.StartWaitingBt.Size = new System.Drawing.Size(390, 26);
             this.StartWaitingBt.TabIndex = 22;
-            this.StartWaitingBt.Text = "Lancer l\'attente de la mise en vente";
+            this.StartWaitingBt.Text = Strings.LaunchWaitingForTheSale;
             this.StartWaitingBt.Click += new System.EventHandler(this.StartWaitingBt_Click);
             // 
             // MaxPrice
@@ -1577,7 +1577,7 @@ namespace BlueSheep.Interface
             this.metroTabPage9.Name = "metroTabPage9";
             this.metroTabPage9.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage9.TabIndex = 2;
-            this.metroTabPage9.Text = "Map";
+            this.metroTabPage9.Text = Strings.Map;
             this.metroTabPage9.VerticalScrollbarBarColor = true;
             this.metroTabPage9.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage9.VerticalScrollbarSize = 10;
@@ -1634,7 +1634,7 @@ namespace BlueSheep.Interface
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Size = new System.Drawing.Size(484, 300);
             this.tabPage8.TabIndex = 3;
-            this.tabPage8.Text = "Héroïque";
+            this.tabPage8.Text = Strings.Heroic;
             this.tabPage8.VerticalScrollbarBarColor = true;
             this.tabPage8.VerticalScrollbarHighlightOnWheel = false;
             this.tabPage8.VerticalScrollbarSize = 10;
@@ -1648,7 +1648,7 @@ namespace BlueSheep.Interface
             this.StatsPage.Name = "StatsPage";
             this.StatsPage.Size = new System.Drawing.Size(484, 300);
             this.StatsPage.TabIndex = 4;
-            this.StatsPage.Text = "Caractéristiques";
+            this.StatsPage.Text = Strings.Characteristics;
             this.StatsPage.VerticalScrollbarBarColor = true;
             this.StatsPage.VerticalScrollbarHighlightOnWheel = false;
             this.StatsPage.VerticalScrollbarSize = 10;
@@ -1669,7 +1669,7 @@ namespace BlueSheep.Interface
             this.marchandPage.Name = "marchandPage";
             this.marchandPage.Size = new System.Drawing.Size(484, 300);
             this.marchandPage.TabIndex = 5;
-            this.marchandPage.Text = "Mode marchand";
+            this.marchandPage.Text = Strings.MerchantMode;
             this.marchandPage.VerticalScrollbarBarColor = true;
             this.marchandPage.VerticalScrollbarHighlightOnWheel = false;
             this.marchandPage.VerticalScrollbarSize = 10;
@@ -1685,7 +1685,7 @@ namespace BlueSheep.Interface
             this.BtnActualize.RoundedCorners = false;
             this.BtnActualize.Size = new System.Drawing.Size(65, 20);
             this.BtnActualize.TabIndex = 13;
-            this.BtnActualize.Text = "Actualiser";
+            this.BtnActualize.Text = Strings.Actualize;
             this.BtnActualize.Click += new System.EventHandler(this.BtnActualize_Click);
             // 
             // sadikButton3
@@ -1699,7 +1699,7 @@ namespace BlueSheep.Interface
             this.sadikButton3.RoundedCorners = false;
             this.sadikButton3.Size = new System.Drawing.Size(65, 20);
             this.sadikButton3.TabIndex = 12;
-            this.sadikButton3.Text = "Ajouter";
+            this.sadikButton3.Text = Strings.Add;
             this.sadikButton3.Click += new System.EventHandler(this.sadikButton3_Click);
             // 
             // sadikLabel10
@@ -1712,7 +1712,7 @@ namespace BlueSheep.Interface
             this.sadikLabel10.Name = "sadikLabel10";
             this.sadikLabel10.Size = new System.Drawing.Size(29, 13);
             this.sadikLabel10.TabIndex = 11;
-            this.sadikLabel10.Text = "Prix";
+            this.sadikLabel10.Text = Strings.Price;
             // 
             // numericUpDown1
             // 
@@ -1760,7 +1760,7 @@ namespace BlueSheep.Interface
             this.sadikCheckbox1.Name = "sadikCheckbox1";
             this.sadikCheckbox1.Size = new System.Drawing.Size(177, 20);
             this.sadikCheckbox1.TabIndex = 2;
-            this.sadikCheckbox1.Text = "Activer le mode marchand";
+            this.sadikCheckbox1.Text =  Strings.EnableMerchantMode;
             this.sadikCheckbox1.CheckedChanged += new BlueSheep.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox1_CheckedChanged_1);
             // 
             // AccountUC

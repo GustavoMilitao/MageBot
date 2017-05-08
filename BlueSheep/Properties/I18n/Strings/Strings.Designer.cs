@@ -88,6 +88,24 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Actualize.
+        /// </summary>
+        public static string Actualize {
+            get {
+                return ResourceManager.GetString("Actualize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Add.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Alliance.
         /// </summary>
         public static string Alliance {
@@ -115,6 +133,15 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Auto delete.
+        /// </summary>
+        public static string AutoDelete {
+            get {
+                return ResourceManager.GetString("AutoDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a BlueSheep.
         /// </summary>
         public static string BlueSheep {
@@ -133,11 +160,38 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Browse.
+        /// </summary>
+        public static string Browse {
+            get {
+                return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Change the language.
         /// </summary>
         public static string ChangeTheLanguage {
             get {
                 return ResourceManager.GetString("ChangeTheLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Characteristics.
+        /// </summary>
+        public static string Characteristics {
+            get {
+                return ResourceManager.GetString("Characteristics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a chart1.
+        /// </summary>
+        public static string chart1 {
+            get {
+                return ResourceManager.GetString("chart1", resourceCulture);
             }
         }
         
@@ -205,6 +259,15 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Crafts.
+        /// </summary>
+        public static string Crafts {
+            get {
+                return ResourceManager.GetString("Crafts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Debug.
         /// </summary>
         public static string Debug {
@@ -246,6 +309,42 @@ namespace BlueSheep.Properties.I18n.Strings {
         public static string Dofus {
             get {
                 return ResourceManager.GetString("Dofus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Enable merchant mode.
+        /// </summary>
+        public static string EnableMerchantMode {
+            get {
+                return ResourceManager.GetString("EnableMerchantMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Enable search.
+        /// </summary>
+        public static string EnableSearch {
+            get {
+                return ResourceManager.GetString("EnableSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Enter the name of the monster.
+        /// </summary>
+        public static string EnterTheNameOfTheMonster {
+            get {
+                return ResourceManager.GetString("EnterTheNameOfTheMonster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Equip.
+        /// </summary>
+        public static string Equip {
+            get {
+                return ResourceManager.GetString("Equip", resourceCulture);
             }
         }
         
@@ -313,11 +412,38 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Heroic.
+        /// </summary>
+        public static string Heroic {
+            get {
+                return ResourceManager.GetString("Heroic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Houses.
+        /// </summary>
+        public static string Houses {
+            get {
+                return ResourceManager.GetString("Houses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a IA.
         /// </summary>
         public static string IA {
             get {
                 return ResourceManager.GetString("IA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Inventory.
+        /// </summary>
+        public static string Inventory {
+            get {
+                return ResourceManager.GetString("Inventory", resourceCulture);
             }
         }
         
@@ -340,6 +466,15 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Launch waiting for the sale.
+        /// </summary>
+        public static string LaunchWaitingForTheSale {
+            get {
+                return ResourceManager.GetString("LaunchWaitingForTheSale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Load a path.
         /// </summary>
         public static string LoadAPath {
@@ -358,11 +493,83 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Management.
+        /// </summary>
+        public static string Management {
+            get {
+                return ResourceManager.GetString("Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Map.
+        /// </summary>
+        public static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Maximum price.
+        /// </summary>
+        public static string MaximumPrice {
+            get {
+                return ResourceManager.GetString("MaximumPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Merchant mode.
+        /// </summary>
+        public static string MerchantMode {
+            get {
+                return ResourceManager.GetString("MerchantMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Miscellaneous.
         /// </summary>
         public static string Miscellaneous {
             get {
                 return ResourceManager.GetString("Miscellaneous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Monsters levels.
+        /// </summary>
+        public static string MonstersLevels {
+            get {
+                return ResourceManager.GetString("MonstersLevels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Monsters names.
+        /// </summary>
+        public static string MonstersNames {
+            get {
+                return ResourceManager.GetString("MonstersNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Monsters restrictions.
+        /// </summary>
+        public static string MonstersRestrictions {
+            get {
+                return ResourceManager.GetString("MonstersRestrictions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Next meal.
+        /// </summary>
+        public static string NextMeal {
+            get {
+                return ResourceManager.GetString("NextMeal", resourceCulture);
             }
         }
         
@@ -399,6 +606,24 @@ namespace BlueSheep.Properties.I18n.Strings {
         public static string Path {
             get {
                 return ResourceManager.GetString("Path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pets.
+        /// </summary>
+        public static string Pets {
+            get {
+                return ResourceManager.GetString("Pets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Price.
+        /// </summary>
+        public static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
             }
         }
         
@@ -448,6 +673,15 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Remove.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Remove configuration.
         /// </summary>
         public static string RemoveConfiguration {
@@ -475,11 +709,38 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Safe box.
+        /// </summary>
+        public static string SafeBox {
+            get {
+                return ResourceManager.GetString("SafeBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Save configuration.
         /// </summary>
         public static string SaveConfiguration {
             get {
                 return ResourceManager.GetString("SaveConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Search for log file.
+        /// </summary>
+        public static string SearchForLogFile {
+            get {
+                return ResourceManager.GetString("SearchForLogFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Sentence to say after buying.
+        /// </summary>
+        public static string SentenceToSayAfterBuying {
+            get {
+                return ResourceManager.GetString("SentenceToSayAfterBuying", resourceCulture);
             }
         }
         
@@ -493,11 +754,65 @@ namespace BlueSheep.Properties.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Starting procreation.
+        /// </summary>
+        public static string StartingProcreation {
+            get {
+                return ResourceManager.GetString("StartingProcreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Statistics.
+        /// </summary>
+        public static string Statistics {
+            get {
+                return ResourceManager.GetString("Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Stop the path.
         /// </summary>
         public static string StopThePath {
             get {
                 return ResourceManager.GetString("StopThePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a throw.
+        /// </summary>
+        public static string Throw {
+            get {
+                return ResourceManager.GetString("Throw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a To.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Unknown.
+        /// </summary>
+        public static string Unknown {
+            get {
+                return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Use.
+        /// </summary>
+        public static string Use {
+            get {
+                return ResourceManager.GetString("Use", resourceCulture);
             }
         }
         
@@ -516,6 +831,15 @@ namespace BlueSheep.Properties.I18n.Strings {
         public static string VerbosityLevel {
             get {
                 return ResourceManager.GetString("VerbosityLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a WinLoseFightPie.
+        /// </summary>
+        public static string WinLoseFightPie {
+            get {
+                return ResourceManager.GetString("WinLoseFightPie", resourceCulture);
             }
         }
     }

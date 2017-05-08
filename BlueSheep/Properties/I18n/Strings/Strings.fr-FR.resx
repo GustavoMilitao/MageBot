@@ -126,6 +126,12 @@
   <data name="Action" xml:space="preserve">
     <value>Action</value>
   </data>
+  <data name="Actualize" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
   <data name="Alliance" xml:space="preserve">
     <value>Alliance</value>
   </data>
@@ -135,14 +141,26 @@
   <data name="AtTheEntranceInCombat" xml:space="preserve">
     <value>à l\'entrée en combat</value>
   </data>
+  <data name="AutoDelete" xml:space="preserve">
+    <value>Suppression auto</value>
+  </data>
   <data name="BlueSheep" xml:space="preserve">
     <value>BlueSheep</value>
   </data>
   <data name="BlueSheepIsNowMinimized" xml:space="preserve">
     <value>BlueSheep est maintenant réduit au minimum dans la barre d'état système</value>
   </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Parcourir</value>
+  </data>
   <data name="ChangeTheLanguage" xml:space="preserve">
     <value>Changer la langue</value>
+  </data>
+  <data name="Characteristics" xml:space="preserve">
+    <value>Caractéristiques</value>
+  </data>
+  <data name="chart1" xml:space="preserve">
+    <value>chart1</value>
   </data>
   <data name="CloseCombat" xml:space="preserve">
     <value>Fermer le combat</value>
@@ -162,6 +180,9 @@
   <data name="Console" xml:space="preserve">
     <value>Console</value>
   </data>
+  <data name="Crafts" xml:space="preserve">
+    <value>Métiers</value>
+  </data>
   <data name="Debug" xml:space="preserve">
     <value>Debug</value>
   </data>
@@ -176,6 +197,18 @@
   </data>
   <data name="Dofus" xml:space="preserve">
     <value>Dofus</value>
+  </data>
+  <data name="EnableMerchantMode" xml:space="preserve">
+    <value>Activer le mode marchand</value>
+  </data>
+  <data name="EnableSearch" xml:space="preserve">
+    <value>Activer le searcher</value>
+  </data>
+  <data name="EnterTheNameOfTheMonster" xml:space="preserve">
+    <value>Entrez le nom du monstre</value>
+  </data>
+  <data name="Equip" xml:space="preserve">
+    <value>Utiliser</value>
   </data>
   <data name="Equipment" xml:space="preserve">
     <value>Equipement</value>
@@ -198,8 +231,17 @@
   <data name="Guild" xml:space="preserve">
     <value>Guilde</value>
   </data>
+  <data name="Heroic" xml:space="preserve">
+    <value>Héroïque</value>
+  </data>
+  <data name="Houses" xml:space="preserve">
+    <value>Maisons</value>
+  </data>
   <data name="IA" xml:space="preserve">
     <value>IA</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventaire</value>
   </data>
   <data name="Kamas" xml:space="preserve">
     <value>Kamas</value>
@@ -207,14 +249,41 @@
   <data name="LaunchThePath" xml:space="preserve">
     <value>Lancer le trajet</value>
   </data>
+  <data name="LaunchWaitingForTheSale" xml:space="preserve">
+    <value>Lancer l\'attente de la mise en vente</value>
+  </data>
   <data name="LoadAPath" xml:space="preserve">
     <value>Charger un Trajet</value>
   </data>
   <data name="LogTheConsole" xml:space="preserve">
     <value>Logger la console</value>
   </data>
+  <data name="Management" xml:space="preserve">
+    <value>Gestion</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="MaximumPrice" xml:space="preserve">
+    <value>Prix maximum</value>
+  </data>
+  <data name="MerchantMode" xml:space="preserve">
+    <value>Mode marchand</value>
+  </data>
   <data name="Miscellaneous" xml:space="preserve">
     <value>Divers</value>
+  </data>
+  <data name="MonstersLevels" xml:space="preserve">
+    <value>Niveaux des monstres</value>
+  </data>
+  <data name="MonstersNames" xml:space="preserve">
+    <value>Nombre de monstres</value>
+  </data>
+  <data name="MonstersRestrictions" xml:space="preserve">
+    <value>Restrictions de monstres</value>
+  </data>
+  <data name="NextMeal" xml:space="preserve">
+    <value>Prochain repas</value>
   </data>
   <data name="NoIA" xml:space="preserve">
     <value>Choisir une IA</value>
@@ -227,6 +296,12 @@
   </data>
   <data name="Path" xml:space="preserve">
     <value>Trajet</value>
+  </data>
+  <data name="Pets" xml:space="preserve">
+    <value>Familiers</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Prix</value>
   </data>
   <data name="Private" xml:space="preserve">
     <value>Privé</value>
@@ -243,6 +318,9 @@
   <data name="Regeneration" xml:space="preserve">
     <value>Régénération</value>
   </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
   <data name="RemoveConfiguration" xml:space="preserve">
     <value>Supprimer la configuration</value>
   </data>
@@ -252,19 +330,46 @@
   <data name="Restrictions" xml:space="preserve">
     <value>Restrictions</value>
   </data>
+  <data name="SafeBox" xml:space="preserve">
+    <value>Coffre</value>
+  </data>
   <data name="SaveConfiguration" xml:space="preserve">
     <value>Sauvegarder la configuration</value>
+  </data>
+  <data name="SearchForLogFile" xml:space="preserve">
+    <value>Fichier log du searcher</value>
+  </data>
+  <data name="SentenceToSayAfterBuying" xml:space="preserve">
+    <value>Phrase à dire après l\'achat</value>
   </data>
   <data name="SpeedSetting" xml:space="preserve">
     <value>Réglage de la vitesse :  Vitesse {0}</value>
   </data>
+  <data name="StartingProcreation" xml:space="preserve">
+    <value>Démarrer l\'élevage</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
   <data name="StopThePath" xml:space="preserve">
     <value>Arrêter le trajet</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>Inconnu</value>
+  </data>
+  <data name="Throw" xml:space="preserve">
+    <value>Jeter</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>À</value>
   </data>
   <data name="UseTheFastEquipmentNumber" xml:space="preserve">
     <value>Utiliser l\'équipement rapide numéro</value>
   </data>
   <data name="VerbosityLevel" xml:space="preserve">
     <value>Niveau de verbosité</value>
+  </data>
+  <data name="WinLoseFightPie" xml:space="preserve">
+    <value>WinLoseFightPie</value>
   </data>
 </root>
