@@ -1,4 +1,6 @@
-﻿namespace BlueSheep.Interface
+﻿using BlueSheep.Properties.I18n.Strings;
+
+namespace BlueSheep.Interface
 {
     partial class AccountUC
     {
@@ -247,27 +249,27 @@
             this.PathDownBt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.PathDownBt.Name = "PathDownBt";
             this.PathDownBt.Size = new System.Drawing.Size(65, 22);
-            this.PathDownBt.Text = "Trajet";
+            this.PathDownBt.Text = Strings.Path;
             // 
             // LoadPathBt
             // 
             this.LoadPathBt.Name = "LoadPathBt";
             this.LoadPathBt.Size = new System.Drawing.Size(263, 22);
-            this.LoadPathBt.Text = "Charger un trajet";
+            this.LoadPathBt.Text = Strings.LoadAPath;
             this.LoadPathBt.Click += new System.EventHandler(this.LoadPathBt_Click);
             // 
             // LaunchPathBt
             // 
             this.LaunchPathBt.Name = "LaunchPathBt";
             this.LaunchPathBt.Size = new System.Drawing.Size(263, 22);
-            this.LaunchPathBt.Text = "Lancer le trajet";
+            this.LaunchPathBt.Text = Strings.LaunchThePath;
             this.LaunchPathBt.Click += new System.EventHandler(this.LaunchPathBt_Click);
             // 
             // StopPathBt
             // 
             this.StopPathBt.Name = "StopPathBt";
             this.StopPathBt.Size = new System.Drawing.Size(263, 22);
-            this.StopPathBt.Text = "Arrêter le trajet";
+            this.StopPathBt.Text = Strings.StopThePath;
             this.StopPathBt.Click += new System.EventHandler(this.StopPathBt_Click);
             // 
             // RelaunchPath
@@ -275,7 +277,7 @@
             this.RelaunchPath.CheckOnClick = true;
             this.RelaunchPath.Name = "RelaunchPath";
             this.RelaunchPath.Size = new System.Drawing.Size(263, 22);
-            this.RelaunchPath.Text = "✘ Relancer le trajet à la reconnexion";
+            this.RelaunchPath.Text = "✘ " + Strings.RestartThePathToReconnect;
             this.RelaunchPath.CheckedChanged += new System.EventHandler(this.RelaunchPath_CheckedChanged);
             // 
             // toolStripSeparator1
@@ -301,7 +303,7 @@
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(158, 22);
-            this.toolStripButton1.Text = "Connexion/Déconnexion";
+            this.toolStripButton1.Text = Strings.Connection+"/"+Strings.Disconnection;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripSeparator2
@@ -313,7 +315,7 @@
             // 
             this.SubcribeLb.Name = "SubcribeLb";
             this.SubcribeLb.Size = new System.Drawing.Size(73, 22);
-            this.SubcribeLb.Text = "Non abonné";
+            this.SubcribeLb.Text = Strings.NotSubscribed;
             // 
             // imageList1
             // 
@@ -374,7 +376,7 @@
             this.KamasLabel.Name = "KamasLabel";
             this.KamasLabel.Size = new System.Drawing.Size(56, 13);
             this.KamasLabel.TabIndex = 13;
-            this.KamasLabel.Text = "0 kamas";
+            this.KamasLabel.Text = "0 "+Strings.Kamas;
             // 
             // StatusLb
             // 
@@ -386,7 +388,7 @@
             this.StatusLb.Name = "StatusLb";
             this.StatusLb.Size = new System.Drawing.Size(74, 13);
             this.StatusLb.TabIndex = 10;
-            this.StatusLb.Text = "Déconnecté";
+            this.StatusLb.Text = Strings.Disconnected;
             // 
             // VTabAccount
             // 
@@ -415,7 +417,7 @@
             this.ConsolePage.Padding = new System.Windows.Forms.Padding(3);
             this.ConsolePage.Size = new System.Drawing.Size(498, 348);
             this.ConsolePage.TabIndex = 0;
-            this.ConsolePage.Text = "Console";
+            this.ConsolePage.Text = Strings.Console;
             this.ConsolePage.UseVisualStyleBackColor = true;
             // 
             // metroTabControl1
@@ -441,7 +443,7 @@
             this.metroTabPage1.Name = "metroTabPage1";
             this.metroTabPage1.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage1.TabIndex = 0;
-            this.metroTabPage1.Text = "Console";
+            this.metroTabPage1.Text = Strings.Console;
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
@@ -477,7 +479,7 @@
             this.metroTabPage2.Name = "metroTabPage2";
             this.metroTabPage2.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage2.TabIndex = 1;
-            this.metroTabPage2.Text = "Configuration";
+            this.metroTabPage2.Text = Strings.Configuration;
             this.metroTabPage2.VerticalScrollbarBarColor = true;
             this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage2.VerticalScrollbarSize = 10;
@@ -502,7 +504,7 @@
             this.sadikLabel13.Name = "sadikLabel13";
             this.sadikLabel13.Size = new System.Drawing.Size(134, 13);
             this.sadikLabel13.TabIndex = 3;
-            this.sadikLabel13.Text = "Niveau de verbosité : ";
+            this.sadikLabel13.Text = Strings.VerbosityLevel + " : ";
             // 
             // NUDVerbose
             // 
@@ -545,7 +547,7 @@
             this.DeleteConfigBt.RoundedCorners = false;
             this.DeleteConfigBt.Size = new System.Drawing.Size(183, 48);
             this.DeleteConfigBt.TabIndex = 10;
-            this.DeleteConfigBt.Text = "Supprimer la configuration";
+            this.DeleteConfigBt.Text = Strings.RemoveConfiguration;
             // 
             // SaveConfig
             // 
@@ -558,7 +560,7 @@
             this.SaveConfig.RoundedCorners = false;
             this.SaveConfig.Size = new System.Drawing.Size(183, 51);
             this.SaveConfig.TabIndex = 9;
-            this.SaveConfig.Text = "Sauvegarder la configuration";
+            this.SaveConfig.Text = Strings.SaveConfiguration;
             // 
             // LogCb
             // 
@@ -568,7 +570,7 @@
             this.LogCb.Name = "LogCb";
             this.LogCb.Size = new System.Drawing.Size(140, 20);
             this.LogCb.TabIndex = 8;
-            this.LogCb.Text = "Logger la console";
+            this.LogCb.Text = Strings.LogTheConsole;
             // 
             // DebugMode
             // 
@@ -578,7 +580,7 @@
             this.DebugMode.Name = "DebugMode";
             this.DebugMode.Size = new System.Drawing.Size(140, 20);
             this.DebugMode.TabIndex = 7;
-            this.DebugMode.Text = "Debug mode";
+            this.DebugMode.Text = Strings.DebugMode;
             // 
             // FightPage
             // 
@@ -589,7 +591,7 @@
             this.FightPage.Padding = new System.Windows.Forms.Padding(3);
             this.FightPage.Size = new System.Drawing.Size(498, 348);
             this.FightPage.TabIndex = 1;
-            this.FightPage.Text = "Combat";
+            this.FightPage.Text = Strings.Combat;
             this.FightPage.UseVisualStyleBackColor = true;
             // 
             // metroTabControl2
@@ -618,7 +620,7 @@
             this.metroTabPage3.Name = "metroTabPage3";
             this.metroTabPage3.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage3.TabIndex = 0;
-            this.metroTabPage3.Text = "Configuration";
+            this.metroTabPage3.Text = Strings.Configuration;
             this.metroTabPage3.VerticalScrollbarBarColor = true;
             this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage3.VerticalScrollbarSize = 10;
@@ -634,7 +636,7 @@
             this.groupBox8.Size = new System.Drawing.Size(402, 80);
             this.groupBox8.TabIndex = 19;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Divers";
+            this.groupBox8.Text = Strings.Miscellaneous;
             // 
             // IsLockingFight
             // 
@@ -646,7 +648,7 @@
             this.IsLockingFight.Size = new System.Drawing.Size(132, 19);
             this.IsLockingFight.Style = MetroFramework.MetroColorStyle.Blue;
             this.IsLockingFight.TabIndex = 3;
-            this.IsLockingFight.Text = "Fermer le combat";
+            this.IsLockingFight.Text = Strings.CloseCombat;
             this.IsLockingFight.Theme = MetroFramework.MetroThemeStyle.Light;
             this.IsLockingFight.UseSelectable = true;
             // 
@@ -688,7 +690,7 @@
             this.sadikLabel11.Name = "sadikLabel11";
             this.sadikLabel11.Size = new System.Drawing.Size(206, 13);
             this.sadikLabel11.TabIndex = 0;
-            this.sadikLabel11.Text = "Réglage de la vitesse :  Vitesse x  ";
+            this.sadikLabel11.Text = string.Format(Strings.SpeedSetting,"x");
             this.sadikLabel11.Visible = false;
             // 
             // GroupBox2
@@ -701,7 +703,7 @@
             this.GroupBox2.Size = new System.Drawing.Size(403, 62);
             this.GroupBox2.TabIndex = 16;
             this.GroupBox2.TabStop = false;
-            this.GroupBox2.Text = "IA";
+            this.GroupBox2.Text = Strings.IA;
             // 
             // NomIA
             // 
@@ -710,7 +712,7 @@
             this.NomIA.Name = "NomIA";
             this.NomIA.Size = new System.Drawing.Size(68, 19);
             this.NomIA.TabIndex = 2;
-            this.NomIA.Text = "Aucune IA";
+            this.NomIA.Text = Strings.NoIA;
             // 
             // ChoiceIABt
             // 
@@ -723,7 +725,7 @@
             this.ChoiceIABt.RoundedCorners = false;
             this.ChoiceIABt.Size = new System.Drawing.Size(190, 38);
             this.ChoiceIABt.TabIndex = 1;
-            this.ChoiceIABt.Text = "Choisir une IA";
+            this.ChoiceIABt.Text = Strings.ChooseAnIA;
             this.ChoiceIABt.Click += new System.EventHandler(this.ChoiceIABt_Click);
             // 
             // GroupBox3
@@ -737,7 +739,7 @@
             this.GroupBox3.Size = new System.Drawing.Size(403, 44);
             this.GroupBox3.TabIndex = 17;
             this.GroupBox3.TabStop = false;
-            this.GroupBox3.Text = "Régénération";
+            this.GroupBox3.Text = Strings.Regeneration;
             // 
             // sadikLabel2
             // 
@@ -748,7 +750,7 @@
             this.sadikLabel2.Name = "sadikLabel2";
             this.sadikLabel2.Size = new System.Drawing.Size(62, 13);
             this.sadikLabel2.TabIndex = 3;
-            this.sadikLabel2.Text = "% de vie.";
+            this.sadikLabel2.Text = "% "+ Strings.OfLife +".";
             // 
             // sadikLabel1
             // 
@@ -781,7 +783,7 @@
             this.GroupBox4.Size = new System.Drawing.Size(403, 65);
             this.GroupBox4.TabIndex = 18;
             this.GroupBox4.TabStop = false;
-            this.GroupBox4.Text = "Equipement";
+            this.GroupBox4.Text = Strings.Equipment;
             // 
             // WithItemSetBox
             // 
@@ -791,7 +793,7 @@
             this.WithItemSetBox.Name = "WithItemSetBox";
             this.WithItemSetBox.Size = new System.Drawing.Size(226, 20);
             this.WithItemSetBox.TabIndex = 5;
-            this.WithItemSetBox.Text = "Utiliser l\'équipement rapide numéro ";
+            this.WithItemSetBox.Text = Strings.UseTheFastEquipmentNumber;
             // 
             // sadikLabel4
             // 
@@ -802,7 +804,7 @@
             this.sadikLabel4.Name = "sadikLabel4";
             this.sadikLabel4.Size = new System.Drawing.Size(114, 13);
             this.sadikLabel4.TabIndex = 4;
-            this.sadikLabel4.Text = "à la fin du combat.";
+            this.sadikLabel4.Text = Strings.AtTheEndOfTheFight + ".";
             // 
             // sadikLabel3
             // 
@@ -813,7 +815,7 @@
             this.sadikLabel3.Name = "sadikLabel3";
             this.sadikLabel3.Size = new System.Drawing.Size(129, 13);
             this.sadikLabel3.TabIndex = 3;
-            this.sadikLabel3.Text = "à l\'entrée en combat.";
+            this.sadikLabel3.Text = Strings.AtTheEntranceInCombat + ".";
             // 
             // PresetEndUpD
             // 

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using BlueSheep.Properties.I18n.Strings;
+using System.Drawing;
 
 namespace BlueSheep.Interface.Text
 {
@@ -23,7 +24,7 @@ namespace BlueSheep.Interface.Text
 
         public override string Category
         {
-            get { return "Général"; }
+            get { return Strings.General; }
             set { m_Category = value; }
         }
 

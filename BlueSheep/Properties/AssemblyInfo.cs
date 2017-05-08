@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // Informações gerais sobre um assembly dependente
@@ -35,3 +36,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.9.6")]
 [assembly: AssemblyFileVersion("0.9.6")]
+[assembly: NeutralResourcesLanguage("")]
+

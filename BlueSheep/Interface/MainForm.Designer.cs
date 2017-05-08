@@ -1,4 +1,7 @@
-﻿namespace BlueSheep.Interface
+﻿using BlueSheep.Properties.I18n.Strings;
+using System.Threading;
+
+namespace BlueSheep.Interface
 {
     partial class MainForm
     {
@@ -75,9 +78,9 @@
             this.AccountsBt.Image = global::BlueSheep.Properties.Resources.account;
             this.AccountsBt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AccountsBt.Name = "AccountsBt";
-            this.AccountsBt.Size = new System.Drawing.Size(75, 22);
-            this.AccountsBt.Text = "Comptes";
-            this.AccountsBt.ToolTipText = "Gestion des comptes";
+            this.AccountsBt.Size = new System.Drawing.Size(77, 22);
+            this.AccountsBt.Text = Strings.Accounts;
+            this.AccountsBt.ToolTipText = Strings.AccountManagement;
             this.AccountsBt.Click += new System.EventHandler(this.AccountsBt_Click);
             // 
             // toolStripSeparator1
@@ -90,8 +93,8 @@
             this.GroupsBt.Image = global::BlueSheep.Properties.Resources.group;
             this.GroupsBt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.GroupsBt.Name = "GroupsBt";
-            this.GroupsBt.Size = new System.Drawing.Size(71, 22);
-            this.GroupsBt.Text = "Groupes";
+            this.GroupsBt.Size = new System.Drawing.Size(65, 22);
+            this.GroupsBt.Text = Strings.Groups;
             this.GroupsBt.Click += new System.EventHandler(this.GroupsBt_Click);
             // 
             // toolStripSeparator2
@@ -103,24 +106,26 @@
             // 
             this.LanguageChoice.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.LanguageChoice.AutoCompleteCustomSource.AddRange(new string[] {
-            "FR",
-            "EN"});
+            "fr-FR",
+            "en-US",
+            "es-ES",
+            "pt-BR"});
             this.LanguageChoice.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.LanguageChoice.Items.AddRange(new object[] {
-            "FR",
-            "EN",
-            "ES",
-            "PT"});
+            "fr-FR",
+            "en-US",
+            "es-ES",
+            "pt-BR"});
             this.LanguageChoice.MaxDropDownItems = 2;
             this.LanguageChoice.Name = "LanguageChoice";
             this.LanguageChoice.Size = new System.Drawing.Size(140, 25);
-            this.LanguageChoice.Text = "Change the language";
+            this.LanguageChoice.Text = Strings.ChangeTheLanguage;
             this.LanguageChoice.SelectedIndexChanged += new System.EventHandler(this.LanguageChoice_SelectedTextChanged);
             // 
             // notifyIcon
             // 
             this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.notifyIcon.BalloonTipText = "BlueSheep is now minimized in the system tray";
+            this.notifyIcon.BalloonTipText = Strings.BlueSheepIsNowMinimized;
             this.notifyIcon.BalloonTipTitle = "[Info]";
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "BlueSheep";

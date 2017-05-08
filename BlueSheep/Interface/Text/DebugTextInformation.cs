@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlueSheep.Properties.I18n.Strings;
+using System;
 using System.Drawing;
 
 namespace BlueSheep.Interface.Text
@@ -23,13 +24,13 @@ namespace BlueSheep.Interface.Text
 
         public override string Category
         {
-            get { return "Debug"; }
+            get { return Strings.Debug; }
             set { throw new NotImplementedException(); }
         }
 
         public override string Account
         {
-            get { return "Erreur"; }
+            get { return Strings.Error; }
             set { throw new NotImplementedException(); }
         }
         #endregion

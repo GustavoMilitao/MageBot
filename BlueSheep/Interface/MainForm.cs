@@ -2,9 +2,13 @@
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Data.D2p;
 using BlueSheep.Engine.Constants;
+using BlueSheep.Properties.I18n.Strings;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace BlueSheep.Interface
@@ -74,27 +78,9 @@ namespace BlueSheep.Interface
 
         private void LanguageChoice_SelectedTextChanged(object sender, EventArgs e)
         {
-            /* Switch the language */
-            Lang = LanguageChoice.Text;
-            switch (Lang)
-            {
-                case "EN":
-                    AccountsBt.Text = "Accounts";
-                    GroupsBt.Text = "Groups";
-                    break;
-                case "FR":
-                    AccountsBt.Text = "Comptes";
-                    GroupsBt.Text = "Groupes";
-                    break;
-                case "ES":
-                    AccountsBt.Text = "Cuentas";
-                    GroupsBt.Text = "Grupos";
-                    break;
-                case "PT":
-                    AccountsBt.Text = "Contas";
-                    GroupsBt.Text = "Grupos";
-                    break;
-            }
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(LanguageChoice.Text);
+            AccountsBt.Text = Strings.Accounts;
+            GroupsBt.Text = Strings.Groups;
         }
 
         private void Form_Resize(object sender, EventArgs e)
@@ -199,7 +185,6 @@ namespace BlueSheep.Interface
                 I18N i18N = new I18N(i18NFileAccessor);
                 GameData.Init(Path.Combine (ActualMainForm.DofusPath, "app","data", "common"));
                 MapsManager.Init(Path.Combine(ActualMainForm.DofusPath, "app", "content", "maps"));
-
             }
             //else
             //{

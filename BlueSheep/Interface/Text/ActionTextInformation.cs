@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlueSheep.Properties.I18n.Strings;
+using System;
 using System.Drawing;
 
 namespace BlueSheep.Interface.Text
@@ -23,7 +24,7 @@ namespace BlueSheep.Interface.Text
 
         public override string Category
         {
-            get { return "Action"; }
+            get { return Strings.Action; }
             set { throw new NotImplementedException();}
         }
 

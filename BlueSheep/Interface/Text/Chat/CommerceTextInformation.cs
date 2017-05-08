@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlueSheep.Properties.I18n.Strings;
+using System;
 using System.Drawing;
 
 namespace BlueSheep.Interface.Text.Chat
@@ -27,13 +28,13 @@ namespace BlueSheep.Interface.Text.Chat
 
             public override string Category
             {
-                get { return "Commerce"; }
+                get { return Strings.Commerce; }
                 set { throw new NotImplementedException(); }
             }
 
             public override string Account
             {
-                get { return "Commerce"; }
+                get { return Strings.Commerce; }
                 set { throw new NotImplementedException(); }
             }
             #endregion
