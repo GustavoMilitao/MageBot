@@ -138,7 +138,7 @@ namespace BlueSheep.Interface
             IsMITM = !socket;
             listViewPets.Columns.Add(Strings.Name, 150, HorizontalAlignment.Left);
             listViewPets.Columns.Add(Strings.UID, 0, HorizontalAlignment.Left);
-            listViewPets.Columns.Add(Strings.Food+ string.Format(" ({0})", Strings.Amount), -2, HorizontalAlignment.Left);
+            listViewPets.Columns.Add(Strings.Food + string.Format(" ({0})", Strings.Amount), -2, HorizontalAlignment.Left);
             listViewPets.Columns.Add(Strings.NextMeal, -2, HorizontalAlignment.Left);
             listViewPets.Columns.Add(Strings.Characteristics, -2, HorizontalAlignment.Left);
             LVItems.Columns.Add(Strings.GID, 0, HorizontalAlignment.Center);
@@ -146,7 +146,7 @@ namespace BlueSheep.Interface
             LVItems.Columns.Add(Strings.Name, -2, HorizontalAlignment.Center);
             LVItems.Columns.Add(Strings.Amount, -2, HorizontalAlignment.Center);
             LVItems.Columns.Add(Strings.Type, -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add(string.Format("{0} {1}",Strings.Price, Strings.Medium.ToLower()), -2, HorizontalAlignment.Center);
+            LVItems.Columns.Add(string.Format("{0} {1}", Strings.Price, Strings.Medium.ToLower()), -2, HorizontalAlignment.Center);
             LVItemBag.Columns.Add(Strings.GID, 0, HorizontalAlignment.Center);
             LVItemBag.Columns.Add(Strings.UID, 0, HorizontalAlignment.Center);
             LVItemBag.Columns.Add(Strings.Name, -2, HorizontalAlignment.Center);
@@ -271,10 +271,8 @@ namespace BlueSheep.Interface
                 Invoke(new SetLogsCallback(Log), text, levelVerbose);
             else
             {
-                if (MainForm.ActualMainForm.Lang != "FR")
-                {
-                    text.Text = BlueSheep.Engine.Constants.Translate.GetTranslation(text.Text, MainForm.ActualMainForm.Lang);
-                }
+
+                text.Text = BlueSheep.Engine.Constants.Translate.GetTranslation(text.Text);
                 text.Text = "[" + DateTime.Now.ToLongTimeString() +
                     "] (" + text.Category + ") " + text.Text;
                 if (text.Category == "Debug" && !DebugMode.Checked)
@@ -863,10 +861,7 @@ namespace BlueSheep.Interface
                     nstatus = "Occupé";
                     break;
             }
-            if (MainForm.ActualMainForm.Lang != "FR")
-            {
-                nstatus = BlueSheep.Engine.Constants.Translate.GetTranslation(nstatus, MainForm.ActualMainForm.Lang);
-            }
+            nstatus = BlueSheep.Engine.Constants.Translate.GetTranslation(nstatus);
             Invoke(new DelegLabel(ModLabel), nstatus, StatusLb);
         }
         #endregion

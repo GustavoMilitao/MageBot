@@ -1,64 +1,64 @@
-﻿"Connecté", "Conectado"
-"Déconnecté", "Desconectado"
-"Dialogue", "Diálogo"
-"Régénération", "Regeneração"
-"Récolte", "Colheita"
-"Déplacement", "Deslocação"
-"Combat", "Briga"
-"Téléportation", "Teletransporte"
-"Trajet arrêté", "Trajeto Parou"
-"Reconnexion automatique dans minutes", "Reconexão em X minutos"
-"Prochain repas dans heures", "Próxima alimentação em X horas"
-"Aucune nourriture disponible, pas de prochaine connexion", "Sem comida disponível, permaneça desconectado"
-"Connexion", "Conectando"
-"Je suis le chef de groupe biatch", "Eu sou o líder do grupo, cadela"
-"Trajet chargé", "Caminho carregado"
-"Erreur lors de la sélection du personnage", "Erro durante seleção do personagem"
-"Serveur complet", "Servidor está cheio, tente novamente mais tarde"
-"Echec de connexion : Dofus a été mis à jour", "Erro de conexão, Dofus foi atualizado, tente novamente mais tarde"
-"Echec de connexion : Vous êtes bannis", "Erro de conexão, sua conta foi banida"
-"Identification en cours", "Identificação em processo"
-"Identification réussie", "Identificado com sucesso"
-"Echec de l'identification", "Falha de identificação"
-"Bienvenue sur DOFUS, dans le Monde des Douze !", "Bem vindo ao Dofus, "
-"Il est interdit de transmettre votre identifiant ou votre mot de passe", "É proibido transferirtransmitir seu nome de usuário e senha"
-"Votre adresse IP actuelle est", "Seu endereço IP é"
-"Impossible de lancer ce sort, vous avez une portée de 0 à 1, et vous visez à 2 !", ""
-"J'ai rejoint le groupe", "Impossível lançar o feitiço, você tem um alcance de 0 a 1, e está mirando a 2"
-"Ancienn cellid of", "Eu ingressei em um grupo"
-"Nouvelle cellid of", "ùltima id de célula de"
-"Début du combat", "Combate começou"
-"GameMap Ancienne cellid of", "Última id de célula do Mapa do Jogo"
-"GameMap Nouvelle cellid of", "Nova id de célula do Mapa do Jogo"
-"Send ready !", "Enviar pronto"
-"Combat fini !", "Fim de combate "
-"Echec de l'ouverture du coffre", "Falhou ao abrir o baú"
-"File d'attente", "Posição na fila"
-"Déconnecté du serveur", "Disconectado do servidor"
-"Inactivité prolongée", "Inatividade prolongada"
-"Connexion établie au serveur", "Conectado ao servidor"
-"Connexion échouée", "Conexão falhou"
-"Lancement du trajet", "Lançamento do caminho"
-"Echec de connexion : compte banni temporairement", "Falha de conexão, sua conta está temporariamente banida"
-"Echec de connexion : compte banni", "Falha de conexão, sua conta está banida"
-"Echec de connexion : serveur en maintenance", "Falha de conexão, servidor está inativo para manutenção"
-"Echec de connexion : erreur inconnue", "Falha de conexão: Erro desconhecido"
-"Echec de connnexion : serveur déconnecté", "Falha de conexão, servidor está disconectado"
-"Echec de connexion : serveur en sauvegarde", "Falha de conexão: o servidor está inativo para cópia de segurança"
-"Echec de connexion : serveur complet", "Falha de conexão, servidor está cheio"
-"Echec de connexion : raison inconnue", "Falha de conexão: Causa desconhecida"
-"Récupération d'un objet du coffre", "Pegando um item do baú"
-"Fermeture du coffre", "Fechando o baú"
-"Ouverture du coffre", "Abrindo o baú"
-"Dépôt d'un objet dans le coffre", "Colocando um item no baú"
-"est connecté", "está conectado"
-"Fight Turn", "Turno da luta"
-"Sort validé", "Feitiço validado"
-"Cible en vue à la cellule", "O alvo está na célula número..."
-"It's Time to capture ! POKEBALL GOOOOOOOO", "É hora de capturar! Pokebola vaaaaaaaaiii"
-"Lancement d'un combat contre monstres de niveau", "Iniciando a luta contra monstros de nível"
-"Lancement d'un sort en", "Lançando um feitiço em"
-"Placement du personnage", "Personagem em posição de luta"
-"Impossible d'enclencher le déplacement", "Incapaz de se mover"
-"Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.bluesheepbot.com ", "O Bot não recebeu informações ainda, por favor, cheque novamente mais tarde, se o problema persistir, avise no fórum: http://forum.bluesheep.com"
-"Up de caractéristique", "Melhorar Características"
+﻿Connecté; Conectado
+Déconnecté; Desconectado
+Dialogue; Diálogo
+Régénération; Regeneração
+Récolte; Colheita
+Déplacement; Deslocação
+Combat; Briga
+Téléportation; Teletransporte
+Trajet arrêté; Trajeto Parou
+Reconnexion automatique dans minutes; Reconexão em X minutos
+Prochain repas dans heures; Próxima alimentação em X horas
+Aucune nourriture disponible, pas de prochaine connexion; Sem comida disponível, permaneça desconectado
+Connexion; Conectando
+Je suis le chef de groupe biatch; Eu sou o líder do grupo, cadela
+Trajet chargé; Caminho carregado
+Erreur lors de la sélection du personnage; Erro durante seleção do personagem
+Serveur complet; Servidor está cheio, tente novamente mais tarde
+Echec de connexion : Dofus a été mis à jour; Erro de conexão, Dofus foi atualizado, tente novamente mais tarde
+Echec de connexion : Vous êtes bannis; Erro de conexão, sua conta foi banida
+Identification en cours; Identificação em processo
+Identification réussie; Identificado com sucesso
+Echec de l'identification; Falha de identificação
+Bienvenue sur DOFUS, dans le Monde des Douze !; Bem vindo ao Dofus, 
+Il est interdit de transmettre votre identifiant ou votre mot de passe; É proibido transferirtransmitir seu nome de usuário e senha
+Votre adresse IP actuelle est; Seu endereço IP é
+Impossible de lancer ce sort, vous avez une portée de 0 à 1, et vous visez à 2 !; 
+J'ai rejoint le groupe; Impossível lançar o feitiço, você tem um alcance de 0 a 1, e está mirando a 2
+Ancienn cellid of; Eu ingressei em um grupo
+Nouvelle cellid of; ùltima id de célula de
+Début du combat; Combate começou
+GameMap Ancienne cellid of; Última id de célula do Mapa do Jogo
+GameMap Nouvelle cellid of; Nova id de célula do Mapa do Jogo
+Send ready !; Enviar pronto
+Combat fini !; Fim de combate 
+Echec de l'ouverture du coffre; Falhou ao abrir o baú
+File d'attente; Posição na fila
+Déconnecté du serveur; Disconectado do servidor
+Inactivité prolongée; Inatividade prolongada
+Connexion établie au serveur; Conectado ao servidor
+Connexion échouée; Conexão falhou
+Lancement du trajet; Lançamento do caminho
+Echec de connexion : compte banni temporairement; Falha de conexão, sua conta está temporariamente banida
+Echec de connexion : compte banni; Falha de conexão, sua conta está banida
+Echec de connexion : serveur en maintenance; Falha de conexão, servidor está inativo para manutenção
+Echec de connexion : erreur inconnue; Falha de conexão: Erro desconhecido
+Echec de connnexion : serveur déconnecté; Falha de conexão, servidor está disconectado
+Echec de connexion : serveur en sauvegarde; Falha de conexão: o servidor está inativo para cópia de segurança
+Echec de connexion : serveur complet; Falha de conexão, servidor está cheio
+Echec de connexion : raison inconnue; Falha de conexão: Causa desconhecida
+Récupération d'un objet du coffre; Pegando um item do baú
+Fermeture du coffre; Fechando o baú
+Ouverture du coffre; Abrindo o baú
+Dépôt d'un objet dans le coffre; Colocando um item no baú
+est connecté; está conectado
+Fight Turn; Turno da luta
+Sort validé; Feitiço validado
+Cible en vue à la cellule; O alvo está na célula número...
+It's Time to capture ! POKEBALL GOOOOOOOO; É hora de capturar! Pokebola vaaaaaaaaiii
+Lancement d'un combat contre monstres de niveau; Iniciando a luta contra monstros de nível
+Lancement d'un sort en; Lançando um feitiço em
+Placement du personnage; Personagem em posição de luta
+Impossible d'enclencher le déplacement; Incapaz de se mover
+Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.bluesheepbot.com ; O Bot não recebeu informações ainda, por favor, cheque novamente mais tarde, se o problema persistir, avise no fórum: http://forum.bluesheep.com
+Up de caractéristique; Melhorar Características

@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using BlueSheep.Common.Types;
 using BlueSheep.AccountsManager;
 using System.Diagnostics;
+using BlueSheep.Properties.I18n.Strings;
+
 namespace BlueSheep.Interface
 {
     public partial class GestAccounts : MetroFramework.Forms.MetroForm
@@ -21,49 +23,16 @@ namespace BlueSheep.Interface
         public GestAccounts(MainForm mainfrm)
         {
             InitializeComponent();
-            switch (mainfrm.Lang)
-            {
-                case "FR":
-                    listViewAccounts.Columns.Add("Nom", 200, HorizontalAlignment.Center);
-                    listViewAccounts.Columns.Add("Mot de passe", 0, HorizontalAlignment.Center);
-                    break;
-                case "EN":
-                    listViewAccounts.Columns.Add("Username", 200, HorizontalAlignment.Center);
-                    listViewAccounts.Columns.Add("Password", 0, HorizontalAlignment.Center);
-                    DelBt.Text = "Delete";
-                    LaunchAccountsSelecBt.Text = "Launch selected accounts";
-                    Text = "Accounts manager";
-                    sadikTabControl1.TabPages[0].Text = "Launch";
-                    sadikTabControl1.TabPages[1].Text = "Add";
-                    AddBt.Text = "Add";
-                    sadikLabel1.Text = "Username";
-                    sadikLabel2.Text = "Password";
-                    break;
-                case "ES":
-                    listViewAccounts.Columns.Add("Nombre de cuenta", 200, HorizontalAlignment.Center);
-                    listViewAccounts.Columns.Add("Contraseña", 0, HorizontalAlignment.Center);
-                    DelBt.Text = "Suprimir";
-                    LaunchAccountsSelecBt.Text = "Lanzar las cuentas seleccionadas";
-                    Text = "Gestión de cuentas";
-                    sadikTabControl1.TabPages[0].Text = "Lanzar";
-                    sadikTabControl1.TabPages[1].Text = "Añadir";
-                    AddBt.Text = "Añadir";
-                    sadikLabel1.Text = "Nombre de cuenta";
-                    sadikLabel2.Text = "Contraseña";
-                    break;
-                case "PT":
-                    listViewAccounts.Columns.Add("Nome de conta", 200, HorizontalAlignment.Center);
-                    listViewAccounts.Columns.Add("Contra-senha", 0, HorizontalAlignment.Center);
-                    DelBt.Text = "Escamotear";
-                    LaunchAccountsSelecBt.Text = "Lance as contas selecionadas";
-                    Text = "Administração de contas";
-                    sadikTabControl1.TabPages[0].Text = "Lance";
-                    sadikTabControl1.TabPages[1].Text = "Acrescentar";
-                    AddBt.Text = "Acrescentar";
-                    sadikLabel1.Text = "Nome de conta";
-                    sadikLabel2.Text = "Contra-senha";
-                    break;
-            }
+            listViewAccounts.Columns.Add(Strings.Name, 200, HorizontalAlignment.Center);
+            listViewAccounts.Columns.Add(Strings.Password, 0, HorizontalAlignment.Center);
+            DelBt.Text = Strings.Delete;
+            LaunchAccountsSelecBt.Text = Strings.LaunchSelectedAccounts;
+            Text = Strings.AccountsManager;
+            sadikTabControl1.TabPages[0].Text = Strings.Launch;
+            sadikTabControl1.TabPages[1].Text = Strings.Add;
+            AddBt.Text = Strings.Add;
+            sadikLabel1.Text = Strings.Name;
+            sadikLabel2.Text = Strings.Password;
             listViewAccounts.Columns[1].Width = 0;
 
             LoadAccounts();
@@ -88,7 +57,7 @@ namespace BlueSheep.Interface
                 {
                     // TODO : Automate the dll injection
                     Process proc = new Process();
-                    string directoryPath = System.IO.Path.Combine (MainForm.ActualMainForm.DofusPath, "app", "Dofus.exe");
+                    string directoryPath = System.IO.Path.Combine(MainForm.ActualMainForm.DofusPath, "app", "Dofus.exe");
                     proc.StartInfo.FileName = directoryPath;
                     proc.Start();
                     //BlueSheep.Engine.Constants.DllInjector Injector = new Engine.Constants.DllInjector();
@@ -105,11 +74,11 @@ namespace BlueSheep.Interface
                     //    }
                     //}
                     //DllInjector.GetInstance.Inject(proc.ProcessName, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\No.Ankama.dll");
-                 //BlueSheep.Engine.Constants.DllInjector Injector = new Engine.Constants.D);
-                 //   String path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\No.Ankama.dll";
-                    
-                    
-                 //   BlueSheep.Engine.Injection.StartInjection(path, proc.Id);
+                    //BlueSheep.Engine.Constants.DllInjector Injector = new Engine.Constants.D);
+                    //   String path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\No.Ankama.dll";
+
+
+                    //   BlueSheep.Engine.Injection.StartInjection(path, proc.Id);
 
                     AccountFrm frm = new AccountFrm(account.SubItems[0].Text, account.SubItems[1].Text, false);
                     frm.Show();

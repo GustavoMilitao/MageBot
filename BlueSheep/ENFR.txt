@@ -1,65 +1,65 @@
-﻿"Connecté", "Connected"
-"Déconnecté", "Disconnected"
-"Dialogue", "Speaking"
-"Régénération", "Regenerating"
-"Récolte", "Gathering"
-"Déplacement", "Moving"
-"Combat", "Fighting"
-"Téléportation", "Teleportating"
-"est mort", "is dead"
-"Fin du tour", "Turn ended"
-"Equipement rapide numero", "Stuff preset number"
-"Trajet arrêté", "Path Stopped"
-"Reconnexion automatique dans minutes", "Reconnection in X minutes"
-"Prochain repas dans", "Next meal in"
-"Aucune nourriture disponible, pas de prochaine connexion", "No food available, stay disconnected."
-"Connexion", "Connecting"
-"Je suis le chef de groupe biatch", "I'm the group leader biatch !"
-"Trajet chargé", "Path loaded "
-"Erreur lors de la sélection du personnage", "Error during the selection of the character"
-"Serveur complet", "The server is full, try again later"
-"Echec de connexion : Dofus a été mis à jour", "Connection failure, Dofus has been updated. Try again later"
-"Echec de connexion : Vous êtes bannis", "Connection failure, your account has been banned"
-"Identification en cours", "Identification in process"
-"Identification réussie", "Identification successful"
-"Echec de l'identification", "Identification failure"
-"J'ai rejoint le groupe", "I joined the group"
-"Ancienne cellid of", "Last cellid of"
-"Nouvelle cellid of", "New cellid of "
-"Début du combat", "Fight started"
-"Combat fini !", "Fight is over !"
-"Echec de l'ouverture du coffre", "Failed to open the chest"
-"File d'attente", "Position in queue"
-"Déconnecté du serveur", "Disconnected from the server"
-"Inactivité prolongée", "Prolonged inactivity"
-"Connexion établie au serveur", "Connected to server"
-"Connexion échouée", " Connection failed"
-"Lancement du trajet", "Path launched"
-"Echec de connexion : compte banni temporairement", "Connection failure, your account is temporarily banned"
-"Echec de connexion : compte banni", "Connection failure, your account is banned"
-"Echec de connexion : serveur en maintenance", "Connection failure, server's is down for maintenance"
-"Echec de connexion : erreur inconnue", "Connection failure : Uknown error"
-"Echec de connnexion : serveur déconnecté", "connection failure, servor disconnected"
-"Echec de connexion : serveur en sauvegarde", "Connection failure, the server is down for backup"
-"Echec de connexion : serveur complet", "connection failure, servor is full"
-"Echec de connexion : raison inconnue", "Connection failure : Unknown cause"
-"Récupération d'un objet du coffre", "Taking an item from the chest"
-"Fermeture du coffre", "Closing the chest"
-"Ouverture du coffre", "Opening the chest"
-"Dépôt d'un objet dans le coffre", "Putting an item in the chest"
-"est connecté", "is connected"
-"Fight Turn", "Fight Turn"
-"Sort validé", "Spell agreed-upon"
-"Cible en vue à la cellule", "Traget is on the cell n°"
-"It's Time to capture ! POKEBALL GOOOOOOOO", "It's Time to capture ! POKEBALL GOOOOOOOO"
-"Lancement d'un combat contre monstres de niveau", "Starting a fight against monsters of level "
-"Lancement d'un sort en", "Launching a spell at"
-"Placement du personnage", "Character's in-fight position"
-"Impossible d'enclencher le déplacement", "Unable to move"
-"Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.bluesheepbot.com ", "The bot didn't receive the map's informations yet, please check out later, if the poblem persists, report it on the forum : http://forum.bluesheep.com"
-"Up de caractéristique", "Enhance characteristics"
-"Envoi de la réponse", "Sending the answer"
-"Aucune réponse disponible dans le trajet", "No answer available in the path for this ask"
-"au serveur de jeu", "to the game's server"
-"au serveur d'identification", "to the authentication's server"
-"La récolte n'est pas encore implémentée, veuillez attendre la mise à jour. Tenez vous au courant sur", "Gathering isn't already implemented, please wait a release. Stay updated on"
+﻿Connecté; Connected
+Déconnecté; Disconnected
+Dialogue; Speaking
+Régénération; Regenerating
+Récolte; Gathering
+Déplacement; Moving
+Combat; Fighting
+Téléportation; Teleportating
+est mort; is dead
+Fin du tour; Turn ended
+Equipement rapide numero; Stuff preset number
+Trajet arrêté; Path Stopped
+Reconnexion automatique dans minutes; Reconnection in X minutes
+Prochain repas dans; Next meal in
+Aucune nourriture disponible, pas de prochaine connexion; No food available, stay disconnected.
+Connexion; Connecting
+Je suis le chef de groupe biatch; I'm the group leader biatch !
+Trajet chargé; Path loaded 
+Erreur lors de la sélection du personnage; Error during the selection of the character
+Serveur complet; The server is full, try again later
+Echec de connexion : Dofus a été mis à jour; Connection failure, Dofus has been updated. Try again later
+Echec de connexion : Vous êtes bannis; Connection failure, your account has been banned
+Identification en cours; Identification in process
+Identification réussie; Identification successful
+Echec de l'identification; Identification failure
+J'ai rejoint le groupe; I joined the group
+Ancienne cellid of; Last cellid of
+Nouvelle cellid of; New cellid of 
+Début du combat; Fight started
+Combat fini !; Fight is over !
+Echec de l'ouverture du coffre; Failed to open the chest
+File d'attente; Position in queue
+Déconnecté du serveur; Disconnected from the server
+Inactivité prolongée; Prolonged inactivity
+Connexion établie au serveur; Connected to server
+Connexion échouée;  Connection failed
+Lancement du trajet; Path launched
+Echec de connexion : compte banni temporairement; Connection failure, your account is temporarily banned
+Echec de connexion : compte banni; Connection failure, your account is banned
+Echec de connexion : serveur en maintenance; Connection failure, server's is down for maintenance
+Echec de connexion : erreur inconnue; Connection failure : Uknown error
+Echec de connnexion : serveur déconnecté; connection failure, servor disconnected
+Echec de connexion : serveur en sauvegarde; Connection failure, the server is down for backup
+Echec de connexion : serveur complet; connection failure, servor is full
+Echec de connexion : raison inconnue; Connection failure : Unknown cause
+Récupération d'un objet du coffre; Taking an item from the chest
+Fermeture du coffre; Closing the chest
+Ouverture du coffre; Opening the chest
+Dépôt d'un objet dans le coffre; Putting an item in the chest
+est connecté; is connected
+Fight Turn; Fight Turn
+Sort validé; Spell agreed-upon
+Cible en vue à la cellule; Traget is on the cell n°
+It's Time to capture ! POKEBALL GOOOOOOOO; It's Time to capture ! POKEBALL GOOOOOOOO
+Lancement d'un combat contre monstres de niveau; Starting a fight against monsters of level 
+Lancement d'un sort en; Launching a spell at
+Placement du personnage; Character's in-fight position
+Impossible d'enclencher le déplacement; Unable to move
+Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.bluesheepbot.com ; The bot didn't receive the map's informations yet, please check out later, if the poblem persists, report it on the forum : http://forum.bluesheep.com
+Up de caractéristique; Enhance characteristics
+Envoi de la réponse; Sending the answer
+Aucune réponse disponible dans le trajet; No answer available in the path for this ask
+au serveur de jeu; to the game's server
+au serveur d'identification; to the authentication's server
+La récolte n'est pas encore implémentée, veuillez attendre la mise à jour. Tenez vous au courant sur; Gathering isn't already implemented, please wait a release. Stay updated on

@@ -1,4 +1,5 @@
 ﻿using BlueSheep.Interface.Text;
+using BlueSheep.Properties.I18n.Strings;
 using System;
 using System.IO;
 using System.Linq;
@@ -21,17 +22,12 @@ namespace BlueSheep.Interface
         {
             InitializeComponent();
             Account = account;
-            switch (MainForm.ActualMainForm.Lang)
-            {
-                case "EN":
-                    Text = "Path manager";
-                    DelBt.Text = "Delete";
-                    LoadBt.Text = "Load";
-                    AddBt.Text = "Add";
-                    FilesList.Columns[0].Text = "Name";
-                    FilesList.Columns[4].Text = "Author";
-                    break;
-            }
+            Text = Strings.PathManager;
+            DelBt.Text = Strings.Delete;
+            LoadBt.Text = Strings.Load;
+            AddBt.Text = Strings.Add;
+            FilesList.Columns[0].Text = Strings.Name;
+            FilesList.Columns[4].Text = Strings.Author;
         }
         #endregion
 
@@ -45,7 +41,7 @@ namespace BlueSheep.Interface
         {
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string combinedPath = System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "BlueSheep", "Paths", openFileDialog1.SafeFileName);
+                string combinedPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Paths", openFileDialog1.SafeFileName);
                 if (!File.Exists(combinedPath))
                 {
                     File.Copy(openFileDialog1.FileName, combinedPath);
@@ -78,7 +74,7 @@ namespace BlueSheep.Interface
         #region Private methods
         private void Init()
         {
-            string combinedPath = System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "BlueSheep", "Paths");
+            string combinedPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Paths");
             openFileDialog1.InitialDirectory = combinedPath;
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(combinedPath);
             if (di.GetFiles().Count() == 0)
@@ -135,12 +131,12 @@ namespace BlueSheep.Interface
             infos[5] = fi.FullName;
             sr.Close();
             FilesList.Items.Add(infos[0]).SubItems.AddRange(new string[] {
-		infos[1],
-		infos[2],
-		infos[3],
-		infos[4],
+        infos[1],
+        infos[2],
+        infos[3],
+        infos[4],
         infos[5]
-	});
+    });
         }
 
 
@@ -149,7 +145,7 @@ namespace BlueSheep.Interface
             if (FilesList.SelectedItems.Count > 0 && Account != null)
             {
                 Account.Path = new Core.Path.PathManager(Account, FilesList.SelectedItems[0].SubItems[5].Text, FilesList.SelectedItems[0].SubItems[0].Text);
-                Account.Log(new BotTextInformation("Trajet chargé : " + FilesList.SelectedItems[0].Text),0);
+                Account.Log(new BotTextInformation("Trajet chargé : " + FilesList.SelectedItems[0].Text), 0);
                 Account.Path.pathBot = FilesList.SelectedItems[0].Text;
                 if (Account.Fight == null)
                 {

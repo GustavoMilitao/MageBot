@@ -117,6 +117,192 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Speaking" xml:space="preserve">
+    <value>Dialogue</value>
+  </data>
+  <data name="Gathering" xml:space="preserve">
+    <value>Récolte</value>
+  </data>
+  <data name="Moving" xml:space="preserve">
+    <value>Déplacement</value>
+  </data>
+  <data name="Fighting" xml:space="preserve">
+    <value>Combat</value>
+  </data>
+  <data name="Teleportating" xml:space="preserve">
+    <value>Téléportation</value>
+  </data>
+  <data name="IsDead" xml:space="preserve">
+    <value>est mort</value>
+  </data>
+  <data name="TurnEnded" xml:space="preserve">
+    <value>Fin du tour</value>
+  </data>
+  <data name="StuffPresetNumber" xml:space="preserve">
+    <value>Equipement rapide numero</value>
+  </data>
+  <data name="PathStopped" xml:space="preserve">
+    <value>Trajet arrêté</value>
+  </data>
+  <data name="ReconnectionInXMinutes" xml:space="preserve">
+    <value>Reconnexion automatique dans minutes</value>
+  </data>
+  <data name="NextMealIn" xml:space="preserve">
+    <value>Prochain repas dans</value>
+  </data>
+  <data name="NoFoodAvailableStayDisconnected" xml:space="preserve">
+    <value>Aucune nourriture disponible, pas de prochaine connexion</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="ImTheGroupLeaderBiatch" xml:space="preserve">
+    <value>Je suis le chef de groupe biatch</value>
+  </data>
+  <data name="PathLoaded" xml:space="preserve">
+    <value>Trajet chargé</value>
+  </data>
+  <data name="ErrorDuringTheSelectionOfTheCharacter" xml:space="preserve">
+    <value>Erreur lors de la sélection du personnage</value>
+  </data>
+  <data name="TheServerIsFullTryAgainLater" xml:space="preserve">
+    <value>Serveur complet</value>
+  </data>
+  <data name="ConnectionFailureDofusHasBeenUpdatedTryAgainLater" xml:space="preserve">
+    <value>Echec de connexion : Dofus a été mis à jour</value>
+  </data>
+  <data name="ConnectionFailureYourAccountHasBeenBanned" xml:space="preserve">
+    <value>Echec de connexion : Vous êtes bannis</value>
+  </data>
+  <data name="IdentificationInProcess" xml:space="preserve">
+    <value>Identification en cours</value>
+  </data>
+  <data name="IdentificationSuccessful" xml:space="preserve">
+    <value>Identification réussie</value>
+  </data>
+  <data name="IdentificationFailure" xml:space="preserve">
+    <value>Echec de l'identification</value>
+  </data>
+  <data name="IJoinedTheGroup" xml:space="preserve">
+    <value>J'ai rejoint le groupe</value>
+  </data>
+  <data name="LastCellidOf" xml:space="preserve">
+    <value>Ancienne cellid of</value>
+  </data>
+  <data name="NewCellidOf" xml:space="preserve">
+    <value>Nouvelle cellid of</value>
+  </data>
+  <data name="FightStarted" xml:space="preserve">
+    <value>Début du combat</value>
+  </data>
+  <data name="FightIsOver" xml:space="preserve">
+    <value>Combat fini !</value>
+  </data>
+  <data name="FailedToOpenTheChest" xml:space="preserve">
+    <value>Echec de l'ouverture du coffre</value>
+  </data>
+  <data name="PositionInQueue" xml:space="preserve">
+    <value>File d'attente</value>
+  </data>
+  <data name="DisconnectedFromTheServer" xml:space="preserve">
+    <value>Déconnecté du serveur</value>
+  </data>
+  <data name="ProlongedInactivity" xml:space="preserve">
+    <value>Inactivité prolongée</value>
+  </data>
+  <data name="ConnectedToServer" xml:space="preserve">
+    <value>Connexion établie au serveur</value>
+  </data>
+  <data name="ConnectionFailed" xml:space="preserve">
+    <value>Connexion échouée</value>
+  </data>
+  <data name="PathLaunched" xml:space="preserve">
+    <value>Lancement du trajet</value>
+  </data>
+  <data name="ConnectionFailureYourAccountIsTemporarilyBanned" xml:space="preserve">
+    <value>Echec de connexion : compte banni temporairement</value>
+  </data>
+  <data name="ConnectionFailureYourAccountIsBanned" xml:space="preserve">
+    <value>Echec de connexion : compte banni</value>
+  </data>
+  <data name="ConnectionFailureServersIsDownForMaintenance" xml:space="preserve">
+    <value>Echec de connexion : serveur en maintenance</value>
+  </data>
+  <data name="ConnectionFailureUknownError" xml:space="preserve">
+    <value>Echec de connexion : erreur inconnue</value>
+  </data>
+  <data name="ConnectionFailureServorDisconnected" xml:space="preserve">
+    <value>Echec de connnexion : serveur déconnecté</value>
+  </data>
+  <data name="ConnectionFailureTheServerIsDownForBackup" xml:space="preserve">
+    <value>Echec de connexion : serveur en sauvegarde</value>
+  </data>
+  <data name="ConnectionFailureServorIsFull" xml:space="preserve">
+    <value>Echec de connexion : serveur complet</value>
+  </data>
+  <data name="ConnectionFailureUnknownCause" xml:space="preserve">
+    <value>Echec de connexion : raison inconnue</value>
+  </data>
+  <data name="TakingAnItemFromTheChest" xml:space="preserve">
+    <value>Récupération d'un objet du coffre</value>
+  </data>
+  <data name="ClosingTheChest" xml:space="preserve">
+    <value>Fermeture du coffre</value>
+  </data>
+  <data name="OpeningTheChest" xml:space="preserve">
+    <value>Ouverture du coffre</value>
+  </data>
+  <data name="PuttingAnItemInTheChest" xml:space="preserve">
+    <value>Dépôt d'un objet dans le coffre</value>
+  </data>
+  <data name="IsConnected" xml:space="preserve">
+    <value>est connecté</value>
+  </data>
+  <data name="FightTurn" xml:space="preserve">
+    <value>Fight Turn</value>
+  </data>
+  <data name="SpellAgreedUpon" xml:space="preserve">
+    <value>Sort validé</value>
+  </data>
+  <data name="TragetIsOnTheCellN" xml:space="preserve">
+    <value>Cible en vue à la cellule</value>
+  </data>
+  <data name="ItsTimeToCapturePOKEBALLGOOOOOOOO" xml:space="preserve">
+    <value>It's Time to capture ! POKEBALL GOOOOOOOO</value>
+  </data>
+  <data name="StartingAFightAgainstMonstersOfLevel" xml:space="preserve">
+    <value>Lancement d'un combat contre monstres de niveau</value>
+  </data>
+  <data name="LaunchingASpellAt" xml:space="preserve">
+    <value>Lancement d'un sort en</value>
+  </data>
+  <data name="CharactersInFightPosition" xml:space="preserve">
+    <value>Placement du personnage</value>
+  </data>
+  <data name="UnableToMove" xml:space="preserve">
+    <value>Impossible d'enclencher le déplacement</value>
+  </data>
+  <data name="TheBotDidntReceiveTheMapsInformationsYetPleaseCheckOutLaterIfThePoblemPersistsReportItOnTheForumHttpForumBluesheepCom" xml:space="preserve">
+    <value>Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.bluesheepbot.com</value>
+  </data>
+  <data name="EnhanceCharacteristics" xml:space="preserve">
+    <value>Up de caractéristique</value>
+  </data>
+  <data name="SendingTheAnswer" xml:space="preserve">
+    <value>Envoi de la réponse</value>
+  </data>
+  <data name="NoAnswerAvailableInThePathForThisAsk" xml:space="preserve">
+    <value>Aucune réponse disponible dans le trajet</value>
+  </data>
+  <data name="ToTheGamesServer" xml:space="preserve">
+    <value>au serveur de jeu</value>
+  </data>
+  <data name="ToTheAuthenticationsServer" xml:space="preserve">
+    <value>au serveur d'identification</value>
+  </data>
+  <data name="GatheringIsntAlreadyImplementedPleaseWaitAReleaseStayUpdatedOn" xml:space="preserve">
+    <value>La récolte n'est pas encore implémentée, veuillez attendre la mise à jour. Tenez vous au courant sur</value>
+  </data>
   <data name="AccountManagement" xml:space="preserve">
     <value>Gestion de comptes</value>
   </data>
@@ -446,5 +632,29 @@
   </data>
   <data name="WinLoseFightPie" xml:space="preserve">
     <value>WinLoseFightPie</value>
+  </data>
+  <data name="AccountsManager" xml:space="preserve">
+    <value>Gestion des comptes</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="GroupsManager" xml:space="preserve">
+    <value>Gérant des groupes</value>
+  </data>
+  <data name="Launch" xml:space="preserve">
+    <value>Lancement</value>
+  </data>
+  <data name="LaunchSelectedAccounts" xml:space="preserve">
+    <value>Lancer des comptes sélectionnés</value>
+  </data>
+  <data name="LaunchSelectedGroups" xml:space="preserve">
+    <value>Lancer des groupes sélectionnés</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>mot de passe</value>
+  </data>
+  <data name="PathManager" xml:space="preserve">
+    <value>Gestionnaire de chemin</value>
   </data>
 </root>

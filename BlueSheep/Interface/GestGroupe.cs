@@ -1,5 +1,6 @@
 ﻿using BlueSheep.AccountsManager;
 using BlueSheep.Common.Types;
+using BlueSheep.Properties.I18n.Strings;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,38 +26,15 @@ namespace BlueSheep.Interface
             LoadAccounts();
             listViewAccounts.HideSelection = true;
             listViewGroups.HideSelection = true;
-
-            switch (MainForm.ActualMainForm.Lang)
-            {
-                case "FR":
-                    listViewAccounts.Columns.Add("Nom", 200, HorizontalAlignment.Center);
-                    listViewAccounts.Columns.Add("Mot de passe", 0, HorizontalAlignment.Center);
-                    listViewGroups.Columns.Add("Nom", -2, HorizontalAlignment.Center);
-                    break;
-                case "EN":
-                    listViewAccounts.Columns.Add("Username", 200, HorizontalAlignment.Center);
-                    listViewAccounts.Columns.Add("Password", 0, HorizontalAlignment.Center);
-                    listViewGroups.Columns.Add("Name", -2, HorizontalAlignment.Center);
-                    DelBt.Text = "Delete";
-                    LaunchGroupsSelecBt.Text = "Launch selected groups";
-                    Text = "Groups manager";
-                    sadikTabControl1.TabPages[0].Text = "Launch";
-                    sadikTabControl1.TabPages[1].Text = "Create";
-                    AddBt.Text = "Create";
-                    break;
-                default:
-                    listViewAccounts.Columns.Add("Username", 200, HorizontalAlignment.Center);
-                    listViewAccounts.Columns.Add("Password", 0, HorizontalAlignment.Center);
-                    listViewGroups.Columns.Add("Name", -2, HorizontalAlignment.Center);
-                    DelBt.Text = "Delete";
-                    LaunchGroupsSelecBt.Text = "Launch selected groups";
-                    Text = "Groups manager";
-                    sadikTabControl1.TabPages[0].Text = "Launch";
-                    sadikTabControl1.TabPages[1].Text = "Create";
-                    AddBt.Text = "Create";
-                    break;
-            }
-            
+            listViewAccounts.Columns.Add(Strings.Name, 200, HorizontalAlignment.Center);
+            listViewAccounts.Columns.Add(Strings.Password, 0, HorizontalAlignment.Center);
+            listViewGroups.Columns.Add(Strings.Name, -2, HorizontalAlignment.Center);
+            DelBt.Text = Strings.Delete;
+            LaunchGroupsSelecBt.Text = Strings.LaunchSelectedGroups;
+            Text = Strings.GroupsManager;
+            sadikTabControl1.TabPages[0].Text = Strings.Launch;
+            sadikTabControl1.TabPages[1].Text = Strings.Create;
+            AddBt.Text = Strings.Create;
         }
         #endregion
 
@@ -89,8 +67,8 @@ namespace BlueSheep.Interface
             //parcours des groupes sélectionnés
             {
                 ListViewItem listViewItem2 = listViewGroups.SelectedItems[i];
-                string ApplicationDataPath = Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData);
-                string combinedPath = System.IO.Path.Combine (ApplicationDataPath, "BlueSheep", "Groups", listViewItem2.Text + ".bs");
+                string ApplicationDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string combinedPath = System.IO.Path.Combine(ApplicationDataPath, "BlueSheep", "Groups", listViewItem2.Text + ".bs");
                 File.Delete(combinedPath);
                 listViewGroups.Items.Remove(listViewItem2);
             }
@@ -148,7 +126,7 @@ namespace BlueSheep.Interface
             }
         }
 
-        
+
 
         private void LoadAccounts()
         {
