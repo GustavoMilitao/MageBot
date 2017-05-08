@@ -132,8 +132,20 @@
   <data name="Add" xml:space="preserve">
     <value>Ajouter</value>
   </data>
+  <data name="AdditionOf" xml:space="preserve">
+    <value>Ajout de</value>
+  </data>
+  <data name="AI" xml:space="preserve">
+    <value>IA</value>
+  </data>
+  <data name="AIManager" xml:space="preserve">
+    <value>Gestionnaire d'IA</value>
+  </data>
   <data name="Alliance" xml:space="preserve">
     <value>Alliance</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Quantité</value>
   </data>
   <data name="AtTheEndOfTheFight" xml:space="preserve">
     <value>à la fin du combat</value>
@@ -141,14 +153,23 @@
   <data name="AtTheEntranceInCombat" xml:space="preserve">
     <value>à l\'entrée en combat</value>
   </data>
+  <data name="Author" xml:space="preserve">
+    <value>Auteur</value>
+  </data>
   <data name="AutoDelete" xml:space="preserve">
     <value>Suppression auto</value>
+  </data>
+  <data name="AutomaticReconnectionIn" xml:space="preserve">
+    <value>Reconnexion automatique dans</value>
   </data>
   <data name="BlueSheep" xml:space="preserve">
     <value>BlueSheep</value>
   </data>
   <data name="BlueSheepIsNowMinimized" xml:space="preserve">
     <value>BlueSheep est maintenant réduit au minimum dans la barre d'état système</value>
+  </data>
+  <data name="Breed" xml:space="preserve">
+    <value>Race</value>
   </data>
   <data name="Browse" xml:space="preserve">
     <value>Parcourir</value>
@@ -171,8 +192,14 @@
   <data name="Commerce" xml:space="preserve">
     <value>Commerce</value>
   </data>
+  <data name="Comparator" xml:space="preserve">
+    <value>Comparateur</value>
+  </data>
   <data name="Configuration" xml:space="preserve">
     <value>Configuration</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Connecté</value>
   </data>
   <data name="Connection" xml:space="preserve">
     <value>Connexion</value>
@@ -188,6 +215,9 @@
   </data>
   <data name="DebugMode" xml:space="preserve">
     <value>Debug mode</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Effacer</value>
   </data>
   <data name="Disconnected" xml:space="preserve">
     <value>Déconnecté</value>
@@ -216,6 +246,9 @@
   <data name="Error" xml:space="preserve">
     <value>Erreur</value>
   </data>
+  <data name="Food" xml:space="preserve">
+    <value>Nourriture</value>
+  </data>
   <data name="Forbidden" xml:space="preserve">
     <value>Interdire</value>
   </data>
@@ -224,6 +257,9 @@
   </data>
   <data name="General" xml:space="preserve">
     <value>Général</value>
+  </data>
+  <data name="GID" xml:space="preserve">
+    <value>GID</value>
   </data>
   <data name="Groups" xml:space="preserve">
     <value>Groupes</value>
@@ -237,8 +273,11 @@
   <data name="Houses" xml:space="preserve">
     <value>Maisons</value>
   </data>
-  <data name="IA" xml:space="preserve">
-    <value>IA</value>
+  <data name="Identification" xml:space="preserve">
+    <value>d'identification</value>
+  </data>
+  <data name="InTheStoreAtThePriceOf" xml:space="preserve">
+    <value>Dans le magasin au prix de</value>
   </data>
   <data name="Inventory" xml:space="preserve">
     <value>Inventaire</value>
@@ -251,6 +290,9 @@
   </data>
   <data name="LaunchWaitingForTheSale" xml:space="preserve">
     <value>Lancer l\'attente de la mise en vente</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Charger</value>
   </data>
   <data name="LoadAPath" xml:space="preserve">
     <value>Charger un Trajet</value>
@@ -267,8 +309,14 @@
   <data name="MaximumPrice" xml:space="preserve">
     <value>Prix maximum</value>
   </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Moyen</value>
+  </data>
   <data name="MerchantMode" xml:space="preserve">
     <value>Mode marchand</value>
+  </data>
+  <data name="MerchantModeActivationTest" xml:space="preserve">
+    <value>Essai de l'activation du mode marchand</value>
   </data>
   <data name="Miscellaneous" xml:space="preserve">
     <value>Divers</value>
@@ -282,14 +330,20 @@
   <data name="MonstersRestrictions" xml:space="preserve">
     <value>Restrictions de monstres</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
   <data name="NextMeal" xml:space="preserve">
     <value>Prochain repas</value>
   </data>
-  <data name="NoIA" xml:space="preserve">
+  <data name="NoAI" xml:space="preserve">
     <value>Choisir une IA</value>
   </data>
   <data name="NotSubscribed" xml:space="preserve">
     <value>Non abonné</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Nombre</value>
   </data>
   <data name="OfLife" xml:space="preserve">
     <value>de vie</value>
@@ -315,6 +369,9 @@
   <data name="RegenerateFrom" xml:space="preserve">
     <value>Se régénérer à partir de</value>
   </data>
+  <data name="Regenerating" xml:space="preserve">
+    <value>Regeneration</value>
+  </data>
   <data name="Regeneration" xml:space="preserve">
     <value>Régénération</value>
   </data>
@@ -327,6 +384,9 @@
   <data name="RestartThePathToReconnect" xml:space="preserve">
     <value>Relancer le trajet à la reconnexion</value>
   </data>
+  <data name="Restriction" xml:space="preserve">
+    <value>Restriction</value>
+  </data>
   <data name="Restrictions" xml:space="preserve">
     <value>Restrictions</value>
   </data>
@@ -338,6 +398,12 @@
   </data>
   <data name="SearchForLogFile" xml:space="preserve">
     <value>Fichier log du searcher</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>secondes</value>
+  </data>
+  <data name="SellingPrice" xml:space="preserve">
+    <value>Prix de vente</value>
   </data>
   <data name="SentenceToSayAfterBuying" xml:space="preserve">
     <value>Phrase à dire après l\'achat</value>
@@ -362,6 +428,15 @@
   </data>
   <data name="To" xml:space="preserve">
     <value>À</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UID" xml:space="preserve">
+    <value>UID</value>
+  </data>
+  <data name="UnableToSwitchToMerchantModeInAFight" xml:space="preserve">
+    <value>Impossible de se mettre en mode marchand en combat</value>
   </data>
   <data name="UseTheFastEquipmentNumber" xml:space="preserve">
     <value>Utiliser l\'équipement rapide numéro</value>

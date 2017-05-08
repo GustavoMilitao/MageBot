@@ -1,5 +1,6 @@
 ﻿using BlueSheep.Core.Fight;
 using BlueSheep.Interface.Text;
+using BlueSheep.Properties.I18n.Strings;
 using System;
 using System.IO;
 using System.Linq;
@@ -22,18 +23,14 @@ namespace BlueSheep.Interface
         {
             InitializeComponent();
             Account = account;
-            switch (MainForm.ActualMainForm.Lang)
-            {
-                case "EN":
-                    Text = "AI Manager";
-                    DelBt.Text = "Delete";
-                    LoadBt.Text = "Load";
-                    AddBt.Text = "Add";
-                    FilesList.Columns[0].Text = "Name";
-                    FilesList.Columns[1].Text = "Author";
-                    FilesList.Columns[2].Text = "Breed";
-                    break;
-            }
+            Text = Strings.AIManager;
+            DelBt.Text = Strings.Delete;
+            LoadBt.Text = Strings.Load;
+            AddBt.Text = Strings.Add;
+            FilesList.Columns[0].Text = Strings.Name ;
+            FilesList.Columns[1].Text = Strings.Author;
+            FilesList.Columns[2].Text = Strings.Breed;
+
             Init();
         }
         #endregion
@@ -80,12 +77,12 @@ namespace BlueSheep.Interface
             infos[5] = fi.FullName;
             sr.Close();
             FilesList.Items.Add(infos[0]).SubItems.AddRange(new string[] {
-		infos[1],
-		infos[2],
-		infos[3],
-		infos[4],
+        infos[1],
+        infos[2],
+        infos[3],
+        infos[4],
         infos[5]
-	});
+    });
         }
         #endregion
 

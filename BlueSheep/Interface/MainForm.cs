@@ -21,7 +21,7 @@ namespace BlueSheep.Interface
 
         #region Fields
         private string m_DofusPath;
-        public string Lang = "FR";
+        public string Lang = ConfigurationManager.AppSettings.Get("DefaultLanguage");
         #endregion
 
         #region Properties
@@ -79,6 +79,7 @@ namespace BlueSheep.Interface
         private void LanguageChoice_SelectedTextChanged(object sender, EventArgs e)
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(LanguageChoice.Text);
+            Lang = LanguageChoice.Text.Split('-')[0].ToUpper().Trim();
             AccountsBt.Text = Strings.Accounts;
             GroupsBt.Text = Strings.Groups;
         }

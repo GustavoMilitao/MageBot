@@ -544,9 +544,6 @@
     <Compile Include="Common\Protocol\Messages\Connection\ServerSelectionMessage.cs" />
     <Compile Include="Common\Protocol\Messages\Connection\ServersListMessage.cs" />
     <Compile Include="Common\Protocol\Messages\Connection\ServerStatusUpdateMessage.cs" />
-    <Compile Include="Common\Protocol\Messages\Debug\DebugClearHighlightCellsMessage.cs" />
-    <Compile Include="Common\Protocol\Messages\Debug\DebugHighlightCellsMessage.cs" />
-    <Compile Include="Common\Protocol\Messages\Debug\DebugInClientMessage.cs" />
     <Compile Include="Common\Protocol\Messages\Game\Achievement\AchievementDetailedListMessage.cs" />
     <Compile Include="Common\Protocol\Messages\Game\Achievement\AchievementDetailedListRequestMessage.cs" />
     <Compile Include="Common\Protocol\Messages\Game\Achievement\AchievementDetailsMessage.cs" />
@@ -1591,7 +1588,6 @@
     <Compile Include="Common\Protocol\Messages\Web\Krosmaster\KrosmasterPlayingStatusMessage.cs" />
     <Compile Include="Common\Protocol\Messages\Web\Krosmaster\KrosmasterTransferMessage.cs" />
     <Compile Include="Common\Protocol\Messages\Web\Krosmaster\KrosmasterTransferRequestMessage.cs" />
-    <Compile Include="Common\Protocol\Messages\Wtf\ClientYouAreDrunkMessage.cs" />
     <Compile Include="Common\Protocol\Types\Common\Basic\StatisticData.cs" />
     <Compile Include="Common\Protocol\Types\Common\Basic\StatisticDataBoolean.cs" />
     <Compile Include="Common\Protocol\Types\Common\Basic\StatisticDataByte.cs" />
@@ -2198,7 +2194,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bluesheep-logo.ico" />
+    <Content Include="ESFR.txt" />
     <Content Include="icon.ico" />
+    <Content Include="ENFR.txt" />
+    <Content Include="PTFR.txt" />
     <None Include="Resources\group.ico" />
     <None Include="Resources\co.ico" />
     <None Include="Resources\account.ico" />

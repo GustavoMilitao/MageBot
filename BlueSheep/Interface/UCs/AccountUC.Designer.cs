@@ -703,7 +703,7 @@ namespace BlueSheep.Interface
             this.GroupBox2.Size = new System.Drawing.Size(403, 62);
             this.GroupBox2.TabIndex = 16;
             this.GroupBox2.TabStop = false;
-            this.GroupBox2.Text = Strings.IA;
+            this.GroupBox2.Text = Strings.AI;
             // 
             // NomIA
             // 
@@ -712,7 +712,7 @@ namespace BlueSheep.Interface
             this.NomIA.Name = "NomIA";
             this.NomIA.Size = new System.Drawing.Size(68, 19);
             this.NomIA.TabIndex = 2;
-            this.NomIA.Text = Strings.NoIA;
+            this.NomIA.Text = Strings.NoAI;
             // 
             // ChoiceIABt
             // 
