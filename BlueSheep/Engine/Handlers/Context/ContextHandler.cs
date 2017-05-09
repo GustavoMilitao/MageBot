@@ -59,10 +59,6 @@ namespace BlueSheep.Engine.Handlers.Context
             account.Enable(true);
             account.MapData.DoAction();
             account.ActualizeMap();
-            if (account.FightData != null && account.Fight != null && account.Fight.infinite)
-            {
-                account.Fight.SearchFight();
-            }
         }
 
         [MessageHandler(typeof(MapComplementaryInformationsWithCoordsMessage))]
