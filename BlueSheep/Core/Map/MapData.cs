@@ -43,7 +43,7 @@ namespace BlueSheep.Core.Map
         /// <summary>
         /// Dict containing the interactive elements and their cellId. If no cellId found, cellId equals -1.
         /// </summary>
-        public Dictionary<Elements.InteractiveElement, int> InteractiveElements = new Dictionary<Elements.InteractiveElement,int>();
+        public Dictionary<Elements.InteractiveElement, int> InteractiveElements = new Dictionary<Elements.InteractiveElement, int>();
 
         /// <summary>
         /// List containing all the stated elements on the map.
@@ -188,7 +188,7 @@ namespace BlueSheep.Core.Map
             {
                 if (element.ElementTypeId == 85)
                     m_Account.Safe = element;
-                Elements.InteractiveElement Ielement = new Elements.InteractiveElement((uint)element.ElementId, element.ElementTypeId, element.EnabledSkills, element.DisabledSkills);         
+                Elements.InteractiveElement Ielement = new Elements.InteractiveElement((uint)element.ElementId, element.ElementTypeId, element.EnabledSkills, element.DisabledSkills);
                 InteractiveElements.Add(Ielement, -1);
                 if (Ielement.EnabledSkills.Count > 0)
                 {
@@ -231,7 +231,7 @@ namespace BlueSheep.Core.Map
         /// Perform the correct action that we must do when we arrive on a new map.
         /// </summary>
         public void DoAction()
-        {       
+        {
             if (m_Account.Path != null && m_Account.Path.Launched)
             {
                 m_Account.Log(new DebugTextInformation("[Path] DoAction"), 0);
@@ -264,7 +264,7 @@ namespace BlueSheep.Core.Map
             string mapName = I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Areas, (int)subArea.Fields["areaId"]).Fields["nameId"]);
             string subAreaName = I18N.GetText((int)subArea.Fields["nameId"]);
             m_Account.ModifBar(5, 0, 0, "[" + X + ";" + Y + "]" + " " + mapName + " (" + subAreaName + ")");
-            m_Account.ModifBar(5, 0, 0,  mapName + " (" + subAreaName + ")");
+            m_Account.ModifBar(5, 0, 0, mapName + " (" + subAreaName + ")");
         }
 
         /// <summary>
@@ -285,7 +285,7 @@ namespace BlueSheep.Core.Map
                 InteractiveElements.Add(Ielement, temp.Item2);
             }
             else
-                InteractiveElements.Add(Ielement, -1);    
+                InteractiveElements.Add(Ielement, -1);
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace BlueSheep.Core.Map
         /// </summary>
         public void UpdateStatedElement(BlueSheep.Common.Protocol.Types.Game.Interactive.StatedElement element)
         {
-            Elements.StatedElement Selement = new Elements.StatedElement(element.ElementCellId, element.ElementId,element.ElementState);
+            Elements.StatedElement Selement = new Elements.StatedElement(element.ElementCellId, element.ElementId, element.ElementState);
             if (StatedElements.Find(s => s.Id == Selement.Id) != null)
                 StatedElements.Find(s => s.Id == Selement.Id).State = Selement.State;
             else
@@ -315,23 +315,27 @@ namespace BlueSheep.Core.Map
         /// </summary>
         public bool CanGatherElement(int id, int distance)
         {
+            Elements.StatedElement element = StatedElements.Find(s => s.Id == id);
+            if (element.State == 1 || element.State == 2)
+                return false;
             if (distance <= 1 && distance >= 0)
                 return true;
-            if (m_Account.Inventory.HasFishingRod)
+            MapPoint characterPoint = new MapPoint(Character.Disposition.CellId);
+            if (element != null)
             {
-                MapPoint characterPoint = new MapPoint(Character.Disposition.CellId);
-                Elements.StatedElement element = StatedElements.Find(s => s.Id == id);
-                if (element != null)
+                MapPoint elementPoint = new MapPoint((int)element.CellId);
+                List<MapPoint> goodPointsList = GetListPointAtGoodDistance(characterPoint, elementPoint, m_Account.Inventory.WeaponRange);
+                if (goodPointsList.Count > 0)
                 {
-                    MapPoint elementPoint = new MapPoint((int)element.CellId);
-                    List<MapPoint> goodPointsList = GetListPointAtGoodDistance(characterPoint, elementPoint, m_Account.Inventory.WeaponRange);
                     foreach (MapPoint mp in goodPointsList)
                         m_Account.Log(new DebugTextInformation("[CanGatherElement] GoodPoints -> " + mp.CellId), 0);
-                    m_Account.Log(new DebugTextInformation("[CanGatherElement] Player CellId ? " + characterPoint.CellId),0);
+                    m_Account.Log(new DebugTextInformation("[CanGatherElement] Player CellId ? " + characterPoint.CellId), 0);
                     var selectedPoint = goodPointsList.FirstOrDefault((point) => point.CellId == characterPoint.CellId);
                     if (selectedPoint != null)
                         return true;
                 }
+                m_Account.Gather.BanElementId(id);
+                return false;
             }
             return false;
         }
