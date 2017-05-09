@@ -1,4 +1,6 @@
-﻿﻿namespace BlueSheep.Interface
+﻿using BlueSheep.Properties.I18n.Strings;
+
+namespace BlueSheep.Interface
  {
      partial class GestAccounts
      {
@@ -68,7 +70,7 @@
             this.LaunchPage.Padding = new System.Windows.Forms.Padding(3);
             this.LaunchPage.Size = new System.Drawing.Size(268, 207);
             this.LaunchPage.TabIndex = 0;
-            this.LaunchPage.Text = "Lancer";
+            this.LaunchPage.Text = global::BlueSheep.Properties.I18n.Strings.Strings.Launch;
             // 
             // IsMITM
             // 
@@ -92,7 +94,7 @@
             this.DelBt.RoundedCorners = false;
             this.DelBt.Size = new System.Drawing.Size(85, 26);
             this.DelBt.TabIndex = 14;
-            this.DelBt.Text = "Supprimer";
+            this.DelBt.Text = Strings.Delete;
             this.DelBt.Click += new System.EventHandler(this.DelBt_Click);
             // 
             // listViewAccounts
@@ -116,7 +118,7 @@
             this.LaunchAccountsSelecBt.RoundedCorners = false;
             this.LaunchAccountsSelecBt.Size = new System.Drawing.Size(137, 26);
             this.LaunchAccountsSelecBt.TabIndex = 12;
-            this.LaunchAccountsSelecBt.Text = "Lancer les comptes";
+            this.LaunchAccountsSelecBt.Text = Strings.LogIn;
             this.LaunchAccountsSelecBt.Click += new System.EventHandler(this.LaunchAccountsSelecBt_Click);
             // 
             // AddPage
@@ -132,7 +134,7 @@
             this.AddPage.Padding = new System.Windows.Forms.Padding(3);
             this.AddPage.Size = new System.Drawing.Size(268, 207);
             this.AddPage.TabIndex = 1;
-            this.AddPage.Text = "Ajouter";
+            this.AddPage.Text = global::BlueSheep.Properties.I18n.Strings.Strings.Add;
             // 
             // sadikLabel2
             // 
@@ -141,9 +143,9 @@
             this.sadikLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel2.Location = new System.Drawing.Point(13, 52);
             this.sadikLabel2.Name = "sadikLabel2";
-            this.sadikLabel2.Size = new System.Drawing.Size(91, 13);
+            this.sadikLabel2.Size = new System.Drawing.Size(70, 13);
             this.sadikLabel2.TabIndex = 18;
-            this.sadikLabel2.Text = "Mot de passe :";
+            this.sadikLabel2.Text = "Password :";
             // 
             // sadikLabel1
             // 
@@ -152,9 +154,9 @@
             this.sadikLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel1.Location = new System.Drawing.Point(13, 17);
             this.sadikLabel1.Name = "sadikLabel1";
-            this.sadikLabel1.Size = new System.Drawing.Size(106, 13);
+            this.sadikLabel1.Size = new System.Drawing.Size(49, 13);
             this.sadikLabel1.TabIndex = 17;
-            this.sadikLabel1.Text = "Nom de compte :";
+            this.sadikLabel1.Text = "Name :";
             // 
             // AddBt
             // 
@@ -167,7 +169,7 @@
             this.AddBt.RoundedCorners = false;
             this.AddBt.Size = new System.Drawing.Size(188, 26);
             this.AddBt.TabIndex = 16;
-            this.AddBt.Text = "Ajouter";
+            this.AddBt.Text = "Add";
             this.AddBt.Click += new System.EventHandler(this.buttonAddAccount_Click);
             // 
             // textBoxPassword
@@ -177,7 +179,7 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(137, 20);
             this.textBoxPassword.TabIndex = 15;
-            this.textBoxPassword.Text = "Entrez le mot de passe...";
+            this.textBoxPassword.Text = "Password";
             this.textBoxPassword.GotFocus += new System.EventHandler(this.textBoxPassword_GotFocus);
             this.textBoxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPassword_Enter);
             this.textBoxPassword.LostFocus += new System.EventHandler(this.textBoxPassword_LostFocus);
@@ -189,7 +191,7 @@
             this.textBoxAccountName.Name = "textBoxAccountName";
             this.textBoxAccountName.Size = new System.Drawing.Size(137, 20);
             this.textBoxAccountName.TabIndex = 14;
-            this.textBoxAccountName.Text = "Entrez le nom de compte...";
+            this.textBoxAccountName.Text = typeof(BlueSheep.Properties.I18n.Strings.Strings).Name;
             this.textBoxAccountName.GotFocus += new System.EventHandler(this.textBoxAccountName_GotFocus);
             this.textBoxAccountName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxAccountName_Enter);
             this.textBoxAccountName.LostFocus += new System.EventHandler(this.textBoxAccountName_LostFocus);
@@ -202,7 +204,7 @@
             this.Controls.Add(this.sadikTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GestAccounts";
-            this.Text = "Gestion des comptes";
+            this.Text = "Accounts manager";
             this.sadikTabControl1.ResumeLayout(false);
             this.LaunchPage.ResumeLayout(false);
             this.AddPage.ResumeLayout(false);

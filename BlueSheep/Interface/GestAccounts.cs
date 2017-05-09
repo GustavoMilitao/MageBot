@@ -60,26 +60,6 @@ namespace BlueSheep.Interface
                     string directoryPath = System.IO.Path.Combine(MainForm.ActualMainForm.DofusPath, "app", "Dofus.exe");
                     proc.StartInfo.FileName = directoryPath;
                     proc.Start();
-                    //BlueSheep.Engine.Constants.DllInjector Injector = new Engine.Constants.DllInjector();
-                    //String path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\No.Ankama.dll";
-                    //List<Process> lp = Process.GetProcessesByName("Dofus").ToList();
-                    //foreach (Process p in lp)
-                    //{
-                    //    Engine.Constants.DllInjectionResult result = Injector.Inject(p.ProcessName, path);
-                    //    if (result != Engine.Constants.DllInjectionResult.Success)
-                    //    {
-                    //        System.Windows.Forms.MessageBox.Show("Erreur lors de l'injection.");
-                    //        proc.Kill();
-                    //        this.Close();
-                    //    }
-                    //}
-                    //DllInjector.GetInstance.Inject(proc.ProcessName, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\No.Ankama.dll");
-                    //BlueSheep.Engine.Constants.DllInjector Injector = new Engine.Constants.D);
-                    //   String path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\No.Ankama.dll";
-
-
-                    //   BlueSheep.Engine.Injection.StartInjection(path, proc.Id);
-
                     AccountFrm frm = new AccountFrm(account.SubItems[0].Text, account.SubItems[1].Text, false);
                     frm.Show();
                     MainForm.ActualMainForm.AddForm(frm);
@@ -124,7 +104,7 @@ namespace BlueSheep.Interface
         }
         private void textBoxPassword_GotFocus(object sender, EventArgs e)
         {
-            if (textBoxPassword.Text == "Entrez le mot de passe...")
+            if (textBoxPassword.Text == Strings.Password)
             {
                 // Vide la TextBox de commande
                 textBoxPassword.Text = string.Empty;
@@ -142,14 +122,14 @@ namespace BlueSheep.Interface
             if (textBoxPassword.Text == "")
             {
                 // Réinitialise le text
-                textBoxPassword.Text = "Entrez le mot de passe...";
+                textBoxPassword.Text = Strings.Password;
                 // Réinitialise la mise en forme
                 textBoxPassword.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
             }
         }
         private void textBoxAccountName_GotFocus(object sender, EventArgs e)
         {
-            if (textBoxAccountName.Text == "Entrez le nom de compte...")
+            if (textBoxAccountName.Text == Strings.NewCellidOf)
             {
                 // Vide la TextBox de commande
                 textBoxAccountName.Text = string.Empty;
@@ -167,7 +147,7 @@ namespace BlueSheep.Interface
             if (textBoxAccountName.Text == "")
             {
                 // Réinitialise le text
-                textBoxAccountName.Text = "Entrez le nom de compte...";
+                textBoxAccountName.Text = Strings.Name;
                 // Réinitialise la mise en forme
                 textBoxAccountName.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
             }

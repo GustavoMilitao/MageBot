@@ -663,4 +663,7 @@
   <data name="PathManager" xml:space="preserve">
     <value>Gerenciador de caminho</value>
   </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Log In</value>
+  </data>
 </root>
