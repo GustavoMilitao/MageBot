@@ -31,7 +31,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetFighterDeath((ulong)msg.TargetId);
+            account.FightData.SetFighterDeath((long)msg.TargetId);
         }
 
         [MessageHandler(typeof(GameActionFightDispellableEffectMessage))]
@@ -53,7 +53,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetPointsVariation((ulong)msg.TargetId, msg.ActionId, msg.Delta);
+            account.FightData.SetPointsVariation((long)msg.TargetId, msg.ActionId, msg.Delta);
         }
 
         [MessageHandler(typeof(GameActionFightLifePointsLostMessage))]
@@ -64,7 +64,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.UpdateFighterLifePoints((ulong)msg.TargetId, -((int)msg.Loss));
+            account.FightData.UpdateFighterLifePoints((long)msg.TargetId, -((int)msg.Loss));
         
         }
 
@@ -76,7 +76,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.UpdateFighterCell((ulong)msg.TargetId, msg.EndCellId);
+            account.FightData.UpdateFighterCell((long)msg.TargetId, msg.EndCellId);
         }
 
         [MessageHandler(typeof(GameActionFightSpellCastMessage))]
@@ -87,7 +87,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetSpellCasted((ulong)msg.SourceId, msg.SpellId, msg.DestinationCellId);
+            account.FightData.SetSpellCasted((long)msg.SourceId, msg.SpellId, msg.DestinationCellId);
         }
 
         [MessageHandler(typeof(GameActionFightSummonMessage))]
@@ -100,7 +100,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             }
             msg.Summons.ForEach(summon => 
             account.FightData.AddSummon(
-                (ulong)msg.SourceId, new BFighter(
+                (long)msg.SourceId, new BFighter(
                     summon.ContextualId, summon.Disposition.CellId,
                     summon.Stats.ActionPoints, summon.Stats, summon.Alive, 
                     (int)summon.Stats.LifePoints, (int)summon.Stats.MaxLifePoints, 
@@ -116,7 +116,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.UpdateFighterCell((ulong)msg.TargetId, msg.CellId);
+            account.FightData.UpdateFighterCell((long)msg.TargetId, msg.CellId);
         }
 
         [MessageHandler(typeof(GameEntitiesDispositionMessage))]
@@ -131,7 +131,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Dispositions.ToList().ForEach(d =>
                 {
-                    account.FightData.UpdateFighterCell((ulong)d.ObjectId, d.CellId);
+                    account.FightData.UpdateFighterCell((long)d.ObjectId, d.CellId);
                 });
             }
             account.SetStatus(Status.Fighting);
@@ -290,10 +290,10 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            MovementPath clientMovement = MapMovementAdapter.GetClientMovement(msg.KeyMovements.Select(k => (uint)k).ToList());
+            MovementPath clientMovement = MapMovementAdapter.GetClientMovement(msg.KeyMovements.Select(k => (int)k).ToList());
             if (account.state == Enums.Status.Fighting)
             {
-                account.FightData.UpdateFighterCell((ulong)msg.ActorId, clientMovement.CellEnd.CellId);
+                account.FightData.UpdateFighterCell((long)msg.ActorId, clientMovement.CellEnd.CellId);
             }
             account.ActualizeMap();
         }
@@ -435,7 +435,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 if (msg.ActionId == 108) // HP Récupérés (delta = combien on a récupérés)
                 {
-                    account.FightData.UpdateFighterLifePoints((ulong)msg.TargetId,(int) msg.Delta);
+                    account.FightData.UpdateFighterLifePoints((long)msg.TargetId,(int) msg.Delta);
                 }
             }    
         }

@@ -380,7 +380,7 @@ namespace BlueSheep.Core.Map
         /// <summary>
         /// Update the cellId of an entity.
         /// </summary>
-        public void UpdateEntityCell(ulong id, int cell)
+        public void UpdateEntityCell(double id, int cell)
         {
             if (Monsters.Find(m => m.m_contextualId == id) != null)
                 Monsters.Find(m => m.m_contextualId == id).m_cellId = cell;

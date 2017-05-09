@@ -96,19 +96,19 @@ namespace BlueSheep.Common
                     if (split.Count > 0)
                         return Usage(split[0]);
                     else
-                      return Usage();
+                        return Usage();
                 case "/move":
                     DefineRequiredParameters(new string[] { });
-                    DefineOptionalParameter(new string[] { "-cell = 0", "-dir = null"});
+                    DefineOptionalParameter(new string[] { "-cell = 0", "-dir = null" });
                     ParseArguments(passedCommands);
                     return Move();
                 case "/mapid":
-                    return new List<string>() {"L'id de la map est : " + account.MapData.Id};
+                    return new List<string>() { "L'id de la map est : " + account.MapData.Id };
                 case "/cellid":
-                    return new List<string>() {"Le joueur se trouve sur la cellule " + account.MapData.Character.Disposition.CellId};
+                    return new List<string>() { "Le joueur se trouve sur la cellule " + account.MapData.Character.Disposition.CellId };
                 case "/cell":
                     DefineRequiredParameters(new string[] { });
-                    DefineOptionalParameter(new string[] {"-npc = 0", "-elem = 0", "-player = null"} );
+                    DefineOptionalParameter(new string[] { "-npc = 0", "-elem = 0", "-player = null" });
                     ParseArguments(passedCommands);
                     return Cell();
                 case "/say":
@@ -131,16 +131,16 @@ namespace BlueSheep.Common
                 case "/fight":
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] { });
-                    DefineSwitches(new string[] { "-launch", "-lock", "-l", "-v", "-t", "-me"});
+                    DefineSwitches(new string[] { "-launch", "-lock", "-l", "-v", "-t", "-me" });
                     ParseArguments(passedCommands);
                     return Fight();
                 case "/gather":
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] { });
                     DefineSwitches(new string[] { "-launch", "-stats" });
-                    DefineRequiredParameters(new string[] {});
-                    DefineOptionalParameter(new string[] {});
-                    DefineSwitches(new string[] {"-launch","-stats"});
+                    DefineRequiredParameters(new string[] { });
+                    DefineOptionalParameter(new string[] { });
+                    DefineSwitches(new string[] { "-launch", "-stats" });
                     ParseArguments(passedCommands);
                     return Gather();
             }
@@ -149,7 +149,7 @@ namespace BlueSheep.Common
 
 
 
-        
+
         #endregion
 
         #region Private Methods
@@ -171,7 +171,7 @@ namespace BlueSheep.Common
                 if (string.IsNullOrEmpty(param))
                 {
                     string ERRORMessage = "ERROR: The required command line parameter '" + param + "' is empty.";
-                    account.Log(new ErrorTextInformation(ERRORMessage),0);
+                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
                 }
 
                 CLIParser.requiredParameters.Add(param, string.Empty);
@@ -196,14 +196,14 @@ namespace BlueSheep.Common
                 if (tokens.Length != 2)
                 {
                     string ERRORMessage = "ERROR: The optional command line parameter '" + param + "' has wrong format.\n Expeted param=value.";
-                    account.Log(new ErrorTextInformation(ERRORMessage),0);
+                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
                 }
 
                 tokens[0] = tokens[0].Trim();
                 if (string.IsNullOrEmpty(tokens[0]))
                 {
                     string ERRORMessage = "ERROR: The optional command line parameter '" + param + "' has empty name.";
-                    account.Log(new ErrorTextInformation(ERRORMessage),0);
+                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
                 }
 
                 tokens[1] = tokens[1].Trim();
@@ -238,13 +238,13 @@ namespace BlueSheep.Common
                 if (string.IsNullOrEmpty(key))
                 {
                     string ERRORMessage = "ERROR: The name of the optional parameter '" + param.Key + "' is empty.";
-                    account.Log(new ErrorTextInformation(ERRORMessage),0);
+                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
                 }
 
                 if (string.IsNullOrEmpty(value))
                 {
                     string ERRORMessage = "ERROR: The value of the optional parameter '" + param.Key + "' is empty.";
-                    account.Log(new ErrorTextInformation(ERRORMessage),0);
+                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
                 }
 
                 CLIParser.optionalParameters.Add(param.Key, param.Value);
@@ -269,7 +269,7 @@ namespace BlueSheep.Common
                 if (string.IsNullOrEmpty(temp))
                 {
                     string ERRORMessage = "ERROR: The switch '" + sw + "' is empty.";
-                    account.Log(new ErrorTextInformation(ERRORMessage),0);
+                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
                 }
 
                 CLIParser.switches.Add(temp, false);
@@ -284,19 +284,28 @@ namespace BlueSheep.Common
         {
             List<string> paramsToSplitInCL = requiredParameters.Keys.ToList();
             paramsToSplitInCL.AddRange(optionalParameters.Keys.ToList());
+            if (switches != null)
+            {
+                paramsToSplitInCL.AddRange(switches.Keys.ToList());
+            }
             paramsToSplitInCL = paramsToSplitInCL.Select(param => "(" + param + ")").ToList();
             string regex = String.Join("|", paramsToSplitInCL);
-
             string[] splitedParams = Regex.Split(commandLine, regex);
             List<string> paramsList = splitedParams.Where(item => !String.IsNullOrEmpty(item))
                 .Select(item2 => item2.TrimStart())
                 .Select(item3 => item3.TrimEnd()).ToList();
-
             Dictionary<string, string> passedCommands = new Dictionary<string, string>();
-            for(int i =0; i < paramsList.Count; i++) 
+            for (int i = 0; i < paramsList.Count; i++)
             {
-                passedCommands.Add(paramsList[0], paramsList[1]);
-                paramsList.RemoveAt(0);
+                if (paramsList.Count == 1)
+                {
+                    passedCommands.Add(paramsList[0], String.Empty);
+                }
+                else
+                {
+                    passedCommands.Add(paramsList[0], paramsList[1]);
+                    paramsList.RemoveAt(0);
+                }
                 paramsList.RemoveAt(0);
             }
 
@@ -334,7 +343,7 @@ namespace BlueSheep.Common
             else
             {
                 string ERRORMessage = "ERROR: The parameter '" + paramName + "' is not supported.";
-                account.Log(new ErrorTextInformation(ERRORMessage),0);
+                account.Log(new ErrorTextInformation(ERRORMessage), 0);
             }
 
             return paramValue;
@@ -351,7 +360,7 @@ namespace BlueSheep.Common
             else
             {
                 string ERRORMessage = "ERROR: switch '" + switchName + "' not supported.";
-                account.Log(new ErrorTextInformation(ERRORMessage),0);
+                account.Log(new ErrorTextInformation(ERRORMessage), 0);
             }
 
             return switchValue;
@@ -359,7 +368,7 @@ namespace BlueSheep.Common
 
         private void ParseRequiredParameters()
         {
-            if (CLIParser.requiredParameters == null 
+            if (CLIParser.requiredParameters == null
                 || CLIParser.requiredParameters.Count == 0)
             {
                 return;
@@ -367,15 +376,15 @@ namespace BlueSheep.Common
 
             List<string> requiredParams = new List<string>(CLIParser.requiredParameters.Keys);
 
-            foreach(string reqPar in requiredParams)
+            foreach (string reqPar in requiredParams)
             {
-                if(!rawArguments.Keys.Contains(reqPar))
+                if (!rawArguments.Keys.Contains(reqPar))
                 {
                     missingRequiredParameters.Add(reqPar);
                 }
                 else
                 {
-                    if(String.IsNullOrEmpty(rawArguments[reqPar]))
+                    if (String.IsNullOrEmpty(rawArguments[reqPar]))
                     {
                         missingValue.Add(reqPar);
                     }
@@ -398,9 +407,9 @@ namespace BlueSheep.Common
 
             foreach (string paramName in optionalParams)
             {
-                if(rawArguments.Keys.Contains(paramName))
+                if (rawArguments.Keys.Contains(paramName))
                 {
-                    if(String.IsNullOrEmpty(rawArguments[paramName]))
+                    if (String.IsNullOrEmpty(rawArguments[paramName]))
                     {
                         missingValue.Add(paramName);
                     }
@@ -469,7 +478,7 @@ namespace BlueSheep.Common
 
             if (ERRORMessage.Length > 0)
             {
-                account.Log(new ErrorTextInformation(ERRORMessage.ToString()), 0); 
+                account.Log(new ErrorTextInformation(ERRORMessage.ToString()), 0);
             }
         }
 
@@ -490,7 +499,7 @@ namespace BlueSheep.Common
             List<string> ls = new List<string>() { "USAGE:" };
             switch (cmd)
             {
-                case "":                 
+                case "":
                     ls.Add("/command -arg1 -arg2 ... -argn Value -switch1");
                     ls.Add("");
                     ls.Add("Below are the available commands. Type /help with the name of the command for a specific help.");
@@ -609,7 +618,7 @@ namespace BlueSheep.Common
                     ls.Add("   - Launch the gathering");
                     return ls;
             }
-            return ls = new List<string>() { ""};
+            return ls = new List<string>() { "" };
         }
 
         /// <summary>
@@ -627,13 +636,13 @@ namespace BlueSheep.Common
                 {
                     result.Add("Déplacement vers la cellid : " + cell);
                     account.Map.MoveToCell(cell);
-                    
+
                 }
 
-                if (dir != "null" && new List<string>() {"bottom", "up","left","right"}.Contains(dir))
+                if (dir != "null" && new List<string>() { "bottom", "up", "left", "right" }.Contains(dir))
                 {
                     result.Add("Déplacement : " + dir);
-                    account.Map.ChangeMap(dir);                  
+                    account.Map.ChangeMap(dir);
                 }
             }
             catch (Exception ex)
@@ -740,7 +749,7 @@ namespace BlueSheep.Common
                             break;
                         case 'r':
                             account.Flood.SendMessage(6, message);
-                                result.Add("Message envoyé. \n");
+                            result.Add("Message envoyé. \n");
                             break;
                         case 'b':
                             account.Flood.SendMessage(5, message);
@@ -785,7 +794,7 @@ namespace BlueSheep.Common
                     result.Add("[PNJ] " + name + " -> id : +" + n.NpcId + " contextual id : " + n.ContextualId + " cell : " + cell + ".");
 
                 }
-                foreach (KeyValuePair<BlueSheep.Core.Map.Elements.InteractiveElement,int > pair in account.MapData.InteractiveElements)
+                foreach (KeyValuePair<BlueSheep.Core.Map.Elements.InteractiveElement, int> pair in account.MapData.InteractiveElements)
                 {
                     if (verbose)
                         result.Add("[INTERACTIVE ELEMENT] " + pair.Key.Name + " -> id " + pair.Key + " cell : " + pair.Value + " IsUsable : " + pair.Key.IsUsable + ".");
@@ -794,12 +803,12 @@ namespace BlueSheep.Common
                 }
                 foreach (GameRolePlayCharacterInformations p in account.MapData.Players)
                 {
-                   int cell = account.MapData.GetCellFromContextId(p.ContextualId);
-                   if (verbose)
-                       result.Add("[PLAYER] " + p.Name + " -> contextual id " + p.ContextualId + " cell : " + cell + " Sex : " + (p.HumanoidInfo.Sex ? "Female" : "Male") + ".");
-                   else
-                       result.Add("[PLAYER] " + p.Name + " -> contextual id " + p.ContextualId + " cell : " + cell + ".");
-                    
+                    int cell = account.MapData.GetCellFromContextId(p.ContextualId);
+                    if (verbose)
+                        result.Add("[PLAYER] " + p.Name + " -> contextual id " + p.ContextualId + " cell : " + cell + " Sex : " + (p.HumanoidInfo.Sex ? "Female" : "Male") + ".");
+                    else
+                        result.Add("[PLAYER] " + p.Name + " -> contextual id " + p.ContextualId + " cell : " + cell + ".");
+
                 }
                 foreach (MonsterGroup m in account.MapData.Monsters)
                 {
@@ -841,7 +850,7 @@ namespace BlueSheep.Common
                 }
                 if (start)
                 {
-                   account.Path.Start();
+                    account.Path.Start();
                     //account.Path.ParsePath();
                     result.Add("Lancement du trajet.");
                 }
@@ -935,7 +944,7 @@ namespace BlueSheep.Common
                 return result;
         }
 
-         /// <summary>
+        /// <summary>
         /// Interface to manage gather.
         /// </summary>
         private List<string> Gather()

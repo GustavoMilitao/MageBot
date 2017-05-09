@@ -247,13 +247,14 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            List<uint> keys = new List<uint>();
+            List<int> keys = new List<int>();
             foreach (int s in msg.KeyMovements)
             {
-                keys.Add((uint)s);
+                keys.Add(s);
             }
+
             MovementPath clientMovement = MapMovementAdapter.GetClientMovement(keys);
-            account.MapData.UpdateEntityCell((ulong)msg.ActorId, clientMovement.CellEnd.CellId);
+            account.MapData.UpdateEntityCell(msg.ActorId, clientMovement.CellEnd.CellId);
             if (account.Map.Moving && msg.ActorId == account.MapData.Character.ContextualId)
             {
                 account.Map.ConfirmMove();
@@ -465,6 +466,8 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
+
+            account.MapData.ParseActors(new List<GameRolePlayActorInformations>() { msg.Informations }.ToArray());
 
             if (account.FloodUC.StartStopFloodingBox.Checked == true && account.FloodUC.PrivateEnterBox.Checked == true && msg.Informations is GameRolePlayCharacterInformations)
             {

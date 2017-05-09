@@ -88,10 +88,10 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         
         public override void Deserialize(IDataReader reader)
         {
-            m_rewards = new FightLoot();
-            m_rewards.Deserialize(reader);
             m_outcome = reader.ReadVarUhShort();
             m_wave = reader.ReadByte();
+            m_rewards = new FightLoot();
+            m_rewards.Deserialize(reader);
         }
     }
 }

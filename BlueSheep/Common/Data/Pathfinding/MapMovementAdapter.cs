@@ -7,7 +7,7 @@ namespace BlueSheep.Data.Pathfinding
     public class MapMovementAdapter
     {
         // Methods
-        public static MovementPath GetClientMovement(List<UInt32> Keys)
+        public static MovementPath GetClientMovement(List<int> Keys)
         {
             MovementPath path = new MovementPath();
             PathElement element = null;

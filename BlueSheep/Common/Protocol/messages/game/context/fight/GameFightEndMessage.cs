@@ -137,6 +137,9 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Fight
         
         public override void Deserialize(IDataReader reader)
         {
+            m_duration = reader.ReadInt();
+            m_ageBonus = reader.ReadShort();
+            m_lootShareLimitMalus = reader.ReadShort();
             int resultsCount = reader.ReadUShort();
             int resultsIndex;
             m_results = new System.Collections.Generic.List<FightResultListEntry>();
@@ -155,9 +158,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Fight
                 objectToAdd.Deserialize(reader);
                 m_namedPartyTeamsOutcomes.Add(objectToAdd);
             }
-            m_duration = reader.ReadInt();
-            m_ageBonus = reader.ReadShort();
-            m_lootShareLimitMalus = reader.ReadShort();
         }
     }
 }
