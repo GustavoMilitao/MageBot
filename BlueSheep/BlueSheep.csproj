@@ -2193,7 +2193,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="agress log.txt" />
     <Content Include="bluesheep-logo.ico" />
+    <Content Include="Erro after dying in a fight.txt" />
+    <Content Include="Error after fight.txt" />
+    <Content Include="Error after fighting 2.txt" />
     <Content Include="ESFR.txt" />
     <Content Include="icon.ico" />
     <Content Include="ENFR.txt" />

@@ -1,0 +1,763 @@
+[18:47:53] (Conexão) Conexão
+[18:47:53] (Conexão) Connected: 213.248.126.40
+[18:47:53] (Debug) [SND] 182
+[18:47:54] (Debug) [RCV] 3 (HelloConnectMessage)
+[18:47:54] (Debug) [SND] 4
+[18:47:54] (Conexão) Identification en cours.
+[18:47:55] (Debug) [RCV] 10 (LoginQueueStatus)
+[18:47:55] (Fila) File d'attente : 24/24.
+[18:47:55] (Debug) [RCV] 10 (LoginQueueStatus)
+[18:47:55] (Fila) File d'attente : 0/23.
+[18:47:55] (Debug) [RCV] 22 (IdentificationSuccessMessage)
+[18:47:55] (Conexão) Identification réussie.
+[18:47:55] (Debug) [RCV] 6469 (SelectedServerDataExtendedMessage)
+[18:47:55] (Conexão) Connexion au serveur Spiritia
+[18:47:55] (Conexão) Disconnected: Changing server.
+[18:47:56] (Conexão) Connected: 213.248.126.76
+[18:47:56] (Debug) [SND] 182
+[18:47:56] (Debug) [RCV] 101 (HelloGameMessage)
+[18:47:56] (Debug) [SND] 110
+[18:47:56] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:47:58] (Debug) [RCV] 6253 (RawDataMessage)
+[18:47:58] (Debug) [SND] 6372
+[18:47:58] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:47:59] (Debug) [RCV] 111 (AuthenticationTicketAcceptedMessage)
+[18:47:59] (Debug) [SND] 150
+[18:47:59] (Debug) [RCV] 175 (BasicTimeMessage)
+[18:47:59] (Debug) [RCV] 6340 (ServerSettingsMessage)
+[18:47:59] (Conexão)  Server Settings : Language : pt, GameType : Normal, Comunity : Português
+[18:47:59] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:47:59] (Debug) [RCV] 6100 (QueueStatusMessage)
+[18:47:59] (Fila) Posição na fila : 1/1.
+[18:48:00] (Debug) [RCV] 6100 (QueueStatusMessage)
+[18:48:00] (Fila) Posição na fila : 0/0.
+[18:48:00] (Debug) [RCV] 6100 (QueueStatusMessage)
+[18:48:00] (Fila) Posição na fila : 0/0.
+[18:48:00] (Debug) [RCV] 151 (CharactersListMessage)
+[18:48:00] (Debug) [SND] 152
+[18:48:00] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:48:00] (Debug) [RCV] 153 (CharacterSelectedSuccessMessage)
+[18:48:00] (BlueSheep) Saddidahkiler de niveau 28 est connecté.
+[18:48:00] (BlueSheep) Breed: Sadida Sex: Male
+[18:48:01] (Debug) [RCV] 3016 (InventoryContentMessage)
+[18:48:01] (Debug) [SND] 4001
+[18:48:01] (Debug) [SND] 5676
+[18:48:01] (Debug) [SND] 6355
+[18:48:01] (Debug) [SND] 5607
+[18:48:01] (Debug) [SND] 250
+[18:48:01] (Debug) [SND] 890
+[18:48:01] (Debug) [RCV] 5655 (JobDescriptionMessage)
+[18:48:01] (Debug) [RCV] 5809 (JobExperienceMultiUpdateMessage)
+[18:48:03] (Debug) [RCV] 1200 (SpellListMessage)
+[18:48:03] (Debug) [RCV] 3009 (InventoryWeightMessage)
+[18:48:04] (Debug) [RCV] 6316 (SequenceNumberRequestMessage)
+[18:48:04] (Debug) [SND] 6317
+[18:48:04] (Debug) [RCV] 780 (TextInformationMessage)
+[18:48:04] (Dofus) Bem-vindo(a) a DOFUS, no Mundo dos Doze!
+Lembre-se: é proibido fornecer o login e senha da sua conta a terceiros.
+[18:48:04] (Debug) [RCV] 780 (TextInformationMessage)
+[18:48:04] (Dofus) Último acesso à conta em 08/05/2017 às 23:44
+[18:48:04] (Debug) [RCV] 780 (TextInformationMessage)
+[18:48:04] (Dofus) O servidor será reiniciado em 7 heures, 11 minutes para manutenção
+[18:48:05] (Debug) [RCV] 6321 (CharacterExperienceGainMessage)
+[18:48:05] (Ação) Experience gagnée : + 0 points d'expérience
+[18:48:05] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:48:06] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:48:06] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:48:06] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:48:07] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:48:07] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:48:07] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:48:07] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:48:08] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:48:08] (Debug) [RCV] 780 (TextInformationMessage)
+[18:48:08] (Dofus) Você tem 1 {openSocial,0,0::amigo(s)} online.
+[18:48:08] (Debug) [RCV] 200 (GameContextCreateMessage)
+[18:48:08] (Debug) [RCV] 5684 (LifePointsRegenBeginMessage)
+[18:48:08] (Debug) [RCV] 220 (CurrentMapMessage)
+[18:48:08] (Debug) [SND] 225
+[18:48:09] (Debug) [RCV] 175 (BasicTimeMessage)
+[18:48:09] (Debug) [RCV] 500 (CharacterStatsListMessage)
+[18:48:09] (Erro) WARNING : T'as chargé aucune IA, fait gaffe mon coco :p
+[18:48:09] (BlueSheep) Configuration restaurée.
+[18:48:09] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:48:09] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:48:10] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:48:10] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:48:10] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:48:11] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:48:11] (Debug) [RCV] 226 (MapComplementaryInformationsDataMessage)
+[18:48:12] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:48:16] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:16] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:23] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:23] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:24] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:24] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:25] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:48:28] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:48:28] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:28] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:30] (Debug) [RCV] 5816 (BasicLatencyStatsRequestMessage)
+[18:48:30] (Debug) [SND] 5663 (BasicLatencyStatsMessage)
+[18:48:31] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:48:31] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:48:32] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:32] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:35] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:48:37] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:37] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:44] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:44] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:51] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:51] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:58] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:48:58] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:12] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:12] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:13] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:49:21] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:49:21] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:21] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:26] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:26] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:27] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:49:40] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:40] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:47] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:47] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:54] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:54] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:49:58] (BlueSheep) Déplacement : right
+[18:50:01] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:01] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:13] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[18:50:13] (BlueSheep) Déplacement : left
+[18:50:13] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:13] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:13] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:15] (Debug) [SND] 952
+[18:50:15] (Debug) [SND] 221
+[18:50:15] (Debug) [Map] Old = 153880325
+[18:50:15] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:16] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:16] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:16] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:16] (Debug) [RCV] 220 (CurrentMapMessage)
+[18:50:16] (Debug) [SND] 225
+[18:50:16] (Debug) [RCV] 175 (BasicTimeMessage)
+[18:50:16] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:17] (BlueSheep) Déplacement : right
+[18:50:17] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:17] (Debug) [RCV] 226 (MapComplementaryInformationsDataMessage)
+[18:50:18] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:19] (Debug) [Map] New = 153879813
+[18:50:25] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:50:27] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:27] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:28] (Debug) [SND] 221
+[18:50:28] (BlueSheep) Déplacement : right
+[18:50:28] (Debug) [Map] Old = 153879813
+[18:50:29] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:29] (Debug) [RCV] 220 (CurrentMapMessage)
+[18:50:29] (Debug) [SND] 225
+[18:50:29] (Debug) [RCV] 175 (BasicTimeMessage)
+[18:50:29] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:30] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:30] (Debug) [RCV] 226 (MapComplementaryInformationsDataMessage)
+[18:50:30] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:31] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:31] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:32] (Debug) [Map] New = 153880325
+[18:50:35] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[18:50:35] (BlueSheep) Déplacement : bottom
+[18:50:35] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:36] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:36] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:37] (Debug) [SND] 952
+[18:50:37] (Debug) [SND] 221
+[18:50:37] (Debug) [Map] Old = 153880325
+[18:50:38] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:38] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:38] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:39] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:39] (Debug) [RCV] 220 (CurrentMapMessage)
+[18:50:39] (Debug) [SND] 225
+[18:50:39] (Debug) [RCV] 175 (BasicTimeMessage)
+[18:50:39] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:40] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:40] (Debug) [RCV] 226 (MapComplementaryInformationsDataMessage)
+[18:50:40] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:41] (Debug) [Map] New = 153880324
+[18:50:43] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:43] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:44] (BlueSheep) USAGE:
+[18:50:44] (BlueSheep) /move [-cell <int>] [-dir <string>]
+[18:50:44] (BlueSheep) Move to a cell and/or a direction.
+[18:50:44] (BlueSheep) OPTIONS:
+[18:50:44] (BlueSheep)   - cell: move to the specified cell.
+[18:50:44] (BlueSheep)   - dir : move to the specified direction (right, left, bottom or up).
+[18:50:44] (BlueSheep) EXAMPLE:
+[18:50:44] (BlueSheep) 1. > /move -cell 150
+[18:50:44] (BlueSheep)    - Move to the cell 150.
+[18:50:44] (BlueSheep) 
+[18:50:44] (BlueSheep) 2. > /move -cell 150 -dir right
+[18:50:44] (BlueSheep)    - Move to the cell 150 and then move to the map at the right
+[18:50:50] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:50] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:50:50] (Debug) [SND] 221
+[18:50:50] (BlueSheep) Déplacement : up
+[18:50:50] (Debug) [Map] Old = 153880324
+[18:50:50] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:51] (Debug) [RCV] 220 (CurrentMapMessage)
+[18:50:51] (Debug) [SND] 225
+[18:50:51] (Debug) [RCV] 175 (BasicTimeMessage)
+[18:50:51] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:51] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:50:51] (Debug) [RCV] 226 (MapComplementaryInformationsDataMessage)
+[18:50:52] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:50:54] (Debug) [Map] New = 153880325
+[18:50:54] (BlueSheep) Déplacement : up
+[18:51:02] (Debug) [SND] 221
+[18:51:02] (BlueSheep) Déplacement : bottom
+[18:51:02] (Debug) [Map] Old = 153880325
+[18:51:03] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:03] (Debug) [RCV] 220 (CurrentMapMessage)
+[18:51:03] (Debug) [SND] 225
+[18:51:03] (Debug) [RCV] 175 (BasicTimeMessage)
+[18:51:03] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:04] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:04] (Debug) [RCV] 226 (MapComplementaryInformationsDataMessage)
+[18:51:04] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:05] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:05] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:06] (Debug) [Map] New = 153880324
+[18:51:11] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[18:51:11] (BlueSheep) Déplacement : bottom
+[18:51:11] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:11] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:11] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:15] (Debug) [SND] 952
+[18:51:15] (Debug) [SND] 221
+[18:51:15] (Debug) [Map] Old = 153880324
+[18:51:15] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:16] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:16] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:17] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:17] (Debug) [RCV] 220 (CurrentMapMessage)
+[18:51:17] (Debug) [SND] 225
+[18:51:17] (Debug) [RCV] 175 (BasicTimeMessage)
+[18:51:17] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:18] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:18] (Debug) [RCV] 226 (MapComplementaryInformationsDataMessage)
+[18:51:18] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:19] (Debug) [Map] New = 153880323
+[18:51:24] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:24] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:26] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[18:51:26] (BlueSheep) Déplacement : bottom
+[18:51:27] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:27] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:27] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:31] (Debug) [SND] 952
+[18:51:31] (Debug) [SND] 221
+[18:51:31] (Debug) [Map] Old = 153880323
+[18:51:31] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:32] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:32] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:33] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:33] (Debug) [RCV] 220 (CurrentMapMessage)
+[18:51:33] (Debug) [SND] 225
+[18:51:33] (Debug) [RCV] 175 (BasicTimeMessage)
+[18:51:33] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:33] (Debug) [RCV] 6208 (AchievementFinished)
+[18:51:33] (Ação) Succès débloqué : Floresta
+[18:51:33] (Debug) [SND] 6377
+[18:51:34] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:34] (Debug) [RCV] 226 (MapComplementaryInformationsDataMessage)
+[18:51:34] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:35] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:35] (Debug) [RCV] 500 (CharacterStatsListMessage)
+[18:51:35] (Debug) [RCV] 6321 (CharacterExperienceGainMessage)
+[18:51:35] (Ação) Experience gagnée : + 52 points d'expérience
+[18:51:35] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:35] (Debug) [Map] New = 153880322
+[18:51:37] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:37] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:51] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:51] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:54] (Debug) [SND] 861 (ChatClientMultiMessage)
+[18:51:54] (BlueSheep) Message envoyé. 
+
+[18:51:54] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:51:54] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:51:55] (Debug) [RCV] 881 (ChatServerMessage)
+[18:51:55] (Geral) Saddidahkiler: estou usando bot
+[18:51:58] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:51:58] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:52:29] (BlueSheep) Message envoyé. 
+
+[18:52:30] (Geral) Saddidahkiler: estou usando bot que eu mesmo criei
+[18:52:42] (BlueSheep) Déplacement : bottom
+[18:52:55] (BlueSheep) Déplacement : bottom
+[18:53:02] (Dofus) Você acaba de memorizar um novo zaap.
+[18:53:03] (Ação) Succès débloqué : Cemitério
+[18:53:04] (Ação) Experience gagnée : + 52 points d'expérience
+[18:53:17] (BlueSheep) Déplacement : bottom
+[18:53:40] (BlueSheep) Déplacement : left
+[18:53:52] (BlueSheep) Déplacement : right
+[18:53:58] (Debug) [RCV] 226 (MapComplementaryInformationsDataMessage)
+[18:53:58] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:53:59] (Debug) [Map] New = 153881090
+[18:54:03] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:03] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:10] (BlueSheep) Déplacement : bottom
+[18:54:10] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:10] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:24] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:24] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:26] (Debug) [SND] 221
+[18:54:26] (BlueSheep) Déplacement : left
+[18:54:26] (Debug) [Map] Old = 153881090
+[18:54:26] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:54:26] (Debug) [RCV] 220 (CurrentMapMessage)
+[18:54:26] (Debug) [SND] 225
+[18:54:27] (Debug) [RCV] 175 (BasicTimeMessage)
+[18:54:27] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:54:27] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:54:27] (Debug) [RCV] 226 (MapComplementaryInformationsDataMessage)
+[18:54:28] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:54:30] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:30] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:30] (Debug) [Map] New = 153880578
+[18:54:31] (BlueSheep) Déplacement : left
+[18:54:33] (BlueSheep) Déplacement : left
+[18:54:35] (BlueSheep) Déplacement : left
+[18:54:44] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:44] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:51] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:54:51] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:12] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:12] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:19] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:19] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:32] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:55:33] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:55:33] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:33] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:40] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:40] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:43] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:55:43] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:43] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:46] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:55:47] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:55:47] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:56:00] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[18:56:00] (BlueSheep) Déplacement : up
+[18:56:01] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:56:01] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:56:01] (Debug) [RCV] 951 (GameMapMovementMessage)
+[18:56:04] (Debug) [SND] 952
+[18:56:04] (Debug) [SND] 221
+[18:56:04] (Debug) [Map] Old = 153880578
+[18:56:04] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[18:56:05] (Debug) [RCV] 6362 (BasicAckMessage)
+[18:56:05] (Debug) [RCV] 954 (GameMapNoMovementMessage)
+[18:56:05] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[18:56:05] (Debug) [RCV] 251 (GameContextRemoveElementMessage)
+[18:56:05] (Debug) [RCV] 200 (GameContextCreateMessage)
+[18:56:05] (Debug) [RCV] 500 (CharacterStatsListMessage)
+[18:56:06] (Debug) [RCV] 702 (GameFightJoinMessage)
+[18:56:06] (Debug) [RCV] 703 (GameFightPlacementPossiblePositionsMessage)
+[18:56:06] (Debug) [SND] 708
+[18:56:06] (BlueSheep) Send Ready !
+[18:56:06] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
+[18:56:06] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
+[18:56:06] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
+[18:56:06] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
+[18:56:06] (Debug) [RCV] 5686 (LifePointsRegenEndMessage)
+[18:56:06] (BlueSheep) Fin de la régénération. + 0 points de vie
+[18:56:07] (Debug) [RCV] 5696 (GameEntitiesDispositionMessage)
+[18:56:07] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:07] (Debug) Classe de id : [0] não implementada 
+[18:56:07] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:07] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:07] (Debug) Classe de id : [0] não implementada 
+[18:56:07] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:08] (Debug) [Map] New = 153880578
+[18:56:08] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:08] (Debug) Classe de id : [0] não implementada 
+[18:56:08] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:08] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:08] (Debug) Classe de id : [0] não implementada 
+[18:56:08] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:23] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:23] (Debug) Classe de id : [0] não implementada 
+[18:56:23] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:23] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:23] (Debug) Classe de id : [0] não implementada 
+[18:56:23] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:30] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:30] (Debug) Classe de id : [0] não implementada 
+[18:56:30] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:43] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:43] (Debug) Classe de id : [0] não implementada 
+[18:56:43] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:47] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:47] (Debug) Classe de id : [0] não implementada 
+[18:56:47] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:47] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:47] (Debug) Classe de id : [0] não implementada 
+[18:56:47] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:48] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:48] (Debug) Classe de id : [0] não implementada 
+[18:56:48] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:49] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:49] (Debug) Classe de id : [0] não implementada 
+[18:56:49] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:56:49] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:56:49] (Debug) Classe de id : [0] não implementada 
+[18:56:49] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:57:04] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:57:04] (Debug) Classe de id : [0] não implementada 
+[18:57:04] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:57:04] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:57:04] (Debug) Classe de id : [0] não implementada 
+[18:57:04] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:57:28] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:57:28] (Debug) Classe de id : [0] não implementada 
+[18:57:28] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:57:28] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:57:28] (Debug) Classe de id : [0] não implementada 
+[18:57:28] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:57:29] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:57:29] (Debug) Classe de id : [0] não implementada 
+[18:57:29] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:57:29] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:57:29] (Debug) Classe de id : [0] não implementada 
+[18:57:29] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:57:30] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:57:30] (Debug) Classe de id : [0] não implementada 
+[18:57:30] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:57:30] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[18:57:30] (Debug) Classe de id : [0] não implementada 
+[18:57:30] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterInformations.cs:linha 133
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightFighterNamedInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightFighterNamedInformations.cs:linha 76
+   em BlueSheep.Common.Protocol.Types.Game.Context.Fight.GameFightCharacterInformations.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\GameFightCharacterInformations.cs:linha 108
+   em BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Character.GameFightShowFighterMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\Character\GameFightShowFighterMessage.cs:linha 63
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightShowFighterMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 222
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+[18:57:48] (Conexão) Disconnected: User forced.
