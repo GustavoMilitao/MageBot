@@ -24,6 +24,7 @@ namespace BlueSheep.Core.Fight
         private FightParser m_AI;
         private FightData m_Data;
         public int flag;
+        public bool infinite { get; set; }
 
         #region Private Fields
         private Object clock = new Object();

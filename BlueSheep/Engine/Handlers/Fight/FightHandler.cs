@@ -65,7 +65,7 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             account.FightData.UpdateFighterLifePoints((long)msg.TargetId, -((int)msg.Loss));
-        
+
         }
 
         [MessageHandler(typeof(GameActionFightSlideMessage))]
@@ -98,12 +98,12 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            msg.Summons.ForEach(summon => 
+            msg.Summons.ForEach(summon =>
             account.FightData.AddSummon(
                 (long)msg.SourceId, new BFighter(
                     summon.ContextualId, summon.Disposition.CellId,
-                    summon.Stats.ActionPoints, summon.Stats, summon.Alive, 
-                    (int)summon.Stats.LifePoints, (int)summon.Stats.MaxLifePoints, 
+                    summon.Stats.ActionPoints, summon.Stats, summon.Alive,
+                    (int)summon.Stats.LifePoints, (int)summon.Stats.MaxLifePoints,
                     summon.Stats.MovementPoints, (uint)summon.TeamId, 0))
             );
         }
@@ -146,6 +146,9 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             account.FightData.FightStop();
+            if (account.Fight.infinite)
+                account.Fight.SearchFight();
+
         }
 
         [MessageHandler(typeof(GameFightHumanReadyStateMessage))]
@@ -175,8 +178,8 @@ namespace BlueSheep.Engine.Handlers.Fight
                 {
                     account.FightData.PerformAutoTimeoutFight(2000);
                     account.Fight.LockFight();
-                }                  
-                
+                }
+
             }
         }
 
@@ -210,7 +213,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetOption(msg.State, msg.Option);         
+            account.FightData.SetOption(msg.State, msg.Option);
         }
 
         [MessageHandler(typeof(GameFightShowFighterMessage))]
@@ -222,7 +225,7 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             account.FightData.AddFighter(msg.Informations);
-            
+
         }
 
         [MessageHandler(typeof(GameFightShowFighterRandomStaticPoseMessage))]
@@ -268,7 +271,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.TurnEnded((ulong)msg.ObjectId);       
+            account.FightData.TurnEnded((ulong)msg.ObjectId);
         }
 
         [MessageHandler(typeof(GameFightTurnStartMessage))]
@@ -279,7 +282,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            
+
         }
 
         [MessageHandler(typeof(GameMapMovementMessage))]
@@ -435,9 +438,9 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 if (msg.ActionId == 108) // HP Récupérés (delta = combien on a récupérés)
                 {
-                    account.FightData.UpdateFighterLifePoints((long)msg.TargetId,(int) msg.Delta);
+                    account.FightData.UpdateFighterLifePoints((long)msg.TargetId, (int)msg.Delta);
                 }
-            }    
+            }
         }
 
         [MessageHandler(typeof(GameActionFightTackledMessage))]

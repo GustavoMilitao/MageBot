@@ -131,7 +131,7 @@ namespace BlueSheep.Common
                 case "/fight":
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] { });
-                    DefineSwitches(new string[] { "-launch", "-lock", "-l", "-v", "-t", "-me" });
+                    DefineSwitches(new string[] { "-launch", "-lock", "-l", "-v", "-t", "-me", "-i" });
                     ParseArguments(passedCommands);
                     return Fight();
                 case "/gather":
@@ -882,7 +882,7 @@ namespace BlueSheep.Common
             bool verbose = IsSwitchOn("-v");
             bool turn = IsSwitchOn("-t");
             bool me = IsSwitchOn("-me");
-
+            bool infinite = IsSwitchOn("-i");
             try
             {
                 if (turn && account.state == Status.Fighting)
@@ -921,6 +921,7 @@ namespace BlueSheep.Common
                 {
                     if (launch && account.state != Status.Fighting)
                     {
+                        account.Fight.infinite = infinite;
                         account.Fight.SearchFight();
                         result.Add("Recherche d'un combat...");
                     }

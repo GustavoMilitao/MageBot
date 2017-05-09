@@ -81,6 +81,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
+            m_level = reader.ReadSByte();
             int additionalCount = reader.ReadUShort();
             int additionalIndex;
             m_additional = new System.Collections.Generic.List<FightResultAdditionalData>();
@@ -90,7 +91,6 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
                 objectToAdd.Deserialize(reader);
                 m_additional.Add(objectToAdd);
             }
-            m_level = reader.ReadSByte();
         }
     }
 }
