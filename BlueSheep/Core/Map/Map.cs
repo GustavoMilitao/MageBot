@@ -129,6 +129,7 @@ namespace BlueSheep.Core.Map
                 if (m_Account.DebugMode.Checked)
                     m_Account.Log(new DebugTextInformation("[SND] 950 (GameMapMovementRequestMessage)"), 0);
             }
+
             //m_Account.Wait(timetowait, timetowait + 100);
             //using (BigEndianWriter writer = new BigEndianWriter())
             //{
@@ -175,7 +176,7 @@ namespace BlueSheep.Core.Map
             //    }
             //    m_Account.SetStatus(Status.None);
             //}
-            
+
             return true;
         }
 

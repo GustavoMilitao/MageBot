@@ -146,6 +146,7 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             account.FightData.FightStop();
+            account.SetStatus(Status.None);
             if (account.Fight.infinite)
                 account.Fight.SearchFight();
 
