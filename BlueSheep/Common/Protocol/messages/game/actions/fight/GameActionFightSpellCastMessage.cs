@@ -95,6 +95,8 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Actions.Fight
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
+            m_spellId = reader.ReadVarUhShort();
+            m_spellLevel = reader.ReadShort();
             int portalsIdsCount = reader.ReadUShort();
             int portalsIdsIndex;
             m_portalsIds = new System.Collections.Generic.List<short>();
@@ -102,8 +104,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Actions.Fight
             {
                 m_portalsIds.Add(reader.ReadShort());
             }
-            m_spellId = reader.ReadVarUhShort();
-            m_spellLevel = reader.ReadShort();
         }
     }
 }
