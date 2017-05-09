@@ -960,7 +960,7 @@ namespace BlueSheep.Interface
                         r.Add((int)j.g.Rows[i].Cells[2].Value);
                     }
                 }
-                if (r.Count() <= 0 && !j.HasRightTool())
+                if (r.Count() <= 0)
                     continue;
                 return Gather.GoGather(r, j);
             }

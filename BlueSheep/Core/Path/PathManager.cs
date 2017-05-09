@@ -181,18 +181,10 @@ namespace BlueSheep.Core.Path
         /// </summary>
         public void ParsePath()
         {
-            //if (!File.Exists(path))
-            //    return;
-            //StreamReader sr = new StreamReader(path);
-            //string line = "";
             conditions = new List<PathCondition>();
             ActionsStack = new List<Action>();
-
-            //while (sr.Peek() > 0)
-            //{
             foreach (string line in m_content)
             {
-                //line = sr.ReadLine();
                 if (line == "" || line == string.Empty || line == null || line.StartsWith("#"))
                     continue;
                 if (line.Contains("+Condition "))
@@ -200,32 +192,26 @@ namespace BlueSheep.Core.Path
                     ParseCondition(line);
                     continue;
                 }
-                if (((line.Contains(Account.MapData.Pos + ":") && CheckMinusNumber(line)) || line.Contains(Account.MapData.Id.ToString() + ":")) && CheckConditions(false))
+                if (CheckConditions(false))
                 {
                     Current_Map = Account.MapData.Pos;
                     AnalyseLine(line);
-                    //sr.Close(); 
                     return;
                 }
-                foreach (string f in flags)
+
+                if(flags.Any(flag => line.Contains(flag)))
                 {
-                    if (line.Contains(f))
-                    {
-                        flag = f;
-                        continue;
-                    }
+                    flag = flags.ElementAt(flags.IndexOf(line));
+                    continue;
                 }
-                foreach (string f in Endflags)
+
+                if (Endflags.Any(Endflag => line.Contains(Endflag)))
                 {
-                    if (line.Contains(f))
-                    {
-                        conditions.Clear();
-                        flag = "";
-                        continue;
-                    }
+                    conditions.Clear();
+                    flag = String.Empty;
+                    continue;
                 }
             }
-            //sr.Close();
             Lost();
         }
 
@@ -254,7 +240,7 @@ namespace BlueSheep.Core.Path
         {
             if (line.Contains("#"))
                 return;
-            if (CheckConditions(true) && flag != "")
+            if (CheckConditions(true) && flag != String.Empty)
             {
                 ParseAction(line);
                 PerformFlag();

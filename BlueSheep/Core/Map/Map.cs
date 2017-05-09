@@ -103,7 +103,7 @@ namespace BlueSheep.Core.Map
             if (path == null)
                 return false;
             List<UInt32> serverMovement = MapMovementAdapter.GetServerMovement(path);
-            if(serverMovement[serverMovement.Count -1] == m_Account.MapData.Character.Disposition.CellId)
+            if (serverMovement[serverMovement.Count -1] == m_Account.MapData.Character.Disposition.CellId)
             {
                 Moving = false;
                 ConfirmMove();
@@ -309,13 +309,8 @@ namespace BlueSheep.Core.Map
             m_Account.Wait(m_time, m_time + 100);
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                if (Moving)
-                {
-                    m_Account.SocketManager.Send(new GameMapMovementConfirmMessage());
-                    Moving = false;
-                }
-                m_Account.SetStatus(Status.None);
-                
+                ChangingMapToSameMapAndSamePosition();
+
                 if (m_MapId != -1)
                 {
                     LaunchChangeMap(m_MapId);
@@ -362,6 +357,16 @@ namespace BlueSheep.Core.Map
                     m_Account.SetStatus(Status.None);
                 }
             }
+        }
+
+        private void ChangingMapToSameMapAndSamePosition()
+        {
+            if (Moving)
+            {
+                m_Account.SocketManager.Send(new GameMapMovementConfirmMessage());
+                Moving = false;
+            }
+            m_Account.SetStatus(Status.None);
         }
 
         public void useZaapi(int mapid)

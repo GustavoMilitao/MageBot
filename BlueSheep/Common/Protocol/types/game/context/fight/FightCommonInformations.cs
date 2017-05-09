@@ -139,6 +139,8 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
         
         public override void Deserialize(IDataReader reader)
         {
+            m_fightId = reader.ReadInt();
+            m_fightType = reader.ReadByte();
             int fightTeamsCount = reader.ReadUShort();
             int fightTeamsIndex;
             m_fightTeams = new System.Collections.Generic.List<FightTeamInformations>();
@@ -164,8 +166,6 @@ namespace BlueSheep.Common.Protocol.Types.Game.Context.Fight
                 objectToAdd.Deserialize(reader);
                 m_fightTeamsOptions.Add(objectToAdd);
             }
-            m_fightId = reader.ReadInt();
-            m_fightType = reader.ReadByte();
         }
     }
 }

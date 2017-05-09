@@ -147,9 +147,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             }
             account.FightData.FightStop();
             account.SetStatus(Status.None);
-            if (account.Fight.infinite)
-                account.Fight.SearchFight();
-
+            //account.Fight.infinite = true; // Swap it with checkbox
         }
 
         [MessageHandler(typeof(GameFightHumanReadyStateMessage))]
