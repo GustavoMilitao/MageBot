@@ -8,8 +8,7 @@ using BlueSheep.Common.Types;
 using BlueSheep.Data.Pathfinding;
 using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Engine.Enums;
-using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using BlueSheep.Util.Enums.Fight;
 using System;
 using System.Collections;
@@ -23,38 +22,42 @@ namespace BlueSheep.Core.Fight
     {
         #region Fields
         #region Dictionary
-        public  Dictionary<DateTime, int> xpWon;
-        public  Dictionary<string, int> winLoseDic;
-        public Dictionary<int, int> DurationByEffect = new Dictionary<int, int>();
-        public Dictionary<int, int> LastTurnLaunchBySpell = new Dictionary<int, int>();
-        public Dictionary<int, int> TotalLaunchBySpell = new Dictionary<int, int>();
-        public Dictionary<int, Dictionary<int, int>> TotalLaunchByCellBySpell = new Dictionary<int, Dictionary<int, int>>();
-        private Dictionary<long, List<BFighter>> m_Summons = new Dictionary<long, List<BFighter>>();
+        public Dictionary<DateTime, int> xpWon { get; set; }
+        public Dictionary<string, int> winLoseDic { get; set; }
+        public Dictionary<int, int> DurationByEffect { get; set; } = new Dictionary<int, int>();
+        public Dictionary<int, int> LastTurnLaunchBySpell { get; set; } = new Dictionary<int, int>();
+        public Dictionary<int, int> TotalLaunchBySpell { get; set; } = new Dictionary<int, int>();
+        public Dictionary<int, Dictionary<int, int>> TotalLaunchByCellBySpell { get; set; } = new Dictionary<int, Dictionary<int, int>>();
+        private Dictionary<long, List<BFighter>> m_Summons { get; set; } = new Dictionary<long, List<BFighter>>();
         #endregion
 
         #region Public Fields
-        public AccountUC m_Account;
-        public List<BFighter> Fighters = new List<BFighter>();
+        public Account.Account Account { get; set; }
+        public List<BFighter> Fighters { get; set; } = new List<BFighter>();
+        public int TimeoutFight { get; set; }
+        public List<BFighter> DeadEnnemies { get; set; } = new List<BFighter>();
+        public int TurnId { get; set; }
 
-        public List<BFighter> DeadEnnemies = new List<BFighter>();
-        public int TurnId;
+        public bool StartFightWithItemSet { get; set; }
+        public byte PresetStartUpId { get; set; }
+        public bool EndFightWithItemSet { get; set; }
+        public sbyte PresetEndUpId { get; set; }
+        public bool IsFighterTurn { get; set; } = false;
+        public bool IsFightStarted { get; set; } = false;
+        public bool WaitForReady { get; set; } = false;
+        public bool IsDead { get; set; } = false;
 
-        public bool IsFighterTurn = false;
-        public bool IsFightStarted = false;
-        public bool WaitForReady = false;
-        public bool IsDead = false;
-
-        public List<FightOptionsEnum> Options = new List<FightOptionsEnum>();
-        public Stopwatch watch = new Stopwatch();
-        public MonsterGroup followingGroup;
-        private Dictionary<string, int> boss;
+        public List<FightOptionsEnum> Options { get; set; } = new List<FightOptionsEnum>();
+        public Stopwatch watch { get; set; } = new Stopwatch();
+        public MonsterGroup followingGroup { get; set; }
+        private Dictionary<string, int> boss { get; set; }
         #endregion
         #endregion
 
         #region Properties
         public BFighter Fighter
         {
-            get { return GetFighter((long)m_Account.CharacterBaseInformations.ObjectID); }
+            get { return GetFighter((long)Account.CharacterBaseInformations.ObjectID); }
         }
 
         public int MonsterNumber
@@ -79,21 +82,20 @@ namespace BlueSheep.Core.Fight
         /// Constructeur (override)
         /// </summary>
         /// <param name="account">Compte associé</param>
-        public FightData(AccountUC Account)
+        public FightData(Account.Account Account)
         {
-            m_Account = Account;
+            this.Account = Account;
             xpWon = new Dictionary<DateTime, int>();
             winLoseDic = new Dictionary<string, int>();
-            winLoseDic.Add("Gagné", 0);
-            winLoseDic.Add("Perdu", 0);
+            winLoseDic.Add("Win", 0);
+            winLoseDic.Add("Lose", 0);
             xpWon.Add(DateTime.Today, 0);
             DataClass[] data = GameData.GetDataObjects(D2oFileEnum.Monsters);
             List<DataClass> b = data.ToList().FindAll(e => ((bool)e.Fields["isBoss"]) == true).ToList();
             boss = new Dictionary<string, int>();
-            //Instanciar m_Index (Ver referência no Monsters.Init()
             foreach (DataClass d in b)
             {
-                boss.Add(BlueSheep.Common.Data.I18N.GetText((int)d.Fields["nameId"]), (int)d.Fields["id"]);
+                boss.Add(Common.Data.I18N.GetText((int)d.Fields["nameId"]), (int)d.Fields["id"]);
             }
         }
         #endregion
@@ -203,12 +205,12 @@ namespace BlueSheep.Core.Fight
             DeadEnnemies.Add(fighter);
             if (!IsDead && fighter.Id == Fighter.Id)
             {
-                m_Account.Log(new ErrorTextInformation("Personnage mort :'("), 0);
+                Account.Log(new ErrorTextInformation("Personnage mort :'("), 0);
                 IsDead = true;
             }
             else if (fighter.CreatureGenericId != 0)
             {
-                m_Account.Log(new ActionTextInformation(fighter.Name + " est mort !"), 5);
+                Account.Log(new ActionTextInformation(fighter.Name + " est mort !"), 5);
             }
             Fighters.Remove(fighter);          
         }
@@ -236,7 +238,7 @@ namespace BlueSheep.Core.Fight
                 else if (actionId == 169)
                     Fighter.MovementPoints -= m_effect.Delta;
                 else if (!IsDead && actionId == 116 && m_effect.TargetId == Fighter.Id)
-                    m_Account.CharacterStats.Range.ContextModif -= m_effect.Delta;
+                    Account.CharacterStats.Range.ContextModif -= m_effect.Delta;
 
             }
         }
@@ -276,9 +278,9 @@ namespace BlueSheep.Core.Fight
                 fighter.LifePoints += delta;
                 if (fighter.Id == Fighter.Id)
                 {
-                    m_Account.ModifBar(2, m_Account.FightData.Fighter.MaxLifePoints, m_Account.FightData.Fighter.LifePoints, "Vitalité");
+                    Account.ModifBar(2, Account.FightData.Fighter.MaxLifePoints, Account.FightData.Fighter.LifePoints, "Life");
                 }
-                m_Account.Log(new ActionTextInformation(fighter.Name + ": " + delta + "PV."), 5);
+                Account.Log(new ActionTextInformation(fighter.Name + ": " + delta + "PV."), 5);
             }
             
         }
@@ -292,7 +294,7 @@ namespace BlueSheep.Core.Fight
             if (fighter != null && fighter.Id == Fighter.Id)
             {
                 int spellLevel = -1;
-                BlueSheep.Common.Types.Spell spell = m_Account.Spells.FirstOrDefault(s => s.Id == spellId);
+                BlueSheep.Common.Types.Spell spell = Account.Spells.FirstOrDefault(s => s.Id == spellId);
                 if (spell != null)
                     spellLevel = spell.Level;
                 if (spellLevel != -1)
@@ -360,14 +362,14 @@ namespace BlueSheep.Core.Fight
             if (informations is GameFightMonsterInformations)
             {
                 GameFightMonsterInformations infos = (GameFightMonsterInformations)informations;
-                Fighters.Add(new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, (uint)informations.TeamId, infos.CreatureGenericId));
+                Fighters.Add(new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, informations.TeamId, infos.CreatureGenericId));
             }
             else
             {
-                Fighters.Add(new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, (uint)informations.TeamId, 0));
+                Fighters.Add(new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, informations.TeamId, 0));
             }
             if (Fighter != null)
-                Fighter.Name = m_Account.CharacterBaseInformations.Name;
+                Fighter.Name = Account.CharacterBaseInformations.Name;
         }
 
         /// <summary>
@@ -377,7 +379,7 @@ namespace BlueSheep.Core.Fight
         {
             WaitForReady = false;
             IsFightStarted = true;
-            m_Account.Log(new ActionTextInformation("Début du combat"), 2);
+            Account.Log(new ActionTextInformation("Début du combat"), 2);
             watch.Restart();
         }
 
@@ -391,17 +393,17 @@ namespace BlueSheep.Core.Fight
             IsFighterTurn = false;
             IsFightStarted = false;
             IsDead = false;
-            m_Account.Log(new ActionTextInformation("Combat fini ! (" + watch.Elapsed.Minutes + " min, " + watch.Elapsed.Seconds + " sec)"), 0);
+            Account.Log(new ActionTextInformation("End fight ! (" + watch.Elapsed.Minutes + " min, " + watch.Elapsed.Seconds + " sec)"), 0);
             watch.Reset();
-            m_Account.SetStatus(Status.Busy);
+            Account.SetStatus(Status.Busy);
             Reset();
             PerformAutoTimeoutFight(2000);
-            if (m_Account.WithItemSetBox.Checked == true)
+            if (EndFightWithItemSet)
             {
-                sbyte id = (sbyte)m_Account.PresetEndUpD.Value;
+                sbyte id = PresetEndUpId;
                 InventoryPresetUseMessage msg2 = new InventoryPresetUseMessage((byte)(id - 1));
-                m_Account.SocketManager.Send(msg2);
-                m_Account.Log(new ActionTextInformation("Equipement rapide numero " + Convert.ToString(id)), 5);
+                Account.SocketManager.Send(msg2);
+                Account.Log(new ActionTextInformation("Fast equipment number " + Convert.ToString(id)), 5);
             }
             PulseRegen();
         }
@@ -427,7 +429,7 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public void TurnEnded(ulong id)
         {
-            if (id == m_Account.CharacterBaseInformations.ObjectID)
+            if (id == Account.CharacterBaseInformations.ObjectID)
             {
                 int num4 = 0;
                 List<int> list = new List<int>();
@@ -460,7 +462,7 @@ namespace BlueSheep.Core.Fight
                     LastTurnLaunchBySpell.Remove(list[0]);
                     list.RemoveAt(0);
                 }
-                m_Account.Log(new ActionTextInformation("Fin du tour"), 5);
+                Account.Log(new ActionTextInformation("Fin du tour"), 5);
             }
 
         }
@@ -494,9 +496,9 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Perform the auto-timeout.
         /// </summary>
-        public void PerformAutoTimeoutFight(int originalTime)
+        public async void PerformAutoTimeoutFight(int originalTime)
         {
-            m_Account.Wait(Convert.ToInt32(originalTime * m_Account.NUDTimeoutFight.Value), Convert.ToInt32(originalTime * m_Account.NUDTimeoutFight.Value));
+            await Account.PutTaskDelay(Convert.ToInt32(originalTime * TimeoutFight));
         }
 
         /// <summary>
@@ -551,7 +553,7 @@ namespace BlueSheep.Core.Fight
                 if (TestFighter.TeamId == Fighter.TeamId || TestFighter.IsAlive == false)
                     continue;
                 MapPoint TestFighterPoint = new MapPoint(TestFighter.CellId);
-                int dist = new SimplePathfinder(m_Account.MapData).FindPath(CharacterPoint.CellId, TestFighterPoint.CellId).Cells.Count();
+                int dist = new SimplePathfinder(Account.MapData).FindPath(CharacterPoint.CellId, TestFighterPoint.CellId).Cells.Count();
                 dist += CharacterPoint.DistanceToCell(TestFighterPoint);
                 if (((dist < SavDistance) || (SavDistance == -1)) && TestFighter != Fighter)
                 {
@@ -615,7 +617,7 @@ namespace BlueSheep.Core.Fight
                 fighter = NearestMonster();
             MapPoint CharacterPoint = new MapPoint(Fighter.CellId);
             MapPoint TestFighterPoint = new MapPoint(fighter.CellId);
-            int dist = new SimplePathfinder(m_Account.MapData).FindPath(fighter.CellId, TestFighterPoint.CellId).Cells.Count();
+            int dist = new SimplePathfinder(Account.MapData).FindPath(fighter.CellId, TestFighterPoint.CellId).Cells.Count();
             dist += CharacterPoint.DistanceToCell(TestFighterPoint);
             return dist;
         }
@@ -686,9 +688,9 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public bool IsCellWalkable(int cellId)
         {
-            if (m_Account.MapData.Data.IsWalkable(cellId))
+            if (Account.MapData.Data.IsWalkable(cellId))
             {
-                var selectedFighter = Fighters.FirstOrDefault((f) => f.CellId == cellId || m_Account.MapData.Data.Cells[cellId].NonWalkableDuringFight);
+                var selectedFighter = Fighters.FirstOrDefault((f) => f.CellId == cellId || Account.MapData.Data.Cells[cellId].NonWalkableDuringFight);
                 if (selectedFighter != null)
                     return false;
                 else
@@ -790,12 +792,12 @@ namespace BlueSheep.Core.Fight
                 if (canLaunchSpell != SpellInabilityReason.None)
                     return canLaunchSpell;
             }
-            Inventory.Item weapon = m_Account.Inventory.Weapon;
+            Inventory.Item weapon = Account.Inventory.Weapon;
             DataClass weaponData = null;
 
             DataClass spellData = GameData.GetDataObject(D2oFileEnum.Spells, spellId);
             ArrayList ids = (ArrayList)spellData.Fields["spellLevels"];
-            int level = m_Account.Spells.FirstOrDefault(Spell => Spell.Id == spellId).Level;
+            int level = Account.Spells.FirstOrDefault(Spell => Spell.Id == spellId).Level;
             int id = Convert.ToInt32(ids[level - 1]);
             DataClass spellLevelsData = GameData.GetDataObject(D2oFileEnum.SpellLevels, id);
 
@@ -813,7 +815,7 @@ namespace BlueSheep.Core.Fight
                 minRange = (minRange * 2);
             if (minRange < 0)
                 minRange = 0;
-            int maxRange = (spellId != 0) ? (int)((int)spellLevelsData.Fields["range"] + ((bool)spellLevelsData.Fields["rangeCanBeBoosted"] ? (m_Account.CharacterStats.Range.ObjectsAndMountBonus + m_Account.CharacterStats.Range.ContextModif) : 0)) : (int)spellLevelsData.Fields["range"];
+            int maxRange = (spellId != 0) ? (int)spellLevelsData.Fields["range"] + ((bool)spellLevelsData.Fields["rangeCanBeBoosted"] ? (Account.CharacterStats.Range.ObjectsAndMountBonus + Account.CharacterStats.Range.ContextModif) : 0) : (int)spellLevelsData.Fields["range"];
             if ((spellId != 0 && (bool)spellLevelsData.Fields["castInDiagonal"]) || (weaponData != null && !(bool)weaponData.Fields["castInLine"]))
                 maxRange = (maxRange * 2);
             if (maxRange < 0)
@@ -855,7 +857,7 @@ namespace BlueSheep.Core.Fight
                 {
                     Dofus1Line.Point point3 = (Dofus1Line.Point)list[i];
                     MapPoint point4 = new MapPoint((int)Math.Round(Math.Floor(point3.X)), (int)Math.Round(Math.Floor(point3.Y)));
-                    if (!(IsFreeCell(point4.CellId)) || !(m_Account.MapData.Data.IsLineOfSight(point4.CellId)))
+                    if (!(IsFreeCell(point4.CellId)) || !(Account.MapData.Data.IsLineOfSight(point4.CellId)))
                         return SpellInabilityReason.LineOfSight;
                     i += 1;
                 }
@@ -879,7 +881,7 @@ namespace BlueSheep.Core.Fight
         /// <returns>SpellInabilityReasons: Unknown, ActionPoints, TooManyLaunch, Cooldown, TooManyInvocations, None  </returns>
         private SpellInabilityReason CanLaunchSpell(int spellId)
         {
-            Inventory.Item weapon = m_Account.Inventory.Weapon;
+            Inventory.Item weapon = Account.Inventory.Weapon;
             DataClass weaponData = null;
 
             DataClass spellData = GameData.GetDataObject(D2oFileEnum.Spells, spellId);
@@ -887,11 +889,11 @@ namespace BlueSheep.Core.Fight
             int level = 0;
             try
             {
-                level = m_Account.Spells.FirstOrDefault(Spell => Spell.Id == spellId).Level;
+                level = Account.Spells.FirstOrDefault(Spell => Spell.Id == spellId).Level;
             }
             catch (NullReferenceException ex)
             {
-                m_Account.Log(new ErrorTextInformation("Le sort spécifié n'existe pas dans votre liste de sorts."), 0);
+                Account.Log(new ErrorTextInformation("Le sort spécifié n'existe pas dans votre liste de sorts."), 0);
                 return SpellInabilityReason.UnknownSpell;
             }
             int id = Convert.ToInt32(ids[level - 1]);
@@ -914,7 +916,7 @@ namespace BlueSheep.Core.Fight
             //EffectInstanceDice
             if (((listEffects != null) && (listEffects.Count > 0)) && ((int)((DataClass)listEffects[0]).Fields["effectId"]) == 181)
             {
-                CharacterCharacteristicsInformations stats = m_Account.CharacterStats;
+                CharacterCharacteristicsInformations stats = Account.CharacterStats;
                 int total = stats.SummonableCreaturesBoost.Base + stats.SummonableCreaturesBoost.ObjectsAndMountBonus + stats.SummonableCreaturesBoost.AlignGiftBonus + stats.SummonableCreaturesBoost.ContextModif;
                 if (GetInvokationNumber() >= total)
                     return SpellInabilityReason.TooManyInvocations;
@@ -939,7 +941,8 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         private void PulseRegen()
         {
-            m_Account.RegenUC.PulseRegen();
+            //Account.Regen.PulseRegen();
+            // TODO Militão: Add Regen module
         }
         #endregion
     }

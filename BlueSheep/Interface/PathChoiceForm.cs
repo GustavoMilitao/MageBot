@@ -1,4 +1,4 @@
-﻿using BlueSheep.Interface.Text;
+﻿using BlueSheep.Util.Text.Log;
 using BlueSheep.Properties.I18n.Strings;
 using System;
 using System.IO;

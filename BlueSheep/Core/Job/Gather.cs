@@ -1,8 +1,7 @@
 ﻿using BlueSheep.Core.Map.Elements;
 using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Engine.Enums;
-using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,7 @@ namespace BlueSheep.Core
     public class Gather
     {
         #region Fields
-        private AccountUC account = null;
+        private Account.Account account = null;
         private int _Id = -1;
         private List<int> m_BannedId = new List<int>();
 
@@ -26,7 +25,6 @@ namespace BlueSheep.Core
                 return Current_El.Name;
             }
         }
-        public JobUC Current_Job;
         
         /// <summary>
         /// Store the gathering stats.
@@ -61,7 +59,7 @@ namespace BlueSheep.Core
         #endregion
 
 
-        public Gather(AccountUC Account)
+        public Gather(Account.Account Account)
         {
             account = Account;
         }
@@ -75,12 +73,11 @@ namespace BlueSheep.Core
         /// /// <param name="job">
         /// The job used.
         /// </param>
-        public bool GoGather(List<int> ressources, JobUC job)
+        public bool GoGather(List<int> ressources)
         {
-            List<int> ListeRessourcesID = ressources;
+            List<int> ListeRessourcesID = ressources.Distinct().ToList();
             List<int> ListDistance = new List<int>();
             List<UsableElement> ListUsableElement = new List<UsableElement>();
-            Current_Job = job;
             try
             {
                 if (ListeRessourcesID.Count > 0)

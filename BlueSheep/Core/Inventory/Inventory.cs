@@ -2,8 +2,7 @@
 using BlueSheep.Common.Protocol.Messages.Game.Dialog;
 using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
 using BlueSheep.Common.Protocol.Messages.Game.Inventory.Items;
-using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,13 +14,13 @@ namespace BlueSheep.Core.Inventory
         public int kamas;
         public int maxWeight;
         public int weight;
-        public AccountUC Account;
+        public Account.Account Account;
         public List<Item> Items;
         public int weightPercent
         {
             get
             {
-                double per = (double)weight / (double)maxWeight;
+                double per = weight / (double)maxWeight;
                 return (int)(per * 100);
             }
 
@@ -29,7 +28,7 @@ namespace BlueSheep.Core.Inventory
         #endregion
 
         #region Constructors
-        public Inventory(AccountUC account)
+        public Inventory(Account.Account account)
         {
             Account = account;
 

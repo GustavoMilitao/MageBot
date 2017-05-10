@@ -1,6 +1,7 @@
 ﻿using BlueSheep.Common.IO;
+using BlueSheep.Core.Account;
 using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +19,7 @@ namespace BlueSheep.Engine.Constants
         
         public byte[] _hashKey;
 
-        public HumanCheck(AccountUC account)
+        public HumanCheck(Account account)
         {
             _hashKey = hashKey_Gen(account);
         }
@@ -260,7 +261,7 @@ namespace BlueSheep.Engine.Constants
         }
    
 
-        private byte[] hashKey_Gen(AccountUC account)
+        private byte[] hashKey_Gen(Account account)
         {
             try
             {

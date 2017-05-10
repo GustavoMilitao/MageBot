@@ -11,7 +11,6 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Houses.Guild
 {
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class HouseGuildShareRequestMessage : Message

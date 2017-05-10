@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Paddock
 {
     using BlueSheep.Common.Protocol.Types.Game.Paddock;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class PaddockPropertiesMessage : Message

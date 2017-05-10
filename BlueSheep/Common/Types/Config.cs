@@ -11,12 +11,12 @@ namespace BlueSheep.Common.Types
         public string m_FloodContent;
         public string m_BotPath;
         public string m_IA;
-        public bool m_Elevage;
+        public bool? m_Elevage;
         public List<bool> m_AutoUp;
         public bool m_IsLockingFight;
-        public decimal m_RegenValue;
+        public decimal? m_RegenValue;
         public List<decimal> m_Restrictions;
-        public bool m_AutoDeletion;
+        public bool? m_AutoDeletion;
         public bool m_RelaunchPath;
         //public System.Windows.Forms.ListView.ListViewItemCollection m_GestItems;
         //public Dictionary<DateTime, int> m_xpWon;

@@ -21,7 +21,7 @@ namespace BlueSheep.Common.Protocol.Messages.Connection
         public override void Serialize(IDataWriter writer)
         {
             writer.WriteUTF(this.salt);
-            writer.WriteVarInt((int)(ushort)this.key.Length);
+            writer.WriteVarInt((ushort)this.key.Length);
             foreach (sbyte @byte in this.key)
                 writer.WriteSByte(@byte);
         }
@@ -30,8 +30,8 @@ namespace BlueSheep.Common.Protocol.Messages.Connection
         {
             this.salt = reader.ReadUTF();
             ushort num = (ushort)reader.ReadVarInt();
-            this.key = new sbyte[(int)num];
-            for (int index = 0; index < (int)num; ++index)
+            this.key = new sbyte[num];
+            for (int index = 0; index < num; ++index)
                 this.key[index] = reader.ReadSByte();
         }
     }

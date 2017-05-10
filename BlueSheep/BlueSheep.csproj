@@ -120,6 +120,10 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Account\Account.cs" />
+    <Compile Include="Core\Fight\DataBar.cs" />
+    <Compile Include="Core\Fight\MonsterRestrictions.cs" />
+    <Compile Include="Core\Job\Resource.cs" />
     <Compile Include="Engine\Constants\DLLInjector.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1936,6 +1940,8 @@
     <Compile Include="Util\Constants\GameConstants.cs" />
     <Compile Include="Util\Bypass\HumanCheck.cs" />
     <Compile Include="Engine\Constants\IntelliSense.cs" />
+    <Compile Include="Util\Enums\Internal\Operator.cs" />
+    <Compile Include="Util\Enums\Internal\RestrictionLevel.cs" />
     <Compile Include="Util\Translate\Translate.cs" />
     <Compile Include="Properties\I18n\Strings\Strings.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using BlueSheep.Common.Constants;
-using BlueSheep.Interface;
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.Protocol.Types.Game.Data.Items.Effects;
 
@@ -14,7 +13,7 @@ namespace BlueSheep.Common.Types
 
         public DataClass Datas { get; set; }
 
-        public AccountUC account { get; set; }
+        public Core.Account.Account account { get; set; }
 
         public List<Food> FoodList { get; set; }
 
@@ -28,12 +27,12 @@ namespace BlueSheep.Common.Types
         #endregion
 
         #region Constructeurs
-        public Pet(Core.Inventory.Item informations, DataClass datas, AccountUC uc)
+        public Pet(Core.Inventory.Item informations, DataClass datas, Core.Account.Account account)
         {
             FoodList = new List<Food>();
             Informations = informations;
             Datas = datas;
-            account = uc;
+            this.account = account;
             Set();
         }
         #endregion

@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Fight.Arena
 {
     using BlueSheep.Common.Protocol.Types.Game.Character;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class ArenaFighterLeaveMessage : Message

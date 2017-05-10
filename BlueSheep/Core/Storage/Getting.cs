@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using BlueSheep.Common.Constants;
-using BlueSheep.Interface;
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
 using BlueSheep.Common.Protocol.Types.Game.Data.Items;
@@ -10,14 +9,14 @@ namespace BlueSheep.Core.Storage
     class Getting
     {
         #region Fields
-        public AccountUC account;
+        public Account.Account account;
         #endregion
 
         #region Public methods
 
-        public Getting(AccountUC accountform)
+        public Getting(Account.Account account)
         {
-            account = accountform;
+            this.account = account;
         }
 
         public void Init()

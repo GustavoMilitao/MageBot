@@ -11,7 +11,6 @@
 namespace BlueSheep.Common.Protocol.Messages.Web.Ankabox
 {
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class MailStatusMessage : Message

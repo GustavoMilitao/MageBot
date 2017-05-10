@@ -4,8 +4,7 @@ using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Npc;
 using BlueSheep.Common.Protocol.Messages.Game.Dialog;
 using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
 using BlueSheep.Engine.Types;
-using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using System.Collections.Generic;
 
 namespace BlueSheep.Core.Npc
@@ -13,7 +12,7 @@ namespace BlueSheep.Core.Npc
     public class Npc
     {
         #region Fields
-        public AccountUC account { get; set; }
+        public Account.Account account { get; set; }
         public GameRolePlayNpcInformations Entity { get; set; }
         public int Id { get; set; }
         public int QuestionId { get; set; }
@@ -26,7 +25,7 @@ namespace BlueSheep.Core.Npc
         #endregion
 
         #region Constructors
-        public Npc(AccountUC Account)
+        public Npc(Account.Account Account)
         {
             account = Account;
             Entity = null;
@@ -69,10 +68,9 @@ namespace BlueSheep.Core.Npc
                 msg.Serialize(writer);
                 writer.Content = account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.MessageID);
+                pack.Pack(msg.MessageID);
                 account.SocketManager.Send(pack.Writer.Content);
-                if (account.DebugMode.Checked)
-                    account.Log(new DebugTextInformation("[SND] 5898 (NpcGenericActionRequestMessage)"), 0);
+                account.Log(new DebugTextInformation("[SND] 5898 (NpcGenericActionRequestMessage)"), 0);
             }
         }
 
@@ -88,8 +86,8 @@ namespace BlueSheep.Core.Npc
             return 0;
         }
 
-#endregion
-    
+        #endregion
+
     }
 
 

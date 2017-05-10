@@ -60,7 +60,7 @@
             {
                 msg.Deserialize(reader);
             }
-            switch ((int)msg.MessageID)
+            switch (msg.MessageID)
             {
                 case 226:
                     MapComplementaryInformationsDataMessage packet = (MapComplementaryInformationsDataMessage)msg;
@@ -293,7 +293,7 @@
             // 
             this.sadikLabel2.AutoSize = true;
             this.sadikLabel2.Font = new System.Drawing.Font("Verdana", 8F);
-            this.sadikLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
+            this.sadikLabel2.ForeColor = System.Drawing.Color.FromArgb(((byte)(135)), ((byte)(135)), ((byte)(135)));
             this.sadikLabel2.Location = new System.Drawing.Point(228, 47);
             this.sadikLabel2.Name = "sadikLabel2";
             this.sadikLabel2.Size = new System.Drawing.Size(14, 13);
@@ -411,7 +411,7 @@
             // 
             this.sadikLabel3.AutoSize = true;
             this.sadikLabel3.Font = new System.Drawing.Font("Verdana", 8F);
-            this.sadikLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
+            this.sadikLabel3.ForeColor = System.Drawing.Color.FromArgb(((byte)(135)), ((byte)(135)), ((byte)(135)));
             this.sadikLabel3.Location = new System.Drawing.Point(212, 47);
             this.sadikLabel3.Name = "sadikLabel3";
             this.sadikLabel3.Size = new System.Drawing.Size(14, 13);
@@ -422,7 +422,7 @@
             // 
             this.sadikLabel4.AutoSize = true;
             this.sadikLabel4.Font = new System.Drawing.Font("Verdana", 8F);
-            this.sadikLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
+            this.sadikLabel4.ForeColor = System.Drawing.Color.FromArgb(((byte)(135)), ((byte)(135)), ((byte)(135)));
             this.sadikLabel4.Location = new System.Drawing.Point(15, 47);
             this.sadikLabel4.Name = "sadikLabel4";
             this.sadikLabel4.Size = new System.Drawing.Size(140, 13);
@@ -487,7 +487,7 @@
             // 
             this.sadikLabel1.AutoSize = true;
             this.sadikLabel1.Font = new System.Drawing.Font("Verdana", 8F);
-            this.sadikLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
+            this.sadikLabel1.ForeColor = System.Drawing.Color.FromArgb(((byte)(135)), ((byte)(135)), ((byte)(135)));
             this.sadikLabel1.Location = new System.Drawing.Point(15, 47);
             this.sadikLabel1.Name = "sadikLabel1";
             this.sadikLabel1.Size = new System.Drawing.Size(140, 13);

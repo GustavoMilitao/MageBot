@@ -11,7 +11,6 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Character.Creation
 {
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class CharacterCanBeCreatedResultMessage : Message

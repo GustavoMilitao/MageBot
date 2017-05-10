@@ -1,4 +1,4 @@
-﻿using BlueSheep.Interface;
+﻿using BlueSheep.Core.Account;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,18 +11,14 @@ namespace BlueSheep.Engine.Frame
         private uint m_LatestSent;
         private readonly List<uint> m_LatencyBuffer;
         private const uint m_LatencyAvgBufferSize = 50;
-        private AccountUC account;
+        private Account account;
         #endregion
 
         #region Constructeurs
-        public LatencyFrame(AccountUC Account)
+        public LatencyFrame(Account Account)
         {
             m_LatencyBuffer = new List<uint>();
             account = Account;
-            //string blah = Str2.Str7(-1820302795);
-            //pId = Player id
-            //ct = character Ticket
-            // hash loader info : 40c2dfcf773f83a6bbe1777b6e3a87f1
         }
         #endregion
 
@@ -62,7 +58,7 @@ namespace BlueSheep.Engine.Frame
 
         public int GetSamplesCount()
         {
-            return (int)m_LatencyBuffer.Count;
+            return m_LatencyBuffer.Count;
         }
 
         public int GetSamplesMax()

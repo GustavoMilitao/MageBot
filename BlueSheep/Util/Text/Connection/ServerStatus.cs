@@ -1,6 +1,7 @@
 ﻿using BlueSheep.Common.Enums;
+using BlueSheep.Core.Account;
 using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 
 namespace BlueSheep.Util.Text
 {
@@ -13,7 +14,7 @@ namespace BlueSheep.Util.Text
         #endregion
 
         #region Public methods
-        public static void Test(ServerStatusEnum status, AccountUC account)
+        public static void Test(ServerStatusEnum status, Account account)
         {
             switch (status)
             {

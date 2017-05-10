@@ -1,7 +1,8 @@
 ﻿using BlueSheep.Common.Types;
 using BlueSheep.Core.Fight;
+using BlueSheep.Core.Job;
 using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,12 +14,12 @@ namespace BlueSheep.Engine.Types
     public class ConfigManager
     {
         #region Fields
-        private AccountUC account;
+        private Core.Account.Account account;
         public bool Restored = false;
         #endregion
 
         #region Constructors
-        public ConfigManager(AccountUC Account)
+        public ConfigManager(Core.Account.Account Account)
         {
             account = Account;
         }
@@ -34,29 +35,30 @@ namespace BlueSheep.Engine.Types
                 Config conf = DeserializeConfig(spath);
                 if (conf == null)
                     return;
-                if (conf.m_AIPath != "")
+                if (!String.IsNullOrEmpty(conf.m_AIPath))
                 {
                     account.FightParser = new FightParser(account, conf.m_AIPath, conf.m_IA);
                     account.Fight = new BFight(account, account.FightParser, account.FightData);
-                    account.ModLabel(conf.m_IA, account.NomIA);
+                    //account.ModLabel(conf.m_IA, account.NomIA);
+                    // TODO Militão: Populate the new interface
                 }
                 if (conf.m_Path != null && conf.m_BotPath != null && conf.m_Path != "")
                 {
                     account.Path = new Core.Path.PathManager(account, conf.m_Path, conf.m_BotPath);
                     if (conf.m_BotPath != null)
-                        account.Log(new BotTextInformation("Trajet chargé : " + conf.m_BotPath), 0);
+                        account.Log(new BotTextInformation("Path loaded : " + conf.m_BotPath), 0);
                     else
-                        account.Log(new BotTextInformation("Trajet chargé : UNKNOWN"), 0);
+                        account.Log(new BotTextInformation("Path loaded : UNKNOWN"), 0);
                 }
                 
                 if (account.Fight == null)
                 {
-                    account.Log(new ErrorTextInformation("WARNING : T'as chargé aucune IA, fait gaffe mon coco :p"), 0);
+                    account.Log(new ErrorTextInformation("WARNING : You have not loaded any AI"), 0);
                 }
 
-                if (conf.m_FloodContent != "")
+                if (!String.IsNullOrEmpty(conf.m_FloodContent))
                 {
-                    account.FloodUC.FloodContentRbox.Text = conf.m_FloodContent;
+                    account.Flood.FloodContent  = conf.m_FloodContent;
                 }
                 //if (conf.m_L1R != null)
                 //{
@@ -64,49 +66,47 @@ namespace BlueSheep.Engine.Types
                 //    account.Gather.Stats = ressources;
                 //}
 
-                if (conf.m_AutoUp.Count > 0)
-                {
-                    if (conf.m_AutoUp[0])
-                        account.CaracUC.VitaRb.Checked = true;
-                    else if (conf.m_AutoUp[1])
-                        account.CaracUC.WisRb.Checked = true;
-                    else if (conf.m_AutoUp[2])
-                        account.CaracUC.StreRb.Checked = true;
-                    else if (conf.m_AutoUp[3])
-                        account.CaracUC.InteRb.Checked = true;
-                    else if (conf.m_AutoUp[4])
-                        account.CaracUC.LuckRb.Checked = true;
-                    else if (conf.m_AutoUp[5])
-                        account.CaracUC.AgiRb.Checked = true;
-                }
+                //if (conf.m_AutoUp.Count > 0)
+                //{
+                //    if (conf.m_AutoUp[0])
+                //        account.CaracUC.VitaRb.Checked = true;
+                //    else if (conf.m_AutoUp[1])
+                //        account.CaracUC.WisRb.Checked = true;
+                //    else if (conf.m_AutoUp[2])
+                //        account.CaracUC.StreRb.Checked = true;
+                //    else if (conf.m_AutoUp[3])
+                //        account.CaracUC.InteRb.Checked = true;
+                //    else if (conf.m_AutoUp[4])
+                //        account.CaracUC.LuckRb.Checked = true;
+                //    else if (conf.m_AutoUp[5])
+                //        account.CaracUC.AgiRb.Checked = true;
+                //}
+                // TODO Militão: Add Character module
                 if (conf.m_Elevage != null)
-                    account.checkBoxBegin.Checked = conf.m_Elevage;
+                    account.MapData.Begin = (bool)conf.m_Elevage;
                 if (conf.m_IsLockingFight)
-                    account.IsLockingFight.Checked = conf.m_IsLockingFight;
-                if (conf.m_RegenValue != null)
-                    account.RegenChoice.Value = conf.m_RegenValue;
+                    account.LockingFights = conf.m_IsLockingFight;
+                //if (conf.m_RegenValue != null)
+                //    account.RegenChoice.Value = conf.m_RegenValue;
+                // TODO Militão: Add regen module
                 if (conf.m_Restrictions.Count > 0)
                 {
-                    account.nudMinMonstersLevel.Value = conf.m_Restrictions[0];
-                    account.nudMaxMonstersLevel.Value = conf.m_Restrictions[1];
-                    account.nudMinMonstersNumber.Value = conf.m_Restrictions[2];
-                    account.nudMaxMonstersNumber.Value = conf.m_Restrictions[3];
+                    account.MinMonstersLevel = (int)conf.m_Restrictions[0];
+                    account.MaxMonstersLevel = (int)conf.m_Restrictions[1];
+                    account.MinMonstersNumber = (int)conf.m_Restrictions[2];
+                    account.MaxMonstersNumber = (int)conf.m_Restrictions[3];
                 }
-                if (conf.m_AutoDeletion != null)
-                    account.GestItemsUC.AutoDeletionBox.Checked = conf.m_AutoDeletion;
+                //if (conf.m_AutoDeletion != null)
+                //    account.GestItemsUC.AutoDeletionBox.Checked = conf.m_AutoDeletion;
+                // TODO Militão: Add Items module
                 if (conf.m_RelaunchPath && account.Path != null)
                     account.Path.Relaunch = true;
-                //if (conf.m_GestItems != null)
-                //{
-                //    foreach (ListViewItem i in conf.m_GestItems)
-                //        account.GestItemsUC.LVGestItems.Items.Add(i);
-                //}
 
-                account.Log(new BotTextInformation("Configuration restaurée."), 0);
+                account.Log(new BotTextInformation("Restored settings."), 0);
             }
             else
             {
-                account.Log(new BotTextInformation("Aucune config pour ce personnage."), 0);
+                account.Log(new BotTextInformation("No config for this character."), 0);
             }
             Restored = true;
         }
@@ -116,7 +116,7 @@ namespace BlueSheep.Engine.Types
             if (!account.Enabled)
                 return;
             List<BSpell> lspells = new List<BSpell>();
-            string ia = "Aucune IA";
+            string ia = "NO IA loaded";
             string AIpath = "";
             //Dictionary<DateTime, int> exp = new Dictionary<DateTime,int>();
             //Dictionary<string,int> winLose = new Dictionary<string,int>();
@@ -135,10 +135,10 @@ namespace BlueSheep.Engine.Types
                 path = account.Path.path;
             }
 
-            string flood = "";
-            if (account.FloodUC.FloodContent.Length > 0)
+            string flood = String.Empty;
+            if (!String.IsNullOrEmpty(account.Flood.FloodContent))
             {
-                flood = account.FloodUC.FloodContent;
+                flood = account.Flood.FloodContent;
             }
 
             string pathBot = "";
@@ -146,42 +146,46 @@ namespace BlueSheep.Engine.Types
                 pathBot = account.Path.pathBot;
 
             List<bool> AutoUp = new List<bool>() { false, false, false, false, false, false };
-            if (account.CaracUC.VitaRb.Checked)
-                AutoUp[0] = true;
-            else if (account.CaracUC.WisRb.Checked)
-                AutoUp[1] = true;
-            else if (account.CaracUC.StreRb.Checked)
-                AutoUp[2] = true;
-            else if (account.CaracUC.InteRb.Checked)
-                AutoUp[3] = true;
-            else if (account.CaracUC.LuckRb.Checked)
-                AutoUp[4] = true;
-            else if (account.CaracUC.AgiRb.Checked)
-                AutoUp[5] = true;
+            //if (account.CaracUC.VitaRb.Checked)
+            //    AutoUp[0] = true;
+            //else if (account.CaracUC.WisRb.Checked)
+            //    AutoUp[1] = true;
+            //else if (account.CaracUC.StreRb.Checked)
+            //    AutoUp[2] = true;
+            //else if (account.CaracUC.InteRb.Checked)
+            //    AutoUp[3] = true;
+            //else if (account.CaracUC.LuckRb.Checked)
+            //    AutoUp[4] = true;
+            //else if (account.CaracUC.AgiRb.Checked)
+            //    AutoUp[5] = true;
+            //TODO Militão: Add Character module
 
-            bool isLockingFight = account.IsLockingFight.Checked;
-            decimal RegenValue = account.RegenChoice.Value;
+            bool isLockingFight = account.LockingFights;
+            //decimal RegenValue = account.RegenChoice.Value;
+            //TODO Militão: Add Regen module
 
-            List<decimal> Restrictions = new List<decimal>(){account.nudMinMonstersLevel.Value,
-                account.nudMaxMonstersLevel.Value,
-                account.nudMinMonstersNumber.Value,
-                account.nudMaxMonstersNumber.Value};
+            List<decimal> Restrictions = new List<decimal>(){
+                account.MinMonstersLevel,
+                account.MaxMonstersLevel,
+                account.MinMonstersNumber,
+                account.MaxMonstersNumber};
 
-            bool AutoDeletion = account.GestItemsUC.AutoDeletionBox.Checked;
-            //System.Windows.Forms.ListView.ListViewItemCollection GestItems = account.GestItemsUC.LVGestItems.Items;
+            //bool AutoDeletion = account.GestItemsUC.AutoDeletionBox.Checked;
+            //TODO Militão: Add Items module
 
-            bool RelaunchPath = account.RelaunchPath.Checked;
+            bool RelaunchPath = account.RelaunchPath;
             //Dictionary<string, int> ressources = account.Gather.Stats;
             //List<string> L1R = ressources.Keys.ToList();
             //List<int> L2R = ressources.Values.ToList();
-            foreach (JobUC uc in account.JobsUC)
-                uc.exportToXml();
+            //foreach (Job jb in account.Jobs)
+            //    jb.exportToXml();
+            //TODO Militão: Create export to xml to job
 
-            Config conf = new Config(path, flood, pathBot, ia, AIpath, account.checkBoxBegin.Checked, 
-                AutoUp, isLockingFight, RegenValue, Restrictions, AutoDeletion, RelaunchPath/*,GestItems*/);//, ressources, exp, winLose); 
-            string spath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
-            Serialize(conf, spath);
-
+            //Config conf = new Config(path, flood, pathBot, ia, AIpath, account.MapData.Begin, 
+            //    AutoUp, isLockingFight, RegenValue, Restrictions, AutoDeletion, RelaunchPath/*,GestItems*/);//, ressources, exp, winLose); 
+            //string spath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
+            //Serialize(conf, spath);
+            //TODO Militão: Add Some modules
 
         }
 

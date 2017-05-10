@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using BlueSheep.Common.Data.D2o;
 using System.Collections;
 using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Stats;
@@ -133,7 +133,7 @@ namespace BlueSheep.Interface.UCs
 
         public int GetBoost(int statId)
         {
-            DataClass d = GameData.GetDataObject(D2oFileEnum.Breeds, (int)account.CharacterBaseInformations.Breed);
+            DataClass d = GameData.GetDataObject(D2oFileEnum.Breeds, account.CharacterBaseInformations.Breed);
             switch (statId)
             {
                 case 10:

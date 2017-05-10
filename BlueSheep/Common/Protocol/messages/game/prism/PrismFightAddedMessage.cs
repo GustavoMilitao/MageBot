@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Prism
 {
     using BlueSheep.Common.Protocol.Types.Game.Prism;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class PrismFightAddedMessage : Message

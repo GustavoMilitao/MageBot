@@ -13,7 +13,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Guild
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class GuildListMessage : Message

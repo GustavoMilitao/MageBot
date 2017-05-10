@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using BlueSheep.Engine.Types;
 using BlueSheep.Common;
 using BlueSheep.Engine.Network;
@@ -179,13 +179,13 @@ namespace BlueSheep.Interface
             Running = null;
             //Fight = new BFight(this);
             Fight = null;
-            Map = new Map(this);
-            Inventory = new Inventory(this);
-            Spells = new List<Spell>();
-            Npc = new Npc(this);
+            //Map = new Map(this);
+            //Inventory = new Inventory(this);
+            //Spells = new List<Spell>();
+            //Npc = new Npc(this);
 
             Jobs = new List<Job>();
-            Gather = new Gather(this);
+            //Gather = new Gather(this);
 
             //Heroic mode
             HeroicUC = new HeroicUC(this);
@@ -217,12 +217,12 @@ namespace BlueSheep.Interface
                 Directory.CreateDirectory(path);
 
             //Config Manager
-            ConfigManager = new ConfigManager(this);
+            //ConfigManager = new ConfigManager(this);
 
-            Flood = new Core.Misc.Flood(this);
-            FightData = new FightData(this);
-            MapData = new MapData(this);
-            WatchDog = new WatchDog(this);
+            //Flood = new Core.Misc.Flood(this);
+            //FightData = new FightData(this);
+            //MapData = new MapData(this);
+            //WatchDog = new WatchDog(this);
         }
 
         public AccountUC()
@@ -256,8 +256,8 @@ namespace BlueSheep.Interface
 
         public void InitMITM()
         {
-            SocketManager = new SocketManager(this);
-            SocketManager.InitMITM();
+            //SocketManager = new SocketManager(this);
+            //SocketManager.InitMITM();
 
         }
 
@@ -472,7 +472,7 @@ namespace BlueSheep.Interface
 
         private void StartWaitingBt_Click(object sender, EventArgs e)
         {
-            House = new HouseBuy(this);
+            //House = new HouseBuy(this);
             Log(new BotTextInformation("En attente de la mise en vente d'une maison..."), 1);
         }
 
@@ -567,36 +567,36 @@ namespace BlueSheep.Interface
 
         private void CommandeBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                string text = CommandeBox.Text;
-                CommandeBox.Clear();
-                CLIParser parser = new CLIParser(this);
-                List<string> result = parser.Parse(text);
-                foreach (string s in result)
-                {
-                    if (s.Contains("ERROR"))
-                        Log(new ErrorTextInformation(s), 0);
-                    else
-                        Log(new BotTextInformation(s), 0);
-                }
-            }
-            else if (e.KeyCode == Keys.Up && CLIParser.CommandsHistory.Count > 0)
-            {
-                int index = CLIParser.CommandsHistory.IndexOf(CommandeBox.Text);
-                if (index != -1 && index != 0)
-                    CommandeBox.Text = CLIParser.CommandsHistory[index - 1];
-                else
-                    CommandeBox.Text = CLIParser.CommandsHistory[CLIParser.CommandsHistory.Count - 1];
-            }
-            else if (e.KeyCode == Keys.Down && CLIParser.CommandsHistory.Count > 0)
-            {
-                int index = CLIParser.CommandsHistory.IndexOf(CommandeBox.Text);
-                if (index != -1 && index != CLIParser.CommandsHistory.Count - 1)
-                    CommandeBox.Text = CLIParser.CommandsHistory[index + 1];
-                else
-                    CommandeBox.Text = "";
-            }
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    string text = CommandeBox.Text;
+            //    CommandeBox.Clear();
+            //    CLIParser parser = new CLIParser(this);
+            //    List<string> result = parser.Parse(text);
+            //    foreach (string s in result)
+            //    {
+            //        if (s.Contains("ERROR"))
+            //            Log(new ErrorTextInformation(s), 0);
+            //        else
+            //            Log(new BotTextInformation(s), 0);
+            //    }
+            //}
+            //else if (e.KeyCode == Keys.Up && CLIParser.CommandsHistory.Count > 0)
+            //{
+            //    int index = CLIParser.CommandsHistory.IndexOf(CommandeBox.Text);
+            //    if (index != -1 && index != 0)
+            //        CommandeBox.Text = CLIParser.CommandsHistory[index - 1];
+            //    else
+            //        CommandeBox.Text = CLIParser.CommandsHistory[CLIParser.CommandsHistory.Count - 1];
+            //}
+            //else if (e.KeyCode == Keys.Down && CLIParser.CommandsHistory.Count > 0)
+            //{
+            //    int index = CLIParser.CommandsHistory.IndexOf(CommandeBox.Text);
+            //    if (index != -1 && index != CLIParser.CommandsHistory.Count - 1)
+            //        CommandeBox.Text = CLIParser.CommandsHistory[index + 1];
+            //    else
+            //        CommandeBox.Text = "";
+            //}
         }
 
         public void ActualizeMap()
@@ -935,7 +935,7 @@ namespace BlueSheep.Interface
 
         public void StartFeeding()
         {
-            Running = new Running(this);
+            //Running = new Running(this);
             Running.Init();
         }
 
@@ -959,7 +959,8 @@ namespace BlueSheep.Interface
                 }
                 if (r.Count() <= 0)
                     continue;
-                return Gather.GoGather(r, j);
+                //return Gather.GoGather(r, j);
+                return false;
             }
             return false;
 
@@ -967,7 +968,7 @@ namespace BlueSheep.Interface
 
         public void TryFeeding()
         {
-            Running = new Running(this);
+            //Running = new Running(this);
             Running.Init();
         }
 
@@ -1059,15 +1060,15 @@ namespace BlueSheep.Interface
 
             Thread.Sleep(GetRandomTime()+new Random().Next(10000));
 
-            m_Running = new Running(this);
+            //m_Running = new Running(this);
 
             if (SocketManager != null && SocketManager.State == SocketState.Connected)
                 return;
 
             Log(new ConnectionTextInformation(Strings.Connection), 0);
 
-            if (SocketManager == null)
-                SocketManager = new SocketManager(this);
+            //if (SocketManager == null)
+            //    SocketManager = new SocketManager(this);
 
             SocketManager.Connect(new ConnectionInformations("213.248.126.40", 5555, Strings.Identification));
             loginstate = "identification";
@@ -1265,7 +1266,7 @@ namespace BlueSheep.Interface
 
             foreach (ObjectItemToSell i in sell)
             {
-                BlueSheep.Core.Inventory.Item item = new BlueSheep.Core.Inventory.Item(i.Effects.ToList(), i.ObjectGID, 0, (int)i.Quantity, (int)i.ObjectUID, this);
+                BlueSheep.Core.Inventory.Item item = new BlueSheep.Core.Inventory.Item(i.Effects.ToList(), i.ObjectGID, 0, (int)i.Quantity, (int)i.ObjectUID);
                 string[] row1 = { item.GID.ToString(), item.UID.ToString(), item.Name, item.Quantity.ToString(), item.Type, i.ObjectPrice.ToString() };
                 System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
                 li.ToolTipText = item.Description;

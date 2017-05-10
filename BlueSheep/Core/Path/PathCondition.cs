@@ -1,5 +1,4 @@
-﻿using BlueSheep.Interface;
-using System;
+﻿using System;
 
 namespace BlueSheep.Core.Path
 {
@@ -9,16 +8,16 @@ namespace BlueSheep.Core.Path
         PathConditionEnum m_Cond;
         object m_delta;
         char m_operateur;
-        AccountUC account;
+        Account.Account account;
         #endregion
 
         #region Constructors
-        public PathCondition(PathConditionEnum condition, object delta, char operateur, AccountUC Account)
+        public PathCondition(PathConditionEnum condition, object delta, char operateur, Account.Account account)
         {
             m_Cond = condition;
             m_delta = delta;
             m_operateur = operateur;
-            account = Account;
+            this.account = account;
         }
         #endregion
 
@@ -43,7 +42,7 @@ namespace BlueSheep.Core.Path
                             else
                                 return false;
                         case '>':
-                            if ((int)account.CharacterBaseInformations.Level > Convert.ToInt32(m_delta))
+                            if (account.CharacterBaseInformations.Level > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -91,7 +90,7 @@ namespace BlueSheep.Core.Path
                     }
                 case PathConditionEnum.PodsPercent:
                     if (Convert.ToString(m_delta) == "%PODS%")
-                        m_delta = account.GestItemsUC.NUDBank.Value;
+                        m_delta = account.MaxPodsPercent;
                     switch (m_operateur)
                     {
                         case '<':

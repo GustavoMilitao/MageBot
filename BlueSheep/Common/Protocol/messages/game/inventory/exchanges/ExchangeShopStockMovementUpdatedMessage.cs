@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges
 {
     using BlueSheep.Common.Protocol.Types.Game.Data.Items;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class ExchangeShopStockMovementUpdatedMessage : Message

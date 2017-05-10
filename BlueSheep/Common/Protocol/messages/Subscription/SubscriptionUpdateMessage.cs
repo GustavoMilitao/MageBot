@@ -11,7 +11,6 @@
 namespace BlueSheep.Common.Protocol.Messages.Subscription
 {
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class SubscriptionUpdateMessage : Message

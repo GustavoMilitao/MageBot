@@ -1,5 +1,4 @@
-﻿using BlueSheep.Interface;
-using BlueSheep.Properties.I18n.Strings;
+﻿using BlueSheep.Properties.I18n.Strings;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;

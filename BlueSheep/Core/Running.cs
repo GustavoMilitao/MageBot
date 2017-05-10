@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using BlueSheep.Common.Types;
 using BlueSheep.Core.Meal;
 using BlueSheep.Core.Storage;
-using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using BlueSheep.Common.Data.D2o;
 
 namespace BlueSheep.Core
@@ -19,7 +18,7 @@ namespace BlueSheep.Core
         private Feeding m_Feeding;
         private LeavingDialog m_LeavingDialog;
         private bool m_OnSafe;
-        private AccountUC account;
+        private Account.Account account;
         #endregion
 
         #region Properties
@@ -68,9 +67,9 @@ namespace BlueSheep.Core
             m_CurrentPetIndex = 0;
         }
 
-        public Running(AccountUC accountform)
+        public Running(Account.Account account)
         {
-            account = accountform;
+            this.account = account;
             m_Openning = null;
             m_Leaving = null;
             m_Getting = null;
@@ -79,7 +78,7 @@ namespace BlueSheep.Core
         #endregion
 
         #region Public methods
-        public void Init()
+        public async void Init()
         {
             if (m_CurrentPetIndex == account.petsList.Count)
             {
@@ -119,7 +118,7 @@ namespace BlueSheep.Core
 
                 m_Feeding = new Feeding(account);
                 m_Feeding.Init(account.petsList[m_CurrentPetIndex]);
-                account.Wait(500, 1000);
+                await account.PutTaskDelay(1000);
                 m_CurrentPetIndex++;
                 return;
             }

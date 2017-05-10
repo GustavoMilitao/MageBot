@@ -11,7 +11,6 @@
 namespace BlueSheep.Common.Protocol.Messages.Web.Haapi
 {
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class HaapiApiKeyRequestMessage : Message

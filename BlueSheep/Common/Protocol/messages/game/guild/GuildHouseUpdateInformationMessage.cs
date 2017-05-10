@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Guild
 {
     using BlueSheep.Common.Protocol.Types.Game.House;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class GuildHouseUpdateInformationMessage : Message

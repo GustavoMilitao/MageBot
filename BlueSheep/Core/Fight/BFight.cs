@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using BlueSheep.Common.IO;
-using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Common.Types;
 using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Engine.Types;
 using BlueSheep.Data.Pathfinding;
-using System.Threading;
 using BlueSheep.Common.Protocol.Messages.Game.Context.Fight;
 using BlueSheep.Common.Protocol.Messages.Game.Context;
 using BlueSheep.Common.Protocol.Messages.Game.Actions.Fight;
@@ -21,7 +19,7 @@ namespace BlueSheep.Core.Fight
     public class BFight
     {
         #region Fields 
-        public AccountUC m_Account;
+        public Account.Account m_Account;
         private FightParser m_AI;
         private FightData m_Data;
         public int flag;
@@ -35,7 +33,7 @@ namespace BlueSheep.Core.Fight
         #endregion
 
         #region Constructors
-        public BFight(AccountUC account, FightParser AI, FightData data)
+        public BFight(Account.Account account, FightParser AI, FightData data)
         {
             m_Account = account;
             m_AI = AI;
@@ -63,7 +61,7 @@ namespace BlueSheep.Core.Fight
                 {
                     case -1:              /* We can't use the spell, continue to the next spell */
                         continue;
-                    case  0:
+                    case 0:
                         LaunchSpell(pair.Key.SpellId, pair.Value.CellId);  /* We can use the spell without move */
                         return;
                     default:
@@ -71,7 +69,7 @@ namespace BlueSheep.Core.Fight
                         LaunchSpell(pair.Key.SpellId, pair.Value.CellId);
                         return;
                 }
-            } 
+            }
             PerformMove(); /* No spell are launchable, move if we can and end the turn */
         }
 
@@ -80,39 +78,30 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public bool SearchFight()
         {
-            int minNumber = (int)m_Account.nudMinMonstersNumber.Value;
-            int maxNumber = (int)m_Account.nudMaxMonstersNumber.Value;
-            int minLevel = (int)m_Account.nudMinMonstersLevel.Value;
-            int maxLevel = (int)m_Account.nudMaxMonstersLevel.Value;
-            lock(clock)
+            int minNumber = m_Account.MinMonstersNumber;
+            int maxNumber = m_Account.MaxMonstersNumber;
+            int minLevel = m_Account.MinMonstersLevel;
+            int maxLevel = m_Account.MaxMonstersLevel;
+            lock (clock)
             {
-                foreach (MonsterGroup monsters in m_Account.MapData.Monsters)
+                MonsterGroup monsters = m_Account.MapData.Monsters.FirstOrDefault(monst => monst.monstersCount >= minNumber &&
+                                                                                           monst.monstersCount <= maxNumber &&
+                                                                                           monst.monstersLevel >= minLevel &&
+                                                                                           monst.monstersLevel <= maxLevel &&
+                                                                                           m_Account.AllowedGroup(monst.NameList()) &&
+                                                                                           !Banned.Contains(monst));
+                if (monsters != null)
                 {
-
-                    if (monsters.monstersCount < minNumber || monsters.monstersCount > maxNumber)
-                    {
-                        continue;
-                    }
-
-                    if (monsters.monstersLevel < minLevel || monsters.monstersLevel > maxLevel)
-                    {
-                        continue;
-                    }
-                    if (m_Account.VerifGroup(monsters.NameList()) == false || Banned.Contains(monsters))
-                        continue;
-
-                    m_Account.FightData.followingGroup = monsters;
-                    if (m_Account.Map.MoveToCell(monsters.m_cellId))
+                    if (m_Account.Map.MoveToCell(monsters.m_cellId).Result)
                     {
                         m_Account.SetStatus(Status.Moving);
-                        m_Account.Log(new ActionTextInformation(string.Format("Lancement d'un combat contre {0} monstres de niveau {1} ({2})", monsters.monstersCount, monsters.monstersLevel, monsters.monstersName(true))),1);
+                        m_Account.Log(new ActionTextInformation(string.Format("Lancement d'un combat contre {0} monstres de niveau {1} ({2})", monsters.monstersCount, monsters.monstersLevel, monsters.monstersName(true))), 1);
                         return true;
                     }
-
                 }
             }
             return false;
-}
+        }
 
         /// <summary>
         /// Launch a fight by sending a GameRolePlayAttackMonsterRequestMessage.
@@ -122,8 +111,6 @@ namespace BlueSheep.Core.Fight
             GameRolePlayAttackMonsterRequestMessage msg = new GameRolePlayAttackMonsterRequestMessage(id);
             m_Account.SocketManager.Send(msg);
             m_Account.Log(new ActionTextInformation("Launch Fight !"), 1);
-            Thread t = new Thread(new ThreadStart(m_Account.Map.CheckFight));
-            t.Start();
         }
 
         /// <summary>
@@ -145,7 +132,7 @@ namespace BlueSheep.Core.Fight
         public void PlaceCharacter(List<int> PlacementCells)
         {
             m_error = 0;
-            m_Account.Log(new BotTextInformation("Placement du personnage."),5);
+            m_Account.Log(new BotTextInformation("Placement du personnage."), 5);
             try
             {
                 PlacementEnum position = m_AI.GetPositioning();
@@ -184,13 +171,13 @@ namespace BlueSheep.Core.Fight
                 }
                 if (cell != -1)
                 {
-                        GameFightPlacementPositionRequestMessage msg = new GameFightPlacementPositionRequestMessage((ushort)cell);
-                        m_Account.SocketManager.Send(msg);
+                    GameFightPlacementPositionRequestMessage msg = new GameFightPlacementPositionRequestMessage((ushort)cell);
+                    m_Account.SocketManager.Send(msg);
                 }
             }
             catch (Exception ex)
             {
-                m_Account.Log(new ErrorTextInformation(ex.Message),0);
+                m_Account.Log(new ErrorTextInformation(ex.Message), 0);
             }
         }
 
@@ -234,19 +221,19 @@ namespace BlueSheep.Core.Fight
             {
                 case 96:
                     // water
-                   return SpellCategory.DamagesWater;
+                    return SpellCategory.DamagesWater;
                 case 97:
                     //earth
-                   return SpellCategory.DamagesEarth;
+                    return SpellCategory.DamagesEarth;
                 case 98:
                     //air
-                   return SpellCategory.DamagesAir;
+                    return SpellCategory.DamagesAir;
                 case 99:
                     //fire
                     return SpellCategory.DamagesFire;
                 case 100:
                     return SpellCategory.DamagesNeutral;
-                    //neutral
+                //neutral
                 case 623:
                     return SpellCategory.Invocation;
                 case 81:
@@ -286,8 +273,7 @@ namespace BlueSheep.Core.Fight
                 pack.Pack(msg.MessageID);
                 m_Account.SocketManager.Send(pack.Writer.Content);
                 m_Account.Log(new ActionTextInformation("Lancement d'un sort en " + cellId), 5);
-                if (m_Account.DebugMode.Checked)
-                    m_Account.Log(new DebugTextInformation("[SND] 1005 (GameActionFightCastRequestMessage)"), 0);
+                m_Account.Log(new DebugTextInformation("[SND] 1005 (GameActionFightCastRequestMessage)"), 0);
             }
         }
 
@@ -339,11 +325,10 @@ namespace BlueSheep.Core.Fight
                         msg.Serialize(writer);
                         writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
                         MessagePackaging pack = new MessagePackaging(writer);
-                        pack.Pack((int)msg.MessageID);
+                        pack.Pack(msg.MessageID);
                         flag = 0;
                         m_Account.SocketManager.Send(pack.Writer.Content);
-                        if (m_Account.DebugMode.Checked)
-                            m_Account.Log(new DebugTextInformation("[SND] 950 (GameMapMovementRequestMessage)"), 0);
+                        m_Account.Log(new DebugTextInformation("[SND] 950 (GameMapMovementRequestMessage)"), 0);
                     }
                     return true;
                 }
@@ -355,7 +340,7 @@ namespace BlueSheep.Core.Fight
         /// Send the GameFightTurnFinishMessage packet in order to end the turn.
         /// </summary>
         public void EndTurn()
-        {     
+        {
             GameFightTurnFinishMessage msg = new GameFightTurnFinishMessage();
             m_Account.SocketManager.Send(msg);
         }

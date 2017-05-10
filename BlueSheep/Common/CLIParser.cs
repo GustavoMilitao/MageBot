@@ -5,7 +5,7 @@ using BlueSheep.Common.Types;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Engine.Types;
 using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +19,7 @@ namespace BlueSheep.Common
         /* Command Line Parser */
 
         #region Fields
-        private AccountUC account;
+        private Core.Account.Account account;
 
         /// <summary>
         /// Stores the commands history.
@@ -68,7 +68,7 @@ namespace BlueSheep.Common
         #endregion
 
         #region Constructors
-        public CLIParser(AccountUC Account)
+        public CLIParser(Core.Account.Account Account)
         {
             account = Account;
         }
@@ -732,11 +732,10 @@ namespace BlueSheep.Common
                         msg.Serialize(writer);
                         writer.Content = account.HumanCheck.hash_function(writer.Content);
                         MessagePackaging pack = new MessagePackaging(writer);
-                        pack.Pack((int)msg.MessageID);
+                        pack.Pack(msg.MessageID);
                         account.SocketManager.Send(pack.Writer.Content);
                         result.Add("à " + dest + " : " + message + "\n");
-                        if (account.DebugMode.Checked)
-                            account.Log(new DebugTextInformation("[SND] 851 (ChatClientPrivateMessage)"), 0);
+                        account.Log(new DebugTextInformation("[SND] 851 (ChatClientPrivateMessage)"), 0);
                     }
                 }
                 else

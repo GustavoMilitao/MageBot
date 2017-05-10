@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Npc
 {
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class TaxCollectorDialogQuestionBasicMessage : Message

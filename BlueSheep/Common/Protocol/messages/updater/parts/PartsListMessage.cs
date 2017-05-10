@@ -13,7 +13,6 @@ namespace BlueSheep.Common.Protocol.Messages.Updater.Parts
     using BlueSheep.Common.Protocol.Types.Updater;
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class PartsListMessage : Message

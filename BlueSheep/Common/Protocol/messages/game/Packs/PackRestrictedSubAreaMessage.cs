@@ -11,7 +11,6 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Packs
 {
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class PackRestrictedSubAreaMessage : Message

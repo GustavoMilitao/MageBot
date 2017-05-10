@@ -1,12 +1,11 @@
 ﻿using BlueSheep.Common.Protocol.Messages.Game.Dialog;
-using BlueSheep.Interface;
 
 namespace BlueSheep.Core.Storage
 {
     public class LeavingDialog
     {
         #region Public methods
-        public void Init(AccountUC account)
+        public void Init(Account.Account account)
         {
             LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
             account.SocketManager.Send(leaveDialogRequestMessage);

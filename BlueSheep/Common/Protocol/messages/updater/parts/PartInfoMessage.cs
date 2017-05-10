@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Updater.Parts
 {
     using BlueSheep.Common.Protocol.Types.Updater;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class PartInfoMessage : Message

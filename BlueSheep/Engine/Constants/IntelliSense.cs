@@ -1,6 +1,5 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.DataCenter;
-using BlueSheep.Common.Enums;
 using System;
 using System.Collections;
 using System.Collections.Generic;

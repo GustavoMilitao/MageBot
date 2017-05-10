@@ -4,7 +4,7 @@ using BlueSheep.Common.IO;
 using BlueSheep.Engine.Types;
 using BlueSheep.Common;
 using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using BlueSheep.Common.Enums;
 using BlueSheep.Util.Enums.EnumHelper;
 using BlueSheep.Common.Protocol.Messages.Game.Basic;
@@ -20,7 +20,7 @@ namespace BlueSheep.Engine.Handlers.Basic
     {
         #region Public methods
         [MessageHandler(typeof(SequenceNumberRequestMessage))]
-        public static void SequenceNumberRequestMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void SequenceNumberRequestMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             account.Sequence++;
 
@@ -29,7 +29,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(BasicLatencyStatsRequestMessage))]
-        public static void BasicLatencyStatsRequestMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void BasicLatencyStatsRequestMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage((ushort)account.LatencyFrame.GetLatencyAvg(),
                 (ushort)account.LatencyFrame.GetSamplesCount(), (ushort)account.LatencyFrame.GetSamplesMax());
@@ -41,18 +41,17 @@ namespace BlueSheep.Engine.Handlers.Basic
                     writer.Content = account.HumanCheck.hash_function(writer.Content);
                     MessagePackaging messagePackaging = new MessagePackaging(writer);
 
-                    messagePackaging.Pack((int)basicLatencyStatsMessage.MessageID);
+                    messagePackaging.Pack(basicLatencyStatsMessage.MessageID);
 
                     account.SocketManager.Send(messagePackaging.Writer.Content);
-                    if (account.DebugMode.Checked)
-                        account.Log(new BlueSheep.Interface.Text.DebugTextInformation("[SND] 5663 (BasicLatencyStatsMessage)"), 0);
+                    account.Log(new BlueSheep.Util.Text.Log.DebugTextInformation("[SND] 5663 (BasicLatencyStatsMessage)"), 0);
                 }
             }
-            
+
         }
 
-        [MessageHandler(typeof (BasicAckMessage))]
-        public static void BasicAckMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        [MessageHandler(typeof(BasicAckMessage))]
+        public static void BasicAckMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             BasicAckMessage basicAckMessage = (BasicAckMessage)message;
 
@@ -64,15 +63,16 @@ namespace BlueSheep.Engine.Handlers.Basic
             account.LastPacketID.Enqueue(basicAckMessage.LastProtocolId);
             account.LastPacket = basicAckMessage.LastProtocolId;
 
-                        
+
         }
 
         [MessageHandler(typeof(BasicNoOperationMessage))]
-        public static void BasicNoOperationMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void BasicNoOperationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             //MainForm.ActualMainForm.ActualizeAccountInformations();
-            if (account.checkBoxBegin.Checked)
-                account.ActualizeFamis();
+            //if (account.MapData.Begin)
+            //    account.ActualizeFamis();
+            // TODO Militão: Populate the new interface
             Thread.Sleep(GetRandomTime());
 
             if (account.LastPacketID.Count == 0)
@@ -131,10 +131,10 @@ namespace BlueSheep.Engine.Handlers.Basic
                 default:
                     return;
             }
-            
+
         }
-         [MessageHandler(typeof (BasicTimeMessage))]
-        public static void BasicTimeMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        [MessageHandler(typeof(BasicTimeMessage))]
+        public static void BasicTimeMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             BasicTimeMessage btmsg = (BasicTimeMessage)message;
 
@@ -152,23 +152,23 @@ namespace BlueSheep.Engine.Handlers.Basic
             //    // account.AboDofLabel.Text = date.Date.ToString();
             //    account.Log(new BotTextInformation(epoch.Date.ToShortDateString()), 0);
             //}
-                //account.serverTimeLag = serverTimeLag;
-         }
+            //account.serverTimeLag = serverTimeLag;
+        }
 
-         [MessageHandler(typeof(AccountLoggingKickedMessage))]
-         public static void AccountLoggingKickedMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
-         {
-             AccountLoggingKickedMessage btmsg = (AccountLoggingKickedMessage)message;
+        [MessageHandler(typeof(AccountLoggingKickedMessage))]
+        public static void AccountLoggingKickedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        {
+            AccountLoggingKickedMessage btmsg = (AccountLoggingKickedMessage)message;
 
-             using (BigEndianReader reader = new BigEndianReader(packetDatas))
-             {
-                 btmsg.Deserialize(reader);
-             }
-             account.Log(new ErrorTextInformation(String.Format("Compte banni {0} jours, {1} heures, {2} minutes :'( ", btmsg.Days, btmsg.Hours, btmsg.Minutes)), 0);
-         }
-        
+            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            {
+                btmsg.Deserialize(reader);
+            }
+            account.Log(new ErrorTextInformation(String.Format("Compte banni {0} jours, {1} heures, {2} minutes :'( ", btmsg.Days, btmsg.Hours, btmsg.Minutes)), 0);
+        }
+
         [MessageHandler(typeof(ServerSettingsMessage))]
-        public static void ServerSettingsMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void ServerSettingsMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             ServerSettingsMessage msg = (ServerSettingsMessage)message;
 
@@ -177,9 +177,9 @@ namespace BlueSheep.Engine.Handlers.Basic
                 msg.Deserialize(reader);
             }
             account.Log(
-                new ConnectionTextInformation(" Server Settings : Language : " + msg.Lang + 
-                                         ", GameType : " + ((GameTypeIdEnum)msg.GameType).Description() + 
-                                         ", Comunity : " + ((CommunityIdEnum)msg.Community).Description()),0);
+                new ConnectionTextInformation(" Server Settings : Language : " + msg.Lang +
+                                         ", GameType : " + ((GameTypeIdEnum)msg.GameType).Description() +
+                                         ", Comunity : " + ((CommunityIdEnum)msg.Community).Description()), 0);
         }
 
         #endregion

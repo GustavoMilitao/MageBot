@@ -1,23 +1,21 @@
 ﻿using BlueSheep.Common.Data.D2o;
-using BlueSheep.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using BlueSheep.Core.Map.Elements;
 using BlueSheep.Data.D2p.Elements;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using BlueSheep.Common.Data;
 using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Common.Types;
 using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
-using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay;
 
 namespace BlueSheep.Core.Map
 {
     public class MapData
     {
         #region Fields
-        private AccountUC m_Account;
+        private Account.Account m_Account;
         public BlueSheep.Data.D2p.Map Data;
 
         /// <summary>
@@ -53,6 +51,8 @@ namespace BlueSheep.Core.Map
         public List<Common.Protocol.Types.Game.Interactive.InteractiveElement> InterElements { get; set; }
 
         public int LastMapId;
+
+        public bool Begin { get; set; }
         #endregion
 
         #region Properties
@@ -105,7 +105,7 @@ namespace BlueSheep.Core.Map
                 Dictionary<int, UsableElement> usableElements = new Dictionary<int, UsableElement>();
                 foreach (var element in InteractiveElements.Keys)
                 {
-                    Elements.InteractiveElement interactiveElement = (Elements.InteractiveElement)element;
+                    Elements.InteractiveElement interactiveElement = element;
                     if (interactiveElement.EnabledSkills.Count >= 1)
                     {
                         foreach (var layer in Data.Layers)
@@ -137,7 +137,7 @@ namespace BlueSheep.Core.Map
         /// Constructeur
         /// </summary>
         /// <param name="account">Compte associé</param>
-        public MapData(AccountUC Account)
+        public MapData(Account.Account Account)
         {
             m_Account = Account;
         }
@@ -241,14 +241,14 @@ namespace BlueSheep.Core.Map
             {
                 m_Account.Path.Start();
             }
-            if (m_Account.petsList.Count != 0 && m_Account.checkBoxBegin.Checked == true)
+            if (m_Account.petsList.Count != 0 && Begin)
             {
                 m_Account.StartFeeding();
             }
-            else if (m_Account.checkBoxBegin.Checked == true)
+            else if (Begin)
             {
-                m_Account.Log(new ErrorTextInformation("Aucun familier dans l'inventaire."), 0);
-                m_Account.checkBoxBegin.Checked = false;
+                m_Account.Log(new ErrorTextInformation("No pet in inventory."), 0);
+                Begin = false;
             }
         }
 
@@ -367,16 +367,16 @@ namespace BlueSheep.Core.Map
         {
             GameRolePlayCharacterInformations pl = Players.Find(p => p.ContextualId == contextId);
             if (pl != null)
-                return (int)pl.Disposition.CellId;
+                return pl.Disposition.CellId;
             Elements.StatedElement st = StatedElements.Find(s => s.Id == contextId);
             if (st != null)
                 return (int)st.CellId;
             GameRolePlayNpcInformations npc = Npcs.Find(s => s.ContextualId == contextId);
             if (npc != null)
-                return (int)npc.Disposition.CellId;
+                return npc.Disposition.CellId;
             GameRolePlayActorInformations other = Others.Find(s => s.ContextualId == contextId);
             if (other != null)
-                return (int)other.Disposition.CellId;
+                return other.Disposition.CellId;
             return 0;
         }
 

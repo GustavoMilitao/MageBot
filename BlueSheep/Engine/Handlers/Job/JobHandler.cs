@@ -12,7 +12,7 @@ namespace BlueSheep.Engine.Handlers.Job
     {
          #region Public methods
         [MessageHandler(typeof(JobDescriptionMessage))]
-        public static void JobDescriptionMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void JobDescriptionMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             JobDescriptionMessage msg = (JobDescriptionMessage)message;
 
@@ -34,7 +34,7 @@ namespace BlueSheep.Engine.Handlers.Job
         }
 
         [MessageHandler(typeof(JobExperienceMultiUpdateMessage))]
-        public static void JobExperienceMultiUpdateMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void JobExperienceMultiUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             JobExperienceMultiUpdateMessage msg = (JobExperienceMultiUpdateMessage)message;
 
@@ -56,15 +56,12 @@ namespace BlueSheep.Engine.Handlers.Job
                     }
                 }
             }
-            account.ActualizeJobs();
-            //foreach (JobUC j in account.JobsUC)
-            //{
-            //    j.populateTreeview();
-            //}
+            //account.ActualizeJobs();
+            // TODO Militão: Populate the new interface
         }
 
         [MessageHandler(typeof(JobExperienceUpdateMessage))]
-        public static void JobExperienceUpdateMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void JobExperienceUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             JobExperienceUpdateMessage msg = (JobExperienceUpdateMessage)message;
 
@@ -84,11 +81,12 @@ namespace BlueSheep.Engine.Handlers.Job
                     break;
                 }
             }
-            foreach (JobUC j in account.JobsUC)
-                j.UpdateJob();
-         
+            //foreach (JobUC j in account.JobsUC)
+            //    j.UpdateJob();
+            // TODO Militão: Populate the new interface
+
         }
 
-#endregion
+        #endregion
     }
 }

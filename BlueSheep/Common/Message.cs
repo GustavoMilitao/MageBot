@@ -50,11 +50,11 @@ namespace BlueSheep.Common
                     writer.WriteByte((byte)packet.Length);
                     break;
                 case 2:
-                    writer.WriteShort((short)(int)packet.Length);
+                    writer.WriteShort((short)packet.Length);
                     break;
                 case 3:
                     writer.WriteByte((byte)(packet.Length >> 16 & 255));
-                    writer.WriteShort((short)(int)(packet.Length & 65535));
+                    writer.WriteShort((short)(packet.Length & 65535));
                     break;
                 default:
                     throw new System.Exception("Packet's length can't be encoded on 4 or more bytes");

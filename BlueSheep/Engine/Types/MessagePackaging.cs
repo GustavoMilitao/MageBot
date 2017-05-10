@@ -84,7 +84,7 @@ namespace BlueSheep.Engine.Types
         private int GetHeader(int protocolID)
         {
             // Création du Header
-            return (int)((protocolID << 2) | GetLenghtType());
+            return (protocolID << 2) | GetLenghtType();
         }
         #endregion
     }

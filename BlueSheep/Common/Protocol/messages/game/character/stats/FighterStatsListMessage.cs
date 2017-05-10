@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Character.Stats
 {
     using BlueSheep.Common.Protocol.Types.Game.Character.Characteristic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class FighterStatsListMessage : Message

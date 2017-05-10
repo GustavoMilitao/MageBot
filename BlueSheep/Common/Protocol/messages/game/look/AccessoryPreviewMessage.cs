@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Look
 {
     using BlueSheep.Common.Protocol.Types.Game.Look;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class AccessoryPreviewMessage : Message

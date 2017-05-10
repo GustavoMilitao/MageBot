@@ -3,7 +3,7 @@
 //using BlueSheep.Engine.Frame;
 //using BlueSheep.Engine.Types;
 //using BlueSheep.Interface;
-//using BlueSheep.Interface.Text;
+//using BlueSheep.Util.Text.Log;
 //using System;
 //using System.Collections.Generic;
 //using System.Net;
@@ -302,11 +302,11 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using System.IO;
 using BlueSheep.Engine.Types;
-using BlueSheep.Interface;
 using BlueSheep.Engine.Frame;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages.Common.Basic;
+using BlueSheep.Core.Account;
 
 namespace BlueSheep.Engine.Network
 {
@@ -861,7 +861,7 @@ namespace BlueSheep.Engine.Network
             try
             {
                 tcp_keepalive sioKeepAliveVals = new tcp_keepalive();
-                sioKeepAliveVals.onoff = (uint)1; // 1 to enable 0 to disable
+                sioKeepAliveVals.onoff = 1; // 1 to enable 0 to disable
                 sioKeepAliveVals.keepalivetime = KeepAliveInactivity;
                 sioKeepAliveVals.keepaliveinterval = KeepAliveInterval;
 
@@ -1105,7 +1105,7 @@ namespace BlueSheep.Engine.Network
     {
         #region Fields
         private MessageInformations m_MessageInformations;
-        private AccountUC account;
+        private Account account;
         private NetClient client;
         private bool m_IsChangingServer;
         public SocketState State;
@@ -1114,7 +1114,7 @@ namespace BlueSheep.Engine.Network
             get { return m_IsChangingServer; }
             set { m_IsChangingServer = value; }
         }
-        private List<string> DisconnectReasons = new List<string>() {"Alerte au modo ! Alerte au modo !", "Try Reconnect.", "Wait before next meal.", "Changing server.", "User forced."};
+        private List<string> DisconnectReasons = new List<string>() { "Alerte au modo ! Alerte au modo !", "Try Reconnect.", "Wait before next meal.", "Changing server.", "User forced." };
 
         #region MITM
         private NetServer server;
@@ -1122,11 +1122,11 @@ namespace BlueSheep.Engine.Network
         #endregion
 
         #region Constructors
-        public SocketManager(AccountUC accountform)
+        public SocketManager(Account account)
         {
-            account = accountform;
+            this.account = account;
             if (account != null)
-                account.LatencyFrame = new LatencyFrame(accountform);
+                account.LatencyFrame = new LatencyFrame(account);
             client = new NetClient();
             client.Connected += new EventHandler<NetSocketConnectedEventArgs>(client_Connected);
             client.DataArrived += new EventHandler<NetSockDataArrivalEventArgs>(client_DataArrived);
@@ -1216,8 +1216,7 @@ namespace BlueSheep.Engine.Network
                 //pack.Pack((int)msg.MessageID);
                 msg.Pack(writer);
                 account.SocketManager.Send(writer.Content);
-                if (account.DebugMode.Checked)
-                    account.Log(new DebugTextInformation("[SND] " + msg.MessageID), 0);
+                account.Log(new DebugTextInformation("[SND] " + msg.MessageID), 0);
             }
         }
 
@@ -1242,10 +1241,10 @@ namespace BlueSheep.Engine.Network
             if (e.Exception.GetType() == typeof(System.Net.Sockets.SocketException))
             {
                 System.Net.Sockets.SocketException s = (System.Net.Sockets.SocketException)e.Exception;
-                account.Log(new ErrorTextInformation("Error: " + e.Function + " - " + s.SocketErrorCode.ToString() + "\r\n" + s.ToString()),0);
+                account.Log(new ErrorTextInformation("Error: " + e.Function + " - " + s.SocketErrorCode.ToString() + "\r\n" + s.ToString()), 0);
             }
             else
-                account.Log(new ErrorTextInformation("Error: " + e.Function + "\r\n" + e.Exception.ToString()),4);
+                account.Log(new ErrorTextInformation("Error: " + e.Function + "\r\n" + e.Exception.ToString()), 4);
         }
 
         private void client_Disconnected(object sender, NetSocketDisconnectedEventArgs e)
@@ -1298,15 +1297,15 @@ namespace BlueSheep.Engine.Network
             if (e.Exception.GetType() == typeof(System.Net.Sockets.SocketException))
             {
                 System.Net.Sockets.SocketException s = (System.Net.Sockets.SocketException)e.Exception;
-                account.Log(new ErrorTextInformation("Error: " + e.Function + " - " + s.SocketErrorCode.ToString() + "\r\n" + s.ToString()),0);
+                account.Log(new ErrorTextInformation("Error: " + e.Function + " - " + s.SocketErrorCode.ToString() + "\r\n" + s.ToString()), 0);
             }
             else
-                account.Log(new ErrorTextInformation("Error: " + e.Function + "\r\n" + e.Exception.ToString()),0);
+                account.Log(new ErrorTextInformation("Error: " + e.Function + "\r\n" + e.Exception.ToString()), 0);
         }
 
         private void server_Disconnected(object sender, NetSocketDisconnectedEventArgs e)
         {
-            account.Log(new ConnectionTextInformation("Disconnected: " + e.Reason),4);
+            account.Log(new ConnectionTextInformation("Disconnected: " + e.Reason), 4);
         }
 
         private void local_Disconnected(object sender, NetSocketDisconnectedEventArgs e)
@@ -1326,7 +1325,7 @@ namespace BlueSheep.Engine.Network
 
         private void server_ConnectionRequested(object sender, NetSockConnectionRequestEventArgs e)
         {
-            account.Log(new ConnectionTextInformation("Connection Requested: " + ((System.Net.IPEndPoint)e.Client.RemoteEndPoint).Address.ToString()),4);
+            account.Log(new ConnectionTextInformation("Connection Requested: " + ((System.Net.IPEndPoint)e.Client.RemoteEndPoint).Address.ToString()), 4);
             server.Accept(e.Client);
             account.Init();
         }
@@ -1340,7 +1339,7 @@ namespace BlueSheep.Engine.Network
 
         private void server_Connected(object sender, NetSocketConnectedEventArgs e)
         {
-            account.Log(new ConnectionTextInformation("Connected: " + e.SourceIP),4);
+            account.Log(new ConnectionTextInformation("Connected: " + e.SourceIP), 4);
         }
         #endregion
 
@@ -1354,4 +1353,4 @@ namespace BlueSheep.Engine.Network
 
     }
 }
-        #endregion
+#endregion

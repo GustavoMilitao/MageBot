@@ -1,5 +1,4 @@
 ﻿using BlueSheep.Common.IO;
-using System.Collections.Generic;
 
 namespace BlueSheep.Data.D2p
 {

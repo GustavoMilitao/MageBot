@@ -13,7 +13,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges
     using BlueSheep.Common.Protocol.Types.Game.Mount;
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class ExchangeMountsStableAddMessage : Message

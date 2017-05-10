@@ -13,7 +13,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Dare
     using BlueSheep.Common.Protocol.Types.Game.Dare;
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class DareListMessage : Message

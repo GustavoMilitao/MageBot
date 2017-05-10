@@ -3,19 +3,20 @@ using BlueSheep.Common.Protocol.Messages.Game.Chat;
 using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Houses;
 using BlueSheep.Common.Protocol.Messages.Game.Interactive;
 using BlueSheep.Engine.Types;
-using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
+using System;
 
 namespace BlueSheep.Core.Misc
 {
     public class HouseBuy
     {
-        private AccountUC account;
+        private Account.Account account;
         public ulong priceHouse;
         public int ElementIdd;
         public int SkillInstanceID;
+        public string SentenceToSay { get; set; }
 
-        public HouseBuy(AccountUC Account)
+        public HouseBuy(Account.Account Account)
         {
             account = Account;
         }
@@ -29,10 +30,9 @@ namespace BlueSheep.Core.Misc
                 msg.Serialize(writer);
                 writer.Content = account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.MessageID);
+                pack.Pack(msg.MessageID);
                 account.SocketManager.Send(pack.Writer.Content);
-                if (account.DebugMode.Checked)
-                    account.Log(new DebugTextInformation("[SND] 861 (ChatClientMultiMessage)"), 0);
+                account.Log(new DebugTextInformation("[SND] 861 (ChatClientMultiMessage)"), 0);
             }
         }
 
@@ -40,14 +40,13 @@ namespace BlueSheep.Core.Misc
         {
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                InteractiveUseRequestMessage msg = new InteractiveUseRequestMessage((uint)ElementIdd,(uint)SkillInstanceID);
+                InteractiveUseRequestMessage msg = new InteractiveUseRequestMessage((uint)ElementIdd, (uint)SkillInstanceID);
                 msg.Serialize(writer);
                 writer.Content = account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.MessageID);
+                pack.Pack(msg.MessageID);
                 account.SocketManager.Send(pack.Writer.Content);
-                if (account.DebugMode.Checked)
-                    account.Log(new DebugTextInformation("[SND] 5001 (InteractiveUseRequestMessage)"), 0);
+                account.Log(new DebugTextInformation("[SND] 5001 (InteractiveUseRequestMessage)"), 0);
             }
         }
 
@@ -56,9 +55,9 @@ namespace BlueSheep.Core.Misc
             HouseBuyRequestMessage msg = new HouseBuyRequestMessage(priceHouse);
             account.SocketManager.Send(msg);
             account.Log(new BotTextInformation("Maison achetée pour " + priceHouse + " kamas !"), 0);
-            if (account.PhraseADire.Text.Length != 0)
+            if (!String.IsNullOrEmpty(SentenceToSay))
             {
-                Say(account.PhraseADire.Text);
+                Say(SentenceToSay);
             }
         }
 

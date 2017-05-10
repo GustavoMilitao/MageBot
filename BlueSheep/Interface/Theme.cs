@@ -400,12 +400,12 @@ namespace BlueSheep.Interface
         {
             Graphics g = e.Graphics;
             SolidBrush brush = new SolidBrush(BarColor);
-            float percent = (float)(val - min) / (float)(max - min);
+            float percent = (val - min) / (float)(max - min);
             double p = Math.Truncate(100 * percent);
             Rectangle rect = ClientRectangle;
 
             // Calculate area for drawing the progress.
-            rect.Width = (int)((float)rect.Width * percent);
+            rect.Width = (int)(rect.Width * percent);
 
             // Draw the progress meter.
             g.FillRectangle(brush, rect);
@@ -516,12 +516,12 @@ namespace BlueSheep.Interface
                 Rectangle oldValueRect = ClientRectangle;
 
                 // Use a new value to calculate the rectangle for progress.
-                percent = (float)(val - min) / (float)(max - min);
-                newValueRect.Width = (int)((float)newValueRect.Width * percent);
+                percent = (val - min) / (float)(max - min);
+                newValueRect.Width = (int)(newValueRect.Width * percent);
 
                 // Use an old value to calculate the rectangle for progress.
-                percent = (float)(oldValue - min) / (float)(max - min);
-                oldValueRect.Width = (int)((float)oldValueRect.Width * percent);
+                percent = (oldValue - min) / (float)(max - min);
+                oldValueRect.Width = (int)(oldValueRect.Width * percent);
 
                 Rectangle updateRect = new Rectangle();
 

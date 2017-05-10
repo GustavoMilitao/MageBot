@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Atlas
 {
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class AtlasPointInformationsMessage : Message

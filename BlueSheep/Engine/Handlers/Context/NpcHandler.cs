@@ -6,7 +6,7 @@ using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Common;
 using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using System.Linq;
 
 namespace BlueSheep.Engine.Handlers.Context
@@ -14,7 +14,7 @@ namespace BlueSheep.Engine.Handlers.Context
     class NpcHandler
     {
         [MessageHandler(typeof(ExchangeStartOkNpcShopMessage))]
-        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             ExchangeStartOkNpcShopMessage msg = (ExchangeStartOkNpcShopMessage)message;
 
@@ -26,7 +26,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(LeaveDialogMessage))]
-        public static void NpcDialogCreationMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void NpcDialogCreationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             LeaveDialogMessage msg = (LeaveDialogMessage)message;
 
@@ -38,7 +38,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(NpcDialogCreationMessage))]
-        public static void LeaveDialogMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void LeaveDialogMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             NpcDialogCreationMessage msg = (NpcDialogCreationMessage)message;
 
@@ -52,7 +52,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(NpcDialogQuestionMessage))]
-        public static void NpcDialogQuestionMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void NpcDialogQuestionMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             NpcDialogQuestionMessage msg = (NpcDialogQuestionMessage)message;
 

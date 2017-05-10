@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context
 {
     using BlueSheep.Common.Protocol.Types.Game.Context;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class GameMapChangeOrientationMessage : Message

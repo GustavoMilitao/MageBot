@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context
 {
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class GameMapMovementMessage : Message

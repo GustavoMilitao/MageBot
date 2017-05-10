@@ -13,7 +13,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay
     using BlueSheep.Common.Protocol.Types.Game.Context.Fight;
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class MapRunningFightListMessage : Message

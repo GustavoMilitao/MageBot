@@ -1,10 +1,11 @@
 ﻿using BlueSheep.Core.Fight;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using BlueSheep.Properties.I18n.Strings;
 using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using BlueSheep.Core.Account;
 
 namespace BlueSheep.Interface
 {
@@ -15,11 +16,11 @@ namespace BlueSheep.Interface
         /// </summary>
 
         #region Fields
-        AccountUC Account;
+        Account Account;
         #endregion
 
         #region Constructors
-        public IAChoice(AccountUC account)
+        public IAChoice(Account account)
         {
             InitializeComponent();
             Account = account;

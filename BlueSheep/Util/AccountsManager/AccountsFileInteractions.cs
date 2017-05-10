@@ -134,7 +134,7 @@ namespace BlueSheep.AccountsManager
                     m_GroupAccounts = new List<AccountUC>();
                     for (int index = 0; index < limite; index++)
                         m_GroupAccounts.Add(new AccountUC(reader.ReadUTF(), reader.ReadUTF(), false));
-                    Groups.Add(new Group(m_GroupAccounts, file.Name.Remove((int)file.Name.Length - 3)));
+                    Groups.Add(new Group(m_GroupAccounts, file.Name.Remove(file.Name.Length - 3)));
                     foreach (AccountUC accountObject in m_GroupAccounts)
                         accountObject.AccountPassword = CryptageBS.DecryptBS(accountObject.AccountPassword);
                 }

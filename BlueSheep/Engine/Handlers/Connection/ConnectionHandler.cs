@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using BlueSheep.Common.Data.D2o;
+﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.IO;
 using BlueSheep.Common.Protocol.Messages.Connection;
 using BlueSheep.Common.Protocol.Messages.Game.Approach;
@@ -9,7 +8,7 @@ using BlueSheep.Engine.Enums;
 using BlueSheep.Engine.Types;
 using BlueSheep.Common;
 using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using BlueSheep.Util.Text;
 using BlueSheep.Util.Text.Connection;
 using RSA;
@@ -24,7 +23,7 @@ namespace BlueSheep.Engine.Handlers.Connection
     {
         #region Public methods
         [MessageHandler(typeof(HelloConnectMessage))]
-        public static void HelloConnectMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void HelloConnectMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             account.SetStatus(Status.None);
             if (!account.IsMITM)
@@ -45,7 +44,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(IdentificationSuccessMessage))]
-        public static void IdentificationSuccessMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void IdentificationSuccessMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             IdentificationSuccessMessage msg = (IdentificationSuccessMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -61,7 +60,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(IdentificationFailedMessage))]
-        public static void IdentificationFailedMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void IdentificationFailedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             IdentificationFailedMessage identificationFailedMessage = (IdentificationFailedMessage)message;
             account.Log(new ErrorTextInformation("Echec de l'identification."), 0);
@@ -74,7 +73,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(SelectedServerDataExtendedMessage))]
-        public static void SelectedServerDataExtendedMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public async static void SelectedServerDataExtendedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             SelectedServerDataExtendedMessage msg = (SelectedServerDataExtendedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -88,8 +87,7 @@ namespace BlueSheep.Engine.Handlers.Connection
             if (!account.IsMITM)
             {
                 account.Log(new ConnectionTextInformation("Connexion au serveur " + BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
-                account.SocketManager.Connect(new ConnectionInformations(msg.Address, (int)msg.Port, "de jeu"));
-                account.loginstate = "de jeu";
+                account.SocketManager.Connect(new ConnectionInformations(msg.Address, msg.Port, "de jeu"));
             }
             else
             {
@@ -103,21 +101,20 @@ namespace BlueSheep.Engine.Handlers.Connection
                 {
                     nmsg.Serialize(writer);
                     MessagePackaging pack = new MessagePackaging(writer);
-                    pack.Pack((int)nmsg.MessageID);
+                    pack.Pack(nmsg.MessageID);
                     account.SocketManager.SendToDofusClient(pack.Writer.Content);
                     //account.SocketManager.DisconnectFromDofusClient();
                     account.SocketManager.DisconnectServer("42 packet handling.");
                     account.SocketManager.ListenDofus();
-                    account.Wait(100, 200);
+                    await account.PutTaskDelay(200);
                 }
                 account.Log(new ConnectionTextInformation("Connexion au serveur " + BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
-                account.SocketManager.Connect(new ConnectionInformations(msg.Address, (int)msg.Port, "de jeu"));
-                account.loginstate = "de jeu";
+                account.SocketManager.Connect(new ConnectionInformations(msg.Address, msg.Port, "de jeu"));
             }
         }
 
         [MessageHandler(typeof(ServerStatusUpdateMessage))]
-        public static void ServerStatusUpdateMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void ServerStatusUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             // Lecture du paquet ServerStatusUpdateMessage
             ServerStatusUpdateMessage serverStatusUpdateMessage = (ServerStatusUpdateMessage)message;
@@ -130,7 +127,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(ServersListMessage))]
-        public static void ServerListMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void ServerListMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             ServersListMessage msg = new ServersListMessage();
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -154,7 +151,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(HelloGameMessage))]
-        public static void HelloGameMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void HelloGameMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             if (!account.IsMITM)
             {
@@ -164,7 +161,7 @@ namespace BlueSheep.Engine.Handlers.Connection
             }
         }
         [MessageHandler(typeof(AuthenticationTicketAcceptedMessage))]
-        public static void AuthenticationTicketAcceptedMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void AuthenticationTicketAcceptedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             if (!account.IsMITM)
             {
@@ -174,7 +171,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(AuthenticationTicketRefusedMessage))]
-        public static void AuthenticationTicketAcceptedRefusedTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void AuthenticationTicketAcceptedRefusedTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             AuthenticationTicketRefusedMessage msg = new AuthenticationTicketRefusedMessage();
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -185,7 +182,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(SelectedServerRefusedMessage))]
-        public static void SelectedServerRefusedMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void SelectedServerRefusedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             // Lecture du paquet ServerStatusUpdateMessage
             SelectedServerRefusedMessage selectedServerRefusedMessage = (SelectedServerRefusedMessage)message;
@@ -197,7 +194,7 @@ namespace BlueSheep.Engine.Handlers.Connection
             ServerStatus.Test((ServerStatusEnum)selectedServerRefusedMessage.ServerStatus, account);
         }
         [MessageHandler(typeof(IdentificationFailedForBadVersionMessage))]
-        public static void IdentificationFailedForBadVersionMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void IdentificationFailedForBadVersionMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             IdentificationFailedForBadVersionMessage identificationFailedForBadVersionMessage = (IdentificationFailedForBadVersionMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -218,7 +215,7 @@ namespace BlueSheep.Engine.Handlers.Connection
             account.SocketManager.DisconnectFromGUI();
         }
         [MessageHandler(typeof(IdentificationFailedBannedMessage))]
-        public static void IdentificationFailedBannedMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void IdentificationFailedBannedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             IdentificationFailedBannedMessage msg = (IdentificationFailedBannedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))

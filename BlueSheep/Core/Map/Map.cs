@@ -8,29 +8,24 @@ using BlueSheep.Data.Pathfinding;
 using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Engine.Types;
-using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace BlueSheep.Core.Map
 {
     public class Map
     {
         #region Fields
-        private AccountUC m_Account;
-        public bool Moving;
-        private int m_time;
-        private int m_MapId;
-        private int m_elemId = -1;
+        private Account.Account Account { get; set; }
         #endregion
 
         #region Constructeurs
-        public Map(AccountUC account)
+        public Map(Account.Account account)
         {
-            m_Account = account;
+            Account = account;
         }
         #endregion
 
@@ -38,184 +33,119 @@ namespace BlueSheep.Core.Map
         public bool ChangeMap(string direction)
         {
             int neighbourId = -1;
-            int num2 = -1;
-            switch(direction)
+            //int num2 = -1;
+            switch (direction)
             {
                 case "haut":
                 case "up":
-                    neighbourId = m_Account.MapData.Data.TopNeighbourId;
-                num2 = 64;
+                    neighbourId = Account.MapData.Data.TopNeighbourId;
+                    //num2 = 64;
                     break;
                 case "bas":
                 case "bottom":
-                    neighbourId = m_Account.MapData.Data.BottomNeighbourId;
-                num2 = 4;
+                    neighbourId = Account.MapData.Data.BottomNeighbourId;
+                    //num2 = 4;
                     break;
                 case "droite":
                 case "right":
-                    neighbourId = m_Account.MapData.Data.RightNeighbourId;
-                num2 = 1;
+                    neighbourId = Account.MapData.Data.RightNeighbourId;
+                    //num2 = 1;
                     break;
                 case "gauche":
                 case "left":
-                    neighbourId = m_Account.MapData.Data.LeftNeighbourId;
-                num2 = 16;
-                break;
+                    neighbourId = Account.MapData.Data.LeftNeighbourId;
+                    //num2 = 16;
+                    break;
+                default:
+                    return false;
             }
 
-            if ((num2 != -1) && (neighbourId >= 0))
-            {
-                int cellId = m_Account.MapData.Character.Disposition.CellId;
-                if ((m_Account.MapData.Data.Cells[cellId].MapChangeData & num2) > 0)
-                {
-                    LaunchChangeMap(neighbourId);
-                    return true;
-                }
-                List<int> list = new List<int>();
-                int num4 = (m_Account.MapData.Data.Cells.Count - 1);
-                int i = 0;
-                while (i <= num4)
-                {
-                    if (((m_Account.MapData.Data.Cells[i].MapChangeData & num2) > 0) && m_Account.MapData.NothingOnCell(i))
-                        list.Add(i);
-                    i += 1;
-                }
-                while (list.Count > 0)
-                {
-                    int randomCellId = list[RandomCell(0, list.Count)];
-                    m_MapId = neighbourId;
-                    if (MoveToCell(randomCellId))
-                    {
-                        return true;
-                    }
-                    list.Remove(randomCellId);
-                }
-            }
-            return false;
+            //if ((num2 != -1) && (neighbourId >= 0))
+            //{
+            //    int cellId = m_Account.MapData.Character.Disposition.CellId;
+            //    if ((m_Account.MapData.Data.Cells[cellId].MapChangeData & num2) > 0)
+            //    {
+            ChangeMap(neighbourId);
+            return true;
+            //}
+            //List<int> list = new List<int>();
+            //int num4 = (m_Account.MapData.Data.Cells.Count - 1);
+            //int i = 0;
+            //while (i <= num4)
+            //{
+            //    if (((m_Account.MapData.Data.Cells[i].MapChangeData & num2) > 0) && m_Account.MapData.NothingOnCell(i))
+            //        list.Add(i);
+            //    i += 1;
+            //}
+            //while (list.Count > 0)
+            //{
+            //    int randomCellId = list[RandomCell(0, list.Count)];
+            //    m_MapId = neighbourId;
+            //    if (MoveToCell(randomCellId).Result)
+            //    {
+            //        return true;
+            //    }
+            //    list.Remove(randomCellId);
+            //}
+            //}
+            //return false;
         }
 
-        public bool MoveToCell(int cellId)
+        public async Task<bool> MoveToCell(int cellId)
         {
-            if (m_Account.state == Engine.Enums.Status.Fighting)
-                return false;
-            m_Account.SetStatus(Status.Moving);
-            MovementPath path = (new Pathfinder(m_Account.MapData)).FindPath(m_Account.MapData.Character.Disposition.CellId, cellId);
-            if (path == null)
-                return false;
-            List<UInt32> serverMovement = MapMovementAdapter.GetServerMovement(path);
-            if (serverMovement[serverMovement.Count -1] == m_Account.MapData.Character.Disposition.CellId)
+            if (Account.state != Engine.Enums.Status.Fighting && Account.CanExecuteAction)
             {
-                Moving = false;
-                ConfirmMove();
-                return true;
+                Account.SetStatus(Status.Moving);
+                MovementPath path = (new Pathfinder(Account.MapData)).FindPath(Account.MapData.Character.Disposition.CellId, cellId);
+                if (path != null)
+                {
+                    List<UInt32> serverMovement = MapMovementAdapter.GetServerMovement(path);
+                    int timetowait;
+                    if (serverMovement.Count() < 3)
+                        timetowait = serverMovement.Count() * 500;
+                    else
+                    {
+                        timetowait = serverMovement.Count() * 300;
+                    }
+                    await Account.PutTaskDelay(timetowait);
+                    Move(serverMovement);
+                }
             }
-            int timetowait;
-            if (serverMovement.Count() < 3)
-                timetowait = serverMovement.Count() * 500;
-            else
-            {
-                timetowait = serverMovement.Count() * 300;
-            }
-            m_time = timetowait;
-            using (BigEndianWriter writer = new BigEndianWriter())
-            {
-                GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select(ui => (short)ui).ToList(), m_Account.MapData.Id);
-                msg.Serialize(writer);
-                writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
-                MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.MessageID);
-                m_Account.SocketManager.Send(pack.Writer.Content);
-                Moving = true;
-                if (m_Account.DebugMode.Checked)
-                    m_Account.Log(new DebugTextInformation("[SND] 950 (GameMapMovementRequestMessage)"), 0);
-            }
-
-            //m_Account.Wait(timetowait, timetowait + 100);
-            //using (BigEndianWriter writer = new BigEndianWriter())
-            //{
-            //    GameMapMovementConfirmMessage newmsg = new GameMapMovementConfirmMessage();
-            //    newmsg.Serialize(writer);
-            //    MessagePackaging pack = new MessagePackaging(writer);
-            //    pack.Pack((int)newmsg.ProtocolID);
-            //    if (m_Account.Fight != null && m_Account.FightData.IsFollowingGroup && m_Account.FightData.followingGroup.m_cellId == cellId)
-            //    {
-            //        m_Account.SocketManager.Send(pack.Writer.Content);
-            //        if (m_Account.DebugMode.Checked)
-            //            m_Account.Log(new DebugTextInformation("[SND] 952 (GameMapMovementConfirmMessage)"), 0);
-            //        m_Account.Fight.LaunchFight(m_Account.FightData.followingGroup.m_contextualId);
-            //        Thread t = new Thread(new ThreadStart(CheckFight));
-            //        t.Start();
-            //    }
-            //    else if (m_Account.Fight != null && m_Account.FightData.IsFollowingGroup)
-            //    {
-            //        m_Account.Fight.SearchFight();
-            //    }
-            //    else if (m_Account.Gather.Id != -1)
-            //    {
-            //        m_Account.SocketManager.Send(pack.Writer.Content);
-            //        if (m_Account.DebugMode.Checked)
-            //            m_Account.Log(new DebugTextInformation("[SND] 952 (GameMapMovementConfirmMessage)"), 0);
-            //        //UseElement(m_Account.Gather.Id, m_Account.Gather.SkillInstanceUid);
-            //        int distance = m_Account.Gather.GetRessourceDistance(m_Account.Gather.Id);
-            //        m_Account.Log(new DebugTextInformation("[Gather] New distance from element " + m_Account.Gather.Id + " = " + distance), 0);
-            //        if (distance <= m_Account.Inventory.WeaponRange)
-            //        {
-            //            UseElement(m_Account.Gather.Id, m_Account.Gather.SkillInstanceUid);
-            //            m_Account.SetStatus(Status.Gathering);
-            //        }
-            //        else if (m_Account.Path != null)
-            //            m_Account.Path.PerformFlag();
-            //        else
-            //            m_Account.PerformGather();
-            //    }
-            //    else
-            //    {
-            //        m_Account.SocketManager.Send(pack.Writer.Content);
-            //        if (m_Account.DebugMode.Checked)
-            //            m_Account.Log(new DebugTextInformation("[SND] 952 (GameMapMovementConfirmMessage)"), 0);
-            //    }
-            //    m_Account.SetStatus(Status.None);
-            //}
-
             return true;
         }
 
         public bool MoveToDoor(int cellId)
         {
-            return MoveToCellWithDistance(cellId, 1, true);
+            return MoveToCellWithDistance(cellId, 1, true).Result;
         }
 
         public bool MoveToElement(int id, int maxDistance)
         {
-            Elements.StatedElement element = m_Account.MapData.StatedElements.Find(s => s.Id == id);
+            Elements.StatedElement element = Account.MapData.StatedElements.Find(s => s.Id == id);
             if (element != null)
-                return MoveToCellWithDistance((int)element.CellId, maxDistance, false);
+                return MoveToCellWithDistance((int)element.CellId, maxDistance, false).Result;
             else
                 return false;
         }
 
         public bool MoveToSecureElement(int id)
         {
-            Elements.StatedElement element = m_Account.MapData.StatedElements.Find(s => s.Id == id);
-            m_elemId = id;
+            Elements.StatedElement element = Account.MapData.StatedElements.Find(s => s.Id == id);
             if (element != null)
-                return MoveToCellWithDistance((int)element.CellId, 1, true);
+                return MoveToCellWithDistance((int)element.CellId, 1, true).Result;
             else
             {
                 return false;
             }
         }
 
-        public void LaunchChangeMap(int mapId)
+        public void ChangeMap(int mapId)
         {
-            if (m_Account.Path != null)
-                m_Account.Path.ClearStack();
-            m_MapId = -1;
+            if (Account.Path != null)
+                Account.Path.ClearStack();
             ChangeMapMessage msg = new ChangeMapMessage(mapId);
-            m_Account.SetStatus(Status.Busy);
-            m_Account.SocketManager.Send(msg);
-            Thread t = new Thread(new ThreadStart(CheckMapChange));
-            t.Start();
+            Account.SetStatus(Status.Busy);
+            Account.SocketManager.Send(msg);
         }
 
         public void UseElement(int id, int skillId)
@@ -224,29 +154,79 @@ namespace BlueSheep.Core.Map
             {
                 InteractiveUseRequestMessage msg = new InteractiveUseRequestMessage((uint)id, (uint)skillId);
                 msg.Serialize(writer);
-                writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
+                writer.Content = Account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.MessageID);
-                m_Account.SocketManager.Send(pack.Writer.Content);
+                pack.Pack(msg.MessageID);
+                Account.SocketManager.Send(pack.Writer.Content);
             }
-            if (m_Account.DebugMode.Checked)
-                m_Account.Log(new DebugTextInformation("[SND] 5001 (InteractiveUseRequestMessage)"), 0);
+            Account.Log(new DebugTextInformation("[SND] 5001 (InteractiveUseRequestMessage)"), 0);
         }
 
         public void UseElement(int id)
         {
-            InteractiveElement e = m_Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.Id == id);
-            UseElement(id, e.EnabledSkills[0].SkillInstanceUid);
-            m_elemId = -1;
+            InteractiveElement e = Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.Id == id);
+            UseElement(id, e.EnabledSkills.FirstOrDefault().SkillInstanceUid);
         }
 
-        public bool MoveToCellWithDistance(int cellId, int maxDistance, bool bool1)
+        private void ChangingMapToSameMapAndSamePosition()
+        {
+            Account.SocketManager.Send(new GameMapMovementConfirmMessage());
+            Account.SetStatus(Status.None);
+        }
+
+        public async void useZaapiTo(int mapid)
+        {
+
+            InteractiveElement e = Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.TypeId == 106);
+            if (e != null)
+            {
+                MoveToSecureElement((int)e.Id);
+                UseElement((int)e.Id, e.EnabledSkills[0].SkillInstanceUid);
+                await Account.PutTaskDelay(100);
+                TeleportRequestMessage msg = new TeleportRequestMessage(1, mapid);
+                Account.SocketManager.Send(msg);
+            }
+        }
+
+        public async void UseZaapTo(int mapid)
+        {
+            InteractiveElement e = Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.TypeId == 16);
+            if (e != null)
+            {
+                MoveToSecureElement((int)e.Id);
+                UseElement((int)e.Id, e.EnabledSkills[0].SkillInstanceUid);
+                await Account.PutTaskDelay(100);
+                TeleportRequestMessage msg = new TeleportRequestMessage(0, mapid);
+                Account.SocketManager.Send(msg);
+            }
+
+        }
+        #endregion
+
+        #region Private methods      
+
+        private void Move(List<uint> serverMovement)
+        {
+            using (BigEndianWriter writer = new BigEndianWriter())
+            {
+                GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select(ui => (short)ui).ToList(), Account.MapData.Id);
+                msg.Serialize(writer);
+                writer.Content = Account.HumanCheck.hash_function(writer.Content);
+                MessagePackaging pack = new MessagePackaging(writer);
+                pack.Pack(msg.MessageID);
+                Account.SocketManager.Send(pack.Writer.Content);
+                Account.SetStatus(Status.Moving);
+                Account.Log(new DebugTextInformation("[SND] 950 (GameMapMovementRequestMessage)"), 0);
+            }
+        }
+
+        private async Task<bool> MoveToCellWithDistance(int cellId, int maxDistance, bool bool1)
         {
             MovementPath path = null;
             int savDistance = -1;
-            MapPoint characterPoint = new MapPoint(m_Account.MapData.Character.Disposition.CellId);
+            MapPoint characterPoint = new MapPoint(Account.MapData.Character.Disposition.CellId);
             MapPoint targetPoint = new MapPoint(cellId);
-            foreach (MapPoint point in m_Account.MapData.GetListPointAtGoodDistance(characterPoint, targetPoint, maxDistance))
+            foreach (MapPoint point in Account.MapData.GetListPointAtGoodDistance(characterPoint, targetPoint, maxDistance))
             {
                 Pathfinder pathFinding = null;
                 if ((targetPoint.DistanceToCell(point) > maxDistance) || ((targetPoint.X != point.X) && (targetPoint.Y != point.Y)))
@@ -256,15 +236,15 @@ namespace BlueSheep.Core.Map
                     continue;
                 if (bool1)
                 {
-                    if (m_Account.MapData.Data.IsWalkable(point.CellId))
+                    if (Account.MapData.Data.IsWalkable(point.CellId))
                         goto Label_00A8;
                     continue;
                 }
-                if (!(m_Account.MapData.NothingOnCell(point.CellId)))
+                if (!(Account.MapData.NothingOnCell(point.CellId)))
                     continue;
-            Label_00A8:
-                pathFinding = new Pathfinder(m_Account.MapData);
-            MovementPath path2 = pathFinding.FindPath(m_Account.MapData.Character.Disposition.CellId, point.CellId);
+                Label_00A8:
+                pathFinding = new Pathfinder(Account.MapData);
+                MovementPath path2 = pathFinding.FindPath(Account.MapData.Character.Disposition.CellId, point.CellId);
                 if (path2 != null)
                 {
                     path = path2;
@@ -274,12 +254,6 @@ namespace BlueSheep.Core.Map
             if (path == null)
                 return false;
             List<UInt32> serverMovement = MapMovementAdapter.GetServerMovement(path);
-            if (serverMovement[serverMovement.Count - 1] == m_Account.MapData.Character.Disposition.CellId)
-            {
-                Moving = false;
-                ConfirmMove();
-                return true;
-            }
             int timetowait;
             if (serverMovement.Count() < 3)
                 timetowait = serverMovement.Count() * 514;
@@ -287,137 +261,11 @@ namespace BlueSheep.Core.Map
             {
                 timetowait = serverMovement.Count() * 320;
             }
-            m_time = timetowait;
-            using (BigEndianWriter writer = new BigEndianWriter())
-            {
-                GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select(ui => (short)ui).ToList(), m_Account.MapData.Id);
-                msg.Serialize(writer);
-                writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
-                MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.MessageID);
-                m_Account.SocketManager.Send(pack.Writer.Content);
-                m_Account.SetStatus(Status.Moving);
-                Moving = true;
-                if (m_Account.DebugMode.Checked)
-                    m_Account.Log(new DebugTextInformation("[SND] 950 (GameMapMovementRequestMessage)"), 0);
-            }
+            await Account.PutTaskDelay(timetowait);
+            Move(serverMovement);
             return true;
         }
 
-        public void ConfirmMove()
-        {
-            m_Account.Wait(m_time, m_time + 100);
-            using (BigEndianWriter writer = new BigEndianWriter())
-            {
-                ChangingMapToSameMapAndSamePosition();
-
-                if (m_MapId != -1)
-                {
-                    LaunchChangeMap(m_MapId);
-                    return;
-                }
-                else if (m_elemId != -1 && m_Account.Gather.Id == -1)
-                {
-                    UseElement(m_elemId);
-                }
-                if (m_Account.Fight != null && m_Account.FightData.IsFollowingGroup && m_Account.FightData.followingGroup.m_cellId == m_Account.MapData.Character.Disposition.CellId)
-                {
-                    m_Account.Fight.LaunchFight((int)m_Account.FightData.followingGroup.m_contextualId);
-                }
-                else if (m_Account.Fight != null && m_Account.FightData.IsFollowingGroup)
-                {
-                    m_Account.Fight.SearchFight();
-                }
-                else if (m_Account.Gather.Id != -1)
-                {
-                    //if (m_Account.MapData.CanGatherElement(m_Account.Gather.Id, m_Account.Inventory.WeaponRange))
-                    int distance = m_Account.Gather.GetRessourceDistance(m_Account.Gather.Id);
-                    m_Account.Log(new DebugTextInformation("[Gather] New distance from element " + m_Account.Gather.Id + " = " + distance), 0);
-                    m_Account.Log(new DebugTextInformation("[CanGatherElement] " + m_Account.MapData.CanGatherElement(m_Account.Gather.Id, m_Account.Inventory.WeaponRange).ToString()), 0);
-                    //if (distance <= m_Account.Inventory.WeaponRange)
-                    if (m_Account.MapData.CanGatherElement(m_Account.Gather.Id, m_Account.Inventory.WeaponRange))
-                    {
-                        m_Account.SetStatus(Status.Gathering);
-                        UseElement(m_Account.Gather.Id, m_Account.Gather.SkillInstanceUid);
-                    }
-                    else if (m_Account.Path != null)
-                    {
-                        m_Account.Gather.BanElementId(m_Account.Gather.Id);
-                        m_Account.Path.PerformFlag();
-                    }
-                    else
-                    {
-                        m_Account.SetStatus(Status.None);
-                        m_Account.Gather.BanElementId(m_Account.Gather.Id);
-                        m_Account.PerformGather();
-                    }
-                }
-                else
-                {
-                    m_Account.SetStatus(Status.None);
-                }
-            }
-        }
-
-        private void ChangingMapToSameMapAndSamePosition()
-        {
-            if (Moving)
-            {
-                m_Account.SocketManager.Send(new GameMapMovementConfirmMessage());
-                Moving = false;
-            }
-            m_Account.SetStatus(Status.None);
-        }
-
-        public void useZaapi(int mapid)
-        {
-
-            InteractiveElement e = m_Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.TypeId == 106);
-            if (e != null)
-            {
-                MoveToSecureElement((int)e.Id);
-                UseElement((int)e.Id, e.EnabledSkills[0].SkillInstanceUid);
-                m_Account.Wait(500, 1000);
-                TeleportRequestMessage msg = new TeleportRequestMessage(1, mapid);
-                m_Account.SocketManager.Send(msg);
-            }
-
-        }
-
-        public void useZaap(int mapid)
-        {
-            InteractiveElement e = m_Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.TypeId == 16);
-            if (e != null)
-            {
-                MoveToSecureElement((int)e.Id);
-                UseElement((int)e.Id, e.EnabledSkills[0].SkillInstanceUid);
-                m_Account.Wait(500, 1000);
-                TeleportRequestMessage msg = new TeleportRequestMessage(0, mapid);
-                m_Account.SocketManager.Send(msg);
-            }
-
-        }
-
-        public void CheckFight()
-        {
-            double endwait = Environment.TickCount + 4000;
-            while (Environment.TickCount < endwait)
-            {
-                System.Threading.Thread.Sleep(1);
-                System.Windows.Forms.Application.DoEvents();
-            }
-            if (m_Account.state != Status.Fighting && m_Account.Fight != null)
-            {
-                m_Account.Fight.Error();
-                m_Account.Log(new DebugTextInformation("[CheckFight] Try to research another fight"), 0);
-                if (m_Account.Fight.SearchFight() == false && m_Account.Path != null)
-                    m_Account.Path.PerformFlag();
-
-            }
-        }
-        #endregion
-
-        #region Private methods      
         private int RandomCell(int min, int max)
         {
             Random random = new Random();
@@ -430,19 +278,6 @@ namespace BlueSheep.Core.Map
             return random.Next(min, max);
         }
 
-        
-
-        private void CheckMapChange()
-        {
-            int old = m_Account.MapData.Id;
-            m_Account.Log(new DebugTextInformation("[Map] Old = " + old), 0);
-            System.Threading.Thread.Sleep(4000);
-            m_Account.Log(new DebugTextInformation("[Map] New = " + m_Account.MapData.Id), 0);
-            if (old == m_Account.MapData.Id && m_Account.Path != null)
-            {
-                m_Account.Path.PerformFlag();
-            }
-        }
         #endregion
     }
 }

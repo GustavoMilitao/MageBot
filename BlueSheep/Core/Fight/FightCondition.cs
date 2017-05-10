@@ -1,5 +1,4 @@
-﻿using BlueSheep.Interface;
-using System;
+﻿using System;
 
 namespace BlueSheep.Core.Fight
 {
@@ -9,11 +8,11 @@ namespace BlueSheep.Core.Fight
         FightConditionEnum m_Cond;
         object m_delta;
         char m_operateur;
-        AccountUC account;
+        Account.Account account;
         #endregion
 
         #region Constructors
-        public FightCondition(FightConditionEnum condition, object delta, char operateur, AccountUC Account)
+        public FightCondition(FightConditionEnum condition, object delta, char operateur, Account.Account Account)
         {
             m_Cond = condition;
             m_delta = delta;

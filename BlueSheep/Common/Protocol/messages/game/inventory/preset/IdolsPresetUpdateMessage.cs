@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Inventory.Preset
 {
     using BlueSheep.Common.Protocol.Types.Game.Inventory.Preset;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class IdolsPresetUpdateMessage : Message

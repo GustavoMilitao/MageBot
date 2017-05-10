@@ -1,6 +1,5 @@
 ﻿using BlueSheep.Common.Protocol.Messages.Game.Inventory.Items;
 using BlueSheep.Common.Types;
-using BlueSheep.Interface;
 
 namespace BlueSheep.Core.Meal
 {
@@ -8,14 +7,14 @@ namespace BlueSheep.Core.Meal
     {
         #region Properties
         public bool SecondFeeding { get; set; }
-        private AccountUC account;
+        private Account.Account account;
         #endregion
 
         #region Public methods
 
-        public Feeding(AccountUC accountform)
+        public Feeding(Account.Account account)
         {
-            account = accountform;
+            this.account = account;
         }
 
         public void Init(Pet pet)
@@ -31,8 +30,6 @@ namespace BlueSheep.Core.Meal
 
                 account.SocketManager.Send(objectFeedMessage);
                 account.LastPacketID.Clear();
-            
-            //account.Wait(500, 1000);
         }
         #endregion
     }

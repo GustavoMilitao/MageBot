@@ -1,5 +1,4 @@
-﻿using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+﻿using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,8 +11,9 @@ namespace BlueSheep.Core.Path
     public class PathManager
     {
         #region Fields
-        private AccountUC Account;
+        private Account.Account Account;
         public string path;
+        public string PathName { get; set; }
         private string flag;
         public bool Relaunch = false;
         private List<PathCondition> conditions;
@@ -47,11 +47,11 @@ namespace BlueSheep.Core.Path
         
 
         #region Constructors
-        public PathManager(AccountUC account, string Path, string name)
+        public PathManager(Account.Account account, string Path, string name)
         {
             Account = account;
             path = Path;
-            Account.PathDownBt.Text = name;
+            PathName = name;
             m_content = File.ReadAllLines(Path).ToList();
         }
 
@@ -181,6 +181,7 @@ namespace BlueSheep.Core.Path
         /// </summary>
         public void ParsePath()
         {
+            //TODO: Fix tha parser
             conditions = new List<PathCondition>();
             ActionsStack = new List<Action>();
             foreach (string line in m_content)
@@ -191,13 +192,6 @@ namespace BlueSheep.Core.Path
                 {
                     ParseCondition(line);
                     continue;
-                }
-
-                if (((line.Contains(Account.MapData.Pos + ":") && CheckMinusNumber(line)) || line.Contains(Account.MapData.Id.ToString() + ":")) && CheckConditions(false))
-                {
-                    Current_Map = Account.MapData.Pos;
-                    AnalyseLine(line);
-                    return;
                 }
 
                 if (flags.Any(flag => line.Contains(flag)))
@@ -213,7 +207,13 @@ namespace BlueSheep.Core.Path
                     continue;
                 }
 
-                
+                if (CheckConditions(false))
+                {
+                    Current_Map = Account.MapData.Pos;
+                    AnalyseLine(line);
+                    return;
+                }
+
             }
             Lost();
         }

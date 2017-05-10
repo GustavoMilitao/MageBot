@@ -13,7 +13,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Mount
     using BlueSheep.Common.Protocol.Types.Game.Paddock;
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class GameDataPaddockObjectListAddMessage : Message

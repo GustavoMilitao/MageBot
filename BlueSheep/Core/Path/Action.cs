@@ -1,5 +1,4 @@
-﻿using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+﻿using BlueSheep.Util.Text.Log;
 using System;
 using System.Linq;
 
@@ -10,11 +9,11 @@ namespace BlueSheep.Core.Path
         #region Fields
         string m_action;
         public object m_delta;
-        AccountUC account;
+        Account.Account account;
         #endregion
 
         #region Constructors
-        public Action(string action, object delta, AccountUC Account)
+        public Action(string action, object delta, Account.Account Account)
         {
             if (((string)delta).Contains(')'))
             {
@@ -27,12 +26,12 @@ namespace BlueSheep.Core.Path
         #endregion
 
         #region Public Methods
-        public void PerformAction()
+        public async void PerformAction()
         {
             if (account.Path == null)
                 return;
             while (account.Busy == true)
-                account.Wait(1, 5);
+                await account.PutTaskDelay(5);
             switch (m_action)
             {
                 case "move(":
@@ -40,23 +39,23 @@ namespace BlueSheep.Core.Path
                     if (account.IsMaster == true && account.MyGroup != null)
                     {
                         account.MyGroup.MoveGroup((string)m_delta);
-                        account.Wait(2000, 3000);
+                        await account.PutTaskDelay(3000);
                     }
                     else if (account.IsSlave == false)
                     {
                         account.Map.ChangeMap((string)m_delta);
-                        account.Wait(2000, 3000);
+                        await account.PutTaskDelay(3000);
                     }
                     else
                     {
-                        account.Log(new ErrorTextInformation("Impossible d'enclencher le déplacement. (mûle ?)"),0);
+                        account.Log(new ErrorTextInformation("Configuration error : This character is a islave and haven't any group."),0);
                     }
                     break;
                 case "object(":
                     if (account.IsMaster == true && account.MyGroup != null)
                     {
                         account.MyGroup.UseItemGroup(account.Inventory.GetItemFromGID(Convert.ToInt32(m_delta)).UID);
-                        account.Wait(2000, 3000);
+                        await account.PutTaskDelay(3000);
                     }
                     else if (account.IsSlave == false)
                     {
@@ -64,18 +63,18 @@ namespace BlueSheep.Core.Path
                     }
                     else
                     {
-                        account.Log(new ErrorTextInformation("Impossible d'enclencher le déplacement. (mûle ? plus d'objet ?)"), 0);
+                        account.Log(new ErrorTextInformation("Configuration error : This character is a islave and haven't any group."), 0);
                     }
                     break;
                 case "cell(":
                     if (account.IsMaster == true && account.MyGroup != null)
                     {
                         account.MyGroup.MoveToCellGroup(Convert.ToInt32(m_delta));
-                        account.Wait(2000, 3000);
+                        await account.PutTaskDelay(3000);
                     }
                     else if (account.IsSlave == false)
                     {
-                        account.Map.MoveToCell(Convert.ToInt32(m_delta));
+                        await account.Map.MoveToCell(Convert.ToInt32(m_delta));
                     }
                     else
                     {
@@ -87,7 +86,7 @@ namespace BlueSheep.Core.Path
                     if (account.IsMaster == true && account.MyGroup != null)
                     {
                         account.MyGroup.TalkToNpcGroup(Convert.ToInt32(m_delta));
-                        account.Wait(2000, 3000);
+                        await account.PutTaskDelay(3000);
                     }
                     else if (account.IsSlave == false)
                     {
@@ -99,7 +98,6 @@ namespace BlueSheep.Core.Path
                     } 
                     break;
                     
-                    break;
                 case "use(":
                     account.Map.MoveToSecureElement(Convert.ToInt32(m_delta));
                     break;
@@ -107,11 +105,11 @@ namespace BlueSheep.Core.Path
                     if (account.IsMaster == true && account.MyGroup != null)
                     {
                         account.MyGroup.UseZaapGroup();
-                        account.Wait(2000, 3000);
+                        await account.PutTaskDelay(3000);
                     }
                     else if (account.IsSlave == false)
                     {
-                        account.Map.useZaap(Convert.ToInt32(account.Path.Current_Action.m_delta));
+                        account.Map.UseZaapTo(Convert.ToInt32(account.Path.Current_Action.m_delta));
                     }
                     else
                     {
@@ -122,11 +120,11 @@ namespace BlueSheep.Core.Path
                     if (account.IsMaster == true && account.MyGroup != null)
                     {
                         account.MyGroup.UseZaapiGroup();
-                        account.Wait(2000, 3000);
+                        await account.PutTaskDelay(3000);
                     }
                     else if (account.IsSlave == false)
                     {
-                        account.Map.useZaapi(Convert.ToInt32(account.Path.Current_Action.m_delta));
+                        account.Map.useZaapiTo(Convert.ToInt32(account.Path.Current_Action.m_delta));
                     }
                     else
                     {
@@ -137,7 +135,7 @@ namespace BlueSheep.Core.Path
                     if (account.IsMaster == true && account.MyGroup != null)
                     {
                         account.MyGroup.RequestExchangeGroup((string)m_delta);
-                        account.Wait(2000, 3000);
+                        await account.PutTaskDelay(3000);
                     }
                     else if (account.IsSlave == false)
                     {

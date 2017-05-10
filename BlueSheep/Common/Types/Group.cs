@@ -68,11 +68,11 @@ namespace BlueSheep.Common.Types
             {
                 if (a.IsMaster == true)
                 {
-                    a.Map.useZaap((int)a.Path.Current_Action.m_delta);
+                    a.Map.UseZaapTo((int)a.Path.Current_Action.m_delta);
                     foreach (AccountUC ac in accounts)
                     {
                         if (ac.IsSlave == true)
-                            ac.Map.useZaap((int)a.Path.Current_Action.m_delta);
+                            ac.Map.UseZaapTo((int)a.Path.Current_Action.m_delta);
                         System.Threading.Thread.Sleep(500);
                     }
                     return;
@@ -86,11 +86,11 @@ namespace BlueSheep.Common.Types
             {
                 if (a.IsMaster == true)
                 {
-                    a.Map.useZaapi((int)a.Path.Current_Action.m_delta);
+                    a.Map.useZaapiTo((int)a.Path.Current_Action.m_delta);
                     foreach (AccountUC ac in accounts)
                     {
                         if (ac.IsSlave == true)
-                            ac.Map.useZaapi((int)a.Path.Current_Action.m_delta);
+                            ac.Map.useZaapiTo((int)a.Path.Current_Action.m_delta);
                         System.Threading.Thread.Sleep(500);
                     }
                     return;
@@ -98,17 +98,17 @@ namespace BlueSheep.Common.Types
             }
         }
 
-        public void MoveToCellGroup(int delta)
+        public async void MoveToCellGroup(int delta)
         {
             foreach (AccountUC a in accounts)
             {
                 if (a.IsMaster == true)
                 {
-                    a.Map.MoveToCell(delta);
+                    await a.Map.MoveToCell(delta);
                     foreach (AccountUC ac in accounts)
                     {
                         if (ac.IsSlave == true)
-                            ac.Map.MoveToCell(delta);
+                            await ac.Map.MoveToCell(delta);
                         System.Threading.Thread.Sleep(500);
                     }
                     return;

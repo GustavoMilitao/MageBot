@@ -1,8 +1,9 @@
 ﻿using System;
 using BlueSheep.Common.IO;
-using BlueSheep.Interface;
 using System.Collections.Generic;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
+using BlueSheep.Core.Account;
+
 namespace BlueSheep.Engine.Types
 {
     public class MessageInformations
@@ -14,14 +15,14 @@ namespace BlueSheep.Engine.Types
         public byte[] m_Data;
         private int? m_LenghtType;
         private int? m_ProtocolID;
-        private AccountUC account;
+        private Account account;
         private List<int> ForbiddenHeaders = new List<int>() { 42, 6469 };
         #endregion
 
         #region Public methods
-        public MessageInformations(AccountUC accountform)
+        public MessageInformations(Account account)
         {
-            account = accountform;
+            this.account = account;
         }
         public void ParseBuffer(byte[] data)
         {

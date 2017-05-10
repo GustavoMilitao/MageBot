@@ -13,7 +13,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Houses
     using BlueSheep.Common.Protocol.Types.Game.House;
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class AccountHouseMessage : Message

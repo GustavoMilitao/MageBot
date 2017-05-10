@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Havenbag.Meet
 {
     using BlueSheep.Common.Protocol.Types.Game.Character;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class InviteInHavenBagOfferMessage : Message

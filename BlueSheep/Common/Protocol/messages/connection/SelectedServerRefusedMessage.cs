@@ -11,7 +11,6 @@
 namespace BlueSheep.Common.Protocol.Messages.Connection
 {
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class SelectedServerRefusedMessage : Message

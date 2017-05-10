@@ -13,7 +13,6 @@ namespace BlueSheep.Common.Protocol.Messages.Web.Krosmaster
     using BlueSheep.Common.Protocol.Types.Web.Krosmaster;
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class KrosmasterInventoryMessage : Message

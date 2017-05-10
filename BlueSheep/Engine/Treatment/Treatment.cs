@@ -4,8 +4,8 @@ using BlueSheep.Common;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
+using BlueSheep.Core.Account;
 
 namespace BlueSheep.Engine.Treatment
 {
@@ -13,21 +13,21 @@ namespace BlueSheep.Engine.Treatment
     {
         #region Fields
         private readonly List<InstanceInfo> m_Instances = new List<InstanceInfo>();
-        private AccountUC account;
+        private Account account;
         #endregion
 
         #region Constructeurs
-        public Treatment(AccountUC accountform)
+        public Treatment(Account account)
         {
             GetTypes("BlueSheep");
-            account = accountform;
+            this.account = account;
         }
         #endregion
 
         #region Public methods
         public void Treat(int packetID, byte[] packetDatas)
         {
-            
+
             List<InstanceInfo> enqueue = new List<InstanceInfo>();
 
             foreach (InstanceInfo instance in m_Instances)
@@ -40,8 +40,7 @@ namespace BlueSheep.Engine.Treatment
             {
                 Message message = (Message)Activator.CreateInstance(instance.MessageType);
                 MethodInfo method = instance.Method;
-                if (account.DebugMode.Checked)
-                    account.Log(new DebugTextInformation("[RCV] " + packetID + " (" + method.Name.Remove(method.Name.IndexOf("Treatment"))+ ")"),0); 
+                account.Log(new DebugTextInformation("[RCV] " + packetID + " (" + method.Name.Remove(method.Name.IndexOf("Treatment")) + ")"), 0);
 
                 if (method == null)
                     return;

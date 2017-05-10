@@ -11,7 +11,6 @@
 namespace BlueSheep.Common.Protocol.Messages.Web.Krosmaster
 {
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class KrosmasterInventoryErrorMessage : Message

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using BlueSheep.Engine.Constants;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 
 namespace BlueSheep.Interface.UCs
 {

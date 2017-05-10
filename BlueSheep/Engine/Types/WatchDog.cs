@@ -1,5 +1,5 @@
-﻿using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+﻿using BlueSheep.Core.Account;
+using BlueSheep.Util.Text.Log;
 using System;
 using System.Threading;
 
@@ -8,13 +8,13 @@ namespace BlueSheep.Engine.Types
     public class WatchDog
     {
         #region Fields
-        private AccountUC m_Account;
+        private Account m_Account;
         private DateTime PathAction;
         private Thread m_PathDog;
         #endregion
 
         #region Constructors
-        public WatchDog(AccountUC account)
+        public WatchDog(Account account)
         {
             m_Account = account;
         }

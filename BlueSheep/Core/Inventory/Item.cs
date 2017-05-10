@@ -1,5 +1,4 @@
 ﻿using BlueSheep.Common.Data;
-using BlueSheep.Interface;
 using System.Collections.Generic;
 using System.Linq;
 using BlueSheep.Common.Data.D2o;
@@ -9,7 +8,7 @@ namespace BlueSheep.Core.Inventory
 {
     public class Item
     {
-        public Item(List<ObjectEffect> effects, int gid, int position, int quantity, int uid, AccountUC account)
+        public Item(List<ObjectEffect> effects, int gid, int position, int quantity, int uid)
         {
             Effects = effects;
             GID = gid;
@@ -54,6 +53,5 @@ namespace BlueSheep.Core.Inventory
         public int Position { get; internal set; }
         public int Quantity { get; internal set; }
         public int UID { get; private set; }
-        public AccountUC Account;
     }
 }

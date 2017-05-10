@@ -14,7 +14,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Job
     using BlueSheep.Common.Protocol.Types.Game.Look;
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class JobCrafterDirectoryEntryMessage : Message

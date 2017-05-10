@@ -1,13 +1,11 @@
 ﻿using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Reflection.Emit;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace BlueSheep.Common.Protocol.Types
 {

@@ -1,13 +1,14 @@
 ﻿using BlueSheep.Common.Enums;
+using BlueSheep.Core.Account;
 using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 
 namespace BlueSheep.Util.Text.Connection
 {
     public class IdentificationFailureReason
     { 
         #region Public methods
-        public static void Test(IdentificationFailureReasonEnum reason, AccountUC account)
+        public static void Test(IdentificationFailureReasonEnum reason, Account account)
         {
             switch (reason)
             {

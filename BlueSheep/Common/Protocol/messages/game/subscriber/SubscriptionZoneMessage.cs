@@ -11,7 +11,6 @@
 namespace BlueSheep.Common.Protocol.Messages.Game.Subscriber
 {
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class SubscriptionZoneMessage : Message

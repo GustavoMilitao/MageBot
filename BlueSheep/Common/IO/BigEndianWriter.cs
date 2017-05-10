@@ -313,7 +313,7 @@ namespace BlueSheep.Common.IO
 
         public void WriteVarShort(ushort @uint)
         {
-            WriteVar((ushort)@uint);
+            WriteVar(@uint);
         }
 
         public void WriteVarInt(int @int)

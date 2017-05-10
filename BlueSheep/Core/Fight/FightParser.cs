@@ -1,8 +1,7 @@
 ﻿using BlueSheep.Common.Data;
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Common.Types;
-using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +14,7 @@ namespace BlueSheep.Core.Fight
     public class FightParser
     {
         #region Fields
-        private AccountUC m_Account;
+        private Account.Account m_Account;
         public string path;
         public string Name;
         public BFighter target;
@@ -69,7 +68,7 @@ namespace BlueSheep.Core.Fight
         #endregion
 
         #region Constructors
-        public FightParser(AccountUC Account, string Path, string name)
+        public FightParser(Account.Account Account, string Path, string name)
         {
             m_Account = Account;
             path = Path;

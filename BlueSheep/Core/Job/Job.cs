@@ -1,6 +1,5 @@
 ﻿using BlueSheep.Common.Data.D2o;
 using BlueSheep.Core.Inventory;
-using BlueSheep.Interface;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +14,13 @@ namespace BlueSheep.Core.Job
         public int XP;
         public int XpLevelFloor;
         public int XpNextLevelFloor;
-        private AccountUC account;
+        private Account.Account account;
         public string Name
         {
             get { return BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Jobs, Id).Fields["nameId"]); }
         }
 
-        public Job(int id, List<int> skills, AccountUC Account)
+        public Job(int id, List<int> skills, Account.Account Account)
         {
             Id = id;
             Skills = skills;

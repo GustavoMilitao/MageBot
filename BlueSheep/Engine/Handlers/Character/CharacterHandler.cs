@@ -12,7 +12,7 @@ using BlueSheep.Common.Protocol.Types.Game.Data.Items;
 using BlueSheep.Common.Types;
 using BlueSheep.Common;
 using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
+using BlueSheep.Util.Text.Log;
 using BlueSheep.Util.Enums.Char;
 using BlueSheep.Util.Enums.EnumHelper;
 using System;
@@ -26,7 +26,7 @@ namespace BlueSheep.Engine.Handlers.Character
 
         #region Public methods
         [MessageHandler(typeof(CharactersListMessage))]
-        public static void CharactersListMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void CharactersListMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             CharactersListMessage charactersListMessage = (CharactersListMessage)message;
 
@@ -50,7 +50,7 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(CharacterSelectedSuccessMessage))]
-        public static void CharacterSelectedSuccessMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void CharacterSelectedSuccessMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             CharacterSelectedSuccessMessage characterSelectedSuccessMessage = (CharacterSelectedSuccessMessage)message;
 
@@ -70,14 +70,14 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(CharacterSelectedErrorMessage))]
-        public static void CharacterSelectedErrorMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void CharacterSelectedErrorMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             account.Log(new ConnectionTextInformation("Erreur lors de la sélection du personnage."),0);
             account.TryReconnect(30);
         }
 
         [MessageHandler(typeof(CharacterStatsListMessage))]
-        public static void CharacterStatsListMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void CharacterStatsListMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             CharacterStatsListMessage msg = (CharacterStatsListMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -118,7 +118,7 @@ namespace BlueSheep.Engine.Handlers.Character
         }
         
         [MessageHandler(typeof(SpellListMessage))]
-        public static void SpellListMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void SpellListMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             SpellListMessage msg = (SpellListMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -132,7 +132,7 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(CharacterSelectedForceMessage))]
-        public static void CharacterSelectedForceMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void CharacterSelectedForceMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             CharacterSelectedForceMessage msg = (CharacterSelectedForceMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -145,7 +145,7 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(CharacterLevelUpMessage))]
-        public static void CharacterLevelUpMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void CharacterLevelUpMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             CharacterLevelUpMessage msg = (CharacterLevelUpMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -158,14 +158,14 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(AchievementFinishedMessage))]
-        public static void AchievementFinishedTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void AchievementFinishedTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             AchievementFinishedMessage msg = (AchievementFinishedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
                 msg.Deserialize(reader);
             }
-            DataClass d = GameData.GetDataObject(D2oFileEnum.Achievements, (int)msg.ObjectId);
+            DataClass d = GameData.GetDataObject(D2oFileEnum.Achievements, msg.ObjectId);
             account.Log(new ActionTextInformation("Succès débloqué : " + I18N.GetText((int)d.Fields["nameId"])),3);
                 AchievementRewardRequestMessage nmsg = new AchievementRewardRequestMessage(-1);
                 account.SocketManager.Send(nmsg);
@@ -173,7 +173,7 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(CharacterExperienceGainMessage))]
-        public static void CharacterExperienceGainMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void CharacterExperienceGainMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             CharacterExperienceGainMessage msg = (CharacterExperienceGainMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -204,7 +204,7 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(StatsUpgradeResultMessage))]
-        public static void StatsUpgradeResultMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void StatsUpgradeResultMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             StatsUpgradeResultMessage msg = (StatsUpgradeResultMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -222,7 +222,7 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(PlayerStatusUpdateMessage))]
-        public static void PlayerStatusUpdateMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void PlayerStatusUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             PlayerStatusUpdateMessage msg = (PlayerStatusUpdateMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))

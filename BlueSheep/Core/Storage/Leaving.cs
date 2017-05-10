@@ -1,5 +1,4 @@
 ﻿using BlueSheep.Common.Types;
-using BlueSheep.Interface;
 using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
 
 namespace BlueSheep.Core.Storage
@@ -7,14 +6,14 @@ namespace BlueSheep.Core.Storage
     public class Leaving
     {
         #region Fields
-        private AccountUC account;
+        private Account.Account account;
         #endregion
 
         #region Public methods
 
-        public Leaving(AccountUC accountform)
+        public Leaving(Account.Account account)
         {
-            account = accountform;
+            this.account = account;
         }
 
         public void Init()

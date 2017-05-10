@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Pvp
 {
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class UpdateMapPlayersAgressableStatusMessage : Message

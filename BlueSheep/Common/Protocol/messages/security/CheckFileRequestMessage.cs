@@ -11,7 +11,6 @@
 namespace BlueSheep.Common.Protocol.Messages.Security
 {
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class CheckFileRequestMessage : Message

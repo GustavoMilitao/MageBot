@@ -23,8 +23,8 @@ using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Common;
 using BlueSheep.Interface;
-using BlueSheep.Interface.Text;
-using BlueSheep.Interface.Text.Chat;
+using BlueSheep.Util.Text.Log;
+using BlueSheep.Util.Text.Log.Chat;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,16 +35,17 @@ namespace BlueSheep.Engine.Handlers.Context
     {
         #region Public methods
         [MessageHandler(typeof(MapComplementaryInformationsDataInHouseMessage))]
-        public static void MapComplementaryInformationsDataInHouseMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void MapComplementaryInformationsDataInHouseMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             MapComplementaryInformationsDataMessageTreatment(message, packetDatas, account);
         }
 
         [MessageHandler(typeof(MapComplementaryInformationsDataMessage))]
-        public static void MapComplementaryInformationsDataMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void MapComplementaryInformationsDataMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             MapComplementaryInformationsDataMessage msg = (MapComplementaryInformationsDataMessage)message;
-            account.HeroicUC.AnalysePacket(message, packetDatas);
+            //account.HeroicUC.AnalysePacket(message, packetDatas);
+            // TODO Militão: Add Heroic module to account
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
                 msg.Deserialize(reader);
@@ -55,19 +56,20 @@ namespace BlueSheep.Engine.Handlers.Context
             account.MapData.ParseStatedElements(msg.StatedElements.ToArray());
             account.MapData.ParseActors(msg.Actors.ToArray());
             account.MapData.ParseInteractiveElements(msg.InteractiveElements.ToArray());
-            account.Enable(true);
+            account.Enabled = true;
             account.MapData.DoAction();
-            account.ActualizeMap();
+            //account.ActualizeMap();
+            // TODO Militão: Populate the new interface
         }
 
         [MessageHandler(typeof(MapComplementaryInformationsWithCoordsMessage))]
-        public static void MapComplementaryInformationsWithCoordsMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void MapComplementaryInformationsWithCoordsMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             MapComplementaryInformationsDataMessageTreatment(message, packetDatas, account);
         }
 
         [MessageHandler(typeof(CurrentMapMessage))]
-        public static void CurrentMapMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void CurrentMapMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             CurrentMapMessage currentMapMessage = (CurrentMapMessage)message;
 
@@ -77,15 +79,18 @@ namespace BlueSheep.Engine.Handlers.Context
             }
 
             account.MapID = currentMapMessage.MapId;
-            if (account.MapID == account.MapData.LastMapId && account.Fight != null)
-            {
-                account.FightData.winLoseDic["Gagné"]++;
-                account.ActualizeFightStats(account.FightData.winLoseDic, account.FightData.xpWon);
-            }
+            account.MapData.Data.Id = currentMapMessage.MapId;
+            account.Log(new DebugTextInformation("[Map] = " + account.MapData.Id), 0);
+            account.SetStatus(Status.None);
+            //if (account.MapID == account.MapData.LastMapId && account.Fight != null)
+            //{
+            //    account.FightData.winLoseDic["Gagné"]++;
+            //    account.ActualizeFightStats(account.FightData.winLoseDic, account.FightData.xpWon);
+            //}
             if (!account.IsMITM)
             {
                 MapInformationsRequestMessage mapInformationsRequestMessage
-                = new MapInformationsRequestMessage(account.MapID);
+                = new MapInformationsRequestMessage(account.MapData.Id);
                 account.SocketManager.Send(mapInformationsRequestMessage);
             }
 
@@ -93,7 +98,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameContextCreateMessage))]
-        public static void GameContextCreateMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void GameContextCreateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             //QuestListRequestMessage questListRequestMessage = new QuestListRequestMessage();
 
@@ -110,7 +115,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(QuestListMessage))]
-        public static void QuestListMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void QuestListMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             if (!account.IsMITM)
             {
@@ -123,7 +128,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(TextInformationMessage))]
-        public static void TextInformationMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void TextInformationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             TextInformationMessage msg = (TextInformationMessage)message;
 
@@ -148,7 +153,8 @@ namespace BlueSheep.Engine.Handlers.Context
                     if (account.Fight != null)
                     {
                         account.FightData.winLoseDic["Perdu"]++;
-                        account.ActualizeFightStats(account.FightData.winLoseDic, account.FightData.xpWon);
+                        //account.ActualizeFightStats(account.FightData.winLoseDic, account.FightData.xpWon);
+                        // TODO Militão: Populate the new interface
                     }
                     break;
             }
@@ -166,7 +172,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ChatServerMessage))]
-        public static void ChatServerMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void ChatServerMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             ChatServerMessage msg = (ChatServerMessage)message;
 
@@ -174,7 +180,7 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            switch ((int)msg.Channel)
+            switch (msg.Channel)
             {
                 case 0:
                     account.Log(new GeneralTextInformation(msg.SenderName + ": " + msg.Content), 1);
@@ -201,7 +207,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         //[MessageHandler(typeof(GameMapMovementConfirmMessage))]
-        //public static void GameMapMovementConfirmMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        //public static void GameMapMovementConfirmMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         //{
         //    GameMapMovementConfirmMessage msg = (GameMapMovementConfirmMessage)message;
 
@@ -238,7 +244,7 @@ namespace BlueSheep.Engine.Handlers.Context
         //}
 
         [MessageHandler(typeof(GameMapMovementMessage))]
-        public static void GameMapMovementMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void GameMapMovementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             GameMapMovementMessage msg = (GameMapMovementMessage)message;
 
@@ -254,14 +260,10 @@ namespace BlueSheep.Engine.Handlers.Context
 
             MovementPath clientMovement = MapMovementAdapter.GetClientMovement(keys);
             account.MapData.UpdateEntityCell(msg.ActorId, clientMovement.CellEnd.CellId);
-            if (account.Map.Moving && msg.ActorId == account.MapData.Character.ContextualId)
-            {
-                account.Map.ConfirmMove();
-            }
         }
 
         [MessageHandler(typeof(GameMapNoMovementMessage))]
-        public static void GameMapNoMovementMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void GameMapNoMovementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             GameMapNoMovementMessage msg = (GameMapNoMovementMessage)message;
 
@@ -295,7 +297,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PopupWarningMessage))]
-        public static void PopupWarningMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public async static void PopupWarningMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             PopupWarningMessage msg = (PopupWarningMessage)message;
 
@@ -306,12 +308,13 @@ namespace BlueSheep.Engine.Handlers.Context
             account.Log(new ErrorTextInformation("[FROM " + msg.Author + " ] : " + msg.Content), 0);
             account.Log(new BotTextInformation("You has been locked for " + msg.LockDuration + ". Stopping BlueSheep actions while blocked..."), 0);
             account.Log(new ErrorTextInformation("Y a un popup sur l'écran, surement un modo :s"), 0);
-            account.Wait(msg.LockDuration, msg.LockDuration);
+            //account.Wait(msg.LockDuration, msg.LockDuration);
+            await account.PutTaskDelay(msg.LockDuration);
             //account.SocketManager.Disconnect("Alerte au modo ! Alerte au modo !");
         }
 
         [MessageHandler(typeof(SystemMessageDisplayMessage))]
-        public static void SystemMessageDisplayMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void SystemMessageDisplayMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             SystemMessageDisplayMessage msg = (SystemMessageDisplayMessage)message;
 
@@ -325,7 +328,7 @@ namespace BlueSheep.Engine.Handlers.Context
 
 
         [MessageHandler(typeof(PartyInvitationMessage))]
-        public static void PartyInvitationMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void PartyInvitationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             PartyInvitationMessage msg = (PartyInvitationMessage)message;
 
@@ -350,7 +353,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PartyMemberInFightMessage))]
-        public static void PartyMemberInFightMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public async static void PartyMemberInFightMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             PartyMemberInFightMessage msg = (PartyMemberInFightMessage)message;
 
@@ -360,7 +363,8 @@ namespace BlueSheep.Engine.Handlers.Context
             }
             if (msg.FightMap.MapId == account.MapData.Id && msg.MemberName == account.MyGroup.GetMaster().CharacterBaseInformations.Name)
             {
-                account.Wait(500, 1500);
+                //account.Wait(500, 1500);
+                await account.PutTaskDelay(1500);
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
                     GameFightJoinRequestMessage msg2 = new GameFightJoinRequestMessage(msg.MemberId, msg.FightId);
@@ -371,7 +375,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(InteractiveElementUpdatedMessage))]
-        public static void InteractiveElementUpdatedMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void InteractiveElementUpdatedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             InteractiveElementUpdatedMessage msg = (InteractiveElementUpdatedMessage)message;
 
@@ -392,7 +396,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(StatedElementUpdatedMessage))]
-        public static void StatedElementUpdatedMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void StatedElementUpdatedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             StatedElementUpdatedMessage msg = (StatedElementUpdatedMessage)message;
 
@@ -404,7 +408,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PurchasableDialogMessage))]
-        public static void PurchasableDialogMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void PurchasableDialogMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             PurchasableDialogMessage msg = (PurchasableDialogMessage)message;
 
@@ -415,7 +419,7 @@ namespace BlueSheep.Engine.Handlers.Context
             if (account.House != null)
             {
                 account.House.priceHouse = msg.Price;
-                if (account.House.priceHouse < Convert.ToUInt64(account.MaxPrice.Value))
+                if (account.House.priceHouse < account.MaxPriceHouse)
                 {
                     account.House.Buy();
                 }
@@ -427,7 +431,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(HousePropertiesMessage))]
-        public static void HousePropertiesMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void HousePropertiesMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             HousePropertiesMessage msg = (HousePropertiesMessage)message;
 
@@ -435,17 +439,17 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (account.SearcherLogBox.Text.Length > 0)
+            if (!String.IsNullOrEmpty(account.HouseSearcherLogPath))
             {
-                StreamWriter SourceFile = new StreamWriter(account.SearcherLogBox.Text, true);
-                SourceFile.WriteLine("Maison abandonnée en : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]");
+                StreamWriter SourceFile = new StreamWriter(account.HouseSearcherLogPath, true);
+                SourceFile.WriteLine("Abandoned house in : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]");
                 SourceFile.Close();
             }
-            account.Log(new BotTextInformation("Maison abandonnée en : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]"), 1);
+            //account.Log(new BotTextInformation("Maison abandonnée en : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]"), 1);
         }
 
         [MessageHandler(typeof(GameContextRemoveElementMessage))]
-        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             GameContextRemoveElementMessage msg = (GameContextRemoveElementMessage)message;
 
@@ -457,10 +461,11 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameRolePlayShowActorMessage))]
-        public static void GameRolePlayShowActorMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void GameRolePlayShowActorMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             GameRolePlayShowActorMessage msg = (GameRolePlayShowActorMessage)message;
-            account.HeroicUC.AnalysePacket(msg, packetDatas);
+            //account.HeroicUC.AnalysePacket(msg, packetDatas);
+            // TODO Militão: Add Heroic module to account
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
                 msg.Deserialize(reader);
@@ -468,12 +473,12 @@ namespace BlueSheep.Engine.Handlers.Context
 
             account.MapData.ParseActors(new List<GameRolePlayActorInformations>() { msg.Informations }.ToArray());
 
-            if (account.FloodUC.StartStopFloodingBox.Checked == true && account.FloodUC.PrivateEnterBox.Checked == true && msg.Informations is GameRolePlayCharacterInformations)
+            if (account.Flood.FloodStarted && account.Flood.SendPrivateMessage && msg.Informations is GameRolePlayCharacterInformations)
             {
                 GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.Informations;
                 account.Flood.SendPrivateTo(infos);
             }
-            if (account.FloodUC.IsMemoryCheck.Checked == true && msg.Informations is GameRolePlayCharacterInformations)
+            if (account.Flood.SaveInMemory && msg.Informations is GameRolePlayCharacterInformations)
             {
                 GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.Informations;
                 account.Flood.SaveNameInMemory(infos);
@@ -481,7 +486,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeStartedWithStorageMessage))]
-        public static void ExchangeStartedWithStorageMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void ExchangeStartedWithStorageMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             ExchangeStartedWithStorageMessage msg = (ExchangeStartedWithStorageMessage)message;
 
@@ -489,16 +494,17 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (account.Path != null && account.Inventory != null)
-            {
-                List<int> items = account.GestItemsUC.GetItemsToTransfer();
-                account.Inventory.TransferItems(items);
-                account.Inventory.GetItems(account.GestItemsUC.GetItemsToGetFromBank());
-            }
+            //if (account.Path != null && account.Inventory != null)
+            //{
+            //    List<int> items = account.GestItemsUC.GetItemsToTransfer();
+            //    account.Inventory.TransferItems(items);
+            //    account.Inventory.GetItems(account.GestItemsUC.GetItemsToGetFromBank());
+            //}
+            // TODO Militão: Add Items module
         }
 
         [MessageHandler(typeof(DisplayNumericalValuePaddockMessage))]
-        public static void DisplayNumericalValueMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void DisplayNumericalValueMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             DisplayNumericalValuePaddockMessage msg = (DisplayNumericalValuePaddockMessage)message;
 
@@ -509,7 +515,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ObtainedItemMessage))]
-        public static void ObtainedItemMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void ObtainedItemMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             ObtainedItemMessage msg = (ObtainedItemMessage)message;
 
@@ -524,13 +530,13 @@ namespace BlueSheep.Engine.Handlers.Context
                 account.Gather.Stats[account.Gather.resourceName] += (int)msg.BaseQuantity;
             else
                 account.Gather.Stats.Add(account.Gather.resourceName, (int)msg.BaseQuantity);
-            account.Gather.Current_Job.ActualizeStats(account.Gather.Stats);
+            //account.Gather.Current_Job.ActualizeStats(account.Gather.Stats);
         }
 
         ////////////////////////////////// PACKET DELETED ///////////////////////////////////////////////
 
         //[MessageHandler(typeof(DisplayNumericalValueWithAgeBonusMessage))]
-        //public static void DisplayNumericalValueWithAgeBonusTreatment(Message message, byte[] packetDatas, AccountUC account)
+        //public static void DisplayNumericalValueWithAgeBonusTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         //{
         //    DisplayNumericalValueWithAgeBonusMessage msg = (DisplayNumericalValueWithAgeBonusMessage)message;
 
@@ -555,7 +561,7 @@ namespace BlueSheep.Engine.Handlers.Context
         //}
 
         [MessageHandler(typeof(InteractiveUseErrorMessage))]
-        public static void InteractiveUseErrorMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void InteractiveUseErrorMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             InteractiveUseErrorMessage msg = (InteractiveUseErrorMessage)message;
 
@@ -572,7 +578,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(InteractiveUseEndedMessage))]
-        public static void InteractiveUseEndedMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void InteractiveUseEndedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             InteractiveUseEndedMessage msg = (InteractiveUseEndedMessage)message;
 
@@ -589,7 +595,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeStartedWithPodsMessage))]
-        public static void ExchangeStartedWithPodsMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public async static void ExchangeStartedWithPodsMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             ExchangeStartedWithPodsMessage msg = (ExchangeStartedWithPodsMessage)message;
 
@@ -597,16 +603,17 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (account.GestItemsUC.ListenerBox.Checked)
-                return;
-            List<int> items = account.GestItemsUC.GetItemsToTransfer();
-            account.Inventory.TransferItems(items);
-            account.Wait(2000, 3000);
+            //if (account.GestItemsUC.ListenerBox.Checked)
+            //    return;
+            //List<int> items = account.GestItemsUC.GetItemsToTransfer();
+            //account.Inventory.TransferItems(items);
+            // TODO Militão: Add Items module
+            await account.PutTaskDelay(3000);
             account.Inventory.ExchangeReady();
         }
 
         [MessageHandler(typeof(ExchangeRequestedTradeMessage))]
-        public static void ExchangeRequestedTradeMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void ExchangeRequestedTradeMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             ExchangeRequestedTradeMessage msg = (ExchangeRequestedTradeMessage)message;
 
@@ -614,12 +621,13 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (account.GestItemsUC.ListenerBox.Checked)
-                account.Inventory.AcceptExchange();
+            //if (account.GestItemsUC.ListenerBox.Checked)
+            //    account.Inventory.AcceptExchange();
+            // TODO Militão: Add Items module
         }
 
         [MessageHandler(typeof(ExchangeIsReadyMessage))]
-        public static void ExchangeIsReadyMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
+        public static void ExchangeIsReadyMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             ExchangeIsReadyMessage msg = (ExchangeIsReadyMessage)message;
 
@@ -627,8 +635,9 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (msg.Ready && account.GestItemsUC.ListenerBox.Checked)
-                account.Inventory.ExchangeReady();
+            //if (msg.Ready && account.GestItemsUC.ListenerBox.Checked)
+            //    account.Inventory.ExchangeReady();
+            // TODO Militão: Add Items module
         }
 
 

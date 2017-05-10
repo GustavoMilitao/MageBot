@@ -12,7 +12,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Startup
 {
     using BlueSheep.Common.Protocol.Types.Game.Startup;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class StartupActionAddMessage : Message

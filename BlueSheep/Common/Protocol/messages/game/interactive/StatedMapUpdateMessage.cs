@@ -13,7 +13,6 @@ namespace BlueSheep.Common.Protocol.Messages.Game.Interactive
     using BlueSheep.Common.Protocol.Types.Game.Interactive;
     using System.Collections.Generic;
     using BlueSheep.Common;
-	using BlueSheep.Common.Protocol.Types;
 
 
     public class StatedMapUpdateMessage : Message
