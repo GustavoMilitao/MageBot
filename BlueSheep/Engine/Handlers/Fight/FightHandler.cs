@@ -190,18 +190,11 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            /* TODO : HANDLE IT */
 
             if (msg.CharId == account.CharacterBaseInformations.ObjectID)
             {
                 account.FightData.FightStop();
             }
-            //else
-            //{
-            //    BFighter fighter = account.Fight.GetFighter(msg.charId);
-            //    if (fighter != null)
-            //        account.Fight.Fighters.Remove(fighter);
-            //}
         }
 
         [MessageHandler(typeof(GameFightOptionStateUpdateMessage))]
@@ -422,6 +415,8 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
+
+            
             /* TODO : Handle it */
         }
 

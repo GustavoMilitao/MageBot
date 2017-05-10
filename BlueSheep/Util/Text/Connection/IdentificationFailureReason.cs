@@ -1,6 +1,6 @@
-﻿using BlueSheep.Interface;
+﻿using BlueSheep.Common.Enums;
+using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
-using DofusBot.Enums;
 
 namespace BlueSheep.Util.Text.Connection
 {
@@ -11,19 +11,19 @@ namespace BlueSheep.Util.Text.Connection
         {
             switch (reason)
             {
-                case IdentificationFailureReasonEnum.WrongCredentials:
+                case IdentificationFailureReasonEnum.WRONG_CREDENTIALS:
                     account.Log(new ErrorTextInformation("Echec de connexion : mauvais identifiants."),0);
                     break;
 
-                case IdentificationFailureReasonEnum.Banned:
+                case IdentificationFailureReasonEnum.BANNED:
                     account.Log(new ErrorTextInformation("Echec de connexion : compte banni."), 0);
                     break;
 
-                case IdentificationFailureReasonEnum.Kicked:
+                case IdentificationFailureReasonEnum.KICKED:
                     account.Log(new ErrorTextInformation("Echec de connexion : compte banni temporairement."), 0);
                     break;
 
-                case IdentificationFailureReasonEnum.InMaintenance:
+                case IdentificationFailureReasonEnum.IN_MAINTENANCE:
                     account.Log(new ErrorTextInformation("Echec de connexion : serveur en maintenance."), 0);
                     account.TryReconnect(15);
                     break;

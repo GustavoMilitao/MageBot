@@ -1,4 +1,5 @@
 ﻿using BlueSheep.Common.Data.D2o;
+using BlueSheep.Common.Enums;
 using BlueSheep.Common.Protocol.Messages.Game.Inventory.Preset;
 using BlueSheep.Common.Protocol.Types.Game.Actions.Fight;
 using BlueSheep.Common.Protocol.Types.Game.Character.Characteristic;
@@ -43,7 +44,7 @@ namespace BlueSheep.Core.Fight
         public bool WaitForReady = false;
         public bool IsDead = false;
 
-        public List<FightOptionEnum> Options = new List<FightOptionEnum>();
+        public List<FightOptionsEnum> Options = new List<FightOptionsEnum>();
         public Stopwatch watch = new Stopwatch();
         public MonsterGroup followingGroup;
         private Dictionary<string, int> boss;
@@ -345,10 +346,10 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public void SetOption(bool state, int id)
         {
-            if (!state && Options.Contains((FightOptionEnum)id))
-                Options.Remove((FightOptionEnum)id);
-            if (state && !Options.Contains((FightOptionEnum)id))
-                Options.Add((FightOptionEnum)id);
+            if (!state && Options.Contains((FightOptionsEnum)id))
+                Options.Remove((FightOptionsEnum)id);
+            if (state && !Options.Contains((FightOptionsEnum)id))
+                Options.Add((FightOptionsEnum)id);
         }
 
         /// <summary>
@@ -744,7 +745,6 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         private List<int> GetReachableCells()
         {
-            // TODO : Manage challenge (zombie)
             List<int> listWalkableCells = new List<int>();
             MapPoint point = new MapPoint(Fighter.CellId);
             int movementPoints = Fighter.MovementPoints;
@@ -769,8 +769,8 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         private bool IsSpectatorAvailable()
         {
-            foreach (FightOptionEnum e in Options)
-                if (e == FightOptionEnum.Secret)
+            foreach (FightOptionsEnum e in Options)
+                if (e == FightOptionsEnum.FIGHT_OPTION_SET_SECRET)
                     return true;
             return false;
         }

@@ -133,7 +133,7 @@ namespace BlueSheep.Data.Pathfinding
                             list6.Add(Math.Floor(a));
                             list3 = list6;
                         }
-                        break; // TODO: might not be correct. Was : Exit Select
+                        break;
                     case 3:
                         num8 = (Math.Ceiling(Convert.ToDouble(((pointd.X * 100) + (num14 * 50)))) / 100);
                         num9 = (Math.Floor(Convert.ToDouble(((pointd.X * 100) + (num14 * 150)))) / 100);
@@ -194,7 +194,7 @@ namespace BlueSheep.Data.Pathfinding
 								num9
 							});
                         }
-                        break; // TODO: might not be correct. Was : Exit Select
+                        break;
                 }
                 if ((list3.Count > 0))
                 {

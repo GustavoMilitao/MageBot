@@ -153,9 +153,6 @@ namespace BlueSheep.Core.Inventory
             ExchangeObjectTransfertListFromInvMessage msg = new ExchangeObjectTransfertListFromInvMessage(items.Select(item => (uint)item).ToList());
             Account.SocketManager.Send(msg);
             Account.Log(new BotTextInformation("Trajet : Tous les objets transférés."), 3);
-            //Account.Npc.CloseDialog();
-            //Don't need, dialog closed with the GetItems() method.
-            //Account.Busy = false;
         }
 
         public void GetItems(List<int> items)

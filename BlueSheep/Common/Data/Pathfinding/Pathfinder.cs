@@ -358,7 +358,6 @@ namespace BlueSheep.Data.Pathfinding
                         count += MapData.Monsters.Where((e) => e.m_cellId == actualPoint.CellId).ToList().Count;
                         if (count > 0)
                         {
-                        //    //ToDo Voir à travers les entity
                             return false;
                         }
                     }
@@ -429,10 +428,6 @@ namespace BlueSheep.Data.Pathfinding
             {
                 cost += 0.3;
             }
-
-            // todo
-            //            if (m_context.IsCellMarked(cell))
-            //                cost += 0.2;
 
             return cost;
         }
@@ -538,7 +533,6 @@ namespace BlueSheep.Data.Pathfinding
             }
             catch
             {
-                // TODO : Null cell
                 cell = null;
             }
             return cell;

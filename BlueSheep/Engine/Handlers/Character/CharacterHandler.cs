@@ -16,11 +16,14 @@ using BlueSheep.Interface.Text;
 using BlueSheep.Util.Enums.Char;
 using BlueSheep.Util.Enums.EnumHelper;
 using System;
+using BlueSheep.Common.Enums;
 
 namespace BlueSheep.Engine.Handlers.Character
 {
     class CharacterHandler
     {
+        delegate void AddMemberCallBack(string MemberName);
+
         #region Public methods
         [MessageHandler(typeof(CharactersListMessage))]
         public static void CharactersListMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
@@ -59,7 +62,7 @@ namespace BlueSheep.Engine.Handlers.Character
             account.CharacterBaseInformations = characterSelectedSuccessMessage.Infos;
 
             account.Log(new BotTextInformation(account.CharacterBaseInformations.Name + " de niveau "+ account.CharacterBaseInformations.Level + " est connecté."),1);
-            account.Log(new BotTextInformation("Breed: "+ ((Breed)account.CharacterBaseInformations.Breed).Description() + " Sex: " + ((Sex)Convert.ToInt32(account.CharacterBaseInformations.Sex)).Description()), 1);
+            account.Log(new BotTextInformation("Breed: "+ ((BreedEnum)account.CharacterBaseInformations.Breed).Description() + " Sex: " + ((Sex)Convert.ToInt32(account.CharacterBaseInformations.Sex)).Description()), 1);
             account.ModifBar(7,0,0, account.AccountName + " - " + account.CharacterBaseInformations.Name);
             account.ModifBar(8, 0, 0, Convert.ToString(account.CharacterBaseInformations.Level));
             
@@ -86,7 +89,17 @@ namespace BlueSheep.Engine.Handlers.Character
             account.CharacterStats = msg.Stats;
             account.CaracUC.Init();
             if (account.MyGroup != null)
-                ((GroupForm)account.ParentForm).AddMember(account.CharacterBaseInformations.Name);
+            {
+                if (((GroupForm)account.ParentForm).InvokeRequired)
+                {
+                    AddMemberCallBack d = new AddMemberCallBack(((GroupForm)account.ParentForm).AddMember);
+                    ((GroupForm)account.ParentForm).Invoke(d, account.CharacterBaseInformations.Name);
+                }
+            }
+            //if (account.MyGroup != null)
+            //{
+            //    ((GroupForm)account.ParentForm).AddMember(account.CharacterBaseInformations.Name);
+            //}
             uint percent = (msg.Stats.LifePoints / msg.Stats.MaxLifePoints) * 100;
             string text = msg.Stats.LifePoints + "/" + msg.Stats.MaxLifePoints + "(" + percent + "%)";
             account.ModifBar(2, (int)msg.Stats.MaxLifePoints, (int)msg.Stats.LifePoints, "Vitalité");

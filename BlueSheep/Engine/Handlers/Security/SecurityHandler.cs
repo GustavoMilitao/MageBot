@@ -11,19 +11,7 @@ namespace BlueSheep.Engine.Handlers.Security
         [MessageHandler(typeof(RawDataMessage))]
         public static void RawDataMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
         {
-            //TODO : Bypass this fucking anti-bot
-
-
             List<int> tt = new List<int>();
-            //for (int i = 0; i <= 255; i++)
-            //{
-            //    Random random = new Random();
-            //    int test = random.Next(-127, 127);
-            //    tt.Add(test);
-            //}
-
-            //tt.AddRange(HumanCheck.ToListOf(new HumanCheck(account)._hashKey, BitConverter.ToInt32));
-
             CheckIntegrityMessage checkIntegrityMessage = new CheckIntegrityMessage(tt);
 
             account.SocketManager.Send(checkIntegrityMessage);
@@ -32,14 +20,6 @@ namespace BlueSheep.Engine.Handlers.Security
         [MessageHandler(typeof(CheckIntegrityMessage))]
         public static void CheckIntegrityMessageTreatment(Message message, byte[] packetDatas, AccountUC account)
         {
-            //using (BigEndianWriter writer = new BigEndianWriter())
-            //{
-            //    writer.WriteBytes(packetDatas);
-            //    MessagePackaging pack = new MessagePackaging(writer);
-            //    pack.Pack(6372);
-            //    account.SocketManager.Send(pack.Writer.Content);
-            //    account.Log(new BotTextInformation("Raw data traité avec succès."), 0);
-            //}
         }
 
         public static int MakeCrc(int param1, int param2)

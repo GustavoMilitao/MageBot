@@ -94,6 +94,8 @@ namespace BlueSheep.Common.Protocol.Types.Game.Inventory.Preset
         
         public override void Deserialize(IDataReader reader)
         {
+            m_presetId = reader.ReadByte();
+            m_symbolId = reader.ReadByte();
             int idolIdCount = reader.ReadUShort();
             int idolIdIndex;
             m_idolId = new System.Collections.Generic.List<ushort>();
@@ -101,8 +103,6 @@ namespace BlueSheep.Common.Protocol.Types.Game.Inventory.Preset
             {
                 m_idolId.Add(reader.ReadVarUhShort());
             }
-            m_presetId = reader.ReadByte();
-            m_symbolId = reader.ReadByte();
         }
     }
 }

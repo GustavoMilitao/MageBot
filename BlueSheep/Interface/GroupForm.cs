@@ -4,6 +4,9 @@ using BlueSheep.Interface.Text;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
+using BlueSheep.Engine.Network;
+
 namespace BlueSheep.Interface
 {
     public partial class GroupForm : MetroFramework.Forms.MetroForm
@@ -17,6 +20,8 @@ namespace BlueSheep.Interface
         public List<Account> list;
         #endregion
 
+        private delegate void Callback(AccountUC account);
+
         #region Constructors
         public GroupForm(List<AccountUC> accounts, string name)
         {
@@ -26,7 +31,7 @@ namespace BlueSheep.Interface
             foreach (AccountUC account in accounts)
             {
                 TabPage tab = new TabPage(account.AccountName);
-                AccountUC naccount = new AccountUC(account.AccountName, account.AccountPassword, true);
+                AccountUC naccount = new AccountUC(account.AccountName, account.AccountPassword, true, this);
                 AccountTabs.TabPages.Add(tab);
                 tab.Controls.Add(naccount);
                 naccount.Dock = DockStyle.Fill;
@@ -36,21 +41,42 @@ namespace BlueSheep.Interface
                 naccount.Init();
             }
         }
+
+        public void Reconnect(AccountUC account)
+        {
+            if (account.InvokeRequired)
+            {
+                Invoke(new Callback(Reconnect),account);
+                return;
+            }
+            Controls.Remove(account);
+            string user = account.AccountName;
+            string pass = account.AccountPassword;
+            account = new AccountUC(user, pass, true, this);
+            Controls.Add(account);
+            account.Show();
+            Show();
+            account.IsMaster = false;
+            account.IsSlave = false;
+            account.Dock = DockStyle.Fill;
+            account.Init();
+        }
+
         #endregion
 
         #region Public Methods
         public void AddMember(string name)
         {
-            MasterChoice.Items.Add(name);
+            MasterChoice1.Items.Add(name);
         }
         #endregion
 
         #region Interface methods
         private void MasterChoice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < MasterChoice.Items.Count; i++)
+            for (int i = 0; i < MasterChoice1.Items.Count; i++)
             {
-                string item = (string)MasterChoice.Items[i];
+                string item = (string)MasterChoice1.Items[i];
                 foreach (AccountUC account in listAccounts)
                 {
                     if (item == account.AccountName)
@@ -60,7 +86,7 @@ namespace BlueSheep.Interface
                         account.MyGroup = new Group(listAccounts, Name);
                     }
                 }
-                if (item == (string)MasterChoice.SelectedItem)
+                if (item == (string)MasterChoice1.SelectedItem)
                 {
                     foreach (AccountUC account in listAccounts)
                     {
@@ -69,7 +95,7 @@ namespace BlueSheep.Interface
                             account.IsSlave = false;
                             account.IsMaster = true;
                             account.MyGroup = new Group(listAccounts, Name);
-                            account.Log(new BotTextInformation("Je suis le chef de groupe biatch !"), 1);
+                            account.Log(new BotTextInformation("This is the Master account now !"), 1);
                             account.Focus();
                             foreach (AccountUC slave in listAccounts)
                             {

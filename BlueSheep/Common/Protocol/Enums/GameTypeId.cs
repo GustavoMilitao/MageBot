@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace BlueSheep.Util.Enums.Servers
+namespace BlueSheep.Common.Enums
 {
-    public enum GameTypeId
+    public enum GameTypeIdEnum
     {
         [Description("Normal")]
         Normal = 0,

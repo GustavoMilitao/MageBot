@@ -5,7 +5,7 @@ using BlueSheep.Engine.Types;
 using BlueSheep.Common;
 using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
-using BlueSheep.Util.Enums.Servers;
+using BlueSheep.Common.Enums;
 using BlueSheep.Util.Enums.EnumHelper;
 using BlueSheep.Common.Protocol.Messages.Game.Basic;
 using BlueSheep.Common.Protocol.Messages.Game.Interactive;
@@ -33,9 +33,6 @@ namespace BlueSheep.Engine.Handlers.Basic
         {
             BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage((ushort)account.LatencyFrame.GetLatencyAvg(),
                 (ushort)account.LatencyFrame.GetSamplesCount(), (ushort)account.LatencyFrame.GetSamplesMax());
-            //account.Log(new BotTextInformation("ROLEPLEY RECU"),0);
-            //BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage(account.LatencyFrame.RolePley(),
-            //    account.LatencyFrame.GetSamplesCount(), account.LatencyFrame.GetSamplesMax());
             if (!account.IsMITM)
             {
                 using (BigEndianWriter writer = new BigEndianWriter())
@@ -181,8 +178,8 @@ namespace BlueSheep.Engine.Handlers.Basic
             }
             account.Log(
                 new ConnectionTextInformation(" Server Settings : Language : " + msg.Lang + 
-                                         ", GameType : " + ((GameTypeId)msg.GameType).Description() + 
-                                         ", Comunity : " + ((CommunityId)msg.Community).Description()),0);
+                                         ", GameType : " + ((GameTypeIdEnum)msg.GameType).Description() + 
+                                         ", Comunity : " + ((CommunityIdEnum)msg.Community).Description()),0);
         }
 
         #endregion

@@ -11,8 +11,6 @@ namespace BlueSheep.Engine.Constants
         #region Fields
         private static Dictionary<string, string> Dic = new Dictionary<string, string>();
         private static int ENInitialized = 0;
-        private static int PTInitialized = 0;
-        private static int ESInitialized = 0;
         #endregion
 
         #region Public Methods

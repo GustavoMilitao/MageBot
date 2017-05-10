@@ -14,13 +14,13 @@ namespace BlueSheep.Common.Enums
     
     public enum FightOptionsEnum
     {
-        
+        /// <summary>Disable spectator</summary>
         FIGHT_OPTION_SET_SECRET = 0,
-        
+        /// <summary>Party only</summary>
         FIGHT_OPTION_SET_TO_PARTY_ONLY = 1,
-        
+        /// <summary>Close fight</summary>
         FIGHT_OPTION_SET_CLOSED = 2,
-        
+        /// <summary>Ask help</summary>
         FIGHT_OPTION_ASK_FOR_HELP = 3,
     }
 }

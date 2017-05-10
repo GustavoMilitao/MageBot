@@ -8,21 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace BlueSheep.Common.Enums
 {
     
     
     public enum ServerCompletionEnum
     {
-        
+        [Description("Recomendado")]
         COMPLETION_RECOMANDATED = 0,
-        
+        [Description("Médio")]
         COMPLETION_AVERAGE = 1,
-        
+        [Description("Alto")]
         COMPLETION_HIGH = 2,
-        
+        [Description("Em Breve")]
         COMPLETION_COMING_SOON = 3,
-        
+        [Description("Cheio")]
         COMPLETION_FULL = 4,
     }
 }

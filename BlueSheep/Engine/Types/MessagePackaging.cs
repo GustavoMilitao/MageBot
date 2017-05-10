@@ -62,13 +62,6 @@ namespace BlueSheep.Engine.Types
                 m_Packet[i] = m_Writer.Content[i - index];
 
             m_Writer.Content = m_Packet;
-
-            //using (
-            //    StreamWriter fileWriter =
-            //        new StreamWriter(
-            //            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-            //            @"\BlueSheep\Packets.txt", true))
-            //    fileWriter.WriteLine("[" + DateTime.Now.ToShortTimeString() + "] Paquet envoyé : " + protocolID);
         }
         #endregion
 

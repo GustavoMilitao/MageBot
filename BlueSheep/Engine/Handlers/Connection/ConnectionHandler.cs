@@ -12,11 +12,11 @@ using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
 using BlueSheep.Util.Text;
 using BlueSheep.Util.Text.Connection;
-using DofusBot.Enums;
 using RSA;
 using System;
 using System.Collections.Generic;
 using BlueSheep.Util.Enums.EnumHelper;
+using BlueSheep.Common.Enums;
 
 namespace BlueSheep.Engine.Handlers.Connection
 {

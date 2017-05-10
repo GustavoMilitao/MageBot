@@ -2,7 +2,6 @@
 {
     public enum InventoryPositionEnum
     {
-        // TODO : Rework this, not complete with new rev.
         /// <summary>Amulette</summary>
         Amulet = 0,
         /// <summary>Ceinture</summary>

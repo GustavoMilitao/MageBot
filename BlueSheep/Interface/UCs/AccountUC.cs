@@ -41,7 +41,7 @@ namespace BlueSheep.Interface
     public partial class AccountUC : MetroFramework.Controls.MetroUserControl
     {
         /// <summary>
-        /// Main UC. TODO : Split this hugggge thing into multiple UC.
+        /// Main UC
         /// </summary>
 
         #region Fields
@@ -83,7 +83,7 @@ namespace BlueSheep.Interface
         public ConfigManager ConfigManager;
         public FightParser FightParser;
         public WatchDog WatchDog;
-        public AccountFrm m_ParentForm;
+        public MetroFramework.Forms.MetroForm m_ParentForm;
         #endregion
 
         #region Properties
@@ -131,7 +131,7 @@ namespace BlueSheep.Interface
                 IntelliSense.AutoCompleteTextBox(MonsterTextBox, lstPopup, IntelliSense.MonstersList, e);
             };
             if (form != null)
-                m_ParentForm = (AccountFrm)form;
+                m_ParentForm = form;
             AccountName = username;
             AccountPassword = password;
             PetsModifiedList = new List<Pet>();
@@ -941,11 +941,8 @@ namespace BlueSheep.Interface
 
         public void Init()
         {
-            //this.Enabled = false;
-            //this.SocketManager = null;
             m_ConnectionThread = new Thread(Connect);
             m_ConnectionThread.Start();
-            //Connect();
         }
 
         public bool PerformGather()
@@ -1060,7 +1057,7 @@ namespace BlueSheep.Interface
             if (m_TimerConnectionThread != null)
                 m_TimerConnectionThread.Change(Timeout.Infinite, Timeout.Infinite);
 
-            Thread.Sleep(GetRandomTime());
+            Thread.Sleep(GetRandomTime()+new Random().Next(10000));
 
             m_Running = new Running(this);
 
@@ -1087,8 +1084,17 @@ namespace BlueSheep.Interface
             //AccountUC Uc = new AccountUC(this.AccountName, this.AccountPassword, true);
             //this.ParentForm.Controls.Add(Uc);
             //Uc.Show();
-            if (MyGroup == null && m_ParentForm != null)
-                m_ParentForm.Reconnect();
+            if (m_ParentForm != null)
+            {
+                if(m_ParentForm is GroupForm)
+                {
+                    ((GroupForm)m_ParentForm).Reconnect(this);
+                }
+                else
+                {
+                    ((AccountFrm)m_ParentForm).Reconnect();
+                }
+            }
             //this.Dispose();
         }
 

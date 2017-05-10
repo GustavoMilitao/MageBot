@@ -8,27 +8,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace BlueSheep.Common.Enums
 {
     
     
     public enum ServerStatusEnum
     {
-        
-        STATUS_UNKNOWN = 0,
-        
-        OFFLINE = 1,
-        
-        STARTING = 2,
-        
-        ONLINE = 3,
-        
-        NOJOIN = 4,
-        
-        SAVING = 5,
-        
-        STOPING = 6,
-        
-        FULL = 7,
+        [Description("Desconhecido")]
+        StatusUnknown,
+        [Description("Offline")]
+        Offline,
+        [Description("Iniciando")]
+        Starting,
+        [Description("Online")]
+        Online,
+        [Description("Sem entrada")]
+        NoJoin,
+        [Description("Salvando")]
+        Saving,
+        [Description("Parando")]
+        Stoping,
+        [Description("Cheio")]
+        Full
     }
 }

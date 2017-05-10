@@ -148,7 +148,6 @@ namespace BlueSheep.Data.D2p
                 Cells.Add(data);
                 m += 1;
             }
-            //TODO: Refactor.D2P Layer and Cell Reading
         }
 
         // Fields

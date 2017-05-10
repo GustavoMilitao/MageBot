@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace BlueSheep.Util.Enums.Servers
+namespace BlueSheep.Common.Enums
 {
-    public enum CommunityId
+    public enum CommunityIdEnum
     {
         [Description("Francês")]
         Frances,

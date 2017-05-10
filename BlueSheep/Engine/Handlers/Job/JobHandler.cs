@@ -57,10 +57,10 @@ namespace BlueSheep.Engine.Handlers.Job
                 }
             }
             account.ActualizeJobs();
-            foreach (JobUC j in account.JobsUC)
-            {
-                j.populateTreeview();
-            }
+            //foreach (JobUC j in account.JobsUC)
+            //{
+            //    j.populateTreeview();
+            //}
         }
 
         [MessageHandler(typeof(JobExperienceUpdateMessage))]

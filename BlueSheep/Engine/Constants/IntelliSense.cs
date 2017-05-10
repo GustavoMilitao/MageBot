@@ -1,6 +1,6 @@
 ﻿using BlueSheep.Common.Data.D2o;
-using BlueSheep.DTO;
-using BlueSheep.Util.Enums.Servers;
+using BlueSheep.Common.DataCenter;
+using BlueSheep.Common.Enums;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -152,15 +152,25 @@ namespace BlueSheep.Engine.Constants
         {
             Server server = new Server();
             server.Id = (int)data.Fields["id"];
-            server.Name = Common.Data.I18N.GetText((int)data["nameId"]);
-            server.ServerComment = Common.Data.I18N.GetText((int)data["commentId"]);
-            server.OpeningDate = new DateTime(Convert.ToInt64(data["openingDate"]));
-            server.Language = (string)data["language"];
-            server.Population = (PopulationId)data["populationId"];
-            server.GameType = (GameTypeId)data["gameTypeId"];
-            server.Comunity = (CommunityId)data["communityId"];
-            server.RestrictedToLanguages = (ArrayList)data["restrictedToLanguages"];
+            server.NameId = Convert.ToUInt32(data["nameId"]);
+            server.CommentId = Convert.ToUInt32(data["commentId"]);
+            server.OpeningDate = Convert.ToDouble(data["openingDate"]);
+            server.Language = Convert.ToString(data["language"]);
+            server.PopulationId = Convert.ToInt32(data["populationId"]);
+            server.GameTypeId = Convert.ToUInt32(data["gameTypeId"]);
+            server.CommunityId = Convert.ToInt32(data["communityId"]);
+            server.RestrictedToLanguages = ArrayListToStringList((ArrayList)data["restrictedToLanguages"]);
             return server;
+        }
+
+        private static List<string>  ArrayListToStringList(ArrayList arrayList)
+        {
+            List<string> result = new List<string>(); 
+            foreach(object o in arrayList)
+            {
+                result.Add((string)o);
+            }
+            return result;
         }
     }
 }

@@ -259,7 +259,6 @@ namespace BlueSheep.Core.Map
         {
             Data = BlueSheep.Data.D2p.MapsManager.FromId(mapId);
             Data.SubAreaId = subAreaId;
-            //TODO: Refactor Location
             DataClass subArea = GameData.GetDataObject(D2oFileEnum.SubAreas, subAreaId);
             string mapName = I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Areas, (int)subArea.Fields["areaId"]).Fields["nameId"]);
             string subAreaName = I18N.GetText((int)subArea.Fields["nameId"]);
@@ -316,7 +315,7 @@ namespace BlueSheep.Core.Map
         public bool CanGatherElement(int id, int distance)
         {
             Elements.StatedElement element = StatedElements.Find(s => s.Id == id);
-            if (element.State == 1 || element.State == 2)
+            if (element.State == 0 || element.State == 2)
                 return false;
             if (distance <= 1 && distance >= 0)
                 return true;

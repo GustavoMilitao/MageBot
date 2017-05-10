@@ -43,12 +43,6 @@ namespace BlueSheep.Engine.Types
                             account.Log(new BotTextInformation("SND (-> Dof) " + m_ProtocolID), 0);
                         }
                     }
-                    //using (
-                    // StreamWriter fileWriter =
-                    // new StreamWriter(
-                    // Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                    // @"\BlueSheep\Packets.txt", true))
-                    // fileWriter.WriteLine("[" + DateTime.Now.ToShortTimeString() + "] Paquet reçu : " + m_ProtocolID);
                     Treatment.Treatment treatment = new Treatment.Treatment(account);
                     if (m_ProtocolID == 6372)
                     {

@@ -111,6 +111,9 @@ namespace BlueSheep.Common.Protocol.Types.Game.Inventory.Preset
         
         public override void Deserialize(IDataReader reader)
         {
+            m_presetId = reader.ReadByte();
+            m_symbolId = reader.ReadByte();
+            m_mount = reader.ReadBoolean();
             int objectsCount = reader.ReadUShort();
             int objectsIndex;
             m_objects = new System.Collections.Generic.List<PresetItem>();
@@ -120,9 +123,7 @@ namespace BlueSheep.Common.Protocol.Types.Game.Inventory.Preset
                 objectToAdd.Deserialize(reader);
                 m_objects.Add(objectToAdd);
             }
-            m_presetId = reader.ReadByte();
-            m_symbolId = reader.ReadByte();
-            m_mount = reader.ReadBoolean();
+            
         }
     }
 }

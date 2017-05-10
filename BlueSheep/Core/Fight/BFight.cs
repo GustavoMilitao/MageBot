@@ -14,6 +14,7 @@ using BlueSheep.Common.Protocol.Messages.Game.Context.Fight;
 using BlueSheep.Common.Protocol.Messages.Game.Context;
 using BlueSheep.Common.Protocol.Messages.Game.Actions.Fight;
 using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight;
+using BlueSheep.Common.Enums;
 
 namespace BlueSheep.Core.Fight
 {
@@ -198,9 +199,30 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public void LockFight()
         {
-            GameFightOptionToggleMessage msg = new GameFightOptionToggleMessage(2);
+            GameFightOptionToggleMessage msg = new GameFightOptionToggleMessage((byte)FightOptionsEnum.FIGHT_OPTION_SET_CLOSED);
             m_Account.SocketManager.Send(msg);
-            m_Account.Log(new ActionTextInformation("Fermeture du combat"), 4);
+            m_Account.Log(new ActionTextInformation("Combat closed"), 4);
+        }
+
+        public void LockFighForParty()
+        {
+            GameFightOptionToggleMessage msg = new GameFightOptionToggleMessage((byte)FightOptionsEnum.FIGHT_OPTION_SET_TO_PARTY_ONLY);
+            m_Account.SocketManager.Send(msg);
+            m_Account.Log(new ActionTextInformation("Combat closed to party only"), 4);
+        }
+
+        public void LockFightForSpectators()
+        {
+            GameFightOptionToggleMessage msg = new GameFightOptionToggleMessage((byte)FightOptionsEnum.FIGHT_OPTION_SET_SECRET);
+            m_Account.SocketManager.Send(msg);
+            m_Account.Log(new ActionTextInformation("Combat spectator closed"), 4);
+        }
+
+        public void AskForHelpInFight()
+        {
+            GameFightOptionToggleMessage msg = new GameFightOptionToggleMessage((byte)FightOptionsEnum.FIGHT_OPTION_ASK_FOR_HELP);
+            m_Account.SocketManager.Send(msg);
+            m_Account.Log(new ActionTextInformation("Asking for help"), 4);
         }
 
         #endregion
@@ -261,7 +283,7 @@ namespace BlueSheep.Core.Fight
                 msg.Serialize(writer);
                 writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack((int)msg.MessageID);
+                pack.Pack(msg.MessageID);
                 m_Account.SocketManager.Send(pack.Writer.Content);
                 m_Account.Log(new ActionTextInformation("Lancement d'un sort en " + cellId), 5);
                 if (m_Account.DebugMode.Checked)

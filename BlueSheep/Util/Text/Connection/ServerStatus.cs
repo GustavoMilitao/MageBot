@@ -1,6 +1,6 @@
-﻿using BlueSheep.Interface;
+﻿using BlueSheep.Common.Enums;
+using BlueSheep.Interface;
 using BlueSheep.Interface.Text;
-using DofusBot.Enums;
 
 namespace BlueSheep.Util.Text
 {

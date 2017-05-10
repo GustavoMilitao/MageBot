@@ -55,7 +55,6 @@ namespace BlueSheep.Interface
                 }
                 else
                 {
-                    // TODO : Automate the dll injection
                     Process proc = new Process();
                     string directoryPath = System.IO.Path.Combine(MainForm.ActualMainForm.DofusPath, "app", "Dofus.exe");
                     proc.StartInfo.FileName = directoryPath;
