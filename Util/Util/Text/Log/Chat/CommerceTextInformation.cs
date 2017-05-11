@@ -1,10 +1,10 @@
-﻿using BlueSheep.Properties.I18n.Strings;
+﻿using BlueSheep.Util.I18n.Strings;
 using System;
 using System.Drawing;
 
-namespace BlueSheep.Interface.Text.Chat
+namespace BlueSheep.Util.Text.Log
 {
-    class CommerceTextInformation : TextInformation
+    public class CommerceTextInformation : TextInformation
     {
         #region Fields
             private string m_Text;

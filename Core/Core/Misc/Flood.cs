@@ -1,7 +1,7 @@
 ﻿using BlueSheep.Util.IO;
 using BlueSheep.Engine.Types;
 using BlueSheep.Util.Text.Log;
-using BlueSheep.Util.Text.Log.Chat;
+using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

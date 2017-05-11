@@ -23,7 +23,6 @@ using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Protocol.Messages;
 using BlueSheep.Util.Text.Log;
-using BlueSheep.Util.Text.Log.Chat;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -77,22 +76,23 @@ namespace BlueSheep.Engine.Handlers.Context
                 currentMapMessage.Deserialize(reader);
             }
 
-            account.MapData.Data.Id = currentMapMessage.MapId;
-            account.Log(new DebugTextInformation("[Map] = " + account.MapData.Id), 0);
+            account.Log(new DebugTextInformation("[Map] = " + currentMapMessage.MapId), 0);
             account.SetStatus(Status.None);
-            //if (account.MapID == account.MapData.LastMapId && account.Fight != null)
-            //{
-            //    account.FightData.winLoseDic["Gagné"]++;
-            //    account.ActualizeFightStats(account.FightData.winLoseDic, account.FightData.xpWon);
-            //}
-            if (!account.Config.IsMITM)
+            if (account.MapData.Data != null)
             {
-                MapInformationsRequestMessage mapInformationsRequestMessage
-                = new MapInformationsRequestMessage(account.MapData.Id);
-                account.SocketManager.Send(mapInformationsRequestMessage);
+                account.MapData.Data.Id = currentMapMessage.MapId;
+                //if (account.MapID == account.MapData.LastMapId && account.Fight != null)
+                //{
+                //    account.FightData.winLoseDic["Gagné"]++;
+                //    account.ActualizeFightStats(account.FightData.winLoseDic, account.FightData.xpWon);
+                //}
+                if (!account.Config.IsMITM)
+                {
+                    MapInformationsRequestMessage mapInformationsRequestMessage
+                    = new MapInformationsRequestMessage(account.MapData.Id);
+                    account.SocketManager.Send(mapInformationsRequestMessage);
+                }
             }
-
-
         }
 
         [MessageHandler(typeof(GameContextCreateMessage))]

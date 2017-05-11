@@ -19,7 +19,7 @@ namespace BlueSheep.Engine.Treatment
         #region Constructeurs
         public Treatment(Account account)
         {
-            GetTypes("BlueSheep");
+            GetTypes("Core");
             this.account = account;
         }
         #endregion

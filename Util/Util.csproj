@@ -65,6 +65,11 @@
     <Compile Include="Util\IO\IDataReader.cs" />
     <Compile Include="Util\IO\IDataWriter.cs" />
     <Compile Include="Util\IO\Int64.cs" />
+    <Compile Include="Util\Resources\Icons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Icons.resx</DependentUpon>
+    </Compile>
     <Compile Include="Util\Text\Log\BlueSheepInfo\ActionTextInformation.cs" />
     <Compile Include="Util\Text\Log\BlueSheepInfo\BotTextInformation.cs" />
     <Compile Include="Util\Text\Log\BlueSheepInfo\CharacterTextInformation.cs" />
@@ -94,6 +99,10 @@
     <EmbeddedResource Include="Util\I18n\Strings\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Util\Resources\Icons.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

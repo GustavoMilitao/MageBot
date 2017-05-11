@@ -87,6 +87,7 @@ namespace BlueSheep.Core.Account
 
         public Account(string username, string password, bool socket = true)
         {
+            initBars();
             Config = new AccountConfig();
             AccountName = username;
             AccountPassword = password;
@@ -147,6 +148,19 @@ namespace BlueSheep.Core.Account
             //FloodUC = new FloodUC(this);
             //tabPage2.Controls.Add(FloodUC);
             //FloodUC.Show();
+        }
+
+        private void initBars()
+        {
+            InfBars = new Dictionary<int, DataBar>();
+            InfBars.Add(1, new DataBar() { Text = "Experience" });
+            InfBars.Add(2, new DataBar() { Text = "Life" });
+            InfBars.Add(3, new DataBar() { Text = "Pods" });
+            InfBars.Add(4, new DataBar() { Text = "Kamas" });
+            InfBars.Add(5, new DataBar() { Text = "Pos" });
+            InfBars.Add(7, new DataBar() { Text = "ParentForm" });
+            InfBars.Add(8, new DataBar() { Text = "Level" });
+            InfBars.Add(9, new DataBar() { Text = "Subscribe" });
         }
 
         public void StartFeeding()
