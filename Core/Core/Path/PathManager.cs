@@ -123,7 +123,7 @@ namespace BlueSheep.Core.Path
         /// </summary>
         public void PerformFlag()
         {
-            if (Account.state == Status.Fighting)
+            if (Account.State == Status.Fighting)
                 return;
             switch (Current_Flag)
             {

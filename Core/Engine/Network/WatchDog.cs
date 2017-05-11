@@ -63,9 +63,9 @@ namespace BlueSheep.Engine.Network
 
         private bool CheckState()
         {
-            return (m_Account.state == Status.None ||
-                m_Account.state == Status.Moving ||
-                m_Account.state == Status.Busy);
+            return (m_Account.State == Status.None ||
+                m_Account.State == Status.Moving ||
+                m_Account.State == Status.Busy);
         }
         #endregion
     }

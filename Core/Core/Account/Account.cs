@@ -62,7 +62,7 @@ namespace BlueSheep.Core.Account
 
         #region Internal code use
         public bool Busy { get; set; }
-        public Status state { get; set; }
+        public Status State { get; set; }
         public WatchDog WatchDog { get; set; }
         public SocketManager SocketManager { get; set; }
         public int Sequence { get; set; }
@@ -111,6 +111,7 @@ namespace BlueSheep.Core.Account
             Npc = new Npc.Npc(this);
             Jobs = new List<Job.Job>();
             Gather = new Gather(this);
+
             string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", AccountName);
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
@@ -120,7 +121,32 @@ namespace BlueSheep.Core.Account
             MapData = new MapData(this);
             WatchDog = new WatchDog(this);
             InformationQueue = new Queue<Tuple<TextInformation, int>>();
-            Config.MonsterRestrictions = new List<Core.Fight.MonsterRestrictions>();
+            Config.MonsterRestrictions = new List<MonsterRestrictions>();
+
+            ////Heroic mode
+            //HeroicUC = new HeroicUC(this);
+            //FloodPage.TabPages[3].Controls.Add(HeroicUC);
+            //HeroicUC.Show();
+
+            ////Items management
+            //GestItemsUC = new GestItemsUC(this);
+            //tabPage9.Controls.Add(GestItemsUC);
+            //GestItemsUC.Show();
+
+            ////Carac
+            //CaracUC = new CaracUC(this);
+            //StatsPage.Controls.Add(CaracUC);
+            //CaracUC.Show();
+
+            ////Regen
+            //RegenUC = new RegenUC(this);
+            //RegenPage.Controls.Add(RegenUC);
+            //RegenUC.Show();
+
+            ////Flood
+            //FloodUC = new FloodUC(this);
+            //tabPage2.Controls.Add(FloodUC);
+            //FloodUC.Show();
         }
 
         public void StartFeeding()
@@ -243,7 +269,7 @@ namespace BlueSheep.Core.Account
 
         public void SetStatus(Status state)
         {
-            this.state = state;
+            this.State = state;
         }
 
         public bool AllowedGroup(List<string> monsters)
@@ -328,7 +354,7 @@ namespace BlueSheep.Core.Account
         }
 
         #region Methodes privées
-        private void Connect()
+        public void Connect()
         {
             if (TimerConnectionThread != null)
                 TimerConnectionThread.Change(Timeout.Infinite, Timeout.Infinite);

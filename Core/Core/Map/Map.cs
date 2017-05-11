@@ -93,7 +93,7 @@ namespace BlueSheep.Core.Map
 
         public async Task<bool> MoveToCell(int cellId)
         {
-            if (Account.state != Status.Fighting)
+            if (Account.State != Status.Fighting)
             {
                 Account.SetStatus(Status.Moving);
                 MovementPath path = (new Pathfinder(Account.MapData)).FindPath(Account.MapData.Character.Disposition.CellId, cellId);

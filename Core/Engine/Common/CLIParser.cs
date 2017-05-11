@@ -14,7 +14,7 @@ using BlueSheep.Core.Fight;
 
 namespace BlueSheep.Protocol
 {
-    class CLIParser
+    public class CLIParser
     {
         /* Command Line Parser */
 
@@ -883,11 +883,11 @@ namespace BlueSheep.Protocol
             bool infinite = IsSwitchOn("-i");
             try
             {
-                if (turn && account.state == Status.Fighting)
+                if (turn && account.State == Status.Fighting)
                 {
                     result.Add("[TURN] " + account.FightData.TurnId);
                 }
-                if (fighters && account.state == Status.Fighting)
+                if (fighters && account.State == Status.Fighting)
                 {
                     foreach (BFighter f in account.FightData.Fighters)
                     {
@@ -906,7 +906,7 @@ namespace BlueSheep.Protocol
                         }
                     }
                 }
-                if (me && account.state == Status.Fighting)
+                if (me && account.State == Status.Fighting)
                 {
                     BFighter m = account.FightData.Fighter;
                     if (verbose)
@@ -917,7 +917,7 @@ namespace BlueSheep.Protocol
                 }
                 if (account.Fight != null && (launch || Lock))
                 {
-                    if (launch && account.state != Status.Fighting)
+                    if (launch && account.State != Status.Fighting)
                     {
                         account.Fight.infinite = infinite;
                         account.Fight.SearchFight();

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using BlueSheep.Util.Text.Log;
 using BlueSheep.Common.Data.D2o;
 using System.Collections;
-using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Stats;
+using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Stats;
 
 namespace BlueSheep.Interface.UCs
 {

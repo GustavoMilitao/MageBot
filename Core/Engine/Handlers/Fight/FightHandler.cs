@@ -286,7 +286,7 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             MovementPath clientMovement = MapMovementAdapter.GetClientMovement(msg.KeyMovements.Select(k => (int)k).ToList());
-            if (account.state == Status.Fighting)
+            if (account.State == Status.Fighting)
             {
                 account.FightData.UpdateFighterCell((long)msg.ActorId, clientMovement.CellEnd.CellId);
             }
@@ -429,7 +429,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            if (account.state == Status.Fighting)
+            if (account.State == Status.Fighting)
             {
                 if (msg.ActionId == 108) // HP Récupérés (delta = combien on a récupérés)
                 {
