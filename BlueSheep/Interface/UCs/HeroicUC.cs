@@ -1,6 +1,6 @@
 ﻿namespace BlueSheep.Interface
 {
-    using BlueSheep.Common.IO;
+    using BlueSheep.Util.IO;
     using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay;
     using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight;
     using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;

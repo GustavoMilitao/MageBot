@@ -1,0 +1,633 @@
+[22:45:19] (Conexão) Conexão
+[22:45:19] (Conexão) Connected: 213.248.126.40
+[22:45:19] (Debug) [SND] 182
+[22:45:20] (Debug) [RCV] 3 (HelloConnectMessage)
+[22:45:20] (Debug) [SND] 4
+[22:45:20] (Conexão) Identification en cours.
+[22:45:20] (Debug) [RCV] 10 (LoginQueueStatus)
+[22:45:20] (Fila) File d'attente : 22/22.
+[22:45:21] (Debug) [RCV] 10 (LoginQueueStatus)
+[22:45:21] (Fila) File d'attente : 0/21.
+[22:45:21] (Debug) [RCV] 22 (IdentificationSuccessMessage)
+[22:45:21] (Conexão) Identification réussie.
+[22:45:21] (Debug) [RCV] 6469 (SelectedServerDataExtendedMessage)
+[22:45:21] (Conexão) Connexion au serveur Spiritia
+[22:45:21] (Conexão) Disconnected: Changing server.
+[22:45:21] (Conexão) Connected: 213.248.126.76
+[22:45:21] (Debug) [SND] 182
+[22:45:22] (Debug) [RCV] 101 (HelloGameMessage)
+[22:45:22] (Debug) [SND] 110
+[22:45:22] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:24] (Debug) [RCV] 6253 (RawDataMessage)
+[22:45:24] (Debug) [SND] 6372
+[22:45:24] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:24] (Debug) [RCV] 111 (AuthenticationTicketAcceptedMessage)
+[22:45:24] (Debug) [SND] 150
+[22:45:25] (Debug) [RCV] 175 (BasicTimeMessage)
+[22:45:25] (Debug) [RCV] 6340 (ServerSettingsMessage)
+[22:45:25] (Conexão)  Server Settings : Language : pt, GameType : Normal, Comunity : Português
+[22:45:25] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:25] (Debug) [RCV] 6100 (QueueStatusMessage)
+[22:45:25] (Fila) Posição na fila : 1/1.
+[22:45:25] (Debug) [RCV] 6100 (QueueStatusMessage)
+[22:45:25] (Fila) Posição na fila : 0/0.
+[22:45:26] (Debug) [RCV] 6100 (QueueStatusMessage)
+[22:45:26] (Fila) Posição na fila : 0/0.
+[22:45:26] (Debug) [RCV] 151 (CharactersListMessage)
+[22:45:26] (Debug) [SND] 152
+[22:45:26] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:26] (Debug) [RCV] 153 (CharacterSelectedSuccessMessage)
+[22:45:26] (BlueSheep) Saddidahkiler de niveau 28 est connecté.
+[22:45:26] (BlueSheep) Breed: Sadida Sex: Male
+[22:45:26] (Debug) [RCV] 3016 (InventoryContentMessage)
+[22:45:26] (Debug) [SND] 4001
+[22:45:26] (Debug) [SND] 5676
+[22:45:26] (Debug) [SND] 6355
+[22:45:26] (Debug) [SND] 5607
+[22:45:26] (Debug) [SND] 250
+[22:45:26] (Debug) [SND] 890
+[22:45:27] (Debug) [RCV] 5655 (JobDescriptionMessage)
+[22:45:27] (Debug) [RCV] 5809 (JobExperienceMultiUpdateMessage)
+[22:45:29] (Debug) [RCV] 1200 (SpellListMessage)
+[22:45:29] (Debug) [RCV] 3009 (InventoryWeightMessage)
+[22:45:30] (Debug) [RCV] 6316 (SequenceNumberRequestMessage)
+[22:45:30] (Debug) [SND] 6317
+[22:45:30] (Debug) [RCV] 780 (TextInformationMessage)
+[22:45:30] (Dofus) Bem-vindo(a) a DOFUS, no Mundo dos Doze!
+Lembre-se: é proibido fornecer o login e senha da sua conta a terceiros.
+[22:45:30] (Debug) [RCV] 780 (TextInformationMessage)
+[22:45:30] (Dofus) Último acesso à conta em 09/05/2017 às 03:44
+[22:45:30] (Debug) [RCV] 780 (TextInformationMessage)
+[22:45:30] (Dofus) O servidor será reiniciado em 3 heures, 14 minutes para manutenção
+[22:45:31] (Debug) [RCV] 6321 (CharacterExperienceGainMessage)
+[22:45:31] (Ação) Experience gagnée : + 0 points d'expérience
+[22:45:31] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:32] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:45:32] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:32] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:45:33] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:33] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:45:34] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:34] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:45:34] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:34] (Debug) [RCV] 780 (TextInformationMessage)
+[22:45:34] (Dofus) Você tem 1 {openSocial,0,0::amigo(s)} online.
+[22:45:35] (Debug) [RCV] 200 (GameContextCreateMessage)
+[22:45:35] (Debug) [RCV] 5684 (LifePointsRegenBeginMessage)
+[22:45:35] (Debug) [RCV] 220 (CurrentMapMessage)
+[22:45:35] (Debug) [SND] 225
+[22:45:35] (Debug) [RCV] 175 (BasicTimeMessage)
+[22:45:35] (Debug) [RCV] 500 (CharacterStatsListMessage)
+[22:45:35] (Erro) WARNING : T'as chargé aucune IA, fait gaffe mon coco :p
+[22:45:35] (BlueSheep) Configuration restaurée.
+[22:45:35] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:45:36] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:36] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:45:37] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:37] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:45:37] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:45:38] (Debug) [RCV] 226 (MapComplementaryInformationsDataMessage)
+[22:45:38] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:45:45] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:45:45] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:45:52] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:45:52] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:45:59] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:45:59] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:06] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:06] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:13] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:14] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:20] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:20] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:27] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:27] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:35] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[22:46:35] (BlueSheep) Déplacement vers la cellid : 254
+[22:46:35] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:35] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:35] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:46:35] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:35] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:38] (Debug) [SND] 952
+[22:46:38] (Debug) [SND] 221
+[22:46:38] (Debug) [Map] Old = 154010882
+[22:46:38] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:46:38] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:46:39] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:46:39] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:46:39] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:46:41] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:41] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:42] (Debug) [Map] New = 154010882
+[22:46:48] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:48] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:53] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[22:46:53] (BlueSheep) Déplacement vers la cellid : 75
+[22:46:53] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:46:53] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:53] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:46:55] (Debug) [SND] 952
+[22:46:55] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:46:56] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:46:56] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:47:01] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:47:01] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:47:04] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[22:47:10] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:47:10] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:47:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:47:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:47:24] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:47:24] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:47:31] (Debug) [RCV] 6316 (SequenceNumberRequestMessage)
+[22:47:31] (Debug) [SND] 6317
+[22:47:31] (Debug) [RCV] 5816 (BasicLatencyStatsRequestMessage)
+[22:47:31] (Debug) [SND] 5663 (BasicLatencyStatsMessage)
+[22:47:31] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:47:32] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:47:32] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:47:32] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:47:38] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:47:38] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:14] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[22:48:14] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:14] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:16] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:16] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:16] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:16] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:20] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:20] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:27] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[22:48:27] (BlueSheep) Déplacement vers la cellid : 545
+[22:48:27] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:27] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:27] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:48:27] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:27] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:31] (Debug) [SND] 952
+[22:48:31] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:48:32] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:48:32] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:48:34] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:34] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:41] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:41] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:46] (BlueSheep) Déplacement vers la cellid : 545
+[22:48:48] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:48] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:55] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:48:55] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:09] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:09] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:16] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:16] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:23] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:23] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:24] (BlueSheep) IA chargée avec succès.
+[22:49:24] (BlueSheep) IA chargée : Saddidahkiler
+[22:49:30] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:30] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:30] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[22:49:30] (Ação) Lancement d'un combat contre 3 monstres de niveau 10 (Kisplash(6),Gwotinha(2),Gwotinha(2),)
+[22:49:30] (BlueSheep) Recherche d'un combat...
+[22:49:30] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:30] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:31] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:32] (Debug) [SND] 952
+[22:49:32] (Debug) [SND] 6191
+[22:49:32] (Ação) Launch Fight !
+[22:49:32] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:33] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:33] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:33] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:34] (Debug) [RCV] 5632 (GameRolePlayShowActorMessage)
+[22:49:34] (Debug) [RCV] 251 (GameContextRemoveElementMessage)
+[22:49:34] (Debug) [RCV] 200 (GameContextCreateMessage)
+[22:49:34] (Debug) [RCV] 500 (CharacterStatsListMessage)
+[22:49:34] (Debug) [RCV] 702 (GameFightJoinMessage)
+[22:49:34] (Debug) [RCV] 703 (GameFightPlacementPossiblePositionsMessage)
+[22:49:34] (BlueSheep) Placement du personnage.
+[22:49:34] (Debug) [SND] 708
+[22:49:34] (BlueSheep) Send Ready !
+[22:49:35] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
+[22:49:35] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
+[22:49:35] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
+[22:49:35] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
+[22:49:35] (Debug) [RCV] 5686 (LifePointsRegenEndMessage)
+[22:49:35] (BlueSheep) Fin de la régénération. + 0 points de vie
+[22:49:35] (Debug) [RCV] 5696 (GameEntitiesDispositionMessage)
+[22:49:36] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[22:49:36] (Debug) [RCV] 5696 (GameEntitiesDispositionMessage)
+[22:49:36] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[22:49:36] (Debug) [RCV] 5696 (GameEntitiesDispositionMessage)
+[22:49:37] (Debug) [RCV] 5696 (GameEntitiesDispositionMessage)
+[22:49:37] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[22:49:37] (Debug) [RCV] 5696 (GameEntitiesDispositionMessage)
+[22:49:37] (Debug) [RCV] 5696 (GameEntitiesDispositionMessage)
+[22:49:37] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
+[22:49:37] (Debug) [RCV] 5696 (GameEntitiesDispositionMessage)
+[22:49:38] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:38] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:39] (Debug) [RCV] 740 (GameFightHumanReadyStateMessage)
+[22:49:39] (Debug) [RCV] 5696 (GameEntitiesDispositionMessage)
+[22:49:39] (Debug) [RCV] 712 (GameFightStartMessage)
+[22:49:39] (Ação) 
+[22:49:39] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:40] (Debug) [RCV] 5921 (GameFightSynchronizeMessage)
+[22:49:40] (Debug) [RCV] 6239 (GameFightNewRoundMessage)
+[22:49:40] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:49:40] (Debug) [RCV] 5921 (GameFightSynchronizeMessage)
+[22:49:41] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:49:41] (Debug) [RCV] 6465 (GameFightTurnStartPlayingMessage)
+[22:49:41] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[22:49:41] (BlueSheep) EndMove
+[22:49:41] (Debug) [RCV] 780 (TextInformationMessage)
+[22:49:41] (Dofus) Mage-eni entrou na batalha como um espectador.
+[22:49:41] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:41] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:42] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:42] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:42] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:49:42] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:49:42] (Debug) [SND] 957
+[22:49:42] (Debug) [SND] 718
+[22:49:43] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:43] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:43] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:44] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:44] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:49:44] (Ação) 
+[22:49:44] (Debug) [RCV] 780 (TextInformationMessage)
+[22:49:44] (Dofus) <b>Saddidahkiler</b> não conseguiu completar o desafio $challenge41. Que surpresa...
+[22:49:44] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:49:44] (Debug) [SND] 716
+[22:49:45] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:45] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:49:45] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:46] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:46] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:46] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:49:46] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:49:46] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:49:46] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:49:46] (Debug) [SND] 716
+[22:49:47] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:47] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:49:47] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:48] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:48] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:48] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:49:48] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:49:48] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:49:48] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:49:48] (Debug) [SND] 716
+[22:49:49] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:49] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:49:49] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:50] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:50] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:50] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:49:50] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:49:50] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:49:50] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:49:50] (Debug) [SND] 716
+[22:49:51] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:51] (Debug) [RCV] 6239 (GameFightNewRoundMessage)
+[22:49:51] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:49:51] (Debug) [RCV] 5921 (GameFightSynchronizeMessage)
+[22:49:51] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:49:51] (Debug) [RCV] 6465 (GameFightTurnStartPlayingMessage)
+[22:49:51] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[22:49:51] (Ação) Lancement d'un sort en 188
+[22:49:51] (Debug) [SND] 1005 (GameActionFightCastRequestMessage)
+[22:49:52] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:52] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:52] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:53] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:53] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:49:53] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:49:53] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:49:53] (Debug) [SND] 957
+[22:49:53] (Ação) Lancement d'un sort en 188
+[22:49:53] (Debug) [SND] 1005 (GameActionFightCastRequestMessage)
+[22:49:53] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:53] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:54] (Debug) [RCV] 1010 (GameActionFightSpellCastMessage)
+[22:49:55] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:49:55] (Debug) [RCV] 6312 (GameActionFightLifePointsLostMessage)
+[22:49:55] (Ação) Gwotinha: -13PV.
+[22:49:55] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:49:55] (Debug) [SND] 957
+[22:49:55] (Ação) Lancement d'un sort en 188
+[22:49:55] (Debug) [SND] 1005 (GameActionFightCastRequestMessage)
+[22:49:55] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:55] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:56] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:56] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:57] (Debug) [RCV] 1010 (GameActionFightSpellCastMessage)
+[22:49:57] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:49:57] (Debug) [RCV] 6312 (GameActionFightLifePointsLostMessage)
+[22:49:57] (Ação) Gwotinha: -5PV.
+[22:49:57] (Debug) [RCV] 1099 (GameActionFightDeathMessage)
+[22:49:57] (Ação) Gwotinha est mort !
+[22:49:57] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:49:57] (Debug) [SND] 957
+[22:49:57] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[22:49:57] (BlueSheep) EndMove
+[22:49:57] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:57] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:58] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:58] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:49:59] (Debug) [RCV] 780 (TextInformationMessage)
+[22:49:59] (Dofus) Você não pode conjurar esse feitiço. Você possui apenas 0 PM e você precisa de 3 para esse feitiço.
+[22:49:59] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:49:59] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:00] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:00] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:01] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:01] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:01] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:01] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:01] (Debug) [SND] 957
+[22:50:01] (Debug) [SND] 718
+[22:50:01] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:02] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:02] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:02] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:03] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:03] (Ação) 
+[22:50:03] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:50:03] (Debug) [SND] 716
+[22:50:04] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:04] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:50:04] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:05] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:05] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:05] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:06] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:06] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:06] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:50:06] (Debug) [SND] 716
+[22:50:06] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:06] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:50:07] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:07] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:07] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:08] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:08] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:08] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:08] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:50:08] (Debug) [SND] 716
+[22:50:09] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:09] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:09] (Debug) [RCV] 6239 (GameFightNewRoundMessage)
+[22:50:09] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:50:10] (Debug) [RCV] 5921 (GameFightSynchronizeMessage)
+[22:50:10] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:10] (Debug) [RCV] 6465 (GameFightTurnStartPlayingMessage)
+[22:50:10] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[22:50:10] (BlueSheep) EndMove
+[22:50:10] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:11] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:11] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:12] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:12] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:12] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:12] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:13] (Debug) [SND] 957
+[22:50:13] (Debug) [SND] 718
+[22:50:13] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:13] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:14] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:14] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:14] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:14] (Ação) 
+[22:50:15] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:50:15] (Debug) [SND] 716
+[22:50:15] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:15] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:50:15] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:16] (Debug) [RCV] 1010 (GameActionFightSpellCastMessage)
+[22:50:16] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:17] (Debug) [RCV] 6312 (GameActionFightLifePointsLostMessage)
+[22:50:17] (Ação) Saddidahkiler: -6PV.
+[22:50:17] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:17] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:18] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:18] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:18] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:18] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:50:18] (Debug) [SND] 716
+[22:50:19] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:19] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:50:19] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:20] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:20] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:20] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:20] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:20] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:21] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:50:21] (Debug) [SND] 716
+[22:50:21] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:21] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:21] (Debug) [RCV] 6239 (GameFightNewRoundMessage)
+[22:50:21] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:50:22] (Debug) [RCV] 5921 (GameFightSynchronizeMessage)
+[22:50:22] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:22] (Debug) [RCV] 6465 (GameFightTurnStartPlayingMessage)
+[22:50:22] (Ação) Lancement d'un sort en 176
+[22:50:22] (Debug) [SND] 1005 (GameActionFightCastRequestMessage)
+[22:50:22] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:23] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:23] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:24] (Debug) [RCV] 1010 (GameActionFightSpellCastMessage)
+[22:50:24] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:24] (Debug) [RCV] 6312 (GameActionFightLifePointsLostMessage)
+[22:50:24] (Ação) Gwotinha: -13PV.
+[22:50:24] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:24] (Debug) [SND] 957
+[22:50:24] (Ação) Lancement d'un sort en 176
+[22:50:24] (Debug) [SND] 1005 (GameActionFightCastRequestMessage)
+[22:50:24] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:25] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:25] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:25] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:26] (Debug) [RCV] 1010 (GameActionFightSpellCastMessage)
+[22:50:26] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:26] (Debug) [RCV] 6312 (GameActionFightLifePointsLostMessage)
+[22:50:26] (Ação) Gwotinha: -5PV.
+[22:50:26] (Debug) [RCV] 1099 (GameActionFightDeathMessage)
+[22:50:26] (Ação) Gwotinha est mort !
+[22:50:26] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:26] (Debug) [SND] 957
+[22:50:26] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[22:50:26] (BlueSheep) EndMove
+[22:50:27] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:27] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:28] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:28] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:29] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:29] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:29] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:29] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:29] (Debug) [SND] 957
+[22:50:29] (Debug) [SND] 718
+[22:50:29] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:29] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:30] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:30] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:30] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:30] (Ação) 
+[22:50:31] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:50:31] (Debug) [SND] 716
+[22:50:31] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:31] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:50:31] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:32] (Debug) [RCV] 1010 (GameActionFightSpellCastMessage)
+[22:50:32] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:32] (Debug) [RCV] 6312 (GameActionFightLifePointsLostMessage)
+[22:50:32] (Ação) Saddidahkiler: -10PV.
+[22:50:33] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:33] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:33] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:33] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:33] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:33] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:33] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:50:33] (Debug) [SND] 716
+[22:50:34] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:34] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:34] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:34] (Debug) [RCV] 6239 (GameFightNewRoundMessage)
+[22:50:34] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:50:35] (Debug) [RCV] 5921 (GameFightSynchronizeMessage)
+[22:50:35] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:35] (Debug) [RCV] 6465 (GameFightTurnStartPlayingMessage)
+[22:50:35] (Ação) Lancement d'un sort en 206
+[22:50:35] (Debug) [SND] 1005 (GameActionFightCastRequestMessage)
+[22:50:35] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:36] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:36] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:37] (Debug) [RCV] 1010 (GameActionFightSpellCastMessage)
+[22:50:37] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:37] (Debug) [RCV] 6312 (GameActionFightLifePointsLostMessage)
+[22:50:37] (Ação) Kisplash: -14PV.
+[22:50:37] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:37] (Debug) [SND] 957
+[22:50:37] (Ação) Lancement d'un sort en 206
+[22:50:37] (Debug) [SND] 1005 (GameActionFightCastRequestMessage)
+[22:50:38] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:38] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:39] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:39] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:39] (Debug) [RCV] 1010 (GameActionFightSpellCastMessage)
+[22:50:39] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:40] (Debug) [RCV] 6312 (GameActionFightLifePointsLostMessage)
+[22:50:40] (Ação) Kisplash: -14PV.
+[22:50:40] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:40] (Debug) [SND] 957
+[22:50:40] (Debug) [SND] 950 (GameMapMovementRequestMessage)
+[22:50:40] (BlueSheep) EndMove
+[22:50:40] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:40] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:41] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:41] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:42] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:42] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:42] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:42] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:42] (Debug) [SND] 957
+[22:50:42] (Debug) [SND] 718
+[22:50:43] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:43] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:43] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:44] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:44] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:44] (Ação) 
+[22:50:44] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:50:44] (Debug) [SND] 716
+[22:50:45] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:45] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:50:45] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:45] (Debug) [RCV] 1010 (GameActionFightSpellCastMessage)
+[22:50:46] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:46] (Debug) [RCV] 6312 (GameActionFightLifePointsLostMessage)
+[22:50:46] (Ação) Saddidahkiler: -6PV.
+[22:50:46] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:46] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:46] (Debug) [RCV] 951 (GameMapMovementMessage)
+[22:50:46] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:47] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:47] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:47] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:50:47] (Debug) [SND] 716
+[22:50:47] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:47] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:47] (Debug) [RCV] 719 (GameFightTurnEndMessage)
+[22:50:48] (Debug) [RCV] 6239 (GameFightNewRoundMessage)
+[22:50:48] (Debug) [RCV] 714 (GameFightTurnStartMessage)
+[22:50:48] (Debug) [RCV] 5921 (GameFightSynchronizeMessage)
+[22:50:48] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:48] (Debug) [RCV] 6465 (GameFightTurnStartPlayingMessage)
+[22:50:48] (Ação) Lancement d'un sort en 165
+[22:50:48] (Debug) [SND] 1005 (GameActionFightCastRequestMessage)
+[22:50:49] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:49] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:49] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:50] (Debug) [RCV] 1010 (GameActionFightSpellCastMessage)
+[22:50:51] (Debug) [RCV] 1030 (GameActionFightPointsVariationMessage)
+[22:50:51] (Debug) [RCV] 6312 (GameActionFightLifePointsLostMessage)
+[22:50:51] (Ação) Kisplash: -4PV.
+[22:50:51] (Debug) [RCV] 1099 (GameActionFightDeathMessage)
+[22:50:51] (Ação) Kisplash est mort !
+[22:50:51] (Debug) [RCV] 956 (SequenceEndMessage)
+[22:50:51] (Debug) [SND] 957
+[22:50:51] (Debug) [RCV] 715 (GameFightTurnReadyRequestMessage)
+[22:50:51] (Debug) [SND] 716
+[22:50:51] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:52] (Debug) [RCV] 176 (BasicNoOperationMessage)
+[22:50:52] (Debug) [RCV] 6362 (BasicAckMessage)
+[22:50:52] (Debug) [RCV] 3023 (ObjectQuantityMessage)
+[22:50:53] (Debug) [RCV] 3009 (InventoryWeightMessage)
+[22:50:53] (Debug) [RCV] 3025 (ObjectAddedMessage)
+[22:50:53] (Debug) [RCV] 3009 (InventoryWeightMessage)
+[22:50:53] (Debug) [RCV] 3025 (ObjectAddedMessage)
+[22:50:53] (Debug) [RCV] 3009 (InventoryWeightMessage)
+[22:50:53] (Debug) [RCV] 3023 (ObjectQuantityMessage)
+[22:50:53] (Debug) [RCV] 3009 (InventoryWeightMessage)
+[22:50:54] (Debug) [RCV] 3023 (ObjectQuantityMessage)
+[22:50:54] (Debug) [RCV] 3009 (InventoryWeightMessage)
+[22:50:54] (Debug) [RCV] 500 (CharacterStatsListMessage)
+[22:50:54] (Debug) [RCV] 6321 (CharacterExperienceGainMessage)
+[22:50:54] (Ação) Experience gagnée : + 47 points d'expérience
+[22:50:54] (Debug) [RCV] 720 (GameFightEndMessage)
+[22:50:57] (Erro) Error: Receiving
+System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.OverflowException: Valor era muito grande ou muito pequeno para UInt16.
+   em System.Convert.ToUInt16(UInt64 value)
+   em System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   em BlueSheep.Util.IO.BigEndianReader.ReadVar[T]() na E:\Source\Repos\BlueSheep\BlueSheep\Common\IO\BigEndianReader.cs:linha 424
+   em BlueSheep.Util.IO.BigEndianReader.ReadVarUhShort() na E:\Source\Repos\BlueSheep\BlueSheep\Common\IO\BigEndianReader.cs:linha 380
+   em BlueSheep.Protocol.Protocol.Types.Game.Context.Fight.FightLoot.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\FightLoot.cs:linha 86
+   em BlueSheep.Protocol.Protocol.Types.Game.Context.Fight.FightResultListEntry.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\FightResultListEntry.cs:linha 92
+   em BlueSheep.Protocol.Protocol.Types.Game.Context.Fight.FightResultFighterListEntry.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\FightResultFighterListEntry.cs:linha 75
+   em BlueSheep.Protocol.Protocol.Types.Game.Context.Fight.FightResultPlayerListEntry.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Fight\FightResultPlayerListEntry.cs:linha 83
+   em BlueSheep.Protocol.Protocol.Messages.Game.Context.Fight.GameFightEndMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\GameFightEndMessage.cs:linha 149
+   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightEndMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 146
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
+   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
+   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
+   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674

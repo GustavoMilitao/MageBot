@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{08641DD9-BCE0-495C-945F-87CCA26D9927}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataCenter</RootNamespace>
+    <AssemblyName>DataCenter</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataCenter\abuse\AbuseReasons.cs" />
+    <Compile Include="DataCenter\alignments\AlignmentBalance.cs" />
+    <Compile Include="DataCenter\alignments\AlignmentEffect.cs" />
+    <Compile Include="DataCenter\alignments\AlignmentGift.cs" />
+    <Compile Include="DataCenter\alignments\AlignmentOrder.cs" />
+    <Compile Include="DataCenter\alignments\AlignmentRank.cs" />
+    <Compile Include="DataCenter\alignments\AlignmentRankJntGift.cs" />
+    <Compile Include="DataCenter\alignments\AlignmentSide.cs" />
+    <Compile Include="DataCenter\alignments\AlignmentTitle.cs" />
+    <Compile Include="DataCenter\almanax\AlmanaxCalendar.cs" />
+    <Compile Include="DataCenter\ambientSounds\AmbientSound.cs" />
+    <Compile Include="DataCenter\ambientSounds\PlaylistSound.cs" />
+    <Compile Include="DataCenter\AnimFunData.cs" />
+    <Compile Include="DataCenter\AnimFunMonsterData.cs" />
+    <Compile Include="DataCenter\AnimFunNpcData.cs" />
+    <Compile Include="DataCenter\appearance\Appearance.cs" />
+    <Compile Include="DataCenter\appearance\CreatureBoneOverride.cs" />
+    <Compile Include="DataCenter\appearance\CreatureBoneType.cs" />
+    <Compile Include="DataCenter\appearance\Ornament.cs" />
+    <Compile Include="DataCenter\appearance\SkinMapping.cs" />
+    <Compile Include="DataCenter\appearance\SkinPosition.cs" />
+    <Compile Include="DataCenter\appearance\Title.cs" />
+    <Compile Include="DataCenter\appearance\TitleCategory.cs" />
+    <Compile Include="DataCenter\bonus\Bonus.cs" />
+    <Compile Include="DataCenter\bonus\criterion\BonusAreaCriterion.cs" />
+    <Compile Include="DataCenter\bonus\criterion\BonusCriterion.cs" />
+    <Compile Include="DataCenter\bonus\criterion\BonusEquippedItemCriterion.cs" />
+    <Compile Include="DataCenter\bonus\criterion\BonusMonsterCriterion.cs" />
+    <Compile Include="DataCenter\bonus\criterion\BonusMonsterFamilyCriterion.cs" />
+    <Compile Include="DataCenter\bonus\criterion\BonusQuestCategoryCriterion.cs" />
+    <Compile Include="DataCenter\bonus\criterion\BonusSubAreaCriterion.cs" />
+    <Compile Include="DataCenter\bonus\MonsterBonus.cs" />
+    <Compile Include="DataCenter\bonus\MonsterDropChanceBonus.cs" />
+    <Compile Include="DataCenter\bonus\MonsterLightBonus.cs" />
+    <Compile Include="DataCenter\bonus\MonsterStarRateBonus.cs" />
+    <Compile Include="DataCenter\bonus\MonsterXPBonus.cs" />
+    <Compile Include="DataCenter\bonus\MountBonus.cs" />
+    <Compile Include="DataCenter\bonus\QuestBonus.cs" />
+    <Compile Include="DataCenter\bonus\QuestKamasBonus.cs" />
+    <Compile Include="DataCenter\bonus\QuestXPBonus.cs" />
+    <Compile Include="DataCenter\breeds\Breed.cs" />
+    <Compile Include="DataCenter\breeds\BreedRole.cs" />
+    <Compile Include="DataCenter\breeds\BreedRoleByBreed.cs" />
+    <Compile Include="DataCenter\breeds\Head.cs" />
+    <Compile Include="DataCenter\challenges\Challenge.cs" />
+    <Compile Include="DataCenter\characteristics\Characteristic.cs" />
+    <Compile Include="DataCenter\characteristics\CharacteristicCategory.cs" />
+    <Compile Include="DataCenter\communication\CensoredWord.cs" />
+    <Compile Include="DataCenter\communication\ChatChannel.cs" />
+    <Compile Include="DataCenter\communication\Emoticon.cs" />
+    <Compile Include="DataCenter\communication\InfoMessage.cs" />
+    <Compile Include="DataCenter\communication\NamingRule.cs" />
+    <Compile Include="DataCenter\communication\Smiley.cs" />
+    <Compile Include="DataCenter\communication\SmileyCategory.cs" />
+    <Compile Include="DataCenter\communication\SmileyPack.cs" />
+    <Compile Include="DataCenter\dare\DareCriteria.cs" />
+    <Compile Include="DataCenter\documents\Comic.cs" />
+    <Compile Include="DataCenter\documents\Document.cs" />
+    <Compile Include="DataCenter\effects\Effect.cs" />
+    <Compile Include="DataCenter\effects\EffectInstance.cs" />
+    <Compile Include="DataCenter\effects\instances\EffectInstanceCreature.cs" />
+    <Compile Include="DataCenter\effects\instances\EffectInstanceDate.cs" />
+    <Compile Include="DataCenter\effects\instances\EffectInstanceDice.cs" />
+    <Compile Include="DataCenter\effects\instances\EffectInstanceDuration.cs" />
+    <Compile Include="DataCenter\effects\instances\EffectInstanceInteger.cs" />
+    <Compile Include="DataCenter\effects\instances\EffectInstanceLadder.cs" />
+    <Compile Include="DataCenter\effects\instances\EffectInstanceMinMax.cs" />
+    <Compile Include="DataCenter\effects\instances\EffectInstanceMount.cs" />
+    <Compile Include="DataCenter\effects\instances\EffectInstanceString.cs" />
+    <Compile Include="DataCenter\externalnotifications\ExternalNotification.cs" />
+    <Compile Include="DataCenter\guild\EmblemBackground.cs" />
+    <Compile Include="DataCenter\guild\EmblemSymbol.cs" />
+    <Compile Include="DataCenter\guild\EmblemSymbolCategory.cs" />
+    <Compile Include="DataCenter\guild\RankName.cs" />
+    <Compile Include="DataCenter\houses\HavenbagFurniture.cs" />
+    <Compile Include="DataCenter\houses\HavenbagTheme.cs" />
+    <Compile Include="DataCenter\houses\House.cs" />
+    <Compile Include="DataCenter\IData.cs" />
+    <Compile Include="DataCenter\idols\Idol.cs" />
+    <Compile Include="DataCenter\idols\IdolsPresetIcon.cs" />
+    <Compile Include="DataCenter\interactives\Interactive.cs" />
+    <Compile Include="DataCenter\interactives\SkillName.cs" />
+    <Compile Include="DataCenter\interactives\StealthBones.cs" />
+    <Compile Include="DataCenter\items\criterion\AccountRightsItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\AchievementItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\AlignmentItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\AlignmentLevelItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\AllianceAvAItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\AllianceItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\AllianceRightsItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\AreaItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\ArenaDuelRankCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\ArenaMaxDuelRankCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\ArenaMaxSoloRankCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\ArenaMaxTeamRankCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\ArenaSoloRankCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\ArenaTeamRankCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\BonesItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\BonusSetItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\BreedItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\CommunityItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\DayItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\EmoteItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\FriendlistItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\GiftItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\GroupItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\GuildItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\GuildLevelItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\GuildRightsItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\ItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\ItemCriterionFactory.cs" />
+    <Compile Include="DataCenter\items\criterion\ItemCriterionOperator.cs" />
+    <Compile Include="DataCenter\items\criterion\JobItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\KamaItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\LevelItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\MapCharactersItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\MariedItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\MaxRankCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\MonthItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\MountFamilyItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\NameItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\ObjectItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\PremiumAccountItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\PrestigeLevelItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\PVPRankItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\QuestItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\RankCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\RideItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\ServerItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\SexItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\SkillItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\SmileyPackItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\SoulStoneItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\SpecializationItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\SpellItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\StaticCriterionItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\SubareaItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\SubscribeItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\SubscriptionDurationItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\UnusableItemCriterion.cs" />
+    <Compile Include="DataCenter\items\criterion\WeightItemCriterion.cs" />
+    <Compile Include="DataCenter\items\Incarnation.cs" />
+    <Compile Include="DataCenter\items\IncarnationLevel.cs" />
+    <Compile Include="DataCenter\items\Item.cs" />
+    <Compile Include="DataCenter\items\ItemSet.cs" />
+    <Compile Include="DataCenter\items\ItemType.cs" />
+    <Compile Include="DataCenter\items\PresetIcon.cs" />
+    <Compile Include="DataCenter\items\VeteranReward.cs" />
+    <Compile Include="DataCenter\items\Weapon.cs" />
+    <Compile Include="DataCenter\jobs\Job.cs" />
+    <Compile Include="DataCenter\jobs\Recipe.cs" />
+    <Compile Include="DataCenter\jobs\Skill.cs" />
+    <Compile Include="DataCenter\livingObjects\LivingObjectSkinJntMood.cs" />
+    <Compile Include="DataCenter\livingObjects\Pet.cs" />
+    <Compile Include="DataCenter\livingObjects\SpeakingItemsTrigger.cs" />
+    <Compile Include="DataCenter\livingObjects\SpeakingItemText.cs" />
+    <Compile Include="DataCenter\misc\ActionDescription.cs" />
+    <Compile Include="DataCenter\misc\CensoredContent.cs" />
+    <Compile Include="DataCenter\misc\Month.cs" />
+    <Compile Include="DataCenter\misc\OptionalFeature.cs" />
+    <Compile Include="DataCenter\misc\Pack.cs" />
+    <Compile Include="DataCenter\misc\Tips.cs" />
+    <Compile Include="DataCenter\misc\TypeAction.cs" />
+    <Compile Include="DataCenter\misc\Url.cs" />
+    <Compile Include="DataCenter\monsters\Companion.cs" />
+    <Compile Include="DataCenter\monsters\CompanionCharacteristic.cs" />
+    <Compile Include="DataCenter\monsters\CompanionSpell.cs" />
+    <Compile Include="DataCenter\monsters\Monster.cs" />
+    <Compile Include="DataCenter\monsters\MonsterDrop.cs" />
+    <Compile Include="DataCenter\monsters\MonsterGrade.cs" />
+    <Compile Include="DataCenter\monsters\MonsterMiniBoss.cs" />
+    <Compile Include="DataCenter\monsters\MonsterRace.cs" />
+    <Compile Include="DataCenter\monsters\MonsterSuperRace.cs" />
+    <Compile Include="DataCenter\mounts\Mount.cs" />
+    <Compile Include="DataCenter\mounts\MountBehavior.cs" />
+    <Compile Include="DataCenter\mounts\MountBone.cs" />
+    <Compile Include="DataCenter\mounts\MountFamily.cs" />
+    <Compile Include="DataCenter\mounts\RideFood.cs" />
+    <Compile Include="DataCenter\notifications\Notification.cs" />
+    <Compile Include="DataCenter\npcs\Npc.cs" />
+    <Compile Include="DataCenter\npcs\NpcAction.cs" />
+    <Compile Include="DataCenter\npcs\NpcMessage.cs" />
+    <Compile Include="DataCenter\npcs\TaxCollectorFirstname.cs" />
+    <Compile Include="DataCenter\npcs\TaxCollectorName.cs" />
+    <Compile Include="DataCenter\playlists\Playlist.cs" />
+    <Compile Include="DataCenter\quest\Achievement.cs" />
+    <Compile Include="DataCenter\quest\AchievementCategory.cs" />
+    <Compile Include="DataCenter\quest\AchievementObjective.cs" />
+    <Compile Include="DataCenter\quest\AchievementReward.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveBringItemToNpc.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveBringSoulToNpc.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveCraftItem.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveDiscoverMap.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveDiscoverSubArea.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveDuelSpecificPlayer.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveFightMonster.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveFightMonstersOnMap.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveFreeForm.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveGoToNpc.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveMultiFightMonster.cs" />
+    <Compile Include="DataCenter\quest\objectives\QuestObjectiveParameters.cs" />
+    <Compile Include="DataCenter\quest\Quest.cs" />
+    <Compile Include="DataCenter\quest\QuestCategory.cs" />
+    <Compile Include="DataCenter\quest\QuestObjective.cs" />
+    <Compile Include="DataCenter\quest\QuestObjectiveType.cs" />
+    <Compile Include="DataCenter\quest\QuestStep.cs" />
+    <Compile Include="DataCenter\quest\QuestStepRewards.cs" />
+    <Compile Include="DataCenter\quest\treasureHunt\LegendaryTreasureHunt.cs" />
+    <Compile Include="DataCenter\quest\treasureHunt\PointOfInterest.cs" />
+    <Compile Include="DataCenter\quest\treasureHunt\PointOfInterestCategory.cs" />
+    <Compile Include="DataCenter\servers\Server.cs" />
+    <Compile Include="DataCenter\servers\ServerCommunity.cs" />
+    <Compile Include="DataCenter\servers\ServerGameType.cs" />
+    <Compile Include="DataCenter\servers\ServerLang.cs" />
+    <Compile Include="DataCenter\servers\ServerPopulation.cs" />
+    <Compile Include="DataCenter\sounds\SoundAnimation.cs" />
+    <Compile Include="DataCenter\sounds\SoundBones.cs" />
+    <Compile Include="DataCenter\sounds\SoundUi.cs" />
+    <Compile Include="DataCenter\sounds\SoundUiElement.cs" />
+    <Compile Include="DataCenter\sounds\SoundUiHook.cs" />
+    <Compile Include="DataCenter\spells\FinishMove.cs" />
+    <Compile Include="DataCenter\spells\Spell.cs" />
+    <Compile Include="DataCenter\spells\SpellBomb.cs" />
+    <Compile Include="DataCenter\spells\SpellLevel.cs" />
+    <Compile Include="DataCenter\spells\SpellPair.cs" />
+    <Compile Include="DataCenter\spells\SpellState.cs" />
+    <Compile Include="DataCenter\spells\SpellType.cs" />
+    <Compile Include="DataCenter\TransformData.cs" />
+    <Compile Include="DataCenter\world\Area.cs" />
+    <Compile Include="DataCenter\world\Dungeon.cs" />
+    <Compile Include="DataCenter\world\Hint.cs" />
+    <Compile Include="DataCenter\world\HintCategory.cs" />
+    <Compile Include="DataCenter\world\MapCoordinates.cs" />
+    <Compile Include="DataCenter\world\MapPosition.cs" />
+    <Compile Include="DataCenter\world\MapReference.cs" />
+    <Compile Include="DataCenter\world\MapScrollAction.cs" />
+    <Compile Include="DataCenter\world\Phoenix.cs" />
+    <Compile Include="DataCenter\world\SubArea.cs" />
+    <Compile Include="DataCenter\world\SuperArea.cs" />
+    <Compile Include="DataCenter\world\Waypoint.cs" />
+    <Compile Include="DataCenter\world\WorldMap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -2,7 +2,7 @@
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Data.D2p;
 using BlueSheep.Engine.Constants;
-using BlueSheep.Properties.I18n.Strings;
+using BlueSheep.Util.I18n.Strings;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

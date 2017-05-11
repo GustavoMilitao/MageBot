@@ -34,7 +34,7 @@ using BlueSheep.Common.Protocol.Types.Game.Character.Characteristic;
 using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
 using BlueSheep.Common.Protocol.Messages.Game.Inventory.Exchanges;
 using BlueSheep.Common.Protocol.Messages.Game.Dialog;
-using BlueSheep.Properties.I18n.Strings;
+using BlueSheep.Util.I18n.Strings;
 
 namespace BlueSheep.Interface
 {
@@ -60,7 +60,7 @@ namespace BlueSheep.Interface
         public Map Map;
         public MapData MapData;
         public Inventory Inventory;
-        public List<Spell> Spells;
+        public List<BSpell> Spells;
         public PathManager Path;
         public Group MyGroup;
         public int MyGroupId;

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using BlueSheep.Common.Types;
 using BlueSheep.AccountsManager;
 using System.Diagnostics;
-using BlueSheep.Properties.I18n.Strings;
+using BlueSheep.Util.I18n.Strings;
 
 namespace BlueSheep.Interface
 {

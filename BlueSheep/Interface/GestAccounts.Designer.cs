@@ -1,4 +1,4 @@
-﻿using BlueSheep.Properties.I18n.Strings;
+﻿using BlueSheep.Util.I18n.Strings;
 
 namespace BlueSheep.Interface
  {
@@ -70,7 +70,7 @@ namespace BlueSheep.Interface
             this.LaunchPage.Padding = new System.Windows.Forms.Padding(3);
             this.LaunchPage.Size = new System.Drawing.Size(268, 207);
             this.LaunchPage.TabIndex = 0;
-            this.LaunchPage.Text = global::BlueSheep.Properties.I18n.Strings.Strings.Launch;
+            this.LaunchPage.Text = global::BlueSheep.Util.I18n.Strings.Strings.Launch;
             // 
             // IsMITM
             // 
@@ -134,7 +134,7 @@ namespace BlueSheep.Interface
             this.AddPage.Padding = new System.Windows.Forms.Padding(3);
             this.AddPage.Size = new System.Drawing.Size(268, 207);
             this.AddPage.TabIndex = 1;
-            this.AddPage.Text = global::BlueSheep.Properties.I18n.Strings.Strings.Add;
+            this.AddPage.Text = global::BlueSheep.Util.I18n.Strings.Strings.Add;
             // 
             // sadikLabel2
             // 
@@ -191,7 +191,7 @@ namespace BlueSheep.Interface
             this.textBoxAccountName.Name = "textBoxAccountName";
             this.textBoxAccountName.Size = new System.Drawing.Size(137, 20);
             this.textBoxAccountName.TabIndex = 14;
-            this.textBoxAccountName.Text = typeof(BlueSheep.Properties.I18n.Strings.Strings).Name;
+            this.textBoxAccountName.Text = typeof(BlueSheep.Util.I18n.Strings.Strings).Name;
             this.textBoxAccountName.GotFocus += new System.EventHandler(this.textBoxAccountName_GotFocus);
             this.textBoxAccountName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxAccountName_Enter);
             this.textBoxAccountName.LostFocus += new System.EventHandler(this.textBoxAccountName_LostFocus);

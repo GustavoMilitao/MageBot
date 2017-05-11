@@ -1,4 +1,4 @@
-﻿using BlueSheep.Properties.I18n.Strings;
+﻿using BlueSheep.Util.I18n.Strings;
 
 namespace BlueSheep.Interface
 {

@@ -1,6 +1,6 @@
 ﻿using BlueSheep.Core.Fight;
 using BlueSheep.Util.Text.Log;
-using BlueSheep.Properties.I18n.Strings;
+using BlueSheep.Util.I18n.Strings;
 using System;
 using System.IO;
 using System.Linq;
