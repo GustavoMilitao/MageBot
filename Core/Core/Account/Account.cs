@@ -124,6 +124,8 @@ namespace BlueSheep.Core.Account
             InformationQueue = new Queue<Tuple<TextInformation, int>>();
             Config.MonsterRestrictions = new List<MonsterRestrictions>();
 
+
+
             ////Heroic mode
             //HeroicUC = new HeroicUC(this);
             //FloodPage.TabPages[3].Controls.Add(HeroicUC);

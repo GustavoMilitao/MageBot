@@ -44,12 +44,12 @@ namespace BlueSheep.Core.Inventory
         {
             get
             {
-                    Item weapon = Items.FirstOrDefault(i => i.Position == (int)InventoryPositionEnum.Weapon);
-                    if (weapon == null)
-                        return false;
+                Item weapon = Items.FirstOrDefault(i => i.Position == (int)InventoryPositionEnum.Weapon);
+                if (weapon == null)
+                    return false;
 
-                    DataClass fishingRod = GameData.GetDataObject(D2oFileEnum.Items, weapon.GID);
-                    return (int)fishingRod.Fields["typeId"] == 20  && (int)fishingRod.Fields["useAnimationId"] == 18 ? true : false;
+                DataClass fishingRod = GameData.GetDataObject(D2oFileEnum.Items, weapon.GID);
+                return (int)fishingRod.Fields["typeId"] == 20 && (int)fishingRod.Fields["useAnimationId"] == 18 ? true : false;
             }
         }
 
@@ -58,7 +58,7 @@ namespace BlueSheep.Core.Inventory
             get
             {
                 Item weapon = Items.FirstOrDefault(i => i.Position == (int)InventoryPositionEnum.Weapon);
-                return weapon != null ? (int)GameData.GetDataObject(D2oFileEnum.Items,weapon.GID).Fields["range"] : 1;
+                return weapon != null ? (int)GameData.GetDataObject(D2oFileEnum.Items, weapon.GID).Fields["range"] : 1;
             }
         }
 
@@ -79,7 +79,7 @@ namespace BlueSheep.Core.Inventory
                 Account.SocketManager.Send(msg);
                 Account.Log(new ActionTextInformation("Suppression de " + GetItemFromUID(uid).Name + "(x" + quantity + ")."), 2);
             }
-            
+
         }
 
         public void SendItemToShop(int uid, int quantity, int price)
@@ -101,9 +101,9 @@ namespace BlueSheep.Core.Inventory
         {
             if (ItemExists(uid) && ItemQuantity(uid) > 0)
             {
-                    ObjectDropMessage msg = new ObjectDropMessage((uint)uid, (uint)quantity);
-                    Account.SocketManager.Send(msg);
-                    Account.Log(new ActionTextInformation("Jet de " + GetItemFromUID(uid).Name + "(x" + quantity + ")."), 2);               
+                ObjectDropMessage msg = new ObjectDropMessage((uint)uid, (uint)quantity);
+                Account.SocketManager.Send(msg);
+                Account.Log(new ActionTextInformation("Jet de " + GetItemFromUID(uid).Name + "(x" + quantity + ")."), 2);
             }
         }
 
@@ -125,7 +125,7 @@ namespace BlueSheep.Core.Inventory
 
         public Item GetItemFromGID(int gid)
         {
-                return Items.FirstOrDefault(i => i.GID == gid);
+            return Items.FirstOrDefault(i => i.GID == gid);
         }
 
         public Item GetItemFromUID(int uid)
@@ -166,7 +166,7 @@ namespace BlueSheep.Core.Inventory
                 Account.SocketManager.Send(msg);
                 Account.Log(new BotTextInformation("Trajet : Tous les objets pris du coffre."), 3);
             }
-            Account.Npc.CloseDialog();   
+            Account.Npc.CloseDialog();
         }
 
         public void ExchangeReady()
@@ -177,7 +177,7 @@ namespace BlueSheep.Core.Inventory
 
         public void RequestExchange(string name)
         {
-            ulong targetId = (ulong)Account.MapData.Players.Find(p=> p.Name == name).ContextualId;
+            ulong targetId = (ulong)Account.MapData.Players.Find(p => p.Name == name).ContextualId;
             if (targetId != 0)
             {
                 Account.SocketManager.Send(new ExchangePlayerRequestMessage(1, targetId));
@@ -194,17 +194,17 @@ namespace BlueSheep.Core.Inventory
             Account.SocketManager.Send(new ExchangeAcceptMessage());
             Account.Log(new ActionTextInformation("Echange accepté"), 5);
         }
-#endregion
+        #endregion
 
         #region Private Methods 
-        private bool ItemExists(int uid)
+        public bool ItemExists(int uid)
         {
-                return Items.FirstOrDefault(i => i.UID == uid) != null ? true : false;
+            return Items.FirstOrDefault(i => i.UID == uid) != null ? true : false;
         }
 
         private int ItemQuantity(int uid)
         {
-                return Items.FirstOrDefault(i => i.UID == uid) != null ? Items.First(i => i.UID == uid).Quantity : 0;
+            return Items.FirstOrDefault(i => i.UID == uid) != null ? Items.First(i => i.UID == uid).Quantity : 0;
         }
 
         private int GetPosition(string TypeName)
@@ -237,7 +237,7 @@ namespace BlueSheep.Core.Inventory
                 case "Pioche":
                     return (int)InventoryPositionEnum.Weapon;
                 case "Bouclier":
-                    return (int)InventoryPositionEnum.Shield;         
+                    return (int)InventoryPositionEnum.Shield;
                 default:
                     return 0;
             }

@@ -144,12 +144,6 @@
     <Compile Include="Interface\AccountFrm.Designer.cs">
       <DependentUpon>AccountFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface\UCs\AccountUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interface\UCs\AccountUC.Designer.cs">
-      <DependentUpon>AccountUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Interface\DofusPathForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,29 +174,11 @@
     <Compile Include="Interface\IAChoice.Designer.cs">
       <DependentUpon>IAChoice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface\UCs\CaracUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interface\UCs\CaracUC.Designer.cs">
-      <DependentUpon>CaracUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\UCs\FloodUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interface\UCs\FloodUC.Designer.cs">
-      <DependentUpon>FloodUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Interface\UCs\GestItemsUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Interface\UCs\GestItemsUC.Designer.cs">
       <DependentUpon>GestItemsUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\UCs\JobUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interface\UCs\JobUC.Designer.cs">
-      <DependentUpon>JobUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Interface\LoginForm.cs">
       <SubType>Form</SubType>
@@ -223,15 +199,6 @@
       <DependentUpon>PathChoiceForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Interface\Theme.cs" />
-    <Compile Include="Interface\UCs\HeroicUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interface\UCs\RegenUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interface\UCs\RegenUC.Designer.cs">
-      <DependentUpon>RegenUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ExceptionHandler\ExceptionDialog.resx">
@@ -239,9 +206,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\AccountFrm.resx">
       <DependentUpon>AccountFrm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\UCs\AccountUC.resx">
-      <DependentUpon>AccountUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\DofusPathForm.resx">
       <DependentUpon>DofusPathForm.cs</DependentUpon>
@@ -258,17 +222,8 @@
     <EmbeddedResource Include="Interface\IAChoice.resx">
       <DependentUpon>IAChoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interface\UCs\CaracUC.resx">
-      <DependentUpon>CaracUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\UCs\FloodUC.resx">
-      <DependentUpon>FloodUC.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Interface\UCs\GestItemsUC.resx">
       <DependentUpon>GestItemsUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\UCs\JobUC.resx">
-      <DependentUpon>JobUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -278,12 +233,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\PathChoiceForm.resx">
       <DependentUpon>PathChoiceForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\UCs\HeroicUC.resx">
-      <DependentUpon>HeroicUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\UCs\RegenUC.resx">
-      <DependentUpon>RegenUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="New Interface\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

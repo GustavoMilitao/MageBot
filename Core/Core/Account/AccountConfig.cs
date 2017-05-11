@@ -2,6 +2,7 @@
 using BlueSheep.Core.Misc;
 using BlueSheep.Core.Path;
 using BlueSheep.Engine.Types;
+using Core.Core.Regen;
 using System;
 using System.Collections.Generic;
 
@@ -11,6 +12,7 @@ namespace BlueSheep.Core.Account
     public class AccountConfig
     {
         #region General
+        public Account Account { get; set; }
         public int VerboseLevel;
         public bool IsMaster { get; set; }
         public bool IsSlave { get; set; }
@@ -40,8 +42,7 @@ namespace BlueSheep.Core.Account
         #endregion
 
         #region Fight
-        //public int RegenChoiceValue { get; set; }
-        //TODO Militão: Put it on Regen Module
+        public Regen RegenConfig { get; set; }
         public int MinMonstersNumber { get; set; }
         public int MaxMonstersNumber { get; set; }
         public int MinMonstersLevel { get; set; }
@@ -55,6 +56,15 @@ namespace BlueSheep.Core.Account
         public ulong MaxPriceHouse { get; set; }
         public string HouseSearcherLogPath { get; set; }
         #endregion
+
+        public AccountConfig(Account account)
+        {
+            Account = account;
+            ConfigRecover = new ConfigManager(account);
+            Flood = new Flood(account);
+            RegenConfig = new Regen(account);
+            MonsterRestrictions = new List<Fight.MonsterRestrictions>();
+        }
 
         public AccountConfig()
         { }

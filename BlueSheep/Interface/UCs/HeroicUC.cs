@@ -7,6 +7,7 @@
     using System;
     using System.ComponentModel;
     using System.Windows.Forms;
+    using Util.Util.Enums.Internal;
 
     public class HeroicUC : MetroFramework.Controls.MetroUserControl
     {
@@ -147,11 +148,6 @@
             return flag;
         }
 
-        //public bool GoAnalyser(int id)
-        //{
-        //    return ((!this.SubAreaId.Contains<int>(id) && (this.account.Game.Map.Id != 0x24138)) && (this.account.Game.Map.Id != 0x23423));
-        //}
-
         private bool IsGoingToRun(GameRolePlayCharacterInformations infoCharacter)
         {
             if (!sadikCheckbox2.Checked)
@@ -170,17 +166,17 @@
             return flag;
         }
 
-        private int SwitchUid(string nameItem)
+        private int SwitchUid(PotionEnum potionEnum)
         {
-            switch (nameItem)
+            switch (potionEnum)
             {
-                case "Potion de Rappel":
+                case PotionEnum.MemoryPotion:
                     return account.Inventory.GetItemFromGID(0x224).UID;
 
-                case "Potion de cité :  Bonta":
+                case PotionEnum.BontaPotion:
                     return account.Inventory.GetItemFromGID(0x1b35).UID;
 
-                case "Potion de cité:  Brâkmar":
+                case PotionEnum.BrakmarPotion:
                     return account.Inventory.GetItemFromGID(0x1b34).UID;
             }
             return 0;

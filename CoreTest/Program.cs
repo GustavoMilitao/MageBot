@@ -20,6 +20,7 @@ namespace CoreTest
         {
             CheckBlueSheepDatas();
             Account conta = new Account("kaiodotapro", "cefet123");
+            conta.Config.DebugMode = true;
             conta.Connect();
             GetMessageLogFromAccountQueue(conta);
         }
@@ -39,7 +40,20 @@ namespace CoreTest
                     text = queueItem.Item1;
                     verboseLevel = queueItem.Item2;
 
-                    Console.WriteLine(text.Text);
+                    text.Text = Translate.GetTranslation(text.Text);
+                    text.Text = "[" + DateTime.Now.ToLongTimeString() +
+                        "] (" + text.Category + ") " + text.Text;
+                    if (text is DebugTextInformation)
+                    {
+                        if(conta.Config.DebugMode)
+                        {
+                            Console.WriteLine(text.Text);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine(text.Text);
+                    }
                 }
             }
         }

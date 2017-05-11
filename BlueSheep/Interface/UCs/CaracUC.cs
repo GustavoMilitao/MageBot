@@ -80,11 +80,6 @@ namespace BlueSheep.Interface.UCs
                 
 
         }
-
-        public void DecreaseAvailablePoints(int n)
-        {
-            AvailabPtLb.Text = Convert.ToString(Convert.ToInt32(AvailabPtLb.Text) - n);
-        }
         #endregion
 
         #region Interface Methods
@@ -137,7 +132,7 @@ namespace BlueSheep.Interface.UCs
             switch (statId)
             {
                 case 10:
-                    ArrayList o =(ArrayList)d.Fields["statsPointsForStrength"];
+                    ArrayList o = (ArrayList)d.Fields["statsPointsForStrength"];
                     break;
                 case 11:
                     break;

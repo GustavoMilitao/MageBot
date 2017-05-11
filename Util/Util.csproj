@@ -47,6 +47,7 @@
     <Compile Include="Util\Cryptography\CryptageBS.cs" />
     <Compile Include="Util\Enums\EnumHelper\EnumHelper.cs" />
     <Compile Include="Util\Enums\Internal\Operator.cs" />
+    <Compile Include="Util\Enums\Internal\PotionEnum.cs" />
     <Compile Include="Util\Enums\Internal\RestrictionLevel.cs" />
     <Compile Include="Util\Enums\Internal\Status.cs" />
     <Compile Include="Util\I18n\Strings\Strings.Designer.cs">

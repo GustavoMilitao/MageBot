@@ -47,6 +47,37 @@ namespace BlueSheep.Core.Misc
             t.Start();
         }
 
+        public void StartPrivateFloodOrInfoFromListTo(List<GameRolePlayCharacterInformations> listaPlayers, string To = "")
+        {
+            foreach (var elem in listaPlayers)
+            {
+                try
+                {
+                    long level = (long)Math.Abs((elem.AlignmentInfos.CharacterPower - elem.ContextualId));
+                    FloodContent = FloodContent.Replace("%name%", elem.Name).Replace("%level%", level.ToString());
+                    if (String.IsNullOrEmpty(To))
+                    {
+                        SendPrivateTo(elem.Name, FloodContent);
+                    }
+                    else
+                    {
+                        SendPrivateTo(To, FloodContent);
+                    }
+                }
+                catch (Exception)
+                {
+                    if (String.IsNullOrEmpty(To))
+                    {
+                        account.Log(new ErrorTextInformation("Impossible to send flood to : " + elem.Name), 3);
+                    }
+                    else
+                    {
+                        account.Log(new ErrorTextInformation("Impossible to send informations of : " + elem.Name+" to "+To), 3);
+                    }
+                }
+            }
+        }
+
         public void SendMessage(int channel, string content)
         {
             using (BigEndianWriter writer = new BigEndianWriter())
