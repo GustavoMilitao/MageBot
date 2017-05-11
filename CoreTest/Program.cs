@@ -1,6 +1,7 @@
 ﻿using BlueSheep.Common.Data;
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Core.Account;
+using BlueSheep.Core.Fight;
 using BlueSheep.Data.D2p;
 using BlueSheep.Engine.Constants;
 using BlueSheep.Util.Text.Log;
@@ -25,7 +26,12 @@ namespace CoreTest
             t.Start();
             conta.Connect();
             conta.Config.FightParser = new BlueSheep.Core.Fight.FightParser(conta, @"C:\Users\Sara\AppData\Roaming\BlueSheep\IAs\IATest.txt", "IA Teste");
+            conta.Fight = new BFight(conta, conta.Config.FightParser, conta.FightData);
             Console.ReadKey();
+            conta.Config.MinMonstersLevel = 0;
+            conta.Config.MaxMonstersLevel = 1000;
+            conta.Config.MinMonstersNumber = 0;
+            conta.Config.MaxMonstersNumber = 8;
             conta.Fight.SearchFight();
             Console.ReadKey();
         }
