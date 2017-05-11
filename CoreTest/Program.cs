@@ -21,8 +21,13 @@ namespace CoreTest
             CheckBlueSheepDatas();
             Account conta = new Account("kaiodotapro", "cefet123");
             conta.Config.DebugMode = true;
+            Thread t = new Thread(() => GetMessageLogFromAccountQueue(conta));
+            t.Start();
             conta.Connect();
-            GetMessageLogFromAccountQueue(conta);
+            conta.Config.FightParser = new BlueSheep.Core.Fight.FightParser(conta, @"C:\Users\Sara\AppData\Roaming\BlueSheep\IAs\IATest.txt", "IA Teste");
+            Console.ReadKey();
+            conta.Fight.SearchFight();
+            Console.ReadKey();
         }
 
 
