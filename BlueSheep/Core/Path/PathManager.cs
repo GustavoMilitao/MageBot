@@ -193,13 +193,6 @@ namespace BlueSheep.Core.Path
                     continue;
                 }
 
-                if (((line.Contains(Account.MapData.Pos + ":") && CheckMinusNumber(line)) || line.Contains(Account.MapData.Id.ToString() + ":")) && CheckConditions(false))
-                {
-                    Current_Map = Account.MapData.Pos;
-                    AnalyseLine(line);
-                    return;
-                }
-
                 if (flags.Any(flag => line.Contains(flag)))
                 {
                     flag = flags.ElementAt(flags.IndexOf(line));
@@ -213,7 +206,14 @@ namespace BlueSheep.Core.Path
                     continue;
                 }
 
-                
+                if (CheckConditions(false))
+                {
+                    Current_Map = Account.MapData.Pos;
+                    AnalyseLine(line);
+                    return;
+                }
+
+
             }
             Lost();
         }
