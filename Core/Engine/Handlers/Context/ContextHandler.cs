@@ -26,6 +26,7 @@ using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace BlueSheep.Engine.Handlers.Context
 {
@@ -42,8 +43,7 @@ namespace BlueSheep.Engine.Handlers.Context
         public static void MapComplementaryInformationsDataMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             MapComplementaryInformationsDataMessage msg = (MapComplementaryInformationsDataMessage)message;
-            //account.HeroicUC.AnalysePacket(message, packetDatas);
-            // TODO Militão: Add Heroic module to account
+            account.Config.HeroicConfig.AnalysePacket(message, packetDatas);
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
                 msg.Deserialize(reader);
@@ -98,18 +98,6 @@ namespace BlueSheep.Engine.Handlers.Context
         [MessageHandler(typeof(GameContextCreateMessage))]
         public static void GameContextCreateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
-            //QuestListRequestMessage questListRequestMessage = new QuestListRequestMessage();
-
-            //using (BigEndianWriter writer = new BigEndianWriter())
-            //{
-            //    questListRequestMessage.Serialize(writer);
-
-            //    MessagePackaging messagePackaging = new MessagePackaging(writer);
-
-            //    messagePackaging.Pack((int)questListRequestMessage.ProtocolID);
-
-            //    account.SocketManager.Send(messagePackaging.Writer.Content);
-            //}
         }
 
         [MessageHandler(typeof(QuestListMessage))]
@@ -462,8 +450,7 @@ namespace BlueSheep.Engine.Handlers.Context
         public static void GameRolePlayShowActorMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             GameRolePlayShowActorMessage msg = (GameRolePlayShowActorMessage)message;
-            //account.HeroicUC.AnalysePacket(msg, packetDatas);
-            // TODO Militão: Add Heroic module to account
+            account.Config.HeroicConfig.AnalysePacket(msg, packetDatas);
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
                 msg.Deserialize(reader);
@@ -492,13 +479,13 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            //if (account.Path != null && account.Inventory != null)
-            //{
-            //    List<int> items = account.GestItemsUC.GetItemsToTransfer();
-            //    account.Inventory.TransferItems(items);
-            //    account.Inventory.GetItems(account.GestItemsUC.GetItemsToGetFromBank());
-            //}
-            // TODO Militão: Add Items module
+            if (account.Config.Path != null && account.Inventory != null)
+            {
+                List<int> items = account.Inventory.GetItemsToTransfer();
+                account.Inventory.TransferItems(items);
+                account.Inventory.GetItems(account.Inventory.ItemsToGetFromBank.Select(item => item.UID).ToList());
+            }
+            // Get and put items from/to bank
         }
 
         [MessageHandler(typeof(DisplayNumericalValuePaddockMessage))]
@@ -601,12 +588,11 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            //if (account.GestItemsUC.ListenerBox.Checked)
-            //    return;
-            //List<int> items = account.GestItemsUC.GetItemsToTransfer();
-            //account.Inventory.TransferItems(items);
-            // TODO Militão: Add Items module
-            await account.PutTaskDelay(3000);
+            if (!account.Inventory.ListeningToExchange)
+                return;
+            List<int> items = account.Inventory.GetItemsToTransfer();
+            account.Inventory.TransferItems(items);
+           await account.PutTaskDelay(3000);
             account.Inventory.ExchangeReady();
         }
 
@@ -619,9 +605,8 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            //if (account.GestItemsUC.ListenerBox.Checked)
-            //    account.Inventory.AcceptExchange();
-            // TODO Militão: Add Items module
+            if (account.Inventory.ListeningToExchange)
+                account.Inventory.AcceptExchange();
         }
 
         [MessageHandler(typeof(ExchangeIsReadyMessage))]
@@ -633,9 +618,8 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            //if (msg.Ready && account.GestItemsUC.ListenerBox.Checked)
-            //    account.Inventory.ExchangeReady();
-            // TODO Militão: Add Items module
+            if (msg.Ready && account.Inventory.ListeningToExchange)
+                account.Inventory.ExchangeReady();
         }
 
 

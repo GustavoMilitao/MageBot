@@ -52,7 +52,7 @@
     <Compile Include="Core\Account\ConfigManager.cs" />
     <Compile Include="Core\Base\BEntity.cs" />
     <Compile Include="Core\Bypass\HumanCheck.cs" />
-    <Compile Include="Core\Character.cs" />
+    <Compile Include="Core\Char\Character.cs" />
     <Compile Include="Core\Connection\IdentificationFailureReason.cs" />
     <Compile Include="Core\Connection\ServerStatus.cs" />
     <Compile Include="Core\Fight\BFight.cs" />

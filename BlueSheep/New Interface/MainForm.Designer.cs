@@ -1,6 +1,6 @@
 ﻿namespace BlueSheep.New_Interface
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,55 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.AccountsBt = new System.Windows.Forms.ToolStripButton();
+            this.GroupsBt = new System.Windows.Forms.ToolStripButton();
+            this.LanguageChoice = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripSeparator1,
-            this.toolStripButton2,
-            this.toolStripComboBox1});
+            this.AccountsBt,
+            this.GroupsBt,
+            this.LanguageChoice});
             this.toolStrip1.Location = new System.Drawing.Point(20, 60);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(984, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // AccountsBt
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.AccountsBt.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AccountsBt.Image = global::BlueSheep.Resources.account;
+            this.AccountsBt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AccountsBt.Name = "AccountsBt";
+            this.AccountsBt.Size = new System.Drawing.Size(23, 22);
+            this.AccountsBt.Text = "toolStripButton1";
             // 
-            // toolStripSeparator1
+            // GroupsBt
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.GroupsBt.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.GroupsBt.Image = global::BlueSheep.Resources.group;
+            this.GroupsBt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.GroupsBt.Name = "GroupsBt";
+            this.GroupsBt.Size = new System.Drawing.Size(23, 22);
+            this.GroupsBt.Text = "toolStripButton2";
             // 
-            // toolStripButton2
+            // LanguageChoice
             // 
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.LanguageChoice.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.LanguageChoice.Name = "LanguageChoice";
+            this.LanguageChoice.Size = new System.Drawing.Size(121, 25);
+            this.LanguageChoice.TextChanged += new System.EventHandler(this.toolStripComboBox1_TextChanged);
             // 
-            // toolStripComboBox1
-            // 
-            this.toolStripComboBox1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -84,7 +81,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "BlueSheep 2.0";
             this.TransparencyKey = System.Drawing.Color.Empty;
             this.toolStrip1.ResumeLayout(false);
@@ -97,9 +94,8 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripButton AccountsBt;
+        private System.Windows.Forms.ToolStripButton GroupsBt;
+        private System.Windows.Forms.ToolStripComboBox LanguageChoice;
     }
 }

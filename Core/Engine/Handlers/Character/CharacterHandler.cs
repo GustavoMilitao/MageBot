@@ -37,7 +37,7 @@ namespace BlueSheep.Engine.Handlers.Character
             }
 
             account.CharacterBaseInformations = charactersListMessage.Characters[0];
-        
+
             //MainForm.ActualMainForm.ActualizeAccountInformations();
 
             if (!account.Config.IsMITM)
@@ -45,7 +45,7 @@ namespace BlueSheep.Engine.Handlers.Character
                 CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage((ulong)account.CharacterBaseInformations.ObjectID);
                 account.SocketManager.Send(characterSelectionMessage);
             }
-            
+
         }
 
         [MessageHandler(typeof(CharacterSelectedSuccessMessage))]
@@ -60,18 +60,18 @@ namespace BlueSheep.Engine.Handlers.Character
 
             account.CharacterBaseInformations = characterSelectedSuccessMessage.Infos;
 
-            account.Log(new BotTextInformation(account.CharacterBaseInformations.Name + " de niveau "+ account.CharacterBaseInformations.Level + " est connecté."),1);
-            account.Log(new BotTextInformation("Breed: "+ ((BreedEnum)account.CharacterBaseInformations.Breed).Description() + " Sex: " + ((Sex)Convert.ToInt32(account.CharacterBaseInformations.Sex)).Description()), 1);
-            account.ModifBar(7,0,0, account.AccountName + " - " + account.CharacterBaseInformations.Name);
+            account.Log(new BotTextInformation(account.CharacterBaseInformations.Name + " de niveau " + account.CharacterBaseInformations.Level + " est connecté."), 1);
+            account.Log(new BotTextInformation("Breed: " + ((BreedEnum)account.CharacterBaseInformations.Breed).Description() + " Sex: " + ((Sex)Convert.ToInt32(account.CharacterBaseInformations.Sex)).Description()), 1);
+            account.ModifBar(7, 0, 0, account.AccountName + " - " + account.CharacterBaseInformations.Name);
             account.ModifBar(8, 0, 0, Convert.ToString(account.CharacterBaseInformations.Level));
-            
+
             //MainForm.ActualMainForm.ActualizeAccountInformations();
         }
 
         [MessageHandler(typeof(CharacterSelectedErrorMessage))]
         public static void CharacterSelectedErrorMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
-            account.Log(new ConnectionTextInformation("Erreur lors de la sélection du personnage."),0);
+            account.Log(new ConnectionTextInformation("Erreur lors de la sélection du personnage."), 0);
             account.TryReconnect(30);
         }
 
@@ -86,11 +86,10 @@ namespace BlueSheep.Engine.Handlers.Character
             if (!account.Config.ConfigRecover.Restored)
                 account.Config.ConfigRecover.RecoverConfig();
             account.CharacterStats = msg.Stats;
-            //account.Config.CaracUC.Init();
-            //TODO Militão: Add Character module
+            //account.Config.CharacterConfig.Init();
+            //TODO Militão: Populate the view with the new interface
             //if (account.MyGroup != null)
             //{
-            //    if (((GroupForm)account.ParentForm).InvokeRequired)
             //    {
             //        AddMemberCallBack d = new AddMemberCallBack(((GroupForm)account.ParentForm).AddMember);
             //        ((GroupForm)account.ParentForm).Invoke(d, account.CharacterBaseInformations.Name);
@@ -104,7 +103,7 @@ namespace BlueSheep.Engine.Handlers.Character
             double j = msg.Stats.ExperienceNextLevelFloor - msg.Stats.ExperienceLevelFloor;
             try
             {
-                int xppercent = (int)(Math.Round(i / j,2) * 100);
+                int xppercent = (int)(Math.Round(i / j, 2) * 100);
             }
             catch (Exception ex)
             {
@@ -113,7 +112,7 @@ namespace BlueSheep.Engine.Handlers.Character
             account.ModifBar(1, (int)msg.Stats.ExperienceNextLevelFloor - (int)msg.Stats.ExperienceLevelFloor, (int)msg.Stats.Experience - (int)msg.Stats.ExperienceLevelFloor, "Experience");
             account.ModifBar(4, 0, 0, msg.Stats.Kamas.ToString());
         }
-        
+
         [MessageHandler(typeof(SpellListMessage))]
         public static void SpellListMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
@@ -136,9 +135,9 @@ namespace BlueSheep.Engine.Handlers.Character
             {
                 msg.Deserialize(reader);
             }
-                CharacterSelectedForceReadyMessage nmsg = new CharacterSelectedForceReadyMessage();
-                account.SocketManager.Send(nmsg);
-            
+            CharacterSelectedForceReadyMessage nmsg = new CharacterSelectedForceReadyMessage();
+            account.SocketManager.Send(nmsg);
+
         }
 
         [MessageHandler(typeof(CharacterLevelUpMessage))]
@@ -151,8 +150,7 @@ namespace BlueSheep.Engine.Handlers.Character
             }
             account.ModifBar(8, 0, 0, Convert.ToString(msg.NewLevel));
             account.Log(new BotTextInformation("Level up ! New level : " + Convert.ToString(msg.NewLevel)), 3);
-            //account.CaracUC.UpAuto();
-            //TODO Militão: Add Character module
+            account.Config.CharacterConfig.UpAuto();
         }
 
         [MessageHandler(typeof(AchievementFinishedMessage))]
@@ -164,10 +162,10 @@ namespace BlueSheep.Engine.Handlers.Character
                 msg.Deserialize(reader);
             }
             DataClass d = GameData.GetDataObject(D2oFileEnum.Achievements, msg.ObjectId);
-            account.Log(new ActionTextInformation("Succès débloqué : " + I18N.GetText((int)d.Fields["nameId"])),3);
-                AchievementRewardRequestMessage nmsg = new AchievementRewardRequestMessage(-1);
-                account.SocketManager.Send(nmsg);
-            
+            account.Log(new ActionTextInformation("Succès débloqué : " + I18N.GetText((int)d.Fields["nameId"])), 3);
+            AchievementRewardRequestMessage nmsg = new AchievementRewardRequestMessage(-1);
+            account.SocketManager.Send(nmsg);
+
         }
 
         [MessageHandler(typeof(CharacterExperienceGainMessage))]
@@ -216,7 +214,7 @@ namespace BlueSheep.Engine.Handlers.Character
             //}
             //else
             //    account.Log(new ErrorTextInformation("Echec de l'up de caractéristique."), 0);
-                
+
         }
 
         [MessageHandler(typeof(PlayerStatusUpdateMessage))]
@@ -239,7 +237,7 @@ namespace BlueSheep.Engine.Handlers.Character
                         PlayerStatusUpdateRequestMessage nmsg = new PlayerStatusUpdateRequestMessage(new PlayerStatus(10));
                         account.SocketManager.Send(nmsg);
                         break;
-                    case  40:
+                    case 40:
                         account.Log(new ActionTextInformation("Statut solo activé."), 3);
                         break;
                     case 30:
@@ -249,7 +247,7 @@ namespace BlueSheep.Engine.Handlers.Character
                 }
             }
         }
-        
+
         #endregion
     }
 }

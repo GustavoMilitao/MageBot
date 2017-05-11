@@ -84,15 +84,8 @@
     <Reference Include="AES">
       <HintPath>..\..\DofusBot\AES.dll</HintPath>
     </Reference>
-    <Reference Include="MetroFramework, Version=1.3.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\MetroFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+    <Reference Include="MetroFramework">
+      <HintPath>.\MetroFramework.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -132,114 +125,27 @@
     <Compile Include="ExceptionHandler\HandledExceptionManager.cs" />
     <Compile Include="ExceptionHandler\SimpleMail.cs" />
     <Compile Include="ExceptionHandler\UnhandledExceptionManager.cs" />
-    <Compile Include="New Interface\Form1.cs">
+    <Compile Include="New Interface\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="New Interface\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\AccountFrm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\AccountFrm.Designer.cs">
-      <DependentUpon>AccountFrm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\DofusPathForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\DofusPathForm.Designer.cs">
-      <DependentUpon>DofusPathForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\GestAccounts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\GestAccounts.Designer.cs">
-      <DependentUpon>GestAccounts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\GestGroupe.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\GestGroupe.Designer.cs">
-      <DependentUpon>GestGroupe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\GroupForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\GroupForm.Designer.cs">
-      <DependentUpon>GroupForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\IAChoice.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\IAChoice.Designer.cs">
-      <DependentUpon>IAChoice.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\UCs\GestItemsUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interface\UCs\GestItemsUC.Designer.cs">
-      <DependentUpon>GestItemsUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\LoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\MainForm.Designer.cs">
+    <Compile Include="New Interface\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface\PathChoiceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\PathChoiceForm.Designer.cs">
-      <DependentUpon>PathChoiceForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\Theme.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ExceptionHandler\ExceptionDialog.resx">
       <DependentUpon>ExceptionDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interface\AccountFrm.resx">
-      <DependentUpon>AccountFrm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\DofusPathForm.resx">
-      <DependentUpon>DofusPathForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\GestAccounts.resx">
-      <DependentUpon>GestAccounts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\GestGroupe.resx">
-      <DependentUpon>GestGroupe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\GroupForm.resx">
-      <DependentUpon>GroupForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\IAChoice.resx">
-      <DependentUpon>IAChoice.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\UCs\GestItemsUC.resx">
-      <DependentUpon>GestItemsUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\MainForm.resx">
+    <EmbeddedResource Include="New Interface\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interface\PathChoiceForm.resx">
-      <DependentUpon>PathChoiceForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="New Interface\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -248,11 +154,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -298,9 +199,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\account.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -311,6 +209,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\group.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

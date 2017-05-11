@@ -50,7 +50,7 @@ namespace BlueSheep.Interface.UCs
             }
         }
 
-        public List<int> GetItemsToTransfer()
+        public List<int> GetItemsToTransferToBank()
         {
             List<int> stayingItems = GetItemsNoBank();
             List<int> items = new List<int>();

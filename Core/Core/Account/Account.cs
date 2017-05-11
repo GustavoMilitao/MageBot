@@ -123,33 +123,6 @@ namespace BlueSheep.Core.Account
             WatchDog = new WatchDog(this);
             InformationQueue = new Queue<Tuple<TextInformation, int>>();
             Config.MonsterRestrictions = new List<MonsterRestrictions>();
-
-
-
-            ////Heroic mode
-            //HeroicUC = new HeroicUC(this);
-            //FloodPage.TabPages[3].Controls.Add(HeroicUC);
-            //HeroicUC.Show();
-
-            ////Items management
-            //GestItemsUC = new GestItemsUC(this);
-            //tabPage9.Controls.Add(GestItemsUC);
-            //GestItemsUC.Show();
-
-            ////Carac
-            //CaracUC = new CaracUC(this);
-            //StatsPage.Controls.Add(CaracUC);
-            //CaracUC.Show();
-
-            ////Regen
-            //RegenUC = new RegenUC(this);
-            //RegenPage.Controls.Add(RegenUC);
-            //RegenUC.Show();
-
-            ////Flood
-            //FloodUC = new FloodUC(this);
-            //tabPage2.Controls.Add(FloodUC);
-            //FloodUC.Show();
         }
 
         private void initBars()
@@ -364,7 +337,6 @@ namespace BlueSheep.Core.Account
         {
             Log(new ConnectionTextInformation(Strings.AutomaticReconnectionIn + " " + seconds + " " + Strings.Seconds + "."), 0);
             SocketManager.Disconnect("Try Reconnect.");
-            //TODO : Make it an ENUM
             TimerConnectionThread = new Timer(Reconnect, null, (int)TimeSpan.FromSeconds(seconds).TotalMilliseconds,
                 Timeout.Infinite);
         }

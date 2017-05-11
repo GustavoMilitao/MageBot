@@ -2,6 +2,8 @@
 using BlueSheep.Core.Misc;
 using BlueSheep.Core.Path;
 using BlueSheep.Engine.Types;
+using Core.Core;
+using Core.Core.Heroic;
 using Core.Core.Regen;
 using System;
 using System.Collections.Generic;
@@ -48,6 +50,8 @@ namespace BlueSheep.Core.Account
         public int MinMonstersLevel { get; set; }
         public int MaxMonstersLevel { get; set; }
         public bool LockingFights { get; set; }
+        public bool LockingSpectators { get; set; }
+        public bool LockingForGroupOnly { get; set; }
         public List<MonsterRestrictions> MonsterRestrictions { get; set; }
         public FightParser FightParser { get; set; }
         #endregion
@@ -57,12 +61,19 @@ namespace BlueSheep.Core.Account
         public string HouseSearcherLogPath { get; set; }
         #endregion
 
+        #region Char
+        public Character CharacterConfig { get; set; }
+        public Heroic HeroicConfig { get; set; }
+        #endregion
+
         public AccountConfig(Account account)
         {
             Account = account;
             ConfigRecover = new ConfigManager(account);
             Flood = new Flood(account);
             RegenConfig = new Regen(account);
+            CharacterConfig = new Character(account);
+            HeroicConfig = new Heroic(account);
             MonsterRestrictions = new List<Fight.MonsterRestrictions>();
         }
 

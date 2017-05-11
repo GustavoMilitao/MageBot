@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using BlueSheep.Interface;
 using Microsoft.Win32;
 using BlueSheep.Engine.ExceptionHandler;
+using BlueSheep.New_Interface;
 
 namespace BlueSheep
 {
@@ -33,9 +33,9 @@ namespace BlueSheep
                         reg.DeleteValue("Minor");
                         System.Threading.Thread.Sleep(1000);
                     }
-                    reg.SetValue("Version", 0.9);
-                    reg.SetValue("Minor", "8,1");
-                    Application.Run(new MainForm("0.9.7.1"));
+                    reg.SetValue("Version", 2.0);
+                    reg.SetValue("Minor", "0.0");
+                    Application.Run(new MainForm("2.0"));
                 }
                 catch (Exception ex)
                 { MessageBox.Show(ex.Message + ex.StackTrace); }
@@ -43,7 +43,7 @@ namespace BlueSheep
             }
             else
             {
-               System.Windows.Forms.MessageBox.Show("Veuillez lancer BlueSheep via l'updater !");
+               System.Windows.Forms.MessageBox.Show("Launch BlueSheep via updater !");
                Environment.Exit(0);
             }
 

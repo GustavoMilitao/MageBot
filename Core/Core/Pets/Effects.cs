@@ -11,15 +11,13 @@ namespace BlueSheep.Core.Pets
         public static List<int> GetEffects(int id)
         {
             DataClass data = GameData.GetDataObject(D2oFileEnum.Pets, id);
-            ArrayList Afoods = (ArrayList)data.Fields["effects"];
-            //TODO Militão: Get metadata name for Effect of pet.
-            List<int> foods = new List<int>();
-            for (int i = 0; i < Afoods.Count; i++)
+            ArrayList effects = (ArrayList)data.Fields["possibleEffects"];
+            List<int> effectIds = new List<int>();
+            foreach(DataClass d in effects)
             {
-                if ((int)Afoods[i] != 2239)
-                    foods.Add((int)Afoods[i]);
+                effectIds.Add((int)d["effectId"]);
             }
-            return foods;
+            return effectIds;
         }
         #endregion
     }

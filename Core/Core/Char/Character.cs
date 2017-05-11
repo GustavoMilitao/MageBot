@@ -16,6 +16,11 @@ namespace Core.Core
         public Account account { get; set; }
         public BoostableCharacteristicEnum? CaracToAutoUp { get; set; }
 
+        public Character(Account account)
+        {
+            this.account = account;
+        }
+
         public void UpAuto()
         {
             if (CaracToAutoUp.HasValue)
@@ -33,7 +38,6 @@ namespace Core.Core
         {
             int boost = GetBoost(statToUp);
             if (account.CharacterStats.StatsPoints >= boost)
-                //TODO: Verify statspoints
                 UpStat(statToUp, boost);
         }
 
@@ -43,7 +47,7 @@ namespace Core.Core
             StatsUpgradeRequestMessage msg = new StatsUpgradeRequestMessage(false, (byte)statId, (ushort)boost);
             account.SocketManager.Send(msg);
         }
-        
+
 
         private int GetBoost(BoostableCharacteristicEnum statId)
         {
@@ -62,7 +66,6 @@ namespace Core.Core
                     return getBoostByArrayListAndUpPoints((ArrayList)d.Fields["statsPointsForAgility"], account.CharacterStats.Agility.Base);
                 case BoostableCharacteristicEnum.BOOSTABLE_CHARAC_INTELLIGENCE:
                     return getBoostByArrayListAndUpPoints((ArrayList)d.Fields["statsPointsForIntelligence"], account.CharacterStats.Intelligence.Base);
-                    //TODO Militão: Verify if this Base is correct
             }
             return 1;
         }

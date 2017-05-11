@@ -30,6 +30,11 @@ namespace Core.Core.Heroic
         public long MaxLevelAgro { get; set; }
 
 
+        public Heroic(Account account)
+        {
+            this.account = account;
+        }
+
         #region Public Methods
         public void AnalysePacket(Message msg, byte[] packetdatas)
         {

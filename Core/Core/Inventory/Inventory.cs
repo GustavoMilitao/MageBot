@@ -2,7 +2,10 @@
 using BlueSheep.Protocol.Messages.Game.Dialog;
 using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
 using BlueSheep.Protocol.Messages.Game.Inventory.Items;
+using BlueSheep.Util.Enums.Internal;
+using BlueSheep.Util.I18n.Strings;
 using BlueSheep.Util.Text.Log;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,6 +19,11 @@ namespace BlueSheep.Core.Inventory
         public int weight;
         public Account.Account Account;
         public List<Item> Items;
+        public List<Item> ItemsToAutoDelete { get; set; }
+        public List<Item> ItemsToStayOnCharacter { get; set; }
+        public List<Item> ItemsToGetFromBank { get; set; }
+        public List<Tuple<Item,int,ulong>> ItemsToAddToShop { get; set; }
+        public bool ListeningToExchange { get; set; }
         public int weightPercent
         {
             get
@@ -111,11 +119,22 @@ namespace BlueSheep.Core.Inventory
         {
             if (ItemExists(uid) && ItemQuantity(uid) > 0)
             {
-                ObjectSetPositionMessage msg = new ObjectSetPositionMessage((uint)uid, (sbyte)GetPosition(GetItemFromUID(uid).Type), 1);
+                ObjectSetPositionMessage msg = new ObjectSetPositionMessage((uint)uid, (sbyte)GetItemFromUID(uid).typeId, 1);
                 Account.SocketManager.Send(msg);
-                Account.Log(new ActionTextInformation(GetItemFromUID(uid).Name + " équipé."), 2);
+                Account.Log(new ActionTextInformation(GetItemFromUID(uid).Name + " Equip."), 2);
 
             }
+        }
+
+        public async void AddItemToShop(Item item, int quantity, ulong price)
+        {
+            ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage((uint)item.UID,quantity,price);
+            
+            Account.SocketManager.Send(msg);
+            Account.Log(new ActionTextInformation(Strings.AdditionOf + item.Name + "(x " + quantity + ") " + Strings.InTheStoreAtThePriceOf + " : " + price + " " + Strings.Kamas), 2);
+            LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
+            await Account.PutTaskDelay(2000);
+            Account.SocketManager.Send(packetleave);
         }
 
         public Item GetItemFromName(string name)
@@ -147,11 +166,23 @@ namespace BlueSheep.Core.Inventory
         {
             foreach (int i in items)
             {
-                Account.Log(new ActionTextInformation("Objet transféré : " + GetItemFromUID(i).Name + " (x" + GetItemFromUID(i).Quantity + ")."), 2);
+                Account.Log(new ActionTextInformation("Object transfered : " + GetItemFromUID(i).Name + " (x" + GetItemFromUID(i).Quantity + ")."), 2);
             }
             ExchangeObjectTransfertListFromInvMessage msg = new ExchangeObjectTransfertListFromInvMessage(items.Select(item => (uint)item).ToList());
             Account.SocketManager.Send(msg);
-            Account.Log(new BotTextInformation("Trajet : Tous les objets transférés."), 3);
+            Account.Log(new BotTextInformation("Path : All objects were transfered."), 3);
+        }
+
+        public List<int> GetItemsToTransfer()
+        {
+            List<int> stayingItems = ItemsToStayOnCharacter.Select(item => item.UID).ToList();
+            List<int> items = new List<int>();
+            foreach (Item i in Items)
+            {
+                if (!stayingItems.Contains(i.UID))
+                    items.Add(i.UID);
+            }
+            return items;
         }
 
         public void GetItems(List<int> items)
@@ -194,6 +225,27 @@ namespace BlueSheep.Core.Inventory
             Account.SocketManager.Send(new ExchangeAcceptMessage());
             Account.Log(new ActionTextInformation("Echange accepté"), 5);
         }
+
+        #endregion
+
+        #region PrivateMethods
+        public void PerformAutoDeletion()
+        {
+            if (Account.State != Status.Fighting)
+            {
+                if (ItemsToAutoDelete.Count > 0)
+                {
+                    foreach (Item item in ItemsToAutoDelete)
+                    {
+                        Account.Inventory.DeleteItem(item.UID, item.Quantity);
+                    }
+                }
+            }
+            else
+            {
+                Account.Log(new ErrorTextInformation("Impossible to destroy an item in combat"), 2);
+            }
+        }
         #endregion
 
         #region Private Methods 
@@ -205,42 +257,6 @@ namespace BlueSheep.Core.Inventory
         private int ItemQuantity(int uid)
         {
             return Items.FirstOrDefault(i => i.UID == uid) != null ? Items.First(i => i.UID == uid).Quantity : 0;
-        }
-
-        private int GetPosition(string TypeName)
-        {
-            switch (TypeName)
-            {
-                case "Chapeau":
-                    return (int)InventoryPositionEnum.Hat;
-                case "Cape":
-                    return (int)InventoryPositionEnum.Cape;
-                case "Amulette":
-                    return (int)InventoryPositionEnum.Amulet;
-                case "Ceinture":
-                    return (int)InventoryPositionEnum.Belt;
-                case "Anneau":
-                    return (int)InventoryPositionEnum.RingRight;
-                case "Bottes":
-                    return (int)InventoryPositionEnum.Boots;
-                case "Familier":
-                    return (int)InventoryPositionEnum.Pets;
-                case "Dofus":
-                case "Trophée":
-                    return (int)InventoryPositionEnum.Dofus6;
-                case "Marteau":
-                case "Bâton":
-                case "Baguette":
-                case "Epée":
-                case "Hache":
-                case "Faux":
-                case "Pioche":
-                    return (int)InventoryPositionEnum.Weapon;
-                case "Bouclier":
-                    return (int)InventoryPositionEnum.Shield;
-                default:
-                    return 0;
-            }
         }
         #endregion
     }

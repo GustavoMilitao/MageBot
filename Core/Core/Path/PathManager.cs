@@ -182,7 +182,7 @@ namespace BlueSheep.Core.Path
         /// </summary>
         public void ParsePath()
         {
-            //TODO: Fix tha parser
+            //TODO: Fix the parser
             conditions = new List<PathCondition>();
             ActionsStack = new List<Action>();
             foreach (string line in m_content)

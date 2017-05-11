@@ -40,7 +40,7 @@ namespace BlueSheep.Core.Pets
         #region Public methods
         public void Set()
         {
-            MealInterval = MealIntervals.GetMealIntervals(Informations.GID).FirstOrDefault();
+            MealInterval = MealIntervals.GetMealIntervals(Informations.GID);
 
             SetFood();
             SetNextMeal();

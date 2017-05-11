@@ -942,8 +942,7 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         private void PulseRegen()
         {
-            //Account.Regen.PulseRegen();
-            // TODO Militão: Add Regen module
+            Account.Config.RegenConfig.PulseRegen();
         }
         #endregion
     }

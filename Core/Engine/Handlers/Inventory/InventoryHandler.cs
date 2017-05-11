@@ -338,9 +338,8 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
             //account.actualizeshop(msg.ObjectsInfos.ToList());
             // TODO Militão: Populate the new interface
-            //if (account.NeedToAddItem())
-            //    account.addItemToShop();
-            // TODO Militão: Add Item Module
+            if (account.Inventory.ItemsToAddToShop.Count > 0)
+                account.Inventory.ItemsToAddToShop.ForEach(item => account.Inventory.AddItemToShop(item.Item1,item.Item2,item.Item3));
         }
         #endregion
     }

@@ -417,8 +417,10 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
 
-            
-            /* TODO : Handle it */
+            if(account.Config.LockingSpectators)
+            {
+                account.Fight.LockFightForSpectators();
+            }
         }
 
         [MessageHandler(typeof(GameActionFightLifePointsGainMessage))]

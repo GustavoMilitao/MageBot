@@ -39,7 +39,6 @@
             this.ScopeBox = new System.Windows.Forms.RichTextBox();
             this.ErrorBox = new System.Windows.Forms.RichTextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.sadikButton1 = new BlueSheep.Interface.SadikButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -162,26 +161,11 @@
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
             // 
-            // sadikButton1
-            // 
-            this.sadikButton1.ButtonStyle = BlueSheep.Interface.SadikButton.Style.Blue;
-            this.sadikButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.sadikButton1.Font = new System.Drawing.Font("Verdana", 8F);
-            this.sadikButton1.Image = null;
-            this.sadikButton1.Location = new System.Drawing.Point(23, 541);
-            this.sadikButton1.Name = "sadikButton1";
-            this.sadikButton1.RoundedCorners = false;
-            this.sadikButton1.Size = new System.Drawing.Size(443, 26);
-            this.sadikButton1.TabIndex = 19;
-            this.sadikButton1.Text = "Continue & Exit.";
-            this.sadikButton1.Click += new System.EventHandler(this.sadikButton1_Click);
-            // 
             // ExceptionDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 594);
-            this.Controls.Add(this.sadikButton1);
             this.Controls.Add(this.btnMore);
             this.Controls.Add(this.txtMore);
             this.Controls.Add(this.lblMoreHeading);
@@ -213,6 +197,5 @@
         internal System.Windows.Forms.RichTextBox ScopeBox;
         internal System.Windows.Forms.RichTextBox ErrorBox;
         internal System.Windows.Forms.PictureBox pictureBox2;
-        private Interface.SadikButton sadikButton1;
     }
 }
