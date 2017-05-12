@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using BlueSheep.Core.Monsters;
 using BlueSheep.Core.Fight;
+using System.Threading.Tasks;
 
 namespace BlueSheep.Protocol
 {
@@ -101,7 +102,7 @@ namespace BlueSheep.Protocol
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] { "-cell = 0", "-dir = null" });
                     ParseArguments(passedCommands);
-                    return Move();
+                    return Move().Result;
                 case "/mapid":
                     return new List<string>() { "L'id de la map est : " + account.MapData.Id };
                 case "/cellid":
@@ -625,7 +626,7 @@ namespace BlueSheep.Protocol
         /// Do the moving action.
         /// </summary>
         /// <returns>A display string of the action</returns>
-        private List<string> Move()
+        private async Task<List<string>> Move()
         {
             int cell = Int32.Parse(GetParamValue("-cell"));
             string dir = GetParamValue("-dir");
@@ -635,7 +636,7 @@ namespace BlueSheep.Protocol
                 if (cell != 0)
                 {
                     result.Add("Déplacement vers la cellid : " + cell);
-                    account.Map.MoveToCell(cell);
+                    await account.Map.MoveToCell(cell);
 
                 }
 

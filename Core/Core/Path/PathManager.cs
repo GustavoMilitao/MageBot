@@ -146,12 +146,12 @@ namespace BlueSheep.Core.Path
                     //On lance un combat, les actions seront effectuées après le combat
                     if (Account.Config.IsMaster == true && Account.MyGroup != null && Account.Fight != null)
                     {
-                        if (!Account.Fight.SearchFight())
+                        if (Account.State != Status.Fighting && !Account.Fight.SearchFight().Result)
                             PerformActionsStack();
                     }
                     else if (Account.Config.IsSlave == false && Account.Fight != null)
                     {
-                        if (Account.Fight.SearchFight() == false)
+                        if (Account.State != Status.Fighting && !Account.Fight.SearchFight().Result)
                             PerformActionsStack();
                     }
                     else

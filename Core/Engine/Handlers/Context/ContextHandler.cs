@@ -86,12 +86,12 @@ namespace BlueSheep.Engine.Handlers.Context
                 //    account.FightData.winLoseDic["Gagné"]++;
                 //    account.ActualizeFightStats(account.FightData.winLoseDic, account.FightData.xpWon);
                 //}
-                if (!account.Config.IsMITM)
-                {
-                    MapInformationsRequestMessage mapInformationsRequestMessage
-                    = new MapInformationsRequestMessage(account.MapData.Id);
-                    account.SocketManager.Send(mapInformationsRequestMessage);
-                }
+            }
+            if (!account.Config.IsMITM)
+            {
+                MapInformationsRequestMessage mapInformationsRequestMessage
+                = new MapInformationsRequestMessage(currentMapMessage.MapId);
+                account.SocketManager.Send(mapInformationsRequestMessage);
             }
         }
 
@@ -133,6 +133,10 @@ namespace BlueSheep.Engine.Handlers.Context
                 //case 171:
                 //    account.Log(new ErrorTextInformation(string.Format("Impossible de lancer ce sort, vous avez une portée de {0} à {1}, et vous visez à {2} !", msg.parameters[0], msg.parameters[1], msg.parameters[2])), 4);
                 //    break;
+                case 36:
+                    if (account.Config.LockingSpectators)
+                        account.Fight.LockFightForSpectators();
+                    break;
                 case 34:
                     //account.Log(new ErrorTextInformation(string.Format("Vous avez perdu {0} points d'énergie", msg.parameters[0])), 0);
                     //account.Log(new ErrorTextInformation("Combat perdu"), 0);
@@ -419,18 +423,19 @@ namespace BlueSheep.Engine.Handlers.Context
         [MessageHandler(typeof(HousePropertiesMessage))]
         public static void HousePropertiesMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
-            HousePropertiesMessage msg = (HousePropertiesMessage)message;
+            //HousePropertiesMessage msg = (HousePropertiesMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
-            if (!String.IsNullOrEmpty(account.Config.HouseSearcherLogPath))
-            {
-                StreamWriter SourceFile = new StreamWriter(account.Config.HouseSearcherLogPath, true);
-                SourceFile.WriteLine("Abandoned house in : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]");
-                SourceFile.Close();
-            }
+            //using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            //{
+            //    msg.Deserialize(reader);
+            //}
+            //if (!String.IsNullOrEmpty(account.Config.HouseSearcherLogPath))
+            //{
+            //    StreamWriter SourceFile = new StreamWriter(account.Config.HouseSearcherLogPath, true);
+            //    SourceFile.WriteLine("Abandoned house in : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]");
+            //    SourceFile.Close();
+            //}
+            //TODO Militão: Treat this
             //account.Log(new BotTextInformation("Maison abandonnée en : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]"), 1);
         }
 
@@ -592,7 +597,7 @@ namespace BlueSheep.Engine.Handlers.Context
                 return;
             List<int> items = account.Inventory.GetItemsToTransfer();
             account.Inventory.TransferItems(items);
-           await account.PutTaskDelay(3000);
+            await account.PutTaskDelay(3000);
             account.Inventory.ExchangeReady();
         }
 

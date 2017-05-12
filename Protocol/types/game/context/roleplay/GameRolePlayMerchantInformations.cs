@@ -81,6 +81,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
+            m_sellType = reader.ReadByte();
             int optionsCount = reader.ReadUShort();
             int optionsIndex;
             m_options = new System.Collections.Generic.List<HumanOption>();
@@ -90,7 +91,6 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
                 objectToAdd.Deserialize(reader);
                 m_options.Add(objectToAdd);
             }
-            m_sellType = reader.ReadByte();
         }
     }
 }

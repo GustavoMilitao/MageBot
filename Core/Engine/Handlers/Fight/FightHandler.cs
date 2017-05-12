@@ -138,7 +138,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightEndMessage))]
-        public static void GameFightEndMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public async static void GameFightEndMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
         {
             GameFightEndMessage msg = (GameFightEndMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -147,6 +147,17 @@ namespace BlueSheep.Engine.Handlers.Fight
             }
             account.FightData.FightStop();
             account.SetStatus(Status.None);
+            await account.PutTaskDelay(2000);
+            if (account.Config.AutoRelaunchFight && account.State != Status.Fighting)
+            {
+                bool findFight = account.Fight.SearchFight().Result;
+                while (!findFight)
+                {
+                    account.Map.ChangeMap();
+                    await account.PutTaskDelay(3000);
+                    findFight = account.Fight.SearchFight().Result;
+                }
+            }
             //account.Fight.infinite = true; // Swap it with checkbox
         }
 
@@ -173,10 +184,11 @@ namespace BlueSheep.Engine.Handlers.Fight
             if (account.Fight != null)
             {
                 account.FightData.Reset(msg.IsFightStarted, msg.CanSayReady);
-                if (account.Config.LockingFights && account.Fight != null)
+                if (account.Config.LockingFights && account.Fight != null && !account.Config.LockPerformed)
                 {
                     account.FightData.PerformAutoTimeoutFight(2000);
                     account.Fight.LockFight();
+                    account.Config.LockPerformed = true;
                 }
 
             }
@@ -417,7 +429,7 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
 
-            if(account.Config.LockingSpectators)
+            if (account.Config.LockingSpectators)
             {
                 account.Fight.LockFightForSpectators();
             }

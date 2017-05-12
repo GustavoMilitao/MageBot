@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlueSheep.Engine.Network;
+using System.Threading;
 
 namespace BlueSheep.Core.Map
 {
@@ -20,6 +21,7 @@ namespace BlueSheep.Core.Map
     {
         #region Fields
         private Account.Account Account { get; set; }
+        private List<string> possibleDir { get; set; } = new List<string>() { "up", "bottom", "right", "left" };
         #endregion
 
         #region Constructeurs
@@ -30,65 +32,67 @@ namespace BlueSheep.Core.Map
         #endregion
 
         #region Public methods
-        public bool ChangeMap(string direction)
+        public bool ChangeMap(string direction = "")
         {
             int neighbourId = -1;
-            //int num2 = -1;
-            switch (direction)
+            int num2 = -1;
+            int rand = new Random().Next(0, 3);
+            string direct = String.IsNullOrEmpty(direction) ? possibleDir[rand] : direction;
+            switch (direct)
             {
                 case "haut":
                 case "up":
                     neighbourId = Account.MapData.Data.TopNeighbourId;
-                    //num2 = 64;
+                    num2 = 64;
                     break;
                 case "bas":
                 case "bottom":
                     neighbourId = Account.MapData.Data.BottomNeighbourId;
-                    //num2 = 4;
+                    num2 = 4;
                     break;
                 case "droite":
                 case "right":
                     neighbourId = Account.MapData.Data.RightNeighbourId;
-                    //num2 = 1;
+                    num2 = 1;
                     break;
                 case "gauche":
                 case "left":
                     neighbourId = Account.MapData.Data.LeftNeighbourId;
-                    //num2 = 16;
+                    num2 = 16;
                     break;
                 default:
                     return false;
             }
 
-            //if ((num2 != -1) && (neighbourId >= 0))
-            //{
-            //    int cellId = m_Account.MapData.Character.Disposition.CellId;
-            //    if ((m_Account.MapData.Data.Cells[cellId].MapChangeData & num2) > 0)
-            //    {
-            ChangeMap(neighbourId);
-            return true;
-            //}
-            //List<int> list = new List<int>();
-            //int num4 = (m_Account.MapData.Data.Cells.Count - 1);
-            //int i = 0;
-            //while (i <= num4)
-            //{
-            //    if (((m_Account.MapData.Data.Cells[i].MapChangeData & num2) > 0) && m_Account.MapData.NothingOnCell(i))
-            //        list.Add(i);
-            //    i += 1;
-            //}
-            //while (list.Count > 0)
-            //{
-            //    int randomCellId = list[RandomCell(0, list.Count)];
-            //    m_MapId = neighbourId;
-            //    if (MoveToCell(randomCellId).Result)
-            //    {
-            //        return true;
-            //    }
-            //    list.Remove(randomCellId);
-            //}
-            //}
-            //return false;
+            if ((num2 != -1) && (neighbourId >= 0))
+            {
+                int cellId = Account.MapData.Character.Disposition.CellId;
+                if ((Account.MapData.Data.Cells[cellId].MapChangeData & num2) > 0)
+                {
+                    ChangeMap(neighbourId);
+                    return true;
+                }
+                List<int> list = new List<int>();
+                int num4 = (Account.MapData.Data.Cells.Count - 1);
+                int i = 0;
+                while (i <= num4)
+                {
+                    if (((Account.MapData.Data.Cells[i].MapChangeData & num2) > 0) && Account.MapData.NothingOnCell(i))
+                        list.Add(i);
+                    i += 1;
+                }
+                while (list.Count > 0)
+                {
+                    int randomCellId = list[RandomCell(0, list.Count)];
+                    //m_MapId = neighbourId;
+                    if (MoveToCell(randomCellId).Result)
+                    {
+                        return true;
+                    }
+                    list.Remove(randomCellId);
+                }
+            }
+            return false;
         }
 
         public async Task<bool> MoveToCell(int cellId)
@@ -107,12 +111,14 @@ namespace BlueSheep.Core.Map
                     {
                         timetowait = serverMovement.Count() * 300;
                     }
-                    await Account.PutTaskDelay(timetowait);
                     Move(serverMovement);
+                    await Account.PutTaskDelay(timetowait);
+                    ConfirmMove();
                 }
             }
             return true;
         }
+
 
         public bool MoveToDoor(int cellId)
         {
@@ -168,7 +174,7 @@ namespace BlueSheep.Core.Map
             UseElement(id, e.EnabledSkills.FirstOrDefault().SkillInstanceUid);
         }
 
-        private void ChangingMapToSameMapAndSamePosition()
+        private void ConfirmMove()
         {
             Account.SocketManager.Send(new GameMapMovementConfirmMessage());
             Account.SetStatus(Status.None);

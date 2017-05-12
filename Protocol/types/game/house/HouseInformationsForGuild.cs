@@ -191,13 +191,6 @@ namespace BlueSheep.Protocol.Types.Game.House
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
-            int skillListIdsCount = reader.ReadUShort();
-            int skillListIdsIndex;
-            m_skillListIds = new System.Collections.Generic.List<int>();
-            for (skillListIdsIndex = 0; (skillListIdsIndex < skillListIdsCount); skillListIdsIndex = (skillListIdsIndex + 1))
-            {
-                m_skillListIds.Add(reader.ReadInt());
-            }
             m_instanceId = reader.ReadInt();
             m_secondHand = reader.ReadBoolean();
             m_ownerName = reader.ReadUTF();
@@ -205,6 +198,13 @@ namespace BlueSheep.Protocol.Types.Game.House
             m_worldY = reader.ReadShort();
             m_mapId = reader.ReadInt();
             m_subAreaId = reader.ReadVarUhShort();
+            int skillListIdsCount = reader.ReadUShort();
+            int skillListIdsIndex;
+            m_skillListIds = new System.Collections.Generic.List<int>();
+            for (skillListIdsIndex = 0; (skillListIdsIndex < skillListIdsCount); skillListIdsIndex = (skillListIdsIndex + 1))
+            {
+                m_skillListIds.Add(reader.ReadInt());
+            }
             m_guildshareParams = reader.ReadVarUhInt();
         }
     }

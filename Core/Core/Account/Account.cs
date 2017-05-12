@@ -88,7 +88,7 @@ namespace BlueSheep.Core.Account
         public Account(string username, string password, bool socket = true)
         {
             initBars();
-            Config = new AccountConfig();
+            Config = new AccountConfig(this);
             AccountName = username;
             AccountPassword = password;
             PetsModifiedList = new List<Pet>();

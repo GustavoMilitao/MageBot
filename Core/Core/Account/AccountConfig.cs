@@ -54,6 +54,8 @@ namespace BlueSheep.Core.Account
         public bool LockingForGroupOnly { get; set; }
         public List<MonsterRestrictions> MonsterRestrictions { get; set; }
         public FightParser FightParser { get; set; }
+        public bool AutoRelaunchFight { get; set; }
+        public bool LockPerformed { get; set; }
         #endregion
 
         #region House

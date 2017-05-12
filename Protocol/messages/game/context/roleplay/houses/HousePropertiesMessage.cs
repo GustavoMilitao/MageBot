@@ -97,6 +97,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses
         
         public override void Deserialize(IDataReader reader)
         {
+            m_houseId = reader.ReadVarUhInt();
             int doorsOnMapCount = reader.ReadUShort();
             int doorsOnMapIndex;
             m_doorsOnMap = new System.Collections.Generic.List<int>();
@@ -106,7 +107,6 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses
             }
             m_properties = ProtocolTypeManager.GetInstance<HouseInstanceInformations>(reader.ReadUShort());
             m_properties.Deserialize(reader);
-            m_houseId = reader.ReadVarUhInt();
         }
     }
 }

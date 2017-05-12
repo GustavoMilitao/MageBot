@@ -13,6 +13,7 @@ using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight;
 using BlueSheep.Protocol.Enums;
 using BlueSheep.Core.Monsters;
 using BlueSheep.Engine.Network;
+using System.Threading.Tasks;
 
 namespace BlueSheep.Core.Fight
 {
@@ -76,28 +77,30 @@ namespace BlueSheep.Core.Fight
         /// <summary>
         /// Search for a fight on the map.
         /// </summary>
-        public bool SearchFight()
+        public async Task<bool> SearchFight()
         {
             int minNumber = m_Account.Config.MinMonstersNumber;
             int maxNumber = m_Account.Config.MaxMonstersNumber;
             int minLevel = m_Account.Config.MinMonstersLevel;
             int maxLevel = m_Account.Config.MaxMonstersLevel;
-            lock (clock)
+            MonsterGroup monsters = m_Account.MapData.Monsters.FirstOrDefault(monst => monst.monstersCount >= minNumber &&
+                                                                                       monst.monstersCount <= maxNumber &&
+                                                                                       monst.monstersLevel >= minLevel &&
+                                                                                       monst.monstersLevel <= maxLevel &&
+                                                                                       m_Account.AllowedGroup(monst.NameList()) &&
+                                                                                       !Banned.Contains(monst));
+            if (monsters != null)
             {
-                MonsterGroup monsters = m_Account.MapData.Monsters.FirstOrDefault(monst => monst.monstersCount >= minNumber &&
-                                                                                           monst.monstersCount <= maxNumber &&
-                                                                                           monst.monstersLevel >= minLevel &&
-                                                                                           monst.monstersLevel <= maxLevel &&
-                                                                                           m_Account.AllowedGroup(monst.NameList()) &&
-                                                                                           !Banned.Contains(monst));
-                if (monsters != null)
+                if (m_Account.Map.MoveToCell(monsters.m_cellId).Result)
                 {
-                    if (m_Account.Map.MoveToCell(monsters.m_cellId).Result)
-                    {
-                        m_Account.SetStatus(Status.Moving);
-                        m_Account.Log(new ActionTextInformation(string.Format("Lancement d'un combat contre {0} monstres de niveau {1} ({2})", monsters.monstersCount, monsters.monstersLevel, monsters.monstersName(true))), 1);
-                        return true;
-                    }
+                    m_Account.SetStatus(Status.None);
+                    m_Account.Log(new ActionTextInformation(string.Format("Fight started, {0} monsters of level {1} ({2})", monsters.monstersCount, monsters.monstersLevel, monsters.monstersName(true))), 1);
+                    await m_Account.PutTaskDelay(2000);
+                    m_Account.Fight.LaunchFight((int)monsters.m_contextualId);
+                    await m_Account.PutTaskDelay(2000);
+                    if (m_Account.State != Status.Fighting)
+                        await SearchFight();
+                    return true;
                 }
             }
             return false;

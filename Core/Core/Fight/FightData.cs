@@ -380,7 +380,8 @@ namespace BlueSheep.Core.Fight
         {
             WaitForReady = false;
             IsFightStarted = true;
-            Account.Log(new ActionTextInformation("Début du combat"), 2);
+            Account.Log(new ActionTextInformation("Beginning of the fight"), 2);
+            Account.SetStatus(Status.Fighting);
             watch.Restart();
         }
 
