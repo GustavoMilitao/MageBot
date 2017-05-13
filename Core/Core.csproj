@@ -30,11 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AES">
+    <Reference Include="AES, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AES.dll</HintPath>
     </Reference>
-    <Reference Include="RSA">
-      <HintPath>..\RSA.dll</HintPath>
+    <Reference Include="BotForge.Core">
+      <HintPath>..\..\..\..\Desktop\test\BotForge.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="BotForge.Server.Protocol">
+      <HintPath>..\..\..\..\Desktop\test\BotForge.Server.Protocol.dll</HintPath>
+    </Reference>
+    <Reference Include="BotForgeAPI">
+      <HintPath>..\..\..\..\Desktop\test\BotForgeAPI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,6 +60,7 @@
     <Compile Include="Core\Base\BEntity.cs" />
     <Compile Include="Core\Bypass\HumanCheck.cs" />
     <Compile Include="Core\Char\Character.cs" />
+    <Compile Include="Core\Char\CharComplements.cs" />
     <Compile Include="Core\Connection\IdentificationFailureReason.cs" />
     <Compile Include="Core\Connection\ServerStatus.cs" />
     <Compile Include="Core\Fight\BFight.cs" />
@@ -139,10 +147,6 @@
     <ProjectReference Include="..\DataFiles\DataFiles.csproj">
       <Project>{44759c8e-e748-40fa-b71e-a04d919ff887}</Project>
       <Name>DataFiles</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Protocol\Protocol.csproj">
-      <Project>{974ba32c-dfdc-4a80-8693-1c8fe6a8edaa}</Project>
-      <Name>Protocol</Name>
     </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{5fc9e97d-6446-45c3-a3b2-84b0883782df}</Project>

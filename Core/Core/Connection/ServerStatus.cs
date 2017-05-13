@@ -1,6 +1,6 @@
-﻿using BlueSheep.Protocol.Enums;
-using BlueSheep.Core.Account;
+﻿using BlueSheep.Core.Account;
 using BlueSheep.Util.Text.Log;
+using BotForgeAPI.Protocol.Enums;
 
 namespace BlueSheep.Util.Text
 {
@@ -17,24 +17,24 @@ namespace BlueSheep.Util.Text
         {
             switch (status)
             {
-                case ServerStatusEnum.Offline:
-                    account.Log(new ConnectionTextInformation("Echec de connexion : serveur déconnecté."), 0);
-                    account.TryReconnect(600);
+                case ServerStatusEnum.OFFLINE:
+                    account.Logger.Log("Server Offline", BotForgeAPI.Logger.LogEnum.Connection);
+                    //account.TryReconnect(600);
                     break;
 
-                case ServerStatusEnum.Saving:
-                    account.Log(new ConnectionTextInformation("Echec de connexion : serveur en sauvegarde."), 0);
-                    account.TryReconnect(600);
+                case ServerStatusEnum.SAVING:
+                    account.Logger.Log("Server Saving", BotForgeAPI.Logger.LogEnum.Connection);
+                    //account.TryReconnect(600);
                     break;
 
-                case ServerStatusEnum.Full:
-                    account.Log(new ConnectionTextInformation("Echec de connexion : serveur complet."), 0);
-                    account.TryReconnect(60);
+                case ServerStatusEnum.FULL:
+                    account.Logger.Log("Server full", BotForgeAPI.Logger.LogEnum.Connection);
+                    //account.TryReconnect(60);
                     break;
 
                 default:
-                    account.Log(new ConnectionTextInformation("Echec de connexion : raison inconnue."), 0);
-                    account.TryReconnect(30);
+                    account.Logger.Log("Can't connect to server: unknown reason.", BotForgeAPI.Logger.LogEnum.Connection);
+                    //account.TryReconnect(30);
                     break;
             }
         }

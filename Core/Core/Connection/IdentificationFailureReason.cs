@@ -1,6 +1,6 @@
-﻿using BlueSheep.Protocol.Enums;
-using BlueSheep.Core.Account;
+﻿using BlueSheep.Core.Account;
 using BlueSheep.Util.Text.Log;
+using BotForgeAPI.Protocol.Enums;
 
 namespace BlueSheep.Util.Text.Connection
 {

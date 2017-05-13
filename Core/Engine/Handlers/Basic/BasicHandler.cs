@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Threading;
 using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages;
 using BlueSheep.Util.Text.Log;
-using BlueSheep.Protocol.Enums;
 using BlueSheep.Util.Enums.EnumHelper;
-using BlueSheep.Protocol.Messages.Game.Basic;
-using BlueSheep.Protocol.Messages.Game.Interactive;
-using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
-using BlueSheep.Protocol.Messages.Game.Inventory.Items;
-using BlueSheep.Protocol.Messages.Game.Dialog;
-using BlueSheep.Protocol.Messages.Game.Approach;
+using BotForgeAPI.Protocol.Messages;
+using BotForgeAPI.Network.Messages;
 
 namespace BlueSheep.Engine.Handlers.Basic
 {
@@ -23,7 +17,7 @@ namespace BlueSheep.Engine.Handlers.Basic
             account.Sequence++;
 
             SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage((ushort)account.Sequence);
-            account.SocketManager.Send(sequenceNumberMessage);
+            //account.SocketManager.Send(sequenceNumberMessage);
         }
 
         [MessageHandler(typeof(BasicLatencyStatsRequestMessage))]
@@ -31,16 +25,16 @@ namespace BlueSheep.Engine.Handlers.Basic
         {
             BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage((ushort)account.LatencyFrame.GetLatencyAvg(),
                 (ushort)account.LatencyFrame.GetSamplesCount(), (ushort)account.LatencyFrame.GetSamplesMax());
-            if (!account.Config.IsMITM)
+            if (account.IsFullSocket)
             {
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
                     basicLatencyStatsMessage.Serialize(writer);
-                    writer.Content = account.HumanCheck.hash_function(writer.Content);
+                    account.HumanCheck.Hash_Function(writer);
                     basicLatencyStatsMessage.Pack(writer);
 
-                    account.SocketManager.Send(writer.Content);
-                    account.Log(new BlueSheep.Util.Text.Log.DebugTextInformation("[SND] 5663 (BasicLatencyStatsMessage)"), 0);
+                    //account.SocketManager.Send(writer.Content);
+                    account.Logger.Log("[SND] 5663 (BasicLatencyStatsMessage)", BotForgeAPI.Logger.LogEnum.Debug);
                 }
             }
 
@@ -56,8 +50,8 @@ namespace BlueSheep.Engine.Handlers.Basic
                 basicAckMessage.Deserialize(reader);
             }
 
-            account.LastPacketID.Enqueue(basicAckMessage.LastProtocolId);
-            account.LastPacket = basicAckMessage.LastProtocolId;
+            account.LastPacketID.Enqueue(basicAckMessage.LastPacketId);
+            account.LastPacket = basicAckMessage.LastPacketId;
 
 
         }
@@ -69,53 +63,54 @@ namespace BlueSheep.Engine.Handlers.Basic
             //if (account.MapData.Begin)
             //    account.ActualizeFamis();
             // TODO Militão: Populate the new interface
-            Thread.Sleep(GetRandomTime());
+            //Thread.Sleep(GetRandomTime());
 
             if (account.LastPacketID.Count == 0)
                 return;
 
-            //switch ((uint)account.LastPacketID.Dequeue())
             switch ((uint)account.LastPacket)
             {
-                case InteractiveUseRequestMessage.ProtocolId:
-                    if (account.Running != null && account.Running.OnSafe)
-                    {
-                        account.Log(new CharacterTextInformation("Ouverture du coffre."), 2);
+                case InteractiveUseRequestMessage.Id:
+                    //if (account.Running != null && account.Running.OnSafe)
+                    //{
+                    //    account.Log(new CharacterTextInformation("Ouverture du coffre."), 2);
 
-                        account.Running.Init();
-                    }
-                    return;
+                    //    account.Running.Init();
+                    //}
+                    //return;
+                    break;
+                case ExchangeObjectMoveMessage.Id:
+                    //if (account.Running.OnLeaving)
+                    //{
+                    //    account.Running.OnLeaving = false;
+                    //    account.Log(new ActionTextInformation("Dépôt d'un objet dans le coffre."), 3);
+                    //    account.Running.Init();
+                    //}
+                    //else if (account.Running.OnGetting)
+                    //{
+                    //    account.Running.OnGetting = false;
+                    //    account.Log(new ActionTextInformation("Récupération d'un objet du coffre."), 3);
+                    //    account.Running.Init();
+                    //}
+                    //return;
+                    break;
+                case ObjectFeedMessage.Id:
+                    //if (account.Running != null && !account.Running.Feeding.SecondFeeding)
+                    //    account.Running.CheckStatisticsUp();
+                    //else if (account.Running != null)
+                    //{
+                    //    account.Running.CurrentPetIndex++;
+                    //    account.Running.Init();
+                    //}
+                    //return;
+                    break;
 
-                case ExchangeObjectMoveMessage.ProtocolId:
-                    if (account.Running.OnLeaving)
-                    {
-                        account.Running.OnLeaving = false;
-                        account.Log(new ActionTextInformation("Dépôt d'un objet dans le coffre."), 3);
-                        account.Running.Init();
-                    }
-                    else if (account.Running.OnGetting)
-                    {
-                        account.Running.OnGetting = false;
-                        account.Log(new ActionTextInformation("Récupération d'un objet du coffre."), 3);
-                        account.Running.Init();
-                    }
-                    return;
-
-                case ObjectFeedMessage.ProtocolId:
-                    if (account.Running != null && !account.Running.Feeding.SecondFeeding)
-                        account.Running.CheckStatisticsUp();
-                    else if (account.Running != null)
-                    {
-                        account.Running.CurrentPetIndex++;
-                        account.Running.Init();
-                    }
-                    return;
-
-                case LeaveDialogRequestMessage.ProtocolId:
-                    account.Log(new ActionTextInformation("Fermeture du coffre."), 3);
-                    if (account.Running != null)
-                        account.Running.Init();
-                    return;
+                case LeaveDialogRequestMessage.Id:
+                    //account.Log(new ActionTextInformation("Fermeture du coffre."), 3);
+                    //if (account.Running != null)
+                    //    account.Running.Init();
+                    //return;
+                    break;
                 //case GameMapMovementRequestMessage.ProtocolId:
 
                 //    return;
@@ -160,7 +155,7 @@ namespace BlueSheep.Engine.Handlers.Basic
             {
                 btmsg.Deserialize(reader);
             }
-            account.Log(new ErrorTextInformation(String.Format("Compte banni {0} jours, {1} heures, {2} minutes :'( ", btmsg.Days, btmsg.Hours, btmsg.Minutes)), 0);
+            account.Logger.Log(String.Format("Compte banni {0} jours, {1} heures, {2} minutes :'( ", btmsg.Days, btmsg.Hours, btmsg.Minutes), BotForgeAPI.Logger.LogEnum.TextInformationError);
         }
 
         [MessageHandler(typeof(ServerSettingsMessage))]
@@ -172,10 +167,10 @@ namespace BlueSheep.Engine.Handlers.Basic
             {
                 msg.Deserialize(reader);
             }
-            account.Log(
-                new ConnectionTextInformation(" Server Settings : Language : " + msg.Lang +
-                                         ", GameType : " + ((GameTypeIdEnum)msg.GameType).Description() +
-                                         ", Comunity : " + ((CommunityIdEnum)msg.Community).Description()), 0);
+            //account.Log(
+            //    new ConnectionTextInformation(" Server Settings : Language : " + msg.Lang +
+            //                             ", GameType : " + ((GameTypeIdEnum)msg.GameType).Description() +
+            //                             ", Comunity : " + ((CommunityIdEnum)msg.Community).Description()), 0);
         }
 
         #endregion

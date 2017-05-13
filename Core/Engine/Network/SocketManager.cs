@@ -14,6 +14,8 @@ using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Common.Basic;
 using BlueSheep.Engine.Network;
 using BlueSheep.Util.Enums.Internal;
+using BotForgeAPI.Network.Messages;
+using BotForgeAPI.Protocol.Messages;
 
 namespace BlueSheep.Engine.Network
 {
