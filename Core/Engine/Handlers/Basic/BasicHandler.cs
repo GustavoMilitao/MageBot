@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Threading;
 using BlueSheep.Util.IO;
-using BlueSheep.Util.Text.Log;
-using BlueSheep.Util.Enums.EnumHelper;
 using BotForgeAPI.Protocol.Messages;
 using BotForgeAPI.Network.Messages;
+using Core.Engine.Types;
 
 namespace BlueSheep.Engine.Handlers.Basic
 {
@@ -12,7 +10,7 @@ namespace BlueSheep.Engine.Handlers.Basic
     {
         #region Public methods
         [MessageHandler(typeof(SequenceNumberRequestMessage))]
-        public static void SequenceNumberRequestMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void SequenceNumberRequestMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             account.Sequence++;
 
@@ -21,7 +19,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(BasicLatencyStatsRequestMessage))]
-        public static void BasicLatencyStatsRequestMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void BasicLatencyStatsRequestMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage((ushort)account.LatencyFrame.GetLatencyAvg(),
                 (ushort)account.LatencyFrame.GetSamplesCount(), (ushort)account.LatencyFrame.GetSamplesMax());
@@ -41,7 +39,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(BasicAckMessage))]
-        public static void BasicAckMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void BasicAckMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             BasicAckMessage basicAckMessage = (BasicAckMessage)message;
 
@@ -57,7 +55,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(BasicNoOperationMessage))]
-        public static void BasicNoOperationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void BasicNoOperationMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             //MainForm.ActualMainForm.ActualizeAccountInformations();
             //if (account.MapData.Begin)
@@ -125,7 +123,7 @@ namespace BlueSheep.Engine.Handlers.Basic
 
         }
         [MessageHandler(typeof(BasicTimeMessage))]
-        public static void BasicTimeMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void BasicTimeMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             BasicTimeMessage btmsg = (BasicTimeMessage)message;
 
@@ -147,7 +145,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(AccountLoggingKickedMessage))]
-        public static void AccountLoggingKickedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void AccountLoggingKickedMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             AccountLoggingKickedMessage btmsg = (AccountLoggingKickedMessage)message;
 
@@ -159,7 +157,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(ServerSettingsMessage))]
-        public static void ServerSettingsMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ServerSettingsMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ServerSettingsMessage msg = (ServerSettingsMessage)message;
 

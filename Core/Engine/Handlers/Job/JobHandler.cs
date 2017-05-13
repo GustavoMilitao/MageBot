@@ -11,7 +11,7 @@ namespace BlueSheep.Engine.Handlers.Job
     {
          #region Public methods
         [MessageHandler(typeof(JobDescriptionMessage))]
-        public static void JobDescriptionMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void JobDescriptionMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             JobDescriptionMessage msg = (JobDescriptionMessage)message;
 
@@ -33,7 +33,7 @@ namespace BlueSheep.Engine.Handlers.Job
         }
 
         [MessageHandler(typeof(JobExperienceMultiUpdateMessage))]
-        public static void JobExperienceMultiUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void JobExperienceMultiUpdateMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             JobExperienceMultiUpdateMessage msg = (JobExperienceMultiUpdateMessage)message;
 
@@ -60,7 +60,7 @@ namespace BlueSheep.Engine.Handlers.Job
         }
 
         [MessageHandler(typeof(JobExperienceUpdateMessage))]
-        public static void JobExperienceUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void JobExperienceUpdateMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             JobExperienceUpdateMessage msg = (JobExperienceUpdateMessage)message;
 

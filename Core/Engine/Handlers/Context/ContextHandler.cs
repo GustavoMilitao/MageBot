@@ -34,13 +34,13 @@ namespace BlueSheep.Engine.Handlers.Context
     {
         #region Public methods
         [MessageHandler(typeof(MapComplementaryInformationsDataInHouseMessage))]
-        public static void MapComplementaryInformationsDataInHouseMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void MapComplementaryInformationsDataInHouseMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             MapComplementaryInformationsDataMessageTreatment(message, packetDatas, account);
         }
 
         [MessageHandler(typeof(MapComplementaryInformationsDataMessage))]
-        public static void MapComplementaryInformationsDataMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void MapComplementaryInformationsDataMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             MapComplementaryInformationsDataMessage msg = (MapComplementaryInformationsDataMessage)message;
             account.Config.HeroicConfig.AnalysePacket(message, packetDatas);
@@ -61,13 +61,13 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(MapComplementaryInformationsWithCoordsMessage))]
-        public static void MapComplementaryInformationsWithCoordsMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void MapComplementaryInformationsWithCoordsMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             MapComplementaryInformationsDataMessageTreatment(message, packetDatas, account);
         }
 
         [MessageHandler(typeof(CurrentMapMessage))]
-        public static void CurrentMapMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void CurrentMapMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             CurrentMapMessage currentMapMessage = (CurrentMapMessage)message;
 
@@ -96,12 +96,12 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameContextCreateMessage))]
-        public static void GameContextCreateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameContextCreateMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
         }
 
         [MessageHandler(typeof(QuestListMessage))]
-        public static void QuestListMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void QuestListMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             if (!account.Config.IsMITM)
             {
@@ -114,7 +114,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(TextInformationMessage))]
-        public static void TextInformationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void TextInformationMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             TextInformationMessage msg = (TextInformationMessage)message;
 
@@ -162,7 +162,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ChatServerMessage))]
-        public static void ChatServerMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ChatServerMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ChatServerMessage msg = (ChatServerMessage)message;
 
@@ -197,7 +197,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         //[MessageHandler(typeof(GameMapMovementConfirmMessage))]
-        //public static void GameMapMovementConfirmMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        //public static void GameMapMovementConfirmMessageTreatment(Message message, byte[] packetDatas, Account account)
         //{
         //    GameMapMovementConfirmMessage msg = (GameMapMovementConfirmMessage)message;
 
@@ -234,7 +234,7 @@ namespace BlueSheep.Engine.Handlers.Context
         //}
 
         [MessageHandler(typeof(GameMapMovementMessage))]
-        public static void GameMapMovementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameMapMovementMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             GameMapMovementMessage msg = (GameMapMovementMessage)message;
 
@@ -253,7 +253,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameMapNoMovementMessage))]
-        public static void GameMapNoMovementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameMapNoMovementMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             GameMapNoMovementMessage msg = (GameMapNoMovementMessage)message;
 
@@ -287,7 +287,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PopupWarningMessage))]
-        public async static void PopupWarningMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public async static void PopupWarningMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             PopupWarningMessage msg = (PopupWarningMessage)message;
 
@@ -304,7 +304,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(SystemMessageDisplayMessage))]
-        public static void SystemMessageDisplayMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void SystemMessageDisplayMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             SystemMessageDisplayMessage msg = (SystemMessageDisplayMessage)message;
 
@@ -318,7 +318,7 @@ namespace BlueSheep.Engine.Handlers.Context
 
 
         [MessageHandler(typeof(PartyInvitationMessage))]
-        public static void PartyInvitationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void PartyInvitationMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             PartyInvitationMessage msg = (PartyInvitationMessage)message;
 
@@ -343,7 +343,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PartyMemberInFightMessage))]
-        public async static void PartyMemberInFightMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public async static void PartyMemberInFightMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             PartyMemberInFightMessage msg = (PartyMemberInFightMessage)message;
 
@@ -365,7 +365,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(InteractiveElementUpdatedMessage))]
-        public static void InteractiveElementUpdatedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InteractiveElementUpdatedMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             InteractiveElementUpdatedMessage msg = (InteractiveElementUpdatedMessage)message;
 
@@ -386,7 +386,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(StatedElementUpdatedMessage))]
-        public static void StatedElementUpdatedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void StatedElementUpdatedMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             StatedElementUpdatedMessage msg = (StatedElementUpdatedMessage)message;
 
@@ -398,7 +398,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PurchasableDialogMessage))]
-        public static void PurchasableDialogMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void PurchasableDialogMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             PurchasableDialogMessage msg = (PurchasableDialogMessage)message;
 
@@ -421,7 +421,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(HousePropertiesMessage))]
-        public static void HousePropertiesMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void HousePropertiesMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             //HousePropertiesMessage msg = (HousePropertiesMessage)message;
 
@@ -440,7 +440,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameContextRemoveElementMessage))]
-        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             GameContextRemoveElementMessage msg = (GameContextRemoveElementMessage)message;
 
@@ -452,7 +452,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameRolePlayShowActorMessage))]
-        public static void GameRolePlayShowActorMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameRolePlayShowActorMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             GameRolePlayShowActorMessage msg = (GameRolePlayShowActorMessage)message;
             account.Config.HeroicConfig.AnalysePacket(msg, packetDatas);
@@ -476,7 +476,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeStartedWithStorageMessage))]
-        public static void ExchangeStartedWithStorageMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeStartedWithStorageMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ExchangeStartedWithStorageMessage msg = (ExchangeStartedWithStorageMessage)message;
 
@@ -494,7 +494,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(DisplayNumericalValuePaddockMessage))]
-        public static void DisplayNumericalValueMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void DisplayNumericalValueMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             DisplayNumericalValuePaddockMessage msg = (DisplayNumericalValuePaddockMessage)message;
 
@@ -505,7 +505,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ObtainedItemMessage))]
-        public static void ObtainedItemMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ObtainedItemMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ObtainedItemMessage msg = (ObtainedItemMessage)message;
 
@@ -526,7 +526,7 @@ namespace BlueSheep.Engine.Handlers.Context
         ////////////////////////////////// PACKET DELETED ///////////////////////////////////////////////
 
         //[MessageHandler(typeof(DisplayNumericalValueWithAgeBonusMessage))]
-        //public static void DisplayNumericalValueWithAgeBonusTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        //public static void DisplayNumericalValueWithAgeBonusTreatment(Message message, byte[] packetDatas, Account account)
         //{
         //    DisplayNumericalValueWithAgeBonusMessage msg = (DisplayNumericalValueWithAgeBonusMessage)message;
 
@@ -551,7 +551,7 @@ namespace BlueSheep.Engine.Handlers.Context
         //}
 
         [MessageHandler(typeof(InteractiveUseErrorMessage))]
-        public static void InteractiveUseErrorMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InteractiveUseErrorMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             InteractiveUseErrorMessage msg = (InteractiveUseErrorMessage)message;
 
@@ -568,7 +568,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(InteractiveUseEndedMessage))]
-        public static void InteractiveUseEndedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InteractiveUseEndedMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             InteractiveUseEndedMessage msg = (InteractiveUseEndedMessage)message;
 
@@ -585,7 +585,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeStartedWithPodsMessage))]
-        public async static void ExchangeStartedWithPodsMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public async static void ExchangeStartedWithPodsMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ExchangeStartedWithPodsMessage msg = (ExchangeStartedWithPodsMessage)message;
 
@@ -602,7 +602,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeRequestedTradeMessage))]
-        public static void ExchangeRequestedTradeMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeRequestedTradeMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ExchangeRequestedTradeMessage msg = (ExchangeRequestedTradeMessage)message;
 
@@ -615,7 +615,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeIsReadyMessage))]
-        public static void ExchangeIsReadyMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeIsReadyMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ExchangeIsReadyMessage msg = (ExchangeIsReadyMessage)message;
 

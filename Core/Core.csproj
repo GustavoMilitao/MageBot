@@ -54,47 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Account\Account.cs" />
-    <Compile Include="Core\Account\AccountConfig.cs" />
-    <Compile Include="Core\Account\ConfigManager.cs" />
-    <Compile Include="Core\Base\BEntity.cs" />
-    <Compile Include="Core\Bypass\HumanCheck.cs" />
-    <Compile Include="Core\Char\Character.cs" />
-    <Compile Include="Core\Char\CharComplements.cs" />
-    <Compile Include="Core\Connection\IdentificationFailureReason.cs" />
-    <Compile Include="Core\Connection\ServerStatus.cs" />
-    <Compile Include="Core\Fight\BFight.cs" />
-    <Compile Include="Core\Fight\BFighter.cs" />
-    <Compile Include="Core\Fight\BSpell.cs" />
-    <Compile Include="Core\Fight\ChallengeEnum.cs" />
-    <Compile Include="Core\Fight\Entity.cs" />
-    <Compile Include="Core\Fight\FightCondition.cs" />
-    <Compile Include="Core\Fight\FightConditionEnum.cs" />
-    <Compile Include="Core\Fight\FightData.cs" />
-    <Compile Include="Core\Fight\FightParser.cs" />
-    <Compile Include="Core\Fight\MonsterRestrictions.cs" />
-    <Compile Include="Core\Fight\PlacementEnum.cs" />
-    <Compile Include="Core\Fight\SpellCategory.cs" />
-    <Compile Include="Core\Fight\TacticEnum.cs" />
-    <Compile Include="Core\Groups\Group.cs" />
-    <Compile Include="Core\Heroic\Heroic.cs" />
-    <Compile Include="Core\Inventory\Inventory.cs" />
-    <Compile Include="Core\Inventory\InventoryPositionEnum.cs" />
-    <Compile Include="Core\Inventory\Item.cs" />
-    <Compile Include="Core\Inventory\Pods.cs" />
-    <Compile Include="Core\Job\Gather.cs" />
-    <Compile Include="Core\Job\Job.cs" />
-    <Compile Include="Core\Job\Resource.cs" />
-    <Compile Include="Core\Map\Elements\InteractiveElement.cs" />
-    <Compile Include="Core\Map\Elements\StatedElement.cs" />
-    <Compile Include="Core\Map\Elements\UsableElement.cs" />
-    <Compile Include="Core\Map\Map.cs" />
-    <Compile Include="Core\Map\MapData.cs" />
-    <Compile Include="Core\Misc\DataBar.cs" />
-    <Compile Include="Core\Misc\Flood.cs" />
-    <Compile Include="Core\Misc\HouseBuy.cs" />
-    <Compile Include="Core\Monsters\MonsterGroup.cs" />
-    <Compile Include="Core\Regen\Regen.cs" />
     <Compile Include="Engine\Common\CLIParser.cs" />
     <Compile Include="Engine\Constants\DLLInjector.cs" />
     <Compile Include="Engine\Constants\IntelliSense.cs" />
@@ -110,44 +69,19 @@
     <Compile Include="Engine\Handlers\Queues\QueuesHandler.cs" />
     <Compile Include="Engine\Handlers\Security\SecurityHandler.cs" />
     <Compile Include="Engine\Treatment\Treatment.cs" />
+    <Compile Include="Engine\Types\Account.cs" />
+    <Compile Include="Engine\Types\CharComplements.cs" />
+    <Compile Include="Engine\Types\DataBar.cs" />
     <Compile Include="Engine\Types\InstanceInfo.cs" />
     <Compile Include="Engine\Frame\LatencyFrame.cs" />
     <Compile Include="Engine\Network\ConnectionInformations.cs" />
     <Compile Include="Engine\Network\MessageInformations.cs" />
     <Compile Include="Engine\Network\MessagePackaging.cs" />
     <Compile Include="Engine\Network\SocketManager.cs" />
-    <Compile Include="Core\Npc\Npc.cs" />
-    <Compile Include="Core\Npc\NpcReply.cs" />
-    <Compile Include="Core\PathFinding\Pathfinder.cs" />
-    <Compile Include="Core\PathFinding\SimpleCellInfo.cs" />
-    <Compile Include="Core\PathFinding\SimplePathfinder.cs" />
-    <Compile Include="Core\Path\Action.cs" />
-    <Compile Include="Core\Path\PathCondition.cs" />
-    <Compile Include="Core\Path\PathConditionEnum.cs" />
-    <Compile Include="Core\Path\PathManager.cs" />
-    <Compile Include="Core\Pets\Effects.cs" />
-    <Compile Include="Core\Pets\Feeding.cs" />
-    <Compile Include="Core\Pets\Food.cs" />
-    <Compile Include="Core\Pets\MealIntervals.cs" />
-    <Compile Include="Core\Pets\Pet.cs" />
-    <Compile Include="Core\Running.cs" />
-    <Compile Include="Core\Storage\AccountsManager\AccountsFileInteractions.cs" />
-    <Compile Include="Core\Storage\Getting.cs" />
-    <Compile Include="Core\Storage\Leaving.cs" />
-    <Compile Include="Core\Storage\LeavingDialog.cs" />
-    <Compile Include="Core\Storage\Opening.cs" />
     <Compile Include="Engine\Network\WatchDog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataCenter\DataCenter.csproj">
-      <Project>{08641dd9-bce0-495c-945f-87cca26d9927}</Project>
-      <Name>DataCenter</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataFiles\DataFiles.csproj">
-      <Project>{44759c8e-e748-40fa-b71e-a04d919ff887}</Project>
-      <Name>DataFiles</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{5fc9e97d-6446-45c3-a3b2-84b0883782df}</Project>
       <Name>Util</Name>

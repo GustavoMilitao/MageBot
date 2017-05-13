@@ -23,7 +23,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
     {
         #region Public methods
         [MessageHandler(typeof(InventoryContentMessage))]
-        public static void InventoryContentMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InventoryContentMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             InventoryContentMessage inventoryContentMessage = (InventoryContentMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -82,7 +82,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
         }
         [MessageHandler(typeof(InventoryContentAndPresetMessage))]
-        public static void InventoryContentAndPresetMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InventoryContentAndPresetMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             InventoryContentAndPresetMessage msg = (InventoryContentAndPresetMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -142,7 +142,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
         }
 
         [MessageHandler(typeof(ObjectModifiedMessage))]
-        public static void ObjectModifiedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ObjectModifiedMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ObjectModifiedMessage msg = (ObjectModifiedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -166,7 +166,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
         }
 
         [MessageHandler(typeof(ObjectQuantityMessage))]
-        public static void ObjectQuantityMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ObjectQuantityMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ObjectQuantityMessage msg = (ObjectQuantityMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -190,7 +190,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
         }
 
         [MessageHandler(typeof(ExchangeErrorMessage))]
-        public static void ExchangeErrorMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeErrorMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             account.Log(new CharacterTextInformation("Echec de l'ouverture du coffre."), 0);
             if (account.Running != null)
@@ -198,7 +198,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
         }
 
         [MessageHandler(typeof(StorageInventoryContentMessage))]
-        public static void StorageInventoryContentMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void StorageInventoryContentMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             StorageInventoryContentMessage storageInventoryContentMessage = (StorageInventoryContentMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -210,7 +210,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
         }
 
         [MessageHandler(typeof(InventoryWeightMessage))]
-        public static void InventoryWeightMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InventoryWeightMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             InventoryWeightMessage msg = (InventoryWeightMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -228,7 +228,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
         }
 
         [MessageHandler(typeof(ObjectAddedMessage))]
-        public static void ObjectAddedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ObjectAddedMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ObjectAddedMessage msg = (ObjectAddedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -261,7 +261,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
         }
         [MessageHandler(typeof(ObjectDeletedMessage))]
-        public static void ObjectDeletedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ObjectDeletedMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ObjectDeletedMessage objectDeletedMessage = (ObjectDeletedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -285,7 +285,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
         }
         [MessageHandler(typeof(StorageObjectUpdateMessage))]
-        public static void StorageObjectUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void StorageObjectUpdateMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             StorageObjectUpdateMessage storageObjectUpdateMessage = (StorageObjectUpdateMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -307,7 +307,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 account.SafeItems.Add(storageObjectUpdateMessage.Object);
         }
         [MessageHandler(typeof(StorageObjectRemoveMessage))]
-        public static void StorageObjectRemoveMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void StorageObjectRemoveMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             StorageObjectRemoveMessage storageObjectRemoveMessage = (StorageObjectRemoveMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -322,14 +322,14 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
         }
         [MessageHandler(typeof(ExchangeLeaveMessage))]
-        public static void ExchangeLeaveMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeLeaveMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             if (account.Running != null)
                 account.Running.OnSafe = false;
             account.Busy = false;
         }
         [MessageHandler(typeof(ExchangeShopStockStartedMessage))]
-        public static void ExchangeShopStockStartedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeShopStockStartedMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ExchangeShopStockStartedMessage msg = (ExchangeShopStockStartedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))

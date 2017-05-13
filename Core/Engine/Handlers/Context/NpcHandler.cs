@@ -13,7 +13,7 @@ namespace BlueSheep.Engine.Handlers.Context
     class NpcHandler
     {
         [MessageHandler(typeof(ExchangeStartOkNpcShopMessage))]
-        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             ExchangeStartOkNpcShopMessage msg = (ExchangeStartOkNpcShopMessage)message;
 
@@ -25,7 +25,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(LeaveDialogMessage))]
-        public static void NpcDialogCreationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void NpcDialogCreationMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             LeaveDialogMessage msg = (LeaveDialogMessage)message;
 
@@ -37,7 +37,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(NpcDialogCreationMessage))]
-        public static void LeaveDialogMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void LeaveDialogMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             NpcDialogCreationMessage msg = (NpcDialogCreationMessage)message;
 
@@ -51,7 +51,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(NpcDialogQuestionMessage))]
-        public static void NpcDialogQuestionMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void NpcDialogQuestionMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             NpcDialogQuestionMessage msg = (NpcDialogQuestionMessage)message;
 

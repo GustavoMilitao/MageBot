@@ -1,6 +1,4 @@
 ﻿using BlueSheep.Common.Data.D2o;
-using BlueSheep.DataCenter;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +9,7 @@ namespace BlueSheep.Engine.Constants
     {
         public static List<string> MonstersList = new List<string>();
         public static List<string> ItemsList = new List<string>();
-        public static List<Server> ServersList = new List<Server>();
+        //public static List<Server> ServersList = new List<Server>();
 
 
         [DllImport("user32")]
@@ -38,32 +36,32 @@ namespace BlueSheep.Engine.Constants
             }
         }
 
-        public static void InitServers()
-        {
-            foreach (DataClass d in GameData.GetDataObjects(D2oFileEnum.Servers))
-            {
-                ServersList.Add(createNewObjectServerFromGameData(d));
-            }
-        }
+        //public static void InitServers()
+        //{
+        //    foreach (DataClass d in GameData.GetDataObjects(D2oFileEnum.Servers))
+        //    {
+        //        ServersList.Add(createNewObjectServerFromGameData(d));
+        //    }
+        //}
 
         #endregion
 
         #region Private methods
 
-        private static Server createNewObjectServerFromGameData(DataClass data)
-        {
-            Server server = new Server();
-            server.Id = (int)data.Fields["id"];
-            server.NameId = Convert.ToUInt32(data["nameId"]);
-            server.CommentId = Convert.ToUInt32(data["commentId"]);
-            server.OpeningDate = Convert.ToDouble(data["openingDate"]);
-            server.Language = Convert.ToString(data["language"]);
-            server.PopulationId = Convert.ToInt32(data["populationId"]);
-            server.GameTypeId = Convert.ToUInt32(data["gameTypeId"]);
-            server.CommunityId = Convert.ToInt32(data["communityId"]);
-            server.RestrictedToLanguages = ArrayListToStringList((ArrayList)data["restrictedToLanguages"]);
-            return server;
-        }
+        //private static Server createNewObjectServerFromGameData(DataClass data)
+        //{
+        //    Server server = new Server();
+        //    server.Id = (int)data.Fields["id"];
+        //    server.NameId = Convert.ToUInt32(data["nameId"]);
+        //    server.CommentId = Convert.ToUInt32(data["commentId"]);
+        //    server.OpeningDate = Convert.ToDouble(data["openingDate"]);
+        //    server.Language = Convert.ToString(data["language"]);
+        //    server.PopulationId = Convert.ToInt32(data["populationId"]);
+        //    server.GameTypeId = Convert.ToUInt32(data["gameTypeId"]);
+        //    server.CommunityId = Convert.ToInt32(data["communityId"]);
+        //    server.RestrictedToLanguages = ArrayListToStringList((ArrayList)data["restrictedToLanguages"]);
+        //    return server;
+        //}
 
         private static List<string> ArrayListToStringList(ArrayList arrayList)
         {
