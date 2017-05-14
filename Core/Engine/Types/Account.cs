@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using BlueSheep.Core.Frame;
 using BlueSheep.Engine.Treatment;
+using BotForge.Core.Game.Fight;
+using BotForgeAPI.Protocol.Messages;
+using BotForgeAPI.Protocol.Enums;
 
 namespace Core.Engine.Types
 {
@@ -15,6 +18,7 @@ namespace Core.Engine.Types
         public ushort Sequence { get; set; }
         public Dictionary<int, DataBar> InfBars { get; set; }
         public Treatment Treatment { get; set; }
+        public bool LockingSpectators { get; set; }
         #endregion
 
         #endregion
@@ -46,6 +50,11 @@ namespace Core.Engine.Types
                 InfBars[bar].Text = text;
             }
 
+        }
+
+        public void LockFightForSpectators()
+        {
+            Network.Send(new GameFightOptionToggleMessage((sbyte)FightOptionsEnum.FIGHT_OPTION_SET_SECRET));
         }
 
     }
