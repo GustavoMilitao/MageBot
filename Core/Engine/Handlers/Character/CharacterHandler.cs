@@ -4,7 +4,6 @@ using BlueSheep.Util.IO;
 using BlueSheep.Util.Text.Log;
 using BlueSheep.Util.Enums.EnumHelper;
 using System;
-using BlueSheep.Core.Fight;
 using BotForgeAPI.Protocol.Messages;
 using BotForgeAPI.Network.Messages;
 using BotForgeAPI.Protocol.Enums;

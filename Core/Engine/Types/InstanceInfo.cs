@@ -20,6 +20,12 @@ namespace BlueSheep.Engine.Types
             MessageType = messageType;
             Method = method;
         }
+
+        public InstanceInfo(Type messageType, MethodInfo method)
+        {
+            MessageType = messageType;
+            Method = method;
+        }
         #endregion
     }
 }

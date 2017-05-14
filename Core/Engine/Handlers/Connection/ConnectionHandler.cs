@@ -3,7 +3,6 @@ using BlueSheep.Util.IO;
 using BlueSheep.Engine.Constants;
 using BlueSheep.Util.Text.Log;
 using BlueSheep.Util.Text;
-using BlueSheep.Util.Text.Connection;
 using System;
 using System.Collections.Generic;
 using BlueSheep.Util.Enums.EnumHelper;
@@ -14,9 +13,8 @@ using BotForgeAPI.Protocol.Types;
 using BotForge.Core.Crypto;
 using BotForgeAPI.Protocol.Enums;
 using System.Linq;
-using BlueSheep.Core.Account;
 using BotForgeAPI.Game.Map;
-using Core.Core.Char;
+using Core.Engine.Types;
 
 namespace BlueSheep.Engine.Handlers.Connection
 {
@@ -89,7 +87,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(SelectedServerDataExtendedMessage))]
-        public async static void SelectedServerDataExtendedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void SelectedServerDataExtendedMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             SelectedServerDataExtendedMessage msg = (SelectedServerDataExtendedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))

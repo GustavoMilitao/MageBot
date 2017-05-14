@@ -1,32 +1,20 @@
 ﻿using BlueSheep.Common.Data;
 using BlueSheep.Common.Data.D2o;
 using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Game.Basic;
-using BlueSheep.Protocol.Messages.Game.Chat;
-using BlueSheep.Protocol.Messages.Game.Context;
-using BlueSheep.Protocol.Messages.Game.Context.Display;
-using BlueSheep.Protocol.Messages.Game.Context.Fight;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Purchasable;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Quest;
-using BlueSheep.Protocol.Messages.Game.Interactive;
-using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
-using BlueSheep.Protocol.Messages.Game.Inventory.Items;
-using BlueSheep.Protocol.Messages.Game.Moderation;
-using BlueSheep.Protocol.Messages.Server.Basic;
-using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-using BlueSheep.Protocol.Types.Game.Interactive;
 using BlueSheep.Data.Pathfinding;
 using BlueSheep.Data.Pathfinding.Positions;
-using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Protocol.Messages;
 using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using BotForgeAPI.Protocol.Messages;
+using BotForgeAPI.Network.Messages;
+using Core.Engine.Types;
+using BotForge.Core.Game.Gather;
+using BotForge.Core.Game.Map;
+using BotForgeAPI.Game.Map;
+using BotForge.Core.Game;
 
 namespace BlueSheep.Engine.Handlers.Context
 {
@@ -43,19 +31,19 @@ namespace BlueSheep.Engine.Handlers.Context
         public static void MapComplementaryInformationsDataMessageTreatment(Message message, byte[] packetDatas, Account account)
         {
             MapComplementaryInformationsDataMessage msg = (MapComplementaryInformationsDataMessage)message;
-            account.Config.HeroicConfig.AnalysePacket(message, packetDatas);
+            //account.Game..Config.HeroicConfig.AnalysePacket(message, packetDatas);
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
                 msg.Deserialize(reader);
             }
-            account.Gather.ClearError();
-            account.MapData.Clear();
-            account.MapData.ParseLocation(msg.MapId, msg.SubAreaId);
-            account.MapData.ParseStatedElements(msg.StatedElements.ToArray());
-            account.MapData.ParseActors(msg.Actors.ToArray());
-            account.MapData.ParseInteractiveElements(msg.InteractiveElements.ToArray());
-            account.Config.Enabled = true;
-            account.MapData.DoAction();
+            (account.Game.Gather.Data as GatherData).Clear();
+            (account.Game.Map.Data as MapData).Clear();
+            (account.Game.Map.Data as MapData).ParseLocation(msg.MapId, msg.SubAreaId);
+            (account.Game.Map.Data as MapData).ParseStatedElements(msg.StatedElements.ToArray());
+            (account.Game.Map.Data as MapData).ParseActors(msg.Actors.ToArray());
+            (account.Game.Map.Data as MapData).ParseInteractiveElements(msg.InteractiveElements.ToArray());
+            //account.Settings.a.Enabled = true;
+            (account.Game.Map.Data as MapData).DoAction();
             //account.ActualizeMap();
             // TODO Militão: Populate the new interface
         }
@@ -76,11 +64,11 @@ namespace BlueSheep.Engine.Handlers.Context
                 currentMapMessage.Deserialize(reader);
             }
 
-            account.Log(new DebugTextInformation("[Map] = " + currentMapMessage.MapId), 0);
-            account.SetStatus(Status.None);
-            if (account.MapData.Data != null)
+            account.Logger.Log("[Map] = " + currentMapMessage.MapId, BotForgeAPI.Logger.LogEnum.Debug);
+            account.Game.Character.SetStatus(Status.None);
+            if (account.Game.Map.Data != null)
             {
-                account.MapData.Data.Id = currentMapMessage.MapId;
+                (account.Game as Game) = currentMapMessage.MapId;
                 //if (account.MapID == account.MapData.LastMapId && account.Fight != null)
                 //{
                 //    account.FightData.winLoseDic["Gagné"]++;

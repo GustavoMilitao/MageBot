@@ -72,6 +72,7 @@
     <Compile Include="Engine\Types\Account.cs" />
     <Compile Include="Engine\Types\CharComplements.cs" />
     <Compile Include="Engine\Types\DataBar.cs" />
+    <Compile Include="Engine\Types\IdentificationFailureReason.cs" />
     <Compile Include="Engine\Types\InstanceInfo.cs" />
     <Compile Include="Engine\Frame\LatencyFrame.cs" />
     <Compile Include="Engine\Network\ConnectionInformations.cs" />
@@ -79,9 +80,14 @@
     <Compile Include="Engine\Network\MessagePackaging.cs" />
     <Compile Include="Engine\Network\SocketManager.cs" />
     <Compile Include="Engine\Network\WatchDog.cs" />
+    <Compile Include="Engine\Types\ServerStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataFiles\DataFiles.csproj">
+      <Project>{44759c8e-e748-40fa-b71e-a04d919ff887}</Project>
+      <Name>DataFiles</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{5fc9e97d-6446-45c3-a3b2-84b0883782df}</Project>
       <Name>Util</Name>

@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BotForge.Core">
+      <HintPath>..\..\..\..\Desktop\test\BotForge.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="BotForgeAPI">
+      <HintPath>..\..\..\..\Desktop\test\BotForgeAPI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

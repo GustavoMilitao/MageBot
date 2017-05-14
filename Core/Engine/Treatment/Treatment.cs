@@ -1,53 +1,43 @@
-﻿using BlueSheep.Engine.Handlers;
-using BlueSheep.Engine.Types;
-using BlueSheep.Protocol.Messages;
+﻿using BlueSheep.Engine.Types;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using BlueSheep.Util.Text.Log;
-using BlueSheep.Core.Account;
+using BotForgeAPI.Network.Messages;
+using BotForge.Core.Account;
+using System.Linq;
+using BotForgeAPI.Network;
 
 namespace BlueSheep.Engine.Treatment
 {
-    class Treatment
+    public class Treatment
     {
         #region Fields
-        private readonly List<InstanceInfo> m_Instances = new List<InstanceInfo>();
+        private readonly List<InstanceInfo> Instances = new List<InstanceInfo>();
         private Account account;
         #endregion
 
         #region Constructeurs
         public Treatment(Account account)
         {
-            GetTypes("Core");
+            GetTypes("BlueSheep");
             this.account = account;
         }
         #endregion
 
         #region Public methods
-        public void Treat(int packetID, byte[] packetDatas)
+        public void Treat(NetworkMessage message)
         {
 
-            List<InstanceInfo> enqueue = new List<InstanceInfo>();
-
-            foreach (InstanceInfo instance in m_Instances)
+            InstanceInfo instance = Instances.FirstOrDefault(inst => inst.MessageType == message.GetType());
+            if(instance != null)
             {
-                if (instance.ProtocolID == packetID)
-                    enqueue.Add(instance);
-            }
-
-            foreach (InstanceInfo instance in enqueue)
-            {
-                Message message = (Message)Activator.CreateInstance(instance.MessageType);
                 MethodInfo method = instance.Method;
-                account.Log(new DebugTextInformation("[RCV] " + packetID + " (" + method.Name.Remove(method.Name.IndexOf("Treatment")) + ")"), 0);
-
-                if (method == null)
-                    return;
-
-                object[] parameters = { message, packetDatas, account };
-
-                method.Invoke(null, parameters);
+                if(method!=null)
+                {
+                    account.Logger.Log("[RCV] " + message.ProtocolId + " (" + method.Name.Remove(method.Name.IndexOf("Treatment")) + ")", BotForgeAPI.Logger.LogEnum.Debug);
+                    object[] parameters = { message, account };
+                    method.Invoke(null, parameters);
+                }
             }
         }
         #endregion
@@ -63,16 +53,16 @@ namespace BlueSheep.Engine.Treatment
 
                 foreach (MethodInfo method in methods)
                 {
-                    MessageHandler messageHandler = (MessageHandler)Attribute.GetCustomAttribute(method, typeof(MessageHandler), false);
+                    Handlers.MessageHandler messageHandler = (Handlers.MessageHandler)Attribute.GetCustomAttribute(method, typeof(Handlers.MessageHandler), false);
 
                     if (messageHandler == null)
                         continue;
 
                     Message message = (Message)(Activator.CreateInstance(messageHandler.MessageType));
 
-                    InstanceInfo instance = new InstanceInfo((uint)message.MessageID, messageHandler.MessageType, method);
+                    InstanceInfo instance = new InstanceInfo(messageHandler.MessageType, method);
 
-                    m_Instances.Add(instance);
+                    Instances.Add(instance);
                 }
             }
         }

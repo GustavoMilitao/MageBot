@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using BlueSheep.Core.Misc;
 using BlueSheep.Core.Frame;
+using BlueSheep.Engine.Treatment;
 
 namespace Core.Engine.Types
 {
@@ -14,6 +14,7 @@ namespace Core.Engine.Types
         public LatencyFrame LatencyFrame { get; set; }
         public ushort Sequence { get; set; }
         public Dictionary<int, DataBar> InfBars { get; set; }
+        public Treatment Treatment { get; set; }
         #endregion
 
         #endregion
