@@ -1,8 +1,9 @@
 ﻿using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Queues;
-using BlueSheep.Protocol.Messages;
 using BlueSheep.Util.Text.Log;
 using BlueSheep.Util.I18n.Strings;
+using BotForgeAPI.Protocol.Messages;
+using BotForgeAPI.Network.Messages;
+using Core.Engine.Types;
 
 namespace BlueSheep.Engine.Handlers.Queues
 {
@@ -14,13 +15,8 @@ namespace BlueSheep.Engine.Handlers.Queues
         {
             LoginQueueStatusMessage loginQueueStatusMessage = (LoginQueueStatusMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                loginQueueStatusMessage.Deserialize(reader);
-            }
-
-            account.Log(new QueueTextInformation("File d'attente : " + loginQueueStatusMessage.Position +
-                "/" + loginQueueStatusMessage.Total + "."),0);
+            account.Logger.Log(Strings.PositionInQueue+" : " + loginQueueStatusMessage.Position +
+                "/" + loginQueueStatusMessage.Total + ".", BotForgeAPI.Logger.LogEnum.Queue);
         }
 
         [MessageHandler(typeof(QueueStatusMessage))]
@@ -28,13 +24,8 @@ namespace BlueSheep.Engine.Handlers.Queues
         {
             QueueStatusMessage queueStatusMessage = (QueueStatusMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                queueStatusMessage.Deserialize(reader);
-            }
-
-            account.Log(new QueueTextInformation(Strings.PositionInQueue + " : " + queueStatusMessage.Position + "/"
-                + queueStatusMessage.Total + "."),0);
+            account.Logger.Log(Strings.PositionInQueue + " : " + queueStatusMessage.Position + "/"
+                + queueStatusMessage.Total + ".", BotForgeAPI.Logger.LogEnum.Queue);
         }
         #endregion
     }

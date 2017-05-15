@@ -1,6 +1,7 @@
-﻿using BlueSheep.Protocol.Messages;
-using System.Collections.Generic;
-using BlueSheep.Protocol.Messages.Security;
+﻿using System.Collections.Generic;
+using BotForgeAPI.Protocol.Messages;
+using BotForgeAPI.Network.Messages;
+using Core.Engine.Types;
 
 namespace BlueSheep.Engine.Handlers.Security
 {
@@ -10,10 +11,10 @@ namespace BlueSheep.Engine.Handlers.Security
         [MessageHandler(typeof(RawDataMessage))]
         public static void RawDataMessageTreatment(Message message,  Account account)
         {
-            List<int> tt = new List<int>();
-            CheckIntegrityMessage checkIntegrityMessage = new CheckIntegrityMessage(tt);
+            List<sbyte> tt = new List<sbyte>();
+            CheckIntegrityMessage checkIntegrityMessage = new CheckIntegrityMessage(tt.ToArray());
 
-            account.SocketManager.Send(checkIntegrityMessage);
+            account.Network.Send(checkIntegrityMessage);
         }
 
         [MessageHandler(typeof(CheckIntegrityMessage))]

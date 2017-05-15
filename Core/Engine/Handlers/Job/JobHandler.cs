@@ -1,9 +1,10 @@
 ﻿using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Job;
-using BlueSheep.Protocol.Types.Game.Context.Roleplay.Job;
-using BlueSheep.Protocol.Types.Game.Interactive.Skill;
-using BlueSheep.Protocol.Messages;
 using System.Collections.Generic;
+using BotForgeAPI.Protocol.Messages;
+using BotForgeAPI.Network.Messages;
+using Core.Engine.Types;
+using BotForgeAPI.Protocol.Types;
+using System.Linq;
 
 namespace BlueSheep.Engine.Handlers.Job
 {
@@ -15,20 +16,10 @@ namespace BlueSheep.Engine.Handlers.Job
         {
             JobDescriptionMessage msg = (JobDescriptionMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
-
             foreach (JobDescription job in msg.JobsDescription)
             {
-                List<int> skills = new List<int>();
-                foreach (SkillActionDescription s in job.Skills)
-                {
-                    skills.Add(s.SkillId);
-                }
-                Core.Job.Job j = new Core.Job.Job(job.JobId, skills, account);
-                account.Jobs.Add(j);
+                BotForge.Core.Game.Job.Job j = new BotForge.Core.Game.Job.Job(job.JobId, job.Skills.ToList());
+                account.Game.Character.Jobs.Add(j);
             }
         }
 
@@ -37,20 +28,16 @@ namespace BlueSheep.Engine.Handlers.Job
         {
             JobExperienceMultiUpdateMessage msg = (JobExperienceMultiUpdateMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             foreach (JobExperience i in msg.ExperiencesUpdate)
             {
-                foreach (Core.Job.Job j in account.Jobs)
+                foreach (BotForge.Core.Game.Job.Job j in account.Game.Character.Jobs)
                 {
                     if (i.JobId == j.Id)
                     {
                         j.Level = i.JobLevel;
-                        j.XP = (int)i.JobXP;
-                        j.XpLevelFloor =(int)i.JobXpLevelFloor;
-                        j.XpNextLevelFloor = (int)i.JobXpNextLevelFloor;
+                        j.Xp = i.JobXP;
+                        j.LevelFloor = i.JobXpLevelFloor;
+                        j.NextXp = i.JobXpNextLevelFloor;
                         break;
                     }
                 }
@@ -63,20 +50,15 @@ namespace BlueSheep.Engine.Handlers.Job
         public static void JobExperienceUpdateMessageTreatment(Message message,  Account account)
         {
             JobExperienceUpdateMessage msg = (JobExperienceUpdateMessage)message;
-
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             JobExperience i = msg.ExperiencesUpdate;
-            foreach (Core.Job.Job j in account.Jobs)
+            foreach (BotForge.Core.Game.Job.Job j in account.Game.Character.Jobs)
             {
                 if (i.JobId == j.Id)
                 {
                     j.Level = i.JobLevel;
-                    j.XP = (int)i.JobXP;
-                    j.XpLevelFloor = (int)i.JobXpLevelFloor;
-                    j.XpNextLevelFloor = (int)i.JobXpNextLevelFloor;
+                    j.Xp = i.JobXP;
+                    j.LevelFloor = i.JobXpLevelFloor;
+                    j.NextXp = i.JobXpNextLevelFloor;
                     break;
                 }
             }
