@@ -2,21 +2,15 @@
 using System.Linq;
 using BlueSheep.Util.Text.Log;
 using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages;
-using BlueSheep.Protocol.Types;
-using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Data.Pathfinding.Positions;
 using BlueSheep.Data.Pathfinding;
-using BlueSheep.Protocol.Messages.Game.Actions.Fight;
-using BlueSheep.Protocol.Messages.Game.Context.Fight;
-using BlueSheep.Protocol.Messages.Game.Character.Stats;
-using BlueSheep.Protocol.Messages.Game.Actions;
-using BlueSheep.Protocol.Messages.Game.Actions.Sequence;
-using BlueSheep.Protocol.Messages.Game.Inventory.Preset;
-using BlueSheep.Protocol.Messages.Game.Context;
-using BlueSheep.Protocol.Types.Game.Context.Fight;
-using BlueSheep.Protocol.Messages.Game.Context.Fight.Character;
-using BlueSheep.Core.Fight;
+using BotForgeAPI.Protocol.Messages;
+using BotForgeAPI.Network.Messages;
+using BotForge.Core.Game.Fight;
+using BotForge.Core.Game.Fight.Fighters;
+using Core.Engine.Types;
+using BotForgeAPI.Game.Map;
+using BotForgeAPI.Protocol.Types;
 
 namespace BlueSheep.Engine.Handlers.Fight
 {
@@ -31,7 +25,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetFighterDeath((long)msg.TargetId);
+            (account.Game.Fight.Data as FightData).SetFighterDeath((long)msg.TargetId);
         }
 
         [MessageHandler(typeof(GameActionFightDispellableEffectMessage))]
@@ -42,7 +36,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetEffect(msg.Effect, msg.ActionId);
+            (account.Game.Fight.Data as FightData).SetEffect(msg.Effect, msg.ActionId);
         }
 
         [MessageHandler(typeof(GameActionFightPointsVariationMessage))]
@@ -53,7 +47,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetPointsVariation((long)msg.TargetId, msg.ActionId, msg.Delta);
+            (account.Game.Fight.Data as FightData).SetPointsVariation((long)msg.TargetId, msg.ActionId, msg.Delta);
         }
 
         [MessageHandler(typeof(GameActionFightLifePointsLostMessage))]
@@ -64,7 +58,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.UpdateFighterLifePoints((long)msg.TargetId, -((int)msg.Loss));
+            (account.Game.Fight.Data as FightData).UpdateFighterLifePoints((long)msg.TargetId, -((int)msg.Loss));
 
         }
 
@@ -76,7 +70,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.UpdateFighterCell((long)msg.TargetId, msg.EndCellId);
+            (account.Game.Fight.Data as FightData).UpdateFighterCell((long)msg.TargetId, msg.EndCellId);
         }
 
         [MessageHandler(typeof(GameActionFightSpellCastMessage))]
@@ -87,7 +81,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetSpellCasted((long)msg.SourceId, msg.SpellId, msg.DestinationCellId);
+            (account.Game.Fight.Data as FightData).SetSpellCasted((long)msg.SourceId, msg.SpellId, msg.DestinationCellId, msg.SpellLevel);
         }
 
         [MessageHandler(typeof(GameActionFightSummonMessage))]
@@ -98,14 +92,10 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            msg.Summons.ForEach(summon =>
-            account.FightData.AddSummon(
-                (long)msg.SourceId, new BFighter(
-                    summon.ContextualId, summon.Disposition.CellId,
-                    summon.Stats.ActionPoints, summon.Stats, summon.Alive,
-                    (int)summon.Stats.LifePoints, (int)summon.Stats.MaxLifePoints,
-                    summon.Stats.MovementPoints, summon.TeamId, 0))
-            );
+            msg.Summons.ToList().ForEach(summon =>
+            (account.Game.Fight.Data as FightData).Summons.Add(
+                    new Fighter(summon, account.Game.Fight.Data,
+                                account.Game.Map.Data)));
         }
 
         [MessageHandler(typeof(GameActionFightTeleportOnSameMapMessage))]
@@ -116,7 +106,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.UpdateFighterCell((long)msg.TargetId, msg.CellId);
+            (account.Game.Fight.Data as FightData).UpdateFighterCell((long)msg.TargetId, msg.CellId);
         }
 
         [MessageHandler(typeof(GameEntitiesDispositionMessage))]
@@ -127,14 +117,14 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            if (account.Fight != null)
+            if (account.Game.Fight != null)
             {
                 msg.Dispositions.ToList().ForEach(d =>
                 {
-                    account.FightData.UpdateFighterCell((long)d.ObjectId, d.CellId);
+                    (account.Game.Fight.Data as FightData).UpdateFighterCell((long)d.ObjectId, d.CellId);
                 });
             }
-            account.SetStatus(Status.Fighting);
+            account.Game.Character.SetStatus(Status.Fighting);
         }
 
         [MessageHandler(typeof(GameFightEndMessage))]
@@ -145,20 +135,8 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.FightStop();
-            account.SetStatus(Status.None);
-            await account.PutTaskDelay(2000);
-            if (account.Config.AutoRelaunchFight && account.State != Status.Fighting)
-            {
-                bool findFight = account.Fight.SearchFight().Result;
-                while (!findFight)
-                {
-                    account.Map.ChangeMap();
-                    await account.PutTaskDelay(3000);
-                    findFight = account.Fight.SearchFight().Result;
-                }
-            }
-            //account.Fight.infinite = true; // Swap it with checkbox
+            (account.Game.Fight.Data as FightData).FightStop(msg);
+            account.Game.Character.SetStatus(Status.None);
         }
 
         [MessageHandler(typeof(GameFightHumanReadyStateMessage))]
@@ -169,8 +147,8 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            if (msg.CharacterId == account.CharacterBaseInformations.ObjectID)
-                account.FightData.WaitForReady = !msg.IsReady;
+            if (msg.CharacterId == account.Game.Character.Id)
+                (account.Game.Fight.Data as FightData).WaitForReady = !msg.IsReady;
         }
 
         [MessageHandler(typeof(GameFightJoinMessage))]
@@ -181,14 +159,15 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            if (account.Fight != null)
+            if (account.Game.Fight != null)
             {
-                account.FightData.Reset(msg.IsFightStarted, msg.CanSayReady);
-                if (account.Config.LockingFights && account.Fight != null && !account.Config.LockPerformed)
+                (account.Game.Fight.Data as FightData).Reset(msg.IsFightStarted, msg.CanSayReady);
+                if (account.Settings.LockingFight && account.Game.Fight != null && !account.LockPerformed)
                 {
-                    account.FightData.PerformAutoTimeoutFight(2000);
-                    account.Fight.LockFight();
-                    account.Config.LockPerformed = true;
+                    //(account.Game.Fight.Data as FightData).PerformAutoTimeoutFight(2000);
+                    account.Wait(2000, 2000);
+                    account.Game.Fight.LockFight();
+                    account.LockPerformed = true;
                 }
 
             }
@@ -203,10 +182,11 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
 
-            if (msg.CharId == account.CharacterBaseInformations.ObjectID)
-            {
-                account.FightData.FightStop();
-            }
+            //if (msg.CharId == account.Game.Character.Id)
+            //{
+            //    (account.Game.Fight as BotForge.Core.Game.Fight.Fight);
+            //}
+            // TODO Militão 2.0: Fight stop here
         }
 
         [MessageHandler(typeof(GameFightOptionStateUpdateMessage))]
@@ -217,7 +197,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.SetOption(msg.State, msg.Option);
+            (account.Game.Fight.Data as FightData).SetOption(msg.State, msg.Option);
         }
 
         [MessageHandler(typeof(GameFightShowFighterMessage))]
@@ -228,7 +208,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.AddFighter(msg.Informations);
+            (account.Game.Fight.Data as FightData).AddFighter(msg.Informations);
 
         }
 
@@ -240,7 +220,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.AddFighter(msg.Informations);
+            (account.Game.Fight.Data as FightData).AddFighter(msg.Informations);
         }
 
         [MessageHandler(typeof(GameFightStartMessage))]
@@ -251,7 +231,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.FightStart();
+            (account.Game.Fight.Data as FightData).FightStart();
         }
 
         [MessageHandler(typeof(GameFightSynchronizeMessage))]
@@ -262,9 +242,9 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.ClearFighters();
+            (account.Game.Fight.Data as FightData).ClearFighters();
             foreach (GameFightFighterInformations i in msg.Fighters)
-                account.FightData.AddFighter(i);
+                (account.Game.Fight.Data as FightData).AddFighter(i);
         }
 
         [MessageHandler(typeof(GameFightTurnEndMessage))]
@@ -275,7 +255,8 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.TurnEnded((ulong)msg.ObjectId);
+            if (msg.ObjectId == account.Game.Character.Id)
+                (account.Game.Fight.Data as FightData).IsFighterTurn = false;
         }
 
         [MessageHandler(typeof(GameFightTurnStartMessage))]
@@ -298,9 +279,9 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             MovementPath clientMovement = MapMovementAdapter.GetClientMovement(msg.KeyMovements.Select(k => (int)k).ToList());
-            if (account.State == Status.Fighting)
+            if (account.Game.Character.Status == Status.Fighting)
             {
-                account.FightData.UpdateFighterCell((long)msg.ActorId, clientMovement.CellEnd.CellId);
+                (account.Game.Fight.Data as FightData).UpdateFighterCell((long)msg.ActorId, clientMovement.CellEnd.CellId);
             }
             //account.ActualizeMap();
             // TODO Militão: Populate the new interface
@@ -314,7 +295,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.UpdateTurn((int)msg.RoundNumber);
+            (account.Game.Fight.Data as FightData).UpdateTurn((int)msg.RoundNumber);
         }
 
         [MessageHandler(typeof(GameFightTurnStartPlayingMessage))]
@@ -325,14 +306,13 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.FightData.TurnStarted();
-            if (account.Fight != null)
+            (account.Game.Fight.Data as FightData).IsFighterTurn = true;
+            if (account.Game.Fight != null)
             {
-                account.Fight.flag = 1;
-                account.Fight.ExecutePlan();
+                account.Game.Fight.ExecutePlan();
             }
             else
-                account.Log(new ErrorTextInformation("Aucune IA, le bot ne peut pas combattre !"), 0);
+                account.Logger.Log("AI is necessary to run fight", BotForgeAPI.Logger.LogEnum.TextInformationError);
         }
 
         [MessageHandler(typeof(GameFightPlacementPossiblePositionsMessage))]
@@ -343,22 +323,22 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.SetStatus(Status.Fighting);
-            account.FightData.UpdateTurn(0);
-            if (account.Fight != null)
+            account.Game.Character.SetStatus(Status.Fighting);
+            (account.Game.Fight.Data as FightData).UpdateTurn(0);
+            if (account.Game.Fight != null)
             {
-                account.Fight.PlaceCharacter(msg.PositionsForChallengers.Select(item => (int)item).ToList());
+                account.Game.Fight.PlaceCharacter((ushort)msg.PositionsForChallengers.Select(item => (int)item).FirstOrDefault());
             }
-            if (account.FightData.StartFightWithItemSet)
+            if (account.StartFightWithItemSet)
             {
-                byte id = account.FightData.PresetStartUpId;
-                InventoryPresetUseMessage msg2 = new InventoryPresetUseMessage((byte)(id - 1));
-                account.SocketManager.Send(msg2);
-                account.Log(new ActionTextInformation("Fast equipment number " + Convert.ToString(id)), 5);
+                byte id = account.PresetStartUpId;
+                InventoryPresetUseMessage msg2 = new InventoryPresetUseMessage((sbyte)(id - 1));
+                account.Network.Send(msg2);
+                account.Logger.Log("Fast equipment number " + Convert.ToString(id), BotForgeAPI.Logger.LogEnum.TextInformationMessage);
             }
             GameFightReadyMessage nmsg = new GameFightReadyMessage(true);
-            account.SocketManager.Send(nmsg);
-            account.Log(new BotTextInformation("Send Ready !"), 5);
+            account.Network.Send(nmsg);
+            account.Logger.Log("Send Ready !", BotForgeAPI.Logger.LogEnum.Bot);
         }
 
         [MessageHandler(typeof(GameFightTurnReadyRequestMessage))]
@@ -370,7 +350,7 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             GameFightTurnReadyMessage msg2 = new GameFightTurnReadyMessage(true);
-            account.SocketManager.Send(msg2);
+            account.Network.Send(msg2);
         }
 
         [MessageHandler(typeof(SequenceEndMessage))]
@@ -381,19 +361,21 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            if (!account.FightData.IsDead && account.FightData.Fighter.Id == msg.AuthorId && !account.Config.IsMITM && account.Fight != null && account.FightData.IsFighterTurn)
+            
+            if ((account.Game.Fight.Data as FightData).Fighter.IsAlive && (account.Game.Fight.Data as FightData).Fighter.Id == msg.AuthorId && !account.IsFullSocket && account.Game.Fight != null && (account.Game.Fight.Data as FightData).IsFighterTurn)
             {
-                GameActionAcknowledgementMessage msg2 = new GameActionAcknowledgementMessage(true, (byte)msg.ActionId);
-                account.SocketManager.Send(msg2);
-                switch (account.Fight.flag)
-                {
-                    case -1:
-                        account.Fight.EndTurn();
-                        break;
-                    case 1:
-                        account.Fight.ExecutePlan();
-                        break;
-                }
+                GameActionAcknowledgementMessage msg2 = new GameActionAcknowledgementMessage(true, (sbyte)msg.ActionId);
+                account.Network.Send(msg2);
+                //switch (account.Game.Fight.flag)
+                //{
+                //    case -1:
+                //        account.Fight.EndTurn();
+                //        break;
+                //    case 1:
+                //        account.Fight.ExecutePlan();
+                //        break;
+                //}
+                //TODO Militão 2.0: Get Flag.
             }
         }
 
@@ -416,7 +398,7 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             int percent = ((int)msg.LifePoints / (int)msg.MaxLifePoints) * 100;
-            account.Log(new BotTextInformation("Fin de la régénération. + " + msg.LifePointsGained + " points de vie"), 2);
+            account.Logger.Log("End Regenerating. + " + msg.LifePointsGained + " life points", BotForgeAPI.Logger.LogEnum.Bot);
             account.ModifBar(2, (int)msg.MaxLifePoints, (int)msg.LifePoints, "Vitalité");
         }
 
@@ -429,9 +411,9 @@ namespace BlueSheep.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
 
-            if (account.Config.LockingSpectators)
+            if (account.LockingSpectators)
             {
-                account.Fight.LockFightForSpectators();
+                account.Game.Fight.ToggleOption(BotForgeAPI.Protocol.Enums.FightOptionsEnum.FIGHT_OPTION_SET_SECRET);
             }
         }
 
@@ -443,11 +425,11 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            if (account.State == Status.Fighting)
+            if (account.Game.Character.Status == Status.Fighting)
             {
                 if (msg.ActionId == 108) // HP Récupérés (delta = combien on a récupérés)
                 {
-                    account.FightData.UpdateFighterLifePoints((long)msg.TargetId, (int)msg.Delta);
+                    (account.Game.Fight.Data as FightData).UpdateFighterLifePoints((long)msg.TargetId, (int)msg.Delta);
                 }
             }
         }
@@ -460,8 +442,9 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            if (account.Fight != null && account.Fight.flag == -1)
-                account.Fight.EndTurn();
+            if (account.Game.Fight != null )//&& account.Fight.flag == -1)
+                account.Game.Fight.EndTurn();
+            //TODO Militão 2.0: Get Flag
         }
         #endregion
     }

@@ -19,6 +19,10 @@ namespace Core.Engine.Types
         public Dictionary<int, DataBar> InfBars { get; set; }
         public Treatment Treatment { get; set; }
         public bool LockingSpectators { get; set; }
+        public bool LockPerformed { get; set; }
+        public bool StartFightWithItemSet { get; set; }
+        public bool EndFightWithItemSet { get; set; }
+        public byte PresetStartUpId { get; set; }
         #endregion
 
         #endregion
