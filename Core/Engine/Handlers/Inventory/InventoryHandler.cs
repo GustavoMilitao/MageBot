@@ -1,21 +1,14 @@
 ﻿using System.Linq;
 using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Types;
-using BlueSheep.Protocol.Messages;
 using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using BlueSheep.Common.Data.D2o;
-using BlueSheep.Protocol.Messages.Game.Inventory.Items;
-using BlueSheep.Protocol.Types.Game.Data.Items;
-using BlueSheep.Protocol.Messages.Game.Inventory.Storage;
-using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
-using BlueSheep.Protocol.Messages.Game.Chat.Channel;
-using BlueSheep.Protocol.Messages.Game.Context;
-using BlueSheep.Protocol.Messages.Security;
-using BlueSheep.Protocol.Messages.Game.Friend;
-using BlueSheep.Core.Pets;
-using BlueSheep.Core.Inventory;
+using BotForgeAPI.Protocol.Messages;
+using Core.Engine.Types;
+using BotForgeAPI.Network.Messages;
+using BotForge.Core.Game.Inventory;
+using BotForge.Core.Game.Pets;
 
 namespace BlueSheep.Engine.Handlers.Inventory
 {
@@ -23,41 +16,36 @@ namespace BlueSheep.Engine.Handlers.Inventory
     {
         #region Public methods
         [MessageHandler(typeof(InventoryContentMessage))]
-        public static void InventoryContentMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void InventoryContentMessageTreatment(Message message, Account account)
         {
             InventoryContentMessage inventoryContentMessage = (InventoryContentMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            foreach (BotForgeAPI.Protocol.Types.ObjectItem item in inventoryContentMessage.Objects)
             {
-                inventoryContentMessage.Deserialize(reader);
-            }
-            foreach (ObjectItem item in inventoryContentMessage.Objects)
-            {
-                Core.Inventory.Item i = new Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
-                account.Inventory.Items.Add(i);
+                BotForge.Core.Game.Inventory.Item i = new BotForge.Core.Game.Inventory.Item(item);
+                account.Game.Inventory.Data.Items.Add(i);
             }
             //account.ActualizeInventory();
             // TODO Militão: Populate the new interface
-            account.petsList = new List<Pet>();
-            foreach (Core.Inventory.Item item in account.Inventory.Items)
+            foreach (BotForge.Core.Game.Inventory.Item item in account.Game.Inventory.Data.Items)
             {
                 DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
                 {
-                    Pet pet = new Pet(item, itemData, account);
-                    account.petsList.Add(pet);
-                    pet.SetFood();
+                    Pet pet = new Pet(item, account);
+                    account.Game.Pets.Data.Pets.Add(pet);
+                    pet.Set();
                 }
             }
-            if (account.petsList.Count > 0)
-                account.Log(new BotTextInformation("Vos " + account.petsList.Count + " familiers vous font un gros bisou de la part de BlueSheep."), 3);
-            if (!account.Config.IsMITM)
+            if (account.Game.Pets.Data.Pets.Count > 0)
+                account.Logger.Log("Your " + account.Game.Pets.Data.Pets.Count + " Familiar make you a big kiss from BlueSheep.", BotForgeAPI.Logger.LogEnum.Bot);
+            if (account.IsFullSocket)
             {
                 FriendsGetListMessage friendGetListMessage = new FriendsGetListMessage();
-                account.SocketManager.Send(friendGetListMessage);
+                account.Network.Send(friendGetListMessage);
                 IgnoredGetListMessage ignoredGetListMessage = new IgnoredGetListMessage();
-                account.SocketManager.Send(ignoredGetListMessage);
+                account.Network.Send(ignoredGetListMessage);
                 SpouseGetInformationsMessage spouseGetInformationsMessage = new SpouseGetInformationsMessage();
-                account.SocketManager.Send(spouseGetInformationsMessage);
+                account.Network.Send(spouseGetInformationsMessage);
                 Random random = new Random();
                 const string hexChars = "0123456789ABCDEF";
                 string key = string.Empty;
@@ -74,49 +62,43 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 int pos = key.Sum(t => t % 16);
                 key += hexChars[pos % 16];
                 ClientKeyMessage clientKeyMessage = new ClientKeyMessage(key);
-                account.SocketManager.Send(clientKeyMessage);
+                account.Network.Send(clientKeyMessage);
                 GameContextCreateRequestMessage gameContextCreateRequestMessage = new GameContextCreateRequestMessage();
-                account.SocketManager.Send(gameContextCreateRequestMessage);
+                account.Network.Send(gameContextCreateRequestMessage);
                 ChannelEnablingMessage channelEnablingMessage = new ChannelEnablingMessage(7, false);
-                account.SocketManager.Send(channelEnablingMessage);
+                account.Network.Send(channelEnablingMessage);
             }
         }
         [MessageHandler(typeof(InventoryContentAndPresetMessage))]
-        public static void InventoryContentAndPresetMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void InventoryContentAndPresetMessageTreatment(Message message, Account account)
         {
             InventoryContentAndPresetMessage msg = (InventoryContentAndPresetMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            foreach (BotForgeAPI.Protocol.Types.ObjectItem item in msg.Objects)
             {
-                msg.Deserialize(reader);
-            }
-            foreach (ObjectItem item in msg.Objects)
-            {
-                Core.Inventory.Item i = new Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
-                account.Inventory.Items.Add(i);
+                Item i = new Item(item);
+                account.Game.Inventory.Data.Items.Add(i);
             }
             //account.ActualizeInventory();
             // TODO Militão: Populate the new interface
-            account.petsList = new List<Pet>();
-            foreach (Core.Inventory.Item item in account.Inventory.Items)
+            foreach (Item item in account.Game.Inventory.Data.Items)
             {
                 DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
                 {
-                    Pet pet = new Pet(item, itemData, account);
-                    account.petsList.Add(pet);
-                    pet.SetFood();
+                    Pet pet = new Pet(item, account);
+                    account.Game.Pets.Data.Pets.Add(pet);
+                    pet.Set();
                 }
             }
-            account.Log(new BotTextInformation("Vos " +
-            account.petsList.Count + " familiers vous font un gros bisou de la part de BlueSheep."), 5);
-            if (!account.Config.IsMITM)
+            account.Logger.Log("Your " + account.Game.Pets.Data.Pets.Count + " Familiar make you a big kiss from BlueSheep.", BotForgeAPI.Logger.LogEnum.Bot);
+            if (account.IsFullSocket)
             {
                 FriendsGetListMessage friendGetListMessage = new FriendsGetListMessage();
-                account.SocketManager.Send(friendGetListMessage);
+                account.Network.Send(friendGetListMessage);
                 IgnoredGetListMessage ignoredGetListMessage = new IgnoredGetListMessage();
-                account.SocketManager.Send(ignoredGetListMessage);
+                account.Network.Send(ignoredGetListMessage);
                 SpouseGetInformationsMessage spouseGetInformationsMessage = new SpouseGetInformationsMessage();
-                account.SocketManager.Send(spouseGetInformationsMessage);
+                account.Network.Send(spouseGetInformationsMessage);
                 Random random = new Random();
                 const string hexChars = "0123456789ABCDEF";
                 string key = string.Empty;
@@ -133,112 +115,107 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 int pos = key.Sum(t => t % 16);
                 key += hexChars[pos % 16];
                 ClientKeyMessage clientKeyMessage = new ClientKeyMessage(key);
-                account.SocketManager.Send(clientKeyMessage);
+                account.Network.Send(clientKeyMessage);
                 GameContextCreateRequestMessage gameContextCreateRequestMessage = new GameContextCreateRequestMessage();
-                account.SocketManager.Send(gameContextCreateRequestMessage);
+                account.Network.Send(gameContextCreateRequestMessage);
                 ChannelEnablingMessage channelEnablingMessage = new ChannelEnablingMessage(7, false);
-                account.SocketManager.Send(channelEnablingMessage);
+                account.Network.Send(channelEnablingMessage);
             }
         }
 
         [MessageHandler(typeof(ObjectModifiedMessage))]
-        public static void ObjectModifiedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ObjectModifiedMessageTreatment(Message message, Account account)
         {
             ObjectModifiedMessage msg = (ObjectModifiedMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            for (int index = 0; index < account.Game.Inventory.Data.Items.Count; index++)
             {
-                msg.Deserialize(reader);
+                if (account.Game.Inventory.Data.Items[index].UID == msg.@object.ObjectUID)
+                    account.Game.Inventory.Data.Items[index] = new Item(msg.@object);
             }
-            for (int index = 0; index < account.Inventory.Items.Count; index++)
-            {
-                if (account.Inventory.Items[index].UID == msg.Object.ObjectUID)
-                    account.Inventory.Items[index] = new Core.Inventory.Item(msg.Object.Effects, msg.Object.ObjectGID, msg.Object.Position, (int)msg.Object.Quantity, (int)msg.Object.ObjectUID);
-            }
-            DataClass ItemData = GameData.GetDataObject(D2oFileEnum.Items, msg.Object.ObjectGID);
+            DataClass ItemData = GameData.GetDataObject(D2oFileEnum.Items, msg.@object.ObjectGID);
             if ((int)ItemData.Fields["typeId"] == 18)
             {
-                Pet pet = new Pet(new Core.Inventory.Item(msg.Object.Effects.ToList(), msg.Object.ObjectGID, msg.Object.Position, (int)msg.Object.Quantity, (int)msg.Object.ObjectUID), ItemData, account);
-                if (account.PetsModifiedList == null)
-                    account.PetsModifiedList = new List<Pet>();
-                account.PetsModifiedList.Add(pet);
-                account.Log(new ActionTextInformation("Familier nourri : " + BlueSheep.Common.Data.I18N.GetText((int)ItemData.Fields["nameId"]) + " " + "."), 3);
+                Pet pet = new Pet(new Item(msg.@object), account);
+                //if (account.Game.Pets.Data.PetsModifiedList == null)
+                //    account.PetsModifiedList = new List<Pet>();
+                //account.PetsModifiedList.Add(pet);
+                account.Logger.Log("Pet fed : " + Common.Data.I18N.GetText((int)ItemData.Fields["nameId"]) + " " + ".", BotForgeAPI.Logger.LogEnum.TextInformationMessage);
             }
         }
 
         [MessageHandler(typeof(ObjectQuantityMessage))]
-        public static void ObjectQuantityMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ObjectQuantityMessageTreatment(Message message, Account account)
         {
             ObjectQuantityMessage msg = (ObjectQuantityMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            for (int index = 0; index < account.Game.Inventory.Data.Items.Count; index++)
             {
-                msg.Deserialize(reader);
-            }
-            for (int index = 0; index < account.Inventory.Items.Count; index++)
-            {
-                if (account.Inventory.Items[index].UID == msg.ObjectUID)
+                if (account.Game.Inventory.Data.Items[index].UID == msg.ObjectUID)
                 {
-                    account.Inventory.Items[index].Quantity = (int)msg.Quantity;
+                    account.Game.Inventory.Data.Items[index].Update(msg);
                     //account.ActualizeInventory();
                     // TODO Militão: Populate the new interface
                 }
             }
-            if (account.Running != null)
-            {
-                foreach (Pet pet in account.petsList)
-                    pet.SetFood();
-            }
+            //if (account.Running != null)
+            //{
+            foreach (Pet pet in account.Game.Pets.Data.Pets)
+                pet.Set();
+            //}
         }
 
         [MessageHandler(typeof(ExchangeErrorMessage))]
-        public static void ExchangeErrorMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ExchangeErrorMessageTreatment(Message message, Account account)
         {
-            account.Log(new CharacterTextInformation("Echec de l'ouverture du coffre."), 0);
-            if (account.Running != null)
-                account.Running.OnSafe = false;
+            account.Logger.Log("Failed to open trunk.", BotForgeAPI.Logger.LogEnum.TextInformationMessage);
+            //if (account.Running != null)
+            //    account.Running.OnSafe = false;
         }
 
         [MessageHandler(typeof(StorageInventoryContentMessage))]
-        public static void StorageInventoryContentMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void StorageInventoryContentMessageTreatment(Message message, Account account)
         {
             StorageInventoryContentMessage storageInventoryContentMessage = (StorageInventoryContentMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                storageInventoryContentMessage.Deserialize(reader);
-            }
-            foreach (ObjectItem item in storageInventoryContentMessage.Objects)
-                account.SafeItems.Add(item);
+            foreach (BotForgeAPI.Protocol.Types.ObjectItem item in storageInventoryContentMessage.Objects)
+                //account.Game.Inventory..Add(item);
+                (account.Game.Inventory.Data as InventoryData).Update(storageInventoryContentMessage);
+            // TODO Militão 2.0: Verify
+        }
+
+        [MessageHandler(typeof(StorageKamasUpdateMessage))]
+        public static void StorageKamasUpdateMessageTreatment(Message message, Account account)
+        {
+            StorageKamasUpdateMessage msg = (StorageKamasUpdateMessage)message;
+
+            (account.Game.Inventory.Data as InventoryData).StorageKamas = (int)msg.KamasTotal;
+        }
+
+        [MessageHandler(typeof(ExchangeKamaModifiedMessage))]
+        public static void ExchangeKamaModifiedMessageTreatment(Message message, Account account)
+        {
+            ExchangeKamaModifiedMessage msg = (ExchangeKamaModifiedMessage)message;
+            (account.Game.Inventory.Data as InventoryData).Update(msg);
         }
 
         [MessageHandler(typeof(InventoryWeightMessage))]
-        public static void InventoryWeightMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void InventoryWeightMessageTreatment(Message message, Account account)
         {
             InventoryWeightMessage msg = (InventoryWeightMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             int Percent = (((int)msg.Weight / (int)msg.WeightMax) * 100);
             string text = Convert.ToString(msg.Weight) + "/" + Convert.ToString((int)msg.WeightMax) + "(" + Percent + "% )";
             int w = Convert.ToInt32(msg.Weight);
             int wmax = Convert.ToInt32(msg.WeightMax);
             account.ModifBar(3, wmax, w, "Pods");
-            account.Pods = new Pods((int)msg.Weight, (int)msg.WeightMax);
-            account.Inventory.weight = (int)msg.Weight;
-            account.Inventory.maxWeight = (int)msg.WeightMax;
+            (account.Game.Inventory.Data as InventoryData).Update(msg);
         }
 
         [MessageHandler(typeof(ObjectAddedMessage))]
-        public static void ObjectAddedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ObjectAddedMessageTreatment(Message message, Account account)
         {
             ObjectAddedMessage msg = (ObjectAddedMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
-            ObjectItem item = msg.Object;
-            Core.Inventory.Item i = new Core.Inventory.Item(item.Effects, item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
-            account.Inventory.Items.Add(i);
-            string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
+            BotForgeAPI.Protocol.Types.ObjectItem item = msg.@object;
+            Item i = new Item(item);
+            account.Game.Inventory.Data.Items.Add(i);
+            //string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
             //System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
             //li.ToolTipText = i.Description;
             //account.AddItem(li, account.LVItems);
@@ -254,92 +231,75 @@ namespace BlueSheep.Engine.Handlers.Inventory
             //    }
             //}
             // TODO Militão: Populate the new interface
-            if (account.Running != null)
-            {
-                foreach (Pet pet in account.petsList)
-                    pet.SetFood();
-            }
+            //if (account.Running != null)
+            //{
+            foreach (Pet pet in account.Game.Pets.Data.Pets)
+                pet.Set();
+            //}
         }
         [MessageHandler(typeof(ObjectDeletedMessage))]
-        public static void ObjectDeletedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ObjectDeletedMessageTreatment(Message message, Account account)
         {
             ObjectDeletedMessage objectDeletedMessage = (ObjectDeletedMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            for (int index = 0; index < account.Game.Inventory.Data.Items.Count; index++)
             {
-                objectDeletedMessage.Deserialize(reader);
-            }
-            for (int index = 0; index < account.Inventory.Items.Count; index++)
-            {
-                if (account.Inventory.Items[index].UID == objectDeletedMessage.ObjectUID)
+                if (account.Game.Inventory.Data.Items[index].UID == objectDeletedMessage.ObjectUID)
                 {
-                    account.Inventory.Items.RemoveAt(index);
+                    account.Game.Inventory.Data.Items.RemoveAt(index);
                     break;
                 }
             }
             //account.ActualizeInventory();
             // TODO Militão: Populate the new interface
-            if (account.Running != null)
-            {
-                foreach (Pet pet in account.petsList)
-                    pet.SetFood();
-            }
+            //if (account.Running != null)
+            //{
+            foreach (Pet pet in account.Game.Pets.Data.Pets)
+                pet.Set();
+            //}
         }
         [MessageHandler(typeof(StorageObjectUpdateMessage))]
-        public static void StorageObjectUpdateMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void StorageObjectUpdateMessageTreatment(Message message, Account account)
         {
             StorageObjectUpdateMessage storageObjectUpdateMessage = (StorageObjectUpdateMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            //bool exists = false;
+            for (int index = 0; index < account.Game.Inventory.Data.StorageItems.Count; index++)
             {
-                storageObjectUpdateMessage.Deserialize(reader);
-            }
-            bool exists = false;
-            for (int index = 0; index < account.SafeItems.Count; index++)
-            {
-                if (account.SafeItems[index].ObjectUID ==
-                storageObjectUpdateMessage.Object.ObjectUID)
+                if (account.Game.Inventory.Data.StorageItems[index].UID ==
+                storageObjectUpdateMessage.@object.ObjectUID)
                 {
-                    account.SafeItems[index].Quantity +=
-                    storageObjectUpdateMessage.Object.Quantity;
-                    exists = true;
+                    (account.Game.Inventory.Data as InventoryData).Update(storageObjectUpdateMessage);
+                    //exists = true;
                 }
             }
-            if (!exists)
-                account.SafeItems.Add(storageObjectUpdateMessage.Object);
+            //if (!exists)
+            //    account.Game.Inventory.Data.StorageItems.Add(new Item(storageObjectUpdateMessage.@object));
+            //TODO Militã0 2.0: Verify
         }
         [MessageHandler(typeof(StorageObjectRemoveMessage))]
-        public static void StorageObjectRemoveMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void StorageObjectRemoveMessageTreatment(Message message, Account account)
         {
             StorageObjectRemoveMessage storageObjectRemoveMessage = (StorageObjectRemoveMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            for (int index = 0; index < account.Game.Inventory.Data.StorageItems.Count; index++)
             {
-                storageObjectRemoveMessage.Deserialize(reader);
-            }
-            for (int index = 0; index < account.SafeItems.Count; index++)
-            {
-                if (account.SafeItems[index].ObjectUID ==
+                if (account.Game.Inventory.Data.StorageItems[index].UID ==
                 storageObjectRemoveMessage.ObjectUID)
-                    account.SafeItems.RemoveAt(index);
+                    account.Game.Inventory.Data.StorageItems.RemoveAt(index);
             }
         }
         [MessageHandler(typeof(ExchangeLeaveMessage))]
-        public static void ExchangeLeaveMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ExchangeLeaveMessageTreatment(Message message, Account account)
         {
-            if (account.Running != null)
-                account.Running.OnSafe = false;
-            account.Busy = false;
+            account.Game.Character.SetStatus(BotForgeAPI.Game.Map.Status.None);
         }
         [MessageHandler(typeof(ExchangeShopStockStartedMessage))]
-        public static void ExchangeShopStockStartedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ExchangeShopStockStartedMessageTreatment(Message message, Account account)
         {
             ExchangeShopStockStartedMessage msg = (ExchangeShopStockStartedMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //account.actualizeshop(msg.ObjectsInfos.ToList());
             // TODO Militão: Populate the new interface
-            if (account.Inventory.ItemsToAddToShop.Count > 0)
-                account.Inventory.ItemsToAddToShop.ForEach(item => account.Inventory.AddItemToShop(item.Item1,item.Item2,item.Item3));
+            //if ((account.Game.Inventory.Data as InventoryData).Items.ItemsToAddToShop.Count > 0)
+            //    account.Inventory.ItemsToAddToShop.ForEach(item => account.Inventory.AddItemToShop(item.Item1, item.Item2, item.Item3));
+            // TODO Militão 2.0: Add Merchant module
         }
         #endregion
     }

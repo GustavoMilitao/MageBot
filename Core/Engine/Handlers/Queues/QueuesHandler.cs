@@ -10,7 +10,7 @@ namespace BlueSheep.Engine.Handlers.Queues
     {
         #region Public methods
         [MessageHandler(typeof(LoginQueueStatusMessage))]
-        public static void LoginQueueStatusTreatment(Message message, byte[] packetDatas, Account account)
+        public static void LoginQueueStatusTreatment(Message message,  Account account)
         {
             LoginQueueStatusMessage loginQueueStatusMessage = (LoginQueueStatusMessage)message;
 
@@ -24,7 +24,7 @@ namespace BlueSheep.Engine.Handlers.Queues
         }
 
         [MessageHandler(typeof(QueueStatusMessage))]
-        public static void QueueStatusMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void QueueStatusMessageTreatment(Message message,  Account account)
         {
             QueueStatusMessage queueStatusMessage = (QueueStatusMessage)message;
 

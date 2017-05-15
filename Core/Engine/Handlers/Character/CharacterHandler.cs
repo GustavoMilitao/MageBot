@@ -21,7 +21,7 @@ namespace BlueSheep.Engine.Handlers.Character
 
         #region Public methods
         [MessageHandler(typeof(CharactersListMessage))]
-        public static void CharactersListMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void CharactersListMessageTreatment(Message message, Account account)
         {
             //CharactersListMessage charactersListMessage = (CharactersListMessage)message;
 
@@ -49,7 +49,7 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(CharacterSelectedSuccessMessage))]
-        public static void CharacterSelectedSuccessMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void CharacterSelectedSuccessMessageTreatment(Message message, Account account)
         {
             //CharacterSelectedSuccessMessage characterSelectedSuccessMessage = (CharacterSelectedSuccessMessage)message;
 
@@ -70,55 +70,39 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(CharacterSelectedErrorMessage))]
-        public static void CharacterSelectedErrorMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void CharacterSelectedErrorMessageTreatment(Message message, Account account)
         {
             account.Logger.Log("Erreur lors de la sélection du personnage.", BotForgeAPI.Logger.LogEnum.Connection);
             //account.TryReconnect(30);
         }
 
         [MessageHandler(typeof(CharacterStatsListMessage))]
-        public static void CharacterStatsListMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void CharacterStatsListMessageTreatment(Message message, Account account)
         {
             CharacterStatsListMessage msg = (CharacterStatsListMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Character.Stats as PlayerStats).Update(msg.Stats);
             PopulateBars(account, msg);
         }
 
         [MessageHandler(typeof(SpellListMessage))]
-        public static void SpellListMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void SpellListMessageTreatment(Message message, Account account)
         {
             SpellListMessage msg = (SpellListMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Character.Spells as SpellsBook).Update(msg);
         }
 
         [MessageHandler(typeof(CharacterSelectedForceMessage))]
-        public static void CharacterSelectedForceMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void CharacterSelectedForceMessageTreatment(Message message, Account account)
         {
             CharacterSelectedForceMessage msg = (CharacterSelectedForceMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             CharacterSelectedForceReadyMessage nmsg = new CharacterSelectedForceReadyMessage();
             account.Network.Send(nmsg);
         }
 
         [MessageHandler(typeof(CharacterLevelUpMessage))]
-        public static void CharacterLevelUpMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void CharacterLevelUpMessageTreatment(Message message, Account account)
         {
             CharacterLevelUpMessage msg = (CharacterLevelUpMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             account.ModifBar(8, 0, 0, Convert.ToString(msg.NewLevel));
             account.Logger.Log("Level up ! New level : " + Convert.ToString(msg.NewLevel), BotForgeAPI.Logger.LogEnum.Bot);
             if (account.Settings.IsUppingStat)
@@ -126,13 +110,9 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(AchievementFinishedMessage))]
-        public static void AchievementFinishedTreatment(Message message, byte[] packetDatas, Account account)
+        public static void AchievementFinishedTreatment(Message message, Account account)
         {
             AchievementFinishedMessage msg = (AchievementFinishedMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             DataClass d = GameData.GetDataObject(D2oFileEnum.Achievements, msg.ObjectId);
             account.Logger.Log("Success unlocked : " + I18N.GetText((int)d.Fields["nameId"]), BotForgeAPI.Logger.LogEnum.TextInformationMessage);
             AchievementRewardRequestMessage nmsg = new AchievementRewardRequestMessage(-1);
@@ -140,25 +120,17 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(CharacterExperienceGainMessage))]
-        public static void CharacterExperienceGainMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void CharacterExperienceGainMessageTreatment(Message message, Account account)
         {
             CharacterExperienceGainMessage msg = (CharacterExperienceGainMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Character.Stats as PlayerStats).Update(msg);
             //TODO Militão 2.0: Update Charts
         }
 
         [MessageHandler(typeof(StatsUpgradeResultMessage))]
-        public static void StatsUpgradeResultMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void StatsUpgradeResultMessageTreatment(Message message, Account account)
         {
             StatsUpgradeResultMessage msg = (StatsUpgradeResultMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //if (msg.result == 1)
             //{
             //    //account.CaracUC.DecreaseAvailablePoints(msg.nbCharacBoost);
@@ -170,20 +142,16 @@ namespace BlueSheep.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(PlayerStatusUpdateMessage))]
-        public static void PlayerStatusUpdateMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void PlayerStatusUpdateMessageTreatment(Message message, Account account)
         {
             PlayerStatusUpdateMessage msg = (PlayerStatusUpdateMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
 
             if (msg.PlayerId == account.Game.Character.Id)
             {
                 switch (msg.Status.StatusId)
                 {
                     case 10:
-                        account.Logger.Log("Available status enabled",BotForgeAPI.Logger.LogEnum.TextInformationMessage);
+                        account.Logger.Log("Available status enabled", BotForgeAPI.Logger.LogEnum.TextInformationMessage);
                         break;
                     case 20:
                         account.Logger.Log("Absent status enabled.", BotForgeAPI.Logger.LogEnum.TextInformationMessage);

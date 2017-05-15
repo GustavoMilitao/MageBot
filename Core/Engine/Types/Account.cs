@@ -4,6 +4,8 @@ using BlueSheep.Engine.Treatment;
 using BotForge.Core.Game.Fight;
 using BotForgeAPI.Protocol.Messages;
 using BotForgeAPI.Protocol.Enums;
+using BotForge.Core.Game.Map.Actors;
+using BotForgeAPI.Game.Map.Actors;
 
 namespace Core.Engine.Types
 {
@@ -23,6 +25,7 @@ namespace Core.Engine.Types
         public bool StartFightWithItemSet { get; set; }
         public bool EndFightWithItemSet { get; set; }
         public byte PresetStartUpId { get; set; }
+        public INpc TalkingNPC { get; set; }
         #endregion
 
         #endregion

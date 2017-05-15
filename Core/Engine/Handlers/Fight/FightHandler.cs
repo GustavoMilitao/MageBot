@@ -18,80 +18,52 @@ namespace BlueSheep.Engine.Handlers.Fight
     {
         #region Public methods
         [MessageHandler(typeof(GameActionFightDeathMessage))]
-        public static void GameActionFightDeathMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameActionFightDeathMessageTreatment(Message message,  Account account)
         {
             GameActionFightDeathMessage msg = (GameActionFightDeathMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).SetFighterDeath((long)msg.TargetId);
         }
 
         [MessageHandler(typeof(GameActionFightDispellableEffectMessage))]
-        public static void GameActionFightDispellableEffectMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameActionFightDispellableEffectMessageTreatment(Message message,  Account account)
         {
             GameActionFightDispellableEffectMessage msg = (GameActionFightDispellableEffectMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).SetEffect(msg.Effect, msg.ActionId);
         }
 
         [MessageHandler(typeof(GameActionFightPointsVariationMessage))]
-        public static void GameActionFightPointsVariationMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameActionFightPointsVariationMessageTreatment(Message message,  Account account)
         {
             GameActionFightPointsVariationMessage msg = (GameActionFightPointsVariationMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).SetPointsVariation((long)msg.TargetId, msg.ActionId, msg.Delta);
         }
 
         [MessageHandler(typeof(GameActionFightLifePointsLostMessage))]
-        public static void GameActionFightLifePointsLostMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameActionFightLifePointsLostMessageTreatment(Message message,  Account account)
         {
             GameActionFightLifePointsLostMessage msg = (GameActionFightLifePointsLostMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).UpdateFighterLifePoints((long)msg.TargetId, -((int)msg.Loss));
 
         }
 
         [MessageHandler(typeof(GameActionFightSlideMessage))]
-        public static void GameActionFightSlideMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameActionFightSlideMessageTreatment(Message message,  Account account)
         {
             GameActionFightSlideMessage msg = (GameActionFightSlideMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).UpdateFighterCell((long)msg.TargetId, msg.EndCellId);
         }
 
         [MessageHandler(typeof(GameActionFightSpellCastMessage))]
-        public static void GameActionFightSpellCastMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameActionFightSpellCastMessageTreatment(Message message,  Account account)
         {
             GameActionFightSpellCastMessage msg = (GameActionFightSpellCastMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).SetSpellCasted((long)msg.SourceId, msg.SpellId, msg.DestinationCellId, msg.SpellLevel);
         }
 
         [MessageHandler(typeof(GameActionFightSummonMessage))]
-        public static void GameActionFightSummonMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameActionFightSummonMessageTreatment(Message message,  Account account)
         {
             GameActionFightSummonMessage msg = (GameActionFightSummonMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             msg.Summons.ToList().ForEach(summon =>
             (account.Game.Fight.Data as FightData).Summons.Add(
                     new Fighter(summon, account.Game.Fight.Data,
@@ -99,24 +71,16 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightTeleportOnSameMapMessage))]
-        public static void GameActionFightTeleportOnSameMapMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameActionFightTeleportOnSameMapMessageTreatment(Message message,  Account account)
         {
             GameActionFightTeleportOnSameMapMessage msg = (GameActionFightTeleportOnSameMapMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).UpdateFighterCell((long)msg.TargetId, msg.CellId);
         }
 
         [MessageHandler(typeof(GameEntitiesDispositionMessage))]
-        public static void GameEntitiesDispositionMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameEntitiesDispositionMessageTreatment(Message message,  Account account)
         {
             GameEntitiesDispositionMessage msg = (GameEntitiesDispositionMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             if (account.Game.Fight != null)
             {
                 msg.Dispositions.ToList().ForEach(d =>
@@ -128,37 +92,25 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightEndMessage))]
-        public async static void GameFightEndMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public async static void GameFightEndMessageTreatment(Message message,  Account account)
         {
             GameFightEndMessage msg = (GameFightEndMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).FightStop(msg);
             account.Game.Character.SetStatus(Status.None);
         }
 
         [MessageHandler(typeof(GameFightHumanReadyStateMessage))]
-        public static void GameFightHumanReadyStateMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightHumanReadyStateMessageTreatment(Message message,  Account account)
         {
             GameFightHumanReadyStateMessage msg = (GameFightHumanReadyStateMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             if (msg.CharacterId == account.Game.Character.Id)
                 (account.Game.Fight.Data as FightData).WaitForReady = !msg.IsReady;
         }
 
         [MessageHandler(typeof(GameFightJoinMessage))]
-        public static void GameFightJoinMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightJoinMessageTreatment(Message message,  Account account)
         {
             GameFightJoinMessage msg = (GameFightJoinMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             if (account.Game.Fight != null)
             {
                 (account.Game.Fight.Data as FightData).Reset(msg.IsFightStarted, msg.CanSayReady);
@@ -174,13 +126,9 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightLeaveMessage))]
-        public static void GameFightLeaveMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightLeaveMessageTreatment(Message message,  Account account)
         {
             GameFightLeaveMessage msg = (GameFightLeaveMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
 
             //if (msg.CharId == account.Game.Character.Id)
             //{
@@ -190,94 +138,63 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightOptionStateUpdateMessage))]
-        public static void GameFightOptionStateUpdateMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightOptionStateUpdateMessageTreatment(Message message,  Account account)
         {
             GameFightOptionStateUpdateMessage msg = (GameFightOptionStateUpdateMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).SetOption(msg.State, msg.Option);
         }
 
         [MessageHandler(typeof(GameFightShowFighterMessage))]
-        public static void GameFightShowFighterMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightShowFighterMessageTreatment(Message message,  Account account)
         {
             GameFightShowFighterMessage msg = (GameFightShowFighterMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).AddFighter(msg.Informations);
 
         }
 
         [MessageHandler(typeof(GameFightShowFighterRandomStaticPoseMessage))]
-        public static void GameFightShowFighterRandomStaticPoseMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightShowFighterRandomStaticPoseMessageTreatment(Message message,  Account account)
         {
             GameFightShowFighterRandomStaticPoseMessage msg = (GameFightShowFighterRandomStaticPoseMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).AddFighter(msg.Informations);
         }
 
         [MessageHandler(typeof(GameFightStartMessage))]
-        public static void GameFightStartMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightStartMessageTreatment(Message message,  Account account)
         {
             GameFightStartMessage msg = (GameFightStartMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).FightStart();
         }
 
         [MessageHandler(typeof(GameFightSynchronizeMessage))]
-        public static void GameFightSynchronizeMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightSynchronizeMessageTreatment(Message message,  Account account)
         {
             GameFightSynchronizeMessage msg = (GameFightSynchronizeMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).ClearFighters();
             foreach (GameFightFighterInformations i in msg.Fighters)
                 (account.Game.Fight.Data as FightData).AddFighter(i);
         }
 
         [MessageHandler(typeof(GameFightTurnEndMessage))]
-        public static void GameFightTurnEndMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightTurnEndMessageTreatment(Message message,  Account account)
         {
             GameFightTurnEndMessage msg = (GameFightTurnEndMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             if (msg.ObjectId == account.Game.Character.Id)
                 (account.Game.Fight.Data as FightData).IsFighterTurn = false;
         }
 
         [MessageHandler(typeof(GameFightTurnStartMessage))]
-        public static void GameFightTurnStartMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightTurnStartMessageTreatment(Message message,  Account account)
         {
             GameFightTurnStartMessage msg = (GameFightTurnStartMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
+            //TODO Militão 2.0: Verify this
 
         }
 
         [MessageHandler(typeof(GameMapMovementMessage))]
-        public static void GameMapMovementMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameMapMovementMessageTreatment(Message message,  Account account)
         {
             GameMapMovementMessage msg = (GameMapMovementMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             MovementPath clientMovement = MapMovementAdapter.GetClientMovement(msg.KeyMovements.Select(k => (int)k).ToList());
             if (account.Game.Character.Status == Status.Fighting)
             {
@@ -288,24 +205,16 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightNewRoundMessage))]
-        public static void GameFightNewRoundMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightNewRoundMessageTreatment(Message message,  Account account)
         {
             GameFightNewRoundMessage msg = (GameFightNewRoundMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).UpdateTurn((int)msg.RoundNumber);
         }
 
         [MessageHandler(typeof(GameFightTurnStartPlayingMessage))]
-        public static void GameFightTurnStartPlayingMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightTurnStartPlayingMessageTreatment(Message message,  Account account)
         {
             GameFightTurnStartPlayingMessage msg = (GameFightTurnStartPlayingMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Fight.Data as FightData).IsFighterTurn = true;
             if (account.Game.Fight != null)
             {
@@ -316,13 +225,9 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightPlacementPossiblePositionsMessage))]
-        public static void GameFightPlacementPossiblePositionsMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightPlacementPossiblePositionsMessageTreatment(Message message,  Account account)
         {
             GameFightPlacementPossiblePositionsMessage msg = (GameFightPlacementPossiblePositionsMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             account.Game.Character.SetStatus(Status.Fighting);
             (account.Game.Fight.Data as FightData).UpdateTurn(0);
             if (account.Game.Fight != null)
@@ -342,25 +247,17 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightTurnReadyRequestMessage))]
-        public static void GameFightTurnReadyRequestMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightTurnReadyRequestMessageTreatment(Message message,  Account account)
         {
             GameFightTurnReadyRequestMessage msg = (GameFightTurnReadyRequestMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             GameFightTurnReadyMessage msg2 = new GameFightTurnReadyMessage(true);
             account.Network.Send(msg2);
         }
 
         [MessageHandler(typeof(SequenceEndMessage))]
-        public static void SequenceEndMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void SequenceEndMessageTreatment(Message message,  Account account)
         {
             SequenceEndMessage msg = (SequenceEndMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             
             if ((account.Game.Fight.Data as FightData).Fighter.IsAlive && (account.Game.Fight.Data as FightData).Fighter.Id == msg.AuthorId && !account.IsFullSocket && account.Game.Fight != null && (account.Game.Fight.Data as FightData).IsFighterTurn)
             {
@@ -380,36 +277,24 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(LifePointsRegenBeginMessage))]
-        public static void LifePointsRegenBeginMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void LifePointsRegenBeginMessageTreatment(Message message,  Account account)
         {
             LifePointsRegenBeginMessage msg = (LifePointsRegenBeginMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
         }
 
         [MessageHandler(typeof(LifePointsRegenEndMessage))]
-        public static void LifePointsRegenEndMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void LifePointsRegenEndMessageTreatment(Message message,  Account account)
         {
             LifePointsRegenEndMessage msg = (LifePointsRegenEndMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             int percent = ((int)msg.LifePoints / (int)msg.MaxLifePoints) * 100;
             account.Logger.Log("End Regenerating. + " + msg.LifePointsGained + " life points", BotForgeAPI.Logger.LogEnum.Bot);
             account.ModifBar(2, (int)msg.MaxLifePoints, (int)msg.LifePoints, "Vitalité");
         }
 
         [MessageHandler(typeof(GameFightSpectatorJoinMessage))]
-        public static void GameFightSpectatorJoinMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameFightSpectatorJoinMessageTreatment(Message message,  Account account)
         {
             GameFightSpectatorJoinMessage msg = (GameFightSpectatorJoinMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
 
             if (account.LockingSpectators)
             {
@@ -418,13 +303,9 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightLifePointsGainMessage))]
-        public static void GameActionFightLifePointsGainMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameActionFightLifePointsGainMessageTreatment(Message message,  Account account)
         {
             GameActionFightLifePointsGainMessage msg = (GameActionFightLifePointsGainMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             if (account.Game.Character.Status == Status.Fighting)
             {
                 if (msg.ActionId == 108) // HP Récupérés (delta = combien on a récupérés)
@@ -435,13 +316,9 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightTackledMessage))]
-        public static void GameActionFightTackledMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameActionFightTackledMessageTreatment(Message message,  Account account)
         {
             GameActionFightTackledMessage msg = (GameActionFightTackledMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             if (account.Game.Fight != null )//&& account.Fight.flag == -1)
                 account.Game.Fight.EndTurn();
             //TODO Militão 2.0: Get Flag

@@ -24,20 +24,16 @@ namespace BlueSheep.Engine.Handlers.Context
     {
         #region Public methods
         [MessageHandler(typeof(MapComplementaryInformationsDataInHouseMessage))]
-        public static void MapComplementaryInformationsDataInHouseMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void MapComplementaryInformationsDataInHouseMessageTreatment(Message message, Account account)
         {
-            MapComplementaryInformationsDataMessageTreatment(message, packetDatas, account);
+            MapComplementaryInformationsDataMessageTreatment(message, account);
         }
 
         [MessageHandler(typeof(MapComplementaryInformationsDataMessage))]
-        public static void MapComplementaryInformationsDataMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void MapComplementaryInformationsDataMessageTreatment(Message message, Account account)
         {
             MapComplementaryInformationsDataMessage msg = (MapComplementaryInformationsDataMessage)message;
             //account.Game..Config.HeroicConfig.AnalysePacket(message, packetDatas);
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             (account.Game.Gather.Data as GatherData).Clear();
             (account.Game.Map.Data as MapData).Clear();
             (account.Game.Map.Data as MapData).ParseLocation(msg.MapId, msg.SubAreaId);
@@ -51,20 +47,15 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(MapComplementaryInformationsWithCoordsMessage))]
-        public static void MapComplementaryInformationsWithCoordsMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void MapComplementaryInformationsWithCoordsMessageTreatment(Message message, Account account)
         {
-            MapComplementaryInformationsDataMessageTreatment(message, packetDatas, account);
+            MapComplementaryInformationsDataMessageTreatment(message, account);
         }
 
         [MessageHandler(typeof(CurrentMapMessage))]
-        public static void CurrentMapMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void CurrentMapMessageTreatment(Message message, Account account)
         {
             CurrentMapMessage currentMapMessage = (CurrentMapMessage)message;
-
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                currentMapMessage.Deserialize(reader);
-            }
 
             account.Logger.Log("[Map] = " + currentMapMessage.MapId, BotForgeAPI.Logger.LogEnum.Debug);
             account.Game.Character.SetStatus(Status.None);
@@ -86,12 +77,12 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameContextCreateMessage))]
-        public static void GameContextCreateMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameContextCreateMessageTreatment(Message message, Account account)
         {
         }
 
         [MessageHandler(typeof(QuestListMessage))]
-        public static void QuestListMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void QuestListMessageTreatment(Message message, Account account)
         {
             if (account.IsFullSocket)
             {
@@ -104,14 +95,9 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(TextInformationMessage))]
-        public static void TextInformationMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void TextInformationMessageTreatment(Message message, Account account)
         {
             TextInformationMessage msg = (TextInformationMessage)message;
-
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             switch (msg.MsgId)
             {
                 //case 89:
@@ -152,14 +138,10 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ChatServerMessage))]
-        public static void ChatServerMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ChatServerMessageTreatment(Message message, Account account)
         {
             ChatServerMessage msg = (ChatServerMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             switch (msg.Channel)
             {
                 case 0:
@@ -187,7 +169,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         //[MessageHandler(typeof(GameMapMovementConfirmMessage))]
-        //public static void GameMapMovementConfirmMessageTreatment(Message message, byte[] packetDatas, Account account)
+        //public static void GameMapMovementConfirmMessageTreatment(Message message,  Account account)
         //{
         //    GameMapMovementConfirmMessage msg = (GameMapMovementConfirmMessage)message;
 
@@ -224,14 +206,10 @@ namespace BlueSheep.Engine.Handlers.Context
         //}
 
         [MessageHandler(typeof(GameMapMovementMessage))]
-        public static void GameMapMovementMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameMapMovementMessageTreatment(Message message, Account account)
         {
             GameMapMovementMessage msg = (GameMapMovementMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             List<int> keys = new List<int>();
             foreach (int s in msg.KeyMovements)
             {
@@ -243,14 +221,10 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameMapNoMovementMessage))]
-        public static void GameMapNoMovementMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameMapNoMovementMessageTreatment(Message message, Account account)
         {
             GameMapNoMovementMessage msg = (GameMapNoMovementMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //if (account.Fight != null && account.FightData.IsFollowingGroup)
             //{
             //    account.Fight.LaunchFight(account.FightData.followingGroup.m_contextualId);
@@ -277,52 +251,40 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PopupWarningMessage))]
-        public static void PopupWarningMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void PopupWarningMessageTreatment(Message message, Account account)
         {
             PopupWarningMessage msg = (PopupWarningMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             account.Logger.Log("[FROM " + msg.Author + " ] : " + msg.Content, BotForgeAPI.Logger.LogEnum.TextInformationError);
             account.Logger.Log("You has been locked for " + msg.LockDuration + ". Stopping BlueSheep actions while blocked...", BotForgeAPI.Logger.LogEnum.Info);
             account.Logger.Log("Y a un popup sur l'écran, surement un modo :s", BotForgeAPI.Logger.LogEnum.TextInformationMessage);
             //account.Wait(msg.LockDuration, msg.LockDuration);
-            account.Wait(msg.LockDuration,msg.LockDuration);
+            account.Wait(msg.LockDuration, msg.LockDuration);
             //account.SocketManager.Disconnect("Alerte au modo ! Alerte au modo !");
         }
 
         [MessageHandler(typeof(SystemMessageDisplayMessage))]
-        public static void SystemMessageDisplayMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void SystemMessageDisplayMessageTreatment(Message message, Account account)
         {
             SystemMessageDisplayMessage msg = (SystemMessageDisplayMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             msg.Parameters.ToList().ForEach(item => account.Logger.Log(item, BotForgeAPI.Logger.LogEnum.Info));
             // account.SocketManager.Disconnect("Alerte au modo ! Alerte au modo !");
         }
 
 
         [MessageHandler(typeof(PartyInvitationMessage))]
-        public static void PartyInvitationMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void PartyInvitationMessageTreatment(Message message, Account account)
         {
             PartyInvitationMessage msg = (PartyInvitationMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             BotForge.Core.Account.Group g = (account.Group as BotForge.Core.Account.Group);
             if (account.Group != null && msg.FromName == account.Group.Leader.Game.Character.Name)
             {
 
                 PartyAcceptInvitationMessage msg2 = new PartyAcceptInvitationMessage(msg.PartyId);
                 account.Network.Send(msg2);
-                account.Logger.Log("J'ai rejoint le groupe :3",BotForgeAPI.Logger.LogEnum.Bot);
+                account.Logger.Log("J'ai rejoint le groupe :3", BotForgeAPI.Logger.LogEnum.Bot);
 
             }
             else
@@ -334,18 +296,14 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PartyMemberInFightMessage))]
-        public static void PartyMemberInFightMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void PartyMemberInFightMessageTreatment(Message message, Account account)
         {
             PartyMemberInFightMessage msg = (PartyMemberInFightMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             if (msg.FightMap.MapId == account.Game.Map.Data.Id && msg.MemberName == account.Group.Leader.Game.Character.Name)
             {
                 //account.Wait(500, 1500);
-                account.Wait(1500,1500);
+                account.Wait(1500, 1500);
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
                     GameFightJoinRequestMessage msg2 = new GameFightJoinRequestMessage(msg.MemberId, msg.FightId);
@@ -356,14 +314,10 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(InteractiveElementUpdatedMessage))]
-        public static void InteractiveElementUpdatedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void InteractiveElementUpdatedMessageTreatment(Message message, Account account)
         {
             InteractiveElementUpdatedMessage msg = (InteractiveElementUpdatedMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //if (account.Game.BidHouse != null)
             //{
             //    InteractiveElement e = msg.InteractiveElement;
@@ -377,26 +331,18 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(StatedElementUpdatedMessage))]
-        public static void StatedElementUpdatedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void StatedElementUpdatedMessageTreatment(Message message, Account account)
         {
             StatedElementUpdatedMessage msg = (StatedElementUpdatedMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //(account.Game.Map.Data as MapData).UpdateStatedElement(msg.StatedElement);
         }
 
         [MessageHandler(typeof(PurchasableDialogMessage))]
-        public static void PurchasableDialogMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void PurchasableDialogMessageTreatment(Message message, Account account)
         {
             PurchasableDialogMessage msg = (PurchasableDialogMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //if (account.House != null)
             //{
             //    account.House.priceHouse = msg.Price;
@@ -412,7 +358,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(HousePropertiesMessage))]
-        public static void HousePropertiesMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void HousePropertiesMessageTreatment(Message message, Account account)
         {
             //HousePropertiesMessage msg = (HousePropertiesMessage)message;
 
@@ -431,34 +377,26 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameContextRemoveElementMessage))]
-        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameContextRemoveElementMessageTreatment(Message message, Account account)
         {
             GameContextRemoveElementMessage msg = (GameContextRemoveElementMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             account.Game.Map.Data.InteractiveElements.Remove(
                 account.Game.Map.Data.InteractiveElements.FirstOrDefault(ielem => ielem.Id == msg.ObjectId));
         }
 
         [MessageHandler(typeof(GameRolePlayShowActorMessage))]
-        public static void GameRolePlayShowActorMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void GameRolePlayShowActorMessageTreatment(Message message, Account account)
         {
             GameRolePlayShowActorMessage msg = (GameRolePlayShowActorMessage)message;
             //account.Config.HeroicConfig.AnalysePacket(msg, packetDatas);
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
 
             (account.Game.Map.Data as MapData).ParseActors(new List<GameRolePlayActorInformations>() { msg.Informations }.ToArray());
 
-            if (account.Game.Tchat != null &&  msg.Informations is GameRolePlayCharacterInformations)
+            if (account.Game.Tchat != null && msg.Informations is GameRolePlayCharacterInformations)
             {
                 GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.Informations;
-                account.Game.Tchat.SendMP(infos.Name,account.Game.Tchat.Data.Content);
+                account.Game.Tchat.SendMP(infos.Name, account.Game.Tchat.Data.Content);
             }
             //if  && msg.Informations is GameRolePlayCharacterInformations)
             //{
@@ -468,14 +406,10 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeStartedWithStorageMessage))]
-        public static void ExchangeStartedWithStorageMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ExchangeStartedWithStorageMessageTreatment(Message message, Account account)
         {
             ExchangeStartedWithStorageMessage msg = (ExchangeStartedWithStorageMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             if (account.Path != null && account.Game.Inventory != null)
             {
                 List<int> items = (account.Game.Inventory.Data as BotForge.Core.Game.Inventory.InventoryData).GetItemsToTransfer();
@@ -486,25 +420,17 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(DisplayNumericalValuePaddockMessage))]
-        public static void DisplayNumericalValueMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void DisplayNumericalValueMessageTreatment(Message message, Account account)
         {
             DisplayNumericalValuePaddockMessage msg = (DisplayNumericalValuePaddockMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
         }
 
         [MessageHandler(typeof(ObtainedItemMessage))]
-        public static void ObtainedItemMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ObtainedItemMessageTreatment(Message message, Account account)
         {
             ObtainedItemMessage msg = (ObtainedItemMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //if ((account.Game.Gather.Data as GatherData)..Current_El == null)
             //    return;
             //account.Logger.Log("Ressource récoltée : " + account.Game.Gather.resourceName + " +" + msg.BaseQuantity, BotForgeAPI.Logger.LogEnum.TextInformationMessage);
@@ -517,14 +443,10 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(InteractiveUseErrorMessage))]
-        public static void InteractiveUseErrorMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void InteractiveUseErrorMessageTreatment(Message message, Account account)
         {
             InteractiveUseErrorMessage msg = (InteractiveUseErrorMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //if (account.Gather.Error())
             //    return;
             (account.Game.Gather.Data as GatherData).Ban(msg.ElemId);
@@ -534,14 +456,10 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(InteractiveUseEndedMessage))]
-        public static void InteractiveUseEndedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void InteractiveUseEndedMessageTreatment(Message message, Account account)
         {
             InteractiveUseEndedMessage msg = (InteractiveUseEndedMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //if (account.Game.Gather.Id == -1)
             //    return;
             account.Game.Character.SetStatus(Status.None);
@@ -551,46 +469,34 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeStartedWithPodsMessage))]
-        public static void ExchangeStartedWithPodsMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ExchangeStartedWithPodsMessageTreatment(Message message, Account account)
         {
             ExchangeStartedWithPodsMessage msg = (ExchangeStartedWithPodsMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //if ((!account.Game.Inventory.Data as InventoryData).ListeningToExchange)
             //    return;
             //TODO Militão 2.0: Verify listen to exchange
             List<int> items = (account.Game.Inventory.Data as InventoryData).GetItemsToTransfer();
             account.Game.Inventory.TransferItems(items);
-            account.Wait(3000,3000);
+            account.Wait(3000, 3000);
             account.Game.Inventory.ExchangeReady();
         }
 
         [MessageHandler(typeof(ExchangeRequestedTradeMessage))]
-        public static void ExchangeRequestedTradeMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ExchangeRequestedTradeMessageTreatment(Message message, Account account)
         {
             ExchangeRequestedTradeMessage msg = (ExchangeRequestedTradeMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //if (account.Game.Inventory.ListeningToExchange)
             //    account.Inventory.AcceptExchange();
             //TODO Militão 2.0: Verify listen to exchange
         }
 
         [MessageHandler(typeof(ExchangeIsReadyMessage))]
-        public static void ExchangeIsReadyMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ExchangeIsReadyMessageTreatment(Message message, Account account)
         {
             ExchangeIsReadyMessage msg = (ExchangeIsReadyMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //if (msg.Ready && account.Game.Inventory.ListeningToExchange)
             //    account.Inventory.ExchangeReady();
             //TODO Militão 2.0: Verify listen to exchange

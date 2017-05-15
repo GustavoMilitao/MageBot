@@ -22,16 +22,12 @@ namespace BlueSheep.Engine.Handlers.Connection
     {
         #region Public methods
         [MessageHandler(typeof(HelloConnectMessage))]
-        public static void HelloConnectMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void HelloConnectMessageTreatment(Message message,  Account account)
         {
             account.Game.Character.SetStatus(Status.None);
             if (account.IsFullSocket)
             {
                 HelloConnectMessage helloConnectMessage = (HelloConnectMessage)message;
-                using (BigEndianReader reader = new BigEndianReader(packetDatas))
-                {
-                    helloConnectMessage.Deserialize(reader);
-                }
                 sbyte[] credentials = RSAKey.Encrypt(helloConnectMessage.Key,
                                                      account,
                                                      helloConnectMessage.Salt);
@@ -58,13 +54,9 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(IdentificationSuccessMessage))]
-        public static void IdentificationSuccessMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void IdentificationSuccessMessageTreatment(Message message,  Account account)
         {
             IdentificationSuccessMessage msg = (IdentificationSuccessMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             dtDateTime = dtDateTime.AddMilliseconds(msg.SubscriptionEndDate).ToLocalTime();
             DateTime subscriptionDate = dtDateTime;
@@ -74,26 +66,18 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(IdentificationFailedMessage))]
-        public static void IdentificationFailedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void IdentificationFailedMessageTreatment(Message message,  Account account)
         {
             IdentificationFailedMessage identificationFailedMessage = (IdentificationFailedMessage)message;
             account.Logger.Log("Failed to identify.", BotForgeAPI.Logger.LogEnum.TextInformationError );
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                identificationFailedMessage.Deserialize(reader);
-            }
             IdentificationFailureReason.Test((IdentificationFailureReasonEnum)identificationFailedMessage.Reason, account);
             //account.SocketManager.DisconnectFromGUI();
         }
 
         [MessageHandler(typeof(SelectedServerDataExtendedMessage))]
-        public static void SelectedServerDataExtendedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void SelectedServerDataExtendedMessageTreatment(Message message,  Account account)
         {
             SelectedServerDataExtendedMessage msg = (SelectedServerDataExtendedMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //account.Log(new BotTextInformation(selectedServerDataExtendedMessage.address + " " + (int)selectedServerDataExtendedMessage.port));
             account.Ticket = AES.AES.TicketTrans(msg.Ticket.Select(s => (int)s).ToList()).ToString();
             account.HumanCheck = new BotForge.Core.Crypto.HumanCheck(account.Ticket);
@@ -127,26 +111,18 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(ServerStatusUpdateMessage))]
-        public static void ServerStatusUpdateMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ServerStatusUpdateMessageTreatment(Message message,  Account account)
         {
             // Lecture du paquet ServerStatusUpdateMessage
             ServerStatusUpdateMessage serverStatusUpdateMessage = (ServerStatusUpdateMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                serverStatusUpdateMessage.Deserialize(reader);
-            }
             // Cherche le statut du serveur
             ServerStatus.Test((ServerStatusEnum)serverStatusUpdateMessage.Server.Status, account);
         }
 
         [MessageHandler(typeof(ServersListMessage))]
-        public static void ServerListMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ServerListMessageTreatment(Message message,  Account account)
         {
             ServersListMessage msg = new ServersListMessage();
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
 
             account.Logger.Log("< --- Probably, your server is under maintenance --- >", BotForgeAPI.Logger.LogEnum.Connection);
             msg.Servers.ToList().ForEach(server => account.Logger.Log("< --- Server : " +
@@ -164,7 +140,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(HelloGameMessage))]
-        public static void HelloGameMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void HelloGameMessageTreatment(Message message,  Account account)
         {
             if (account.IsFullSocket)
             {
@@ -174,7 +150,7 @@ namespace BlueSheep.Engine.Handlers.Connection
             }
         }
         [MessageHandler(typeof(AuthenticationTicketAcceptedMessage))]
-        public static void AuthenticationTicketAcceptedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void AuthenticationTicketAcceptedMessageTreatment(Message message,  Account account)
         {
             if (account.IsFullSocket)
             {
@@ -184,36 +160,24 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(AuthenticationTicketRefusedMessage))]
-        public static void AuthenticationTicketAcceptedRefusedTreatment(Message message, byte[] packetDatas, Account account)
+        public static void AuthenticationTicketAcceptedRefusedTreatment(Message message,  Account account)
         {
             AuthenticationTicketRefusedMessage msg = new AuthenticationTicketRefusedMessage();
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             account.Logger.Log("Error : Authentication Ticket Refused", BotForgeAPI.Logger.LogEnum.TextInformationError);
         }
 
         [MessageHandler(typeof(SelectedServerRefusedMessage))]
-        public static void SelectedServerRefusedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void SelectedServerRefusedMessageTreatment(Message message,  Account account)
         {
             // Lecture du paquet ServerStatusUpdateMessage
             SelectedServerRefusedMessage selectedServerRefusedMessage = (SelectedServerRefusedMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                selectedServerRefusedMessage.Deserialize(reader);
-            }
             // Cherche le statut du serveur
             ServerStatus.Test((ServerStatusEnum)selectedServerRefusedMessage.ServerStatus, account);
         }
         [MessageHandler(typeof(IdentificationFailedForBadVersionMessage))]
-        public static void IdentificationFailedForBadVersionMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void IdentificationFailedForBadVersionMessageTreatment(Message message,  Account account)
         {
             IdentificationFailedForBadVersionMessage identificationFailedForBadVersionMessage = (IdentificationFailedForBadVersionMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                identificationFailedForBadVersionMessage.Deserialize(reader);
-            }
             account.Logger.Log("Echec de connexion : Dofus a été mis à jour ("
             + identificationFailedForBadVersionMessage.RequiredVersion.Major + "."
             + identificationFailedForBadVersionMessage.RequiredVersion.Minor + "."
@@ -228,13 +192,9 @@ namespace BlueSheep.Engine.Handlers.Connection
             //account.SocketManager.DisconnectFromGUI();
         }
         [MessageHandler(typeof(IdentificationFailedBannedMessage))]
-        public static void IdentificationFailedBannedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void IdentificationFailedBannedMessageTreatment(Message message,  Account account)
         {
             IdentificationFailedBannedMessage msg = (IdentificationFailedBannedMessage)message;
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             account.Logger.Log("Sorry, your character is banned :(", BotForgeAPI.Logger.LogEnum.TextInformationError);
             //account.SocketManager.DisconnectFromGUI();
         }

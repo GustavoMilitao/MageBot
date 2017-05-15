@@ -10,7 +10,7 @@ namespace BlueSheep.Engine.Handlers.Basic
     {
         #region Public methods
         [MessageHandler(typeof(SequenceNumberRequestMessage))]
-        public static void SequenceNumberRequestMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void SequenceNumberRequestMessageTreatment(Message message, Account account)
         {
             account.Sequence++;
 
@@ -19,7 +19,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(BasicLatencyStatsRequestMessage))]
-        public static void BasicLatencyStatsRequestMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void BasicLatencyStatsRequestMessageTreatment(Message message, Account account)
         {
             BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage((ushort)account.LatencyFrame.GetLatencyAvg(),
                 (ushort)account.LatencyFrame.GetSamplesCount(), (ushort)account.LatencyFrame.GetSamplesMax());
@@ -39,14 +39,9 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(BasicAckMessage))]
-        public static void BasicAckMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void BasicAckMessageTreatment(Message message, Account account)
         {
             BasicAckMessage basicAckMessage = (BasicAckMessage)message;
-
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                basicAckMessage.Deserialize(reader);
-            }
 
             account.LastPacketID.Enqueue(basicAckMessage.LastPacketId);
             account.LastPacket = basicAckMessage.LastPacketId;
@@ -55,7 +50,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(BasicNoOperationMessage))]
-        public static void BasicNoOperationMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void BasicNoOperationMessageTreatment(Message message, Account account)
         {
             //MainForm.ActualMainForm.ActualizeAccountInformations();
             //if (account.MapData.Begin)
@@ -123,14 +118,10 @@ namespace BlueSheep.Engine.Handlers.Basic
 
         }
         [MessageHandler(typeof(BasicTimeMessage))]
-        public static void BasicTimeMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void BasicTimeMessageTreatment(Message message, Account account)
         {
             BasicTimeMessage btmsg = (BasicTimeMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                btmsg.Deserialize(reader);
-            }
             //double serverTimeLag = btmsg.timestamp + btmsg.timezoneOffset * 60 * 1000; // - ((new DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc) - DateTime.MinValue) + DateTime.MinValue).TotalMilliseconds;
             //DateTime epoch = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
             ////System.DateTime date = System.DateTime.FromOADate(msg.subscriptionEndDate); 
@@ -145,26 +136,18 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(AccountLoggingKickedMessage))]
-        public static void AccountLoggingKickedMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void AccountLoggingKickedMessageTreatment(Message message, Account account)
         {
             AccountLoggingKickedMessage btmsg = (AccountLoggingKickedMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                btmsg.Deserialize(reader);
-            }
             account.Logger.Log(String.Format("Compte banni {0} jours, {1} heures, {2} minutes :'( ", btmsg.Days, btmsg.Hours, btmsg.Minutes), BotForgeAPI.Logger.LogEnum.TextInformationError);
         }
 
         [MessageHandler(typeof(ServerSettingsMessage))]
-        public static void ServerSettingsMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void ServerSettingsMessageTreatment(Message message, Account account)
         {
             ServerSettingsMessage msg = (ServerSettingsMessage)message;
 
-            using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            {
-                msg.Deserialize(reader);
-            }
             //account.Log(
             //    new ConnectionTextInformation(" Server Settings : Language : " + msg.Lang +
             //                             ", GameType : " + ((GameTypeIdEnum)msg.GameType).Description() +

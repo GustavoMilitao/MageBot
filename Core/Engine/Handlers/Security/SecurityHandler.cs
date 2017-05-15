@@ -8,7 +8,7 @@ namespace BlueSheep.Engine.Handlers.Security
     {
         #region Public methods
         [MessageHandler(typeof(RawDataMessage))]
-        public static void RawDataMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void RawDataMessageTreatment(Message message,  Account account)
         {
             List<int> tt = new List<int>();
             CheckIntegrityMessage checkIntegrityMessage = new CheckIntegrityMessage(tt);
@@ -17,7 +17,7 @@ namespace BlueSheep.Engine.Handlers.Security
         }
 
         [MessageHandler(typeof(CheckIntegrityMessage))]
-        public static void CheckIntegrityMessageTreatment(Message message, byte[] packetDatas, Account account)
+        public static void CheckIntegrityMessageTreatment(Message message,  Account account)
         {
         }
 
