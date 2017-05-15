@@ -9,8 +9,9 @@ using Core.Engine.Types;
 using BotForgeAPI.Network.Messages;
 using BotForge.Core.Game.Inventory;
 using BotForge.Core.Game.Pets;
+using BlueSheep.Common.Data;
 
-namespace BlueSheep.Engine.Handlers.Inventory
+namespace Core.Engine.Handlers.Inventory
 {
     class InventoryHandler
     {
@@ -41,11 +42,11 @@ namespace BlueSheep.Engine.Handlers.Inventory
             if (account.IsFullSocket)
             {
                 FriendsGetListMessage friendGetListMessage = new FriendsGetListMessage();
-                account.Network.Send(friendGetListMessage);
+                account.Network.Connection.Send(friendGetListMessage);
                 IgnoredGetListMessage ignoredGetListMessage = new IgnoredGetListMessage();
-                account.Network.Send(ignoredGetListMessage);
+                account.Network.Connection.Send(ignoredGetListMessage);
                 SpouseGetInformationsMessage spouseGetInformationsMessage = new SpouseGetInformationsMessage();
-                account.Network.Send(spouseGetInformationsMessage);
+                account.Network.Connection.Send(spouseGetInformationsMessage);
                 Random random = new Random();
                 const string hexChars = "0123456789ABCDEF";
                 string key = string.Empty;
@@ -62,11 +63,11 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 int pos = key.Sum(t => t % 16);
                 key += hexChars[pos % 16];
                 ClientKeyMessage clientKeyMessage = new ClientKeyMessage(key);
-                account.Network.Send(clientKeyMessage);
+                account.Network.Connection.Send(clientKeyMessage);
                 GameContextCreateRequestMessage gameContextCreateRequestMessage = new GameContextCreateRequestMessage();
-                account.Network.Send(gameContextCreateRequestMessage);
+                account.Network.Connection.Send(gameContextCreateRequestMessage);
                 ChannelEnablingMessage channelEnablingMessage = new ChannelEnablingMessage(7, false);
-                account.Network.Send(channelEnablingMessage);
+                account.Network.Connection.Send(channelEnablingMessage);
             }
         }
         [MessageHandler(typeof(InventoryContentAndPresetMessage))]
@@ -94,11 +95,11 @@ namespace BlueSheep.Engine.Handlers.Inventory
             if (account.IsFullSocket)
             {
                 FriendsGetListMessage friendGetListMessage = new FriendsGetListMessage();
-                account.Network.Send(friendGetListMessage);
+                account.Network.Connection.Send(friendGetListMessage);
                 IgnoredGetListMessage ignoredGetListMessage = new IgnoredGetListMessage();
-                account.Network.Send(ignoredGetListMessage);
+                account.Network.Connection.Send(ignoredGetListMessage);
                 SpouseGetInformationsMessage spouseGetInformationsMessage = new SpouseGetInformationsMessage();
-                account.Network.Send(spouseGetInformationsMessage);
+                account.Network.Connection.Send(spouseGetInformationsMessage);
                 Random random = new Random();
                 const string hexChars = "0123456789ABCDEF";
                 string key = string.Empty;
@@ -115,11 +116,11 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 int pos = key.Sum(t => t % 16);
                 key += hexChars[pos % 16];
                 ClientKeyMessage clientKeyMessage = new ClientKeyMessage(key);
-                account.Network.Send(clientKeyMessage);
+                account.Network.Connection.Send(clientKeyMessage);
                 GameContextCreateRequestMessage gameContextCreateRequestMessage = new GameContextCreateRequestMessage();
-                account.Network.Send(gameContextCreateRequestMessage);
+                account.Network.Connection.Send(gameContextCreateRequestMessage);
                 ChannelEnablingMessage channelEnablingMessage = new ChannelEnablingMessage(7, false);
-                account.Network.Send(channelEnablingMessage);
+                account.Network.Connection.Send(channelEnablingMessage);
             }
         }
 
@@ -139,7 +140,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 //if (account.Game.Pets.Data.PetsModifiedList == null)
                 //    account.PetsModifiedList = new List<Pet>();
                 //account.PetsModifiedList.Add(pet);
-                account.Logger.Log("Pet fed : " + Common.Data.I18N.GetText((int)ItemData.Fields["nameId"]) + " " + ".", BotForgeAPI.Logger.LogEnum.TextInformationMessage);
+                account.Logger.Log("Pet fed : " + I18N.GetText((int)ItemData.Fields["nameId"]) + " " + ".", BotForgeAPI.Logger.LogEnum.TextInformationMessage);
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlueSheep.Engine.Handlers
+namespace Core.Engine.Handlers
 {
     class MessageHandler : Attribute
     {

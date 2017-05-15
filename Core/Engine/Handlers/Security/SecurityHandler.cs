@@ -3,7 +3,7 @@ using BotForgeAPI.Protocol.Messages;
 using BotForgeAPI.Network.Messages;
 using Core.Engine.Types;
 
-namespace BlueSheep.Engine.Handlers.Security
+namespace Core.Engine.Handlers.Security
 {
     class SecurityHandler
     {
@@ -14,7 +14,7 @@ namespace BlueSheep.Engine.Handlers.Security
             List<sbyte> tt = new List<sbyte>();
             CheckIntegrityMessage checkIntegrityMessage = new CheckIntegrityMessage(tt.ToArray());
 
-            account.Network.Send(checkIntegrityMessage);
+            account.Network.Connection.Send(checkIntegrityMessage);
         }
 
         [MessageHandler(typeof(CheckIntegrityMessage))]

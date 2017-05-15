@@ -1,5 +1,4 @@
-﻿using BlueSheep.Util.I18n.Strings;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,8 +28,8 @@ namespace BlueSheep.New_Interface
         private void toolStripComboBox1_TextChanged(object sender, EventArgs e)
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(LanguageChoice.Text);
-            AccountsBt.Text = Strings.Accounts;
-            GroupsBt.Text = Strings.Groups;
+            //AccountsBt.Text = Strings.Accounts;
+            //GroupsBt.Text = Strings.Groups;
         }
     }
 }

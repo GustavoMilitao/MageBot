@@ -11,7 +11,7 @@ using BotForge.Core.Game.Path;
 using BotForgeAPI.Protocol.Types;
 using BotForge.Core.Game.Map;
 
-namespace BlueSheep.Engine.Handlers.Context
+namespace Core.Engine.Handlers.Context
 {
     class NpcHandler
     {

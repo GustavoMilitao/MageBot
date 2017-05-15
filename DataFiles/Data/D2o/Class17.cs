@@ -12,38 +12,38 @@ namespace BlueSheep.Common.Data.D2o
         {
             string_0 = string_1;
             int num = dofusReader_0.ReadInt();
-            delegate0_0 = method_0(num, dofusReader_0);
+            delegate0_0 = Method_0(num, dofusReader_0);
         }
 
-        private Delegate0 method_0(int int_0, BigEndianReader dofusReader_0)
+        private Delegate0 Method_0(int int_0, BigEndianReader dofusReader_0)
         {
             switch (int_0)
             {
                 case -1:
-                    return new Delegate0(method_9);
+                    return new Delegate0(Method_9);
                 case -2:
-                    return new Delegate0(method_10);
+                    return new Delegate0(Method_10);
                 case -3:
-                    return new Delegate0(method_5);
+                    return new Delegate0(Method_5);
                 case -4:
-                    return new Delegate0(method_11);
+                    return new Delegate0(Method_11);
                 case -5:
-                    return new Delegate0(method_12);
+                    return new Delegate0(Method_12);
                 case -6:
-                    return new Delegate0(method_13);
+                    return new Delegate0(Method_13);
                 case -99:
                     string str = dofusReader_0.ReadUTF();
                     class17_0 = new Class17(str, dofusReader_0);
-                    return new Delegate0(method_1);
+                    return new Delegate0(Method_1);
             }
             if ((int_0 > 0))
             {
-                return new Delegate0(method_2);
+                return new Delegate0(Method_2);
             }
             return null;
         }
 
-        private ArrayList method_1(string string_1, BigEndianReader dofusReader_0)
+        private ArrayList Method_1(string string_1, BigEndianReader dofusReader_0)
         {
             ArrayList list = new ArrayList();
             int num = dofusReader_0.ReadInt();
@@ -57,69 +57,69 @@ namespace BlueSheep.Common.Data.D2o
         }
 
         [CompilerGenerated()]
-        private object method_10(string string_1, BigEndianReader dofusReader_0)
+        private object Method_10(string string_1, BigEndianReader dofusReader_0)
         {
-            return method_4(string_1, dofusReader_0);
+            return Method_4(string_1, dofusReader_0);
         }
 
         [CompilerGenerated()]
-        private object method_11(string string_1, BigEndianReader dofusReader_0)
+        private object Method_11(string string_1, BigEndianReader dofusReader_0)
         {
-            return method_6(string_1, dofusReader_0);
+            return Method_6(string_1, dofusReader_0);
         }
 
         [CompilerGenerated()]
-        private object method_12(string string_1, BigEndianReader dofusReader_0)
+        private object Method_12(string string_1, BigEndianReader dofusReader_0)
         {
-            return method_7(string_1, dofusReader_0);
+            return Method_7(string_1, dofusReader_0);
         }
 
         [CompilerGenerated()]
-        private object method_13(string string_1, BigEndianReader dofusReader_0)
+        private object Method_13(string string_1, BigEndianReader dofusReader_0)
         {
-            return method_8(string_1, dofusReader_0);
+            return Method_8(string_1, dofusReader_0);
         }
 
-        private object method_2(string string_1, BigEndianReader dofusReader_0)
+        private object Method_2(string string_1, BigEndianReader dofusReader_0)
         {
             int num = dofusReader_0.ReadInt();
             return GameData.FileName_Data[string_1].dictionary_0[num].method_0(string_1, dofusReader_0);
         }
 
-        private int method_3(string string_1, BigEndianReader dofusReader_0)
+        private int Method_3(string string_1, BigEndianReader dofusReader_0)
         {
             return dofusReader_0.ReadInt();
         }
 
-        private bool method_4(string string_1, BigEndianReader dofusReader_0)
+        private bool Method_4(string string_1, BigEndianReader dofusReader_0)
         {
             return dofusReader_0.ReadBoolean();
         }
 
-        private string method_5(string string_1, BigEndianReader dofusReader_0)
+        private string Method_5(string string_1, BigEndianReader dofusReader_0)
         {
             return dofusReader_0.ReadUTF();
         }
 
-        private double method_6(string string_1, BigEndianReader dofusReader_0)
+        private double Method_6(string string_1, BigEndianReader dofusReader_0)
         {
             return dofusReader_0.ReadDouble();
         }
 
-        private int method_7(string string_1, BigEndianReader dofusReader_0)
+        private int Method_7(string string_1, BigEndianReader dofusReader_0)
         {
             return dofusReader_0.ReadInt();
         }
 
-        private UInt32 method_8(string string_1, BigEndianReader dofusReader_0)
+        private UInt32 Method_8(string string_1, BigEndianReader dofusReader_0)
         {
             return dofusReader_0.ReadUInt();
         }
 
         [CompilerGenerated()]
-        private object method_9(string string_1, BigEndianReader dofusReader_0)
+        private object Method_9(string string_1, BigEndianReader dofusReader_0)
         {
-            return method_3(string_1, dofusReader_0);
+            return Method_3(string_1, dofusReader_0);
         }
 
 

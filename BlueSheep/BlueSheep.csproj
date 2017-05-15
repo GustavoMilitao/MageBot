@@ -181,24 +181,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{ac76d095-50e6-469e-b522-40556ff1ac2d}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataFiles\DataFiles.csproj">
-      <Project>{44759c8e-e748-40fa-b71e-a04d919ff887}</Project>
-      <Name>DataFiles</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Protocol\Protocol.csproj">
-      <Project>{974ba32c-dfdc-4a80-8693-1c8fe6a8edaa}</Project>
-      <Name>Protocol</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Util\Util.csproj">
-      <Project>{5fc9e97d-6446-45c3-a3b2-84b0883782df}</Project>
-      <Name>Util</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\account.ico" />
   </ItemGroup>
   <ItemGroup>

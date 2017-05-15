@@ -12,7 +12,7 @@ using Core.Engine.Types;
 using BotForgeAPI.Game.Map;
 using BotForgeAPI.Protocol.Types;
 
-namespace BlueSheep.Engine.Handlers.Fight
+namespace Core.Engine.Handlers.Fight
 {
     class FightHandler
     {
@@ -92,7 +92,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightEndMessage))]
-        public async static void GameFightEndMessageTreatment(Message message,  Account account)
+        public static void GameFightEndMessageTreatment(Message message,  Account account)
         {
             GameFightEndMessage msg = (GameFightEndMessage)message;
             (account.Game.Fight.Data as FightData).FightStop(msg);
@@ -238,11 +238,11 @@ namespace BlueSheep.Engine.Handlers.Fight
             {
                 byte id = account.PresetStartUpId;
                 InventoryPresetUseMessage msg2 = new InventoryPresetUseMessage((sbyte)(id - 1));
-                account.Network.Send(msg2);
+                account.Network.Connection.Send(msg2);
                 account.Logger.Log("Fast equipment number " + Convert.ToString(id), BotForgeAPI.Logger.LogEnum.TextInformationMessage);
             }
             GameFightReadyMessage nmsg = new GameFightReadyMessage(true);
-            account.Network.Send(nmsg);
+            account.Network.Connection.Send(nmsg);
             account.Logger.Log("Send Ready !", BotForgeAPI.Logger.LogEnum.Bot);
         }
 
@@ -251,7 +251,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         {
             GameFightTurnReadyRequestMessage msg = (GameFightTurnReadyRequestMessage)message;
             GameFightTurnReadyMessage msg2 = new GameFightTurnReadyMessage(true);
-            account.Network.Send(msg2);
+            account.Network.Connection.Send(msg2);
         }
 
         [MessageHandler(typeof(SequenceEndMessage))]
@@ -262,7 +262,7 @@ namespace BlueSheep.Engine.Handlers.Fight
             if ((account.Game.Fight.Data as FightData).Fighter.IsAlive && (account.Game.Fight.Data as FightData).Fighter.Id == msg.AuthorId && !account.IsFullSocket && account.Game.Fight != null && (account.Game.Fight.Data as FightData).IsFighterTurn)
             {
                 GameActionAcknowledgementMessage msg2 = new GameActionAcknowledgementMessage(true, (sbyte)msg.ActionId);
-                account.Network.Send(msg2);
+                account.Network.Connection.Send(msg2);
                 //switch (account.Game.Fight.flag)
                 //{
                 //    case -1:

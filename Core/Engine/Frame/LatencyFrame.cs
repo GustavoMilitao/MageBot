@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Engine.Types;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -10,11 +11,11 @@ namespace BlueSheep.Core.Frame
         private uint m_LatestSent;
         private readonly List<uint> m_LatencyBuffer;
         private const uint m_LatencyAvgBufferSize = 50;
-        private Account.Account account;
+        private Account account;
         #endregion
 
         #region Constructeurs
-        public LatencyFrame(Account.Account Account)
+        public LatencyFrame(Account Account)
         {
             m_LatencyBuffer = new List<uint>();
             account = Account;
@@ -70,7 +71,7 @@ namespace BlueSheep.Core.Frame
 
         public int RolePley()
         {
-            long pId = (long)account.CharacterBaseInformations.ObjectID;
+            long pId = (long)account.Game.Character.Id;
             uint ct = Convert.ToUInt32(account.Ticket);
             string loaderInfo = "4dd3a4c8490e4517d1883a5c367e1B5f";
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(loaderInfo);
@@ -105,11 +106,11 @@ namespace BlueSheep.Core.Frame
                 //base();
             }
 
-            private static byte[] Str8;
+            //private static byte[] Str8;
 
-            private static byte[] Str9;
+            //private static byte[] Str9;
 
-            private static byte[] Str10;
+            //private static byte[] Str10;
 
             private static string[] Str11 = new List<string>().ToArray();
 
@@ -171,7 +172,7 @@ namespace BlueSheep.Core.Frame
                 //}
                 //var _loc3_ = _loc3_;
                 //var _loc0_ = Str2;
-                return;
+                //return;
             }
 
             public static string Str7(int param1)
@@ -220,7 +221,7 @@ namespace BlueSheep.Core.Frame
                 }
                 _loc3_ = 0;
                 _loc2_ = 0;
-                for (_loc2_ = 0; _loc2_ < 256; _loc2_++)
+                for (_loc2_ = 0; _loc2_ < 256; )//_loc2_++)
                 {
                     _loc3_ = (_loc3_ + Str22[_loc2_] + param1[_loc2_ % param1.Length]) & 255;
                     //goto lab2;
@@ -231,8 +232,8 @@ namespace BlueSheep.Core.Frame
                         Str22[_loc3_] = (byte)_loc4_;
                         continue;
 
-                    lab1:
-                        _loc4_ = Str22[_loc2_];
+                    //lab1:
+                        //_loc4_ = Str22[_loc2_];
                     } while (true);
 
                     //lab2:

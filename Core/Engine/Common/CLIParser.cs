@@ -1,6 +1,4 @@
 ﻿using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Game.Chat;
-using BlueSheep.Protocol.Types.Game.Context.Roleplay;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Engine.Types;
 using BlueSheep.Util.Text.Log;
@@ -9,9 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using BlueSheep.Core.Monsters;
-using BlueSheep.Core.Fight;
 using System.Threading.Tasks;
+using Core.Engine.Types;
+using BotForgeAPI.Protocol.Types;
+using BotForge.Core.Game.Map.Actors;
+using BotForgeAPI.Protocol.Messages;
+using BotForgeAPI.Protocol.Enums;
+using BotForge.Core.Game.Gather;
 
 namespace BlueSheep.Protocol
 {
@@ -20,7 +22,7 @@ namespace BlueSheep.Protocol
         /* Command Line Parser */
 
         #region Fields
-        private Core.Account.Account account;
+        private Account account;
 
         /// <summary>
         /// Stores the commands history.
@@ -69,7 +71,7 @@ namespace BlueSheep.Protocol
         #endregion
 
         #region Constructors
-        public CLIParser(Core.Account.Account Account)
+        public CLIParser(Account Account)
         {
             account = Account;
         }
@@ -102,11 +104,11 @@ namespace BlueSheep.Protocol
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] { "-cell = 0", "-dir = null" });
                     ParseArguments(passedCommands);
-                    return Move().Result;
+                    return Move();
                 case "/mapid":
-                    return new List<string>() { "L'id de la map est : " + account.MapData.Id };
+                    return new List<string>() { "L'id de la map est : " + account.Game.Map.Data.Id };
                 case "/cellid":
-                    return new List<string>() { "Le joueur se trouve sur la cellule " + account.MapData.Character.Disposition.CellId };
+                    return new List<string>() { "Le joueur se trouve sur la cellule " + account.Game.Character.Cell.CellId };
                 case "/cell":
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] { "-npc = 0", "-elem = 0", "-player = null" });
@@ -123,18 +125,18 @@ namespace BlueSheep.Protocol
                     DefineSwitches(new string[] { "-v" });
                     ParseArguments(passedCommands);
                     return DispEntities();
-                case "/path":
-                    DefineRequiredParameters(new string[] { });
-                    DefineOptionalParameter(new string[] { "-load = null", "-name = Unknown" });
-                    DefineSwitches(new string[] { "-start", "-stop" });
-                    ParseArguments(passedCommands);
-                    return Path();
-                case "/fight":
-                    DefineRequiredParameters(new string[] { });
-                    DefineOptionalParameter(new string[] { });
-                    DefineSwitches(new string[] { "-launch", "-lock", "-l", "-v", "-t", "-me", "-i" });
-                    ParseArguments(passedCommands);
-                    return Fight();
+                //case "/path":
+                //    DefineRequiredParameters(new string[] { });
+                //    DefineOptionalParameter(new string[] { "-load = null", "-name = Unknown" });
+                //    DefineSwitches(new string[] { "-start", "-stop" });
+                //    ParseArguments(passedCommands);
+                //    return Path();
+                //case "/fight":
+                //    DefineRequiredParameters(new string[] { });
+                //    DefineOptionalParameter(new string[] { });
+                //    DefineSwitches(new string[] { "-launch", "-lock", "-l", "-v", "-t", "-me", "-i" });
+                //    ParseArguments(passedCommands);
+                //    return Fight();
                 case "/gather":
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] { });
@@ -172,7 +174,7 @@ namespace BlueSheep.Protocol
                 if (string.IsNullOrEmpty(param))
                 {
                     string ERRORMessage = "ERROR: The required command line parameter '" + param + "' is empty.";
-                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
+                    account.Logger.Log(ERRORMessage, BotForgeAPI.Logger.LogEnum.TextInformationError);
                 }
 
                 CLIParser.requiredParameters.Add(param, string.Empty);
@@ -197,14 +199,14 @@ namespace BlueSheep.Protocol
                 if (tokens.Length != 2)
                 {
                     string ERRORMessage = "ERROR: The optional command line parameter '" + param + "' has wrong format.\n Expeted param=value.";
-                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
+                    account.Logger.Log(ERRORMessage, BotForgeAPI.Logger.LogEnum.TextInformationError);
                 }
 
                 tokens[0] = tokens[0].Trim();
                 if (string.IsNullOrEmpty(tokens[0]))
                 {
                     string ERRORMessage = "ERROR: The optional command line parameter '" + param + "' has empty name.";
-                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
+                    account.Logger.Log(ERRORMessage, BotForgeAPI.Logger.LogEnum.TextInformationError);
                 }
 
                 tokens[1] = tokens[1].Trim();
@@ -239,13 +241,13 @@ namespace BlueSheep.Protocol
                 if (string.IsNullOrEmpty(key))
                 {
                     string ERRORMessage = "ERROR: The name of the optional parameter '" + param.Key + "' is empty.";
-                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
+                    account.Logger.Log(ERRORMessage, BotForgeAPI.Logger.LogEnum.TextInformationError);
                 }
 
                 if (string.IsNullOrEmpty(value))
                 {
                     string ERRORMessage = "ERROR: The value of the optional parameter '" + param.Key + "' is empty.";
-                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
+                    account.Logger.Log(ERRORMessage, BotForgeAPI.Logger.LogEnum.TextInformationError);
                 }
 
                 CLIParser.optionalParameters.Add(param.Key, param.Value);
@@ -270,7 +272,7 @@ namespace BlueSheep.Protocol
                 if (string.IsNullOrEmpty(temp))
                 {
                     string ERRORMessage = "ERROR: The switch '" + sw + "' is empty.";
-                    account.Log(new ErrorTextInformation(ERRORMessage), 0);
+                    account.Logger.Log(ERRORMessage, BotForgeAPI.Logger.LogEnum.TextInformationError);
                 }
 
                 CLIParser.switches.Add(temp, false);
@@ -344,7 +346,7 @@ namespace BlueSheep.Protocol
             else
             {
                 string ERRORMessage = "ERROR: The parameter '" + paramName + "' is not supported.";
-                account.Log(new ErrorTextInformation(ERRORMessage), 0);
+                account.Logger.Log(ERRORMessage, BotForgeAPI.Logger.LogEnum.TextInformationError);
             }
 
             return paramValue;
@@ -361,7 +363,7 @@ namespace BlueSheep.Protocol
             else
             {
                 string ERRORMessage = "ERROR: switch '" + switchName + "' not supported.";
-                account.Log(new ErrorTextInformation(ERRORMessage), 0);
+                account.Logger.Log(ERRORMessage, BotForgeAPI.Logger.LogEnum.TextInformationError);
             }
 
             return switchValue;
@@ -479,7 +481,7 @@ namespace BlueSheep.Protocol
 
             if (ERRORMessage.Length > 0)
             {
-                account.Log(new ErrorTextInformation(ERRORMessage.ToString()), 0);
+                account.Logger.Log(ERRORMessage.ToString(), BotForgeAPI.Logger.LogEnum.TextInformationError);
             }
         }
 
@@ -626,24 +628,54 @@ namespace BlueSheep.Protocol
         /// Do the moving action.
         /// </summary>
         /// <returns>A display string of the action</returns>
-        private async Task<List<string>> Move()
+        private List<string> Move()
         {
             int cell = Int32.Parse(GetParamValue("-cell"));
             string dir = GetParamValue("-dir");
+
+            BotForgeAPI.Game.Map.MapDirectionEnum? direction;
+            switch (dir.ToUpper())
+            {
+                case "UP":
+                case "TOP":
+                case "NORTH":
+                    direction = BotForgeAPI.Game.Map.MapDirectionEnum.North;
+                    break;
+                case "LEFT":
+                case "WEST":
+                    direction = BotForgeAPI.Game.Map.MapDirectionEnum.West;
+                    break;
+                case "BOTTOM":
+                case "DOWN":
+                case "SOUTH":
+                    direction = BotForgeAPI.Game.Map.MapDirectionEnum.South;
+                    break;
+                case "RIGHT":
+                case "EAST":
+                    direction = BotForgeAPI.Game.Map.MapDirectionEnum.East;
+                    break;
+                default:
+                    direction = null;
+                    break;
+            }
 
             try
             {
                 if (cell != 0)
                 {
                     result.Add("Déplacement vers la cellid : " + cell);
-                    await account.Map.MoveToCell(cell);
+                    account.Game.Map.MoveToCell(cell);
 
                 }
 
-                if (dir != "null" && new List<string>() { "bottom", "up", "left", "right" }.Contains(dir))
+                if (direction != null && new List<BotForgeAPI.Game.Map.MapDirectionEnum>() { BotForgeAPI.Game.Map.MapDirectionEnum.East,
+                                                                                         BotForgeAPI.Game.Map.MapDirectionEnum.North,
+                                                                                         BotForgeAPI.Game.Map.MapDirectionEnum.South,
+                                                                                         BotForgeAPI.Game.Map.MapDirectionEnum.West}
+                .Contains(direction.Value))
                 {
                     result.Add("Déplacement : " + dir);
-                    account.Map.ChangeMap(dir);
+                    account.Game.Map.ChangeMap(direction.Value);
                 }
             }
             catch (Exception ex)
@@ -671,8 +703,8 @@ namespace BlueSheep.Protocol
             {
                 if (npcId != 0)
                 {
-                    string name = account.Npc.GetNpcName(npcId);
-                    int cell = account.MapData.GetCellFromContextId(npcId);
+                    string name = account.TalkingNPC.Name;
+                    int cell = account.Game.Map.Data.GetCellFromContextId(npcId).CellId;
                     if (cell != 0)
                         result.Add("Le pnj " + name + " est à la cellule " + cell + ". \n");
                     else
@@ -680,7 +712,7 @@ namespace BlueSheep.Protocol
                 }
                 else if (elemid != 0)
                 {
-                    int cell = account.MapData.GetCellFromContextId(elemid);
+                    int cell = account.Game.Map.Data.GetCellFromContextId(elemid).CellId;
                     if (cell != 0)
                         result.Add("L'élement " + elemid + " est à la cellule " + cell + ". \n");
                     else
@@ -689,11 +721,11 @@ namespace BlueSheep.Protocol
                 else if (player != "null")
                 {
                     int cell = 0;
-                    foreach (GameRolePlayCharacterInformations p in account.MapData.Players)
+                    foreach (Character p in account.Game.Map.Data.Players)
                     {
                         if (p.Name == player)
                         {
-                            cell = account.MapData.GetCellFromContextId(p.ContextualId);
+                            cell = account.Game.Map.Data.GetCellFromContextId((int)p.Id).CellId;
                         }
                     }
                     if (cell != 0)
@@ -729,13 +761,14 @@ namespace BlueSheep.Protocol
                 {
                     using (BigEndianWriter writer = new BigEndianWriter())
                     {
-                        ChatClientPrivateMessage msg = new ChatClientPrivateMessage(message, dest);
-                        msg.Serialize(writer);
-                        writer.Content = account.HumanCheck.hash_function(writer.Content);
-                        msg.Pack(writer);
-                        account.SocketManager.Send(writer.Content);
+                        //ChatClientPrivateMessage msg = new ChatClientPrivateMessage(message, dest);
+                        ////msg.Serialize(writer);
+                        ////account.HumanCheck.Hash_Function(writer);
+                        ////msg.Pack(writer);
+                        //account.Network.Send(msg);
+                        account.Game.Tchat.SendMP(dest, message);
                         result.Add("à " + dest + " : " + message + "\n");
-                        account.Log(new DebugTextInformation("[SND] 851 (ChatClientPrivateMessage)"), 0);
+                        account.Logger.Log("[SND] 851 (ChatClientPrivateMessage)", BotForgeAPI.Logger.LogEnum.Debug);
                     }
                 }
                 else
@@ -743,24 +776,24 @@ namespace BlueSheep.Protocol
                     switch (canal)
                     {
                         case 'g':
-                            account.Config.Flood.SendMessage(2, message);
-                            result.Add("Message envoyé. \n");
+                            account.Game.Tchat.Send(ChatChannelsMultiEnum.CHANNEL_GUILD, message);
+                            result.Add("Message sent. \n");
                             break;
                         case 'r':
-                            account.Config.Flood.SendMessage(6, message);
-                            result.Add("Message envoyé. \n");
+                            account.Game.Tchat.Send(ChatChannelsMultiEnum.CHANNEL_SEEK, message);
+                            result.Add("Message sent. \n");
                             break;
                         case 'b':
-                            account.Config.Flood.SendMessage(5, message);
-                            result.Add("Message envoyé. \n");
+                            account.Game.Tchat.Send(ChatChannelsMultiEnum.CHANNEL_SALES, message);
+                            result.Add("Message sent. \n");
                             break;
                         case 'a':
-                            account.Config.Flood.SendMessage(3, message);
-                            result.Add("Message envoyé. \n");
+                            account.Game.Tchat.Send(ChatChannelsMultiEnum.CHANNEL_ALLIANCE, message);
+                            result.Add("Message sent. \n");
                             break;
                         case 's':
-                            account.Config.Flood.SendMessage(0, message);
-                            result.Add("Message envoyé. \n");
+                            account.Game.Tchat.Send(ChatChannelsMultiEnum.CHANNEL_GLOBAL, message);
+                            result.Add("Message sent. \n");
                             break;
                     }
                 }
@@ -786,35 +819,34 @@ namespace BlueSheep.Protocol
 
             try
             {
-                foreach (GameRolePlayNpcInformations n in account.MapData.Npcs)
+                foreach (Npc n in account.Game.Map.Data.Npcs)
                 {
-                    string name = account.Npc.GetNpcName(n.NpcId);
-                    int cell = account.MapData.GetCellFromContextId(n.ContextualId);
-                    result.Add("[PNJ] " + name + " -> id : +" + n.NpcId + " contextual id : " + n.ContextualId + " cell : " + cell + ".");
+                    string name = n.Name;
+                    int cell = account.Game.Map.Data.GetCellFromContextId((int)n.Id).CellId;
+                    result.Add("[PNJ] " + name + " -> id : +" + n.NpcId + " contextual id : " + n.Id + " cell : " + cell + ".");
 
                 }
-                foreach (KeyValuePair<BlueSheep.Core.Map.Elements.InteractiveElement, int> pair in account.MapData.InteractiveElements)
+                foreach (BotForge.Core.Game.Map.Elements.InteractiveElement elem in account.Game.Map.Data.InteractiveElements)
                 {
                     if (verbose)
-                        result.Add("[INTERACTIVE ELEMENT] " + pair.Key.Name + " -> id " + pair.Key + " cell : " + pair.Value + " IsUsable : " + pair.Key.IsUsable + ".");
+                        result.Add("[INTERACTIVE ELEMENT] " + elem.Name + " -> id " + elem.Id + " cell : " + elem.Cell.CellId + " IsUsable : " + elem.IsUsable + ".");
                     else
-                        result.Add("[INTERACTIVE ELEMENT] " + pair.Key.Name + " -> id " + pair.Key + " cell : " + pair.Value + ".");
+                        result.Add("[INTERACTIVE ELEMENT] " + elem.Name + " -> id " + elem.Id + " cell : " + elem.Cell.CellId + ".");
                 }
-                foreach (GameRolePlayCharacterInformations p in account.MapData.Players)
+                foreach (Character p in account.Game.Map.Data.Players)
                 {
-                    int cell = account.MapData.GetCellFromContextId(p.ContextualId);
-                    if (verbose)
-                        result.Add("[PLAYER] " + p.Name + " -> contextual id " + p.ContextualId + " cell : " + cell + " Sex : " + (p.HumanoidInfo.Sex ? "Female" : "Male") + ".");
-                    else
-                        result.Add("[PLAYER] " + p.Name + " -> contextual id " + p.ContextualId + " cell : " + cell + ".");
+                    //if (verbose)
+                    //    result.Add("[PLAYER] " + p.Name + " -> contextual id " + p.Id + " cell : " + p.Cell.CellId + " Sex : " + (p..HumanoidInfo.Sex ? "Female" : "Male") + ".");
+                    //else
+                    result.Add("[PLAYER] " + p.Name + " -> contextual id " + p.Id + " cell : " + p.Cell.CellId + ".");
 
                 }
-                foreach (MonsterGroup m in account.MapData.Monsters)
+                foreach (GroupMonster m in account.Game.Map.Data.Monsters)
                 {
                     if (verbose)
-                        result.Add("[MONSTERS] " + " -> (" + m.monstersLevel + ") " + m.monstersName(true) + " contextual id " + m.m_contextualId + " cell : " + m.m_cellId + ".");
+                        result.Add("[MONSTERS] " + " -> (" + m.Level + ") " + m.monstersName(true) + " contextual id " + m.Id + " cell : " + m.Cell.CellId + ".");
                     else
-                        result.Add("[MONSTERS] " + " -> " + m.monstersName(false) + " contextual id " + m.m_contextualId + ".");
+                        result.Add("[MONSTERS] " + " -> " + m.monstersName(false) + " contextual id " + m.Id + ".");
                 }
 
             }
@@ -832,117 +864,117 @@ namespace BlueSheep.Protocol
         /// <summary>
         /// Interface to manage path
         /// </summary>
-        private List<string> Path()
-        {
-            string path = GetParamValue("-load");
-            string name = GetParamValue("-name");
-            bool start = IsSwitchOn("-start");
-            bool stop = IsSwitchOn("-stop");
+        //private List<string> Path()
+        //{
+        //    string path = GetParamValue("-load");
+        //    string name = GetParamValue("-name");
+        //    bool start = IsSwitchOn("-start");
+        //    bool stop = IsSwitchOn("-stop");
 
-            try
-            {
-                if (path != "null")
-                {
-                    account.Config.Path = new Core.Path.PathManager(account, path, name);
-                    account.Config.Path.StopPath();
-                    result.Add("Trajet chargé : " + name);
-                }
-                if (start)
-                {
-                    account.Config.Path.Start();
-                    //account.Path.ParsePath();
-                    result.Add("Lancement du trajet.");
-                }
-                if (stop)
-                {
-                    account.Config.Path.StopPath();
-                    result.Add("Arrêt du trajet...");
-                }
-            }
-            catch (Exception ex)
-            {
-                result.Add("[ERROR] " + ex.Message + "\n");
-                return result;
-            }
-            if (!(result.Count > 0))
-                return Usage("path");
-            else
-                return result;
-        }
+        //    try
+        //    {
+        //        if (path != "null")
+        //        {
+        //            account.Config.Path = new Core.Path.PathManager(account, path, name);
+        //            account.Config.Path.StopPath();
+        //            result.Add("Trajet chargé : " + name);
+        //        }
+        //        if (start)
+        //        {
+        //            account.Config.Path.Start();
+        //            //account.Path.ParsePath();
+        //            result.Add("Lancement du trajet.");
+        //        }
+        //        if (stop)
+        //        {
+        //            account.Config.Path.StopPath();
+        //            result.Add("Arrêt du trajet...");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Add("[ERROR] " + ex.Message + "\n");
+        //        return result;
+        //    }
+        //    if (!(result.Count > 0))
+        //        return Usage("path");
+        //    else
+        //        return result;
+        //}
 
         /// <summary>
         /// Interface to manage fights
         /// </summary>
-        private List<string> Fight()
-        {
-            bool launch = IsSwitchOn("-launch");
-            bool Lock = IsSwitchOn("-lock");
-            bool fighters = IsSwitchOn("-l");
-            bool verbose = IsSwitchOn("-v");
-            bool turn = IsSwitchOn("-t");
-            bool me = IsSwitchOn("-me");
-            bool infinite = IsSwitchOn("-i");
-            try
-            {
-                if (turn && account.State == Status.Fighting)
-                {
-                    result.Add("[TURN] " + account.FightData.TurnId);
-                }
-                if (fighters && account.State == Status.Fighting)
-                {
-                    foreach (BFighter f in account.FightData.Fighters)
-                    {
-                        if (verbose)
-                        {
-                            bool isAlly = f.TeamId == account.FightData.Fighter.TeamId;
-                            result.Add(String.Format("[{1}] LP : {2}/{3} AP:{4} MP:{5} Cell: {6} Alive ? {7}",
-                                isAlly ? "ALLY" : "ENNEMY", f.LifePoints, f.MaxLifePoints,
-                                f.ActionPoints, f.MovementPoints, f.CellId, f.IsAlive));
-                        }
-                        else
-                        {
-                            bool isAlly = f.TeamId == account.FightData.Fighter.TeamId;
-                            result.Add(String.Format("[{1}] LP : {2}/{3} Alive ? {4} ",
-                                isAlly ? "ALLY" : "ENNEMY", f.LifePoints, f.MaxLifePoints, f.IsAlive));
-                        }
-                    }
-                }
-                if (me && account.State == Status.Fighting)
-                {
-                    BFighter m = account.FightData.Fighter;
-                    if (verbose)
-                        result.Add(String.Format("[ME] LP : {1}/{2} AP:{3} MP:{4} Cell: {5} Alive ? {6}", m.LifePoints, m.MaxLifePoints
-                            , m.ActionPoints, m.MovementPoints, m.IsAlive));
-                    else
-                        result.Add(String.Format("[ME] LP : {1}/{2} Alive ? {3} \n", m.LifePoints, m.MaxLifePoints, m.IsAlive));
-                }
-                if (account.Fight != null && (launch || Lock))
-                {
-                    if (launch && account.State != Status.Fighting)
-                    {
-                        account.Fight.infinite = infinite;
-                        account.Fight.SearchFight();
-                        result.Add("Recherche d'un combat...");
-                    }
-                    if (Lock && account.FightData.WaitForReady)
-                    {
-                        account.Fight.LockFight();
-                        result.Add("Fermeture du combat.");
-                    }
-                }
-                else
-                    throw new Exception("L'utilisation de cette commande nécessite d'avoir une IA chargée.");
-            }
-            catch (Exception ex)
-            {
-                result.Add("[ERROR] " + ex.Message + "\n");
-                return result;
-            }
-            if (!(result.Count > 0))
-                return Usage("fight");
-            else
-                return result;
-        }
+        //private List<string> Fight()
+        //{
+        //    bool launch = IsSwitchOn("-launch");
+        //    bool Lock = IsSwitchOn("-lock");
+        //    bool fighters = IsSwitchOn("-l");
+        //    bool verbose = IsSwitchOn("-v");
+        //    bool turn = IsSwitchOn("-t");
+        //    bool me = IsSwitchOn("-me");
+        //    bool infinite = IsSwitchOn("-i");
+        //    try
+        //    {
+        //        if (turn && account.State == Status.Fighting)
+        //        {
+        //            result.Add("[TURN] " + account.FightData.TurnId);
+        //        }
+        //        if (fighters && account.State == Status.Fighting)
+        //        {
+        //            foreach (BFighter f in account.FightData.Fighters)
+        //            {
+        //                if (verbose)
+        //                {
+        //                    bool isAlly = f.TeamId == account.FightData.Fighter.TeamId;
+        //                    result.Add(String.Format("[{1}] LP : {2}/{3} AP:{4} MP:{5} Cell: {6} Alive ? {7}",
+        //                        isAlly ? "ALLY" : "ENNEMY", f.LifePoints, f.MaxLifePoints,
+        //                        f.ActionPoints, f.MovementPoints, f.CellId, f.IsAlive));
+        //                }
+        //                else
+        //                {
+        //                    bool isAlly = f.TeamId == account.FightData.Fighter.TeamId;
+        //                    result.Add(String.Format("[{1}] LP : {2}/{3} Alive ? {4} ",
+        //                        isAlly ? "ALLY" : "ENNEMY", f.LifePoints, f.MaxLifePoints, f.IsAlive));
+        //                }
+        //            }
+        //        }
+        //        if (me && account.State == Status.Fighting)
+        //        {
+        //            BFighter m = account.FightData.Fighter;
+        //            if (verbose)
+        //                result.Add(String.Format("[ME] LP : {1}/{2} AP:{3} MP:{4} Cell: {5} Alive ? {6}", m.LifePoints, m.MaxLifePoints
+        //                    , m.ActionPoints, m.MovementPoints, m.IsAlive));
+        //            else
+        //                result.Add(String.Format("[ME] LP : {1}/{2} Alive ? {3} \n", m.LifePoints, m.MaxLifePoints, m.IsAlive));
+        //        }
+        //        if (account.Fight != null && (launch || Lock))
+        //        {
+        //            if (launch && account.State != Status.Fighting)
+        //            {
+        //                account.Fight.infinite = infinite;
+        //                account.Fight.SearchFight();
+        //                result.Add("Recherche d'un combat...");
+        //            }
+        //            if (Lock && account.FightData.WaitForReady)
+        //            {
+        //                account.Fight.LockFight();
+        //                result.Add("Fermeture du combat.");
+        //            }
+        //        }
+        //        else
+        //            throw new Exception("L'utilisation de cette commande nécessite d'avoir une IA chargée.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Add("[ERROR] " + ex.Message + "\n");
+        //        return result;
+        //    }
+        //    if (!(result.Count > 0))
+        //        return Usage("fight");
+        //    else
+        //        return result;
+        //}
 
         /// <summary>
         /// Interface to manage gather.
@@ -955,17 +987,17 @@ namespace BlueSheep.Protocol
             {
                 if (launch)
                 {
-                    account.PerformGather();
+                    account.Game.Gather.PerformGather();
                     result.Add("Récolte de la map...");
                 }
-                if (stats)
-                {
-                    Dictionary<string, int> newStats = account.Gather.Stats;
-                    foreach (KeyValuePair<string, int> key in newStats)
-                    {
-                        result.Add(String.Format("[{1}] : {2}", key.Key, key.Value));
-                    }
-                }
+                //if (stats)
+                //{
+                //    var newStats = (account.Game.Gather.Data as GatherData).Stats;
+                //    foreach (var key in newStats)
+                //    {
+                //        result.Add(String.Format("[{1}] : {2}", key.Key, key.Value));
+                //    }
+                //}
             }
             catch (Exception ex)
             {

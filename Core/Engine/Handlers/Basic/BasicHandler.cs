@@ -3,8 +3,11 @@ using BlueSheep.Util.IO;
 using BotForgeAPI.Protocol.Messages;
 using BotForgeAPI.Network.Messages;
 using Core.Engine.Types;
+using BotForgeAPI.Network;
+using System.Collections.Generic;
+using System.Net.Sockets;
 
-namespace BlueSheep.Engine.Handlers.Basic
+namespace Core.Engine.Handlers.Basic
 {
     class BasicHandler
     {
@@ -30,8 +33,11 @@ namespace BlueSheep.Engine.Handlers.Basic
                     basicLatencyStatsMessage.Serialize(writer);
                     account.HumanCheck.Hash_Function(writer);
                     basicLatencyStatsMessage.Pack(writer);
-
-                    //account.SocketManager.Send(writer.Content);
+                    var content = new List<ArraySegment<byte>>(3);
+                    content.Add(new ArraySegment<byte>(writer.Content));
+                    (account.Network.Connection as ServerConnection).Socket.BeginSend( content, SocketFlags.None, null,
+                        (account.Network.Connection as ServerConnection).Socket);
+                    //TODO Militão 2.0: Verify
                     account.Logger.Log("[SND] 5663 (BasicLatencyStatsMessage)", BotForgeAPI.Logger.LogEnum.Debug);
                 }
             }

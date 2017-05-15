@@ -31,8 +31,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="BotForge.Core">
+      <HintPath>..\..\..\..\Desktop\test\BotForge.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="BotForgeAPI">
+      <HintPath>..\..\..\..\Desktop\test\BotForgeAPI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />

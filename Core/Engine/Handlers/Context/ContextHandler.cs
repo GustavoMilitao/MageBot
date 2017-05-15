@@ -18,7 +18,7 @@ using BotForge.Core.Game.Path;
 using BotForgeAPI.Protocol.Types;
 using BotForge.Core.Game.Inventory;
 
-namespace BlueSheep.Engine.Handlers.Context
+namespace Core.Engine.Handlers.Context
 {
     class ContextHandler
     {
@@ -72,7 +72,7 @@ namespace BlueSheep.Engine.Handlers.Context
             {
                 MapInformationsRequestMessage mapInformationsRequestMessage
                 = new MapInformationsRequestMessage(currentMapMessage.MapId);
-                account.Network.Send(mapInformationsRequestMessage);
+                account.Network.Connection.Send(mapInformationsRequestMessage);
             }
         }
 
@@ -89,7 +89,7 @@ namespace BlueSheep.Engine.Handlers.Context
                 MapInformationsRequestMessage mapInformationsRequestMessage
                     = new MapInformationsRequestMessage(account.Game.Map.Data.Id);
 
-                account.Network.Send(mapInformationsRequestMessage);
+                account.Network.Connection.Send(mapInformationsRequestMessage);
             }
 
         }
@@ -283,14 +283,14 @@ namespace BlueSheep.Engine.Handlers.Context
             {
 
                 PartyAcceptInvitationMessage msg2 = new PartyAcceptInvitationMessage(msg.PartyId);
-                account.Network.Send(msg2);
+                account.Network.Connection.Send(msg2);
                 account.Logger.Log("J'ai rejoint le groupe :3", BotForgeAPI.Logger.LogEnum.Bot);
 
             }
             else
             {
                 PartyRefuseInvitationMessage msg2 = new PartyRefuseInvitationMessage(msg.PartyId);
-                account.Network.Send(msg2);
+                account.Network.Connection.Send(msg2);
 
             }
         }
@@ -307,7 +307,7 @@ namespace BlueSheep.Engine.Handlers.Context
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
                     GameFightJoinRequestMessage msg2 = new GameFightJoinRequestMessage(msg.MemberId, msg.FightId);
-                    account.Network.Send(msg2);
+                    account.Network.Connection.Send(msg2);
                 }
             }
 

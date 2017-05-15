@@ -6,7 +6,7 @@ using Core.Engine.Types;
 using BotForgeAPI.Protocol.Types;
 using System.Linq;
 
-namespace BlueSheep.Engine.Handlers.Job
+namespace Core.Engine.Handlers.Job
 {
     class JobHandler
     {

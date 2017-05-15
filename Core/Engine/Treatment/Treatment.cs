@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using BotForgeAPI.Network.Messages;
 using BotForge.Core.Account;
 using System.Linq;
-using BotForgeAPI.Network;
+using BotForgeAPI.Protocol.Types;
+using Core.Engine.Handlers;
 
 namespace BlueSheep.Engine.Treatment
 {
@@ -19,20 +19,20 @@ namespace BlueSheep.Engine.Treatment
         #region Constructeurs
         public Treatment(Account account)
         {
-            GetTypes("BlueSheep");
+            GetTypes("Core");
             this.account = account;
         }
         #endregion
 
         #region Public methods
-        public void Treat(NetworkMessage message)
+        public void Treat(BotForgeAPI.Network.NetworkMessage message)
         {
 
             InstanceInfo instance = Instances.FirstOrDefault(inst => inst.MessageType == message.GetType());
-            if(instance != null)
+            if (instance != null)
             {
                 MethodInfo method = instance.Method;
-                if(method!=null)
+                if (method != null)
                 {
                     account.Logger.Log("[RCV] " + message.ProtocolId + " (" + method.Name.Remove(method.Name.IndexOf("Treatment")) + ")", BotForgeAPI.Logger.LogEnum.Debug);
                     object[] parameters = { message, account };
@@ -53,12 +53,10 @@ namespace BlueSheep.Engine.Treatment
 
                 foreach (MethodInfo method in methods)
                 {
-                    Handlers.MessageHandler messageHandler = (Handlers.MessageHandler)Attribute.GetCustomAttribute(method, typeof(Handlers.MessageHandler), false);
+                    MessageHandler messageHandler = (MessageHandler)Attribute.GetCustomAttribute(method, typeof(MessageHandler), false);
 
                     if (messageHandler == null)
                         continue;
-
-                    Message message = (Message)(Activator.CreateInstance(messageHandler.MessageType));
 
                     InstanceInfo instance = new InstanceInfo(messageHandler.MessageType, method);
 

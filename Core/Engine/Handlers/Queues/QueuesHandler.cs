@@ -5,7 +5,7 @@ using BotForgeAPI.Protocol.Messages;
 using BotForgeAPI.Network.Messages;
 using Core.Engine.Types;
 
-namespace BlueSheep.Engine.Handlers.Queues
+namespace Core.Engine.Handlers.Queues
 {
     class QueuesHandler
     {

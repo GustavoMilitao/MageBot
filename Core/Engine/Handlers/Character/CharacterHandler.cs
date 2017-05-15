@@ -13,7 +13,7 @@ using BotForge.Core.Game.Characteristics;
 using BotForge.Core.Game.Map.Actors;
 using Core.Engine.Types;
 
-namespace BlueSheep.Engine.Handlers.Character
+namespace Core.Engine.Handlers.Character
 {
     class CharacterHandler
     {
@@ -23,14 +23,10 @@ namespace BlueSheep.Engine.Handlers.Character
         [MessageHandler(typeof(CharactersListMessage))]
         public static void CharactersListMessageTreatment(Message message, Account account)
         {
-            //CharactersListMessage charactersListMessage = (CharactersListMessage)message;
+            CharactersListMessage charactersListMessage = (CharactersListMessage)message;
 
             ////packetDatas = packetDatas.ToList().SkipWhile(a => a == 0).ToArray();
 
-            //using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            //{
-            //    charactersListMessage.Deserialize(reader);
-            //}
             //foreach(CharacterBaseInformations info in charactersListMessage.Characters)
             //{
             //    var a = account.Game.Map.Data.Players.Where(ch => ch.Id == info.ObjectId).FirstOrDefault();
@@ -39,12 +35,13 @@ namespace BlueSheep.Engine.Handlers.Character
 
             ////MainForm.ActualMainForm.ActualizeAccountInformations();
 
-            //if (!account.Config.IsMITM)
-            //{
-            //    CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage((ulong)account.CharacterBaseInformations.ObjectID);
-            //    account.SocketManager.Send(characterSelectionMessage);
-            //}
-            //TODO Militão 2.0: Descubrir qual campo preencher nesse ponto
+            if (account.IsFullSocket)
+            {
+                //CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage((ulong)account.Game.Character.Id);
+                CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage(charactersListMessage.Characters.FirstOrDefault().ObjectId);
+                account.Network.Connection.Send(characterSelectionMessage);
+            }
+            //TODO Militão 2.0: Implementar opção de escolha de personagem
 
         }
 
@@ -96,7 +93,7 @@ namespace BlueSheep.Engine.Handlers.Character
         {
             CharacterSelectedForceMessage msg = (CharacterSelectedForceMessage)message;
             CharacterSelectedForceReadyMessage nmsg = new CharacterSelectedForceReadyMessage();
-            account.Network.Send(nmsg);
+            account.Network.Connection.Send(nmsg);
         }
 
         [MessageHandler(typeof(CharacterLevelUpMessage))]
@@ -116,7 +113,7 @@ namespace BlueSheep.Engine.Handlers.Character
             DataClass d = GameData.GetDataObject(D2oFileEnum.Achievements, msg.ObjectId);
             account.Logger.Log("Success unlocked : " + I18N.GetText((int)d.Fields["nameId"]), BotForgeAPI.Logger.LogEnum.TextInformationMessage);
             AchievementRewardRequestMessage nmsg = new AchievementRewardRequestMessage(-1);
-            account.Network.Send(nmsg);
+            account.Network.Connection.Send(nmsg);
         }
 
         [MessageHandler(typeof(CharacterExperienceGainMessage))]
@@ -156,7 +153,7 @@ namespace BlueSheep.Engine.Handlers.Character
                     case 20:
                         account.Logger.Log("Absent status enabled.", BotForgeAPI.Logger.LogEnum.TextInformationMessage);
                         PlayerStatusUpdateRequestMessage nmsg = new PlayerStatusUpdateRequestMessage(new PlayerStatus(10));
-                        account.Network.Send(nmsg);
+                        account.Network.Connection.Send(nmsg);
                         break;
                     case 40:
                         account.Logger.Log("Solo status enabled.", BotForgeAPI.Logger.LogEnum.TextInformationMessage);
