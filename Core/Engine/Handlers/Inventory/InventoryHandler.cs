@@ -22,7 +22,7 @@ namespace Core.Engine.Handlers.Inventory
             InventoryContentMessage inventoryContentMessage = (InventoryContentMessage)message;
             foreach (BotForgeAPI.Protocol.Types.ObjectItem item in inventoryContentMessage.Objects)
             {
-                BotForge.Core.Game.Inventory.Item i = new BotForge.Core.Game.Inventory.Item(item);
+                BotForge.Core.Game.Inventory.Item i = new Item(item);
                 account.Game.Inventory.Data.Items.Add(i);
             }
             //account.ActualizeInventory();

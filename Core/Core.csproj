@@ -34,14 +34,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AES.dll</HintPath>
     </Reference>
-    <Reference Include="BotForge.Core">
-      <HintPath>..\..\..\..\Desktop\test\BotForge.Core.dll</HintPath>
+    <Reference Include="BotForge.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\Source\Repos\BlueSheep\BotForge.Core.dll</HintPath>
     </Reference>
-    <Reference Include="BotForge.Server.Protocol">
-      <HintPath>..\..\..\..\Desktop\test\BotForge.Server.Protocol.dll</HintPath>
+    <Reference Include="BotForge.FullSocket">
+      <HintPath>E:\Source\Repos\BlueSheep\BotForge.FullSocket.dll</HintPath>
     </Reference>
-    <Reference Include="BotForgeAPI">
-      <HintPath>..\..\..\..\Desktop\test\BotForgeAPI.dll</HintPath>
+    <Reference Include="BotForge.Server.Protocol, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\Source\Repos\BlueSheep\BotForge.Server.Protocol.dll</HintPath>
+    </Reference>
+    <Reference Include="BotForgeAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\Source\Repos\BlueSheep\BotForgeAPI.dll</HintPath>
     </Reference>
     <Reference Include="RSA">
       <HintPath>E:\Source\Repos\BlueSheep\RSA.dll</HintPath>

@@ -21,7 +21,7 @@ namespace BlueSheep.Engine.ExceptionHandler
             {
                 System.Diagnostics.Process.Start(strUrl);
             }
-            catch (System.Security.SecurityException ex)
+            catch (System.Security.SecurityException)
             {
                 //-- do nothing; we can't launch without full trust.
             }
