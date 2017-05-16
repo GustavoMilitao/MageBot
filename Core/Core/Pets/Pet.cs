@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using BlueSheep.Common.Data.D2o;
+using DataFiles.Data.D2o;
 using BlueSheep.Protocol.Types.Game.Data.Items.Effects;
-using System.Linq;
 
 namespace BlueSheep.Core.Pets
 {
@@ -111,7 +110,7 @@ namespace BlueSheep.Core.Pets
                         ObjectEffectInteger effectInteger = (ObjectEffectInteger)effect;
                         DataClass effectObject = GameData.GetDataObject(D2oFileEnum.Effects, effect.ActionId);
                         //Effect effectEffect = (Effect) effectObject;
-                        string effectString = BlueSheep.Common.Data.I18N.GetText((int)effectObject.Fields["descriptionId"]);
+                        string effectString = DataFiles.Data.I18n.I18N.GetText((int)effectObject.Fields["descriptionId"]);
                         effectString = effectString.TrimStart('#');
                         int index = effectString.IndexOf("#", StringComparison.Ordinal);
                         index += 2;

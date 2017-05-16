@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Web.Krosmaster
 {
-    using BlueSheep.Protocol;
-
-
     public class KrosmasterTransferMessage : Message
     {
         
-        public const int ProtocolId = 6348;
+        protected override int ProtocolId { get; set; } = 6348;
         
         public override int MessageID
         {

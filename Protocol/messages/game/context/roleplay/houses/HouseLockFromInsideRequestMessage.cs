@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses
     public class HouseLockFromInsideRequestMessage : LockableChangeCodeMessage
     {
         
-        public const int ProtocolId = 5885;
+        protected override int ProtocolId { get; set; } = 5885;
         
         public override int MessageID
         {

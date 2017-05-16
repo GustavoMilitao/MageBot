@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Alliance
     public class AllianceModificationStartedMessage : Message
     {
         
-        public const int ProtocolId = 6444;
+        protected override int ProtocolId { get; set; } = 6444;
         
         public override int MessageID
         {

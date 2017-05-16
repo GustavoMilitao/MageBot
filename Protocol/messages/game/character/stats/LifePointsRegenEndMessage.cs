@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Character.Stats
     public class LifePointsRegenEndMessage : UpdateLifePointsMessage
     {
         
-        public const int ProtocolId = 5686;
+        protected override int ProtocolId { get; set; } = 5686;
         
         public override int MessageID
         {

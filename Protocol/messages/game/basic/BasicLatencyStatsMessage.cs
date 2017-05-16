@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Basic
 {
-    using BlueSheep.Protocol;
-
-
     public class BasicLatencyStatsMessage : Message
     {
         
-        public const int ProtocolId = 5663;
+        protected override int ProtocolId { get; set; } = 5663;
         
         public override int MessageID
         {

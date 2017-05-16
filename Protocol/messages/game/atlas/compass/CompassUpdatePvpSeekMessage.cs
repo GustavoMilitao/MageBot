@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Atlas.Compass
     public class CompassUpdatePvpSeekMessage : CompassUpdateMessage
     {
         
-        public const int ProtocolId = 6013;
+        protected override int ProtocolId { get; set; } = 6013;
         
         public override int MessageID
         {

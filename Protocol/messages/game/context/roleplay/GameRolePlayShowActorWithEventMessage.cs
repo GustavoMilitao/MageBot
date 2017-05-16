@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
     public class GameRolePlayShowActorWithEventMessage : GameRolePlayShowActorMessage
     {
         
-        public const int ProtocolId = 6407;
+        protected override int ProtocolId { get; set; } = 6407;
         
         public override int MessageID
         {

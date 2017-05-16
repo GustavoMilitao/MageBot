@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Fight.Arena
     public class ArenaRankInfos : NetworkType
     {
         
-        public const int ProtocolId = 499;
+        protected override int ProtocolId { get; set; } = 499;
         
         public override int TypeID
         {

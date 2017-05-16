@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Death
 {
-    using BlueSheep.Protocol;
-
-
     public class GameRolePlayPlayerLifeStatusMessage : Message
     {
         
-        public const int ProtocolId = 5996;
+        protected override int ProtocolId { get; set; } = 5996;
         
         public override int MessageID
         {

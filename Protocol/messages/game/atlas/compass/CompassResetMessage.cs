@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Atlas.Compass
 {
-    using BlueSheep.Protocol;
-
-
     public class CompassResetMessage : Message
     {
         
-        public const int ProtocolId = 5584;
+        protected override int ProtocolId { get; set; } = 5584;
         
         public override int MessageID
         {

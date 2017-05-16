@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Approach
     public class ServerSessionConstantLong : ServerSessionConstant
     {
         
-        public const int ProtocolId = 429;
+        protected override int ProtocolId { get; set; } = 429;
         
         public override int TypeID
         {

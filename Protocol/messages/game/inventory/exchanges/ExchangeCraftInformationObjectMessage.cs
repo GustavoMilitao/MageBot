@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeCraftInformationObjectMessage : ExchangeCraftResultWithObjectIdMessage
     {
         
-        public const int ProtocolId = 5794;
+        protected override int ProtocolId { get; set; } = 5794;
         
         public override int MessageID
         {

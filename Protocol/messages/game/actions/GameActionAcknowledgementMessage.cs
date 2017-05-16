@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Actions
 {
-    using BlueSheep.Protocol;
-
-
     public class GameActionAcknowledgementMessage : Message
     {
         
-        public const int ProtocolId = 957;
+        protected override int ProtocolId { get; set; } = 957;
         
         public override int MessageID
         {

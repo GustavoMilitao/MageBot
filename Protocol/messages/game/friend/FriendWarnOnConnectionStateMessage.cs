@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Friend
 {
-    using BlueSheep.Protocol;
-
-
     public class FriendWarnOnConnectionStateMessage : Message
     {
         
-        public const int ProtocolId = 5630;
+        protected override int ProtocolId { get; set; } = 5630;
         
         public override int MessageID
         {

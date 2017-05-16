@@ -1,4 +1,4 @@
-﻿using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using BlueSheep.Protocol.Messages.Game.Dialog;
 using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
 using BlueSheep.Protocol.Messages.Game.Inventory.Items;

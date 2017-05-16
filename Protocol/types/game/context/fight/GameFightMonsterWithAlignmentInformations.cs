@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Fight
     public class GameFightMonsterWithAlignmentInformations : GameFightMonsterInformations
     {
         
-        public const int ProtocolId = 203;
+        protected override int ProtocolId { get; set; } = 203;
         
         public override int TypeID
         {

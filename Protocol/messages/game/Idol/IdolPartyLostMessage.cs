@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Idol
 {
-    using BlueSheep.Protocol;
-
-
     public class IdolPartyLostMessage : Message
     {
         
-        public const int ProtocolId = 6580;
+        protected override int ProtocolId { get; set; } = 6580;
         
         public override int MessageID
         {

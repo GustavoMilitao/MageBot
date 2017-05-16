@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Finishmoves
 {
-    using BlueSheep.Protocol;
-
-
     public class FinishMoveSetRequestMessage : Message
     {
         
-        public const int ProtocolId = 6703;
+        protected override int ProtocolId { get; set; } = 6703;
         
         public override int MessageID
         {

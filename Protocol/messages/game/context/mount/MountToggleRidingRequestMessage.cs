@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Mount
 {
-    using BlueSheep.Protocol;
-
-
     public class MountToggleRidingRequestMessage : Message
     {
         
-        public const int ProtocolId = 5976;
+        protected override int ProtocolId { get; set; } = 5976;
         
         public override int MessageID
         {

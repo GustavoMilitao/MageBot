@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Mount
 {
-    using BlueSheep.Protocol;
-
-
     public class PaddockRemoveItemRequestMessage : Message
     {
         
-        public const int ProtocolId = 5958;
+        protected override int ProtocolId { get; set; } = 5958;
         
         public override int MessageID
         {

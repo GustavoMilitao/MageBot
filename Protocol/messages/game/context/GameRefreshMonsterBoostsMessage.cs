@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Context
 {
     using BlueSheep.Protocol.Types.Game.Context.Roleplay;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class GameRefreshMonsterBoostsMessage : Message
     {
         
-        public const int ProtocolId = 6618;
+        protected override int ProtocolId { get; set; } = 6618;
         
         public override int MessageID
         {

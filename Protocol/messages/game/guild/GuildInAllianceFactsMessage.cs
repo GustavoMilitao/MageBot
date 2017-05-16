@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Guild
     public class GuildInAllianceFactsMessage : GuildFactsMessage
     {
         
-        public const int ProtocolId = 6422;
+        protected override int ProtocolId { get; set; } = 6422;
         
         public override int MessageID
         {

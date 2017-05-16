@@ -4,7 +4,11 @@ namespace BlueSheep.Protocol.Messages
 {
     public abstract class Message
     {
+
+
         #region Properties
+        protected abstract int ProtocolId { get; set; }
+
         public virtual int MessageID
         {
             get

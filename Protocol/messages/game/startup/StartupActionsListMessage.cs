@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Startup
 {
     using BlueSheep.Protocol.Types.Game.Startup;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class StartupActionsListMessage : Message
     {
         
-        public const int ProtocolId = 1301;
+        protected override int ProtocolId { get; set; } = 1301;
         
         public override int MessageID
         {

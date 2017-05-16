@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Guild
 {
-    using BlueSheep.Protocol;
-
-
     public class GuildPaddockRemovedMessage : Message
     {
         
-        public const int ProtocolId = 5955;
+        protected override int ProtocolId { get; set; } = 5955;
         
         public override int MessageID
         {

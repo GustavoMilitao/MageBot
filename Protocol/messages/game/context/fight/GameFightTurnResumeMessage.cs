@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Fight
     public class GameFightTurnResumeMessage : GameFightTurnStartMessage
     {
         
-        public const int ProtocolId = 6307;
+        protected override int ProtocolId { get; set; } = 6307;
         
         public override int MessageID
         {

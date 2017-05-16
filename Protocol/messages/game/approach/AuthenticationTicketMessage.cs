@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Game.Approach
 {
     public class AuthenticationTicketMessage : Message
     {
-        public const int ProtocolId = 110;
+        protected override int ProtocolId { get; set; } = 110;
         public override int MessageID { get { return ProtocolId; } }
 
         public string Lang { get; set; }

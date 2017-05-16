@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Guild
 {
     using BlueSheep.Protocol.Types.Game.Guild;
-    using BlueSheep.Protocol;
 
 
     public class GuildInformationsMemberUpdateMessage : Message
     {
         
-        public const int ProtocolId = 5597;
+        protected override int ProtocolId { get; set; } = 5597;
         
         public override int MessageID
         {

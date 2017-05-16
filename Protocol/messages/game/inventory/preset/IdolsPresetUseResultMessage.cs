@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Preset
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class IdolsPresetUseResultMessage : Message
     {
         
-        public const int ProtocolId = 6614;
+        protected override int ProtocolId { get; set; } = 6614;
         
         public override int MessageID
         {

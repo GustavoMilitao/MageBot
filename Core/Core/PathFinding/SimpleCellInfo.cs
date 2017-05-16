@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using BlueSheep.Data.Pathfinding.Positions;
+using DataFiles.Data.Pathfinding.Positions;
 using BlueSheep.Core.Map;
 
-namespace BlueSheep.Data.Pathfinding
+namespace DataFiles.Data.Pathfinding
 {
     internal sealed class SimpleCellInfo
     {

@@ -4,8 +4,8 @@ using System.Linq;
 using BlueSheep.Util.IO;
 using BlueSheep.Util.Text.Log;
 using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Data.Pathfinding.Positions;
-using BlueSheep.Data.Pathfinding;
+using DataFiles.Data.Pathfinding.Positions;
+using DataFiles.Data.Pathfinding;
 using BlueSheep.Protocol.Messages.Game.Context.Fight;
 using BlueSheep.Protocol.Messages.Game.Context;
 using BlueSheep.Protocol.Messages.Game.Actions.Fight;
@@ -24,7 +24,7 @@ namespace BlueSheep.Core.Fight
         private FightParser m_AI;
         private FightData m_Data;
         public int flag;
-        public bool infinite { get; set; }
+        public bool Infinite { get; set; }
 
         #region Private Fields
         private Object clock = new Object();
@@ -124,7 +124,7 @@ namespace BlueSheep.Core.Fight
             m_error++;
             if (m_error > 1)
             {
-                BanMonsters(m_Data.followingGroup);
+                BanMonsters(m_Data.FollowingGroup);
                 m_error = 0;
             }
         }
@@ -271,7 +271,7 @@ namespace BlueSheep.Core.Fight
             {
                 GameActionFightCastRequestMessage msg = new GameActionFightCastRequestMessage((ushort)spellId, (short)cellId);
                 msg.Serialize(writer);
-                writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
+                writer.Content = m_Account.HumanCheck.Hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
                 pack.Pack(msg.MessageID);
                 m_Account.SocketManager.Send(pack.Writer.Content);
@@ -326,7 +326,7 @@ namespace BlueSheep.Core.Fight
                     {
                         GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.ToList().Select(ui => (short)ui).ToList(), m_Account.MapData.Id);
                         msg.Serialize(writer);
-                        writer.Content = m_Account.HumanCheck.hash_function(writer.Content);
+                        writer.Content = m_Account.HumanCheck.Hash_function(writer.Content);
                         MessagePackaging pack = new MessagePackaging(writer);
                         pack.Pack(msg.MessageID);
                         flag = 0;

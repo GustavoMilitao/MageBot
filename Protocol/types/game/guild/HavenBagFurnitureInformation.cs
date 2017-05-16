@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Guild
     public class HavenBagFurnitureInformation : NetworkType
     {
         
-        public const int ProtocolId = 498;
+        protected override int ProtocolId { get; set; } = 498;
         
         public override int TypeID
         {

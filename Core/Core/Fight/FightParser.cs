@@ -1,6 +1,5 @@
-﻿using BlueSheep.Common.Data;
-using BlueSheep.Common.Data.D2o;
-using BlueSheep.Protocol.Types;
+﻿using DataFiles.Data;
+using DataFiles.Data.D2o;
 using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
@@ -294,7 +293,7 @@ namespace BlueSheep.Core.Fight
             {
                 if (line.IndexOf(op) != -1)
                 {
-                    FightConditionEnum e = FightConditionEnum.Null;
+                    //FightConditionEnum e = FightConditionEnum.Null;
                     string b = line.Substring(0, line.IndexOf(op));
                     FightConditionEnum condition = (FightConditionEnum)Enum.Parse(typeof(FightConditionEnum), b);
                     if (Enum.IsDefined(typeof(FightConditionEnum), condition) | condition.ToString().Contains(","))
@@ -318,7 +317,7 @@ namespace BlueSheep.Core.Fight
             DataClass[] datas = GameData.GetDataObjects(D2oFileEnum.Spells);
             foreach (DataClass d in datas)
             {
-                if (I18N.GetText((int)d.Fields["nameId"]).ToUpper() == name.ToUpper())
+                if (DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]).ToUpper() == name.ToUpper())
                     return (int)d.Fields["id"];
             }
             return -1;

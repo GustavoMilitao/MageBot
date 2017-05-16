@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses
 {
-    using BlueSheep.Protocol;
-
-
     public class HouseKickRequestMessage : Message
     {
         
-        public const int ProtocolId = 5698;
+        protected override int ProtocolId { get; set; } = 5698;
         
         public override int MessageID
         {

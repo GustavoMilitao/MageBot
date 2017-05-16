@@ -1,7 +1,4 @@
-﻿using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Party;
-using BlueSheep.Common.Types;
-using BlueSheep.Util.Text.Log;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 

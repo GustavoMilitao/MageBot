@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
 {
-    using BlueSheep.Protocol;
-
-
     public class MimicryObjectEraseRequestMessage : Message
     {
         
-        public const int ProtocolId = 6457;
+        protected override int ProtocolId { get; set; } = 6457;
         
         public override int MessageID
         {

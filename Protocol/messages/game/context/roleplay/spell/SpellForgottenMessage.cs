@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Spell
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class SpellForgottenMessage : Message
     {
         
-        public const int ProtocolId = 5834;
+        protected override int ProtocolId { get; set; } = 5834;
         
         public override int MessageID
         {

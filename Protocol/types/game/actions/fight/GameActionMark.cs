@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Actions.Fight
     public class GameActionMark : NetworkType
     {
         
-        public const int ProtocolId = 351;
+        protected override int ProtocolId { get; set; } = 351;
         
         public override int TypeID
         {

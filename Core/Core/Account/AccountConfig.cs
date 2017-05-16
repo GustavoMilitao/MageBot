@@ -1,7 +1,6 @@
 ﻿using BlueSheep.Core.Fight;
 using BlueSheep.Core.Misc;
 using BlueSheep.Core.Path;
-using BlueSheep.Engine.Types;
 using Core.Core;
 using Core.Core.Heroic;
 using Core.Core.Regen;

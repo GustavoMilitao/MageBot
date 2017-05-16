@@ -2,7 +2,7 @@
 {
     public class AbstractSocialGroupInfos
     {
-        public const int ProtocolId = 416;
+        protected virtual int ProtocolId { get; set; } = 416;
         public virtual int TypeID { get { return ProtocolId; } }
 
         public AbstractSocialGroupInfos() { }

@@ -4,8 +4,8 @@ using BlueSheep.Protocol.Messages.Game.Context.Roleplay;
 using BlueSheep.Protocol.Messages.Game.Interactive;
 using BlueSheep.Protocol.Messages.Game.Interactive.Zaap;
 using BlueSheep.Core.Map.Elements;
-using BlueSheep.Data.Pathfinding;
-using BlueSheep.Data.Pathfinding.Positions;
+using DataFiles.Data.Pathfinding;
+using DataFiles.Data.Pathfinding.Positions;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Util.Text.Log;
 using System;
@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlueSheep.Engine.Network;
-using System.Threading;
 
 namespace BlueSheep.Core.Map
 {
@@ -160,7 +159,7 @@ namespace BlueSheep.Core.Map
             {
                 InteractiveUseRequestMessage msg = new InteractiveUseRequestMessage((uint)id, (uint)skillId);
                 msg.Serialize(writer);
-                writer.Content = Account.HumanCheck.hash_function(writer.Content);
+                writer.Content = Account.HumanCheck.Hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
                 pack.Pack(msg.MessageID);
                 Account.SocketManager.Send(pack.Writer.Content);
@@ -217,7 +216,7 @@ namespace BlueSheep.Core.Map
             {
                 GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select(ui => (short)ui).ToList(), Account.MapData.Id);
                 msg.Serialize(writer);
-                writer.Content = Account.HumanCheck.hash_function(writer.Content);
+                writer.Content = Account.HumanCheck.Hash_function(writer.Content);
                 msg.Pack(writer);
                 Account.SocketManager.Send(writer.Content);
                 Account.SetStatus(Status.Moving);

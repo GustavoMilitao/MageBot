@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Shortcut
     public class ShortcutObjectIdolsPreset : ShortcutObject
     {
         
-        public const int ProtocolId = 492;
+        protected override int ProtocolId { get; set; } = 492;
         
         public override int TypeID
         {

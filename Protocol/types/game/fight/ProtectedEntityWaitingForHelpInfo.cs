@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Fight
     public class ProtectedEntityWaitingForHelpInfo : NetworkType
     {
         
-        public const int ProtocolId = 186;
+        protected override int ProtocolId { get; set; } = 186;
         
         public override int TypeID
         {

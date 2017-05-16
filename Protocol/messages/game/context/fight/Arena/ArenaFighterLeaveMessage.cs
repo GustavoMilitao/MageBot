@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context.Fight.Arena
 {
     using BlueSheep.Protocol.Types.Game.Character;
-    using BlueSheep.Protocol;
 
 
     public class ArenaFighterLeaveMessage : Message
     {
         
-        public const int ProtocolId = 6700;
+        protected override int ProtocolId { get; set; } = 6700;
         
         public override int MessageID
         {

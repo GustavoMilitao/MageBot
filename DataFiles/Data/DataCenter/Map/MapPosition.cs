@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlueSheep.Common.Data.DataCenter.Map
+namespace DataFiles.Data.DataCenter.Map
 {
         public class MapPosition
         {

@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Achievement
 {
     using BlueSheep.Protocol.Types.Game.Achievement;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class AchievementDetailedListMessage : Message
     {
         
-        public const int ProtocolId = 6358;
+        protected override int ProtocolId { get; set; } = 6358;
         
         public override int MessageID
         {

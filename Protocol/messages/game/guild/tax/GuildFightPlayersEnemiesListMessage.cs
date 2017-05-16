@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Guild.Tax
 {
     using BlueSheep.Protocol.Types.Game.Character;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class GuildFightPlayersEnemiesListMessage : Message
     {
         
-        public const int ProtocolId = 5928;
+        protected override int ProtocolId { get; set; } = 5928;
         
         public override int MessageID
         {

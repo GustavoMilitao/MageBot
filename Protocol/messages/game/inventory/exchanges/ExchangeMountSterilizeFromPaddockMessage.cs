@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using BlueSheep.Protocol;
-
-
     public class ExchangeMountSterilizeFromPaddockMessage : Message
     {
         
-        public const int ProtocolId = 6056;
+        protected override int ProtocolId { get; set; } = 6056;
         
         public override int MessageID
         {

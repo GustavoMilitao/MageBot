@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Friend
 {
-    using BlueSheep.Protocol;
-
-
     public class IgnoredAddRequestMessage : Message
     {
         
-        public const int ProtocolId = 5673;
+        protected override int ProtocolId { get; set; } = 5673;
         
         public override int MessageID
         {

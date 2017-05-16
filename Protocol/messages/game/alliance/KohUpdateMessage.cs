@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Alliance
 {
     using BlueSheep.Protocol.Types.Game.Context.Roleplay;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class KohUpdateMessage : Message
     {
         
-        public const int ProtocolId = 6439;
+        protected override int ProtocolId { get; set; } = 6439;
         
         public override int MessageID
         {

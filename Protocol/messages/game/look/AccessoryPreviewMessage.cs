@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Look
 {
     using BlueSheep.Protocol.Types.Game.Look;
-    using BlueSheep.Protocol;
 
 
     public class AccessoryPreviewMessage : Message
     {
         
-        public const int ProtocolId = 6517;
+        protected override int ProtocolId { get; set; } = 6517;
         
         public override int MessageID
         {

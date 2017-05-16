@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
 {
     using BlueSheep.Protocol.Types.Game.Mount;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class ExchangeMountsPaddockAddMessage : Message
     {
         
-        public const int ProtocolId = 6561;
+        protected override int ProtocolId { get; set; } = 6561;
         
         public override int MessageID
         {

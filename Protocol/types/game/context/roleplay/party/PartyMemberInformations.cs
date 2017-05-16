@@ -19,7 +19,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Party
     public class PartyMemberInformations : CharacterBaseInformations
     {
         
-        public const int ProtocolId = 90;
+        protected override int ProtocolId { get; set; } = 90;
         
         public override int TypeID
         {

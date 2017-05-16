@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Achievement
     public class AchievementObjective : NetworkType
     {
         
-        public const int ProtocolId = 404;
+        protected override int ProtocolId { get; set; } = 404;
         
         public override int TypeID
         {

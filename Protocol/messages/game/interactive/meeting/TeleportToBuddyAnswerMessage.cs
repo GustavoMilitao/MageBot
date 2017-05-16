@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Interactive.Meeting
 {
-    using BlueSheep.Protocol;
-
-
     public class TeleportToBuddyAnswerMessage : Message
     {
         
-        public const int ProtocolId = 6293;
+        protected override int ProtocolId { get; set; } = 6293;
         
         public override int MessageID
         {

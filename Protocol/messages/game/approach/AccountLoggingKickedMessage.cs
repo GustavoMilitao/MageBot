@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Approach
 {
-    using BlueSheep.Protocol;
-
-
     public class AccountLoggingKickedMessage : Message
     {
         
-        public const int ProtocolId = 6029;
+        protected override int ProtocolId { get; set; } = 6029;
         
         public override int MessageID
         {

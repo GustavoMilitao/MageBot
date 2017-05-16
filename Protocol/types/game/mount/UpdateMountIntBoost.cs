@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Mount
     public class UpdateMountIntBoost : UpdateMountBoost
     {
         
-        public const int ProtocolId = 357;
+        protected override int ProtocolId { get; set; } = 357;
         
         public override int TypeID
         {

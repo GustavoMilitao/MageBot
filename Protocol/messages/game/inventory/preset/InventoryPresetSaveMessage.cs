@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Preset
 {
-    using BlueSheep.Protocol;
-
-
     public class InventoryPresetSaveMessage : Message
     {
         
-        public const int ProtocolId = 6165;
+        protected override int ProtocolId { get; set; } = 6165;
         
         public override int MessageID
         {

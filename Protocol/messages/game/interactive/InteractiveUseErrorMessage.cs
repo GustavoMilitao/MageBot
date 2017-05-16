@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Interactive
 {
-    using BlueSheep.Protocol;
-
-
     public class InteractiveUseErrorMessage : Message
     {
         
-        public const int ProtocolId = 6384;
+        protected override int ProtocolId { get; set; } = 6384;
         
         public override int MessageID
         {

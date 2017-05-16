@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
 {
     using BlueSheep.Protocol.Types.Game.Interactive;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class MapObstacleUpdateMessage : Message
     {
         
-        public const int ProtocolId = 6051;
+        protected override int ProtocolId { get; set; } = 6051;
         
         public override int MessageID
         {

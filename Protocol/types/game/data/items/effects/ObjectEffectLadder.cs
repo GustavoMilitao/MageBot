@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Data.Items.Effects
     public class ObjectEffectLadder : ObjectEffectCreature
     {
         
-        public const int ProtocolId = 81;
+        protected override int ProtocolId { get; set; } = 81;
         
         public override int TypeID
         {

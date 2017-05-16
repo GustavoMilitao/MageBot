@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class GameRolePlayArenaSwitchToFightServerMessage : Message
     {
         
-        public const int ProtocolId = 6575;
+        protected override int ProtocolId { get; set; } = 6575;
         
         public override int MessageID
         {

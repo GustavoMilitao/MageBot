@@ -1,12 +1,11 @@
-﻿using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using BlueSheep.Protocol.Enums;
 using BlueSheep.Protocol.Messages.Game.Inventory.Preset;
 using BlueSheep.Protocol.Types.Game.Actions.Fight;
 using BlueSheep.Protocol.Types.Game.Character.Characteristic;
 using BlueSheep.Protocol.Types.Game.Context.Fight;
-using BlueSheep.Protocol.Types;
-using BlueSheep.Data.Pathfinding;
-using BlueSheep.Data.Pathfinding.Positions;
+using DataFiles.Data.Pathfinding;
+using DataFiles.Data.Pathfinding.Positions;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Util.Text.Log;
 using BlueSheep.Util.Enums.Fight;
@@ -23,13 +22,13 @@ namespace BlueSheep.Core.Fight
     {
         #region Fields
         #region Dictionary
-        public Dictionary<DateTime, int> xpWon { get; set; }
-        public Dictionary<string, int> winLoseDic { get; set; }
+        public Dictionary<DateTime, int> XpWon { get; set; }
+        public Dictionary<string, int> WinLoseDic { get; set; }
         public Dictionary<int, int> DurationByEffect { get; set; } = new Dictionary<int, int>();
         public Dictionary<int, int> LastTurnLaunchBySpell { get; set; } = new Dictionary<int, int>();
         public Dictionary<int, int> TotalLaunchBySpell { get; set; } = new Dictionary<int, int>();
         public Dictionary<int, Dictionary<int, int>> TotalLaunchByCellBySpell { get; set; } = new Dictionary<int, Dictionary<int, int>>();
-        private Dictionary<long, List<BFighter>> m_Summons { get; set; } = new Dictionary<long, List<BFighter>>();
+        private Dictionary<long, List<BFighter>> M_Summons { get; set; } = new Dictionary<long, List<BFighter>>();
         #endregion
 
         #region Public Fields
@@ -49,9 +48,9 @@ namespace BlueSheep.Core.Fight
         public bool IsDead { get; set; } = false;
 
         public List<FightOptionsEnum> Options { get; set; } = new List<FightOptionsEnum>();
-        public Stopwatch watch { get; set; } = new Stopwatch();
-        public MonsterGroup followingGroup { get; set; }
-        private Dictionary<string, int> boss { get; set; }
+        public Stopwatch Watch { get; set; } = new Stopwatch();
+        public MonsterGroup FollowingGroup { get; set; }
+        private Dictionary<string, int> Boss { get; set; }
         #endregion
         #endregion
 
@@ -70,7 +69,7 @@ namespace BlueSheep.Core.Fight
         {
             get
             {
-                if (followingGroup != null)
+                if (FollowingGroup != null)
                     return true;
                 else
                     return false;
@@ -86,17 +85,19 @@ namespace BlueSheep.Core.Fight
         public FightData(Account.Account Account)
         {
             this.Account = Account;
-            xpWon = new Dictionary<DateTime, int>();
-            winLoseDic = new Dictionary<string, int>();
-            winLoseDic.Add("Win", 0);
-            winLoseDic.Add("Lose", 0);
-            xpWon.Add(DateTime.Today, 0);
+            XpWon = new Dictionary<DateTime, int>();
+            WinLoseDic = new Dictionary<string, int>
+            {
+                { "Win", 0 },
+                { "Lose", 0 }
+            };
+            XpWon.Add(DateTime.Today, 0);
             DataClass[] data = GameData.GetDataObjects(D2oFileEnum.Monsters);
             List<DataClass> b = data.ToList().FindAll(e => ((bool)e.Fields["isBoss"]) == true).ToList();
-            boss = new Dictionary<string, int>();
+            Boss = new Dictionary<string, int>();
             foreach (DataClass d in b)
             {
-                boss.Add(Common.Data.I18N.GetText((int)d.Fields["nameId"]), (int)d.Fields["id"]);
+                Boss.Add(DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]), (int)d.Fields["id"]);
             }
         }
         #endregion
@@ -164,17 +165,17 @@ namespace BlueSheep.Core.Fight
         {
             Fighters.Add(summon);
             List<BFighter> summoned = new List<BFighter>();
-            if (m_Summons.ContainsKey(sourceId))
+            if (M_Summons.ContainsKey(sourceId))
             {
-                m_Summons.TryGetValue(sourceId, out summoned);
+                M_Summons.TryGetValue(sourceId, out summoned);
                 summoned.Add(summon);
-                m_Summons.Remove(sourceId);
-                m_Summons.Add(sourceId, summoned);
+                M_Summons.Remove(sourceId);
+                M_Summons.Add(sourceId, summoned);
             }
             else
             {
                 summoned.Add(summon);
-                m_Summons.Add(sourceId, summoned);
+                M_Summons.Add(sourceId, summoned);
             }
         }
 
@@ -184,7 +185,7 @@ namespace BlueSheep.Core.Fight
         public BFighter GetSummoner()
         {
             Tuple<long, int> temp = new Tuple<long,int>(0, -1);
-            foreach (KeyValuePair<long, List<BFighter>> pair in m_Summons)
+            foreach (KeyValuePair<long, List<BFighter>> pair in M_Summons)
             {
                 if (pair.Value.Count > temp.Item2)
                 {
@@ -221,25 +222,23 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public void SetEffect(AbstractFightDispellableEffect effect, int actionId = -1)
         {
-            if (effect is FightTemporaryBoostStateEffect)
+            if (effect is FightTemporaryBoostStateEffect m_effect1)
             {
-                FightTemporaryBoostStateEffect m_effect = (FightTemporaryBoostStateEffect)effect;
-                if (!IsDead && m_effect.TargetId == Fighter.Id)
+                if (!IsDead && m_effect1.TargetId == Fighter.Id)
                 {
-                    if (DurationByEffect.ContainsKey(m_effect.StateId))
-                        DurationByEffect.Remove(m_effect.StateId);
-                    DurationByEffect.Add(m_effect.StateId, effect.TurnDuration);
+                    if (DurationByEffect.ContainsKey(m_effect1.StateId))
+                        DurationByEffect.Remove(m_effect1.StateId);
+                    DurationByEffect.Add(m_effect1.StateId, effect.TurnDuration);
                 }
             }
-            else if (effect is FightTemporaryBoostEffect)
+            else if (effect is FightTemporaryBoostEffect m_effect2)
             {
-                FightTemporaryBoostEffect m_effect = (FightTemporaryBoostEffect)effect;
                 if (actionId == 168)
-                    Fighter.ActionPoints -= m_effect.Delta;
+                    Fighter.ActionPoints -= m_effect2.Delta;
                 else if (actionId == 169)
-                    Fighter.MovementPoints -= m_effect.Delta;
-                else if (!IsDead && actionId == 116 && m_effect.TargetId == Fighter.Id)
-                    Account.CharacterStats.Range.ContextModif -= m_effect.Delta;
+                    Fighter.MovementPoints -= m_effect2.Delta;
+                else if (!IsDead && actionId == 116 && m_effect2.TargetId == Fighter.Id)
+                    Account.CharacterStats.Range.ContextModif -= m_effect2.Delta;
 
             }
         }
@@ -322,9 +321,11 @@ namespace BlueSheep.Core.Fight
                             }
                             else
                             {
-                                Dictionary<int, int> tempdico = new Dictionary<int, int>();
-                                tempdico.Add(destinationCellId, 1);
-                               TotalLaunchByCellBySpell.Add(spellId, tempdico);
+                                Dictionary<int, int> tempdico = new Dictionary<int, int>
+                                {
+                                    { destinationCellId, 1 }
+                                };
+                                TotalLaunchByCellBySpell.Add(spellId, tempdico);
                             }
                         }
                     }
@@ -360,9 +361,8 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public void AddFighter(GameFightFighterInformations informations)
         {
-            if (informations is GameFightMonsterInformations)
+            if (informations is GameFightMonsterInformations infos)
             {
-                GameFightMonsterInformations infos = (GameFightMonsterInformations)informations;
                 Fighters.Add(new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, informations.TeamId, infos.CreatureGenericId));
             }
             else
@@ -382,7 +382,7 @@ namespace BlueSheep.Core.Fight
             IsFightStarted = true;
             Account.Log(new ActionTextInformation("Beginning of the fight"), 2);
             Account.SetStatus(Status.Fighting);
-            watch.Restart();
+            Watch.Restart();
         }
 
         /// <summary>
@@ -390,13 +390,13 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public void FightStop()
         {
-            watch.Stop();
+            Watch.Stop();
             WaitForReady = false;
             IsFighterTurn = false;
             IsFightStarted = false;
             IsDead = false;
-            Account.Log(new ActionTextInformation("End fight ! (" + watch.Elapsed.Minutes + " min, " + watch.Elapsed.Seconds + " sec)"), 0);
-            watch.Reset();
+            Account.Log(new ActionTextInformation("End fight ! (" + Watch.Elapsed.Minutes + " min, " + Watch.Elapsed.Seconds + " sec)"), 0);
+            Watch.Reset();
             Account.SetStatus(Status.Busy);
             Reset();
             PerformAutoTimeoutFight(2000);
@@ -482,7 +482,7 @@ namespace BlueSheep.Core.Fight
         /// </summary>
         public void Reset(bool isFightStarted = false, bool canSayReady = false)
         {
-            m_Summons.Clear();
+            M_Summons.Clear();
             Fighters.Clear();
             DeadEnnemies.Clear();
             Options.Clear();
@@ -492,7 +492,7 @@ namespace BlueSheep.Core.Fight
             DurationByEffect.Clear();
             IsFightStarted = isFightStarted;
             WaitForReady = (!isFightStarted && canSayReady);
-            followingGroup = null;
+            FollowingGroup = null;
         }
 
         /// <summary>
@@ -679,7 +679,7 @@ namespace BlueSheep.Core.Fight
         {
             foreach (BFighter f in Fighters)
             {
-                if (boss.ContainsKey(f.Name) || boss.ContainsValue(f.CreatureGenericId))
+                if (Boss.ContainsKey(f.Name) || Boss.ContainsValue(f.CreatureGenericId))
                     return true;
             }
             return false;
@@ -893,7 +893,7 @@ namespace BlueSheep.Core.Fight
             {
                 level = Account.Spells.FirstOrDefault(Spell => Spell.SpellId == spellId).Level;
             }
-            catch (NullReferenceException ex)
+            catch (NullReferenceException)
             {
                 Account.Log(new ErrorTextInformation("Le sort spécifié n'existe pas dans votre liste de sorts."), 0);
                 return SpellInabilityReason.UnknownSpell;

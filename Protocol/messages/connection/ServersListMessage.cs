@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Connection
 {
     using BlueSheep.Protocol.Types.Connection;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class ServersListMessage : Message
     {
         
-        public const int ProtocolId = 30;
+        protected override int ProtocolId { get; set; } = 30;
         
         public override int MessageID
         {

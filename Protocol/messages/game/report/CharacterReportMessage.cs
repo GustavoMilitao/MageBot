@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Report
 {
-    using BlueSheep.Protocol;
-
-
     public class CharacterReportMessage : Message
     {
         
-        public const int ProtocolId = 6079;
+        protected override int ProtocolId { get; set; } = 6079;
         
         public override int MessageID
         {

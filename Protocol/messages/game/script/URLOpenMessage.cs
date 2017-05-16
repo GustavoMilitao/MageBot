@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Script
 {
-    using BlueSheep.Protocol;
-
-
     public class URLOpenMessage : Message
     {
         
-        public const int ProtocolId = 6266;
+        protected override int ProtocolId { get; set; } = 6266;
         
         public override int MessageID
         {

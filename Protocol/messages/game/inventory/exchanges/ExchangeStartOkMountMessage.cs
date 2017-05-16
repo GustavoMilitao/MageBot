@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeStartOkMountMessage : ExchangeStartOkMountWithOutPaddockMessage
     {
         
-        public const int ProtocolId = 5979;
+        protected override int ProtocolId { get; set; } = 5979;
         
         public override int MessageID
         {

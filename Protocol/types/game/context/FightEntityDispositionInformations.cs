@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Context
     public class FightEntityDispositionInformations : EntityDispositionInformations
     {
         
-        public const int ProtocolId = 217;
+        protected override int ProtocolId { get; set; } = 217;
         
         public override int TypeID
         {

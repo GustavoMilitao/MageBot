@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Friend
 {
-    using BlueSheep.Protocol;
-
-
     public class WarnOnPermaDeathStateMessage : Message
     {
         
-        public const int ProtocolId = 6513;
+        protected override int ProtocolId { get; set; } = 6513;
         
         public override int MessageID
         {

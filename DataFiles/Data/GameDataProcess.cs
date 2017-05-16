@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using BlueSheep.Common.IO;
 
-namespace BlueSheep.Common.Data
+namespace DataFiles.Data
 {
     public class GameDataProcess
     {

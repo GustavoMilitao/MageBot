@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context
 {
     using BlueSheep.Protocol.Types.Game.Look;
-    using BlueSheep.Protocol;
 
 
     public class GameContextRefreshEntityLookMessage : Message
     {
         
-        public const int ProtocolId = 5637;
+        protected override int ProtocolId { get; set; } = 5637;
         
         public override int MessageID
         {

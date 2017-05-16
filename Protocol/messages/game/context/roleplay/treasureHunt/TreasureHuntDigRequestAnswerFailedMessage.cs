@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.TreasureHunt
     public class TreasureHuntDigRequestAnswerFailedMessage : TreasureHuntDigRequestAnswerMessage
     {
         
-        public const int ProtocolId = 6509;
+        protected override int ProtocolId { get; set; } = 6509;
         
         public override int MessageID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Shortcut
 {
-    using BlueSheep.Protocol;
-
-
     public class ShortcutBarRemovedMessage : Message
     {
         
-        public const int ProtocolId = 6224;
+        protected override int ProtocolId { get; set; } = 6224;
         
         public override int MessageID
         {

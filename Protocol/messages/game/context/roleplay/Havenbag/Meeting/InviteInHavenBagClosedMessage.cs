@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Havenbag.Meeting
 {
     using BlueSheep.Protocol.Types.Game.Character;
-    using BlueSheep.Protocol;
 
 
     public class InviteInHavenBagClosedMessage : Message
     {
         
-        public const int ProtocolId = 6645;
+        protected override int ProtocolId { get; set; } = 6645;
         
         public override int MessageID
         {

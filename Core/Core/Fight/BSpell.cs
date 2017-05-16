@@ -1,5 +1,5 @@
-﻿using BlueSheep.Common.Data;
-using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data;
+using DataFiles.Data.D2o;
 
 namespace BlueSheep.Core.Fight
 {
@@ -27,7 +27,7 @@ namespace BlueSheep.Core.Fight
         private string GetName()
         {
             DataClass spell = GameData.GetDataObject(D2oFileEnum.Spells, SpellId);
-            return I18N.GetText((int)spell.Fields["nameId"]);
+            return DataFiles.Data.I18n.I18N.GetText((int)spell.Fields["nameId"]);
         }
     }
 

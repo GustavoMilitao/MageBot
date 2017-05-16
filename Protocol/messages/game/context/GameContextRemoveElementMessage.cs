@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context
 {
-    using BlueSheep.Protocol;
-
-
     public class GameContextRemoveElementMessage : Message
     {
         
-        public const int ProtocolId = 251;
+        protected override int ProtocolId { get; set; } = 251;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Prism
     public class PrismGeolocalizedInformation : PrismSubareaEmptyInfo
     {
         
-        public const int ProtocolId = 434;
+        protected override int ProtocolId { get; set; } = 434;
         
         public override int TypeID
         {

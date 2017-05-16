@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context.Notification
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class NotificationListMessage : Message
     {
         
-        public const int ProtocolId = 6087;
+        protected override int ProtocolId { get; set; } = 6087;
         
         public override int MessageID
         {

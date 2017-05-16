@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Social
     public class AllianceVersatileInformations : NetworkType
     {
         
-        public const int ProtocolId = 432;
+        protected override int ProtocolId { get; set; } = 432;
         
         public override int TypeID
         {

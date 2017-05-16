@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context
 {
-    using BlueSheep.Protocol;
-
-
     public class GameMapNoMovementMessage : Message
     {
         
-        public const int ProtocolId = 954;
+        protected override int ProtocolId { get; set; } = 954;
         
         public override int MessageID
         {

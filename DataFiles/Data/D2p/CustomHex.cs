@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace BlueSheep.Data.D2p
+namespace DataFiles.Data.D2p
 {
     public class CustomHex
     {

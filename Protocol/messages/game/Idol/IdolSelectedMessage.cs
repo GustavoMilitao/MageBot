@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Idol
     public class IdolSelectedMessage : Message
     {
         
-        public const int ProtocolId = 6581;
+        protected override int ProtocolId { get; set; } = 6581;
         
         public override int MessageID
         {

@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Common.Data.DataCenter.Effects.Instances
+﻿namespace DataFiles.Data.DataCenter.Effects.Instances
 {
     class EffectInstanceString
     {

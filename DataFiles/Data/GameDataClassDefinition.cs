@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using BlueSheep.Common.Data.DataCenter;
+using DataFiles.Data.DataCenter;
 using BlueSheep.Common.IO;
 
-namespace BlueSheep.Common.Data
+namespace DataFiles.Data
 {
     public class GameDataClassDefinition
     {

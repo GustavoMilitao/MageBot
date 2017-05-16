@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Modificator
 {
-    using BlueSheep.Protocol;
-
-
     public class AreaFightModificatorUpdateMessage : Message
     {
         
-        public const int ProtocolId = 6493;
+        protected override int ProtocolId { get; set; } = 6493;
         
         public override int MessageID
         {

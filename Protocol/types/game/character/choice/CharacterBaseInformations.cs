@@ -2,7 +2,7 @@
 {
     public class CharacterBaseInformations : CharacterMinimalPlusLookInformations
     {
-        public new const int ProtocolId = 45;
+        protected override int ProtocolId { get; set; } = 45;
         public override int TypeID { get { return ProtocolId; } }
 
         public sbyte Breed { get; set; }

@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Messages.Game.Guild.Tax
     public class TaxCollectorListMessage : AbstractTaxCollectorListMessage
     {
         
-        public const int ProtocolId = 5930;
+        protected override int ProtocolId { get; set; } = 5930;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
     public class ObjectUseOnCharacterMessage : ObjectUseMessage
     {
         
-        public const int ProtocolId = 3003;
+        protected override int ProtocolId { get; set; } = 3003;
         
         public override int MessageID
         {

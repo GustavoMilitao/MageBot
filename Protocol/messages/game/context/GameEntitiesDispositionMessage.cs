@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Context
 {
     using BlueSheep.Protocol.Types.Game.Context;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class GameEntitiesDispositionMessage : Message
     {
         
-        public const int ProtocolId = 5696;
+        protected override int ProtocolId { get; set; } = 5696;
         
         public override int MessageID
         {

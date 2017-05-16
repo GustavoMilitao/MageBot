@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Npc
 {
-    using BlueSheep.Protocol;
-
-
     public class AlliancePrismDialogQuestionMessage : Message
     {
         
-        public const int ProtocolId = 6448;
+        protected override int ProtocolId { get; set; } = 6448;
         
         public override int MessageID
         {

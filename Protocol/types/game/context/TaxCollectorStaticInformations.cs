@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Context
     public class TaxCollectorStaticInformations : NetworkType
     {
         
-        public const int ProtocolId = 147;
+        protected override int ProtocolId { get; set; } = 147;
         
         public override int TypeID
         {

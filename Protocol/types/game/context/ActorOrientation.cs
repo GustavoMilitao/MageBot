@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context
     public class ActorOrientation : NetworkType
     {
         
-        public const int ProtocolId = 353;
+        protected override int ProtocolId { get; set; } = 353;
         
         public override int TypeID
         {

@@ -1,4 +1,4 @@
-﻿using BlueSheep.Util.I18n.Strings;
+﻿using BlueSheep.Properties.I18n.Strings;
 
 namespace BlueSheep.Interface
 {
@@ -1880,16 +1880,16 @@ namespace BlueSheep.Interface
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
         private MetroFramework.Controls.MetroTabPage metroTabPage1;
         internal System.Windows.Forms.TextBox CommandeBox;
-        public System.Windows.Forms.RichTextBox LogConsole;
+        private System.Windows.Forms.RichTextBox LogConsole;
         private MetroFramework.Controls.MetroTabPage metroTabPage2;
         private MetroFramework.Controls.MetroProgressBar VitaBar;
         private SadikGroupBox sadikGroupBox2;
         private SadikLabel sadikLabel13;
-        public System.Windows.Forms.NumericUpDown NUDVerbose;
+        private System.Windows.Forms.NumericUpDown NUDVerbose;
         private SadikGroupBox sadikGroupBox1;
         private SadikButton DeleteConfigBt;
         private SadikButton SaveConfig;
-        public SadikCheckbox LogCb;
+        private SadikCheckbox LogCb;
         public SadikCheckbox DebugMode;
         private MetroFramework.Controls.MetroProgressBar PodsBar;
         private MetroFramework.Controls.MetroProgressBar XpBar;

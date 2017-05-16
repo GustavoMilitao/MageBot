@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class ObjectsDeletedMessage : Message
     {
         
-        public const int ProtocolId = 6034;
+        protected override int ProtocolId { get; set; } = 6034;
         
         public override int MessageID
         {

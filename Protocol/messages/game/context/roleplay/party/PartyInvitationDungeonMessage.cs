@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party
     public class PartyInvitationDungeonMessage : PartyInvitationMessage
     {
         
-        public const int ProtocolId = 6244;
+        protected override int ProtocolId { get; set; } = 6244;
         
         public override int MessageID
         {

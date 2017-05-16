@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Inventory.Preset
     public class PresetItem : NetworkType
     {
         
-        public const int ProtocolId = 354;
+        protected override int ProtocolId { get; set; } = 354;
         
         public override int TypeID
         {

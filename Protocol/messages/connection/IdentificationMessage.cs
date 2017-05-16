@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Connection
 {
     public class IdentificationMessage : Message
     {
-        public const int ProtocolId = 4;
+        protected override int ProtocolId { get; set; } = 4;
         public override int MessageID { get { return ProtocolId; } }
 
         public bool Autoconnect { get; set; }

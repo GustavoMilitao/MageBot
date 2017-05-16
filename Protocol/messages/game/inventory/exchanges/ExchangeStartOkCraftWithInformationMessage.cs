@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeStartOkCraftWithInformationMessage : ExchangeStartOkCraftMessage
     {
         
-        public const int ProtocolId = 5941;
+        protected override int ProtocolId { get; set; } = 5941;
         
         public override int MessageID
         {

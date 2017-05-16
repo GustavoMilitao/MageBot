@@ -25,7 +25,7 @@ namespace BlueSheep.Core.Storage
             {
                 bool isFood = false;
 
-                foreach (Pet pet in account.petsList)
+                foreach (Pet pet in account.PetsList)
                 {
                     foreach (Food food in pet.FoodList)
                     {

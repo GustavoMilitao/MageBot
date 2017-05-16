@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
     public class ObjectUseMultipleMessage : ObjectUseMessage
     {
         
-        public const int ProtocolId = 6234;
+        protected override int ProtocolId { get; set; } = 6234;
         
         public override int MessageID
         {

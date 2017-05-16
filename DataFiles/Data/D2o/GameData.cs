@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.CompilerServices;
 
-namespace BlueSheep.Common.Data.D2o
+namespace DataFiles.Data.D2o
 {
     public class GameData
     {

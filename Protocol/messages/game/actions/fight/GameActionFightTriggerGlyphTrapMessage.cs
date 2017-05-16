@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Actions.Fight
     public class GameActionFightTriggerGlyphTrapMessage : AbstractGameActionMessage
     {
         
-        public const int ProtocolId = 5741;
+        protected override int ProtocolId { get; set; } = 5741;
         
         public override int MessageID
         {

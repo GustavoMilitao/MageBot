@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Data.Items
     public class ObjectItemGenericQuantityPrice : ObjectItemGenericQuantity
     {
         
-        public const int ProtocolId = 494;
+        protected override int ProtocolId { get; set; } = 494;
         
         public override int TypeID
         {

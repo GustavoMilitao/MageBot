@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Approach
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class ReloginTokenStatusMessage : Message
     {
         
-        public const int ProtocolId = 6539;
+        protected override int ProtocolId { get; set; } = 6539;
         
         public override int MessageID
         {

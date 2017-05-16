@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Data.Items.Effects
     public class ObjectEffectDuration : ObjectEffect
     {
         
-        public const int ProtocolId = 75;
+        protected override int ProtocolId { get; set; } = 75;
         
         public override int TypeID
         {

@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
     public class GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage : GameRolePlayArenaUpdatePlayerInfosMessage
     {
         
-        public const int ProtocolId = 6728;
+        protected override int ProtocolId { get; set; } = 6728;
         
         public override int MessageID
         {

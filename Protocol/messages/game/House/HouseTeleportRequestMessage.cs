@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.House
 {
-    using BlueSheep.Protocol;
-
-
     public class HouseTeleportRequestMessage : Message
     {
         
-        public const int ProtocolId = 6726;
+        protected override int ProtocolId { get; set; } = 6726;
         
         public override int MessageID
         {

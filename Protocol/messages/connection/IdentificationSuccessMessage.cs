@@ -14,7 +14,7 @@
         public bool WasAlreadyConnected;
         public uint HavenbagAvailableRoom;
 
-        public const int ProtocolId = 22;
+        protected override int ProtocolId { get; set; } = 22;
         public override int MessageID { get { return ProtocolId; } }
 
         public IdentificationSuccessMessage() { }

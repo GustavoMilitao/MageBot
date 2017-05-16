@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Spell
 {
-    using BlueSheep.Protocol;
-
-
     public class ValidateSpellForgetMessage : Message
     {
         
-        public const int ProtocolId = 1700;
+        protected override int ProtocolId { get; set; } = 1700;
         
         public override int MessageID
         {

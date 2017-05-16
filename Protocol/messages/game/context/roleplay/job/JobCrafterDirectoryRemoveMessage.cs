@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Job
 {
-    using BlueSheep.Protocol;
-
-
     public class JobCrafterDirectoryRemoveMessage : Message
     {
         
-        public const int ProtocolId = 5653;
+        protected override int ProtocolId { get; set; } = 5653;
         
         public override int MessageID
         {

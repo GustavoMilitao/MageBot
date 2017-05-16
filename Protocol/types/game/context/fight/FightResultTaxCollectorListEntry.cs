@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Fight
     public class FightResultTaxCollectorListEntry : FightResultFighterListEntry
     {
         
-        public const int ProtocolId = 84;
+        protected override int ProtocolId { get; set; } = 84;
         
         public override int TypeID
         {

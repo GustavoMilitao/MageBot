@@ -1,6 +1,4 @@
 ﻿using BlueSheep.Util.IO;
-using BlueSheep.Engine.Types;
-using BlueSheep.Util.Text.Log;
 using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
@@ -84,7 +82,7 @@ namespace BlueSheep.Core.Misc
             {
                 ChatClientMultiMessage msg = new ChatClientMultiMessage(content, (byte)channel);
                 msg.Serialize(writer);
-                writer.Content = account.HumanCheck.hash_function(writer.Content);
+                writer.Content = account.HumanCheck.Hash_function(writer.Content);
                 msg.Pack(writer);
                 account.SocketManager.Send(writer.Content);
                 account.Log(new DebugTextInformation("[SND] 861 (ChatClientMultiMessage)"), 0);
@@ -119,7 +117,7 @@ namespace BlueSheep.Core.Misc
             {
                 ChatClientPrivateMessage msg = new ChatClientPrivateMessage(content, name);
                 msg.Serialize(writer);
-                writer.Content = account.HumanCheck.hash_function(writer.Content);
+                writer.Content = account.HumanCheck.Hash_function(writer.Content);
                 msg.Pack(writer);
                 account.SocketManager.Send(writer.Content);
                 account.Log(new PrivateTextInformation("à " + name + " : " + content), 1);

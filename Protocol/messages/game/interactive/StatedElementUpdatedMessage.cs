@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Interactive
 {
     using BlueSheep.Protocol.Types.Game.Interactive;
-    using BlueSheep.Protocol;
 
 
     public class StatedElementUpdatedMessage : Message
     {
         
-        public const int ProtocolId = 5709;
+        protected override int ProtocolId { get; set; } = 5709;
         
         public override int MessageID
         {

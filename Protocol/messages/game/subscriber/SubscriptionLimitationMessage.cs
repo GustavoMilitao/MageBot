@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Subscriber
 {
-    using BlueSheep.Protocol;
-
-
     public class SubscriptionLimitationMessage : Message
     {
         
-        public const int ProtocolId = 5542;
+        protected override int ProtocolId { get; set; } = 5542;
         
         public override int MessageID
         {

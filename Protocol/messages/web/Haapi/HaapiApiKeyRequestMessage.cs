@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Web.Haapi
 {
-    using BlueSheep.Protocol;
-
-
     public class HaapiApiKeyRequestMessage : Message
     {
         
-        public const int ProtocolId = 6648;
+        protected override int ProtocolId { get; set; } = 6648;
         
         public override int MessageID
         {

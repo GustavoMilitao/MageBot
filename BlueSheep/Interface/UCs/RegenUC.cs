@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using BlueSheep.Engine.Enums;
-using BlueSheep.Util.Text.Log;
-using BlueSheep.Core.Inventory;
-using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Emote;
 
 namespace BlueSheep.Interface.UCs
 {

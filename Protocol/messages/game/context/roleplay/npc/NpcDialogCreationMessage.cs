@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Npc
 {
-    using BlueSheep.Protocol;
-
-
     public class NpcDialogCreationMessage : Message
     {
         
-        public const int ProtocolId = 5618;
+        protected override int ProtocolId { get; set; } = 5618;
         
         public override int MessageID
         {

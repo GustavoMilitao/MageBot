@@ -1,9 +1,8 @@
-﻿using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Npc;
 using BlueSheep.Protocol.Messages.Game.Dialog;
 using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-using BlueSheep.Engine.Types;
 using BlueSheep.Util.Text.Log;
 using System.Collections.Generic;
 
@@ -18,7 +17,7 @@ namespace BlueSheep.Core.Npc
         public int QuestionId { get; set; }
         public string QuestionText
         {
-            get { return BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.NpcMessages, QuestionId).Fields["messageId"]); }
+            get { return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.NpcMessages, QuestionId).Fields["messageId"]); }
         }
 
         public List<NpcReply> Replies { get; set; }
@@ -53,7 +52,7 @@ namespace BlueSheep.Core.Npc
 
         public string GetNpcName(int npcId)
         {
-            return BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Npcs, npcId).Fields["nameId"]);
+            return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Npcs, npcId).Fields["nameId"]);
         }
 
         public void TalkToNpc(int npcId)
@@ -66,7 +65,7 @@ namespace BlueSheep.Core.Npc
             {
                 NpcGenericActionRequestMessage msg = new NpcGenericActionRequestMessage(npcId, 3, account.MapData.Id);
                 msg.Serialize(writer);
-                writer.Content = account.HumanCheck.hash_function(writer.Content);
+                writer.Content = account.HumanCheck.Hash_function(writer.Content);
                 msg.Pack(writer);
                 account.SocketManager.Send(writer.Content);
                 account.Log(new DebugTextInformation("[SND] 5898 (NpcGenericActionRequestMessage)"), 0);

@@ -18,7 +18,7 @@ namespace BlueSheep.Protocol.Types.Game.Mount
     public class MountClientData : NetworkType
     {
         
-        public const int ProtocolId = 178;
+        protected override int ProtocolId { get; set; } = 178;
         
         public override int TypeID
         {

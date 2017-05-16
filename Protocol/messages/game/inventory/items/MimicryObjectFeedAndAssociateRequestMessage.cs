@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
     public class MimicryObjectFeedAndAssociateRequestMessage : SymbioticObjectAssociateRequestMessage
     {
         
-        public const int ProtocolId = 6460;
+        protected override int ProtocolId { get; set; } = 6460;
         
         public override int MessageID
         {

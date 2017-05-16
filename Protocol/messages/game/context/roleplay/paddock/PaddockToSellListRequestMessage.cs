@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Paddock
 {
-    using BlueSheep.Protocol;
-
-
     public class PaddockToSellListRequestMessage : Message
     {
         
-        public const int ProtocolId = 6141;
+        protected override int ProtocolId { get; set; } = 6141;
         
         public override int MessageID
         {

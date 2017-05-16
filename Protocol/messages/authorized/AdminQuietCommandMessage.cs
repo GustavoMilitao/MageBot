@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Authorized
     public class AdminQuietCommandMessage : AdminCommandMessage
     {
         
-        public const int ProtocolId = 5662;
+        protected override int ProtocolId { get; set; } = 5662;
         
         public override int MessageID
         {

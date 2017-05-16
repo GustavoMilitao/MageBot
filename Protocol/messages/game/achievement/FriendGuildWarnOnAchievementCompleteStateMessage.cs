@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Achievement
 {
-    using BlueSheep.Protocol;
-
-
     public class FriendGuildWarnOnAchievementCompleteStateMessage : Message
     {
         
-        public const int ProtocolId = 6383;
+        protected override int ProtocolId { get; set; } = 6383;
         
         public override int MessageID
         {

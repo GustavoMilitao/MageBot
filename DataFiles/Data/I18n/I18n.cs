@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Common.Data
+﻿namespace DataFiles.Data.I18n
 {
     public class I18N
     {

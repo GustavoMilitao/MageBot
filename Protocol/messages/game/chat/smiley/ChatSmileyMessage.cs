@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Chat.Smiley
 {
-    using BlueSheep.Protocol;
-
-
     public class ChatSmileyMessage : Message
     {
         
-        public const int ProtocolId = 801;
+        protected override int ProtocolId { get; set; } = 801;
         
         public override int MessageID
         {

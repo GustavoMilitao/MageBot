@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Actions.Sequence
 {
-    using BlueSheep.Protocol;
-
-
     public class SequenceEndMessage : Message
     {
         
-        public const int ProtocolId = 956;
+        protected override int ProtocolId { get; set; } = 956;
         
         public override int MessageID
         {

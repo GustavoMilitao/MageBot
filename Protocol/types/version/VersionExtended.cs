@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Types
 {
     public class VersionExtended : Version
     {
-        public new const int ProtocolId = 393;
+        protected override int ProtocolId { get; set; } = 393;
         public override int TypeID { get { return ProtocolId; } }
 
         public sbyte Install { get; set; }

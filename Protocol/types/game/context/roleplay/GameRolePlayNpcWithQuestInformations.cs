@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
     public class GameRolePlayNpcWithQuestInformations : GameRolePlayNpcInformations
     {
         
-        public const int ProtocolId = 383;
+        protected override int ProtocolId { get; set; } = 383;
         
         public override int TypeID
         {

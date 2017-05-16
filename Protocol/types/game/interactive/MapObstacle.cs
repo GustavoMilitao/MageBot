@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Interactive
     public class MapObstacle : NetworkType
     {
         
-        public const int ProtocolId = 200;
+        protected override int ProtocolId { get; set; } = 200;
         
         public override int TypeID
         {

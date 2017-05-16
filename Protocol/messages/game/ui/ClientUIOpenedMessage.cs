@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Ui
 {
-    using BlueSheep.Protocol;
-
-
     public class ClientUIOpenedMessage : Message
     {
         
-        public const int ProtocolId = 6459;
+        protected override int ProtocolId { get; set; } = 6459;
         
         public override int MessageID
         {

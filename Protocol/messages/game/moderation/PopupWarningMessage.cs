@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Moderation
 {
-    using BlueSheep.Protocol;
-
-
     public class PopupWarningMessage : Message
     {
         
-        public const int ProtocolId = 6134;
+        protected override int ProtocolId { get; set; } = 6134;
         
         public override int MessageID
         {

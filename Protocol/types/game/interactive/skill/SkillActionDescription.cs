@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Interactive.Skill
     public class SkillActionDescription : NetworkType
     {
         
-        public const int ProtocolId = 102;
+        protected override int ProtocolId { get; set; } = 102;
         
         public override int TypeID
         {

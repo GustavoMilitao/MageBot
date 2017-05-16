@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Friend
     public class AbstractContactInformations : NetworkType
     {
         
-        public const int ProtocolId = 380;
+        protected override int ProtocolId { get; set; } = 380;
         
         public override int TypeID
         {

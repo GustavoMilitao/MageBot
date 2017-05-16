@@ -1,13 +1,8 @@
 ﻿namespace BlueSheep.Interface
 {
-    using BlueSheep.Util.IO;
-    using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay;
-    using BlueSheep.Common.Protocol.Messages.Game.Context.Roleplay.Fight;
-    using BlueSheep.Common.Protocol.Types.Game.Context.Roleplay;
     using System;
     using System.ComponentModel;
     using System.Windows.Forms;
-    using Util.Util.Enums.Internal;
 
     public class HeroicUC : MetroFramework.Controls.MetroUserControl
     {
@@ -61,7 +56,7 @@
             {
                 msg.Deserialize(reader);
             }
-            switch (msg.MessageID)
+            switch ((int)msg.MessageID)
             {
                 case 226:
                     MapComplementaryInformationsDataMessage packet = (MapComplementaryInformationsDataMessage)msg;
@@ -148,6 +143,11 @@
             return flag;
         }
 
+        //public bool GoAnalyser(int id)
+        //{
+        //    return ((!this.SubAreaId.Contains<int>(id) && (this.account.Game.Map.Id != 0x24138)) && (this.account.Game.Map.Id != 0x23423));
+        //}
+
         private bool IsGoingToRun(GameRolePlayCharacterInformations infoCharacter)
         {
             if (!sadikCheckbox2.Checked)
@@ -166,17 +166,17 @@
             return flag;
         }
 
-        private int SwitchUid(PotionEnum potionEnum)
+        private int SwitchUid(string nameItem)
         {
-            switch (potionEnum)
+            switch (nameItem)
             {
-                case PotionEnum.MemoryPotion:
+                case "Potion de Rappel":
                     return account.Inventory.GetItemFromGID(0x224).UID;
 
-                case PotionEnum.BontaPotion:
+                case "Potion de cité :  Bonta":
                     return account.Inventory.GetItemFromGID(0x1b35).UID;
 
-                case PotionEnum.BrakmarPotion:
+                case "Potion de cité:  Brâkmar":
                     return account.Inventory.GetItemFromGID(0x1b34).UID;
             }
             return 0;
@@ -289,7 +289,7 @@
             // 
             this.sadikLabel2.AutoSize = true;
             this.sadikLabel2.Font = new System.Drawing.Font("Verdana", 8F);
-            this.sadikLabel2.ForeColor = System.Drawing.Color.FromArgb(((byte)(135)), ((byte)(135)), ((byte)(135)));
+            this.sadikLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel2.Location = new System.Drawing.Point(228, 47);
             this.sadikLabel2.Name = "sadikLabel2";
             this.sadikLabel2.Size = new System.Drawing.Size(14, 13);
@@ -407,7 +407,7 @@
             // 
             this.sadikLabel3.AutoSize = true;
             this.sadikLabel3.Font = new System.Drawing.Font("Verdana", 8F);
-            this.sadikLabel3.ForeColor = System.Drawing.Color.FromArgb(((byte)(135)), ((byte)(135)), ((byte)(135)));
+            this.sadikLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel3.Location = new System.Drawing.Point(212, 47);
             this.sadikLabel3.Name = "sadikLabel3";
             this.sadikLabel3.Size = new System.Drawing.Size(14, 13);
@@ -418,7 +418,7 @@
             // 
             this.sadikLabel4.AutoSize = true;
             this.sadikLabel4.Font = new System.Drawing.Font("Verdana", 8F);
-            this.sadikLabel4.ForeColor = System.Drawing.Color.FromArgb(((byte)(135)), ((byte)(135)), ((byte)(135)));
+            this.sadikLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel4.Location = new System.Drawing.Point(15, 47);
             this.sadikLabel4.Name = "sadikLabel4";
             this.sadikLabel4.Size = new System.Drawing.Size(140, 13);
@@ -483,7 +483,7 @@
             // 
             this.sadikLabel1.AutoSize = true;
             this.sadikLabel1.Font = new System.Drawing.Font("Verdana", 8F);
-            this.sadikLabel1.ForeColor = System.Drawing.Color.FromArgb(((byte)(135)), ((byte)(135)), ((byte)(135)));
+            this.sadikLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel1.Location = new System.Drawing.Point(15, 47);
             this.sadikLabel1.Name = "sadikLabel1";
             this.sadikLabel1.Size = new System.Drawing.Size(140, 13);

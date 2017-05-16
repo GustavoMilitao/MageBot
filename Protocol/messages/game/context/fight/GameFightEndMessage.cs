@@ -13,14 +13,13 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Fight
     using BlueSheep.Protocol.Types.Game.Context.Fight;
     using BlueSheep.Protocol.Types.Game.Context.Roleplay.Party;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
-	using BlueSheep.Protocol.Types;
+    using BlueSheep.Protocol.Types;
 
 
     public class GameFightEndMessage : Message
     {
         
-        public const int ProtocolId = 720;
+        protected override int ProtocolId { get; set; } = 720;
         
         public override int MessageID
         {

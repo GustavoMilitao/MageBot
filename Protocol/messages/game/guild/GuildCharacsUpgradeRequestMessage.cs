@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Guild
 {
-    using BlueSheep.Protocol;
-
-
     public class GuildCharacsUpgradeRequestMessage : Message
     {
         
-        public const int ProtocolId = 5706;
+        protected override int ProtocolId { get; set; } = 5706;
         
         public override int MessageID
         {

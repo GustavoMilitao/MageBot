@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Fight
     public class FightResultExperienceData : FightResultAdditionalData
     {
         
-        public const int ProtocolId = 192;
+        protected override int ProtocolId { get; set; } = 192;
         
         public override int TypeID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Character.Creation
 {
-    using BlueSheep.Protocol;
-
-
     public class CharacterNameSuggestionFailureMessage : Message
     {
         
-        public const int ProtocolId = 164;
+        protected override int ProtocolId { get; set; } = 164;
         
         public override int MessageID
         {

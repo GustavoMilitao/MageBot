@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Inventory
 {
-    using BlueSheep.Protocol;
-
-
     public class ObjectAveragePricesErrorMessage : Message
     {
         
-        public const int ProtocolId = 6336;
+        protected override int ProtocolId { get; set; } = 6336;
         
         public override int MessageID
         {

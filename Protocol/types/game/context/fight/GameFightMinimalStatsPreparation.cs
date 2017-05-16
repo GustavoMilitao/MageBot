@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Fight
     public class GameFightMinimalStatsPreparation : GameFightMinimalStats
     {
         
-        public const int ProtocolId = 360;
+        protected override int ProtocolId { get; set; } = 360;
         
         public override int TypeID
         {

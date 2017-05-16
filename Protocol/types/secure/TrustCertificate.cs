@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Secure
     public class TrustCertificate : NetworkType
     {
         
-        public const int ProtocolId = 377;
+        protected override int ProtocolId { get; set; } = 377;
         
         public override int TypeID
         {

@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Character.Restriction
     public class ActorRestrictionsInformations : NetworkType
     {
         
-        public const int ProtocolId = 204;
+        protected override int ProtocolId { get; set; } = 204;
         
         public override int TypeID
         {

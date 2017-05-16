@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Party
     public class PartyMemberGeoPosition : NetworkType
     {
         
-        public const int ProtocolId = 378;
+        protected override int ProtocolId { get; set; } = 378;
         
         public override int TypeID
         {

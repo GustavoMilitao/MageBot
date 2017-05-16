@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 
-namespace BlueSheep.Data.Pathfinding
+namespace DataFiles.Data.Pathfinding
 {
     public class Dofus1Line
     {
@@ -76,61 +76,67 @@ namespace BlueSheep.Data.Pathfinding
                         num7 = (Math.Ceiling(Math.Abs(Convert.ToDouble(((Math.Ceiling(a) * 100) - (a * 100))))) / 100);
                         if ((Math.Floor(d) == Math.Floor(a)))
                         {
-                            list3 = Dofus1Line.smethod_0(new object[] { Math.Floor(Convert.ToDouble((pointd.Y + num15))) });
+                            list3 = Dofus1Line.Smethod_0(new object[] { Math.Floor(Convert.ToDouble((pointd.Y + num15))) });
                             if (d == (double)list3[0] && a < (double)list3[0])
                             {
-                                list3 = Dofus1Line.smethod_0(new object[] { Math.Ceiling(Convert.ToDouble((pointd.Y + num15))) });
+                                list3 = Dofus1Line.Smethod_0(new object[] { Math.Ceiling(Convert.ToDouble((pointd.Y + num15))) });
                             }
                             else if (d == (double)list3[0] && a > (double)list3[0])
                             {
-                                list3 = Dofus1Line.smethod_0(new object[] { Math.Floor(Convert.ToDouble((pointd.Y + num15))) });
+                                list3 = Dofus1Line.Smethod_0(new object[] { Math.Floor(Convert.ToDouble((pointd.Y + num15))) });
                             }
                             else if (a == (double)list3[0] && d < (double)list3[0])
                             {
-                                list3 = Dofus1Line.smethod_0(new object[] { Math.Ceiling(Convert.ToDouble((pointd.Y + num15))) });
+                                list3 = Dofus1Line.Smethod_0(new object[] { Math.Ceiling(Convert.ToDouble((pointd.Y + num15))) });
                             }
                             else if (a == (double)list3[0] && d > (double)list3[0])
                             {
-                                list3 = Dofus1Line.smethod_0(new object[] { Math.Floor(Convert.ToDouble((pointd.Y + num15))) });
+                                list3 = Dofus1Line.Smethod_0(new object[] { Math.Floor(Convert.ToDouble((pointd.Y + num15))) });
                             }
                         }
                         else if ((Math.Ceiling(d) == Math.Ceiling(a)))
                         {
-                            list3 = Dofus1Line.smethod_0(new object[] { Math.Ceiling(Convert.ToDouble((pointd.Y + num15))) });
+                            list3 = Dofus1Line.Smethod_0(new object[] { Math.Ceiling(Convert.ToDouble((pointd.Y + num15))) });
                             if (d == (double)list3[0] && a < (double)list3[0])
                             {
-                                list3 = Dofus1Line.smethod_0(new object[] { Math.Floor(Convert.ToDouble((pointd.Y + num15))) });
+                                list3 = Dofus1Line.Smethod_0(new object[] { Math.Floor(Convert.ToDouble((pointd.Y + num15))) });
                             }
                             else if (d == (double)list3[0] && a > (double)list3[0])
                             {
-                                list3 = Dofus1Line.smethod_0(new object[] { Math.Ceiling(Convert.ToDouble((pointd.Y + num15))) });
+                                list3 = Dofus1Line.Smethod_0(new object[] { Math.Ceiling(Convert.ToDouble((pointd.Y + num15))) });
                             }
                             else if (a == (double)list3[0] && d < (double)list3[0])
                             {
-                                list3 = Dofus1Line.smethod_0(new object[] { Math.Floor(Convert.ToDouble((pointd.Y + num15))) });
+                                list3 = Dofus1Line.Smethod_0(new object[] { Math.Floor(Convert.ToDouble((pointd.Y + num15))) });
                             }
                             else if (a == (double)list3[0] && d > (double)list3[0])
                             {
-                                list3 = Dofus1Line.smethod_0(new object[] { Math.Ceiling(Convert.ToDouble((pointd.Y + num15))) });
+                                list3 = Dofus1Line.Smethod_0(new object[] { Math.Ceiling(Convert.ToDouble((pointd.Y + num15))) });
                             }
                         }
                         else if ((Math.Floor(Convert.ToDouble((num6 * 100))) <= num2))
                         {
-                            ArrayList list4 = new ArrayList();
-                            list4.Add(Math.Floor(a));
+                            ArrayList list4 = new ArrayList
+                            {
+                                Math.Floor(a)
+                            };
                             list3 = list4;
                         }
                         else if ((Math.Floor(Convert.ToDouble((num7 * 100))) >= num3))
                         {
-                            ArrayList list5 = new ArrayList();
-                            list5.Add(Math.Floor(d));
+                            ArrayList list5 = new ArrayList
+                            {
+                                Math.Floor(d)
+                            };
                             list3 = list5;
                         }
                         else
                         {
-                            ArrayList list6 = new ArrayList();
-                            list6.Add(Math.Floor(d));
-                            list6.Add(Math.Floor(a));
+                            ArrayList list6 = new ArrayList
+                            {
+                                Math.Floor(d),
+                                Math.Floor(a)
+                            };
                             list3 = list6;
                         }
                         break;
@@ -141,55 +147,55 @@ namespace BlueSheep.Data.Pathfinding
                         num11 = (Math.Ceiling(Math.Abs(Convert.ToDouble(((Math.Ceiling(num9) * 100) - (num9 * 100))))) / 100);
                         if (Math.Floor(num8) == Math.Floor(num9))
                         {
-                            list2 = Dofus1Line.smethod_0(new object[] { Math.Floor(Convert.ToDouble(pointd.X + num14)) });
+                            list2 = Dofus1Line.Smethod_0(new object[] { Math.Floor(Convert.ToDouble(pointd.X + num14)) });
                             if (num8 == (double)list2[0] && num9 < (double)list2[0])
                             {
-                                list2 = Dofus1Line.smethod_0(new object[] { Math.Ceiling(Convert.ToDouble(pointd.X + num14)) });
+                                list2 = Dofus1Line.Smethod_0(new object[] { Math.Ceiling(Convert.ToDouble(pointd.X + num14)) });
                             }
                             else if (num8 == (double)list2[0] && num9 > (double)list2[0])
                             {
-                                list2 = Dofus1Line.smethod_0(new object[] { Math.Floor(Convert.ToDouble(pointd.X + num14)) });
+                                list2 = Dofus1Line.Smethod_0(new object[] { Math.Floor(Convert.ToDouble(pointd.X + num14)) });
                             }
                             else if (num9 == (double)list2[0] && num8 < (double)list2[0])
                             {
-                                list2 = Dofus1Line.smethod_0(new object[] { Math.Ceiling(Convert.ToDouble(pointd.X + num14)) });
+                                list2 = Dofus1Line.Smethod_0(new object[] { Math.Ceiling(Convert.ToDouble(pointd.X + num14)) });
                             }
                             else if (num9 == (double)list2[0] && num8 > (double)list2[0])
                             {
-                                list2 = Dofus1Line.smethod_0(new object[] { Math.Floor(Convert.ToDouble(pointd.X + num14)) });
+                                list2 = Dofus1Line.Smethod_0(new object[] { Math.Floor(Convert.ToDouble(pointd.X + num14)) });
                             }
                         }
                         else if (Math.Ceiling(num8) == Math.Ceiling(num9))
                         {
-                            list2 = Dofus1Line.smethod_0(new object[] { Math.Ceiling(Convert.ToDouble(pointd.X + num14)) });
+                            list2 = Dofus1Line.Smethod_0(new object[] { Math.Ceiling(Convert.ToDouble(pointd.X + num14)) });
                             if (num8 == (double)list2[0] && num9 < (double)list2[0])
                             {
-                                list2 = Dofus1Line.smethod_0(new object[] { Math.Floor(Convert.ToDouble(pointd.X + num14)) });
+                                list2 = Dofus1Line.Smethod_0(new object[] { Math.Floor(Convert.ToDouble(pointd.X + num14)) });
                             }
                             else if (num8 == (double)list2[0] && num9 > (double)list2[0])
                             {
-                                list2 = Dofus1Line.smethod_0(new object[] { Math.Ceiling(Convert.ToDouble(pointd.X + num14)) });
+                                list2 = Dofus1Line.Smethod_0(new object[] { Math.Ceiling(Convert.ToDouble(pointd.X + num14)) });
                             }
                             else if (num9 == (double)list2[0] && num8 < (double)list2[0])
                             {
-                                list2 = Dofus1Line.smethod_0(new object[] { Math.Floor(Convert.ToDouble(pointd.X + num14)) });
+                                list2 = Dofus1Line.Smethod_0(new object[] { Math.Floor(Convert.ToDouble(pointd.X + num14)) });
                             }
                             else if (num9 == (double)list2[0] && num8 > (double)list2[0])
                             {
-                                list2 = Dofus1Line.smethod_0(new object[] { Math.Ceiling(Convert.ToDouble(pointd.X + num14)) });
+                                list2 = Dofus1Line.Smethod_0(new object[] { Math.Ceiling(Convert.ToDouble(pointd.X + num14)) });
                             }
                         }
                         else if ((Math.Floor(Convert.ToDouble((num10 * 100))) <= num2))
                         {
-                            list2 = Dofus1Line.smethod_0(new object[] { num9 });
+                            list2 = Dofus1Line.Smethod_0(new object[] { num9 });
                         }
                         else if ((Math.Floor(Convert.ToDouble((num11 * 100))) >= num3))
                         {
-                            list2 = Dofus1Line.smethod_0(new object[] { num8 });
+                            list2 = Dofus1Line.Smethod_0(new object[] { num8 });
                         }
                         else
                         {
-                            list2 = Dofus1Line.smethod_0(new object[] {
+                            list2 = Dofus1Line.Smethod_0(new object[] {
 								num8,
 								num9
 							});
@@ -227,7 +233,7 @@ namespace BlueSheep.Data.Pathfinding
             return list;
         }
 
-        private static ArrayList smethod_0(object[] object_0)
+        private static ArrayList Smethod_0(object[] object_0)
         {
             ArrayList list = new ArrayList();
             list.AddRange(object_0);

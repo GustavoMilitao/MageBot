@@ -18,7 +18,7 @@ namespace BlueSheep.Protocol.Messages.Common.Basic
     public class AggregateStatWithDataMessage : AggregateStatMessage
     {
         
-        public const int ProtocolId = 6662;
+        protected override int ProtocolId { get; set; } = 6662;
         
         public override int MessageID
         {

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using BlueSheep.Engine.Constants;
-using BlueSheep.Util.Text.Log;
 
 namespace BlueSheep.Interface.UCs
 {
@@ -50,7 +48,7 @@ namespace BlueSheep.Interface.UCs
             }
         }
 
-        public List<int> GetItemsToTransferToBank()
+        public List<int> GetItemsToTransfer()
         {
             List<int> stayingItems = GetItemsNoBank();
             List<int> items = new List<int>();

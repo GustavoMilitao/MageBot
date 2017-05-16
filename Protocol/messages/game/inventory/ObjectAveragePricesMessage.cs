@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Inventory
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class ObjectAveragePricesMessage : Message
     {
         
-        public const int ProtocolId = 6335;
+        protected override int ProtocolId { get; set; } = 6335;
         
         public override int MessageID
         {

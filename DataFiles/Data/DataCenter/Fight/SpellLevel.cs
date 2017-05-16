@@ -1,11 +1,11 @@
-﻿using BlueSheep.Common.Data.DataCenter.Effects.Instances;
+﻿using DataFiles.Data.DataCenter.Effects.Instances;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlueSheep.Common.Data.DataCenter.Fight
+namespace DataFiles.Data.DataCenter.Fight
 {
     class SpellLevel : IDataCenter
     {

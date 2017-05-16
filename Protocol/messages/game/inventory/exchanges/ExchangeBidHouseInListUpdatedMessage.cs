@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeBidHouseInListUpdatedMessage : ExchangeBidHouseInListAddedMessage
     {
         
-        public const int ProtocolId = 6337;
+        protected override int ProtocolId { get; set; } = 6337;
         
         public override int MessageID
         {

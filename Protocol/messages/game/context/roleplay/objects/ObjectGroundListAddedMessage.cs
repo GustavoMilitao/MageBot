@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Objects
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class ObjectGroundListAddedMessage : Message
     {
         
-        public const int ProtocolId = 5925;
+        protected override int ProtocolId { get; set; } = 5925;
         
         public override int MessageID
         {

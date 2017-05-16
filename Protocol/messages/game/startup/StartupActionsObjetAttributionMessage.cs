@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Startup
 {
-    using BlueSheep.Protocol;
-
-
     public class StartupActionsObjetAttributionMessage : Message
     {
         
-        public const int ProtocolId = 1303;
+        protected override int ProtocolId { get; set; } = 1303;
         
         public override int MessageID
         {

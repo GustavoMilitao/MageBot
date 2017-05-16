@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Prism
     public class PrismSubareaEmptyInfo : NetworkType
     {
         
-        public const int ProtocolId = 438;
+        protected override int ProtocolId { get; set; } = 438;
         
         public override int TypeID
         {

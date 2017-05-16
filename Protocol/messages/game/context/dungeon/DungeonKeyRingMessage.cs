@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context.Dungeon
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class DungeonKeyRingMessage : Message
     {
         
-        public const int ProtocolId = 6299;
+        protected override int ProtocolId { get; set; } = 6299;
         
         public override int MessageID
         {

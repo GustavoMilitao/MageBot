@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Chat.Smiley
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class ChatSmileyExtraPackListMessage : Message
     {
         
-        public const int ProtocolId = 6596;
+        protected override int ProtocolId { get; set; } = 6596;
         
         public override int MessageID
         {

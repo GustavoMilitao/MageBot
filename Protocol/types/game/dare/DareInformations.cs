@@ -18,7 +18,7 @@ namespace BlueSheep.Protocol.Types.Game.Dare
     public class DareInformations : NetworkType
     {
         
-        public const int ProtocolId = 502;
+        protected override int ProtocolId { get; set; } = 502;
         
         public override int TypeID
         {

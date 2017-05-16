@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Storage
 {
-    using BlueSheep.Protocol;
-
-
     public class StorageKamasUpdateMessage : Message
     {
         
-        public const int ProtocolId = 5645;
+        protected override int ProtocolId { get; set; } = 5645;
         
         public override int MessageID
         {

@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
 {
     using BlueSheep.Protocol.Types.Game.Context.Roleplay.Job;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class DecraftResultMessage : Message
     {
         
-        public const int ProtocolId = 6569;
+        protected override int ProtocolId { get; set; } = 6569;
         
         public override int MessageID
         {

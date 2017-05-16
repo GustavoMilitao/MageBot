@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Messages.Game.Dare
     public class DareSubscribedMessage : Message
     {
         
-        public const int ProtocolId = 6660;
+        protected override int ProtocolId { get; set; } = 6660;
         
         public override int MessageID
         {

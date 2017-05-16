@@ -12,14 +12,13 @@ namespace BlueSheep.Protocol.Messages.Game.Friend
 {
     using BlueSheep.Protocol.Types.Game.Friend;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
-	using BlueSheep.Protocol.Types;
+    using BlueSheep.Protocol.Types;
 
 
     public class FriendsListMessage : Message
     {
         
-        public const int ProtocolId = 4002;
+        protected override int ProtocolId { get; set; } = 4002;
         
         public override int MessageID
         {

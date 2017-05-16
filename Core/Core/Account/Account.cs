@@ -13,7 +13,7 @@ using BlueSheep.Core.Frame;
 using System.IO;
 using BlueSheep.Util.I18n.Strings;
 using BlueSheep.Util.Text.Log;
-using BlueSheep.Common.Data.D2o;
+using DataFiles.Data.D2o;
 using BlueSheep.Core.Pets;
 using BlueSheep.Core.Job;
 using BlueSheep.Core.Groups;
@@ -52,7 +52,7 @@ namespace BlueSheep.Core.Account
         public List<Job.Job> Jobs { get; set; }
         public Gather Gather { get; set; }
         public List<Pet> PetsModifiedList { get; set; }
-        public List<Pet> petsList { get; set; }
+        public List<Pet> PetsList { get; set; }
         public InteractiveElement Safe { get; set; }
         public CharacterBaseInformations CharacterBaseInformations { get; set; }
         public Pods Pods { get; set; }
@@ -87,7 +87,7 @@ namespace BlueSheep.Core.Account
 
         public Account(string username, string password, bool socket = true)
         {
-            initBars();
+            InitBars();
             Config = new AccountConfig(this);
             AccountName = username;
             AccountPassword = password;
@@ -96,7 +96,7 @@ namespace BlueSheep.Core.Account
             Config.NextMeal = new DateTime();
             Ticket = string.Empty;
             PetsModifiedList = null;
-            petsList = null;
+            PetsList = null;
             Safe = null;
             CharacterBaseInformations = null;
             Sequence = 0;
@@ -125,17 +125,19 @@ namespace BlueSheep.Core.Account
             Config.MonsterRestrictions = new List<MonsterRestrictions>();
         }
 
-        private void initBars()
+        private void InitBars()
         {
-            InfBars = new Dictionary<int, DataBar>();
-            InfBars.Add(1, new DataBar() { Text = "Experience" });
-            InfBars.Add(2, new DataBar() { Text = "Life" });
-            InfBars.Add(3, new DataBar() { Text = "Pods" });
-            InfBars.Add(4, new DataBar() { Text = "Kamas" });
-            InfBars.Add(5, new DataBar() { Text = "Pos" });
-            InfBars.Add(7, new DataBar() { Text = "ParentForm" });
-            InfBars.Add(8, new DataBar() { Text = "Level" });
-            InfBars.Add(9, new DataBar() { Text = "Subscribe" });
+            InfBars = new Dictionary<int, DataBar>
+            {
+                { 1, new DataBar() { Text = "Experience" } },
+                { 2, new DataBar() { Text = "Life" } },
+                { 3, new DataBar() { Text = "Pods" } },
+                { 4, new DataBar() { Text = "Kamas" } },
+                { 5, new DataBar() { Text = "Pos" } },
+                { 7, new DataBar() { Text = "ParentForm" } },
+                { 8, new DataBar() { Text = "Level" } },
+                { 9, new DataBar() { Text = "Subscribe" } }
+            };
         }
 
         public void StartFeeding()
@@ -185,7 +187,7 @@ namespace BlueSheep.Core.Account
                     if ((int)d.Fields["gatheredRessourceItem"] != -1 && job.Level >= (int)d.Fields["levelMin"])
                     {
                         int rid = (int)d.Fields["interactiveId"];
-                        //string resourceName = I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Interactives, rid).Fields["nameId"]);
+                        //string resourceName = DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Interactives, rid).Fields["nameId"]);
                         // This way we can get resource name
                         resourcesToPerformGather.Add(rid);
                     }
@@ -196,7 +198,7 @@ namespace BlueSheep.Core.Account
 
         public void SetNextMeal()
         {
-            foreach (Pet pet in petsList)
+            foreach (Pet pet in PetsList)
             {
                 if (pet.NextMeal.Year == 1)
                     continue;
@@ -378,10 +380,12 @@ namespace BlueSheep.Core.Account
         {
 
             System.Xml.Serialization.XmlSerializer XmlBuddy = new System.Xml.Serialization.XmlSerializer(typeof(T));
-            System.Xml.XmlWriterSettings MySettings = new System.Xml.XmlWriterSettings();
-            MySettings.Indent = true;
-            MySettings.CloseOutput = true;
-            MySettings.OmitXmlDeclaration = true;
+            System.Xml.XmlWriterSettings MySettings = new System.Xml.XmlWriterSettings()
+            {
+                Indent = true,
+                CloseOutput = true,
+                OmitXmlDeclaration = true
+            };
             System.Xml.XmlWriter MyWriter = System.Xml.XmlWriter.Create(sConfigFilePath, MySettings);
             XmlBuddy.Serialize(MyWriter, obj);
             MyWriter.Flush();

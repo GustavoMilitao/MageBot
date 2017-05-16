@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangePlayerMultiCraftRequestMessage : ExchangeRequestMessage
     {
         
-        public const int ProtocolId = 5784;
+        protected override int ProtocolId { get; set; } = 5784;
         
         public override int MessageID
         {

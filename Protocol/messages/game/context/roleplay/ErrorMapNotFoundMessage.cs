@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
 {
-    using BlueSheep.Protocol;
-
-
     public class ErrorMapNotFoundMessage : Message
     {
         
-        public const int ProtocolId = 6197;
+        protected override int ProtocolId { get; set; } = 6197;
         
         public override int MessageID
         {

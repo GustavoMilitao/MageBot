@@ -1,5 +1,5 @@
-﻿using BlueSheep.Common.Data;
-using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data;
+using DataFiles.Data.D2o;
 using BlueSheep.Protocol.Types.Game.Interactive;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +44,7 @@ namespace BlueSheep.Core.Map.Elements
                 foreach (DataClass d in ld)
                 {
                     if ((int)d.Fields["interactiveId"] == TypeId)
-                        return I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, (int)d.Fields["gatheredRessourceItem"]).Fields["nameId"]);
+                        return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, (int)d.Fields["gatheredRessourceItem"]).Fields["nameId"]);
                 }
                 return "Unknown";
             }

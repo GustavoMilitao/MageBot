@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Chat
     public class ChatServerMessage : ChatAbstractServerMessage
     {
         
-        public const int ProtocolId = 881;
+        protected override int ProtocolId { get; set; } = 881;
         
         public override int MessageID
         {

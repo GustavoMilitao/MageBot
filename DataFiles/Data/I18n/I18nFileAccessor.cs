@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using BlueSheep.Util.IO;
 
-namespace BlueSheep.Common.Data
+namespace DataFiles.Data.I18n
 {
     public class I18NFileAccessor
     {

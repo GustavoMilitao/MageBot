@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Mount
 {
-    using BlueSheep.Protocol;
-
-
     public class MountEmoteIconUsedOkMessage : Message
     {
         
-        public const int ProtocolId = 5978;
+        protected override int ProtocolId { get; set; } = 5978;
         
         public override int MessageID
         {

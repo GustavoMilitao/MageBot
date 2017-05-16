@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
 {
-    using BlueSheep.Protocol;
-
-
     public class ExchangeMultiCraftCrafterCanUseHisRessourcesMessage : Message
     {
         
-        public const int ProtocolId = 6020;
+        protected override int ProtocolId { get; set; } = 6020;
         
         public override int MessageID
         {

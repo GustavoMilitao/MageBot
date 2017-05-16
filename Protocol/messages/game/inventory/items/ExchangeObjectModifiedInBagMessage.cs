@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
     public class ExchangeObjectModifiedInBagMessage : ExchangeObjectMessage
     {
         
-        public const int ProtocolId = 6008;
+        protected override int ProtocolId { get; set; } = 6008;
         
         public override int MessageID
         {

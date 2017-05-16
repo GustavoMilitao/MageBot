@@ -1,7 +1,4 @@
-﻿using BlueSheep.AccountsManager;
-using BlueSheep.Common.Types;
-using BlueSheep.Util.I18n.Strings;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;

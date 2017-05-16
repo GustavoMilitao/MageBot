@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
     public class GameRolePlayMerchantInformations : GameRolePlayNamedActorInformations
     {
         
-        public const int ProtocolId = 129;
+        protected override int ProtocolId { get; set; } = 129;
         
         public override int TypeID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Preset
 {
-    using BlueSheep.Protocol;
-
-
     public class IdolsPresetDeleteMessage : Message
     {
         
-        public const int ProtocolId = 6602;
+        protected override int ProtocolId { get; set; } = 6602;
         
         public override int MessageID
         {

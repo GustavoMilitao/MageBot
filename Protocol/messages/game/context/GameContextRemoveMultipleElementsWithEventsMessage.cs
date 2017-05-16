@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context
     public class GameContextRemoveMultipleElementsWithEventsMessage : GameContextRemoveMultipleElementsMessage
     {
         
-        public const int ProtocolId = 6416;
+        protected override int ProtocolId { get; set; } = 6416;
         
         public override int MessageID
         {

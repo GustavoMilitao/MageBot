@@ -1,11 +1,10 @@
 ﻿using System.Linq;
 using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Types;
 using BlueSheep.Protocol.Messages;
 using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
-using BlueSheep.Common.Data.D2o;
+using DataFiles.Data.D2o;
 using BlueSheep.Protocol.Messages.Game.Inventory.Items;
 using BlueSheep.Protocol.Types.Game.Data.Items;
 using BlueSheep.Protocol.Messages.Game.Inventory.Storage;
@@ -37,19 +36,19 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
             //account.ActualizeInventory();
             // TODO Militão: Populate the new interface
-            account.petsList = new List<Pet>();
+            account.PetsList = new List<Pet>();
             foreach (Core.Inventory.Item item in account.Inventory.Items)
             {
                 DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
                 {
                     Pet pet = new Pet(item, itemData, account);
-                    account.petsList.Add(pet);
+                    account.PetsList.Add(pet);
                     pet.SetFood();
                 }
             }
-            if (account.petsList.Count > 0)
-                account.Log(new BotTextInformation("Vos " + account.petsList.Count + " familiers vous font un gros bisou de la part de BlueSheep."), 3);
+            if (account.PetsList.Count > 0)
+                account.Log(new BotTextInformation("Vos " + account.PetsList.Count + " familiers vous font un gros bisou de la part de BlueSheep."), 3);
             if (!account.Config.IsMITM)
             {
                 FriendsGetListMessage friendGetListMessage = new FriendsGetListMessage();
@@ -96,19 +95,19 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
             //account.ActualizeInventory();
             // TODO Militão: Populate the new interface
-            account.petsList = new List<Pet>();
+            account.PetsList = new List<Pet>();
             foreach (Core.Inventory.Item item in account.Inventory.Items)
             {
                 DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
                 {
                     Pet pet = new Pet(item, itemData, account);
-                    account.petsList.Add(pet);
+                    account.PetsList.Add(pet);
                     pet.SetFood();
                 }
             }
             account.Log(new BotTextInformation("Vos " +
-            account.petsList.Count + " familiers vous font un gros bisou de la part de BlueSheep."), 5);
+            account.PetsList.Count + " familiers vous font un gros bisou de la part de BlueSheep."), 5);
             if (!account.Config.IsMITM)
             {
                 FriendsGetListMessage friendGetListMessage = new FriendsGetListMessage();
@@ -161,7 +160,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 if (account.PetsModifiedList == null)
                     account.PetsModifiedList = new List<Pet>();
                 account.PetsModifiedList.Add(pet);
-                account.Log(new ActionTextInformation("Familier nourri : " + BlueSheep.Common.Data.I18N.GetText((int)ItemData.Fields["nameId"]) + " " + "."), 3);
+                account.Log(new ActionTextInformation("Familier nourri : " + DataFiles.Data.I18n.I18N.GetText((int)ItemData.Fields["nameId"]) + " " + "."), 3);
             }
         }
 
@@ -184,7 +183,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
             if (account.Running != null)
             {
-                foreach (Pet pet in account.petsList)
+                foreach (Pet pet in account.PetsList)
                     pet.SetFood();
             }
         }
@@ -256,7 +255,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             // TODO Militão: Populate the new interface
             if (account.Running != null)
             {
-                foreach (Pet pet in account.petsList)
+                foreach (Pet pet in account.PetsList)
                     pet.SetFood();
             }
         }
@@ -280,7 +279,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             // TODO Militão: Populate the new interface
             if (account.Running != null)
             {
-                foreach (Pet pet in account.petsList)
+                foreach (Pet pet in account.PetsList)
                     pet.SetFood();
             }
         }

@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using BlueSheep.Common.IO;
 
-namespace BlueSheep.Common.Data
+namespace DataFiles.Data
 {
     public class GameDataFileAccessor
     {

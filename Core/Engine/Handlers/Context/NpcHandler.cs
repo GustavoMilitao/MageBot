@@ -1,4 +1,4 @@
-﻿using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Npc;
 using BlueSheep.Protocol.Messages.Game.Dialog;
@@ -61,7 +61,7 @@ namespace BlueSheep.Engine.Handlers.Context
             }
             account.Npc.QuestionId = (int)msg.MessageId;
             int mess = (int)GameData.GetDataObject(D2oFileEnum.NpcMessages, account.Npc.QuestionId).Fields["messageId"];
-            account.Log(new BotTextInformation("Dialogue : " + BlueSheep.Common.Data.I18N.GetText(mess)), 0);
+            account.Log(new BotTextInformation("Dialogue : " + DataFiles.Data.I18n.I18N.GetText(mess)), 0);
             if (account.Npc.QuestionId == 318 && (int)msg.VisibleReplies[0] == 259)
             {
                 //Bank
@@ -79,7 +79,7 @@ namespace BlueSheep.Engine.Handlers.Context
             account.Npc.Replies = msg.VisibleReplies.Select((id) => new BlueSheep.Core.Npc.NpcReply(account.MapData.Npcs.Find(n => (int)n.ContextualId == account.Npc.Id).NpcId, (int)id)).ToList();
             if (account.Config.Path != null)
             {
-                account.Config.Path.SearchReplies(BlueSheep.Common.Data.I18N.GetText(mess));
+                account.Config.Path.SearchReplies(DataFiles.Data.I18n.I18N.GetText(mess));
             }
         }
 

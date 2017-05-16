@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Common.Data.D2o
+﻿namespace DataFiles.Data.D2o
 {
     public enum D2oFileEnum
     {

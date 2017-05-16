@@ -6,9 +6,6 @@ using BlueSheep.Protocol.Types.Game.Context.Roleplay;
 using BlueSheep.Util.IO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Util.Util.Enums.Internal;
 
 namespace Core.Core.Heroic

@@ -1,7 +1,6 @@
 ﻿using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Game.Interactive;
 using BlueSheep.Protocol.Types.Game.Interactive;
-using BlueSheep.Engine.Types;
 using BlueSheep.Util.Text.Log;
 
 namespace BlueSheep.Core.Storage
@@ -30,7 +29,7 @@ namespace BlueSheep.Core.Storage
             using (BigEndianWriter writer = new BigEndianWriter())
             {
                 interactiveUseRequestMessage.Serialize(writer);
-                writer.Content = account.HumanCheck.hash_function(writer.Content);
+                writer.Content = account.HumanCheck.Hash_function(writer.Content);
 
                 interactiveUseRequestMessage.Pack(writer);
 

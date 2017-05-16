@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Purchasable
     public class PurchasableDialogMessage : Message
     {
         
-        public const int ProtocolId = 5739;
+        protected override int ProtocolId { get; set; } = 5739;
         
         public override int MessageID
         {

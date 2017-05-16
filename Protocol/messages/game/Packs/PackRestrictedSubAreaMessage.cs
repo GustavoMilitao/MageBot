@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Packs
 {
-    using BlueSheep.Protocol;
-
-
     public class PackRestrictedSubAreaMessage : Message
     {
         
-        public const int ProtocolId = 6186;
+        protected override int ProtocolId { get; set; } = 6186;
         
         public override int MessageID
         {

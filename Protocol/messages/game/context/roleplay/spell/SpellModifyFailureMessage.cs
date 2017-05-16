@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Spell
 {
-    using BlueSheep.Protocol;
-
-
     public class SpellModifyFailureMessage : Message
     {
         
-        public const int ProtocolId = 6653;
+        protected override int ProtocolId { get; set; } = 6653;
         
         public override int MessageID
         {

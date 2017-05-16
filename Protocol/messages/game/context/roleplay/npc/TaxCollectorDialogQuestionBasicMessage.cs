@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Npc
 {
     using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-    using BlueSheep.Protocol;
 
 
     public class TaxCollectorDialogQuestionBasicMessage : Message
     {
         
-        public const int ProtocolId = 5619;
+        protected override int ProtocolId { get; set; } = 5619;
         
         public override int MessageID
         {

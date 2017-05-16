@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Social
     public class AllianceFactSheetInformations : AllianceInformations
     {
         
-        public const int ProtocolId = 421;
+        protected override int ProtocolId { get; set; } = 421;
         
         public override int TypeID
         {

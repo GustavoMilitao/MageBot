@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Quest
     public class QuestObjectiveInformations : NetworkType
     {
         
-        public const int ProtocolId = 385;
+        protected override int ProtocolId { get; set; } = 385;
         
         public override int TypeID
         {

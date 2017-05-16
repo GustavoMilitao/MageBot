@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Queues
 {
     public class LoginQueueStatusMessage : Message
     {
-        public const int ProtocolId = 10;
+        protected override int ProtocolId { get; set; } = 10;
         public override int MessageID { get { return ProtocolId; } }
 
         public ushort Position;

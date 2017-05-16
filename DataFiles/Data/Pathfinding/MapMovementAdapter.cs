@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using BlueSheep.Data.Pathfinding.Positions;
+using DataFiles.Data.Pathfinding.Positions;
 
-namespace BlueSheep.Data.Pathfinding
+namespace DataFiles.Data.Pathfinding
 {
     public class MapMovementAdapter
     {

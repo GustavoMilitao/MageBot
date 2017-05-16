@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using BlueSheep.Protocol;
-
-
     public class ExchangeAcceptMessage : Message
     {
         
-        public const int ProtocolId = 5508;
+        protected override int ProtocolId { get; set; } = 5508;
         
         public override int MessageID
         {

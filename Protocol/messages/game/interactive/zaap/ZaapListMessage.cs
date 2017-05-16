@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Interactive.Zaap
     public class ZaapListMessage : TeleportDestinationsListMessage
     {
         
-        public const int ProtocolId = 1604;
+        protected override int ProtocolId { get; set; } = 1604;
         
         public override int MessageID
         {

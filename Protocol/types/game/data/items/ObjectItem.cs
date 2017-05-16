@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Data.Items
     public class ObjectItem : Item
     {
         
-        public const int ProtocolId = 37;
+        protected override int ProtocolId { get; set; } = 37;
         
         public override int TypeID
         {

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Actions.Fight
     public class GameActionFightDispellEffectMessage : GameActionFightDispellMessage
     {
         
-        public const int ProtocolId = 6113;
+        protected override int ProtocolId { get; set; } = 6113;
         
         public override int MessageID
         {

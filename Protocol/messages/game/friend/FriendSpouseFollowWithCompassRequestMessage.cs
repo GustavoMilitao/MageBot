@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Friend
 {
-    using BlueSheep.Protocol;
-
-
     public class FriendSpouseFollowWithCompassRequestMessage : Message
     {
         
-        public const int ProtocolId = 5606;
+        protected override int ProtocolId { get; set; } = 5606;
         
         public override int MessageID
         {

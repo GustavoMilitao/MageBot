@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Storage
 {
-    using BlueSheep.Protocol;
-
-
     public class StorageObjectRemoveMessage : Message
     {
         
-        public const int ProtocolId = 5648;
+        protected override int ProtocolId { get; set; } = 5648;
         
         public override int MessageID
         {

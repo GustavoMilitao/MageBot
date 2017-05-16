@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Connection.Register
 {
-    using BlueSheep.Protocol;
-
-
     public class AccountLinkRequiredMessage : Message
     {
         
-        public const int ProtocolId = 6607;
+        protected override int ProtocolId { get; set; } = 6607;
         
         public override int MessageID
         {

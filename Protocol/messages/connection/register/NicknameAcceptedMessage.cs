@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Connection.Register
 {
-    using BlueSheep.Protocol;
-
-
     public class NicknameAcceptedMessage : Message
     {
         
-        public const int ProtocolId = 5641;
+        protected override int ProtocolId { get; set; } = 5641;
         
         public override int MessageID
         {

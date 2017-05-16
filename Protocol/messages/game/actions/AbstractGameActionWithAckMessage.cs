@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Actions
     public class AbstractGameActionWithAckMessage : AbstractGameActionMessage
     {
         
-        public const int ProtocolId = 1001;
+        protected override int ProtocolId { get; set; } = 1001;
         
         public override int MessageID
         {

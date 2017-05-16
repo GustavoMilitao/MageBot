@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party
 {
-    using BlueSheep.Protocol;
-
-
     public class DungeonPartyFinderRegisterErrorMessage : Message
     {
         
-        public const int ProtocolId = 6243;
+        protected override int ProtocolId { get; set; } = 6243;
         
         public override int MessageID
         {

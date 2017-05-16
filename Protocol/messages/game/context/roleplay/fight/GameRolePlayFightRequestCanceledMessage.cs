@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight
 {
-    using BlueSheep.Protocol;
-
-
     public class GameRolePlayFightRequestCanceledMessage : Message
     {
         
-        public const int ProtocolId = 5822;
+        protected override int ProtocolId { get; set; } = 5822;
         
         public override int MessageID
         {

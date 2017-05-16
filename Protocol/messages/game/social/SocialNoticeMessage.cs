@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Social
 {
-    using BlueSheep.Protocol;
-
-
     public class SocialNoticeMessage : Message
     {
         
-        public const int ProtocolId = 6688;
+        protected override int ProtocolId { get; set; } = 6688;
         
         public override int MessageID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Job
 {
-    using BlueSheep.Protocol;
-
-
     public class JobAllowMultiCraftRequestMessage : Message
     {
         
-        public const int ProtocolId = 5748;
+        protected override int ProtocolId { get; set; } = 5748;
         
         public override int MessageID
         {

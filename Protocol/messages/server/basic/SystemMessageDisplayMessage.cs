@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Server.Basic
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class SystemMessageDisplayMessage : Message
     {
         
-        public const int ProtocolId = 189;
+        protected override int ProtocolId { get; set; } = 189;
         
         public override int MessageID
         {

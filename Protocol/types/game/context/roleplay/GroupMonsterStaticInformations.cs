@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
     public class GroupMonsterStaticInformations : NetworkType
     {
         
-        public const int ProtocolId = 140;
+        protected override int ProtocolId { get; set; } = 140;
         
         public override int TypeID
         {

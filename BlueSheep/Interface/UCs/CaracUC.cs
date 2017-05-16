@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using BlueSheep.Util.Text.Log;
-using BlueSheep.Common.Data.D2o;
 using System.Collections;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Stats;
 
 namespace BlueSheep.Interface.UCs
 {
@@ -80,6 +77,11 @@ namespace BlueSheep.Interface.UCs
                 
 
         }
+
+        public void DecreaseAvailablePoints(int n)
+        {
+            AvailabPtLb.Text = Convert.ToString(Convert.ToInt32(AvailabPtLb.Text) - n);
+        }
         #endregion
 
         #region Interface Methods
@@ -128,11 +130,11 @@ namespace BlueSheep.Interface.UCs
 
         public int GetBoost(int statId)
         {
-            DataClass d = GameData.GetDataObject(D2oFileEnum.Breeds, account.CharacterBaseInformations.Breed);
+            DataClass d = GameData.GetDataObject(D2oFileEnum.Breeds, (int)account.CharacterBaseInformations.Breed);
             switch (statId)
             {
                 case 10:
-                    ArrayList o = (ArrayList)d.Fields["statsPointsForStrength"];
+                    ArrayList o =(ArrayList)d.Fields["statsPointsForStrength"];
                     break;
                 case 11:
                     break;

@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Common.Data.DataCenter
+﻿namespace DataFiles.Data.DataCenter
 {
     public interface IDataCenter
     {

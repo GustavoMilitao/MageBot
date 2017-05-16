@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Data.Items.Effects
     public class ObjectEffectMinMax : ObjectEffect
     {
         
-        public const int ProtocolId = 82;
+        protected override int ProtocolId { get; set; } = 82;
         
         public override int TypeID
         {

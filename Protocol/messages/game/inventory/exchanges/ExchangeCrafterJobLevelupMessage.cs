@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using BlueSheep.Protocol;
-
-
     public class ExchangeCrafterJobLevelupMessage : Message
     {
         
-        public const int ProtocolId = 6598;
+        protected override int ProtocolId { get; set; } = 6598;
         
         public override int MessageID
         {

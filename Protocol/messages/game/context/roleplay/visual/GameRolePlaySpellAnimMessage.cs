@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Visual
 {
-    using BlueSheep.Protocol;
-
-
     public class GameRolePlaySpellAnimMessage : Message
     {
         
-        public const int ProtocolId = 6114;
+        protected override int ProtocolId { get; set; } = 6114;
         
         public override int MessageID
         {

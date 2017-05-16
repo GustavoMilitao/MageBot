@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Character.Characteristic
     public class CharacterBaseCharacteristic : NetworkType
     {
         
-        public const int ProtocolId = 4;
+        protected override int ProtocolId { get; set; } = 4;
         
         public override int TypeID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Authorized
 {
-    using BlueSheep.Protocol;
-
-
     public class AdminCommandMessage : Message
     {
-        
-        public const int ProtocolId = 76;
+
+        protected override int ProtocolId { get; set; } = 76;
         
         public override int MessageID
         {

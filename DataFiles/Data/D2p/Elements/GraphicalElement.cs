@@ -1,7 +1,7 @@
 ﻿using BlueSheep.Util.IO;
 using System;
 
-namespace BlueSheep.Data.D2p.Elements
+namespace DataFiles.Data.D2p.Elements
 {
     public class GraphicalElement : BasicElement
     {

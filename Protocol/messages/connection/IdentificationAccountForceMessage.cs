@@ -14,7 +14,7 @@ namespace BlueSheep.Protocol.Messages.Connection
     public class IdentificationAccountForceMessage : IdentificationMessage
     {
         
-        public const int ProtocolId = 6119;
+        protected override int ProtocolId { get; set; } = 6119;
         
         public override int MessageID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Delay
 {
-    using BlueSheep.Protocol;
-
-
     public class GameRolePlayDelayedActionFinishedMessage : Message
     {
         
-        public const int ProtocolId = 6150;
+        protected override int ProtocolId { get; set; } = 6150;
         
         public override int MessageID
         {

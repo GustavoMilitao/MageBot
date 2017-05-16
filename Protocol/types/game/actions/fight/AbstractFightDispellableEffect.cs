@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Actions.Fight
     public class AbstractFightDispellableEffect : NetworkType
     {
         
-        public const int ProtocolId = 206;
+        protected override int ProtocolId { get; set; } = 206;
         
         public override int TypeID
         {

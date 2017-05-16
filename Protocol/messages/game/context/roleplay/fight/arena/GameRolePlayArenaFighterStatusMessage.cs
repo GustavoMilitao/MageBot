@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
 {
-    using BlueSheep.Protocol;
-
-
     public class GameRolePlayArenaFighterStatusMessage : Message
     {
         
-        public const int ProtocolId = 6281;
+        protected override int ProtocolId { get; set; } = 6281;
         
         public override int MessageID
         {

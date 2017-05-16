@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Mount
     public class UpdateMountBoost : NetworkType
     {
         
-        public const int ProtocolId = 356;
+        protected override int ProtocolId { get; set; } = 356;
         
         public override int TypeID
         {

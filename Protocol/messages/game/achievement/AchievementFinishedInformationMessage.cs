@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Achievement
     public class AchievementFinishedInformationMessage : AchievementFinishedMessage
     {
         
-        public const int ProtocolId = 6381;
+        protected override int ProtocolId { get; set; } = 6381;
         
         public override int MessageID
         {

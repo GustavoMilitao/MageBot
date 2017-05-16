@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Fight.Challenge
 {
-    using BlueSheep.Protocol;
-
-
     public class ChallengeDungeonStackedBonusMessage : Message
     {
         
-        public const int ProtocolId = 6151;
+        protected override int ProtocolId { get; set; } = 6151;
         
         public override int MessageID
         {

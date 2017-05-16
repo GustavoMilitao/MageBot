@@ -1,4 +1,4 @@
-﻿using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using BlueSheep.Protocol.Types.Game.Context.Roleplay;
 using System;
 using System.Collections;
@@ -58,18 +58,18 @@ namespace BlueSheep.Core.Monsters
                 ArrayList monsterGrades2 = (ArrayList)monsterGrades;
                 DataClass monsterGradeData = (DataClass)monsterGrades2[Convert.ToInt32(monster.Grade) - 1];
                 if (withLevels)
-                    monstersname.Add(BlueSheep.Common.Data.I18N.GetText((int)monsterData.Fields["nameId"]) + "(" + monsterGradeData.Fields["level"] + ")");
+                    monstersname.Add(DataFiles.Data.I18n.I18N.GetText((int)monsterData.Fields["nameId"]) + "(" + monsterGradeData.Fields["level"] + ")");
                 else
-                    monstersname.Add(BlueSheep.Common.Data.I18N.GetText((int)monsterData.Fields["nameId"]));
+                    monstersname.Add(DataFiles.Data.I18n.I18N.GetText((int)monsterData.Fields["nameId"]));
             }
             DataClass mainmonsterData = GameData.GetDataObject(D2oFileEnum.Monsters, m_staticInfos.MainCreatureLightInfos.CreatureGenericId);
             object mainmonsterGrades = mainmonsterData.Fields["grades"];
             ArrayList mainmonsterGrades2 = (ArrayList)mainmonsterGrades;
             DataClass mainmonsterGradeData = (DataClass)mainmonsterGrades2[Convert.ToInt32(m_staticInfos.MainCreatureLightInfos.Grade) - 1];
             if (withLevels)
-                monstersname.Add(BlueSheep.Common.Data.I18N.GetText((int)mainmonsterData.Fields["nameId"]) + "(" + mainmonsterGradeData.Fields["level"] + ")");
+                monstersname.Add(DataFiles.Data.I18n.I18N.GetText((int)mainmonsterData.Fields["nameId"]) + "(" + mainmonsterGradeData.Fields["level"] + ")");
             else
-                monstersname.Add(BlueSheep.Common.Data.I18N.GetText((int)mainmonsterData.Fields["nameId"]));
+                monstersname.Add(DataFiles.Data.I18n.I18N.GetText((int)mainmonsterData.Fields["nameId"]));
 
             string names = "";
             foreach (string item in monstersname)
@@ -88,10 +88,10 @@ namespace BlueSheep.Core.Monsters
             foreach (MonsterInGroupInformations monster in m_staticInfos.Underlings)
             {
                 DataClass monsterData = GameData.GetDataObject(D2oFileEnum.Monsters, monster.CreatureGenericId);
-                monstersname.Add(BlueSheep.Common.Data.I18N.GetText((int)monsterData.Fields["nameId"]));
+                monstersname.Add(DataFiles.Data.I18n.I18N.GetText((int)monsterData.Fields["nameId"]));
             }
             DataClass mainmonsterData = GameData.GetDataObject(D2oFileEnum.Monsters, m_staticInfos.MainCreatureLightInfos.CreatureGenericId);
-            monstersname.Add(BlueSheep.Common.Data.I18N.GetText((int)mainmonsterData.Fields["nameId"]));
+            monstersname.Add(DataFiles.Data.I18n.I18N.GetText((int)mainmonsterData.Fields["nameId"]));
             return monstersname;
         }
                     

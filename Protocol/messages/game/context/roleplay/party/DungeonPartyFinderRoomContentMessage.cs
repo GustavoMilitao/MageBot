@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party
 {
     using BlueSheep.Protocol.Types.Game.Context.Roleplay.Party;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class DungeonPartyFinderRoomContentMessage : Message
     {
         
-        public const int ProtocolId = 6247;
+        protected override int ProtocolId { get; set; } = 6247;
         
         public override int MessageID
         {

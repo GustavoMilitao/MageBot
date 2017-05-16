@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Updater.Parts
 {
     using BlueSheep.Protocol.Types.Updater;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class PartsListMessage : Message
     {
         
-        public const int ProtocolId = 1502;
+        protected override int ProtocolId { get; set; } = 1502;
         
         public override int MessageID
         {

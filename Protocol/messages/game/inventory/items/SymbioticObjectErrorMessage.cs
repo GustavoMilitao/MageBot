@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
     public class SymbioticObjectErrorMessage : ObjectErrorMessage
     {
         
-        public const int ProtocolId = 6526;
+        protected override int ProtocolId { get; set; } = 6526;
         
         public override int MessageID
         {

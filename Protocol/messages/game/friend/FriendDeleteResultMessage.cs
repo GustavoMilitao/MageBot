@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Friend
 {
-    using BlueSheep.Protocol;
-
-
     public class FriendDeleteResultMessage : Message
     {
         
-        public const int ProtocolId = 5601;
+        protected override int ProtocolId { get; set; } = 5601;
         
         public override int MessageID
         {

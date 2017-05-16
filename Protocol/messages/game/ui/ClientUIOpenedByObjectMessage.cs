@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Ui
     public class ClientUIOpenedByObjectMessage : ClientUIOpenedMessage
     {
         
-        public const int ProtocolId = 6463;
+        protected override int ProtocolId { get; set; } = 6463;
         
         public override int MessageID
         {

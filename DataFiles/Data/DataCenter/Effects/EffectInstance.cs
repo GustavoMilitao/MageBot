@@ -1,5 +1,5 @@
 ﻿using System;
-namespace BlueSheep.Common.Data.DataCenter.Effects
+namespace DataFiles.Data.DataCenter.Effects
 {
     class EffectInstance : IDataCenter
     {

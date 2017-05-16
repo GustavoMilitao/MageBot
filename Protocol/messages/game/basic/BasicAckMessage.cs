@@ -3,7 +3,7 @@ namespace BlueSheep.Protocol.Messages.Game.Basic
 {
     public class BasicAckMessage : Message
     {
-        public const int ProtocolId = 6362;
+        protected override int ProtocolId { get; set; } = 6362;
         public override int MessageID { get { return ProtocolId; } }
 
         public uint Seq;

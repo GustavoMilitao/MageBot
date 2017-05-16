@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Job
 {
-    using BlueSheep.Protocol;
-
-
     public class JobUnlearntMessage : Message
     {
         
-        public const int ProtocolId = 5657;
+        protected override int ProtocolId { get; set; } = 5657;
         
         public override int MessageID
         {

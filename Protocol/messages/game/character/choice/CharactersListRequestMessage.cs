@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Game.Character.Choice
 {
     public class CharactersListRequestMessage : Message
     {
-        public const int ProtocolId = 150;
+        protected override int ProtocolId { get; set; } = 150;
         public override int MessageID { get { return ProtocolId; } }
 
         public CharactersListRequestMessage() { }

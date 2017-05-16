@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Job
     public class JobExperienceOtherPlayerUpdateMessage : JobExperienceUpdateMessage
     {
         
-        public const int ProtocolId = 6599;
+        protected override int ProtocolId { get; set; } = 6599;
         
         public override int MessageID
         {

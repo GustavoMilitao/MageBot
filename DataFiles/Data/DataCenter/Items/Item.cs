@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Common.Data.DataCenter.Items
+﻿namespace DataFiles.Data.DataCenter.Items
 {
    public  class Item : IDataCenter
     {

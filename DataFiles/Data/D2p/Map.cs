@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BlueSheep.Util.IO;
 
-namespace BlueSheep.Data.D2p
+namespace DataFiles.Data.D2p
 {
     public class Map
     {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Interactive.Zaap
 {
-    using BlueSheep.Protocol;
-
-
     public class ZaapRespawnUpdatedMessage : Message
     {
         
-        public const int ProtocolId = 6571;
+        protected override int ProtocolId { get; set; } = 6571;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.House
     public class AccountHouseInformations : HouseInformations
     {
         
-        public const int ProtocolId = 390;
+        protected override int ProtocolId { get; set; } = 390;
         
         public override int TypeID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Approach
 {
-    using BlueSheep.Protocol;
-
-
     public class AlreadyConnectedMessage : Message
     {
         
-        public const int ProtocolId = 109;
+        protected override int ProtocolId { get; set; } = 109;
         
         public override int MessageID
         {

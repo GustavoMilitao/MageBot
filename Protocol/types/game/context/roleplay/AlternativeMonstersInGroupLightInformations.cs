@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
     public class AlternativeMonstersInGroupLightInformations : NetworkType
     {
         
-        public const int ProtocolId = 394;
+        protected override int ProtocolId { get; set; } = 394;
         
         public override int TypeID
         {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using BlueSheep.Util.IO;
 
-namespace BlueSheep.Data.D2p
+namespace DataFiles.Data.D2p
 {
     internal sealed class D2PFileDlm
     {

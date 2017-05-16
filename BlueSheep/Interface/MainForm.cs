@@ -1,8 +1,8 @@
-﻿using BlueSheep.Common.Data;
-using BlueSheep.Common.Data.D2o;
-using BlueSheep.Data.D2p;
-using BlueSheep.Engine.Constants;
-using BlueSheep.Util.I18n.Strings;
+﻿using BlueSheep.Util.I18n.Strings;
+using Core.Engine.Constants;
+using DataFiles.Data.D2o;
+using DataFiles.Data.D2p;
+using DataFiles.Data.I18n;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

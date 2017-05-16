@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Initialization
 {
     using BlueSheep.Protocol.Types.Game.Character.Restriction;
-    using BlueSheep.Protocol;
 
 
     public class SetCharacterRestrictionsMessage : Message
     {
         
-        public const int ProtocolId = 170;
+        protected override int ProtocolId { get; set; } = 170;
         
         public override int MessageID
         {

@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Character.Characteristic
     public class CharacterSpellModification : NetworkType
     {
         
-        public const int ProtocolId = 215;
+        protected override int ProtocolId { get; set; } = 215;
         
         public override int TypeID
         {

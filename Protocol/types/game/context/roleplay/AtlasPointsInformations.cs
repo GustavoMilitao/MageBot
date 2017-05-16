@@ -18,7 +18,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
     public class AtlasPointsInformations : NetworkType
     {
         
-        public const int ProtocolId = 175;
+        protected override int ProtocolId { get; set; } = 175;
         
         public override int TypeID
         {

@@ -13,14 +13,13 @@ namespace BlueSheep.Protocol.Messages.Game.Basic
     using BlueSheep.Protocol.Types.Game.Social;
     using BlueSheep.Protocol;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
-	using BlueSheep.Protocol.Types;
+    using BlueSheep.Protocol.Types;
 
 
     public class BasicWhoIsMessage : Message
     {
         
-        public const int ProtocolId = 180;
+        protected override int ProtocolId { get; set; } = 180;
         
         public override int MessageID
         {

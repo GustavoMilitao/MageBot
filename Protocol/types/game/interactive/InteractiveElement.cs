@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Interactive
     public class InteractiveElement : NetworkType
     {
         
-        public const int ProtocolId = 80;
+        protected override int ProtocolId { get; set; } = 80;
         
         public override int TypeID
         {

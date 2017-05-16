@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Actions.Fight
     public class FightTemporaryBoostStateEffect : FightTemporaryBoostEffect
     {
         
-        public const int ProtocolId = 214;
+        protected override int ProtocolId { get; set; } = 214;
         
         public override int TypeID
         {

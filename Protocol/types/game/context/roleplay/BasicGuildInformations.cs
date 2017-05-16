@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
 {
     public class BasicGuildInformations : AbstractSocialGroupInfos
     {
-        public new const int ProtocolId = 365;
+        protected override int ProtocolId { get; set; } = 365;
         public override int TypeID { get { return ProtocolId; } }
 
         public uint GuildId;

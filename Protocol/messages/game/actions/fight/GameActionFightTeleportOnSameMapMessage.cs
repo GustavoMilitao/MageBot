@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Actions.Fight
     public class GameActionFightTeleportOnSameMapMessage : AbstractGameActionMessage
     {
         
-        public const int ProtocolId = 5528;
+        protected override int ProtocolId { get; set; } = 5528;
         
         public override int MessageID
         {

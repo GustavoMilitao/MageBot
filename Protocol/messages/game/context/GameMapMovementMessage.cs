@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class GameMapMovementMessage : Message
     {
         
-        public const int ProtocolId = 951;
+        protected override int ProtocolId { get; set; } = 951;
         
         public override int MessageID
         {

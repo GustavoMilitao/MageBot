@@ -13,7 +13,7 @@ namespace BlueSheep.Protocol.Types.Game.Friend
     public class IgnoredOnlineInformations : IgnoredInformations
     {
         
-        public const int ProtocolId = 105;
+        protected override int ProtocolId { get; set; } = 105;
         
         public override int TypeID
         {

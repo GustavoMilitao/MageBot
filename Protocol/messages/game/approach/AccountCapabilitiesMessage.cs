@@ -2,7 +2,7 @@
 {
     class AccountCapabilitiesMessage : Message
     {
-        public const int ProtocolId = 6216;
+        protected override int ProtocolId { get; set; } = 6216;
         public override int MessageID { get { return ProtocolId; } }
 
         public int AccountId;

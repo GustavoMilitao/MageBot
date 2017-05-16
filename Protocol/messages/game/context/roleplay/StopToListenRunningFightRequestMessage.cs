@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
 {
-    using BlueSheep.Protocol;
-
-
     public class StopToListenRunningFightRequestMessage : Message
     {
         
-        public const int ProtocolId = 6124;
+        protected override int ProtocolId { get; set; } = 6124;
         
         public override int MessageID
         {

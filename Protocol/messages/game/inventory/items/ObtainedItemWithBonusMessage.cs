@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
     public class ObtainedItemWithBonusMessage : ObtainedItemMessage
     {
         
-        public const int ProtocolId = 6520;
+        protected override int ProtocolId { get; set; } = 6520;
         
         public override int MessageID
         {

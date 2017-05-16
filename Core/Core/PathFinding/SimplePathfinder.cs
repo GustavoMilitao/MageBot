@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using BlueSheep.Core.Map;
 using BlueSheep.Core.Fight;
-using BlueSheep.Data.Pathfinding.Positions;
+using DataFiles.Data.Pathfinding.Positions;
 
-namespace BlueSheep.Data.Pathfinding
+namespace DataFiles.Data.Pathfinding
 {
     public class SimplePathfinder
     {

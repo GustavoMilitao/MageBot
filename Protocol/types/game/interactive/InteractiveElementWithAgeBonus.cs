@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Interactive
     public class InteractiveElementWithAgeBonus : InteractiveElement
     {
         
-        public const int ProtocolId = 398;
+        protected override int ProtocolId { get; set; } = 398;
         
         public override int TypeID
         {

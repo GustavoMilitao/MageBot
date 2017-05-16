@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Look
     public class IndexedEntityLook : NetworkType
     {
         
-        public const int ProtocolId = 405;
+        protected override int ProtocolId { get; set; } = 405;
         
         public override int TypeID
         {

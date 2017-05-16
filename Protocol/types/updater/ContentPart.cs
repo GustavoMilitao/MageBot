@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Updater
     public class ContentPart : NetworkType
     {
         
-        public const int ProtocolId = 350;
+        protected override int ProtocolId { get; set; } = 350;
         
         public override int TypeID
         {

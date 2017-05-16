@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using BlueSheep.Util.IO;
-using BlueSheep.Data.D2p.Elements;
+using DataFiles.Data.D2p.Elements;
 
-namespace BlueSheep.Data.D2p
+namespace DataFiles.Data.D2p
 {
     public class Cell
     {

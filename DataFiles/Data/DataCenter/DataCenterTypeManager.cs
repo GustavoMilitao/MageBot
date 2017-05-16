@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using BlueSheep.Common.Extensions;
 
-namespace BlueSheep.Common.Data.DataCenter
+namespace DataFiles.Data.DataCenter
 {
     class DataCenterTypeManager
     {

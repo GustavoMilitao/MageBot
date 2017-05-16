@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Job
 {
     using BlueSheep.Protocol.Types.Game.Context.Roleplay.Job;
-    using BlueSheep.Protocol;
 
 
     public class JobCrafterDirectoryAddMessage : Message
     {
         
-        public const int ProtocolId = 5651;
+        protected override int ProtocolId { get; set; } = 5651;
         
         public override int MessageID
         {

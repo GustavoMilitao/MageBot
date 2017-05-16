@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
 {
     using BlueSheep.Protocol.Types.Game.Data.Items;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class ExchangeTypesItemsExchangerDescriptionForUserMessage : Message
     {
         
-        public const int ProtocolId = 5752;
+        protected override int ProtocolId { get; set; } = 5752;
         
         public override int MessageID
         {

@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses
     public class HouseBuyResultMessage : Message
     {
         
-        public const int ProtocolId = 5735;
+        protected override int ProtocolId { get; set; } = 5735;
         
         public override int MessageID
         {

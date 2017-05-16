@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Paddock
 {
     using BlueSheep.Protocol.Types.Game.Paddock;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class PaddockToSellListMessage : Message
     {
         
-        public const int ProtocolId = 6138;
+        protected override int ProtocolId { get; set; } = 6138;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Npc
     public class TaxCollectorDialogQuestionExtendedMessage : TaxCollectorDialogQuestionBasicMessage
     {
         
-        public const int ProtocolId = 5615;
+        protected override int ProtocolId { get; set; } = 5615;
         
         public override int MessageID
         {

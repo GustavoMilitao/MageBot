@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Achievement
     public class AchievementStartedObjective : AchievementObjective
     {
         
-        public const int ProtocolId = 402;
+        protected override int ProtocolId { get; set; } = 402;
         
         public override int TypeID
         {

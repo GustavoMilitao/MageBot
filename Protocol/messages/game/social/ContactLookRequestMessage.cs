@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Social
 {
-    using BlueSheep.Protocol;
-
-
     public class ContactLookRequestMessage : Message
     {
         
-        public const int ProtocolId = 5932;
+        protected override int ProtocolId { get; set; } = 5932;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Fight
     public class GameFightFighterTaxCollectorLightInformations : GameFightFighterLightInformations
     {
         
-        public const int ProtocolId = 457;
+        protected override int ProtocolId { get; set; } = 457;
         
         public override int TypeID
         {

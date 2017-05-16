@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Fight
     public class GameFightResumeSlaveInfo : NetworkType
     {
         
-        public const int ProtocolId = 364;
+        protected override int ProtocolId { get; set; } = 364;
         
         public override int TypeID
         {

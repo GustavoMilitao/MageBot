@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Common.Basic
     public class StatisticDataBoolean : StatisticData
     {
         
-        public const int ProtocolId = 482;
+        protected override int ProtocolId { get; set; } = 482;
         
         public override int TypeID
         {

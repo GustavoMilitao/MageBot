@@ -1,5 +1,5 @@
-﻿using BlueSheep.Common.Data;
-using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data;
+using DataFiles.Data.D2o;
 using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Game.Basic;
 using BlueSheep.Protocol.Messages.Game.Chat;
@@ -18,14 +18,12 @@ using BlueSheep.Protocol.Messages.Game.Moderation;
 using BlueSheep.Protocol.Messages.Server.Basic;
 using BlueSheep.Protocol.Types.Game.Context.Roleplay;
 using BlueSheep.Protocol.Types.Game.Interactive;
-using BlueSheep.Data.Pathfinding;
-using BlueSheep.Data.Pathfinding.Positions;
+using DataFiles.Data.Pathfinding;
+using DataFiles.Data.Pathfinding.Positions;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Protocol.Messages;
 using BlueSheep.Util.Text.Log;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace BlueSheep.Engine.Handlers.Context
@@ -142,7 +140,7 @@ namespace BlueSheep.Engine.Handlers.Context
                     //account.Log(new ErrorTextInformation("Combat perdu"), 0);
                     if (account.Fight != null)
                     {
-                        account.FightData.winLoseDic["Perdu"]++;
+                        account.FightData.WinLoseDic["Perdu"]++;
                         //account.ActualizeFightStats(account.FightData.winLoseDic, account.FightData.xpWon);
                         // TODO Militão: Populate the new interface
                     }
@@ -152,7 +150,7 @@ namespace BlueSheep.Engine.Handlers.Context
 
 
             DataClass data = GameData.GetDataObject(D2oFileEnum.InfoMessages, msg.MsgType * 10000 + msg.MsgId);
-            string text = I18N.GetText((int)data.Fields["textId"]);
+            string text = DataFiles.Data.I18n.I18N.GetText((int)data.Fields["textId"]);
             for (int i = 0; i < msg.Parameters.Count; i++)
             {
                 var parameter = msg.Parameters[i];
@@ -211,20 +209,20 @@ namespace BlueSheep.Engine.Handlers.Context
         //        if (e.Id == account.CharacterBaseInformations.id)
         //            Character = e;
         //    }
-        //    int mapChangeData = ((BlueSheep.Data.D2p.Map)account.Map.Data).Cells[Character.CellId].MapChangeData;
+        //    int mapChangeData = ((DataFiles.Data.D2p.Map)account.Map.Data).Cells[Character.CellId].MapChangeData;
         //    if (mapChangeData != 0)
         //    {
         //        int neighbourId = 0;
         //        if (neighbourId == -2)
         //        {
         //            if ((mapChangeData & 64) > 0)
-        //                neighbourId = ((BlueSheep.Data.D2p.Map)account.Map.Data).TopNeighbourId;
+        //                neighbourId = ((DataFiles.Data.D2p.Map)account.Map.Data).TopNeighbourId;
         //            if ((mapChangeData & 16) > 0)
-        //                neighbourId = ((BlueSheep.Data.D2p.Map)account.Map.Data).LeftNeighbourId;
+        //                neighbourId = ((DataFiles.Data.D2p.Map)account.Map.Data).LeftNeighbourId;
         //            if ((mapChangeData & 4) > 0)
-        //                neighbourId = ((BlueSheep.Data.D2p.Map)account.Map.Data).BottomNeighbourId;
+        //                neighbourId = ((DataFiles.Data.D2p.Map)account.Map.Data).BottomNeighbourId;
         //            if ((mapChangeData & 1) > 0)
-        //                neighbourId = ((BlueSheep.Data.D2p.Map)account.Map.Data).RightNeighbourId;
+        //                neighbourId = ((DataFiles.Data.D2p.Map)account.Map.Data).RightNeighbourId;
         //        }
         //        if (neighbourId >= 0)
         //            account.Map.LaunchChangeMap(neighbourId);

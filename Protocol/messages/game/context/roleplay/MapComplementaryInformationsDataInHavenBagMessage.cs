@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
     public class MapComplementaryInformationsDataInHavenBagMessage : MapComplementaryInformationsDataMessage
     {
         
-        public const int ProtocolId = 6622;
+        protected override int ProtocolId { get; set; } = 6622;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Character.Stats
     public class CharacterLevelUpInformationMessage : CharacterLevelUpMessage
     {
         
-        public const int ProtocolId = 6076;
+        protected override int ProtocolId { get; set; } = 6076;
         
         public override int MessageID
         {

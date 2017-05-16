@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Actions.Fight
     public class GameActionFightSpellImmunityMessage : AbstractGameActionMessage
     {
         
-        public const int ProtocolId = 6221;
+        protected override int ProtocolId { get; set; } = 6221;
         
         public override int MessageID
         {

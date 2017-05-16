@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party
     public class PartyMemberEjectedMessage : PartyMemberRemoveMessage
     {
         
-        public const int ProtocolId = 6252;
+        protected override int ProtocolId { get; set; } = 6252;
         
         public override int MessageID
         {

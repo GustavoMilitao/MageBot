@@ -12,14 +12,13 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Quest
 {
     using BlueSheep.Protocol.Types.Game.Context.Roleplay.Quest;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
-	using BlueSheep.Protocol.Types;
+    using BlueSheep.Protocol.Types;
 
 
     public class QuestListMessage : Message
     {
         
-        public const int ProtocolId = 5626;
+        protected override int ProtocolId { get; set; } = 5626;
         
         public override int MessageID
         {

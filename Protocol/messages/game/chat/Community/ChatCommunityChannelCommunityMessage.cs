@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Chat.Community
 {
-    using BlueSheep.Protocol;
-
-
     public class ChatCommunityChannelCommunityMessage : Message
     {
         
-        public const int ProtocolId = 6730;
+        protected override int ProtocolId { get; set; } = 6730;
         
         public override int MessageID
         {

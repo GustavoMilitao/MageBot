@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Game.Basic
 {
     public class BasicTimeMessage : Message
     {
-        public const int ProtocolId = 175;
+        protected override int ProtocolId { get; set; } = 175;
         public override int MessageID { get { return ProtocolId; } }
 
         public double Timestamp;

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Script
 {
-    using BlueSheep.Protocol;
-
-
     public class CinematicMessage : Message
     {
         
-        public const int ProtocolId = 6053;
+        protected override int ProtocolId { get; set; } = 6053;
         
         public override int MessageID
         {

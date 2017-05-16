@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
     public class GuildInAllianceInformations : GuildInformations
     {
         
-        public const int ProtocolId = 420;
+        protected override int ProtocolId { get; set; } = 420;
         
         public override int TypeID
         {

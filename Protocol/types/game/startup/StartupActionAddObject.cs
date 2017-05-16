@@ -18,7 +18,7 @@ namespace BlueSheep.Protocol.Types.Game.Startup
     public class StartupActionAddObject : NetworkType
     {
         
-        public const int ProtocolId = 52;
+        protected override int ProtocolId { get; set; } = 52;
         
         public override int TypeID
         {

@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Game.Approach
 {
     public class HelloGameMessage : Message
     {
-        public const int ProtocolId = 101;
+        protected override int ProtocolId { get; set; } = 101;
         public override int MessageID { get { return ProtocolId; } }
 
         public HelloGameMessage() { }

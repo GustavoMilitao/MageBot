@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Pvp
 {
-    using BlueSheep.Protocol;
-
-
     public class AlignmentRankUpdateMessage : Message
     {
         
-        public const int ProtocolId = 6058;
+        protected override int ProtocolId { get; set; } = 6058;
         
         public override int MessageID
         {

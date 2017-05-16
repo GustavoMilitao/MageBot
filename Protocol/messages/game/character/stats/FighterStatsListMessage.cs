@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Character.Stats
 {
     using BlueSheep.Protocol.Types.Game.Character.Characteristic;
-    using BlueSheep.Protocol;
 
 
     public class FighterStatsListMessage : Message
     {
         
-        public const int ProtocolId = 6322;
+        protected override int ProtocolId { get; set; } = 6322;
         
         public override int MessageID
         {

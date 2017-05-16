@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Lockable
 {
-    using BlueSheep.Protocol;
-
-
     public class LockableUseCodeMessage : Message
     {
         
-        public const int ProtocolId = 5667;
+        protected override int ProtocolId { get; set; } = 5667;
         
         public override int MessageID
         {

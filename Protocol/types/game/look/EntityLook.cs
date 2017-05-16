@@ -5,7 +5,7 @@ namespace BlueSheep.Protocol.Types.Game.Look
 {
     public class EntityLook : NetworkType
     {
-        public const int ProtocolId = 55;
+        protected override int ProtocolId { get; set; } = 55;
         public override int TypeID { get { return ProtocolId; } }
 
         public ushort BonesId { get; set; }

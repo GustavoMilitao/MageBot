@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Data.Pathfinding
+﻿namespace DataFiles.Data.Pathfinding
 {
     public class OpenSquare
     {

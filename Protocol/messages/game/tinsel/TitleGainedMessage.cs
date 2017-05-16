@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Tinsel
 {
-    using BlueSheep.Protocol;
-
-
     public class TitleGainedMessage : Message
     {
         
-        public const int ProtocolId = 6364;
+        protected override int ProtocolId { get; set; } = 6364;
         
         public override int MessageID
         {

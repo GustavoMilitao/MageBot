@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Dare
 {
-    using BlueSheep.Protocol;
-
-
     public class DareSubscribeRequestMessage : Message
     {
         
-        public const int ProtocolId = 6666;
+        protected override int ProtocolId { get; set; } = 6666;
         
         public override int MessageID
         {

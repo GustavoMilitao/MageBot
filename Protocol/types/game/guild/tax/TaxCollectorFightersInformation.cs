@@ -18,7 +18,7 @@ namespace BlueSheep.Protocol.Types.Game.Guild.Tax
     public class TaxCollectorFightersInformation : NetworkType
     {
         
-        public const int ProtocolId = 169;
+        protected override int ProtocolId { get; set; } = 169;
         
         public override int TypeID
         {

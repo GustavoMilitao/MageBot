@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Emote
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class EmoteListMessage : Message
     {
         
-        public const int ProtocolId = 5689;
+        protected override int ProtocolId { get; set; } = 5689;
         
         public override int MessageID
         {

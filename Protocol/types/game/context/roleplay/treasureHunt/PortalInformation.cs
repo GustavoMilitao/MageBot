@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.TreasureHunt
     public class PortalInformation : NetworkType
     {
         
-        public const int ProtocolId = 466;
+        protected override int ProtocolId { get; set; } = 466;
         
         public override int TypeID
         {

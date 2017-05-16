@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
 {
-    using BlueSheep.Protocol;
-
-
     public class TeleportOnSameMapMessage : Message
     {
         
-        public const int ProtocolId = 6048;
+        protected override int ProtocolId { get; set; } = 6048;
         
         public override int MessageID
         {

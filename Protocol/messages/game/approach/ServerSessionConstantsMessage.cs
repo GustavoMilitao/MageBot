@@ -6,7 +6,7 @@ namespace BlueSheep.Protocol.Messages.Game.Approach
 {
     class ServerSessionConstantsMessage : Message
     {
-        public const int ProtocolId = 6434;
+        protected override int ProtocolId { get; set; } = 6434;
         public override int MessageID { get { return ProtocolId; } }
 
         public List<ServerSessionConstant> Variables;

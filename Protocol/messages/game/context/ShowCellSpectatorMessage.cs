@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context
     public class ShowCellSpectatorMessage : ShowCellMessage
     {
         
-        public const int ProtocolId = 6158;
+        protected override int ProtocolId { get; set; } = 6158;
         
         public override int MessageID
         {

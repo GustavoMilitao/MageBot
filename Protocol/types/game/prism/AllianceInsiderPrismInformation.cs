@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Prism
     public class AllianceInsiderPrismInformation : PrismInformation
     {
         
-        public const int ProtocolId = 431;
+        protected override int ProtocolId { get; set; } = 431;
         
         public override int TypeID
         {

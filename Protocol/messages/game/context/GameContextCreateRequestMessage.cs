@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context
 {
     public class GameContextCreateRequestMessage : Message
     {
-        public const int ProtocolId = 250;
+        protected override int ProtocolId { get; set; } = 250;
         public override int MessageID { get { return ProtocolId; } }
 
         public GameContextCreateRequestMessage() { }

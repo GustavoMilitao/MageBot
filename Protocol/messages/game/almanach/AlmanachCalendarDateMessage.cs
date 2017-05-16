@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Almanach
 {
-    using BlueSheep.Protocol;
-
-
     public class AlmanachCalendarDateMessage : Message
     {
         
-        public const int ProtocolId = 6341;
+        protected override int ProtocolId { get; set; } = 6341;
         
         public override int MessageID
         {

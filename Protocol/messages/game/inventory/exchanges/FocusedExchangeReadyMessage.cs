@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
     public class FocusedExchangeReadyMessage : ExchangeReadyMessage
     {
         
-        public const int ProtocolId = 6701;
+        protected override int ProtocolId { get; set; } = 6701;
         
         public override int MessageID
         {

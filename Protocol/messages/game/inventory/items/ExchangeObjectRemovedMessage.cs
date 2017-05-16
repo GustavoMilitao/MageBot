@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
     public class ExchangeObjectRemovedMessage : ExchangeObjectMessage
     {
         
-        public const int ProtocolId = 5517;
+        protected override int ProtocolId { get; set; } = 5517;
         
         public override int MessageID
         {

@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
     public class InventoryContentAndPresetMessage : InventoryContentMessage
     {
         
-        public const int ProtocolId = 6162;
+        protected override int ProtocolId { get; set; } = 6162;
         
         public override int MessageID
         {

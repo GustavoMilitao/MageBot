@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Common.Data.DataCenter.Effects
+﻿namespace DataFiles.Data.DataCenter.Effects
 {
     class Effect : IDataCenter
     {

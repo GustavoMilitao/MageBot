@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Chat.Channel
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class EnabledChannelsMessage : Message
     {
         
-        public const int ProtocolId = 892;
+        protected override int ProtocolId { get; set; } = 892;
         
         public override int MessageID
         {

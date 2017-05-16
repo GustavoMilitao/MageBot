@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Paddock
     public class PaddockGuildedInformations : PaddockBuyableInformations
     {
         
-        public const int ProtocolId = 508;
+        protected override int ProtocolId { get; set; } = 508;
         
         public override int TypeID
         {

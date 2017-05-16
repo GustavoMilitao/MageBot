@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Lockable
     public class LockableStateUpdateStorageMessage : LockableStateUpdateAbstractMessage
     {
         
-        public const int ProtocolId = 5669;
+        protected override int ProtocolId { get; set; } = 5669;
         
         public override int MessageID
         {

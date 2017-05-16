@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Messages.Game.Character.Choice
     public class CharacterReplayWithRemodelRequestMessage : CharacterReplayRequestMessage
     {
         
-        public const int ProtocolId = 6551;
+        protected override int ProtocolId { get; set; } = 6551;
         
         public override int MessageID
         {

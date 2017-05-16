@@ -18,7 +18,7 @@ namespace BlueSheep.Protocol.Messages.Common.Basic
     public class BasicStatWithDataMessage : BasicStatMessage
     {
         
-        public const int ProtocolId = 6573;
+        protected override int ProtocolId { get; set; } = 6573;
         
         public override int MessageID
         {

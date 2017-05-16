@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Connection
 {
     public class ServerSelectionMessage : Message
     {
-        public const int ProtocolId = 40;
+        protected override int ProtocolId { get; set; } = 40;
         public override int MessageID { get { return ProtocolId; } }
 
         private ushort _serverId;

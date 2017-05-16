@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Fight
 {
-    using BlueSheep.Protocol;
-
-
     public class GameFightPlacementSwapPositionsErrorMessage : Message
     {
         
-        public const int ProtocolId = 6548;
+        protected override int ProtocolId { get; set; } = 6548;
         
         public override int MessageID
         {

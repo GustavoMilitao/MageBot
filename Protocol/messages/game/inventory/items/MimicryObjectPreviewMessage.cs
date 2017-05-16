@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
 {
     using BlueSheep.Protocol.Types.Game.Data.Items;
-    using BlueSheep.Protocol;
 
 
     public class MimicryObjectPreviewMessage : Message
     {
         
-        public const int ProtocolId = 6458;
+        protected override int ProtocolId { get; set; } = 6458;
         
         public override int MessageID
         {

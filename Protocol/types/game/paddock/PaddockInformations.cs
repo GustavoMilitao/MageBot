@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Paddock
     public class PaddockInformations : NetworkType
     {
         
-        public const int ProtocolId = 132;
+        protected override int ProtocolId { get; set; } = 132;
         
         public override int TypeID
         {

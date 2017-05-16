@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Startup
     public class StartupActionFinishedMessage : Message
     {
         
-        public const int ProtocolId = 1304;
+        protected override int ProtocolId { get; set; } = 1304;
         
         public override int MessageID
         {

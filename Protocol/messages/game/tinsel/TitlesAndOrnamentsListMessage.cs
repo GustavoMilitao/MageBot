@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Tinsel
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class TitlesAndOrnamentsListMessage : Message
     {
         
-        public const int ProtocolId = 6367;
+        protected override int ProtocolId { get; set; } = 6367;
         
         public override int MessageID
         {

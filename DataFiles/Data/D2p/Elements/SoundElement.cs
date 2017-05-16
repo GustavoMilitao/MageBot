@@ -1,6 +1,6 @@
 ﻿using BlueSheep.Util.IO;
 
-namespace BlueSheep.Data.D2p.Elements
+namespace DataFiles.Data.D2p.Elements
 {
     public class SoundElement : BasicElement
     {

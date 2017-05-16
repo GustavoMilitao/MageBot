@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Pvp
 {
-    using BlueSheep.Protocol;
-
-
     public class UpdateSelfAgressableStatusMessage : Message
     {
         
-        public const int ProtocolId = 6456;
+        protected override int ProtocolId { get; set; } = 6456;
         
         public override int MessageID
         {

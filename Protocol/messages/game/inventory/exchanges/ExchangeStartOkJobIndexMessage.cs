@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class ExchangeStartOkJobIndexMessage : Message
     {
         
-        public const int ProtocolId = 5819;
+        protected override int ProtocolId { get; set; } = 5819;
         
         public override int MessageID
         {

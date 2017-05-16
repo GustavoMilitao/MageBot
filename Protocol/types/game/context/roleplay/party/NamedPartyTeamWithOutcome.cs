@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Party
     public class NamedPartyTeamWithOutcome : NetworkType
     {
         
-        public const int ProtocolId = 470;
+        protected override int ProtocolId { get; set; } = 470;
         
         public override int TypeID
         {

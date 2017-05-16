@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace BlueSheep.Data.Pathfinding.Positions
+namespace DataFiles.Data.Pathfinding.Positions
 {
     public class MapPoint
     {

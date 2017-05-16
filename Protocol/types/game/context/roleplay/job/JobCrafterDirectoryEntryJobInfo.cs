@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Job
     public class JobCrafterDirectoryEntryJobInfo : NetworkType
     {
         
-        public const int ProtocolId = 195;
+        protected override int ProtocolId { get; set; } = 195;
         
         public override int TypeID
         {

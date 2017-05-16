@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Actions.Fight
     public class GameActionFightTackledMessage : AbstractGameActionMessage
     {
         
-        public const int ProtocolId = 1004;
+        protected override int ProtocolId { get; set; } = 1004;
         
         public override int MessageID
         {

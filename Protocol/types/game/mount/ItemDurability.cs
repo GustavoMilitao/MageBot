@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Mount
     public class ItemDurability : NetworkType
     {
         
-        public const int ProtocolId = 168;
+        protected override int ProtocolId { get; set; } = 168;
         
         public override int TypeID
         {

@@ -13,7 +13,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Party
     public class DungeonPartyFinderPlayer : NetworkType
     {
         
-        public const int ProtocolId = 373;
+        protected override int ProtocolId { get; set; } = 373;
         
         public override int TypeID
         {

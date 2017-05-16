@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Display
     public class DisplayNumericalValueWithAgeBonusMessage : DisplayNumericalValueMessage
     {
         
-        public const int ProtocolId = 6361;
+        protected override int ProtocolId { get; set; } = 6361;
         
         public override int MessageID
         {

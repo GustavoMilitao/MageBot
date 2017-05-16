@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Havenbag
 {
-    using BlueSheep.Protocol;
-
-
     public class EnterHavenBagRequestMessage : Message
     {
         
-        public const int ProtocolId = 6636;
+        protected override int ProtocolId { get; set; } = 6636;
         
         public override int MessageID
         {

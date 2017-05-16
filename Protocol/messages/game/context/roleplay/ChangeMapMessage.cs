@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
 {
-    using BlueSheep.Protocol;
-
-
     public class ChangeMapMessage : Message
     {
         
-        public const int ProtocolId = 221;
+        protected override int ProtocolId { get; set; } = 221;
         
         public override int MessageID
         {

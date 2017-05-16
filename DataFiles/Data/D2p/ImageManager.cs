@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 
-namespace BlueSheep.Data.D2p
+namespace DataFiles.Data.D2p
 {
     public class ImageManager
     {

@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Connection
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class MigratedServerListMessage : Message
     {
         
-        public const int ProtocolId = 6731;
+        protected override int ProtocolId { get; set; } = 6731;
         
         public override int MessageID
         {

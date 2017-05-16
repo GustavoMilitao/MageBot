@@ -11,14 +11,13 @@
 namespace BlueSheep.Protocol.Messages.Game.Character.Status
 {
     using BlueSheep.Protocol.Types.Game.Character.Status;
-    using BlueSheep.Protocol;
-	using BlueSheep.Protocol.Types;
+    using BlueSheep.Protocol.Types;
 
 
     public class PlayerStatusUpdateRequestMessage : Message
     {
         
-        public const int ProtocolId = 6387;
+        protected override int ProtocolId { get; set; } = 6387;
         
         public override int MessageID
         {

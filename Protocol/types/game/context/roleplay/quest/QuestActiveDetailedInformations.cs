@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Quest
     public class QuestActiveDetailedInformations : QuestActiveInformations
     {
         
-        public const int ProtocolId = 382;
+        protected override int ProtocolId { get; set; } = 382;
         
         public override int TypeID
         {

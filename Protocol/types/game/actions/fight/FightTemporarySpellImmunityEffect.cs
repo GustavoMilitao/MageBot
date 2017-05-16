@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Actions.Fight
     public class FightTemporarySpellImmunityEffect : AbstractFightDispellableEffect
     {
         
-        public const int ProtocolId = 366;
+        protected override int ProtocolId { get; set; } = 366;
         
         public override int TypeID
         {

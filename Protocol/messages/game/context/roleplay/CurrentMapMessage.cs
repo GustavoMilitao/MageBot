@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
 {
     public class CurrentMapMessage : Message
     {
-        public const int ProtocolId = 220;
+        protected override int ProtocolId { get; set; } = 220;
         public override int MessageID { get { return ProtocolId; } }
 
         public int MapId { get; set; }

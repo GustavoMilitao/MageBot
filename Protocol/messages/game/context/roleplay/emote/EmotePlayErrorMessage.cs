@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Emote
 {
-    using BlueSheep.Protocol;
-
-
     public class EmotePlayErrorMessage : Message
     {
         
-        public const int ProtocolId = 5688;
+        protected override int ProtocolId { get; set; } = 5688;
         
         public override int MessageID
         {

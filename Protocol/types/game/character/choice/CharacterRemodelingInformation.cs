@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Character.Choice
     public class CharacterRemodelingInformation : AbstractCharacterInformation
     {
         
-        public const int ProtocolId = 479;
+        protected override int ProtocolId { get; set; } = 479;
         
         public override int TypeID
         {

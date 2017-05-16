@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Util.Util.Enums.Internal
+﻿namespace Util.Util.Enums.Internal
 {
     public enum PotionEnum
     {

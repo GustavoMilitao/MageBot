@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Connection.Search
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class AcquaintanceServerListMessage : Message
     {
         
-        public const int ProtocolId = 6142;
+        protected override int ProtocolId { get; set; } = 6142;
         
         public override int MessageID
         {

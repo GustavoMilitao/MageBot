@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Achievement
 {
-    using BlueSheep.Protocol;
-
-
     public class AchievementDetailsRequestMessage : Message
     {
         
-        public const int ProtocolId = 6380;
+        protected override int ProtocolId { get; set; } = 6380;
         
         public override int MessageID
         {

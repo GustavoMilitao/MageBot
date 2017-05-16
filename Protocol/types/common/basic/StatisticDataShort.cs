@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Common.Basic
     public class StatisticDataShort : StatisticData
     {
         
-        public const int ProtocolId = 488;
+        protected override int ProtocolId { get; set; } = 488;
         
         public override int TypeID
         {

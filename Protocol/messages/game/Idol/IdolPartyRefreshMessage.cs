@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Idol
 {
     using BlueSheep.Protocol.Types.Game.Idol;
-    using BlueSheep.Protocol;
 
 
     public class IdolPartyRefreshMessage : Message
     {
         
-        public const int ProtocolId = 6583;
+        protected override int ProtocolId { get; set; } = 6583;
         
         public override int MessageID
         {

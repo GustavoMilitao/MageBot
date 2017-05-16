@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Common
 {
-    using BlueSheep.Protocol;
-
-
     public class NetworkDataContainerMessage : Message
     {
         
-        public const int ProtocolId = 2;
+        protected override int ProtocolId { get; set; } = 2;
         
         public override int MessageID
         {

@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Connection
 {
     public class IdentificationFailedMessage : Message
     {
-        public const int ProtocolId = 20;
+        protected override int ProtocolId { get; set; } = 20;
         public override int MessageID { get { return ProtocolId; } }
 
         public uint Reason = 99;

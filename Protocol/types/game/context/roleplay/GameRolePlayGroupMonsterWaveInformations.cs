@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
     public class GameRolePlayGroupMonsterWaveInformations : GameRolePlayGroupMonsterInformations
     {
         
-        public const int ProtocolId = 464;
+        protected override int ProtocolId { get; set; } = 464;
         
         public override int TypeID
         {

@@ -1,13 +1,8 @@
 ﻿using BlueSheep.Core.Account;
-using BlueSheep.Core.Inventory;
 using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Emote;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Util.Text.Log;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Core.Regen
 {

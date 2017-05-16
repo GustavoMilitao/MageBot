@@ -62,8 +62,8 @@ namespace BlueSheep.Interface
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1,
             this.AccountsBt,
+            this.toolStripSeparator1,
             this.GroupsBt,
             this.toolStripSeparator2,
             this.LanguageChoice});
@@ -77,7 +77,9 @@ namespace BlueSheep.Interface
             // 
             this.AccountsBt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AccountsBt.Name = "AccountsBt";
-            this.AccountsBt.Size = new System.Drawing.Size(23, 22);
+            this.AccountsBt.Size = new System.Drawing.Size(77, 22);
+            this.AccountsBt.Text = Strings.Accounts;
+            this.AccountsBt.ToolTipText = Strings.AccountManagement;
             this.AccountsBt.Click += new System.EventHandler(this.AccountsBt_Click);
             // 
             // toolStripSeparator1
@@ -89,7 +91,8 @@ namespace BlueSheep.Interface
             // 
             this.GroupsBt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.GroupsBt.Name = "GroupsBt";
-            this.GroupsBt.Size = new System.Drawing.Size(23, 22);
+            this.GroupsBt.Size = new System.Drawing.Size(65, 22);
+            this.GroupsBt.Text = Strings.Groups;
             this.GroupsBt.Click += new System.EventHandler(this.GroupsBt_Click);
             // 
             // toolStripSeparator2
@@ -114,11 +117,13 @@ namespace BlueSheep.Interface
             this.LanguageChoice.MaxDropDownItems = 2;
             this.LanguageChoice.Name = "LanguageChoice";
             this.LanguageChoice.Size = new System.Drawing.Size(140, 25);
+            this.LanguageChoice.Text = Strings.ChangeTheLanguage;
             this.LanguageChoice.SelectedIndexChanged += new System.EventHandler(this.LanguageChoice_SelectedTextChanged);
             // 
             // notifyIcon
             // 
             this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notifyIcon.BalloonTipText = Strings.BlueSheepIsNowMinimized;
             this.notifyIcon.BalloonTipTitle = "[Info]";
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "BlueSheep";

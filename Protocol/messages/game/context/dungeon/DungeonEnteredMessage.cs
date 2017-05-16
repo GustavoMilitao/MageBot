@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Dungeon
 {
-    using BlueSheep.Protocol;
-
-
     public class DungeonEnteredMessage : Message
     {
         
-        public const int ProtocolId = 6152;
+        protected override int ProtocolId { get; set; } = 6152;
         
         public override int MessageID
         {

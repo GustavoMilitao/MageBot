@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party
 {
-    using BlueSheep.Protocol;
-
-
     public class PartyInvitationRequestMessage : Message
     {
         
-        public const int ProtocolId = 5585;
+        protected override int ProtocolId { get; set; } = 5585;
         
         public override int MessageID
         {

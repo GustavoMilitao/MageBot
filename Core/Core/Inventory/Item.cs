@@ -1,7 +1,7 @@
-﻿using BlueSheep.Common.Data;
+﻿using DataFiles.Data;
 using System.Collections.Generic;
 using System.Linq;
-using BlueSheep.Common.Data.D2o;
+using DataFiles.Data.D2o;
 using BlueSheep.Protocol.Types.Game.Data.Items.Effects;
 
 namespace BlueSheep.Core.Inventory
@@ -19,17 +19,17 @@ namespace BlueSheep.Core.Inventory
 
         public string Description
         {
-            get { return I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, GID).Fields["descriptionId"]); }
+            get { return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, GID).Fields["descriptionId"]); }
         }
         public List<ObjectEffect> Effects { get; private set; }
         public int GID { get; private set; }
         public string Name
         {
-            get { return I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, GID).Fields["nameId"]); }
+            get { return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, GID).Fields["nameId"]); }
         }
         public string Type
         {
-            get { return I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.ItemTypes, typeId).Fields["nameId"]); }
+            get { return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.ItemTypes, typeId).Fields["nameId"]); }
         }
         public int typeId
         {

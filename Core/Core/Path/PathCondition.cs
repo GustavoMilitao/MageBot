@@ -54,7 +54,7 @@ namespace BlueSheep.Core.Path
                         default:
                             return false;
                     }
-                    return false;
+                    //return false;
                 case PathConditionEnum.Pods:
                     switch (m_operateur)
                     {
@@ -76,7 +76,7 @@ namespace BlueSheep.Core.Path
                         default:
                             return false;
                     }
-                    return false;
+                    //return false;
                 case PathConditionEnum.Alive:
                     switch (m_operateur)
                     {
@@ -111,7 +111,7 @@ namespace BlueSheep.Core.Path
                         default:
                             return false;
                     }
-                    return false;
+                    //return false;
 
 
             }

@@ -5,7 +5,7 @@ namespace BlueSheep.Protocol.Messages.Game.Basic
 {
     public class TextInformationMessage : Message
     {
-        public const int ProtocolId = 780;
+        protected override int ProtocolId { get; set; } = 780;
         public override int MessageID { get { return ProtocolId; } }
 
         public byte MsgType;

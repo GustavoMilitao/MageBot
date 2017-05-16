@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Interactive.Zaap
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class TeleportDestinationsListMessage : Message
     {
         
-        public const int ProtocolId = 5960;
+        protected override int ProtocolId { get; set; } = 5960;
         
         public override int MessageID
         {

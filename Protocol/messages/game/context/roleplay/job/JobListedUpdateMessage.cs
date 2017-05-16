@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Job
 {
-    using BlueSheep.Protocol;
-
-
     public class JobListedUpdateMessage : Message
     {
         
-        public const int ProtocolId = 6016;
+        protected override int ProtocolId { get; set; } = 6016;
         
         public override int MessageID
         {

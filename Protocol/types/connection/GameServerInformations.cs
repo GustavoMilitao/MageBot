@@ -2,7 +2,7 @@
 {
     public class GameServerInformations : NetworkType
     {
-        public const int ProtocolId = 25;
+        protected override int ProtocolId { get; set; } = 25;
         public override int TypeID { get { return ProtocolId; } }
 
         public ushort ObjectID { get; set; }

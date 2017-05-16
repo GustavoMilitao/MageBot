@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using BlueSheep.Util.Text.Log;
 
 namespace BlueSheep.Interface.UCs
 {
@@ -110,7 +109,7 @@ namespace BlueSheep.Interface.UCs
                 {
                     string[] parsed = ((string)elem).Split(',');
                     FloodContent = FloodContent.Replace("%name%", parsed[0]).Replace("%level%", parsed[1]);
-                    m_Account.Flood.SendPrivateTo(parsed[0], FloodContent);
+                    m_Account.Flood.SendPrivateTo((string)parsed[0], FloodContent);
                 }
                 catch (Exception)
                 {

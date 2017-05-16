@@ -15,14 +15,13 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
     using BlueSheep.Protocol.Types.Game.Interactive;
     using BlueSheep.Protocol.Types.Game.Context.Fight;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
-	using BlueSheep.Protocol.Types;
+    using BlueSheep.Protocol.Types;
 
 
     public class MapComplementaryInformationsDataMessage : Message
     {
         
-        public const int ProtocolId = 226;
+        protected override int ProtocolId { get; set; } = 226;
         
         public override int MessageID
         {

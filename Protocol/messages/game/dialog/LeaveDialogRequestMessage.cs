@@ -10,13 +10,11 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Dialog
 {
-    using BlueSheep.Protocol;
-
-
     public class LeaveDialogRequestMessage : Message
     {
+        public const int ProtocolID = 5501;
         
-        public const int ProtocolId = 5501;
+        protected override int ProtocolId { get; set; } = 5501;
         
         public override int MessageID
         {

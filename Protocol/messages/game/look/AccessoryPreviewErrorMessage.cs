@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Look
 {
-    using BlueSheep.Protocol;
-
-
     public class AccessoryPreviewErrorMessage : Message
     {
         
-        public const int ProtocolId = 6521;
+        protected override int ProtocolId { get; set; } = 6521;
         
         public override int MessageID
         {

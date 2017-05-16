@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Web.Krosmaster
 {
     using BlueSheep.Protocol.Types.Web.Krosmaster;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class KrosmasterInventoryMessage : Message
     {
         
-        public const int ProtocolId = 6350;
+        protected override int ProtocolId { get; set; } = 6350;
         
         public override int MessageID
         {

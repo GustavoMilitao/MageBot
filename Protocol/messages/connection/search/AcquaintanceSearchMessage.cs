@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Connection.Search
 {
-    using BlueSheep.Protocol;
-
-
     public class AcquaintanceSearchMessage : Message
     {
         
-        public const int ProtocolId = 6144;
+        protected override int ProtocolId { get; set; } = 6144;
         
         public override int MessageID
         {

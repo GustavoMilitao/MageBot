@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Notification
 {
-    using BlueSheep.Protocol;
-
-
     public class NotificationResetMessage : Message
     {
         
-        public const int ProtocolId = 6089;
+        protected override int ProtocolId { get; set; } = 6089;
         
         public override int MessageID
         {

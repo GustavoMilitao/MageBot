@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context
 {
-    using BlueSheep.Protocol;
-
-
     public class GameEntityDispositionErrorMessage : Message
     {
         
-        public const int ProtocolId = 5695;
+        protected override int ProtocolId { get; set; } = 5695;
         
         public override int MessageID
         {

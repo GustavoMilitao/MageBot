@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Web.Ankabox
 {
-    using BlueSheep.Protocol;
-
-
     public class MailStatusMessage : Message
     {
         
-        public const int ProtocolId = 6275;
+        protected override int ProtocolId { get; set; } = 6275;
         
         public override int MessageID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Connection
 {
-    using BlueSheep.Protocol;
-
-
     public class SelectedServerRefusedMessage : Message
     {
         
-        public const int ProtocolId = 41;
+        protected override int ProtocolId { get; set; } = 41;
         
         public override int MessageID
         {

@@ -2,7 +2,7 @@
 {
     public class CharacterMinimalInformations : CharacterBasicMinimalInformations
     {
-        public new const int ProtocolId = 110;
+        protected override int ProtocolId { get; set; } = 110;
         public override int TypeID { get { return ProtocolId; } }
 
         public byte Level { get; set; }

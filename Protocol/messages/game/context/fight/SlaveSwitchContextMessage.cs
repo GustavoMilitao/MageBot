@@ -14,14 +14,13 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Fight
     using BlueSheep.Protocol.Types.Game.Character.Characteristic;
     using BlueSheep.Protocol.Types.Game.Shortcut;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
-	using BlueSheep.Protocol.Types;
+    using BlueSheep.Protocol.Types;
 
 
     public class SlaveSwitchContextMessage : Message
     {
         
-        public const int ProtocolId = 6214;
+        protected override int ProtocolId { get; set; } = 6214;
         
         public override int MessageID
         {

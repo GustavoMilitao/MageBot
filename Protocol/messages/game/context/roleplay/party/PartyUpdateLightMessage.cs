@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party
     public class PartyUpdateLightMessage : AbstractPartyEventMessage
     {
         
-        public const int ProtocolId = 6054;
+        protected override int ProtocolId { get; set; } = 6054;
         
         public override int MessageID
         {

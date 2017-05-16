@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Authorized
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class ConsoleCommandsListMessage : Message
     {
         
-        public const int ProtocolId = 6127;
+        protected override int ProtocolId { get; set; } = 6127;
         
         public override int MessageID
         {

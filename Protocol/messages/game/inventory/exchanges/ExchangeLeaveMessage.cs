@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeLeaveMessage : LeaveDialogMessage
     {
         
-        public const int ProtocolId = 5628;
+        protected override int ProtocolId { get; set; } = 5628;
         
         public override int MessageID
         {

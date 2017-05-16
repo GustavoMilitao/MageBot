@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Types.Game.Character
 {
     public class CharacterMinimalAllianceInformations : CharacterMinimalPlusLookInformations
     {
-        public new const int ProtocolId = 444;
+        protected override int ProtocolId { get; set; } = 444;
         public override int TypeID { get { return ProtocolId; } }
 
         public BasicAllianceInformations Alliance { get; set; }

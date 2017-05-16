@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Objects
 {
-    using BlueSheep.Protocol;
-
-
     public class ObjectGroundAddedMessage : Message
     {
         
-        public const int ProtocolId = 3017;
+        protected override int ProtocolId { get; set; } = 3017;
         
         public override int MessageID
         {

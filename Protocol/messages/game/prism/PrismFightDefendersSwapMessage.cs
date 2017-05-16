@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Prism
 {
-    using BlueSheep.Protocol;
-
-
     public class PrismFightDefendersSwapMessage : Message
     {
         
-        public const int ProtocolId = 5902;
+        protected override int ProtocolId { get; set; } = 5902;
         
         public override int MessageID
         {

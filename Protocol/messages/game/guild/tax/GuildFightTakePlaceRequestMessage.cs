@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Guild.Tax
     public class GuildFightTakePlaceRequestMessage : GuildFightJoinRequestMessage
     {
         
-        public const int ProtocolId = 6235;
+        protected override int ProtocolId { get; set; } = 6235;
         
         public override int MessageID
         {

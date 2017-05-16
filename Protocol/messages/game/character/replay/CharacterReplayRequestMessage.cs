@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Character.Replay
 {
-    using BlueSheep.Protocol;
-
-
     public class CharacterReplayRequestMessage : Message
     {
         
-        public const int ProtocolId = 167;
+        protected override int ProtocolId { get; set; } = 167;
         
         public override int MessageID
         {

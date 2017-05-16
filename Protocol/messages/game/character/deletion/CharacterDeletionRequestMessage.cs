@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Character.Deletion
 {
-    using BlueSheep.Protocol;
-
-
     public class CharacterDeletionRequestMessage : Message
     {
         
-        public const int ProtocolId = 165;
+        protected override int ProtocolId { get; set; } = 165;
         
         public override int MessageID
         {

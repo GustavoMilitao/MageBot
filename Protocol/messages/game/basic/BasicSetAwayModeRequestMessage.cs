@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Basic
     public class BasicSetAwayModeRequestMessage : Message
     {
         
-        public const int ProtocolId = 5665;
+        protected override int ProtocolId { get; set; } = 5665;
         
         public override int MessageID
         {

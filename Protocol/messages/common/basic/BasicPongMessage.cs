@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Common.Basic
 {
-    using BlueSheep.Protocol;
-
-
     public class BasicPongMessage : Message
     {
         
-        public const int ProtocolId = 183;
+        protected override int ProtocolId { get; set; } = 183;
         
         public override int MessageID
         {

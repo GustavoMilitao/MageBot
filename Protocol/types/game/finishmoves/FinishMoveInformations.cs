@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Finishmoves
     public class FinishMoveInformations : NetworkType
     {
         
-        public const int ProtocolId = 506;
+        protected override int ProtocolId { get; set; } = 506;
         
         public override int TypeID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Guest
 {
-    using BlueSheep.Protocol;
-
-
     public class GuestLimitationMessage : Message
     {
         
-        public const int ProtocolId = 6506;
+        protected override int ProtocolId { get; set; } = 6506;
         
         public override int MessageID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Chat.Smiley
 {
-    using BlueSheep.Protocol;
-
-
     public class MoodSmileyUpdateMessage : Message
     {
         
-        public const int ProtocolId = 6388;
+        protected override int ProtocolId { get; set; } = 6388;
         
         public override int MessageID
         {

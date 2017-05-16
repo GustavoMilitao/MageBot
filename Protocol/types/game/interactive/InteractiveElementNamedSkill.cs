@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Interactive
     public class InteractiveElementNamedSkill : InteractiveElementSkill
     {
         
-        public const int ProtocolId = 220;
+        protected override int ProtocolId { get; set; } = 220;
         
         public override int TypeID
         {

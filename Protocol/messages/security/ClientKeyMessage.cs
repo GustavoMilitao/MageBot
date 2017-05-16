@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Security
 {
     public class ClientKeyMessage : Message
     {
-        public const int ProtocolId = 5607;
+        protected override int ProtocolId { get; set; } = 5607;
         public override int MessageID { get { return ProtocolId; } }
 
         public string Key { get; set; }

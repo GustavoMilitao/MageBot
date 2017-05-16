@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Guild.Tax
 {
-    using BlueSheep.Protocol;
-
-
     public class TaxCollectorStateUpdateMessage : Message
     {
         
-        public const int ProtocolId = 6455;
+        protected override int ProtocolId { get; set; } = 6455;
         
         public override int MessageID
         {

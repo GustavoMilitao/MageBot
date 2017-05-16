@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Notification
 {
-    using BlueSheep.Protocol;
-
-
     public class NotificationUpdateFlagMessage : Message
     {
         
-        public const int ProtocolId = 6090;
+        protected override int ProtocolId { get; set; } = 6090;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Delay
     public class GameRolePlayDelayedObjectUseMessage : GameRolePlayDelayedActionMessage
     {
         
-        public const int ProtocolId = 6425;
+        protected override int ProtocolId { get; set; } = 6425;
         
         public override int MessageID
         {

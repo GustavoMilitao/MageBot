@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Connection
     public class IdentificationFailedForBadVersionMessage : IdentificationFailedMessage
     {
         
-        public new const int ProtocolId = 21;
+        protected override int ProtocolId { get; set; } = 21;
         
         public override int MessageID
         {

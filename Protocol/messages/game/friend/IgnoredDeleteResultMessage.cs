@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Friend
     public class IgnoredDeleteResultMessage : Message
     {
         
-        public const int ProtocolId = 5677;
+        protected override int ProtocolId { get; set; } = 5677;
         
         public override int MessageID
         {

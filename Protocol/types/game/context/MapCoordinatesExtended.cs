@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Context
     public class MapCoordinatesExtended : MapCoordinatesAndId
     {
         
-        public const int ProtocolId = 176;
+        protected override int ProtocolId { get; set; } = 176;
         
         public override int TypeID
         {

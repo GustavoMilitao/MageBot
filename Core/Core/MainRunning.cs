@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using BlueSheep.Common.Data;
+using DataFiles.Data;
 using BlueSheep.Common.Types;
 using BlueSheep.Util.Text.Log;
 using BlueSheep.Engine.Network;

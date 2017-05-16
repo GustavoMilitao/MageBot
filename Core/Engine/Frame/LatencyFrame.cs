@@ -105,11 +105,11 @@ namespace BlueSheep.Core.Frame
                 //base();
             }
 
-            private static byte[] Str8;
+            //private static byte[] Str8;
 
-            private static byte[] Str9;
+            //private static byte[] Str9;
 
-            private static byte[] Str10;
+            //private static byte[] Str10;
 
             private static string[] Str11 = new List<string>().ToArray();
 
@@ -171,7 +171,7 @@ namespace BlueSheep.Core.Frame
                 //}
                 //var _loc3_ = _loc3_;
                 //var _loc0_ = Str2;
-                return;
+                //return;
             }
 
             public static string Str7(int param1)
@@ -220,7 +220,7 @@ namespace BlueSheep.Core.Frame
                 }
                 _loc3_ = 0;
                 _loc2_ = 0;
-                for (_loc2_ = 0; _loc2_ < 256; _loc2_++)
+                for (_loc2_ = 0; _loc2_ < 256; /*_loc2_++*/)
                 {
                     _loc3_ = (_loc3_ + Str22[_loc2_] + param1[_loc2_ % param1.Length]) & 255;
                     //goto lab2;
@@ -231,8 +231,8 @@ namespace BlueSheep.Core.Frame
                         Str22[_loc3_] = (byte)_loc4_;
                         continue;
 
-                    lab1:
-                        _loc4_ = Str22[_loc2_];
+                    ////lab1:
+                    //    _loc4_ = Str22[_loc2_];
                     } while (true);
 
                     //lab2:

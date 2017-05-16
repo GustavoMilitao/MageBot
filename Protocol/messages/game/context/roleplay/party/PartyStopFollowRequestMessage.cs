@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party
     public class PartyStopFollowRequestMessage : AbstractPartyMessage
     {
         
-        public const int ProtocolId = 5574;
+        protected override int ProtocolId { get; set; } = 5574;
         
         public override int MessageID
         {

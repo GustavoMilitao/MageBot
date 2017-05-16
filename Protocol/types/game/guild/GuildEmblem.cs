@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Guild
     public class GuildEmblem : NetworkType
     {
         
-        public const int ProtocolId = 87;
+        protected override int ProtocolId { get; set; } = 87;
         
         public override int TypeID
         {

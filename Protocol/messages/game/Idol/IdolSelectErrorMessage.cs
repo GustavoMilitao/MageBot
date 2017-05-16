@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Idol
     public class IdolSelectErrorMessage : Message
     {
         
-        public const int ProtocolId = 6584;
+        protected override int ProtocolId { get; set; } = 6584;
         
         public override int MessageID
         {

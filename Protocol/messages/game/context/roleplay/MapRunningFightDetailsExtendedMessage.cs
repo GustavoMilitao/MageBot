@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
     public class MapRunningFightDetailsExtendedMessage : MapRunningFightDetailsMessage
     {
         
-        public const int ProtocolId = 6500;
+        protected override int ProtocolId { get; set; } = 6500;
         
         public override int MessageID
         {

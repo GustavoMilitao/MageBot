@@ -1,12 +1,12 @@
-﻿using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using BlueSheep.Core.Map.Elements;
-using BlueSheep.Data.D2p.Elements;
+using DataFiles.Data.D2p.Elements;
 using BlueSheep.Util.Text.Log;
-using BlueSheep.Common.Data;
-using BlueSheep.Data.Pathfinding.Positions;
+using DataFiles.Data;
+using DataFiles.Data.Pathfinding.Positions;
 using BlueSheep.Protocol.Types.Game.Context.Roleplay;
 using BlueSheep.Core.Monsters;
 using BlueSheep.Util.Enums.Internal;
@@ -17,7 +17,7 @@ namespace BlueSheep.Core.Map
     {
         #region Fields
         private Account.Account Account;
-        public BlueSheep.Data.D2p.Map Data;
+        public DataFiles.Data.D2p.Map Data;
 
         /// <summary>
         /// List containing all the players on the map.
@@ -240,7 +240,7 @@ namespace BlueSheep.Core.Map
             {
                 Account.Config.Path.Start();
             }
-            if (Account.petsList.Count != 0 && Account.Config.Begin)
+            if (Account.PetsList.Count != 0 && Account.Config.Begin)
             {
                 Account.StartFeeding();
             }
@@ -256,11 +256,11 @@ namespace BlueSheep.Core.Map
         /// </summary>
         public void ParseLocation(int mapId, int subAreaId)
         {
-            Data = BlueSheep.Data.D2p.MapsManager.FromId(mapId);
+            Data = DataFiles.Data.D2p.MapsManager.FromId(mapId);
             Data.SubAreaId = subAreaId;
             DataClass subArea = GameData.GetDataObject(D2oFileEnum.SubAreas, subAreaId);
-            string mapName = I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Areas, (int)subArea.Fields["areaId"]).Fields["nameId"]);
-            string subAreaName = I18N.GetText((int)subArea.Fields["nameId"]);
+            string mapName = DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Areas, (int)subArea.Fields["areaId"]).Fields["nameId"]);
+            string subAreaName = DataFiles.Data.I18n.I18N.GetText((int)subArea.Fields["nameId"]);
             Account.ModifBar(5, 0, 0, "[" + X + ";" + Y + "]" + " " + mapName + " (" + subAreaName + ")");
             Account.ModifBar(5, 0, 0, mapName + " (" + subAreaName + ")");
         }

@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Data.Items
     public class SellerBuyerDescriptor : NetworkType
     {
         
-        public const int ProtocolId = 121;
+        protected override int ProtocolId { get; set; } = 121;
         
         public override int TypeID
         {

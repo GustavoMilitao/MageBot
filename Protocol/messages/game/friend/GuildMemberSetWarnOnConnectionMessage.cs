@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Friend
 {
-    using BlueSheep.Protocol;
-
-
     public class GuildMemberSetWarnOnConnectionMessage : Message
     {
         
-        public const int ProtocolId = 6159;
+        protected override int ProtocolId { get; set; } = 6159;
         
         public override int MessageID
         {

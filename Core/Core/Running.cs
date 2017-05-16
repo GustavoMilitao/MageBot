@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BlueSheep.Core.Storage;
 using BlueSheep.Util.Text.Log;
-using BlueSheep.Common.Data.D2o;
+using DataFiles.Data.D2o;
 using BlueSheep.Core.Pets;
 
 namespace BlueSheep.Core
@@ -79,23 +79,23 @@ namespace BlueSheep.Core
         #region Public methods
         public async void Init()
         {
-            if (m_CurrentPetIndex == account.petsList.Count)
+            if (m_CurrentPetIndex == account.PetsList.Count)
             {
                 account.SetNextMeal();
                 account.GetNextMeal();
                 return;
             }
 
-            if ((CheckTime(account.petsList[m_CurrentPetIndex])) ||
+            if ((CheckTime(account.PetsList[m_CurrentPetIndex])) ||
                 ((m_Feeding != null) && (m_Feeding.SecondFeeding)))
             {
                 if (
-                    account.petsList[m_CurrentPetIndex].Informations.Position == 8)
+                    account.PetsList[m_CurrentPetIndex].Informations.Position == 8)
                 {
                     Console.WriteLine();
                 }
 
-                if (account.petsList[m_CurrentPetIndex].FoodList.Count == 0)
+                if (account.PetsList[m_CurrentPetIndex].FoodList.Count == 0)
                 {
                     if (account.Safe == null)
                     {
@@ -116,7 +116,7 @@ namespace BlueSheep.Core
                 }
 
                 m_Feeding = new Feeding(account);
-                m_Feeding.Init(account.petsList[m_CurrentPetIndex]);
+                m_Feeding.Init(account.PetsList[m_CurrentPetIndex]);
                 await account.PutTaskDelay(1000);
                 m_CurrentPetIndex++;
                 return;
@@ -146,12 +146,12 @@ namespace BlueSheep.Core
         {
             foreach (Pet petModified in account.PetsModifiedList)
             {
-                if (m_CurrentPetIndex >= account.petsList.Count)
+                if (m_CurrentPetIndex >= account.PetsList.Count)
                     continue;
                 if (petModified.Informations.UID ==
-                    account.petsList[m_CurrentPetIndex].Informations.UID)
+                    account.PetsList[m_CurrentPetIndex].Informations.UID)
                 {
-                    Pet pet = account.petsList[m_CurrentPetIndex];
+                    Pet pet = account.PetsList[m_CurrentPetIndex];
 
                     if (pet.Effect != petModified.Effect)
                     {
@@ -166,7 +166,7 @@ namespace BlueSheep.Core
                 }
             }
 
-            account.petsList = new List<Pet>();
+            account.PetsList = new List<Pet>();
 
 
             foreach (Core.Inventory.Item item in account.Inventory.Items)
@@ -175,7 +175,7 @@ namespace BlueSheep.Core
                 if ((int)itemData.Fields["typeId"] == 18)
                 {
                     Pet petToAdd = new Pet(item, itemData, account);
-                    account.petsList.Add(petToAdd);
+                    account.PetsList.Add(petToAdd);
                 }
             }
 
@@ -195,13 +195,13 @@ namespace BlueSheep.Core
         public void NoFood()
         {
            account.Log(new ActionTextInformation("Aucune nourriture disponible pour " +
-                                                                        BlueSheep.Common.Data.I18N.GetText((int)account.petsList[m_CurrentPetIndex].Datas
+                                                                        DataFiles.Data.I18n.I18N.GetText((int)account.PetsList[m_CurrentPetIndex].Datas
                                                                           .Fields["nameId"]) +
                                                                       "."),0);
 
-           account.petsList[m_CurrentPetIndex].NonFeededForMissingFood = true;
+           account.PetsList[m_CurrentPetIndex].NonFeededForMissingFood = true;
 
-           account.petsList[m_CurrentPetIndex].NextMeal = new DateTime();
+           account.PetsList[m_CurrentPetIndex].NextMeal = new DateTime();
             m_CurrentPetIndex++;
             Init();
         }

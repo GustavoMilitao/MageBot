@@ -2,7 +2,6 @@
 using BlueSheep.Protocol.Messages.Game.Chat;
 using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses;
 using BlueSheep.Protocol.Messages.Game.Interactive;
-using BlueSheep.Engine.Types;
 using BlueSheep.Util.Text.Log;
 using System;
 
@@ -28,7 +27,7 @@ namespace BlueSheep.Core.Misc
             {
                 ChatClientMultiMessage msg = new ChatClientMultiMessage(sentence, 0);
                 msg.Serialize(writer);
-                writer.Content = account.HumanCheck.hash_function(writer.Content);
+                writer.Content = account.HumanCheck.Hash_function(writer.Content);
                 msg.Pack(writer);
                 account.SocketManager.Send(writer.Content);
                 account.Log(new DebugTextInformation("[SND] 861 (ChatClientMultiMessage)"), 0);
@@ -41,7 +40,7 @@ namespace BlueSheep.Core.Misc
             {
                 InteractiveUseRequestMessage msg = new InteractiveUseRequestMessage((uint)ElementIdd, (uint)SkillInstanceID);
                 msg.Serialize(writer);
-                writer.Content = account.HumanCheck.hash_function(writer.Content);
+                writer.Content = account.HumanCheck.Hash_function(writer.Content);
                 msg.Pack(writer);
                 account.SocketManager.Send(writer.Content);
                 account.Log(new DebugTextInformation("[SND] 5001 (InteractiveUseRequestMessage)"), 0);

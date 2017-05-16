@@ -1,4 +1,4 @@
-﻿using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Connection;
 using BlueSheep.Protocol.Messages.Game.Approach;
@@ -102,7 +102,7 @@ namespace BlueSheep.Engine.Handlers.Connection
             account.SocketManager.IsChangingServer = true;
             if (!account.Config.IsMITM)
             {
-                account.Log(new ConnectionTextInformation("Connexion au serveur " + BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
+                account.Log(new ConnectionTextInformation("Connexion au serveur " + DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
                 account.SocketManager.Connect(new ConnectionInformations(msg.Address, msg.Port, "de jeu"));
             }
             else
@@ -123,7 +123,7 @@ namespace BlueSheep.Engine.Handlers.Connection
                     account.SocketManager.ListenDofus();
                     await account.PutTaskDelay(200);
                 }
-                account.Log(new ConnectionTextInformation("Connexion au serveur " + BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
+                account.Log(new ConnectionTextInformation("Connexion au serveur " + DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
                 account.SocketManager.Connect(new ConnectionInformations(msg.Address, msg.Port, "of game"));
             }
         }
@@ -152,7 +152,7 @@ namespace BlueSheep.Engine.Handlers.Connection
 
             account.Log(new ConnectionTextInformation("< --- Probably, your server is under maintenance --- >"), 0);
             msg.Servers.ForEach(server => account.Log(new ConnectionTextInformation("< --- Server : " +
-                BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, server.ObjectID).Fields["nameId"])
+                DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, server.ObjectID).Fields["nameId"])
                          + " Status : " + ((ServerStatusEnum)server.Status).Description() + " --- >"), 0));
 
             //foreach (GameServerInformations gsi in msg.servers)

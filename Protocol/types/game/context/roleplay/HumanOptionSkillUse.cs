@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
     public class HumanOptionSkillUse : HumanOption
     {
         
-        public const int ProtocolId = 495;
+        protected override int ProtocolId { get; set; } = 495;
         
         public override int TypeID
         {

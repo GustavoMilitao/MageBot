@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Character.Choice
 {
-    using BlueSheep.Protocol;
-
-
     public class CharacterSelectedForceReadyMessage : Message
     {
         
-        public const int ProtocolId = 6072;
+        protected override int ProtocolId { get; set; } = 6072;
         
         public override int MessageID
         {

@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Character.Status
     public class PlayerStatus : NetworkType
     {
         
-        public const int ProtocolId = 415;
+        protected override int ProtocolId { get; set; } = 415;
         
         public override int TypeID
         {

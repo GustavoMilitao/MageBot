@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Fight
 {
-    using BlueSheep.Protocol;
-
-
     public class GameFightJoinRequestMessage : Message
     {
         
-        public const int ProtocolId = 701;
+        protected override int ProtocolId { get; set; } = 701;
         
         public override int MessageID
         {

@@ -4,7 +4,7 @@ using System.IO.Compression;
 using System.Linq;
 using BlueSheep.Util.IO;
 
-namespace BlueSheep.Data.D2p
+namespace DataFiles.Data.D2p
 {
     public class MapsManager
     {

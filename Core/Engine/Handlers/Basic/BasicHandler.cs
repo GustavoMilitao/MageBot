@@ -36,7 +36,7 @@ namespace BlueSheep.Engine.Handlers.Basic
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
                     basicLatencyStatsMessage.Serialize(writer);
-                    writer.Content = account.HumanCheck.hash_function(writer.Content);
+                    writer.Content = account.HumanCheck.Hash_function(writer.Content);
                     basicLatencyStatsMessage.Pack(writer);
 
                     account.SocketManager.Send(writer.Content);
@@ -77,7 +77,7 @@ namespace BlueSheep.Engine.Handlers.Basic
             //switch ((uint)account.LastPacketID.Dequeue())
             switch ((uint)account.LastPacket)
             {
-                case InteractiveUseRequestMessage.ProtocolId:
+                case InteractiveUseRequestMessage.ProtocolID:
                     if (account.Running != null && account.Running.OnSafe)
                     {
                         account.Log(new CharacterTextInformation("Ouverture du coffre."), 2);
@@ -86,7 +86,7 @@ namespace BlueSheep.Engine.Handlers.Basic
                     }
                     return;
 
-                case ExchangeObjectMoveMessage.ProtocolId:
+                case ExchangeObjectMoveMessage.ProtocolID:
                     if (account.Running.OnLeaving)
                     {
                         account.Running.OnLeaving = false;
@@ -101,7 +101,7 @@ namespace BlueSheep.Engine.Handlers.Basic
                     }
                     return;
 
-                case ObjectFeedMessage.ProtocolId:
+                case ObjectFeedMessage.ProtocolID:
                     if (account.Running != null && !account.Running.Feeding.SecondFeeding)
                         account.Running.CheckStatisticsUp();
                     else if (account.Running != null)
@@ -111,7 +111,7 @@ namespace BlueSheep.Engine.Handlers.Basic
                     }
                     return;
 
-                case LeaveDialogRequestMessage.ProtocolId:
+                case LeaveDialogRequestMessage.ProtocolID:
                     account.Log(new ActionTextInformation("Fermeture du coffre."), 3);
                     if (account.Running != null)
                         account.Running.Init();

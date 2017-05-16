@@ -1,11 +1,13 @@
-﻿using BlueSheep.Common.Data.D2o;
-using BlueSheep.DataCenter;
+﻿using BlueSheep.DataCenter;
+using DataFiles.Data.D2o;
+using DataFiles.Data.I18n;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
-namespace BlueSheep.Engine.Constants
+
+namespace Core.Engine.Constants
 {
     public class IntelliSense
     {
@@ -26,7 +28,7 @@ namespace BlueSheep.Engine.Constants
             foreach (DataClass d in GameData.GetDataObjects(D2oFileEnum.Monsters))
             {
                 if (d.Fields.ContainsKey("nameId"))
-                    MonstersList.Add(BlueSheep.Common.Data.I18N.GetText((int)d.Fields["nameId"]));
+                    MonstersList.Add(DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]));
             }
         }
 
@@ -34,7 +36,7 @@ namespace BlueSheep.Engine.Constants
         {
             foreach (DataClass d in GameData.GetDataObjects(D2oFileEnum.Items))
             {
-                ItemsList.Add(BlueSheep.Common.Data.I18N.GetText((int)d.Fields["nameId"]));
+                ItemsList.Add(DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]));
             }
         }
 
@@ -42,7 +44,7 @@ namespace BlueSheep.Engine.Constants
         {
             foreach (DataClass d in GameData.GetDataObjects(D2oFileEnum.Servers))
             {
-                ServersList.Add(createNewObjectServerFromGameData(d));
+                ServersList.Add(CreateNewObjectServerFromGameData(d));
             }
         }
 
@@ -50,18 +52,20 @@ namespace BlueSheep.Engine.Constants
 
         #region Private methods
 
-        private static Server createNewObjectServerFromGameData(DataClass data)
+        private static Server CreateNewObjectServerFromGameData(DataClass data)
         {
-            Server server = new Server();
-            server.Id = (int)data.Fields["id"];
-            server.NameId = Convert.ToUInt32(data["nameId"]);
-            server.CommentId = Convert.ToUInt32(data["commentId"]);
-            server.OpeningDate = Convert.ToDouble(data["openingDate"]);
-            server.Language = Convert.ToString(data["language"]);
-            server.PopulationId = Convert.ToInt32(data["populationId"]);
-            server.GameTypeId = Convert.ToUInt32(data["gameTypeId"]);
-            server.CommunityId = Convert.ToInt32(data["communityId"]);
-            server.RestrictedToLanguages = ArrayListToStringList((ArrayList)data["restrictedToLanguages"]);
+            Server server = new Server()
+            {
+                Id = (int)data.Fields["id"],
+                NameId = Convert.ToUInt32(data["nameId"]),
+                CommentId = Convert.ToUInt32(data["commentId"]),
+                OpeningDate = Convert.ToDouble(data["openingDate"]),
+                Language = Convert.ToString(data["language"]),
+                PopulationId = Convert.ToInt32(data["populationId"]),
+                GameTypeId = Convert.ToUInt32(data["gameTypeId"]),
+                CommunityId = Convert.ToInt32(data["communityId"]),
+                RestrictedToLanguages = ArrayListToStringList((ArrayList)data["restrictedToLanguages"])
+            };
             return server;
         }
 

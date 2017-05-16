@@ -5,7 +5,7 @@ namespace BlueSheep.Protocol.Messages.Game.Approach
 {
     class ServerOptionalFeaturesMessage : Message
     {
-        public const int ProtocolId = 6305;
+        protected override int ProtocolId { get; set; } = 6305;
         public override int MessageID { get { return ProtocolId; } }
 
         public List<byte> Features;

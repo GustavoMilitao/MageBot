@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Paddock
     public class PaddockAbandonnedInformations : PaddockBuyableInformations
     {
         
-        public const int ProtocolId = 133;
+        protected override int ProtocolId { get; set; } = 133;
         
         public override int TypeID
         {

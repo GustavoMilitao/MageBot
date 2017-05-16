@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Shortcut
     public class ShortcutSmiley : Shortcut
     {
         
-        public const int ProtocolId = 388;
+        protected override int ProtocolId { get; set; } = 388;
         
         public override int TypeID
         {

@@ -1,4 +1,4 @@
-﻿using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using BlueSheep.Protocol.Types.Game.Context.Fight;
 using BlueSheep.Core.Base;
 
@@ -37,7 +37,7 @@ namespace BlueSheep.Core.Fight
                 if (CreatureGenericId != 0)
                 {
                     DataClass data = GameData.GetDataObject(D2oFileEnum.Monsters, CreatureGenericId);
-                    return BlueSheep.Common.Data.I18N.GetText((int)data.Fields["nameId"]);
+                    return DataFiles.Data.I18n.I18N.GetText((int)data.Fields["nameId"]);
                 }
                 else
                     return "Unknown";

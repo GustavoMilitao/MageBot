@@ -11,14 +11,13 @@
 namespace BlueSheep.Protocol.Messages.Game.Shortcut
 {
     using BlueSheep.Protocol.Types.Game.Shortcut;
-    using BlueSheep.Protocol;
-	using BlueSheep.Protocol.Types;
+    using BlueSheep.Protocol.Types;
 
 
     public class ShortcutBarReplacedMessage : Message
     {
         
-        public const int ProtocolId = 6706;
+        protected override int ProtocolId { get; set; } = 6706;
         
         public override int MessageID
         {

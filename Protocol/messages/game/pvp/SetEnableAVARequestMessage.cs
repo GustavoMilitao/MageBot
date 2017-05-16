@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Pvp
 {
-    using BlueSheep.Protocol;
-
-
     public class SetEnableAVARequestMessage : Message
     {
         
-        public const int ProtocolId = 6443;
+        protected override int ProtocolId { get; set; } = 6443;
         
         public override int MessageID
         {

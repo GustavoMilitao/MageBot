@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using BlueSheep.Common.Types;
-using BlueSheep.AccountsManager;
 using System.Diagnostics;
-using BlueSheep.Util.I18n.Strings;
 
 namespace BlueSheep.Interface
 {

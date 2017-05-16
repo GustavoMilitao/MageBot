@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BlueSheep.Core.Job
+﻿namespace BlueSheep.Core.Job
 {
     public class Resource
     {

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Interactive.Skill
     public class SkillActionDescriptionCollect : SkillActionDescriptionTimed
     {
         
-        public const int ProtocolId = 99;
+        protected override int ProtocolId { get; set; } = 99;
         
         public override int TypeID
         {

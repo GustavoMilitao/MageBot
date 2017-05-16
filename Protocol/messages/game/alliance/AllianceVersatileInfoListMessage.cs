@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Alliance
 {
     using BlueSheep.Protocol.Types.Game.Social;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class AllianceVersatileInfoListMessage : Message
     {
         
-        public const int ProtocolId = 6436;
+        protected override int ProtocolId { get; set; } = 6436;
         
         public override int MessageID
         {

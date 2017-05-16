@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Connection
 {
     using BlueSheep.Protocol.Types.Connection;
-    using BlueSheep.Protocol;
 
 
     public class ServerStatusUpdateMessage : Message
     {
         
-        public const int ProtocolId = 50;
+        protected override int ProtocolId { get; set; } = 50;
         
         public override int MessageID
         {

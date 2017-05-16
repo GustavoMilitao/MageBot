@@ -1,6 +1,5 @@
 ﻿using BlueSheep.Util.Cryptography;
 using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Types;
 using System;
 using System.Collections.Generic;
 using System.IO;

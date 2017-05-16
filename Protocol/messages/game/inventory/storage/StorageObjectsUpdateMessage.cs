@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Storage
 {
     using BlueSheep.Protocol.Types.Game.Data.Items;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class StorageObjectsUpdateMessage : Message
     {
         
-        public const int ProtocolId = 6036;
+        protected override int ProtocolId { get; set; } = 6036;
         
         public override int MessageID
         {

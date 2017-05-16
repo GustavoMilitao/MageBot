@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context
 {
-    using BlueSheep.Protocol;
-
-
     public class GameMapChangeOrientationRequestMessage : Message
     {
         
-        public const int ProtocolId = 945;
+        protected override int ProtocolId { get; set; } = 945;
         
         public override int MessageID
         {

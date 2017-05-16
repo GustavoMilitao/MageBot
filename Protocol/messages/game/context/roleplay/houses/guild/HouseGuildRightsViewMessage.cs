@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses.Guild
 {
-    using BlueSheep.Protocol;
-
-
     public class HouseGuildRightsViewMessage : Message
     {
         
-        public const int ProtocolId = 5700;
+        protected override int ProtocolId { get; set; } = 5700;
         
         public override int MessageID
         {

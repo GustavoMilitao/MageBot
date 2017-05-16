@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
     public class HumanOptionEmote : HumanOption
     {
         
-        public const int ProtocolId = 407;
+        protected override int ProtocolId { get; set; } = 407;
         
         public override int TypeID
         {

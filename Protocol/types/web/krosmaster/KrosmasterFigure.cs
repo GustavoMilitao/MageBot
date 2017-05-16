@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Web.Krosmaster
     public class KrosmasterFigure : NetworkType
     {
         
-        public const int ProtocolId = 397;
+        protected override int ProtocolId { get; set; } = 397;
         
         public override int TypeID
         {

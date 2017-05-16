@@ -11,14 +11,13 @@
 namespace BlueSheep.Protocol.Messages.Game.Guild.Tax
 {
     using BlueSheep.Protocol.Types.Game.Guild.Tax;
-    using BlueSheep.Protocol;
-	using BlueSheep.Protocol.Types;
+    using BlueSheep.Protocol.Types;
 
 
     public class TaxCollectorMovementAddMessage : Message
     {
         
-        public const int ProtocolId = 5917;
+        protected override int ProtocolId { get; set; } = 5917;
         
         public override int MessageID
         {

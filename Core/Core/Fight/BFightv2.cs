@@ -8,12 +8,12 @@ using BlueSheep.Util.Text.Log;
 using BlueSheep.Engine.Enums;
 using BlueSheep.Common.Types;
 using BlueSheep.Common.Protocol.Types;
-using BlueSheep.Data.Pathfinding.Positions;
+using DataFiles.Data.Pathfinding.Positions;
 using BlueSheep.Engine.Types;
 using BlueSheep.Common.Protocol.Messages;
-using BlueSheep.Data.Pathfinding;
+using DataFiles.Data.Pathfinding;
 using System.Collections;
-using BlueSheep.Common.Data.D2o;
+using DataFiles.Data.D2o;
 using System.Diagnostics;
 
 namespace BlueSheep.Core.Fight
@@ -278,7 +278,7 @@ namespace BlueSheep.Core.Fight
                         }
                     }
                 }
-                SimplePathfinder pathfinder = new SimplePathfinder((BlueSheep.Data.D2p.Map)Account.Map.Data);
+                SimplePathfinder pathfinder = new SimplePathfinder((DataFiles.Data.D2p.Map)Account.Map.Data);
                 pathfinder.SetFight(Fighters, Fighter.MovementPoints);
                 MovementPath path = pathfinder.FindPath(Fighter.CellId, cellId);
                 if (path != null)
@@ -361,7 +361,7 @@ namespace BlueSheep.Core.Fight
         /// <returns>True si oui; False si non.</returns>
         private bool IsCellWalkable(int cellId)
         {
-            BlueSheep.Data.D2p.Map MapData = (BlueSheep.Data.D2p.Map)Account.Map.Data;
+            DataFiles.Data.D2p.Map MapData = (DataFiles.Data.D2p.Map)Account.Map.Data;
             if (Account.Map.Data.IsWalkable(cellId))
             {
                 var selectedFighter = Fighters.FirstOrDefault((f) => f.CellId == cellId || MapData.Cells[cellId].NonWalkableDuringFight());

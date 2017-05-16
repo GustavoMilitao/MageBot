@@ -19,7 +19,7 @@ namespace BlueSheep.Protocol.Types.Game.Prism
     public class PrismFightersInformation : NetworkType
     {
         
-        public const int ProtocolId = 443;
+        protected override int ProtocolId { get; set; } = 443;
         
         public override int TypeID
         {

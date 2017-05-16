@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Character.Alignment
     public class ActorExtendedAlignmentInformations : ActorAlignmentInformations
     {
         
-        public const int ProtocolId = 202;
+        protected override int ProtocolId { get; set; } = 202;
         
         public override int TypeID
         {

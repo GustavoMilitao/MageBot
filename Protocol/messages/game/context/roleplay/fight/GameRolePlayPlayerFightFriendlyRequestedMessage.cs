@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight
 {
-    using BlueSheep.Protocol;
-
-
     public class GameRolePlayPlayerFightFriendlyRequestedMessage : Message
     {
         
-        public const int ProtocolId = 5937;
+        protected override int ProtocolId { get; set; } = 5937;
         
         public override int MessageID
         {

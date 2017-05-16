@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Chat.Smiley
     public class LocalizedChatSmileyMessage : ChatSmileyMessage
     {
         
-        public const int ProtocolId = 6185;
+        protected override int ProtocolId { get; set; } = 6185;
         
         public override int MessageID
         {

@@ -20,10 +20,10 @@ namespace BlueSheep.Engine.Constants
 
         public HumanCheck(Account account)
         {
-            _hashKey = hashKey_Gen(account);
+            _hashKey = HashKey_Gen(account);
         }
 
-        public byte[] hash_function(byte[] packet)
+        public byte[] Hash_function(byte[] packet)
         {
             /* Hello Mr.Fourbasse :hap: */
             if (_hashKey == null)
@@ -32,7 +32,7 @@ namespace BlueSheep.Engine.Constants
             {
                 writer.WriteBytes(packet);
                 BigEndianWriter writer2 = new BigEndianWriter();
-                writer2.WriteBytes(hash(packet));
+                writer2.WriteBytes(Hash(packet));
                 using (RijndaelManaged myRijndael = new RijndaelManaged())
                 {
                     myRijndael.GenerateIV();
@@ -89,7 +89,7 @@ namespace BlueSheep.Engine.Constants
         }
 #endregion
 
-        private byte[] hash(byte[] src)
+        private byte[] Hash(byte[] src)
         {
             uint _loc2_ = Convert.ToUInt32(src.Length * 8);
             while (src.Length % 4 != 0)
@@ -126,7 +126,7 @@ namespace BlueSheep.Engine.Constants
             return content;
         }
 
-        private uint[] core_md5(uint[] x, uint len)
+        private uint[] Core_md5(uint[] x, uint len)
         {
             x[len >> 5] |= (uint)(128) << ((int)(len) % 32);
             x[(len + 64 >> 9 << 4) + 14] = len;
@@ -156,70 +156,70 @@ namespace BlueSheep.Engine.Constants
                 uint oldb = b;
                 uint oldc = c;
                 uint oldd = d;
-                a = ff(a, b, c, d, x[i + 0], 7, 0xD76AA478);
-                d = ff(d, a, b, c, x[i + 1], 12, 0xE8C7B756);
-                c = ff(c, d, a, b, x[i + 2], 17, 0x242070DB);
-                b = ff(b, c, d, a, x[i + 3], 22, 0xC1BDCEEE);
-                a = ff(a, b, c, d, x[i + 4], 7, 0xF57C0FAF);
-                d = ff(d, a, b, c, x[i + 5], 12, 0x4787C62A);
-                c = ff(c, d, a, b, x[i + 6], 17, 0xA8304613);
-                b = ff(b, c, d, a, x[i + 7], 22, 0xFD469501);
-                a = ff(a, b, c, d, x[i + 8], 7, 0x698098D8);
-                d = ff(d, a, b, c, x[i + 9], 12, 0x8B44F7AF);
-                c = ff(c, d, a, b, x[i + 10], 17, 0xFFFF5BB1);
-                b = ff(b, c, d, a, x[i + 11], 22, 0x895CD7BE);
-                a = ff(a, b, c, d, x[i + 12], 7, 0x6B901122);
-                d = ff(d, a, b, c, x[i + 13], 12, 0xFD987193);
-                c = ff(c, d, a, b, x[i + 14], 17, 0xA679438E);
-                b = ff(b, c, d, a, x[i + 15], 22, 0x49B40821);
-                a = gg(a, b, c, d, x[i + 1], 5, 0xf61e2562);
-                d = gg(d, a, b, c, x[i + 6], 9, 0xc040b340);
-                c = gg(c, d, a, b, x[i + 11], 14, 0x265e5a51);
-                b = gg(b, c, d, a, x[i + 0], 20, 0xe9b6c7aa);
-                a = gg(a, b, c, d, x[i + 5], 5, 0xd62f105d);
-                d = gg(d, a, b, c, x[i + 10], 9, 0x2441453);
-                c = gg(c, d, a, b, x[i + 15], 14, 0xd8a1e681);
-                b = gg(b, c, d, a, x[i + 4], 20, 0xe7d3fbc8);
-                a = gg(a, b, c, d, x[i + 9], 5, 0x21e1cde6);
-                d = gg(d, a, b, c, x[i + 14], 9, 0xc33707d6);
-                c = gg(c, d, a, b, x[i + 3], 14, 0xf4d50d87);
-                b = gg(b, c, d, a, x[i + 8], 20, 0x455a14ed);
-                a = gg(a, b, c, d, x[i + 13], 5, 0xa9e3e905);
-                d = gg(d, a, b, c, x[i + 2], 9, 0xfcefa3f8);
-                c = gg(c, d, a, b, x[i + 7], 14, 0x676f02d9);
-                b = gg(b, c, d, a, x[i + 12], 20, 0x8d2a4c8a);
-                a = hh(a, b, c, d, x[i + 5], 4, 0xfffa3942);
-                d = hh(d, a, b, c, x[i + 8], 11, 0x8771f681);
-                c = hh(c, d, a, b, x[i + 11], 16, 0x6d9d6122);
-                b = hh(b, c, d, a, x[i + 14], 23, 0xfde5380c);
-                a = hh(a, b, c, d, x[i + 1], 4, 0xa4beea44);
-                d = hh(d, a, b, c, x[i + 4], 11, 0x4bdecfa9);
-                c = hh(c, d, a, b, x[i + 7], 16, 0xf6bb4b60);
-                b = hh(b, c, d, a, x[i + 10], 23, 0xbebfbc70);
-                a = hh(a, b, c, d, x[i + 13], 4, 0x289b7ec6);
-                d = hh(d, a, b, c, x[i + 0], 11, 0xeaa127fa);
-                c = hh(c, d, a, b, x[i + 3], 16, 0xd4ef3085);
-                b = hh(b, c, d, a, x[i + 6], 23, 0x4881d05);
-                a = hh(a, b, c, d, x[i + 9], 4, 0xd9d4d039);
-                d = hh(d, a, b, c, x[i + 12], 11, 0xe6db99e5);
-                c = hh(c, d, a, b, x[i + 15], 16, 0x1fa27cf8);
-                b = hh(b, c, d, a, x[i + 2], 23, 0xc4ac5665);
-                a = ii(a, b, c, d, x[i + 0], 6, 0xf4292244);
-                d = ii(d, a, b, c, x[i + 7], 10, 0x432aff97);
-                c = ii(c, d, a, b, x[i + 14], 15, 0xab9423a7);
-                b = ii(b, c, d, a, x[i + 5], 21, 0xfc93a039);
-                a = ii(a, b, c, d, x[i + 12], 6, 0x655b59c3);
-                d = ii(d, a, b, c, x[i + 3], 10, 0x8f0ccc92);
-                c = ii(c, d, a, b, x[i + 10], 15, 0xffeff47d);
-                b = ii(b, c, d, a, x[i + 1], 21, 0x85845dd1);
-                a = ii(a, b, c, d, x[i + 8], 6, 0x6fa87e4f);
-                d = ii(d, a, b, c, x[i + 15], 10, 0xfe2ce6e0);
-                c = ii(c, d, a, b, x[i + 6], 15, 0xa3014314);
-                b = ii(b, c, d, a, x[i + 13], 21, 0x4e0811a1);
-                a = ii(a, b, c, d, x[i + 4], 6, 0xf7537e82);
-                d = ii(d, a, b, c, x[i + 11], 10, 0xbd3af235);
-                c = ii(c, d, a, b, x[i + 2], 15, 0x2ad7d2bb);
-                b = ii(b, c, d, a, x[i + 9], 21, 0xeb86d391);
+                a = Ff(a, b, c, d, x[i + 0], 7, 0xD76AA478);
+                d = Ff(d, a, b, c, x[i + 1], 12, 0xE8C7B756);
+                c = Ff(c, d, a, b, x[i + 2], 17, 0x242070DB);
+                b = Ff(b, c, d, a, x[i + 3], 22, 0xC1BDCEEE);
+                a = Ff(a, b, c, d, x[i + 4], 7, 0xF57C0FAF);
+                d = Ff(d, a, b, c, x[i + 5], 12, 0x4787C62A);
+                c = Ff(c, d, a, b, x[i + 6], 17, 0xA8304613);
+                b = Ff(b, c, d, a, x[i + 7], 22, 0xFD469501);
+                a = Ff(a, b, c, d, x[i + 8], 7, 0x698098D8);
+                d = Ff(d, a, b, c, x[i + 9], 12, 0x8B44F7AF);
+                c = Ff(c, d, a, b, x[i + 10], 17, 0xFFFF5BB1);
+                b = Ff(b, c, d, a, x[i + 11], 22, 0x895CD7BE);
+                a = Ff(a, b, c, d, x[i + 12], 7, 0x6B901122);
+                d = Ff(d, a, b, c, x[i + 13], 12, 0xFD987193);
+                c = Ff(c, d, a, b, x[i + 14], 17, 0xA679438E);
+                b = Ff(b, c, d, a, x[i + 15], 22, 0x49B40821);
+                a = Gg(a, b, c, d, x[i + 1], 5, 0xf61e2562);
+                d = Gg(d, a, b, c, x[i + 6], 9, 0xc040b340);
+                c = Gg(c, d, a, b, x[i + 11], 14, 0x265e5a51);
+                b = Gg(b, c, d, a, x[i + 0], 20, 0xe9b6c7aa);
+                a = Gg(a, b, c, d, x[i + 5], 5, 0xd62f105d);
+                d = Gg(d, a, b, c, x[i + 10], 9, 0x2441453);
+                c = Gg(c, d, a, b, x[i + 15], 14, 0xd8a1e681);
+                b = Gg(b, c, d, a, x[i + 4], 20, 0xe7d3fbc8);
+                a = Gg(a, b, c, d, x[i + 9], 5, 0x21e1cde6);
+                d = Gg(d, a, b, c, x[i + 14], 9, 0xc33707d6);
+                c = Gg(c, d, a, b, x[i + 3], 14, 0xf4d50d87);
+                b = Gg(b, c, d, a, x[i + 8], 20, 0x455a14ed);
+                a = Gg(a, b, c, d, x[i + 13], 5, 0xa9e3e905);
+                d = Gg(d, a, b, c, x[i + 2], 9, 0xfcefa3f8);
+                c = Gg(c, d, a, b, x[i + 7], 14, 0x676f02d9);
+                b = Gg(b, c, d, a, x[i + 12], 20, 0x8d2a4c8a);
+                a = Hh(a, b, c, d, x[i + 5], 4, 0xfffa3942);
+                d = Hh(d, a, b, c, x[i + 8], 11, 0x8771f681);
+                c = Hh(c, d, a, b, x[i + 11], 16, 0x6d9d6122);
+                b = Hh(b, c, d, a, x[i + 14], 23, 0xfde5380c);
+                a = Hh(a, b, c, d, x[i + 1], 4, 0xa4beea44);
+                d = Hh(d, a, b, c, x[i + 4], 11, 0x4bdecfa9);
+                c = Hh(c, d, a, b, x[i + 7], 16, 0xf6bb4b60);
+                b = Hh(b, c, d, a, x[i + 10], 23, 0xbebfbc70);
+                a = Hh(a, b, c, d, x[i + 13], 4, 0x289b7ec6);
+                d = Hh(d, a, b, c, x[i + 0], 11, 0xeaa127fa);
+                c = Hh(c, d, a, b, x[i + 3], 16, 0xd4ef3085);
+                b = Hh(b, c, d, a, x[i + 6], 23, 0x4881d05);
+                a = Hh(a, b, c, d, x[i + 9], 4, 0xd9d4d039);
+                d = Hh(d, a, b, c, x[i + 12], 11, 0xe6db99e5);
+                c = Hh(c, d, a, b, x[i + 15], 16, 0x1fa27cf8);
+                b = Hh(b, c, d, a, x[i + 2], 23, 0xc4ac5665);
+                a = Ii(a, b, c, d, x[i + 0], 6, 0xf4292244);
+                d = Ii(d, a, b, c, x[i + 7], 10, 0x432aff97);
+                c = Ii(c, d, a, b, x[i + 14], 15, 0xab9423a7);
+                b = Ii(b, c, d, a, x[i + 5], 21, 0xfc93a039);
+                a = Ii(a, b, c, d, x[i + 12], 6, 0x655b59c3);
+                d = Ii(d, a, b, c, x[i + 3], 10, 0x8f0ccc92);
+                c = Ii(c, d, a, b, x[i + 10], 15, 0xffeff47d);
+                b = Ii(b, c, d, a, x[i + 1], 21, 0x85845dd1);
+                a = Ii(a, b, c, d, x[i + 8], 6, 0x6fa87e4f);
+                d = Ii(d, a, b, c, x[i + 15], 10, 0xfe2ce6e0);
+                c = Ii(c, d, a, b, x[i + 6], 15, 0xa3014314);
+                b = Ii(b, c, d, a, x[i + 13], 21, 0x4e0811a1);
+                a = Ii(a, b, c, d, x[i + 4], 6, 0xf7537e82);
+                d = Ii(d, a, b, c, x[i + 11], 10, 0xbd3af235);
+                c = Ii(c, d, a, b, x[i + 2], 15, 0x2ad7d2bb);
+                b = Ii(b, c, d, a, x[i + 9], 21, 0xeb86d391);
                 a += olda;
                 b += oldb;
                 c += oldc;
@@ -229,45 +229,45 @@ namespace BlueSheep.Engine.Constants
         }
 
         //Bitwise rotate a 32-bit number to the left.
-        private uint rol(uint num, uint cnt)
+        private uint Rol(uint num, uint cnt)
         {
             return Convert.ToUInt32(((int)num << (int)cnt) | (num >> (int)(32 - cnt)));
         }
         //These functions implement the four basic operations the algorithm uses.
-        private uint cmn(uint param1, uint param2, uint param3, uint param4, uint param5, uint param6)
+        private uint Cmn(uint param1, uint param2, uint param3, uint param4, uint param5, uint param6)
         {
-            return rol(param2 + param1 + param4 + param6, param5) + param3;
+            return Rol(param2 + param1 + param4 + param6, param5) + param3;
         }
 
-        private uint ff(uint param1, uint param2, uint param3, uint param4, uint param5, uint param6, uint param7)
+        private uint Ff(uint param1, uint param2, uint param3, uint param4, uint param5, uint param6, uint param7)
         {
-            return cmn(param2 & param3 | ~param2 & param4, param1, param2, param5, param6, param7);
+            return Cmn(param2 & param3 | ~param2 & param4, param1, param2, param5, param6, param7);
         }
 
-        private uint gg(uint param1, uint param2, uint param3, uint param4, uint param5, uint param6, uint param7)
+        private uint Gg(uint param1, uint param2, uint param3, uint param4, uint param5, uint param6, uint param7)
         {
-            return cmn(param2 & param4 | param3 & ~param4, param1, param2, param5, param6, param7);
+            return Cmn(param2 & param4 | param3 & ~param4, param1, param2, param5, param6, param7);
         }
 
-        private uint hh(uint param1, uint param2, uint param3, uint param4, uint param5, uint param6, uint param7)
+        private uint Hh(uint param1, uint param2, uint param3, uint param4, uint param5, uint param6, uint param7)
         {
-            return cmn(param2 ^ param3 ^ param4, param1, param2, param5, param6, param7);
+            return Cmn(param2 ^ param3 ^ param4, param1, param2, param5, param6, param7);
         }
 
-        private uint ii(uint param1, uint param2, uint param3, uint param4, uint param5, uint param6, uint param7)
+        private uint Ii(uint param1, uint param2, uint param3, uint param4, uint param5, uint param6, uint param7)
         {
-            return cmn(param3 ^ (param2 | ~param4), param1, param2, param5, param6, param7);
+            return Cmn(param3 ^ (param2 | ~param4), param1, param2, param5, param6, param7);
         }
    
 
-        private byte[] hashKey_Gen(Account account)
+        private byte[] HashKey_Gen(Account account)
         {
             try
             {
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
                     writer.WriteUTF(account.Ticket);
-                    byte[] key = hash(writer.Content);
+                    byte[] key = Hash(writer.Content);
                     return key;
                 }
             }
@@ -288,10 +288,10 @@ namespace BlueSheep.Engine.Constants
 
 
         #region Private Methods
-        private string dec(string param1, string param2)
+        private string Dec(string param1, string param2)
         {
-            byte[] _loc3_ = decodeToByteArray(param1);
-            byte[] _loc4_ = decodeToByteArray(param2);
+            byte[] _loc3_ = DecodeToByteArray(param1);
+            byte[] _loc4_ = DecodeToByteArray(param2);
             uint _loc5_ = 0;
             while (_loc5_ < _loc3_.Length)
             {
@@ -301,7 +301,7 @@ namespace BlueSheep.Engine.Constants
             return _loc3_.ToString(); ;
         }
 
-        private byte[] decodeToByteArray(string param1)
+        private byte[] DecodeToByteArray(string param1)
         {
             uint _loc6_ = 0;
             uint _loc7_ = 0;

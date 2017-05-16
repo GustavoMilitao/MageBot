@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Fight
     public class FightStartingPositions : NetworkType
     {
         
-        public const int ProtocolId = 513;
+        protected override int ProtocolId { get; set; } = 513;
         
         public override int TypeID
         {

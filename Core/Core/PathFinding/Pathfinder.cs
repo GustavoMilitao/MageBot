@@ -1,11 +1,11 @@
-﻿using BlueSheep.Data.Pathfinding.Positions;
+﻿using DataFiles.Data.Pathfinding.Positions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using BlueSheep.Core.Map;
 using BlueSheep.Core.Fight;
 
-namespace BlueSheep.Data.Pathfinding
+namespace DataFiles.Data.Pathfinding
 {
     public class Pathfinder
     {
@@ -334,8 +334,8 @@ namespace BlueSheep.Data.Pathfinding
         {
             bool isNewSystem = MapData.Data.IsUsingNewMovementSystem;
             MapPoint actualPoint = new MapPoint(x, y);
-            BlueSheep.Data.D2p.CellData fCellData = null;
-            BlueSheep.Data.D2p.CellData sCellData = null;
+            DataFiles.Data.D2p.CellData fCellData = null;
+            DataFiles.Data.D2p.CellData sCellData = null;
             bool mov = false;
             int floor = 0;
 
@@ -372,13 +372,13 @@ namespace BlueSheep.Data.Pathfinding
 
         public bool IsChangeZone(int fCell, int sCell)
         {
-            BlueSheep.Data.D2p.Map data = MapData.Data;
+            DataFiles.Data.D2p.Map data = MapData.Data;
             return data.Cells[fCell].MoveZone != data.Cells[sCell].MoveZone && System.Math.Abs(data.Cells[fCell].Floor) == System.Math.Abs(data.Cells[sCell].Floor);
         }
 
         private double GetCellSpeed(int cellId, bool throughEntities)
         {
-            BlueSheep.Data.D2p.Map data = MapData.Data;
+            DataFiles.Data.D2p.Map data = MapData.Data;
             var speed = data.Cells[cellId].Speed;
             MapPoint cell = new MapPoint(cellId);
 

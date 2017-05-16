@@ -1,5 +1,4 @@
 ﻿using BlueSheep.Protocol.Messages.Game.Inventory.Items;
-using BlueSheep.Protocol.Types;
 
 namespace BlueSheep.Core.Pets
 {

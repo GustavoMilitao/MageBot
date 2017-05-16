@@ -12,13 +12,12 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Spells
 {
     using BlueSheep.Protocol.Types.Game.Data.Items;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class SpellListMessage : Message
     {
         
-        public const int ProtocolId = 1200;
+        protected override int ProtocolId { get; set; } = 1200;
         
         public override int MessageID
         {

@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Data.Pathfinding.Positions
+﻿namespace DataFiles.Data.Pathfinding.Positions
 {
     public class PathElement
     {

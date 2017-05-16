@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context
     public class GameCautiousMapMovementRequestMessage : GameMapMovementRequestMessage
     {
         
-        public const int ProtocolId = 6496;
+        protected override int ProtocolId { get; set; } = 6496;
         
         public override int MessageID
         {

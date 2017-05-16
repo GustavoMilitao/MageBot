@@ -12,14 +12,13 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
 {
     using BlueSheep.Protocol.Types.Game.Context.Roleplay;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
-	using BlueSheep.Protocol.Types;
+    using BlueSheep.Protocol.Types;
 
 
     public class GameRolePlayShowMultipleActorsMessage : Message
     {
         
-        public const int ProtocolId = 6712;
+        protected override int ProtocolId { get; set; } = 6712;
         
         public override int MessageID
         {

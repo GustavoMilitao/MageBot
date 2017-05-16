@@ -1,5 +1,5 @@
 ﻿using BlueSheep.Core.Map.Elements;
-using BlueSheep.Data.Pathfinding.Positions;
+using DataFiles.Data.Pathfinding.Positions;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Util.Text.Log;
 using System;

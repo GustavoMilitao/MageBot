@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Fight.Character
     public class GameFightShowFighterRandomStaticPoseMessage : GameFightShowFighterMessage
     {
         
-        public const int ProtocolId = 6218;
+        protected override int ProtocolId { get; set; } = 6218;
         
         public override int MessageID
         {

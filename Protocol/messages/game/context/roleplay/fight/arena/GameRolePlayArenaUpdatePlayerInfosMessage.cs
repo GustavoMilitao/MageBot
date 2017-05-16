@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
 {
     using BlueSheep.Protocol.Types.Game.Context.Roleplay.Fight.Arena;
-    using BlueSheep.Protocol;
 
 
     public class GameRolePlayArenaUpdatePlayerInfosMessage : Message
     {
         
-        public const int ProtocolId = 6301;
+        protected override int ProtocolId { get; set; } = 6301;
         
         public override int MessageID
         {

@@ -5,7 +5,7 @@ namespace BlueSheep.Protocol.Messages.Handshake
 {
     public class ProtocolRequired : Message
     {
-        public const int ProtocolId = 1;
+        protected override int ProtocolId { get; set; } = 1;
         public override int MessageID { get { return ProtocolId; } }
 
         public uint RequiredVersion { get; set; }

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.TreasureHunt
     public class TreasureHuntStepFight : TreasureHuntStep
     {
         
-        public const int ProtocolId = 462;
+        protected override int ProtocolId { get; set; } = 462;
         
         public override int TypeID
         {

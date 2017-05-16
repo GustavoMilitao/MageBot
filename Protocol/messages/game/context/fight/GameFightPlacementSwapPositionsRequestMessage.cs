@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Fight
     public class GameFightPlacementSwapPositionsRequestMessage : GameFightPlacementPositionRequestMessage
     {
         
-        public const int ProtocolId = 6541;
+        protected override int ProtocolId { get; set; } = 6541;
         
         public override int MessageID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Updater.Parts
 {
-    using BlueSheep.Protocol;
-
-
     public class GetPartInfoMessage : Message
     {
         
-        public const int ProtocolId = 1506;
+        protected override int ProtocolId { get; set; } = 1506;
         
         public override int MessageID
         {

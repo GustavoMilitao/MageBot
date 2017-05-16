@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Guild.Tax
     public class TaxCollectorWaitingForHelpInformations : TaxCollectorComplementaryInformations
     {
         
-        public const int ProtocolId = 447;
+        protected override int ProtocolId { get; set; } = 447;
         
         public override int TypeID
         {

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Character.Choice
     public class CharacterSelectedErrorMissingMapPackMessage : CharacterSelectedErrorMessage
     {
         
-        public const int ProtocolId = 6300;
+        protected override int ProtocolId { get; set; } = 6300;
         
         public override int MessageID
         {

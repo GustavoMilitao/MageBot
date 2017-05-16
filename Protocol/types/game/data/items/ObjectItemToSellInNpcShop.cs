@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Data.Items
     public class ObjectItemToSellInNpcShop : ObjectItemMinimalInformation
     {
         
-        public const int ProtocolId = 352;
+        protected override int ProtocolId { get; set; } = 352;
         
         public override int TypeID
         {

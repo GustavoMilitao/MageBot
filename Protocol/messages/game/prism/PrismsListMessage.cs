@@ -10,8 +10,7 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Prism
 {
-    using BlueSheep.Protocol;
-	using BlueSheep.Protocol.Types;
+    using BlueSheep.Protocol.Types;
     using BlueSheep.Protocol.Types.Game.Prism;
     using System.Collections.Generic;
 
@@ -19,7 +18,7 @@ namespace BlueSheep.Protocol.Messages.Game.Prism
     public class PrismsListMessage : Message
     {
         
-        public const int ProtocolId = 6440;
+        protected override int ProtocolId { get; set; } = 6440;
         
         public override int MessageID
         {

@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Job
     public class DecraftedItemStackInfo : NetworkType
     {
         
-        public const int ProtocolId = 481;
+        protected override int ProtocolId { get; set; } = 481;
         
         public override int TypeID
         {

@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Pvp
 {
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
 
 
     public class UpdateMapPlayersAgressableStatusMessage : Message
     {
         
-        public const int ProtocolId = 6454;
+        protected override int ProtocolId { get; set; } = 6454;
         
         public override int MessageID
         {

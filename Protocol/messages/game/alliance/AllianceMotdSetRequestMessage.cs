@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Messages.Game.Alliance
     public class AllianceMotdSetRequestMessage : SocialNoticeSetRequestMessage
     {
         
-        public const int ProtocolId = 6687;
+        protected override int ProtocolId { get; set; } = 6687;
         
         public override int MessageID
         {

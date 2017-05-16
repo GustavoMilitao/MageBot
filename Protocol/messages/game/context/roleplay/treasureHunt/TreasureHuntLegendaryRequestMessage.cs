@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.TreasureHunt
 {
-    using BlueSheep.Protocol;
-
-
     public class TreasureHuntLegendaryRequestMessage : Message
     {
         
-        public const int ProtocolId = 6499;
+        protected override int ProtocolId { get; set; } = 6499;
         
         public override int MessageID
         {

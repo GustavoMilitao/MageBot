@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeStartedWithStorageMessage : ExchangeStartedMessage
     {
         
-        public const int ProtocolId = 6236;
+        protected override int ProtocolId { get; set; } = 6236;
         
         public override int MessageID
         {

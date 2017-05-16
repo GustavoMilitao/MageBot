@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Document
 {
-    using BlueSheep.Protocol;
-
-
     public class ComicReadingBeginMessage : Message
     {
         
-        public const int ProtocolId = 6536;
+        protected override int ProtocolId { get; set; } = 6536;
         
         public override int MessageID
         {

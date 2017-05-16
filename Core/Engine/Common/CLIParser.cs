@@ -2,7 +2,6 @@
 using BlueSheep.Protocol.Messages.Game.Chat;
 using BlueSheep.Protocol.Types.Game.Context.Roleplay;
 using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Engine.Types;
 using BlueSheep.Util.Text.Log;
 using System;
 using System.Collections.Generic;
@@ -134,7 +133,7 @@ namespace BlueSheep.Protocol
                     DefineOptionalParameter(new string[] { });
                     DefineSwitches(new string[] { "-launch", "-lock", "-l", "-v", "-t", "-me", "-i" });
                     ParseArguments(passedCommands);
-                    return Fight();
+                    return Fight().Result;
                 case "/gather":
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] { });
@@ -731,7 +730,7 @@ namespace BlueSheep.Protocol
                     {
                         ChatClientPrivateMessage msg = new ChatClientPrivateMessage(message, dest);
                         msg.Serialize(writer);
-                        writer.Content = account.HumanCheck.hash_function(writer.Content);
+                        writer.Content = account.HumanCheck.Hash_function(writer.Content);
                         msg.Pack(writer);
                         account.SocketManager.Send(writer.Content);
                         result.Add("à " + dest + " : " + message + "\n");
@@ -873,7 +872,7 @@ namespace BlueSheep.Protocol
         /// <summary>
         /// Interface to manage fights
         /// </summary>
-        private List<string> Fight()
+        private async Task<List<string>> Fight()
         {
             bool launch = IsSwitchOn("-launch");
             bool Lock = IsSwitchOn("-lock");
@@ -920,8 +919,8 @@ namespace BlueSheep.Protocol
                 {
                     if (launch && account.State != Status.Fighting)
                     {
-                        account.Fight.infinite = infinite;
-                        account.Fight.SearchFight();
+                        account.Fight.Infinite = infinite;
+                        await account.Fight.SearchFight();
                         result.Add("Recherche d'un combat...");
                     }
                     if (Lock && account.FightData.WaitForReady)

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Security
 {
-    using BlueSheep.Protocol;
-
-
     public class CheckFileRequestMessage : Message
     {
         
-        public const int ProtocolId = 6154;
+        protected override int ProtocolId { get; set; } = 6154;
         
         public override int MessageID
         {

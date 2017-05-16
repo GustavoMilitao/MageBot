@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Connection
 {
     public class HelloConnectMessage : Message
     {
-        public const int ProtocolId = 3;
+        protected override int ProtocolId { get; set; } = 3;
         public override int MessageID { get { return ProtocolId; } }
 
         public string salt;

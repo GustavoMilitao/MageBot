@@ -1,6 +1,4 @@
-﻿using BlueSheep.Common.Data.D2o;
-using System.Collections;
-using System.Collections.Generic;
+﻿using DataFiles.Data.D2o;
 
 namespace BlueSheep.Core.Pets
 {

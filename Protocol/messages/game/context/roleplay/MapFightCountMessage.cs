@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
 {
-    using BlueSheep.Protocol;
-
-
     public class MapFightCountMessage : Message
     {
         
-        public const int ProtocolId = 210;
+        protected override int ProtocolId { get; set; } = 210;
         
         public override int MessageID
         {

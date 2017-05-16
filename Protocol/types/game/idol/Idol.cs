@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Idol
     public class Idol : NetworkType
     {
         
-        public const int ProtocolId = 489;
+        protected override int ProtocolId { get; set; } = 489;
         
         public override int TypeID
         {

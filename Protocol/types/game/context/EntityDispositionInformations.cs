@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context
     public class EntityDispositionInformations : NetworkType
     {
         
-        public const int ProtocolId = 60;
+        protected override int ProtocolId { get; set; } = 60;
         
         public override int TypeID
         {

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Common.Basic
 {
-    using BlueSheep.Protocol;
-
-
     public class BasicPingMessage : Message
     {
         
-        public const int ProtocolId = 182;
+        protected override int ProtocolId { get; set; } = 182;
         
         public override int MessageID
         {

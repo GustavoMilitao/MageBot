@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Basic
 {
-    using BlueSheep.Protocol;
-
-
     public class BasicWhoAmIRequestMessage : Message
     {
         
-        public const int ProtocolId = 5664;
+        protected override int ProtocolId { get; set; } = 5664;
         
         public override int MessageID
         {

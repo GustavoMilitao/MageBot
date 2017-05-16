@@ -1,5 +1,5 @@
-﻿using BlueSheep.Common.Data;
-using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data;
+using DataFiles.Data.D2o;
 using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Game.Achievement;
 using BlueSheep.Protocol.Messages.Game.Character.Choice;
@@ -105,7 +105,7 @@ namespace BlueSheep.Engine.Handlers.Character
             {
                 int xppercent = (int)(Math.Round(i / j, 2) * 100);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -162,7 +162,7 @@ namespace BlueSheep.Engine.Handlers.Character
                 msg.Deserialize(reader);
             }
             DataClass d = GameData.GetDataObject(D2oFileEnum.Achievements, msg.ObjectId);
-            account.Log(new ActionTextInformation("Succès débloqué : " + I18N.GetText((int)d.Fields["nameId"])), 3);
+            account.Log(new ActionTextInformation("Succès débloqué : " + DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"])), 3);
             AchievementRewardRequestMessage nmsg = new AchievementRewardRequestMessage(-1);
             account.SocketManager.Send(nmsg);
 
@@ -187,14 +187,14 @@ namespace BlueSheep.Engine.Handlers.Character
                 {
                     int xppercent = (int)((i / j) * 100);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }
                 account.ModifBar(1, (int)account.CharacterStats.ExperienceNextLevelFloor - (int)account.CharacterStats.ExperienceLevelFloor, (int)account.CharacterStats.Experience - (int)account.CharacterStats.ExperienceLevelFloor, "Experience");
                 if (account.Fight != null)
                 {
-                    account.FightData.xpWon[DateTime.Today] += (int)msg.ExperienceCharacter;
+                    account.FightData.XpWon[DateTime.Today] += (int)msg.ExperienceCharacter;
                 }
             }
         }

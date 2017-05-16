@@ -11,13 +11,12 @@
 namespace BlueSheep.Protocol.Messages.Game.Atlas
 {
     using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-    using BlueSheep.Protocol;
 
 
     public class AtlasPointInformationsMessage : Message
     {
         
-        public const int ProtocolId = 5956;
+        protected override int ProtocolId { get; set; } = 5956;
         
         public override int MessageID
         {

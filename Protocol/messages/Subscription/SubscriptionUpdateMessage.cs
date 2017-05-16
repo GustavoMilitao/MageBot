@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Subscription
 {
-    using BlueSheep.Protocol;
-
-
     public class SubscriptionUpdateMessage : Message
     {
         
-        public const int ProtocolId = 6616;
+        protected override int ProtocolId { get; set; } = 6616;
         
         public override int MessageID
         {

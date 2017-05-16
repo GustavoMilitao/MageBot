@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Emote
 {
-    using BlueSheep.Protocol;
-
-
     public class EmoteRemoveMessage : Message
     {
         
-        public const int ProtocolId = 5687;
+        protected override int ProtocolId { get; set; } = 5687;
         
         public override int MessageID
         {

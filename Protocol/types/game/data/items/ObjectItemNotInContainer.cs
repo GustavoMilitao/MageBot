@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Types.Game.Data.Items
     public class ObjectItemNotInContainer : Item
     {
         
-        public const int ProtocolId = 134;
+        protected override int ProtocolId { get; set; } = 134;
         
         public override int TypeID
         {

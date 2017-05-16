@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Quest
 {
-    using BlueSheep.Protocol;
-
-
     public class QuestStartRequestMessage : Message
     {
         
-        public const int ProtocolId = 5643;
+        protected override int ProtocolId { get; set; } = 5643;
         
         public override int MessageID
         {

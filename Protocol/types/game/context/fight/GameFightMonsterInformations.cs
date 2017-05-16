@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Fight
     public class GameFightMonsterInformations : GameFightAIInformations
     {
         
-        public const int ProtocolId = 29;
+        protected override int ProtocolId { get; set; } = 29;
         
         public override int TypeID
         {

@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Messages.Game.Chat
     public class ChatServerCopyWithObjectMessage : ChatServerCopyMessage
     {
         
-        public const int ProtocolId = 884;
+        protected override int ProtocolId { get; set; } = 884;
         
         public override int MessageID
         {

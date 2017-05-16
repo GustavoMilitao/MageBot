@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context
 {
-    using BlueSheep.Protocol;
-
-
     public class GameContextDestroyMessage : Message
     {
         
-        public const int ProtocolId = 201;
+        protected override int ProtocolId { get; set; } = 201;
         
         public override int MessageID
         {

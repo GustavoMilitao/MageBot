@@ -5,7 +5,7 @@ namespace BlueSheep.Protocol.Messages.Connection
 {
     public class ServerListMessage : Message
     {
-        public const int ProtocolId = 30;
+        protected override int ProtocolId { get; set; } = 30;
         public override int MessageID { get { return ProtocolId; } }
 
         public List<GameServerInformations> Servers;

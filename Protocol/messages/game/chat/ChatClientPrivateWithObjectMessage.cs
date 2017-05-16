@@ -17,7 +17,7 @@ namespace BlueSheep.Protocol.Messages.Game.Chat
     public class ChatClientPrivateWithObjectMessage : ChatClientPrivateMessage
     {
         
-        public const int ProtocolId = 852;
+        protected override int ProtocolId { get; set; } = 852;
         
         public override int MessageID
         {

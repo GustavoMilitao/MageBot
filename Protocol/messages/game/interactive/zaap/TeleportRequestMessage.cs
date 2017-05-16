@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Interactive.Zaap
 {
-    using BlueSheep.Protocol;
-
-
     public class TeleportRequestMessage : Message
     {
         
-        public const int ProtocolId = 5961;
+        protected override int ProtocolId { get; set; } = 5961;
         
         public override int MessageID
         {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace BlueSheep.Common.Data.D2o
+namespace DataFiles.Data.D2o
 {
     internal sealed class D2oData
     {

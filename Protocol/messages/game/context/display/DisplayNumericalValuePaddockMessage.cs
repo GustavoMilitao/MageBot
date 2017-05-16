@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Context.Display
 {
-    using BlueSheep.Protocol;
-
-
     public class DisplayNumericalValuePaddockMessage : Message
     {
         
-        public const int ProtocolId = 6563;
+        protected override int ProtocolId { get; set; } = 6563;
         
         public override int MessageID
         {

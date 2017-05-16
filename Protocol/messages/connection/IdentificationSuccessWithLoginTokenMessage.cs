@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Connection
     public class IdentificationSuccessWithLoginTokenMessage : IdentificationSuccessMessage
     {
         
-        public const int ProtocolId = 6209;
+        protected override int ProtocolId { get; set; } = 6209;
         
         public override int MessageID
         {

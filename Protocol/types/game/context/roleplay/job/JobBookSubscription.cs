@@ -16,7 +16,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Job
     public class JobBookSubscription : NetworkType
     {
         
-        public const int ProtocolId = 500;
+        protected override int ProtocolId { get; set; } = 500;
         
         public override int TypeID
         {

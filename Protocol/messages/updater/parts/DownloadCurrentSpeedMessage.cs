@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Updater.Parts
 {
-    using BlueSheep.Protocol;
-
-
     public class DownloadCurrentSpeedMessage : Message
     {
         
-        public const int ProtocolId = 1511;
+        protected override int ProtocolId { get; set; } = 1511;
         
         public override int MessageID
         {

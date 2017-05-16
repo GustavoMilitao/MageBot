@@ -5,7 +5,7 @@ namespace BlueSheep.Protocol.Messages.Security
 {
     public class CheckIntegrityMessage : Message
     {
-        public const int ProtocolId = 6372;
+        protected override int ProtocolId { get; set; } = 6372;
         public override int MessageID { get { return ProtocolId; } }
 
         public List<int> Data { get; set; }

@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using BlueSheep.Protocol;
-
-
     public class ExchangeItemAutoCraftStopedMessage : Message
     {
         
-        public const int ProtocolId = 5810;
+        protected override int ProtocolId { get; set; } = 5810;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeMountsStableBornAddMessage : ExchangeMountsStableAddMessage
     {
         
-        public const int ProtocolId = 6557;
+        protected override int ProtocolId { get; set; } = 6557;
         
         public override int MessageID
         {

@@ -1,6 +1,4 @@
-﻿using BlueSheep.Util.Text.Log;
-using BlueSheep.Util.I18n.Strings;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -146,7 +144,7 @@ namespace BlueSheep.Interface
             {
                 Account.Path = new Core.Path.PathManager(Account, FilesList.SelectedItems[0].SubItems[5].Text, FilesList.SelectedItems[0].SubItems[0].Text);
                 Account.Log(new BotTextInformation("Trajet chargé : " + FilesList.SelectedItems[0].Text), 0);
-                Account.Path.Path = FilesList.SelectedItems[0].Text;
+                Account.Path.pathBot = FilesList.SelectedItems[0].Text;
                 if (Account.Fight == null)
                 {
                     Account.Log(new ErrorTextInformation("WARNING : T'as chargé aucune IA, fait gaffe mon coco :p"), 0);

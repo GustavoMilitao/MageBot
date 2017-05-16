@@ -18,7 +18,7 @@ namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
     public class HumanInformations : NetworkType
     {
         
-        public const int ProtocolId = 157;
+        protected override int ProtocolId { get; set; } = 157;
         
         public override int TypeID
         {

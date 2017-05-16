@@ -1,4 +1,4 @@
-﻿using BlueSheep.Common.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using BlueSheep.Core.Inventory;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace BlueSheep.Core.Job
         private Account.Account account;
         public string Name
         {
-            get { return BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Jobs, Id).Fields["nameId"]); }
+            get { return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Jobs, Id).Fields["nameId"]); }
         }
 
         public Job(int id, List<int> skills, Account.Account Account)
@@ -46,7 +46,7 @@ namespace BlueSheep.Core.Job
             foreach (int skill in Skills)
             {
                 DataClass d = GameData.GetDataObject(D2oFileEnum.Skills, skill);
-                if ((int)d.Fields["gatheredRessourceItem"] != -1 && BlueSheep.Common.Data.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, (int)d.Fields["gatheredRessourceItem"]).Fields["nameId"]) == ressourceName)
+                if ((int)d.Fields["gatheredRessourceItem"] != -1 && DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, (int)d.Fields["gatheredRessourceItem"]).Fields["nameId"]) == ressourceName)
                     return true;
             }
             return false;

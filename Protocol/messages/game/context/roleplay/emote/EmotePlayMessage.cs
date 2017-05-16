@@ -15,7 +15,7 @@ namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Emote
     public class EmotePlayMessage : EmotePlayAbstractMessage
     {
         
-        public const int ProtocolId = 5683;
+        protected override int ProtocolId { get; set; } = 5683;
         
         public override int MessageID
         {

@@ -13,7 +13,7 @@ namespace BlueSheep.Protocol.Messages.Game.Character.Creation
     public class CharacterCreationRequestMessage : Message
     {
 
-        public const int ProtocolId = 160;
+        protected override int ProtocolId { get; set; } = 160;
         
         public override int MessageID
         {

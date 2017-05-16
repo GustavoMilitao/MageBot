@@ -10,13 +10,10 @@
 
 namespace BlueSheep.Protocol.Messages.Game.Chat
 {
-    using BlueSheep.Protocol;
-
-
     public class ChatErrorMessage : Message
     {
         
-        public const int ProtocolId = 870;
+        protected override int ProtocolId { get; set; } = 870;
         
         public override int MessageID
         {

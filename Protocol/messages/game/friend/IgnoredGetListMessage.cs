@@ -4,7 +4,7 @@ namespace BlueSheep.Protocol.Messages.Game.Friend
 {
     public class IgnoredGetListMessage : Message
     {
-        public const int ProtocolId = 5676;
+        protected override int ProtocolId { get; set; } = 5676;
         public override int MessageID { get { return ProtocolId; } }
 
         public IgnoredGetListMessage() { }
