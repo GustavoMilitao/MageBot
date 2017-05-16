@@ -8,12 +8,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 using BlueSheep.Core.Groups;
 using BlueSheep.Core.Account;
 
-namespace BlueSheep.AccountsManager
+namespace Core.Storage.AccountsManager
 {
-    class AccountsFileInteractions
+    public class AccountsFileInteractions
     {
         #region Fields
-        private List<Account> Accounts { get; set; } = new List<Account>();
+        public List<Account> Accounts { get; set; } = new List<Account>();
         private List<Account> GroupAccounts { get; set; } = new List<Account>();
         public List<Group> Groups = new List<Group>();
         private readonly string m_SavingFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\accounts.bs";

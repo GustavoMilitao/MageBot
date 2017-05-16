@@ -1,4 +1,4 @@
-﻿using BlueSheep.Properties.I18n.Strings;
+﻿using BlueSheep.Util.I18n.Strings;
 
 namespace BlueSheep.Interface
  {
@@ -70,7 +70,7 @@ namespace BlueSheep.Interface
             this.LaunchPage.Padding = new System.Windows.Forms.Padding(3);
             this.LaunchPage.Size = new System.Drawing.Size(268, 207);
             this.LaunchPage.TabIndex = 0;
-            this.LaunchPage.Text = global::BlueSheep.Properties.I18n.Strings.Strings.Launch;
+            this.LaunchPage.Text = Strings.Launch;
             // 
             // IsMITM
             // 
@@ -134,7 +134,7 @@ namespace BlueSheep.Interface
             this.AddPage.Padding = new System.Windows.Forms.Padding(3);
             this.AddPage.Size = new System.Drawing.Size(268, 207);
             this.AddPage.TabIndex = 1;
-            this.AddPage.Text = global::BlueSheep.Properties.I18n.Strings.Strings.Add;
+            this.AddPage.Text = Strings.Add;
             // 
             // sadikLabel2
             // 
@@ -145,7 +145,7 @@ namespace BlueSheep.Interface
             this.sadikLabel2.Name = "sadikLabel2";
             this.sadikLabel2.Size = new System.Drawing.Size(70, 13);
             this.sadikLabel2.TabIndex = 18;
-            this.sadikLabel2.Text = "Password :";
+            this.sadikLabel2.Text = Strings.Password + " :";
             // 
             // sadikLabel1
             // 
@@ -156,7 +156,7 @@ namespace BlueSheep.Interface
             this.sadikLabel1.Name = "sadikLabel1";
             this.sadikLabel1.Size = new System.Drawing.Size(49, 13);
             this.sadikLabel1.TabIndex = 17;
-            this.sadikLabel1.Text = "Name :";
+            this.sadikLabel1.Text = Strings.Name+ " :";
             // 
             // AddBt
             // 
@@ -169,7 +169,7 @@ namespace BlueSheep.Interface
             this.AddBt.RoundedCorners = false;
             this.AddBt.Size = new System.Drawing.Size(188, 26);
             this.AddBt.TabIndex = 16;
-            this.AddBt.Text = "Add";
+            this.AddBt.Text = Strings.Add;
             this.AddBt.Click += new System.EventHandler(this.buttonAddAccount_Click);
             // 
             // textBoxPassword
@@ -179,7 +179,7 @@ namespace BlueSheep.Interface
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(137, 20);
             this.textBoxPassword.TabIndex = 15;
-            this.textBoxPassword.Text = "Password";
+            this.textBoxPassword.Text = Strings.Password;
             this.textBoxPassword.GotFocus += new System.EventHandler(this.textBoxPassword_GotFocus);
             this.textBoxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPassword_Enter);
             this.textBoxPassword.LostFocus += new System.EventHandler(this.textBoxPassword_LostFocus);
@@ -191,7 +191,7 @@ namespace BlueSheep.Interface
             this.textBoxAccountName.Name = "textBoxAccountName";
             this.textBoxAccountName.Size = new System.Drawing.Size(137, 20);
             this.textBoxAccountName.TabIndex = 14;
-            this.textBoxAccountName.Text = typeof(BlueSheep.Properties.I18n.Strings.Strings).Name;
+            this.textBoxAccountName.Text = Strings.Name;
             this.textBoxAccountName.GotFocus += new System.EventHandler(this.textBoxAccountName_GotFocus);
             this.textBoxAccountName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxAccountName_Enter);
             this.textBoxAccountName.LostFocus += new System.EventHandler(this.textBoxAccountName_LostFocus);
@@ -204,7 +204,7 @@ namespace BlueSheep.Interface
             this.Controls.Add(this.sadikTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GestAccounts";
-            this.Text = "Accounts manager";
+            this.Text = Strings.AccountsManager;
             this.sadikTabControl1.ResumeLayout(false);
             this.LaunchPage.ResumeLayout(false);
             this.AddPage.ResumeLayout(false);

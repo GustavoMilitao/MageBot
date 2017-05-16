@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BlueSheep.Core.Fight;
+using BlueSheep.Util.I18n.Strings;
+using BlueSheep.Util.Text.Log;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,14 +15,14 @@ namespace BlueSheep.Interface
         /// </summary>
 
         #region Fields
-        AccountUC Account;
+        AccountUC accUserControl;
         #endregion
 
         #region Constructors
         public IAChoice(AccountUC account)
         {
             InitializeComponent();
-            Account = account;
+            accUserControl = account;
             Text = Strings.AIManager;
             DelBt.Text = Strings.Delete;
             LoadBt.Text = Strings.Load;
@@ -140,13 +143,13 @@ namespace BlueSheep.Interface
 
         private void LaunchIA()
         {
-            if (FilesList.SelectedItems.Count > 0 && Account != null)
+            if (FilesList.SelectedItems.Count > 0 && accUserControl != null)
             {
-                Account.FightParser = new FightParser(Account, FilesList.SelectedItems[0].SubItems[5].Text, FilesList.SelectedItems[0].SubItems[0].Text);
-                Account.Log(new BotTextInformation("IA chargée : " + FilesList.SelectedItems[0].Text), 0);
-                Account.FightParser.Name = FilesList.SelectedItems[0].Text;
-                Account.NomIA.Text = Account.FightParser.Name;
-                Account.Fight = new BFight(Account, Account.FightParser, Account.FightData);
+                accUserControl.Account.Config.FightParser = new FightParser(accUserControl.Account, FilesList.SelectedItems[0].SubItems[5].Text, FilesList.SelectedItems[0].SubItems[0].Text);
+                accUserControl.Log(new BotTextInformation("AI loaded : " + FilesList.SelectedItems[0].Text), 0);
+                accUserControl.Account.Config.FightParser.Name = FilesList.SelectedItems[0].Text;
+                accUserControl.NomIA.Text = accUserControl.Account.Config.FightParser.Name;
+                accUserControl.Account.Fight = new BFight(accUserControl.Account, accUserControl.Account.Config.FightParser, accUserControl.Account.FightData);
                 Close();
             }
         }

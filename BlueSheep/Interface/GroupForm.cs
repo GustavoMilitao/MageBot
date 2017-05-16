@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BlueSheep.Core.Account;
+using BlueSheep.Core.Groups;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -12,28 +14,26 @@ namespace BlueSheep.Interface
 
         #region Fields
         public List<AccountUC> listAccounts;
-        public List<Account> list;
         #endregion
 
         private delegate void Callback(AccountUC account);
 
         #region Constructors
-        public GroupForm(List<AccountUC> accounts, string name)
+        public GroupForm(List<Account> accounts, string name)
         {
             InitializeComponent();
             Text = name;
-            list = new List<Account>();
-            foreach (AccountUC account in accounts)
+            listAccounts = new List<AccountUC>();
+            foreach (Account account in accounts)
             {
                 TabPage tab = new TabPage(account.AccountName);
-                AccountUC naccount = new AccountUC(account.AccountName, account.AccountPassword, true, this);
                 AccountTabs.TabPages.Add(tab);
+                account.MyGroup = new Group(accounts, Name);
+                AccountUC naccount = new AccountUC(account, true, this);
+                listAccounts.Add(naccount);
                 tab.Controls.Add(naccount);
                 naccount.Dock = DockStyle.Fill;
                 naccount.Show();
-                naccount.MyGroup = new Group(accounts, Name);
-                list.Add(new Account(account.AccountName, account.AccountPassword));
-                naccount.Init();
             }
         }
 

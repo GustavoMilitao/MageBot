@@ -9,6 +9,23 @@ using System.Collections;
 using System.Windows.Forms.DataVisualization.Charting;
 using BlueSheep.Interface.UCs;
 using System.IO;
+using BlueSheep.Core.Account;
+using Core.Engine.Constants;
+using BlueSheep.Core.Pets;
+using BlueSheep.Util.I18n.Strings;
+using BlueSheep.Protocol.Types.Game.Character.Choice;
+using BlueSheep.Protocol.Types.Game.Data.Items;
+using BlueSheep.Core.Map;
+using BlueSheep.Core.Inventory;
+using BlueSheep.Core.Fight;
+using BlueSheep.Core.Npc;
+using BlueSheep.Core.Job;
+using BlueSheep.Engine.Network;
+using BlueSheep.Util.Text.Log;
+using BlueSheep.Core.Network;
+using BlueSheep.Util.Enums.Internal;
+using BlueSheep.Core.Misc;
+using DataFiles.Data.I18n;
 
 namespace BlueSheep.Interface
 {
@@ -18,67 +35,15 @@ namespace BlueSheep.Interface
         /// Main UC
         /// </summary>
 
-        #region Fields
-        public string AccountName;
-        public string AccountPassword;
-        private Running m_Running;
-        private Thread m_ConnectionThread;
-        private Timer m_TimerConnectionThread;
-        private List<Bot> m_Bots = new List<Bot>();
-        public string loginstate;
-        private DateTime m_NextMeal;
-        public bool IsMaster;
-        public bool IsSlave;
-        public BFight Fight;
-        public FightData FightData;
-        public Map Map;
-        public MapData MapData;
-        public Inventory Inventory;
-        public List<Spell> Spells;
-        public PathManager Path;
-        public Group MyGroup;
-        public int MyGroupId;
-        public HouseBuy House = null;
-        public Npc Npc;
-        public Flood Flood;
-        public List<Job> Jobs;
-        public bool Busy;
-        public double serverTimeLag;
-        public Gather Gather;
-        public List<JobUC> JobsUC;
-        public HumanCheck HumanCheck;
-        public HeroicUC HeroicUC;
-        public GestItemsUC GestItemsUC;
-        public CaracUC CaracUC;
-        public RegenUC RegenUC;
-        public FloodUC FloodUC;
-        public bool IsMITM;
-        public Status state;
-        public ConfigManager ConfigManager;
-        public FightParser FightParser;
-        public WatchDog WatchDog;
-        public MetroFramework.Forms.MetroForm m_ParentForm;
-        #endregion
-
         #region Properties
-        public bool IsBegun { get; set; }
-        public SocketManager SocketManager { get; set; }
-        public DateTime NextMeal { get; set; }
-        public string Ticket { get; set; }
-        public List<Pet> PetsModifiedList { get; set; }
-        public List<Pet> petsList { get; set; }
-        public List<int> GiftsList { get; set; }
-        public InteractiveElement Safe { get; set; }
-        public CharacterBaseInformations CharacterBaseInformations { get; set; }
-        public int Sequence { get; set; }
-        public LatencyFrame LatencyFrame { get; set; }
-        public Pods Pods { get; set; }
-        public List<ObjectItem> SafeItems { get; set; }
-        public Running Running { get; set; }
-        public Queue<int> LastPacketID { get; set; }
-        public int LastPacket;
-        public int MapID { get; set; }
-        public CharacterCharacteristicsInformations CharacterStats { get; set; }
+        public Account Account { get; set; }
+        public List<JobUC> JobsUC { get; set; }
+        public HeroicUC HeroicUC { get; set; }
+        public GestItemsUC GestItemsUC { get; set; }
+        public CaracUC CaracUC { get; set; }
+        public RegenUC RegenUC { get; set; }
+        public FloodUC FloodUC { get; set; }
+        public MetroFramework.Forms.MetroForm m_ParentForm { get; set; }
         #endregion
 
         #region Delegates
@@ -97,19 +62,19 @@ namespace BlueSheep.Interface
 
         #region Constructeurs
 
-        public AccountUC(string username, string password, bool socket, MetroFramework.Forms.MetroForm form = null)
+        public AccountUC(Account account, bool socket = true, MetroFramework.Forms.MetroForm form = null)
         {
             InitializeComponent();
-            MonsterTextBox.KeyUp += (s, e) =>
-            {
-                IntelliSense.AutoCompleteTextBox(MonsterTextBox, lstPopup, IntelliSense.MonstersList, e);
-            };
+            //MonsterTextBox.KeyUp += (s, e) =>
+            //{
+            //    IntelliSense.AutoCompleteTextBox(MonsterTextBox, lstPopup, IntelliSense.MonstersList, e);
+            //};
             if (form != null)
                 m_ParentForm = form;
-            AccountName = username;
-            AccountPassword = password;
-            PetsModifiedList = new List<Pet>();
-            IsMITM = !socket;
+            Account = account;
+            account.PetsModifiedList = new List<Pet>();
+            account.Config = new AccountConfig(account);
+            account.Config.IsMITM = !socket;
             listViewPets.Columns.Add(Strings.Name, 150, HorizontalAlignment.Left);
             listViewPets.Columns.Add(Strings.UID, 0, HorizontalAlignment.Left);
             listViewPets.Columns.Add(Strings.Food + string.Format(" ({0})", Strings.Amount), -2, HorizontalAlignment.Left);
@@ -139,27 +104,26 @@ namespace BlueSheep.Interface
             MonstersRestrictionsView.Columns.Add(Strings.Number, -2);
             MonstersRestrictionsView.Columns.Add(Strings.Restriction, -2);
             JobsUC = new List<JobUC>();
-            NextMeal = new DateTime();
-            Ticket = string.Empty;
-            PetsModifiedList = null;
-            petsList = null;
-            Safe = null;
-            CharacterBaseInformations = null;
-            Sequence = 0;
-            LatencyFrame = null;
-            Pods = null;
-            SafeItems = new List<ObjectItem>();
-            LastPacketID = new Queue<int>();
-            Running = null;
+            account.Config.NextMeal = new DateTime();
+            account.Ticket = string.Empty;
+            account.PetsList = new List<Pet>();
+            account.Safe = new Core.Map.Elements.InteractiveElement();
+            account.CharacterBaseInformations = new CharacterBaseInformations();
+            account.Sequence = 0;
+            account.LatencyFrame = new Core.Frame.LatencyFrame(account);
+            account.Pods = new Core.Inventory.Pods();
+            account.SafeItems = new List<ObjectItem>();
+            account.LastPacketID = new Queue<int>();
+            account.Running = new Core.Running();
             //Fight = new BFight(this);
-            Fight = null;
-            Map = new Map(this);
-            Inventory = new Inventory(this);
-            Spells = new List<Spell>();
-            Npc = new Npc(this);
+            account.Fight = null;
+            account.Map = new Map(account);
+            account.Inventory = new Inventory(account);
+            account.Spells = new List<BSpell>();
+            account.Npc = new Npc(account);
 
-            Jobs = new List<Job>();
-            Gather = new Gather(this);
+            account.Jobs = new List<Job>();
+            account.Gather = new Gather(account);
 
             //Heroic mode
             HeroicUC = new HeroicUC(this);
@@ -186,17 +150,17 @@ namespace BlueSheep.Interface
             tabPage2.Controls.Add(FloodUC);
             FloodUC.Show();
 
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", AccountName);
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName);
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
             //Config Manager
-            ConfigManager = new ConfigManager(this);
+            account.Config.ConfigRecover = new ConfigManager(account);
 
-            Flood = new Core.Misc.Flood(this);
-            FightData = new FightData(this);
-            MapData = new MapData(this);
-            WatchDog = new WatchDog(this);
+            account.Config.Flood = new Core.Misc.Flood(account);
+            account.FightData = new FightData(account);
+            account.MapData = new MapData(account);
+            account.WatchDog = new WatchDog(account);
         }
 
         public AccountUC()
@@ -206,32 +170,32 @@ namespace BlueSheep.Interface
 
         #endregion
 
-        #region Methodes d'interfaces
+        #region Interface Methods
 
         private void Form_Closed(object sender, EventArgs e)
         {
-            if (SocketManager != null)
-                SocketManager.DisconnectFromGUI();
-            if (IsMITM)
+            if (Account.SocketManager != null)
+                Account.SocketManager.DisconnectFromGUI();
+            if (Account.Config.IsMITM)
             {
-                SocketManager.DisconnectServer("Form closing");
+                Account.SocketManager.DisconnectServer("Form closing");
             }
         }
 
         private void SaveConfig_Click(object sender, EventArgs e)
         {
-            ConfigManager.SaveConfig();
+            Account.Config.ConfigRecover.SaveConfig();
         }
 
         private void DeleteConfigBt_Click(object sender, EventArgs e)
         {
-            ConfigManager.DeleteConfig();
+            Account.Config.ConfigRecover.DeleteConfig();
         }
 
         public void InitMITM()
         {
-            SocketManager = new SocketManager(this);
-            SocketManager.InitMITM();
+            Account.SocketManager = new SocketManager(Account);
+            Account.SocketManager.InitMITM();
 
         }
 
@@ -253,7 +217,7 @@ namespace BlueSheep.Interface
                     return;
 
                 if (LogCb.Checked)
-                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + CharacterBaseInformations.Name + ".txt", true))
+                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + Account.CharacterBaseInformations.Name + ".txt", true))
                         fileWriter.WriteLine(text.Text);
 
                 int startIndex = LogConsole.TextLength;
@@ -271,16 +235,16 @@ namespace BlueSheep.Interface
         private void DeleteItem_Click(object sender, EventArgs e)
         {
             //Delete an item from inventory
-            if (state == BlueSheep.Engine.Enums.Status.Fighting)
+            if (Account.State == Status.Fighting)
             {
-                Log(new ErrorTextInformation("Impossible de supprimer un objet en combat ^^"), 0);
+                Log(new ErrorTextInformation("It's impossible to delete an item in fight ^^"), 0);
                 return;
             }
             for (int i = 0; i < LVItems.Items.Count; i++)
             {
                 if (LVItems.Items[i].Selected)
                 {
-                    Inventory.DeleteItem(Convert.ToInt32(LVItems.Items[i].SubItems[1].Text), Convert.ToInt32(LVItems.Items[i].SubItems[3].Text));
+                    Account.Inventory.DeleteItem(Convert.ToInt32(LVItems.Items[i].SubItems[1].Text), Convert.ToInt32(LVItems.Items[i].SubItems[3].Text));
                 }
             }
         }
@@ -288,16 +252,16 @@ namespace BlueSheep.Interface
         private void DropItems_Click(object sender, EventArgs e)
         {
             //Drop an item from inventory
-            if (state == BlueSheep.Engine.Enums.Status.Fighting)
+            if (Account.State == Status.Fighting)
             {
-                Log(new ErrorTextInformation("Impossible de jeter un objet en combat ^^"), 0);
+                Log(new ErrorTextInformation("It's impossible to drop an item in fight ^^"), 0);
                 return;
             }
             for (int i = 0; i < LVItems.Items.Count; i++)
             {
                 if (LVItems.Items[i].Selected)
                 {
-                    Inventory.DropItem(Convert.ToInt32(LVItems.Items[i].SubItems[1].Text), Convert.ToInt32(LVItems.Items[i].SubItems[3].Text));
+                    Account.Inventory.DropItem(Convert.ToInt32(LVItems.Items[i].SubItems[1].Text), Convert.ToInt32(LVItems.Items[i].SubItems[3].Text));
                 }
             }
         }
@@ -305,16 +269,16 @@ namespace BlueSheep.Interface
         private void sadikButton1_Click(object sender, EventArgs e)
         {
             //Use an item from inventory
-            if (state == BlueSheep.Engine.Enums.Status.Fighting)
+            if (Account.State == Status.Fighting)
             {
-                Log(new ErrorTextInformation("Impossible d'utiliser un objet en combat ^^"), 0);
+                Log(new ErrorTextInformation("It's impossible to use an item in fight ^^"), 0);
                 return;
             }
             for (int i = 0; i < LVItems.Items.Count; i++)
             {
                 if (LVItems.Items[i].Selected)
                 {
-                    Inventory.UseItem(Convert.ToInt32(LVItems.Items[i].SubItems[1].Text));
+                    Account.Inventory.UseItem(Convert.ToInt32(LVItems.Items[i].SubItems[1].Text));
                 }
             }
         }
@@ -322,24 +286,24 @@ namespace BlueSheep.Interface
         private void sadikButton2_Click(object sender, EventArgs e)
         {
             //Equip an item from inventory
-            if (StatusLb.Text == "Combat" && StatusLb.Text == "Fighting")
+            if (Account.State == Status.Fighting)
             {
-                Log(new ErrorTextInformation("Impossible d'équiper un item en combat ^^"), 0);
+                Log(new ErrorTextInformation("It's impossible to equip an item in fight ^^"), 0);
             }
             for (int i = 0; i < LVItems.Items.Count; i++)
             {
                 if (LVItems.Items[i].Selected)
                 {
-                    Inventory.EquipItem(Convert.ToInt32(LVItems.Items[i].SubItems[1].Text));
+                    Account.Inventory.EquipItem(Convert.ToInt32(LVItems.Items[i].SubItems[1].Text));
                 }
             }
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if (SocketManager.State == SocketState.Connected)
+            if (Account.SocketManager.State == SocketState.Connected)
             {
-                SocketManager.DisconnectFromGUI();
+                Account.SocketManager.DisconnectFromGUI();
             }
             else
             {
@@ -350,14 +314,14 @@ namespace BlueSheep.Interface
 
         private void checkBoxBegin_CheckedChanged(object sender)
         {
-            if (checkBoxBegin.Checked == true)
+            if (checkBoxBegin.Checked)
             {
-                StartFeeding();
+                Account.StartFeeding();
             }
             else
             {
-                Log(new BotTextInformation("L'élevage va être stoppé"), 3);
-                Running = null;
+                Log(new BotTextInformation("Pet feeding stopped"), 3);
+                Account.Running = null;
             }
         }
 
@@ -391,7 +355,7 @@ namespace BlueSheep.Interface
                         PosLabel.Text = text;
                         break;
                     case 7:
-                        ParentForm.Text = text;
+                        base.ParentForm.Text = text;
                         break;
                     case 8:
                         LevelLb.Text = text;
@@ -420,21 +384,21 @@ namespace BlueSheep.Interface
 
         private void LaunchPathBt_Click(object sender, EventArgs e)
         {
-            if (Path != null)
+            if (Account.Config.Path != null)
             {
-                Log(new BotTextInformation("Lancement du trajet"), 1);
-                Path.Start();
+                Log(new BotTextInformation("Path started"), 1);
+                Account.Config.Path.Start();
             }
             else
-                Log(new ErrorTextInformation("Aucun trajet chargé"), 3);
+                Log(new ErrorTextInformation("No Path loaded"), 3);
         }
 
         private void StopPathBt_Click(object sender, EventArgs e)
         {
-            if (Path != null)
+            if (Account.Config.Path != null)
             {
-                Path.StopPath();
-                Log(new BotTextInformation("Trajet arrêté"), 1);
+                Account.Config.Path.StopPath();
+                Log(new BotTextInformation("Path stopped"), 1);
             }
         }
 
@@ -446,8 +410,8 @@ namespace BlueSheep.Interface
 
         private void StartWaitingBt_Click(object sender, EventArgs e)
         {
-            House = new HouseBuy(this);
-            Log(new BotTextInformation("En attente de la mise en vente d'une maison..."), 1);
+            Account.House = new HouseBuy(Account);
+            Log(new BotTextInformation("Waiting for the sale of a house..."), 1);
         }
 
         private void ParcourirBt_Click(object sender, EventArgs e)
@@ -459,7 +423,7 @@ namespace BlueSheep.Interface
         public void ActualizeInventory()
         {
             BeginInvoke(new MethodInvoker(LVItems.Items.Clear));
-            foreach (Core.Inventory.Item i in Inventory.Items)
+            foreach (Core.Inventory.Item i in Account.Inventory.Items)
             {
                 string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
                 System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
@@ -469,7 +433,7 @@ namespace BlueSheep.Interface
             RegenUC.RefreshQuantity();
 
             BeginInvoke(new MethodInvoker(LVItemBag.Items.Clear));
-            foreach (Core.Inventory.Item i in Inventory.Items)
+            foreach (Core.Inventory.Item i in Account.Inventory.Items)
             {
                 string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
                 System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
@@ -485,21 +449,21 @@ namespace BlueSheep.Interface
                 BeginInvoke(new MethodInvoker(ActualizeFamis));
                 return;
             }
-            if (NextMeal.Year != 1)
-                Invoke(new DelegLabel(ModLabel), "Prochain repas à : " + NextMeal.ToShortTimeString(), labelNextMeal);
+            if (Account.Config.NextMeal.Year != 1)
+                Invoke(new DelegLabel(ModLabel), "Next meal in : " + Account.Config.NextMeal.ToShortTimeString(), labelNextMeal);
             else
-                Invoke(new DelegLabel(ModLabel), "Pas de prochain repas", labelNextMeal);
+                Invoke(new DelegLabel(ModLabel), "No next meal", labelNextMeal);
 
-            Invoke(new DelegLabel(ModLabel), Safe != null ? "Coffre : Oui" : "Coffre : Non", labelSafe);
+            Invoke(new DelegLabel(ModLabel), Account.Safe != null ? "Safe: Yes " : " Safe: No", labelSafe);
 
             if (listViewPets.InvokeRequired)
                 BeginInvoke(new MethodInvoker(listViewPets.Items.Clear));
             else
                 listViewPets.Items.Clear();
 
-            if ((petsList != null) && (petsList.Count != 0))
+            if ((Account.PetsList != null) && (Account.PetsList.Count != 0))
             {
-                foreach (Pet pet in petsList)
+                foreach (Pet pet in Account.PetsList)
                 {
                     ListViewItem listViewItem = new ListViewItem();
                     listViewItem.SubItems[0].Text = I18N.GetText((int)pet.Datas.Fields["nameId"]);
@@ -508,7 +472,7 @@ namespace BlueSheep.Interface
                     if (pet.FoodList.Count != 0)
                         listViewItem.SubItems.Add(I18N.GetText((int)pet.FoodList[0].Datas.Fields["nameId"]) + " (" + pet.FoodList[0].Informations.Quantity + ")");
                     else
-                        listViewItem.SubItems.Add("Aucune (0)");
+                        listViewItem.SubItems.Add("None (0)");
 
                     if (pet.NextMeal.Year != 1)
                     {
@@ -518,7 +482,7 @@ namespace BlueSheep.Interface
                         listViewItem.SubItems.Add(nextMeal.ToShortDateString() + " " + nextMeal.ToShortTimeString());
                     }
                     else
-                        listViewItem.SubItems.Add("Pas de prochain repas.");
+                        listViewItem.SubItems.Add("No next meal.");
 
                     listViewItem.SubItems.Add(pet.Effect);
 
@@ -621,11 +585,11 @@ namespace BlueSheep.Interface
             //}
             foreach (GameRolePlayNpcInformations n in MapData.Npcs)
             {
-                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), I18N.GetText((int)n.ContextualId),"?", "NPC" }), MapView);
+                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), I18N.GetText((int)n.ContextualId), "?", "NPC" }), MapView);
             }
-            foreach(GameRolePlayCharacterInformations c in MapData.Players)
+            foreach (GameRolePlayCharacterInformations c in MapData.Players)
             {
-                AddItem(new ListViewItem(new string[] { Convert.ToString("[CID]:"+c.ContextualId+"[ACCID]:"+c.AccountId), c.Name ,Convert.ToString(c.Disposition.CellId), "Player" }), MapView);
+                AddItem(new ListViewItem(new string[] { Convert.ToString("[CID]:" + c.ContextualId + "[ACCID]:" + c.AccountId), c.Name, Convert.ToString(c.Disposition.CellId), "Player" }), MapView);
             }
         }
 
@@ -1031,7 +995,7 @@ namespace BlueSheep.Interface
             if (m_TimerConnectionThread != null)
                 m_TimerConnectionThread.Change(Timeout.Infinite, Timeout.Infinite);
 
-            Thread.Sleep(GetRandomTime()+new Random().Next(10000));
+            Thread.Sleep(GetRandomTime() + new Random().Next(10000));
 
             m_Running = new Running(this);
 
@@ -1060,7 +1024,7 @@ namespace BlueSheep.Interface
             //Uc.Show();
             if (m_ParentForm != null)
             {
-                if(m_ParentForm is GroupForm)
+                if (m_ParentForm is GroupForm)
                 {
                     ((GroupForm)m_ParentForm).Reconnect(this);
                 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BlueSheep.Util.I18n.Strings;
+using BlueSheep.Util.Text.Log;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,14 +14,14 @@ namespace BlueSheep.Interface
         /// </summary>
 
         #region Fields
-        private AccountUC Account;
+        private AccountUC accUserControl;
         #endregion
 
         #region Constructors
         public PathChoiceForm(AccountUC account)
         {
             InitializeComponent();
-            Account = account;
+            accUserControl = account;
             Text = Strings.PathManager;
             DelBt.Text = Strings.Delete;
             LoadBt.Text = Strings.Load;
@@ -140,14 +142,14 @@ namespace BlueSheep.Interface
 
         private void LaunchPath(object sender, EventArgs e)
         {
-            if (FilesList.SelectedItems.Count > 0 && Account != null)
+            if (FilesList.SelectedItems.Count > 0 && accUserControl != null)
             {
-                Account.Path = new Core.Path.PathManager(Account, FilesList.SelectedItems[0].SubItems[5].Text, FilesList.SelectedItems[0].SubItems[0].Text);
-                Account.Log(new BotTextInformation("Trajet chargé : " + FilesList.SelectedItems[0].Text), 0);
-                Account.Path.pathBot = FilesList.SelectedItems[0].Text;
-                if (Account.Fight == null)
+                accUserControl.Account.Config.Path = new Core.Path.PathManager(accUserControl.Account, FilesList.SelectedItems[0].SubItems[5].Text, FilesList.SelectedItems[0].SubItems[0].Text);
+                accUserControl.Log(new BotTextInformation("Trajet chargé : " + FilesList.SelectedItems[0].Text), 0);
+                accUserControl.Account.Config.Path.Path = FilesList.SelectedItems[0].Text;
+                if (accUserControl.Account.Fight == null)
                 {
-                    Account.Log(new ErrorTextInformation("WARNING : T'as chargé aucune IA, fait gaffe mon coco :p"), 0);
+                    accUserControl.Log(new ErrorTextInformation("WARNING : You haven't any AI loaded :p"), 0);
                 }
                 Close();
             }

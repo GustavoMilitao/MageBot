@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BlueSheep.Core.Account;
+using BlueSheep.Core.Groups;
+using BlueSheep.Util.I18n.Strings;
+using Core.Storage.AccountsManager;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -41,17 +45,11 @@ namespace BlueSheep.Interface
             foreach (ListViewItem item in listViewGroups.SelectedItems)
             {
                 Group group = SearchGroups(item.Text);
-                List<AccountUC> listaccounts = new List<AccountUC>();
-                //foreach (AccountUC account in group.accounts)
-                //{
-                //    //AccountUC acc = new AccountUC(account.Name, account.Password);
-                //    listaccounts.Add(account);
-                //}
                 GroupForm frm = new GroupForm(group.accounts, group.name);
-                //foreach (AccountUC account in frm.listAccounts)
-                //{
-                //    account.Init();
-                //}
+                foreach (Account account in group.accounts)
+                {
+                    account.Init();
+                }
                 frm.Show();
                 MainForm.ActualMainForm.AddForm(frm);
             }
@@ -75,10 +73,10 @@ namespace BlueSheep.Interface
         {
             if (listViewAccounts.SelectedItems.Count > 0)
             {
-                List<AccountUC> listaccounts = new List<AccountUC>();
+                List<Account> listaccounts = new List<Account>();
                 foreach (ListViewItem account in listViewAccounts.SelectedItems)
                 {
-                    listaccounts.Add(new AccountUC(account.SubItems[0].Text, account.SubItems[1].Text, false));
+                    listaccounts.Add(new Account(account.SubItems[0].Text, account.SubItems[1].Text, false));
                 }
                 if (NameBox.Text.Length > 0)
                 {
@@ -131,7 +129,7 @@ namespace BlueSheep.Interface
             accountsFileInteractions.RecoverAccountsInfos();
             foreach (Account accountObject in accountsFileInteractions.Accounts)
             {
-                string[] row1 = { accountObject.Name, accountObject.Password };
+                string[] row1 = { accountObject.AccountName, accountObject.AccountPassword};
                 ListViewItem li = new ListViewItem(row1);
                 listViewAccounts.Items.Add(li);
             }

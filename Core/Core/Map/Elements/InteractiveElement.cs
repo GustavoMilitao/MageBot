@@ -16,6 +16,11 @@ namespace BlueSheep.Core.Map.Elements
             DisabledSkills = disabledSkills;
         }
 
+        public InteractiveElement()
+        {
+
+        }
+
         public InteractiveElement(Protocol.Types.Game.Interactive.InteractiveElement element)
         {
             Id = (uint)element.ElementId;
