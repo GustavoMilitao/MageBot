@@ -11,15 +11,17 @@ using System.Text.RegularExpressions;
 using BlueSheep.Core.Monsters;
 using BlueSheep.Core.Fight;
 using System.Threading.Tasks;
+using BlueSheep.Core.Account;
+using BlueSheep.Core.Path;
 
-namespace BlueSheep.Protocol
+namespace Core.Engine.Common
 {
     public class CLIParser
     {
         /* Command Line Parser */
 
         #region Fields
-        private Core.Account.Account account;
+        private Account account;
 
         /// <summary>
         /// Stores the commands history.
@@ -68,7 +70,7 @@ namespace BlueSheep.Protocol
         #endregion
 
         #region Constructors
-        public CLIParser(Core.Account.Account Account)
+        public CLIParser(Account Account)
         {
             account = Account;
         }
@@ -842,7 +844,7 @@ namespace BlueSheep.Protocol
             {
                 if (path != "null")
                 {
-                    account.Config.Path = new Core.Path.PathManager(account, path, name);
+                    account.Config.Path = new PathManager(account, path, name);
                     account.Config.Path.StopPath();
                     result.Add("Trajet chargé : " + name);
                 }

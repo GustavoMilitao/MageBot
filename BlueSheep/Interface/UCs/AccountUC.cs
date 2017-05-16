@@ -26,6 +26,7 @@ using BlueSheep.Core.Network;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Core.Misc;
 using DataFiles.Data.I18n;
+using Core.Engine.Common;
 
 namespace BlueSheep.Interface
 {
@@ -509,7 +510,7 @@ namespace BlueSheep.Interface
             {
                 string text = CommandeBox.Text;
                 CommandeBox.Clear();
-                CLIParser parser = new CLIParser(this);
+                CLIParser parser = new CLIParser(Account);
                 List<string> result = parser.Parse(text);
                 foreach (string s in result)
                 {
