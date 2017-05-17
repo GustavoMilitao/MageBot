@@ -1,9 +1,9 @@
-﻿using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Game.Interactive;
-using BlueSheep.Protocol.Types.Game.Interactive;
+﻿using MageBot.Util.IO;
+using MageBot.Protocol.Messages.Game.Interactive;
+using MageBot.Protocol.Types.Game.Interactive;
 using Util.Util.Text.Log;
 
-namespace BlueSheep.Core.Storage
+namespace MageBot.Core.Storage
 {
     class Opening
     {

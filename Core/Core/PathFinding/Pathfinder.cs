@@ -1,11 +1,11 @@
-﻿using DataFiles.Data.Pathfinding.Positions;
+﻿using MageBot.DataFiles.Data.Pathfinding.Positions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BlueSheep.Core.Map;
-using BlueSheep.Core.Fight;
+using MageBot.Core.Map;
+using MageBot.Core.Fight;
 
-namespace DataFiles.Data.Pathfinding
+namespace MageBot.DataFiles.Data.Pathfinding
 {
     public class Pathfinder
     {
@@ -334,8 +334,8 @@ namespace DataFiles.Data.Pathfinding
         {
             bool isNewSystem = MapData.Data.IsUsingNewMovementSystem;
             MapPoint actualPoint = new MapPoint(x, y);
-            DataFiles.Data.D2p.CellData fCellData = null;
-            DataFiles.Data.D2p.CellData sCellData = null;
+            MageBot.DataFiles.Data.D2p.CellData fCellData = null;
+            MageBot.DataFiles.Data.D2p.CellData sCellData = null;
             bool mov = false;
             int floor = 0;
 
@@ -372,13 +372,13 @@ namespace DataFiles.Data.Pathfinding
 
         public bool IsChangeZone(int fCell, int sCell)
         {
-            DataFiles.Data.D2p.Map data = MapData.Data;
+            MageBot.DataFiles.Data.D2p.Map data = MapData.Data;
             return data.Cells[fCell].MoveZone != data.Cells[sCell].MoveZone && System.Math.Abs(data.Cells[fCell].Floor) == System.Math.Abs(data.Cells[sCell].Floor);
         }
 
         private double GetCellSpeed(int cellId, bool throughEntities)
         {
-            DataFiles.Data.D2p.Map data = MapData.Data;
+            MageBot.DataFiles.Data.D2p.Map data = MapData.Data;
             var speed = data.Cells[cellId].Speed;
             MapPoint cell = new MapPoint(cellId);
 

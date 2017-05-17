@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Connection.Register
+namespace MageBot.Protocol.Messages.Connection.Register
 {
     public class NicknameRefusedMessage : Message
     {

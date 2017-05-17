@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Fight
 {
-    using BlueSheep.Protocol.Types.Game.Context.Fight;
+    using MageBot.Protocol.Types.Game.Context.Fight;
 
 
     public class GameRolePlayShowChallengeMessage : Message

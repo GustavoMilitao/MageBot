@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.DataCenter
+﻿namespace MageBot.DataCenter
 {
     public class AnimFunData
     {

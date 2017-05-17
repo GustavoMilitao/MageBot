@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Core.Fight
+﻿namespace MageBot.Core.Fight
 {
     public enum PlacementEnum
     {

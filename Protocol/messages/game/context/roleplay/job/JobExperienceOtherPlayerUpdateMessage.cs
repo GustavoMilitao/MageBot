@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Job
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Job
 {
 
 

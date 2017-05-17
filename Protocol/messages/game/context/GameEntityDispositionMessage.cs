@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context
+namespace MageBot.Protocol.Messages.Game.Context
 {
-    using BlueSheep.Protocol.Types.Game.Context;
+    using MageBot.Protocol.Types.Game.Context;
 
 
     public class GameEntityDispositionMessage : Message

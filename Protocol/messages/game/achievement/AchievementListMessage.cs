@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Achievement
+namespace MageBot.Protocol.Messages.Game.Achievement
 {
-    using BlueSheep.Protocol.Types.Game.Achievement;
+    using MageBot.Protocol.Types.Game.Achievement;
     using System.Collections.Generic;
 
 

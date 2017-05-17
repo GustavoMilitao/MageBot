@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Protocol.Messages.Connection
+﻿namespace MageBot.Protocol.Messages.Connection
 {
     public class IdentificationSuccessMessage : Message
     {

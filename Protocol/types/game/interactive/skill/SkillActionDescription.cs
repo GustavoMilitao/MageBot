@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Interactive.Skill
+namespace MageBot.Protocol.Types.Game.Interactive.Skill
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class SkillActionDescription : NetworkType

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DataFiles.Data.D2o
+namespace MageBot.DataFiles.Data.D2o
 {
     //[DefaultMember("Field")]      
     public class DataClass

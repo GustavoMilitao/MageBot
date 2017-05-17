@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Fight
+namespace MageBot.Protocol.Messages.Game.Context.Fight
 {
-    using BlueSheep.Protocol.Types.Game.Context.Fight;
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay.Party;
+    using MageBot.Protocol.Types.Game.Context.Fight;
+    using MageBot.Protocol.Types.Game.Context.Roleplay.Party;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class GameFightEndMessage : Message

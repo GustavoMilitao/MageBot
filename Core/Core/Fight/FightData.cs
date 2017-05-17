@@ -1,22 +1,22 @@
-﻿using DataFiles.Data.D2o;
-using BlueSheep.Protocol.Enums;
-using BlueSheep.Protocol.Messages.Game.Inventory.Preset;
-using BlueSheep.Protocol.Types.Game.Actions.Fight;
-using BlueSheep.Protocol.Types.Game.Character.Characteristic;
-using BlueSheep.Protocol.Types.Game.Context.Fight;
-using DataFiles.Data.Pathfinding;
-using DataFiles.Data.Pathfinding.Positions;
-using BlueSheep.Util.Enums.Internal;
+﻿using MageBot.DataFiles.Data.D2o;
+using MageBot.Protocol.Enums;
+using MageBot.Protocol.Messages.Game.Inventory.Preset;
+using MageBot.Protocol.Types.Game.Actions.Fight;
+using MageBot.Protocol.Types.Game.Character.Characteristic;
+using MageBot.Protocol.Types.Game.Context.Fight;
+using MageBot.DataFiles.Data.Pathfinding;
+using MageBot.DataFiles.Data.Pathfinding.Positions;
+using MageBot.Util.Enums.Internal;
 using Util.Util.Text.Log;
-using BlueSheep.Util.Enums.Fight;
+using MageBot.Util.Enums.Fight;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using BlueSheep.Core.Monsters;
+using MageBot.Core.Monsters;
 
-namespace BlueSheep.Core.Fight
+namespace MageBot.Core.Fight
 {
     public class FightData
     {
@@ -97,7 +97,7 @@ namespace BlueSheep.Core.Fight
             Boss = new Dictionary<string, int>();
             foreach (DataClass d in b)
             {
-                Boss.Add(DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]), (int)d.Fields["id"]);
+                Boss.Add(MageBot.DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]), (int)d.Fields["id"]);
             }
         }
         #endregion

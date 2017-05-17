@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Atlas.Compass
+namespace MageBot.Protocol.Messages.Game.Atlas.Compass
 {
 
 

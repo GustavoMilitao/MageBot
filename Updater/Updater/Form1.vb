@@ -5,7 +5,7 @@ Imports Microsoft.Win32
 
 Public Class UpdaterFrm
     Dim CurrentVersion As String = "0.0.0" '--- Change this to Current version, needs changing on every update
-    Dim ProgramName As String = "BlueSheep" '--- Program Name
+    Dim ProgramName As String = "MageBot" '--- Program Name
     Dim SiteName As String = "http://bluesheepbot.com/update.html" '--- Update Page
     Dim VersionCHK, GetVer, GetVerLink As String
     Dim GetUpd As Integer
@@ -36,10 +36,10 @@ Public Class UpdaterFrm
             '    End If
             Pbar.Value = 20
             Pbar.Value = 25
-            If Not Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep") Then
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep")
+            If Not Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot") Then
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot")
             End If
-            If File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep\BlueSheep.exe") Then
+            If File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.exe") Then
                 AutoUpdate()
             Else
                 Dim Thread As New Threading.Thread(AddressOf Download)
@@ -59,20 +59,20 @@ Public Class UpdaterFrm
         Dim matches As MatchCollection = Regex.Matches(ReadSource)
         'Dim reg As RegistryKey
         Dim c As Single
-        Dim reg As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\BlueSheep")
-        'If File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep\version.bs") Then
-        'If cs.Contains("Software\\BlueSheep") Then
+        Dim reg As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\MageBot")
+        'If File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.version.bs") Then
+        'If cs.Contains("Software\\MageBot.) Then
         If reg IsNot Nothing Then
-            'reg = Registry.CurrentUser.CreateSubKey("Software\BlueSheep")
+            'reg = Registry.CurrentUser.CreateSubKey("Software\MageBot")
             CurrentVersion = reg.GetValue("Version").ToString()
             c = reg.GetValue("Minor")
-            'Dim reader As New StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep\version.bs")
+            'Dim reader As New StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.version.bs")
             'Dim BVer As String = reader.ReadLine()
             'Dim decByte As Byte() = Convert.FromBase64String(BVer)
             'CurrentVersion = System.Text.Encoding.ASCII.GetString(decByte)
             'reader.Close()
         Else
-            File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep\BlueSheep.exe")
+            File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.exe")
             Dim Thread As New Threading.Thread(AddressOf Download)
             Thread.Start()
             Exit Sub
@@ -99,7 +99,7 @@ Public Class UpdaterFrm
 
         If major > currentmajor OrElse minor > currentminor OrElse release > currentrelease Then
             'My.Computer.Network.DownloadFile(GetVerLink, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & IO.Path.GetFileName(GetVerLink))
-            File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep\BlueSheep.exe")
+            File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.exe")
             Dim Thread As New Threading.Thread(AddressOf Download)
             Thread.Start()
         Else
@@ -114,7 +114,7 @@ Public Class UpdaterFrm
 
     Private Sub client_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
         Try
-            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep\BlueSheep.exe", "ok")
+            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.exe", "ok")
             Me.BeginInvoke(DirectCast(Sub() Me.Close(), MethodInvoker))
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -128,7 +128,7 @@ Public Class UpdaterFrm
 
     Private Sub Download()
         Try
-            If Not File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep\MetroFramework.dll") Then
+            If Not File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.MetroFramework.dll") Then
                 Dim Thread As New Threading.Thread(AddressOf Dll)
                 Thread.Start()
                 Exit Sub
@@ -136,7 +136,7 @@ Public Class UpdaterFrm
             Dim Client As WebClient = New WebClient
             AddHandler Client.DownloadProgressChanged, AddressOf client_ProgressChanged
             AddHandler Client.DownloadFileCompleted, AddressOf client_DownloadCompleted
-            Client.DownloadFileAsync(New Uri("http://bluesheepbot.com/BlueSheep.exe"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep\BlueSheep.exe")
+            Client.DownloadFileAsync(New Uri("http://bluesheepbot.com/MageBot.exe"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot\MageBot.exe")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -145,13 +145,13 @@ Public Class UpdaterFrm
     Private Sub Dll()
         Dim Client As WebClient = New WebClient
         AddHandler Client.DownloadProgressChanged, AddressOf client_ProgressChanged
-        Client.DownloadFileAsync(New Uri("http://bluesheepbot.com/MetroFramework.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep\MetroFramework.dll")
+        Client.DownloadFileAsync(New Uri("http://bluesheepbot.com/MetroFramework.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.MetroFramework.dll")
         Dim Client2 As WebClient = New WebClient
         AddHandler Client2.DownloadProgressChanged, AddressOf client_ProgressChanged
-        Client2.DownloadFileAsync(New Uri("http://bluesheepbot.com/MetroFramework.Design.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep\MetroFramework.Design.dll")
+        Client2.DownloadFileAsync(New Uri("http://bluesheepbot.com/MetroFramework.Design.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.MetroFramework.Design.dll")
         Dim Client3 As WebClient = New WebClient
         AddHandler Client3.DownloadProgressChanged, AddressOf client_ProgressChanged
         AddHandler Client3.DownloadFileCompleted, AddressOf dll_DownloadCompleted
-        Client3.DownloadFileAsync(New Uri("http://bluesheepbot.com/MetroFramework.Fonts.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BlueSheep\MetroFramework.Fonts.dll")
+        Client3.DownloadFileAsync(New Uri("http://bluesheepbot.com/MetroFramework.Fonts.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.MetroFramework.Fonts.dll")
     End Sub
 End Class

@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Web.Krosmaster
+namespace MageBot.Protocol.Types.Web.Krosmaster
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class KrosmasterFigure : NetworkType

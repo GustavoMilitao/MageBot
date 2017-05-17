@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Approach
+namespace MageBot.Protocol.Messages.Game.Approach
 {
     using System.Collections.Generic;
 

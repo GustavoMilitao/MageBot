@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.CompilerServices;
 
-namespace DataFiles.Data.D2o
+namespace MageBot.DataFiles.Data.D2o
 {
     public class GameData
     {

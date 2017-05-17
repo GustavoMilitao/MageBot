@@ -1,23 +1,23 @@
-﻿using BlueSheep.Engine.Handlers;
-using BlueSheep.Engine.Types;
-using BlueSheep.Protocol.Messages;
+﻿using MageBot.Core.Engine.Handlers;
+using MageBot.Core.EngineTypes;
+using MageBot.Protocol.Messages;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Util.Util.Text.Log;
-using BlueSheep.Core.Account;
+using MageBot.Core.Account;
 
-namespace BlueSheep.Engine.Treatment
+namespace MageBot.Core.Engine.Treatment
 {
     class Treatment
     {
         #region Fields
         private readonly List<InstanceInfo> m_Instances = new List<InstanceInfo>();
-        private Account account;
+        private Account.Account account;
         #endregion
 
         #region Constructeurs
-        public Treatment(Account account)
+        public Treatment(Account.Account account)
         {
             GetTypes("Core");
             this.account = account;

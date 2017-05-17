@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses.Guild
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Houses.Guild
 {
     public class HouseGuildShareRequestMessage : Message
     {

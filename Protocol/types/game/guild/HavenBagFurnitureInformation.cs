@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Guild
+namespace MageBot.Protocol.Types.Game.Guild
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class HavenBagFurnitureInformation : NetworkType

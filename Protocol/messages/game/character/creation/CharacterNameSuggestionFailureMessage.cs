@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Character.Creation
+namespace MageBot.Protocol.Messages.Game.Character.Creation
 {
     public class CharacterNameSuggestionFailureMessage : Message
     {

@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Prism
+namespace MageBot.Protocol.Types.Game.Prism
 {
-    using BlueSheep.Protocol.Types.Game.Fight;
-    using BlueSheep.Protocol.Types.Game.Character;
+    using MageBot.Protocol.Types.Game.Fight;
+    using MageBot.Protocol.Types.Game.Character;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class PrismFightersInformation : NetworkType

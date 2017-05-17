@@ -1,6 +1,6 @@
-﻿using BlueSheep.Protocol.Types.Game.Context.Roleplay;
+﻿using MageBot.Protocol.Types.Game.Context.Roleplay;
 
-namespace BlueSheep.Protocol.Types.Game.Character
+namespace MageBot.Protocol.Types.Game.Character
 {
     public class CharacterMinimalGuildInformations : CharacterMinimalPlusLookInformations
     {

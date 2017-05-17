@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Util.Enums.Fight
+﻿namespace MageBot.Util.Enums.Fight
 {
     public enum SpellInabilityReason
         {

@@ -1,6 +1,6 @@
-﻿using BlueSheep.Protocol.Types.Game.Social;
+﻿using MageBot.Protocol.Types.Game.Social;
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
+namespace MageBot.Protocol.Types.Game.Context.Roleplay
 {
     public class BasicAllianceInformations : AbstractSocialGroupInfos
     {

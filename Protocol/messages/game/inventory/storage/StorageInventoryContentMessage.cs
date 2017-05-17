@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory.Storage
+namespace MageBot.Protocol.Messages.Game.Inventory.Storage
 {
-    using BlueSheep.Protocol.Messages.Game.Inventory.Items;
+    using MageBot.Protocol.Messages.Game.Inventory.Items;
 
 
     public class StorageInventoryContentMessage : InventoryContentMessage

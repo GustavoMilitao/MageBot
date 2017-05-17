@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Shortcut
+namespace MageBot.Protocol.Types.Game.Shortcut
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class Shortcut : NetworkType

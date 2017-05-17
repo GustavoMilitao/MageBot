@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Shortcut
+namespace MageBot.Protocol.Messages.Game.Shortcut
 {
-    using BlueSheep.Protocol.Types.Game.Shortcut;
+    using MageBot.Protocol.Types.Game.Shortcut;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class ShortcutBarContentMessage : Message

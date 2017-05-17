@@ -37,8 +37,8 @@
 [22:30:55] (Debug) [SND] 152
 [22:30:55] (Debug) [RCV] 6362 (BasicAckMessage)
 [22:30:55] (Debug) [RCV] 153 (CharacterSelectedSuccessMessage)
-[22:30:55] (BlueSheep) Saddidahkiler de niveau 28 est connecté.
-[22:30:55] (BlueSheep) Breed: Sadida Sex: Male
+[22:30:55] (MageBot. Saddidahkiler de niveau 28 est connecté.
+[22:30:55] (MageBot. Breed: Sadida Sex: Male
 [22:30:55] (Debug) [RCV] 3016 (InventoryContentMessage)
 [22:30:55] (Debug) [SND] 4001
 [22:30:55] (Debug) [SND] 5676
@@ -79,7 +79,7 @@ Lembre-se: é proibido fornecer o login e senha da sua conta a terceiros.
 [22:31:06] (Debug) [RCV] 175 (BasicTimeMessage)
 [22:31:06] (Debug) [RCV] 500 (CharacterStatsListMessage)
 [22:31:06] (Erro) WARNING : T'as chargé aucune IA, fait gaffe mon coco :p
-[22:31:06] (BlueSheep) Configuration restaurée.
+[22:31:06] (MageBot. Configuration restaurée.
 [22:31:06] (Debug) [RCV] 176 (BasicNoOperationMessage)
 [22:31:07] (Debug) [RCV] 6362 (BasicAckMessage)
 [22:31:07] (Debug) [RCV] 176 (BasicNoOperationMessage)
@@ -119,11 +119,11 @@ Lembre-se: é proibido fornecer o login e senha da sua conta a terceiros.
 
 [22:32:06] (Debug) [RCV] 951 (GameMapMovementMessage)
 [22:32:06] (Debug) [RCV] 951 (GameMapMovementMessage)
-[22:32:07] (BlueSheep) IA chargée avec succès.
-[22:32:07] (BlueSheep) IA chargée : Saddidahkiler
+[22:32:07] (MageBot. IA chargée avec succès.
+[22:32:07] (MageBot. IA chargée : Saddidahkiler
 [22:32:12] (Debug) [SND] 950 (GameMapMovementRequestMessage)
 [22:32:12] (Ação) Lancement d'un combat contre 1 monstres de niveau 4 (Gatrobata(4))
-[22:32:12] (BlueSheep) Recherche d'un combat...
+[22:32:12] (MageBot. Recherche d'un combat...
 [22:32:12] (Debug) [RCV] 6362 (BasicAckMessage)
 [22:32:12] (Debug) [RCV] 951 (GameMapMovementMessage)
 [22:32:12] (Debug) [RCV] 951 (GameMapMovementMessage)
@@ -150,7 +150,7 @@ Lembre-se: é proibido fornecer o login e senha da sua conta a terceiros.
 [22:32:55] (Debug) [RCV] 951 (GameMapMovementMessage)
 [22:32:58] (Debug) [SND] 950 (GameMapMovementRequestMessage)
 [22:32:58] (Ação) Lancement d'un combat contre 1 monstres de niveau 4 (Gatrobata(4))
-[22:32:58] (BlueSheep) Recherche d'un combat...
+[22:32:58] (MageBot. Recherche d'un combat...
 [22:32:58] (Debug) [RCV] 6362 (BasicAckMessage)
 [22:32:58] (Debug) [RCV] 951 (GameMapMovementMessage)
 [22:32:58] (Debug) [RCV] 951 (GameMapMovementMessage)
@@ -167,15 +167,15 @@ Lembre-se: é proibido fornecer o login e senha da sua conta a terceiros.
 [22:33:02] (Debug) [RCV] 500 (CharacterStatsListMessage)
 [22:33:02] (Debug) [RCV] 702 (GameFightJoinMessage)
 [22:33:02] (Debug) [RCV] 703 (GameFightPlacementPossiblePositionsMessage)
-[22:33:02] (BlueSheep) Placement du personnage.
+[22:33:02] (MageBot. Placement du personnage.
 [22:33:02] (Debug) [SND] 708
-[22:33:02] (BlueSheep) Send Ready !
+[22:33:02] (MageBot. Send Ready !
 [22:33:02] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
 [22:33:03] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
 [22:33:03] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
 [22:33:03] (Debug) [RCV] 5927 (GameFightOptionStateUpdateMessage)
 [22:33:03] (Debug) [RCV] 5686 (LifePointsRegenEndMessage)
-[22:33:03] (BlueSheep) Fin de la régénération. + 0 points de vie
+[22:33:03] (MageBot. Fin de la régénération. + 0 points de vie
 [22:33:04] (Debug) [RCV] 5696 (GameEntitiesDispositionMessage)
 [22:33:04] (Debug) [RCV] 5864 (GameFightShowFighterMessage)
 [22:33:04] (Debug) [RCV] 5696 (GameEntitiesDispositionMessage)
@@ -195,7 +195,7 @@ Lembre-se: é proibido fornecer o login e senha da sua conta a terceiros.
 [22:33:09] (Debug) [RCV] 956 (SequenceEndMessage)
 [22:33:09] (Debug) [RCV] 6465 (GameFightTurnStartPlayingMessage)
 [22:33:09] (Debug) [SND] 950 (GameMapMovementRequestMessage)
-[22:33:09] (BlueSheep) EndMove
+[22:33:09] (MageBot. EndMove
 [22:33:09] (Debug) [RCV] 780 (TextInformationMessage)
 [22:33:09] (Dofus) Mage-eni entrou na batalha como um espectador.
 [22:33:09] (Debug) [RCV] 6362 (BasicAckMessage)
@@ -234,7 +234,7 @@ Lembre-se: é proibido fornecer o login e senha da sua conta a terceiros.
 [22:33:17] (Debug) [RCV] 956 (SequenceEndMessage)
 [22:33:17] (Debug) [RCV] 6465 (GameFightTurnStartPlayingMessage)
 [22:33:17] (Debug) [SND] 950 (GameMapMovementRequestMessage)
-[22:33:17] (BlueSheep) EndMove
+[22:33:17] (MageBot. EndMove
 [22:33:18] (Debug) [RCV] 176 (BasicNoOperationMessage)
 [22:33:19] (Debug) [RCV] 6362 (BasicAckMessage)
 [22:33:19] (Debug) [RCV] 176 (BasicNoOperationMessage)
@@ -307,18 +307,18 @@ Lembre-se: é proibido fornecer o login e senha da sua conta a terceiros.
 [22:33:35] (Erro) Error: Receiving
 System.Reflection.TargetInvocationException: Uma exceção foi acionada pelo destino de uma chamada. ---> System.IO.EndOfStreamException: Não é possível ler depois do fim do fluxo.
    em System.IO.BinaryReader.ReadByte()
-   em BlueSheep.Util.IO.BigEndianReader.ReadByte() na E:\Source\Repos\BlueSheep\BlueSheep\Common\IO\BigEndianReader.cs:linha 175
-   em BlueSheep.Util.IO.BigEndianReader.ReadVar[T]() na E:\Source\Repos\BlueSheep\BlueSheep\Common\IO\BigEndianReader.cs:linha 417
-   em BlueSheep.Util.IO.BigEndianReader.ReadVarUhShort() na E:\Source\Repos\BlueSheep\BlueSheep\Common\IO\BigEndianReader.cs:linha 380
-   em BlueSheep.Protocol.Protocol.Types.Game.Context.Roleplay.Party.NamedPartyTeamWithOutcome.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Types\Game\Context\Roleplay\Party\NamedPartyTeamWithOutcome.cs:linha 77
-   em BlueSheep.Protocol.Protocol.Messages.Game.Context.Fight.GameFightEndMessage.Deserialize(IDataReader reader) na E:\Source\Repos\BlueSheep\BlueSheep\Common\Protocol\Messages\Game\Context\Fight\GameFightEndMessage.cs:linha 155
-   em BlueSheep.Engine.Handlers.Fight.FightHandler.GameFightEndMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Handlers\Fight\FightHandler.cs:linha 146
+   em MageBot.Util.IO.BigEndianReader.ReadByte() na E:\Source\Repos\MageBot\MageBot\Common\IO\BigEndianReader.cs:linha 175
+   em MageBot.Util.IO.BigEndianReader.ReadVar[T]() na E:\Source\Repos\MageBot\MageBot\Common\IO\BigEndianReader.cs:linha 417
+   em MageBot.Util.IO.BigEndianReader.ReadVarUhShort() na E:\Source\Repos\MageBot\MageBot\Common\IO\BigEndianReader.cs:linha 380
+   em MageBot.Protocol.Protocol.Types.Game.Context.Roleplay.Party.NamedPartyTeamWithOutcome.Deserialize(IDataReader reader) na E:\Source\Repos\MageBot\MageBot\Common\Protocol\Types\Game\Context\Roleplay\Party\NamedPartyTeamWithOutcome.cs:linha 77
+   em MageBot.Protocol.Protocol.Messages.Game.Context.Fight.GameFightEndMessage.Deserialize(IDataReader reader) na E:\Source\Repos\MageBot\MageBot\Common\Protocol\Messages\Game\Context\Fight\GameFightEndMessage.cs:linha 155
+   em MageBot.Core.Engine.Handlers.Fight.FightHandler.GameFightEndMessageTreatment(Message message, Byte[] packetDatas, AccountUC account) na E:\Source\Repos\MageBot\MageBot\Engine\Handlers\Fight\FightHandler.cs:linha 146
    --- Fim do rastreamento de pilha de exceções internas ---
    em System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
    em System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
    em System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
    em System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
-   em BlueSheep.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Treatment\Treatment.cs:linha 51
-   em BlueSheep.Engine.Types.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Types\MessageInformations.cs:linha 64
-   em BlueSheep.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 1260
-   em BlueSheep.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\BlueSheep\BlueSheep\Engine\Network\SocketManager.cs:linha 674
+   em MageBot.Core.Engine.Treatment.Treatment.Treat(Int32 packetID, Byte[] packetDatas) na E:\Source\Repos\MageBot\MageBot\Engine\Treatment\Treatment.cs:linha 51
+   em MageBot.Core.EngineTypes.MessageInformations.ParseBuffer(Byte[] data) na E:\Source\Repos\MageBot\MageBot\Engine\Types\MessageInformations.cs:linha 64
+   em MageBot.Core.Engine.Network.SocketManager.client_DataArrived(Object sender, NetSockDataArrivalEventArgs e) na E:\Source\Repos\MageBot\MageBot\Engine\Network\SocketManager.cs:linha 1260
+   em MageBot.Core.Engine.Network.NetBase.ReceiveCallback(IAsyncResult ar) na E:\Source\Repos\MageBot\MageBot\Engine\Network\SocketManager.cs:linha 674

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Interactive
+namespace MageBot.Protocol.Messages.Game.Interactive
 {
     public class InteractiveUseEndedMessage : Message
     {

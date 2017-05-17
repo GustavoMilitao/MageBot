@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context
+namespace MageBot.Protocol.Messages.Game.Context
 {
     public class ShowCellMessage : Message
     {

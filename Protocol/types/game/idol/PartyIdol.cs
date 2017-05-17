@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Idol
+namespace MageBot.Protocol.Types.Game.Idol
 {
     using System.Collections.Generic;
 

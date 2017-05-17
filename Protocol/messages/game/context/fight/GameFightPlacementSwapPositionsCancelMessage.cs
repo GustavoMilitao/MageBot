@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Fight
+namespace MageBot.Protocol.Messages.Game.Context.Fight
 {
     public class GameFightPlacementSwapPositionsCancelMessage : Message
     {

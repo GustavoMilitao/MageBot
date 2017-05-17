@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Core.Job
+﻿namespace MageBot.Core.Job
 {
     public class Resource
     {

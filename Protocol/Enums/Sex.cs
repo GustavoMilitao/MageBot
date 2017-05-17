@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace BlueSheep.Util.Enums.Char
+namespace MageBot.Util.Enums.Char
 {
     public enum Sex
     {

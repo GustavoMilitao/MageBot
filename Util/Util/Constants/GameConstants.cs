@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace BlueSheep.Engine.Constants
+namespace MageBot.Core.Engine.Constants
 {
     public static class GameConstants
     {

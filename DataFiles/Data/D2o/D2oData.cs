@@ -1,10 +1,10 @@
-﻿using BlueSheep.Util.IO;
+﻿using MageBot.Util.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace DataFiles.Data.D2o
+namespace MageBot.DataFiles.Data.D2o
 {
     internal sealed class D2oData
     {

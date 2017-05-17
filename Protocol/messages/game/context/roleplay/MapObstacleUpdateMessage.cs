@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay
 {
-    using BlueSheep.Protocol.Types.Game.Interactive;
+    using MageBot.Protocol.Types.Game.Interactive;
     using System.Collections.Generic;
 
 

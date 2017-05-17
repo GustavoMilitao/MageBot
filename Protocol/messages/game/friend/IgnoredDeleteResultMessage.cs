@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Friend
+namespace MageBot.Protocol.Messages.Game.Friend
 {
-    using BlueSheep.Protocol;
+    using MageBot.Protocol;
 
 
     public class IgnoredDeleteResultMessage : Message

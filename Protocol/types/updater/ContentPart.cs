@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Updater
+namespace MageBot.Protocol.Types.Updater
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class ContentPart : NetworkType

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Paddock
+namespace MageBot.Protocol.Types.Game.Paddock
 {
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-    using BlueSheep.Protocol.Types.Game.Mount;
+    using MageBot.Protocol.Types.Game.Context.Roleplay;
+    using MageBot.Protocol.Types.Game.Mount;
 
 
     public class PaddockItem : ObjectItemInRolePlay

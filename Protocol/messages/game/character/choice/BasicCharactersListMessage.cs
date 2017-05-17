@@ -1,9 +1,9 @@
 ﻿
-using BlueSheep.Protocol.Types;
-using BlueSheep.Protocol.Types.Game.Character.Choice;
+using MageBot.Protocol.Types;
+using MageBot.Protocol.Types.Game.Character.Choice;
 using System.Collections.Generic;
 
-namespace BlueSheep.Protocol.Messages.Game.Character.Choice
+namespace MageBot.Protocol.Messages.Game.Character.Choice
 {
     public class BasicCharactersListMessage : Message
     {

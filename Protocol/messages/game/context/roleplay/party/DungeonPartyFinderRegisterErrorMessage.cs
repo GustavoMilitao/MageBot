@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party
 {
     public class DungeonPartyFinderRegisterErrorMessage : Message
     {

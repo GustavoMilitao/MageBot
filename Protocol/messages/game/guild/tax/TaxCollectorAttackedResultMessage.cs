@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Guild.Tax
+namespace MageBot.Protocol.Messages.Game.Guild.Tax
 {
-    using BlueSheep.Protocol.Types.Game.Guild.Tax;
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay;
+    using MageBot.Protocol.Types.Game.Guild.Tax;
+    using MageBot.Protocol.Types.Game.Context.Roleplay;
 
 
     public class TaxCollectorAttackedResultMessage : Message

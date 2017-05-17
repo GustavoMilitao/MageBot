@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Spell
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Spell
 {
     public class SpellItemBoostMessage : Message
     {

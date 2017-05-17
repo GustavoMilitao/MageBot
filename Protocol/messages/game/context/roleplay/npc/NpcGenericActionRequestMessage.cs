@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Npc
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Npc
 {
     public class NpcGenericActionRequestMessage : Message
     {

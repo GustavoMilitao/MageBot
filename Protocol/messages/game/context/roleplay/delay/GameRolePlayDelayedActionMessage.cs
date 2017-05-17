@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Delay
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Delay
 {
     public class GameRolePlayDelayedActionMessage : Message
     {

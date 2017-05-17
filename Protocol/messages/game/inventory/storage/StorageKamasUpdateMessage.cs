@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory.Storage
+namespace MageBot.Protocol.Messages.Game.Inventory.Storage
 {
     public class StorageKamasUpdateMessage : Message
     {

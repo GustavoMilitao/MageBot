@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Alliance
+namespace MageBot.Protocol.Messages.Game.Alliance
 {
-    using BlueSheep.Protocol.Types.Game.Social;
-    using BlueSheep.Protocol.Types.Game.Prism;
+    using MageBot.Protocol.Types.Game.Social;
+    using MageBot.Protocol.Types.Game.Prism;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class AllianceInsiderInfoMessage : Message

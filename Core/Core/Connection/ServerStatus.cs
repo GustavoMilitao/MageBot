@@ -1,8 +1,8 @@
-﻿using BlueSheep.Protocol.Enums;
-using BlueSheep.Core.Account;
+﻿using MageBot.Protocol.Enums;
+using MageBot.Core.Account;
 using Util.Util.Text.Log;
 
-namespace BlueSheep.Util.Text
+namespace MageBot.Util.Text
 {
     public class ServerStatus
     {

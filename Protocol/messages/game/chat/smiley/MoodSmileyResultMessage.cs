@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Chat.Smiley
+namespace MageBot.Protocol.Messages.Game.Chat.Smiley
 {
     public class MoodSmileyResultMessage : Message
     {

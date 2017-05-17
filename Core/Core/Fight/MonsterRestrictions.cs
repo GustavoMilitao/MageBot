@@ -1,6 +1,6 @@
-﻿using BlueSheep.Util.Enums.Internal;
+﻿using MageBot.Util.Enums.Internal;
 
-namespace BlueSheep.Core.Fight
+namespace MageBot.Core.Fight
 {
     public class MonsterRestrictions
     {

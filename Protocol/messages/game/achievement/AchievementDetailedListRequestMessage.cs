@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Achievement
+namespace MageBot.Protocol.Messages.Game.Achievement
 {
     public class AchievementDetailedListRequestMessage : Message
     {

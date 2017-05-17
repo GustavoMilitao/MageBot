@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Action.Fight
+namespace MageBot.Protocol.Types.Game.Action.Fight
 {
-    using BlueSheep.Protocol.Types.Game.Actions.Fight;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types.Game.Actions.Fight;
+    using MageBot.Protocol.Types;
 
 
     public class FightDispellableEffectExtendedInformations : NetworkType

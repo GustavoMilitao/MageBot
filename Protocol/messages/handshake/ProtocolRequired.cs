@@ -1,7 +1,7 @@
 ﻿ 
 using System;
 
-namespace BlueSheep.Protocol.Messages.Handshake
+namespace MageBot.Protocol.Messages.Handshake
 {
     public class ProtocolRequired : Message
     {

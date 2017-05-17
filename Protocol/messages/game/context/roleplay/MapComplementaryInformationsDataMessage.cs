@@ -8,14 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay
 {
-    using BlueSheep.Protocol.Types.Game.House;
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-    using BlueSheep.Protocol.Types.Game.Interactive;
-    using BlueSheep.Protocol.Types.Game.Context.Fight;
+    using MageBot.Protocol.Types.Game.House;
+    using MageBot.Protocol.Types.Game.Context.Roleplay;
+    using MageBot.Protocol.Types.Game.Interactive;
+    using MageBot.Protocol.Types.Game.Context.Fight;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class MapComplementaryInformationsDataMessage : Message

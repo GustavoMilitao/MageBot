@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Server.Basic
+namespace MageBot.Protocol.Messages.Server.Basic
 {
     using System.Collections.Generic;
 

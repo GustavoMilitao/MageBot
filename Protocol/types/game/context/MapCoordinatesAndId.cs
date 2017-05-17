@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context
+namespace MageBot.Protocol.Types.Game.Context
 {
 
 

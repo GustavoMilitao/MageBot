@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BlueSheep.Util.IO;
+using MageBot.Util.IO;
 using Util.Util.Text.Log;
-using BlueSheep.Util.Enums.Internal;
-using DataFiles.Data.Pathfinding.Positions;
-using DataFiles.Data.Pathfinding;
-using BlueSheep.Protocol.Messages.Game.Context.Fight;
-using BlueSheep.Protocol.Messages.Game.Context;
-using BlueSheep.Protocol.Messages.Game.Actions.Fight;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight;
-using BlueSheep.Protocol.Enums;
-using BlueSheep.Core.Monsters;
-using BlueSheep.Engine.Network;
+using MageBot.Util.Enums.Internal;
+using MageBot.DataFiles.Data.Pathfinding.Positions;
+using MageBot.DataFiles.Data.Pathfinding;
+using MageBot.Protocol.Messages.Game.Context.Fight;
+using MageBot.Protocol.Messages.Game.Context;
+using MageBot.Protocol.Messages.Game.Actions.Fight;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Fight;
+using MageBot.Protocol.Enums;
+using MageBot.Core.Monsters;
+using MageBot.Core.Engine.Network;
 using System.Threading.Tasks;
 
-namespace BlueSheep.Core.Fight
+namespace MageBot.Core.Fight
 {
     public class BFight
     {

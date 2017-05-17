@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Havenbag.Meeting
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Havenbag.Meeting
 {
-    using BlueSheep.Protocol.Types.Game.Character;
+    using MageBot.Protocol.Types.Game.Character;
 
 
     public class InviteInHavenBagMessage : Message

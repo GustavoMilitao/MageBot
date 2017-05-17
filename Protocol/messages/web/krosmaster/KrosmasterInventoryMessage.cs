@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Web.Krosmaster
+namespace MageBot.Protocol.Messages.Web.Krosmaster
 {
-    using BlueSheep.Protocol.Types.Web.Krosmaster;
+    using MageBot.Protocol.Types.Web.Krosmaster;
     using System.Collections.Generic;
 
 

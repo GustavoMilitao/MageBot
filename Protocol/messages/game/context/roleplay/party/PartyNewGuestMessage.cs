@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party
 {
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay.Party;
+    using MageBot.Protocol.Types.Game.Context.Roleplay.Party;
 
 
     public class PartyNewGuestMessage : AbstractPartyEventMessage

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Stats
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Stats
 {
     public class StatsUpgradeResultMessage : Message
     {

@@ -1,30 +1,30 @@
-﻿using BlueSheep.Util.Cryptography;
-using BlueSheep.Util.IO;
+﻿using MageBot.Util.Cryptography;
+using MageBot.Util.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using BlueSheep.Core.Groups;
-using BlueSheep.Core.Account;
+using MageBot.Core.Groups;
+using MageBot.Core.Account;
 
-namespace Core.Storage.AccountsManager
+namespace MageBot.Core.Storage.AccountsManager
 {
     public class AccountsFileInteractions
     {
         #region Fields
-        public List<Account> Accounts { get; set; } = new List<Account>();
-        private List<Account> GroupAccounts { get; set; } = new List<Account>();
+        public List<Account.Account> Accounts { get; set; } = new List<Account.Account>();
+        private List<Account.Account> GroupAccounts { get; set; } = new List<Account.Account>();
         public List<Group> Groups = new List<Group>();
-        private readonly string m_SavingFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\accounts.bs";
-        private readonly string m_SavingDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep";
-        private readonly string m_SavingGroupDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Groups";
+        private readonly string m_SavingFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot.accounts.bs";
+        private readonly string m_SavingDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot";
+        private readonly string m_SavingGroupDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot.Groups";
         #endregion
 
         #region Public methods
-        public void SaveAccountsInfos(List<Account> accounts)
+        public void SaveAccountsInfos(List<Account.Account> accounts)
         {
-            foreach (Account acc in accounts)
+            foreach (Account.Account acc in accounts)
             {
                 acc.AccountPassword = CryptageBS.EncryptBS(acc.AccountPassword);
                 Accounts.Add(acc);
@@ -34,7 +34,7 @@ namespace Core.Storage.AccountsManager
             using (BigEndianWriter writer = new BigEndianWriter())
             {
                 writer.WriteInt(Accounts.Count);
-                foreach (Account accountObject in Accounts)
+                foreach (Account.Account accountObject in Accounts)
                 {
                     writer.WriteUTF(accountObject.AccountName);
                     writer.WriteUTF(accountObject.AccountPassword);
@@ -45,7 +45,7 @@ namespace Core.Storage.AccountsManager
                     binaryFormatter.Serialize(stream, writer);
                 }
             }
-            foreach (Account acc in accounts)
+            foreach (Account.Account acc in accounts)
                 acc.AccountPassword = CryptageBS.DecryptBS(acc.AccountPassword);
         }
         public void RecoverAccountsInfos()
@@ -59,26 +59,26 @@ namespace Core.Storage.AccountsManager
                     using (BigEndianReader reader = new BigEndianReader(writer.Content))
                     {
                         int limite = reader.ReadInt();
-                        Accounts = new List<Account>();
+                        Accounts = new List<Account.Account>();
                         for (int index = 0; index < limite; index++)
-                            Accounts.Add(new Account(reader.ReadUTF(), reader.ReadUTF()));
+                            Accounts.Add(new Account.Account(reader.ReadUTF(), reader.ReadUTF()));
                     }
                     writer.Dispose();
                     stream.Close();
                 }
             }
-            foreach (Account accountObject in Accounts)
+            foreach (Account.Account accountObject in Accounts)
                 accountObject.AccountPassword = CryptageBS.DecryptBS(accountObject.AccountPassword);
         }
-        public void SaveGroup(List<Account> accounts, string groupname)
+        public void SaveGroup(List<Account.Account> accounts, string groupname)
         {
             if (!Directory.Exists(m_SavingGroupDirectoryPath))
                 Directory.CreateDirectory(m_SavingGroupDirectoryPath);
             GroupAccounts = accounts;
-            using (BigEndianWriter writer = new BigEndianWriter(File.Create(Path.Combine(m_SavingGroupDirectoryPath, groupname))))
+            using (BigEndianWriter writer = new BigEndianWriter(File.Create(System.IO.Path.Combine(m_SavingGroupDirectoryPath, groupname))))
             {
                 writer.WriteInt(GroupAccounts.Count);
-                foreach (Account accountObject in GroupAccounts)
+                foreach (Account.Account accountObject in GroupAccounts)
                 {
                     writer.WriteUTF(accountObject.AccountName);
                     writer.WriteUTF(CryptageBS.EncryptBS(accountObject.AccountPassword));
@@ -93,11 +93,11 @@ namespace Core.Storage.AccountsManager
                 using (BigEndianReader reader = new BigEndianReader(content))
                 {
                     int limite = reader.ReadInt();
-                    GroupAccounts = new List<Account>();
+                    GroupAccounts = new List<Account.Account>();
                     for (int index = 0; index < limite; index++)
-                        GroupAccounts.Add(new Account(reader.ReadUTF(), reader.ReadUTF()));
+                        GroupAccounts.Add(new Account.Account(reader.ReadUTF(), reader.ReadUTF()));
                     Groups.Add(new Group(GroupAccounts, file.Name.Remove(file.Name.Length - 3)));
-                    foreach (Account accountObject in GroupAccounts)
+                    foreach (Account.Account accountObject in GroupAccounts)
                         accountObject.AccountPassword = CryptageBS.DecryptBS(accountObject.AccountPassword);
                 }
             }

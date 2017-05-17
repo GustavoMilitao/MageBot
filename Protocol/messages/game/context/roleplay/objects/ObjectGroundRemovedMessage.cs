@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Objects
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Objects
 {
     public class ObjectGroundRemovedMessage : Message
     {

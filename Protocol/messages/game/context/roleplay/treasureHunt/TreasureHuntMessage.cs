@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.TreasureHunt
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.TreasureHunt
 {
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay.TreasureHunt;
+    using MageBot.Protocol.Types.Game.Context.Roleplay.TreasureHunt;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class TreasureHuntMessage : Message

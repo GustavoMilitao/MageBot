@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Character.Stats
+namespace MageBot.Protocol.Messages.Game.Character.Stats
 {
-    using BlueSheep.Protocol.Types.Game.Character.Characteristic;
+    using MageBot.Protocol.Types.Game.Character.Characteristic;
 
 
     public class FighterStatsListMessage : Message

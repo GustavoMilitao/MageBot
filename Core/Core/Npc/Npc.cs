@@ -1,12 +1,12 @@
-﻿using DataFiles.Data.D2o;
-using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Npc;
-using BlueSheep.Protocol.Messages.Game.Dialog;
-using BlueSheep.Protocol.Types.Game.Context.Roleplay;
+﻿using MageBot.DataFiles.Data.D2o;
+using MageBot.Util.IO;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Npc;
+using MageBot.Protocol.Messages.Game.Dialog;
+using MageBot.Protocol.Types.Game.Context.Roleplay;
 using Util.Util.Text.Log;
 using System.Collections.Generic;
 
-namespace BlueSheep.Core.Npc
+namespace MageBot.Core.Npc
 {
     public class Npc
     {
@@ -17,7 +17,7 @@ namespace BlueSheep.Core.Npc
         public int QuestionId { get; set; }
         public string QuestionText
         {
-            get { return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.NpcMessages, QuestionId).Fields["messageId"]); }
+            get { return MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.NpcMessages, QuestionId).Fields["messageId"]); }
         }
 
         public List<NpcReply> Replies { get; set; }
@@ -52,7 +52,7 @@ namespace BlueSheep.Core.Npc
 
         public string GetNpcName(int npcId)
         {
-            return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Npcs, npcId).Fields["nameId"]);
+            return MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Npcs, npcId).Fields["nameId"]);
         }
 
         public void TalkToNpc(int npcId)

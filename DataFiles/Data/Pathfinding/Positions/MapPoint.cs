@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace DataFiles.Data.Pathfinding.Positions
+namespace MageBot.DataFiles.Data.Pathfinding.Positions
 {
     public class MapPoint
     {

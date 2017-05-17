@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Modificator
+namespace MageBot.Protocol.Messages.Game.Modificator
 {
     public class AreaFightModificatorUpdateMessage : Message
     {

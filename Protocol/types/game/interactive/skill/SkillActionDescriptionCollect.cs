@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Interactive.Skill
+namespace MageBot.Protocol.Types.Game.Interactive.Skill
 {
 
 

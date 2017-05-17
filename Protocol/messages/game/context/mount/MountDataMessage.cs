@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Mount
+namespace MageBot.Protocol.Messages.Game.Context.Mount
 {
-    using BlueSheep.Protocol.Types.Game.Mount;
+    using MageBot.Protocol.Types.Game.Mount;
 
 
     public class MountDataMessage : Message

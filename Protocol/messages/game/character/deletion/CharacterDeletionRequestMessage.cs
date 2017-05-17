@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Character.Deletion
+namespace MageBot.Protocol.Messages.Game.Character.Deletion
 {
     public class CharacterDeletionRequestMessage : Message
     {

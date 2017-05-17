@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Alliance
+namespace MageBot.Protocol.Messages.Game.Alliance
 {
-    using BlueSheep.Protocol.Messages.Game.Social;
+    using MageBot.Protocol.Messages.Game.Social;
 
 
     public class AllianceMotdSetErrorMessage : SocialNoticeSetErrorMessage

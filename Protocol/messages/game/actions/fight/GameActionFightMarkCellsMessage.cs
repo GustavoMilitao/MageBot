@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Actions.Fight
+namespace MageBot.Protocol.Messages.Game.Actions.Fight
 {
-    using BlueSheep.Protocol.Messages.Game.Actions;
-    using BlueSheep.Protocol.Types.Game.Actions.Fight;
+    using MageBot.Protocol.Messages.Game.Actions;
+    using MageBot.Protocol.Types.Game.Actions.Fight;
 
 
     public class GameActionFightMarkCellsMessage : AbstractGameActionMessage

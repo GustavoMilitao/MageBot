@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DataFiles.Data.D2o;
-using BlueSheep.Protocol.Types.Game.Data.Items.Effects;
+using MageBot.DataFiles.Data.D2o;
+using MageBot.Protocol.Types.Game.Data.Items.Effects;
 
-namespace BlueSheep.Core.Inventory
+namespace MageBot.Core.Inventory
 {
     public class Item
     {
@@ -18,17 +18,17 @@ namespace BlueSheep.Core.Inventory
 
         public string Description
         {
-            get { return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, GID).Fields["descriptionId"]); }
+            get { return MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, GID).Fields["descriptionId"]); }
         }
         public List<ObjectEffect> Effects { get; private set; }
         public int GID { get; private set; }
         public string Name
         {
-            get { return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, GID).Fields["nameId"]); }
+            get { return MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, GID).Fields["nameId"]); }
         }
         public string Type
         {
-            get { return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.ItemTypes, typeId).Fields["nameId"]); }
+            get { return MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.ItemTypes, typeId).Fields["nameId"]); }
         }
         public int typeId
         {

@@ -1,43 +1,43 @@
-﻿using DataFiles.Data.D2o;
-using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Game.Basic;
-using BlueSheep.Protocol.Messages.Game.Chat;
-using BlueSheep.Protocol.Messages.Game.Context;
-using BlueSheep.Protocol.Messages.Game.Context.Display;
-using BlueSheep.Protocol.Messages.Game.Context.Fight;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Purchasable;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Quest;
-using BlueSheep.Protocol.Messages.Game.Interactive;
-using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
-using BlueSheep.Protocol.Messages.Game.Inventory.Items;
-using BlueSheep.Protocol.Messages.Game.Moderation;
-using BlueSheep.Protocol.Messages.Server.Basic;
-using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-using BlueSheep.Protocol.Types.Game.Interactive;
-using DataFiles.Data.Pathfinding;
-using DataFiles.Data.Pathfinding.Positions;
-using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Protocol.Messages;
+﻿using MageBot.DataFiles.Data.D2o;
+using MageBot.Util.IO;
+using MageBot.Protocol.Messages.Game.Basic;
+using MageBot.Protocol.Messages.Game.Chat;
+using MageBot.Protocol.Messages.Game.Context;
+using MageBot.Protocol.Messages.Game.Context.Display;
+using MageBot.Protocol.Messages.Game.Context.Fight;
+using MageBot.Protocol.Messages.Game.Context.Roleplay;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Houses;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Party;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Purchasable;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Quest;
+using MageBot.Protocol.Messages.Game.Interactive;
+using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
+using MageBot.Protocol.Messages.Game.Inventory.Items;
+using MageBot.Protocol.Messages.Game.Moderation;
+using MageBot.Protocol.Messages.Server.Basic;
+using MageBot.Protocol.Types.Game.Context.Roleplay;
+using MageBot.Protocol.Types.Game.Interactive;
+using MageBot.DataFiles.Data.Pathfinding;
+using MageBot.DataFiles.Data.Pathfinding.Positions;
+using MageBot.Util.Enums.Internal;
+using MageBot.Protocol.Messages;
 using Util.Util.Text.Log;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BlueSheep.Engine.Handlers.Context
+namespace MageBot.Core.Engine.Handlers.Context
 {
     class ContextHandler
     {
         #region Public methods
         [MessageHandler(typeof(MapComplementaryInformationsDataInHouseMessage))]
-        public static void MapComplementaryInformationsDataInHouseMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void MapComplementaryInformationsDataInHouseMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             MapComplementaryInformationsDataMessageTreatment(message, packetDatas, account);
         }
 
         [MessageHandler(typeof(MapComplementaryInformationsDataMessage))]
-        public static void MapComplementaryInformationsDataMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void MapComplementaryInformationsDataMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             MapComplementaryInformationsDataMessage msg = (MapComplementaryInformationsDataMessage)message;
             account.Config.HeroicConfig.AnalysePacket(message, packetDatas);
@@ -58,13 +58,13 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(MapComplementaryInformationsWithCoordsMessage))]
-        public static void MapComplementaryInformationsWithCoordsMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void MapComplementaryInformationsWithCoordsMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             MapComplementaryInformationsDataMessageTreatment(message, packetDatas, account);
         }
 
         [MessageHandler(typeof(CurrentMapMessage))]
-        public static void CurrentMapMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void CurrentMapMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             CurrentMapMessage currentMapMessage = (CurrentMapMessage)message;
 
@@ -93,12 +93,12 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameContextCreateMessage))]
-        public static void GameContextCreateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameContextCreateMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
         }
 
         [MessageHandler(typeof(QuestListMessage))]
-        public static void QuestListMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void QuestListMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             if (!account.Config.IsMITM)
             {
@@ -111,7 +111,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(TextInformationMessage))]
-        public static void TextInformationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void TextInformationMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             TextInformationMessage msg = (TextInformationMessage)message;
 
@@ -149,7 +149,7 @@ namespace BlueSheep.Engine.Handlers.Context
 
 
             DataClass data = GameData.GetDataObject(D2oFileEnum.InfoMessages, msg.MsgType * 10000 + msg.MsgId);
-            string text = DataFiles.Data.I18n.I18N.GetText((int)data.Fields["textId"]);
+            string text = MageBot.DataFiles.Data.I18n.I18N.GetText((int)data.Fields["textId"]);
             for (int i = 0; i < msg.Parameters.Count; i++)
             {
                 var parameter = msg.Parameters[i];
@@ -159,7 +159,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ChatServerMessage))]
-        public static void ChatServerMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ChatServerMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ChatServerMessage msg = (ChatServerMessage)message;
 
@@ -194,7 +194,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         //[MessageHandler(typeof(GameMapMovementConfirmMessage))]
-        //public static void GameMapMovementConfirmMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        //public static void GameMapMovementConfirmMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         //{
         //    GameMapMovementConfirmMessage msg = (GameMapMovementConfirmMessage)message;
 
@@ -202,26 +202,26 @@ namespace BlueSheep.Engine.Handlers.Context
         //    {
         //        msg.Deserialize(reader);
         //    }
-        //    BlueSheep.Core.Fight.Entity Character = null;
-        //    foreach (BlueSheep.Core.Fight.Entity e in account.Map.Entities)
+        //    MageBot.Core.Fight.Entity Character = null;
+        //    foreach (MageBot.Core.Fight.Entity e in account.Map.Entities)
         //    {
         //        if (e.Id == account.CharacterBaseInformations.id)
         //            Character = e;
         //    }
-        //    int mapChangeData = ((DataFiles.Data.D2p.Map)account.Map.Data).Cells[Character.CellId].MapChangeData;
+        //    int mapChangeData = ((MageBot.DataFiles.Data.D2p.Map)account.Map.Data).Cells[Character.CellId].MapChangeData;
         //    if (mapChangeData != 0)
         //    {
         //        int neighbourId = 0;
         //        if (neighbourId == -2)
         //        {
         //            if ((mapChangeData & 64) > 0)
-        //                neighbourId = ((DataFiles.Data.D2p.Map)account.Map.Data).TopNeighbourId;
+        //                neighbourId = ((MageBot.DataFiles.Data.D2p.Map)account.Map.Data).TopNeighbourId;
         //            if ((mapChangeData & 16) > 0)
-        //                neighbourId = ((DataFiles.Data.D2p.Map)account.Map.Data).LeftNeighbourId;
+        //                neighbourId = ((MageBot.DataFiles.Data.D2p.Map)account.Map.Data).LeftNeighbourId;
         //            if ((mapChangeData & 4) > 0)
-        //                neighbourId = ((DataFiles.Data.D2p.Map)account.Map.Data).BottomNeighbourId;
+        //                neighbourId = ((MageBot.DataFiles.Data.D2p.Map)account.Map.Data).BottomNeighbourId;
         //            if ((mapChangeData & 1) > 0)
-        //                neighbourId = ((DataFiles.Data.D2p.Map)account.Map.Data).RightNeighbourId;
+        //                neighbourId = ((MageBot.DataFiles.Data.D2p.Map)account.Map.Data).RightNeighbourId;
         //        }
         //        if (neighbourId >= 0)
         //            account.Map.LaunchChangeMap(neighbourId);
@@ -231,7 +231,7 @@ namespace BlueSheep.Engine.Handlers.Context
         //}
 
         [MessageHandler(typeof(GameMapMovementMessage))]
-        public static void GameMapMovementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameMapMovementMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameMapMovementMessage msg = (GameMapMovementMessage)message;
 
@@ -250,7 +250,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameMapNoMovementMessage))]
-        public static void GameMapNoMovementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameMapNoMovementMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameMapNoMovementMessage msg = (GameMapNoMovementMessage)message;
 
@@ -284,7 +284,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PopupWarningMessage))]
-        public async static void PopupWarningMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public async static void PopupWarningMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             PopupWarningMessage msg = (PopupWarningMessage)message;
 
@@ -293,7 +293,7 @@ namespace BlueSheep.Engine.Handlers.Context
                 msg.Deserialize(reader);
             }
             account.Log(new ErrorTextInformation("[FROM " + msg.Author + " ] : " + msg.Content), 0);
-            account.Log(new BotTextInformation("You has been locked for " + msg.LockDuration + ". Stopping BlueSheep actions while blocked..."), 0);
+            account.Log(new BotTextInformation("You has been locked for " + msg.LockDuration + ". Stopping MageBot.actions while blocked..."), 0);
             account.Log(new ErrorTextInformation("Y a un popup sur l'écran, surement un modo :s"), 0);
             //account.Wait(msg.LockDuration, msg.LockDuration);
             await account.PutTaskDelay(msg.LockDuration);
@@ -301,7 +301,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(SystemMessageDisplayMessage))]
-        public static void SystemMessageDisplayMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void SystemMessageDisplayMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             SystemMessageDisplayMessage msg = (SystemMessageDisplayMessage)message;
 
@@ -315,7 +315,7 @@ namespace BlueSheep.Engine.Handlers.Context
 
 
         [MessageHandler(typeof(PartyInvitationMessage))]
-        public static void PartyInvitationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void PartyInvitationMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             PartyInvitationMessage msg = (PartyInvitationMessage)message;
 
@@ -340,7 +340,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PartyMemberInFightMessage))]
-        public async static void PartyMemberInFightMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public async static void PartyMemberInFightMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             PartyMemberInFightMessage msg = (PartyMemberInFightMessage)message;
 
@@ -362,7 +362,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(InteractiveElementUpdatedMessage))]
-        public static void InteractiveElementUpdatedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InteractiveElementUpdatedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             InteractiveElementUpdatedMessage msg = (InteractiveElementUpdatedMessage)message;
 
@@ -383,7 +383,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(StatedElementUpdatedMessage))]
-        public static void StatedElementUpdatedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void StatedElementUpdatedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             StatedElementUpdatedMessage msg = (StatedElementUpdatedMessage)message;
 
@@ -395,7 +395,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PurchasableDialogMessage))]
-        public static void PurchasableDialogMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void PurchasableDialogMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             PurchasableDialogMessage msg = (PurchasableDialogMessage)message;
 
@@ -418,7 +418,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(HousePropertiesMessage))]
-        public static void HousePropertiesMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void HousePropertiesMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             //HousePropertiesMessage msg = (HousePropertiesMessage)message;
 
@@ -437,7 +437,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameContextRemoveElementMessage))]
-        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameContextRemoveElementMessage msg = (GameContextRemoveElementMessage)message;
 
@@ -449,7 +449,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(GameRolePlayShowActorMessage))]
-        public static void GameRolePlayShowActorMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameRolePlayShowActorMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameRolePlayShowActorMessage msg = (GameRolePlayShowActorMessage)message;
             account.Config.HeroicConfig.AnalysePacket(msg, packetDatas);
@@ -473,7 +473,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeStartedWithStorageMessage))]
-        public static void ExchangeStartedWithStorageMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeStartedWithStorageMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ExchangeStartedWithStorageMessage msg = (ExchangeStartedWithStorageMessage)message;
 
@@ -491,7 +491,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(DisplayNumericalValuePaddockMessage))]
-        public static void DisplayNumericalValueMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void DisplayNumericalValueMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             DisplayNumericalValuePaddockMessage msg = (DisplayNumericalValuePaddockMessage)message;
 
@@ -502,7 +502,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ObtainedItemMessage))]
-        public static void ObtainedItemMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ObtainedItemMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ObtainedItemMessage msg = (ObtainedItemMessage)message;
 
@@ -523,7 +523,7 @@ namespace BlueSheep.Engine.Handlers.Context
         ////////////////////////////////// PACKET DELETED ///////////////////////////////////////////////
 
         //[MessageHandler(typeof(DisplayNumericalValueWithAgeBonusMessage))]
-        //public static void DisplayNumericalValueWithAgeBonusTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        //public static void DisplayNumericalValueWithAgeBonusTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         //{
         //    DisplayNumericalValueWithAgeBonusMessage msg = (DisplayNumericalValueWithAgeBonusMessage)message;
 
@@ -548,7 +548,7 @@ namespace BlueSheep.Engine.Handlers.Context
         //}
 
         [MessageHandler(typeof(InteractiveUseErrorMessage))]
-        public static void InteractiveUseErrorMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InteractiveUseErrorMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             InteractiveUseErrorMessage msg = (InteractiveUseErrorMessage)message;
 
@@ -565,7 +565,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(InteractiveUseEndedMessage))]
-        public static void InteractiveUseEndedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InteractiveUseEndedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             InteractiveUseEndedMessage msg = (InteractiveUseEndedMessage)message;
 
@@ -582,7 +582,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeStartedWithPodsMessage))]
-        public async static void ExchangeStartedWithPodsMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public async static void ExchangeStartedWithPodsMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ExchangeStartedWithPodsMessage msg = (ExchangeStartedWithPodsMessage)message;
 
@@ -599,7 +599,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeRequestedTradeMessage))]
-        public static void ExchangeRequestedTradeMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeRequestedTradeMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ExchangeRequestedTradeMessage msg = (ExchangeRequestedTradeMessage)message;
 
@@ -612,7 +612,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(ExchangeIsReadyMessage))]
-        public static void ExchangeIsReadyMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeIsReadyMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ExchangeIsReadyMessage msg = (ExchangeIsReadyMessage)message;
 

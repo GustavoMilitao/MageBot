@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.House
+namespace MageBot.Protocol.Messages.Game.House
 {
     public class HouseTeleportRequestMessage : Message
     {

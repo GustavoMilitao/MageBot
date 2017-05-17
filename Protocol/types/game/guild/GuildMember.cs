@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Guild
+namespace MageBot.Protocol.Types.Game.Guild
 {
-    using BlueSheep.Protocol.Types.Game.Character;
-    using BlueSheep.Protocol.Types.Game.Character.Status;
-    using BlueSheep.Protocol;
+    using MageBot.Protocol.Types.Game.Character;
+    using MageBot.Protocol.Types.Game.Character.Status;
+    using MageBot.Protocol;
 
 
     public class GuildMember : CharacterMinimalInformations

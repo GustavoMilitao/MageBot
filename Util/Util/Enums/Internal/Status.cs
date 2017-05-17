@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Util.Enums.Internal
+﻿namespace MageBot.Util.Enums.Internal
 {
     public enum Status
     {

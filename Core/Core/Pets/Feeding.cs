@@ -1,6 +1,6 @@
-﻿using BlueSheep.Protocol.Messages.Game.Inventory.Items;
+﻿using MageBot.Protocol.Messages.Game.Inventory.Items;
 
-namespace BlueSheep.Core.Pets
+namespace MageBot.Core.Pets
 {
     public class Feeding
     {

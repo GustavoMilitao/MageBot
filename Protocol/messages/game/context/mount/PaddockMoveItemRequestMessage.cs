@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Mount
+namespace MageBot.Protocol.Messages.Game.Context.Mount
 {
     public class PaddockMoveItemRequestMessage : Message
     {

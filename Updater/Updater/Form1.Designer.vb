@@ -41,7 +41,7 @@ Partial Class UpdaterFrm
         Me.StatusLb.Name = "StatusLb"
         Me.StatusLb.Size = New System.Drawing.Size(59, 13)
         Me.StatusLb.TabIndex = 1
-        Me.StatusLb.Text = "BlueSheep"
+        Me.StatusLb.Text = "MageBot"
         '
         'UpdaterFrm
         '

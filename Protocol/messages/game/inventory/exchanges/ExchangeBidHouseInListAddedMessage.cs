@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
+namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using BlueSheep.Protocol.Types.Game.Data.Items.Effects;
+    using MageBot.Protocol.Types.Game.Data.Items.Effects;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class ExchangeBidHouseInListAddedMessage : Message

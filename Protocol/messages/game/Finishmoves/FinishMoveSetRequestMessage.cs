@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Finishmoves
+namespace MageBot.Protocol.Messages.Game.Finishmoves
 {
     public class FinishMoveSetRequestMessage : Message
     {

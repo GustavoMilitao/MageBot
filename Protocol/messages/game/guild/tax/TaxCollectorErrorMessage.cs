@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Guild.Tax
+namespace MageBot.Protocol.Messages.Game.Guild.Tax
 {
     public class TaxCollectorErrorMessage : Message
     {

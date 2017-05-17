@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Character.Status
+namespace MageBot.Protocol.Messages.Game.Character.Status
 {
-    using BlueSheep.Protocol.Types.Game.Character.Status;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types.Game.Character.Status;
+    using MageBot.Protocol.Types;
 
 
     public class PlayerStatusUpdateRequestMessage : Message

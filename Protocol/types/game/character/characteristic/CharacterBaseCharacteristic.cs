@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Character.Characteristic
+namespace MageBot.Protocol.Types.Game.Character.Characteristic
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class CharacterBaseCharacteristic : NetworkType

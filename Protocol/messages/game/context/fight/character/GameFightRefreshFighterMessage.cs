@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Fight.Character
+namespace MageBot.Protocol.Messages.Game.Context.Fight.Character
 {
-    using BlueSheep.Protocol.Types.Game.Context;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types.Game.Context;
+    using MageBot.Protocol.Types;
 
 
     public class GameFightRefreshFighterMessage : Message

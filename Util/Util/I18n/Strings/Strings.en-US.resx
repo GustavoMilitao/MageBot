@@ -282,8 +282,8 @@
   <data name="UnableToMove" xml:space="preserve">
     <value>Unable to move</value>
   </data>
-  <data name="TheBotDidntReceiveTheMapsInformationsYetPleaseCheckOutLaterIfThePoblemPersistsReportItOnTheForumHttpForumBluesheepCom" xml:space="preserve">
-    <value>The bot didn't receive the map's informations yet, please check out later, if the poblem persists, report it on the forum : http://forum.bluesheep.com</value>
+  <data name="TheBotDidntReceiveTheMapsInformationsYetPleaseCheckOutLaterIfThePoblemPersistsReportItOnTheForumHttpForumMageBotCom" xml:space="preserve">
+    <value>The bot didn't receive the map's informations yet, please check out later, if the poblem persists, report it on the forum : http://forum.magebot.com</value>
   </data>
   <data name="EnhanceCharacteristics" xml:space="preserve">
     <value>Enhance characteristics</value>
@@ -348,11 +348,11 @@
   <data name="AutomaticReconnectionIn" xml:space="preserve">
     <value>Automatic reconnection in</value>
   </data>
-  <data name="BlueSheep" xml:space="preserve">
-    <value>BlueSheep</value>
+  <data name="MageBot" xml:space="preserve">
+    <value>MageBot</value>
   </data>
-  <data name="BlueSheepIsNowMinimized" xml:space="preserve">
-    <value>BlueSheep is now minimized in the system tray</value>
+  <data name="MageBotIsNowMinimized" xml:space="preserve">
+    <value>MageBot is now minimized in the system tray</value>
   </data>
   <data name="Breed" xml:space="preserve">
     <value>Breed</value>

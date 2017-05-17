@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
-using BlueSheep.Util.IO;
+using MageBot.Util.IO;
 
-namespace DataFiles.Data.D2p
+namespace MageBot.DataFiles.Data.D2p
 {
     internal sealed class D2PFileDlm
     {

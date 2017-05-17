@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Protocol.Messages.Secure
+﻿namespace MageBot.Protocol.Messages.Secure
 {
     class TrustStatusMessage : Message
     {

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
+namespace MageBot.Protocol.Messages.Game.Inventory.Items
 {
-    using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
-    using BlueSheep.Protocol.Types.Game.Data.Items;
+    using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
+    using MageBot.Protocol.Types.Game.Data.Items;
 
 
     public class ExchangeObjectModifiedMessage : ExchangeObjectMessage

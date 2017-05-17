@@ -1,20 +1,20 @@
-﻿using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Game.Context;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay;
-using BlueSheep.Protocol.Messages.Game.Interactive;
-using BlueSheep.Protocol.Messages.Game.Interactive.Zaap;
-using BlueSheep.Core.Map.Elements;
-using DataFiles.Data.Pathfinding;
-using DataFiles.Data.Pathfinding.Positions;
-using BlueSheep.Util.Enums.Internal;
+﻿using MageBot.Util.IO;
+using MageBot.Protocol.Messages.Game.Context;
+using MageBot.Protocol.Messages.Game.Context.Roleplay;
+using MageBot.Protocol.Messages.Game.Interactive;
+using MageBot.Protocol.Messages.Game.Interactive.Zaap;
+using MageBot.Core.Map.Elements;
+using MageBot.DataFiles.Data.Pathfinding;
+using MageBot.DataFiles.Data.Pathfinding.Positions;
+using MageBot.Util.Enums.Internal;
 using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BlueSheep.Engine.Network;
+using MageBot.Core.Engine.Network;
 
-namespace BlueSheep.Core.Map
+namespace MageBot.Core.Map
 {
     public class Map
     {

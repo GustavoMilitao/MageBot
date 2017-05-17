@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Common.Basic
+namespace MageBot.Protocol.Messages.Common.Basic
 {
-    using BlueSheep.Protocol.Types;
-    using BlueSheep.Protocol.Types.Common.Basic;
+    using MageBot.Protocol.Types;
+    using MageBot.Protocol.Types.Common.Basic;
     using System.Collections.Generic;
 
 

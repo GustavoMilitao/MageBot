@@ -1,7 +1,7 @@
-﻿using BlueSheep.Protocol.Types.Connection;
+﻿using MageBot.Protocol.Types.Connection;
 using System.Collections.Generic;
 
-namespace BlueSheep.Protocol.Messages.Connection
+namespace MageBot.Protocol.Messages.Connection
 {
     public class ServerListMessage : Message
     {

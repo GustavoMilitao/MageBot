@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Purchasable
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Purchasable
 {
-    using BlueSheep.Protocol;
+    using MageBot.Protocol;
 
 
     public class PurchasableDialogMessage : Message

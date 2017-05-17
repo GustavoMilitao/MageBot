@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace BlueSheep.Engine.Types
+namespace MageBot.Core.EngineTypes
 {
     class InstanceInfo
     {

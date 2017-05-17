@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Character.Status
+namespace MageBot.Protocol.Messages.Game.Character.Status
 {
     public class PlayerStatusUpdateErrorMessage : Message
     {

@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Engine.Network
+﻿namespace MageBot.Core.Engine.Network
 {
     public class ConnectionInformations
     {

@@ -1,12 +1,12 @@
-﻿using BlueSheep.Core.Map.Elements;
-using DataFiles.Data.Pathfinding.Positions;
-using BlueSheep.Util.Enums.Internal;
+﻿using MageBot.Core.Map.Elements;
+using MageBot.DataFiles.Data.Pathfinding.Positions;
+using MageBot.Util.Enums.Internal;
 using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BlueSheep.Core.Job
+namespace MageBot.Core.Job
 {
     public class Gather
     {

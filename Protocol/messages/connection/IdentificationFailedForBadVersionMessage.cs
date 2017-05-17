@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using BlueSheep.Protocol.Types;
+using MageBot.Protocol.Types;
 
-namespace BlueSheep.Protocol.Messages.Connection
+namespace MageBot.Protocol.Messages.Connection
 {
 
     public class IdentificationFailedForBadVersionMessage : IdentificationFailedMessage

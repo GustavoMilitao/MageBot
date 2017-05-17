@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Friend
+namespace MageBot.Protocol.Messages.Game.Friend
 {
     public class FriendSetWarnOnConnectionMessage : Message
     {

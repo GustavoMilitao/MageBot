@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Atlas
+namespace MageBot.Protocol.Messages.Game.Atlas
 {
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay;
+    using MageBot.Protocol.Types.Game.Context.Roleplay;
 
 
     public class AtlasPointInformationsMessage : Message

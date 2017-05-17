@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory.Preset
+namespace MageBot.Protocol.Messages.Game.Inventory.Preset
 {
     public class InventoryPresetUseMessage : Message
     {

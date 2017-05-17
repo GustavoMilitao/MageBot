@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Connection
+namespace MageBot.Protocol.Messages.Connection
 {
-    using BlueSheep.Protocol.Types.Connection;
+    using MageBot.Protocol.Types.Connection;
     using System.Collections.Generic;
 
 

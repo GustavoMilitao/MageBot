@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
+namespace MageBot.Protocol.Messages.Game.Inventory.Items
 {
-    using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
+    using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
 
 
     public class ExchangePodsModifiedMessage : ExchangeObjectMessage

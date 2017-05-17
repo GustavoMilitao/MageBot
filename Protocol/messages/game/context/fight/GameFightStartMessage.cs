@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Fight
+namespace MageBot.Protocol.Messages.Game.Context.Fight
 {
-    using BlueSheep.Protocol.Types.Game.Idol;
+    using MageBot.Protocol.Types.Game.Idol;
     using System.Collections.Generic;
 
 

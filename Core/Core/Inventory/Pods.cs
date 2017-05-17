@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Core.Inventory
+﻿namespace MageBot.Core.Inventory
 {
     public class Pods
     {

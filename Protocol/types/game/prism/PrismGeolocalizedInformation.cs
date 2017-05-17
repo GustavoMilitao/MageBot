@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Prism
+namespace MageBot.Protocol.Types.Game.Prism
 {
 
 

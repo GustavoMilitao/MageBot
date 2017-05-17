@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Alliance
+namespace MageBot.Protocol.Messages.Game.Alliance
 {
     public class AllianceInvitationStateRecrutedMessage : Message
     {

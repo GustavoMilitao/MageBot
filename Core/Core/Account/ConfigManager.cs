@@ -3,17 +3,17 @@ using System;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace BlueSheep.Core.Account
+namespace MageBot.Core.Account
 {
     public class ConfigManager
     {
         #region Fields
-        private Core.Account.Account account;
+        private MageBot.Core.Account.Account account;
         public bool Restored { get; set; }
         #endregion
 
         #region Constructors
-        public ConfigManager(Core.Account.Account Account)
+        public ConfigManager(MageBot.Core.Account.Account Account)
         {
             account = Account;
         }
@@ -22,7 +22,7 @@ namespace BlueSheep.Core.Account
         #region Public Methods
         public bool RecoverConfig()
         {
-            string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
+            string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
             if (File.Exists(spath))
             {
                 AccountConfig configuration = DeserializeConfig(spath);
@@ -44,7 +44,7 @@ namespace BlueSheep.Core.Account
 
         public void SaveConfig()
         {
-            string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
+            string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
 
             if (account.Config != null && account.Config.Enabled)
             {
@@ -54,7 +54,7 @@ namespace BlueSheep.Core.Account
 
         public void DeleteConfig()
         {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
             if (File.Exists(path))
                 File.Delete(path);
         }

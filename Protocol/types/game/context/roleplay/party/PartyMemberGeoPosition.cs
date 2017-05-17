@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Party
+namespace MageBot.Protocol.Types.Game.Context.Roleplay.Party
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class PartyMemberGeoPosition : NetworkType

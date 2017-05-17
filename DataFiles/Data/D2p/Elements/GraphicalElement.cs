@@ -1,7 +1,7 @@
-﻿using BlueSheep.Util.IO;
+﻿using MageBot.Util.IO;
 using System;
 
-namespace DataFiles.Data.D2p.Elements
+namespace MageBot.DataFiles.Data.D2p.Elements
 {
     public class GraphicalElement : BasicElement
     {

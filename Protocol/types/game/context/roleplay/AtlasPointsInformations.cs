@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
+namespace MageBot.Protocol.Types.Game.Context.Roleplay
 {
-    using BlueSheep.Protocol.Types.Game.Context;
+    using MageBot.Protocol.Types.Game.Context;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class AtlasPointsInformations : NetworkType

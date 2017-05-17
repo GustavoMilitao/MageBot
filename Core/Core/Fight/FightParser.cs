@@ -1,4 +1,4 @@
-﻿using DataFiles.Data.D2o;
+﻿using MageBot.DataFiles.Data.D2o;
 using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace BlueSheep.Core.Fight
+namespace MageBot.Core.Fight
 {
     public class FightParser
     {
@@ -316,7 +316,7 @@ namespace BlueSheep.Core.Fight
             DataClass[] datas = GameData.GetDataObjects(D2oFileEnum.Spells);
             foreach (DataClass d in datas)
             {
-                if (DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]).ToUpper() == name.ToUpper())
+                if (MageBot.DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]).ToUpper() == name.ToUpper())
                     return (int)d.Fields["id"];
             }
             return -1;

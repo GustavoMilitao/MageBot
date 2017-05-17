@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Connection
+namespace MageBot.Protocol.Messages.Connection
 {
 
 

@@ -1,6 +1,6 @@
-﻿using BlueSheep.Protocol.Types.Game.Look;
+﻿using MageBot.Protocol.Types.Game.Look;
 
-namespace BlueSheep.Protocol.Types.Game.Character
+namespace MageBot.Protocol.Types.Game.Character
 {
     public class CharacterMinimalPlusLookInformations : CharacterMinimalInformations
     {

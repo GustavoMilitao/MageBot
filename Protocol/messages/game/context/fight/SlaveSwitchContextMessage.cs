@@ -8,13 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Fight
+namespace MageBot.Protocol.Messages.Game.Context.Fight
 {
-    using BlueSheep.Protocol.Types.Game.Data.Items;
-    using BlueSheep.Protocol.Types.Game.Character.Characteristic;
-    using BlueSheep.Protocol.Types.Game.Shortcut;
+    using MageBot.Protocol.Types.Game.Data.Items;
+    using MageBot.Protocol.Types.Game.Character.Characteristic;
+    using MageBot.Protocol.Types.Game.Shortcut;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class SlaveSwitchContextMessage : Message

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using BlueSheep.Util.IO;
+using MageBot.Util.IO;
 
-namespace DataFiles.Data.I18n
+namespace MageBot.DataFiles.Data.I18n
 {
     public class I18NFileAccessor
     {

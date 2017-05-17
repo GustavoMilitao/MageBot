@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.DataCenter
+namespace MageBot.DataCenter
 {
     using System.Collections.Generic;
     using System;

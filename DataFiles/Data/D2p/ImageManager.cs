@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 
-namespace DataFiles.Data.D2p
+namespace MageBot.DataFiles.Data.D2p
 {
     public class ImageManager
     {

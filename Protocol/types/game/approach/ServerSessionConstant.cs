@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Protocol.Types.Game.Approach
+﻿namespace MageBot.Protocol.Types.Game.Approach
 {
     public class ServerSessionConstant : NetworkType
     {

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Atlas.Compass
+namespace MageBot.Protocol.Messages.Game.Atlas.Compass
 {
-    using BlueSheep.Protocol.Types.Game.Context;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types.Game.Context;
+    using MageBot.Protocol.Types;
 
 
     public class CompassUpdateMessage : Message

@@ -1,6 +1,6 @@
-﻿using DataFiles.Data.D2o;
+﻿using MageBot.DataFiles.Data.D2o;
 
-namespace BlueSheep.Core.Fight
+namespace MageBot.Core.Fight
 {
     public class BSpell
     {
@@ -26,7 +26,7 @@ namespace BlueSheep.Core.Fight
         private string GetName()
         {
             DataClass spell = GameData.GetDataObject(D2oFileEnum.Spells, SpellId);
-            return DataFiles.Data.I18n.I18N.GetText((int)spell.Fields["nameId"]);
+            return MageBot.DataFiles.Data.I18n.I18N.GetText((int)spell.Fields["nameId"]);
         }
     }
 

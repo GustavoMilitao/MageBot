@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.TreasureHunt
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.TreasureHunt
 {
     public class TreasureHuntFinishedMessage : Message
     {

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 
-namespace DataFiles.Data.Pathfinding
+namespace MageBot.DataFiles.Data.Pathfinding
 {
     public class Dofus1Line
     {

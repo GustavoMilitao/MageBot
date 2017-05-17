@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Prism
+namespace MageBot.Protocol.Messages.Game.Prism
 {
-    using BlueSheep.Protocol.Types.Game.Prism;
+    using MageBot.Protocol.Types.Game.Prism;
 
 
     public class PrismFightAddedMessage : Message

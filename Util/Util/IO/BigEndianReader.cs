@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace BlueSheep.Util.IO
+namespace MageBot.Util.IO
 {
     public class BigEndianReader : IDisposable, IDataReader
     {

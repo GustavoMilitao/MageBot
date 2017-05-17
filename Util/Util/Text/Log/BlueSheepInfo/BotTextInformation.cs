@@ -24,7 +24,7 @@ namespace Util.Util.Text.Log
 
         public override string Category
         {
-            get { return Strings.BlueSheep; }
+            get { return Strings.MageBot; }
             set { throw new NotImplementedException(); }
         }
 

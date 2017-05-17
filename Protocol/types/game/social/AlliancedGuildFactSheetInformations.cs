@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Social
+namespace MageBot.Protocol.Types.Game.Social
 {
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay;
+    using MageBot.Protocol.Types.Game.Context.Roleplay;
 
 
     public class AlliancedGuildFactSheetInformations : GuildInformations

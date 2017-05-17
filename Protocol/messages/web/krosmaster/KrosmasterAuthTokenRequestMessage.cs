@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Web.Krosmaster
+namespace MageBot.Protocol.Messages.Web.Krosmaster
 {
     public class KrosmasterAuthTokenRequestMessage : Message
     {

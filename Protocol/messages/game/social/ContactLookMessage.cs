@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Social
+namespace MageBot.Protocol.Messages.Game.Social
 {
-    using BlueSheep.Protocol.Types.Game.Look;
+    using MageBot.Protocol.Types.Game.Look;
 
 
     public class ContactLookMessage : Message

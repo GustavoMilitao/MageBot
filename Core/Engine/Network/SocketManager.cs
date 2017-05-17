@@ -7,15 +7,15 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.IO;
-using BlueSheep.Protocol.Messages;
-using BlueSheep.Core.Frame;
+using MageBot.Protocol.Messages;
+using MageBot.Core.Frame;
 using Util.Util.Text.Log;
-using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Common.Basic;
-using BlueSheep.Engine.Network;
-using BlueSheep.Util.Enums.Internal;
+using MageBot.Util.IO;
+using MageBot.Protocol.Messages.Common.Basic;
+using MageBot.Core.Engine.Network;
+using MageBot.Util.Enums.Internal;
 
-namespace BlueSheep.Engine.Network
+namespace MageBot.Core.Engine.Network
 {
     #region Enums
     public enum SocketState
@@ -806,7 +806,7 @@ namespace BlueSheep.Engine.Network
     #endregion
 }
 
-namespace BlueSheep.Core.Network
+namespace MageBot.Core.Network
 {
     public class SocketManager
     {

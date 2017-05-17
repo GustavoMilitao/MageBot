@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Guild
+namespace MageBot.Protocol.Messages.Game.Guild
 {
-    using BlueSheep.Protocol.Types.Game.Social;
+    using MageBot.Protocol.Types.Game.Social;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class GuildVersatileInfoListMessage : Message

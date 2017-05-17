@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Interactive.Skill
+namespace MageBot.Protocol.Messages.Game.Interactive.Skill
 {
-    using BlueSheep.Protocol.Messages.Game.Interactive;
+    using MageBot.Protocol.Messages.Game.Interactive;
 
 
     public class InteractiveUseWithParamRequestMessage : InteractiveUseRequestMessage

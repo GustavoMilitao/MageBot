@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Data.Items.Effects
+namespace MageBot.Protocol.Types.Game.Data.Items.Effects
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class ObjectEffect : NetworkType

@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Guild.Tax
+namespace MageBot.Protocol.Messages.Game.Guild.Tax
 {
-    using BlueSheep.Protocol.Types.Game.Guild.Tax;
+    using MageBot.Protocol.Types.Game.Guild.Tax;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class AbstractTaxCollectorListMessage : Message

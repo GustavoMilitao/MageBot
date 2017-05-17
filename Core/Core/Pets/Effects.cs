@@ -1,8 +1,8 @@
-﻿using DataFiles.Data.D2o;
+﻿using MageBot.DataFiles.Data.D2o;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BlueSheep.Core.Pets
+namespace MageBot.Core.Pets
 {
     static class Effects
     {

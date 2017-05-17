@@ -1,4 +1,4 @@
-﻿using BlueSheep.Util.Enums.Internal;
+﻿using MageBot.Util.Enums.Internal;
 using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 
-namespace BlueSheep.Core.Path
+namespace MageBot.Core.Path
 {
     public class PathManager
     {
@@ -100,7 +100,7 @@ namespace BlueSheep.Core.Path
                     if (flag == 1 && question.Contains(line.Split('|')[0]))
                     {
                         string[] l = line.Split('|');
-                        foreach (BlueSheep.Core.Npc.NpcReply rep in Account.Npc.Replies)
+                        foreach (MageBot.Core.Npc.NpcReply rep in Account.Npc.Replies)
                         {
                             string resp = rep.GetText();
                             if (resp.Contains(l[1]))

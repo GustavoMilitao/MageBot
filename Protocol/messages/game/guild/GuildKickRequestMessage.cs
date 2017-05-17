@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Guild
+namespace MageBot.Protocol.Messages.Game.Guild
 {
     public class GuildKickRequestMessage : Message
     {

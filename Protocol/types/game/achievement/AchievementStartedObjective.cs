@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Achievement
+namespace MageBot.Protocol.Types.Game.Achievement
 {
 
 

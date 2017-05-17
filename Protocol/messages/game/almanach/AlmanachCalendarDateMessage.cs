@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Almanach
+namespace MageBot.Protocol.Messages.Game.Almanach
 {
     public class AlmanachCalendarDateMessage : Message
     {

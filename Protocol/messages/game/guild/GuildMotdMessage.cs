@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Guild
+namespace MageBot.Protocol.Messages.Game.Guild
 {
-    using BlueSheep.Protocol.Messages.Game.Social;
+    using MageBot.Protocol.Messages.Game.Social;
 
 
     public class GuildMotdMessage : SocialNoticeMessage

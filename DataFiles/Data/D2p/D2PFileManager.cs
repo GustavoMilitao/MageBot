@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace DataFiles.Data.D2p
+namespace MageBot.DataFiles.Data.D2p
 {
     internal sealed class D2pFileManager
     {

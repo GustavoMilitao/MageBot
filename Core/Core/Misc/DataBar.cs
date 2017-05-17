@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Core.Misc
+﻿namespace MageBot.Core.Misc
 {
     public class DataBar
     {

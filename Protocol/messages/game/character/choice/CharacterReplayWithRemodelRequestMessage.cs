@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Character.Choice
+namespace MageBot.Protocol.Messages.Game.Character.Choice
 {
-    using BlueSheep.Protocol.Messages.Game.Character.Replay;
-    using BlueSheep.Protocol.Types.Game.Character.Choice;
+    using MageBot.Protocol.Messages.Game.Character.Replay;
+    using MageBot.Protocol.Types.Game.Character.Choice;
 
 
     public class CharacterReplayWithRemodelRequestMessage : CharacterReplayRequestMessage

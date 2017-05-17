@@ -1,29 +1,29 @@
-﻿using BlueSheep.Core.Fight;
+﻿using MageBot.Core.Fight;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using BlueSheep.Core.Map;
-using BlueSheep.Core.Misc;
-using BlueSheep.Engine.Constants;
-using BlueSheep.Protocol.Types.Game.Character.Choice;
-using BlueSheep.Protocol.Types.Game.Data.Items;
-using BlueSheep.Protocol.Types.Game.Character.Characteristic;
-using BlueSheep.Core.Frame;
+using MageBot.Core.Map;
+using MageBot.Core.Misc;
+using MageBot.Core.Engine.Constants;
+using MageBot.Protocol.Types.Game.Character.Choice;
+using MageBot.Protocol.Types.Game.Data.Items;
+using MageBot.Protocol.Types.Game.Character.Characteristic;
+using MageBot.Core.Frame;
 using System.IO;
 using Util.Util.I18n.Strings;
 using Util.Util.Text.Log;
-using DataFiles.Data.D2o;
-using BlueSheep.Core.Pets;
-using BlueSheep.Core.Job;
-using BlueSheep.Core.Groups;
-using BlueSheep.Core.Inventory;
-using BlueSheep.Core.Map.Elements;
-using BlueSheep.Core.Network;
-using BlueSheep.Engine.Network;
-using BlueSheep.Util.Enums.Internal;
+using MageBot.DataFiles.Data.D2o;
+using MageBot.Core.Pets;
+using MageBot.Core.Job;
+using MageBot.Core.Groups;
+using MageBot.Core.Inventory;
+using MageBot.Core.Map.Elements;
+using MageBot.Core.Network;
+using MageBot.Core.Engine.Network;
+using MageBot.Util.Enums.Internal;
 
-namespace BlueSheep.Core.Account
+namespace MageBot.Core.Account
 {
     public class Account
     {
@@ -113,7 +113,7 @@ namespace BlueSheep.Core.Account
             Jobs = new List<Job.Job>();
             Gather = new Gather(this);
 
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", AccountName);
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot","Accounts", AccountName);
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
             Config.ConfigRecover = new ConfigManager(this);
@@ -187,7 +187,7 @@ namespace BlueSheep.Core.Account
                     if ((int)d.Fields["gatheredRessourceItem"] != -1 && job.Level >= (int)d.Fields["levelMin"])
                     {
                         int rid = (int)d.Fields["interactiveId"];
-                        //string resourceName = DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Interactives, rid).Fields["nameId"]);
+                        //string resourceName = MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Interactives, rid).Fields["nameId"]);
                         // This way we can get resource name
                         resourcesToPerformGather.Add(rid);
                     }

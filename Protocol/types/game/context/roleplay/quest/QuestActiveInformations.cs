@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Quest
+namespace MageBot.Protocol.Types.Game.Context.Roleplay.Quest
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class QuestActiveInformations : NetworkType

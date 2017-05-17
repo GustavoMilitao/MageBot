@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Connection.Search
+namespace MageBot.Protocol.Messages.Connection.Search
 {
     public class AcquaintanceSearchErrorMessage : Message
     {

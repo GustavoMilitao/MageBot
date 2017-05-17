@@ -1,11 +1,11 @@
-﻿using BlueSheep.Core.Account;
-using BlueSheep.Core.Fight;
-using BlueSheep.Engine.Constants;
+﻿using MageBot.Core.Account;
+using MageBot.Core.Fight;
+using MageBot.Core.Engine.Constants;
 using Util.Util.Text.Log;
-using Core.Engine.Constants;
-using DataFiles.Data.D2o;
-using DataFiles.Data.D2p;
-using DataFiles.Data.I18n;
+using MageBot.Core.Engine.Constants;
+using MageBot.DataFiles.Data.D2o;
+using MageBot.DataFiles.Data.D2p;
+using MageBot.DataFiles.Data.I18n;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,13 +17,13 @@ namespace CoreTest
     {
         static void Main(string[] args)
         {
-            CheckBlueSheepDatas();
+            CheckMageBotDatas();
             Account conta = new Account("kaiodotapro", "cefet123");
             conta.Config.DebugMode = true;
             Thread t = new Thread(() => GetMessageLogFromAccountQueue(conta));
             t.Start();
             conta.Connect();
-            conta.Config.FightParser = new FightParser(conta, @"C:\Users\Sara\AppData\Roaming\BlueSheep\IAs\IATest.txt", "IA Teste");
+            conta.Config.FightParser = new FightParser(conta, @"C:\Users\Sara\AppData\Roaming\MageBot.IAs\IATest.txt", "IA Teste");
             conta.Fight = new BFight(conta, conta.Config.FightParser, conta.FightData);
             conta.Config.MinMonstersLevel = 0;
             conta.Config.MaxMonstersLevel = 1000;
@@ -71,11 +71,11 @@ namespace CoreTest
         }
     }
 
-    private static void CheckBlueSheepDatas()
+    private static void CheckMageBotDatas()
     {
-        // Create the BlueSheep needed folders
+        // Create the MageBot.needed folders
         string applicationDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        string blueSheepPath = Path.Combine(applicationDataPath, "BlueSheep");
+        string blueSheepPath = Path.Combine(applicationDataPath, "MageBot");
         if (!Directory.Exists(blueSheepPath))
             Directory.CreateDirectory(blueSheepPath);
         if (!Directory.Exists(Path.Combine(blueSheepPath, "Accounts")))
@@ -99,13 +99,13 @@ namespace CoreTest
         }
 
 
-        FileInfo fileInfo = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Logs.txt");
+        FileInfo fileInfo = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot.Logs.txt");
         fileInfo.Delete();
         using (fileInfo.Create())
         {
         }
 
-        //fileInfo = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Packets.txt");
+        //fileInfo = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot.Packets.txt");
         //fileInfo.Delete();
         //using (fileInfo.Create())
         //{

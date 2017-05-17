@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Friend
+namespace MageBot.Protocol.Types.Game.Friend
 {
 
 

@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataFiles.Data.D2o;
-using BlueSheep.Protocol.Types.Game.Data.Items.Effects;
+using MageBot.DataFiles.Data.D2o;
+using MageBot.Protocol.Types.Game.Data.Items.Effects;
 
-namespace BlueSheep.Core.Pets
+namespace MageBot.Core.Pets
 {
     public class Pet
     {
         #region Properties
-        public Core.Inventory.Item Informations { get; set; }
+        public MageBot.Core.Inventory.Item Informations { get; set; }
 
         public DataClass Datas { get; set; }
 
-        public Core.Account.Account account { get; set; }
+        public MageBot.Core.Account.Account account { get; set; }
 
         public List<Food> FoodList { get; set; }
 
@@ -26,7 +26,7 @@ namespace BlueSheep.Core.Pets
         #endregion
 
         #region Constructeurs
-        public Pet(Core.Inventory.Item informations, DataClass datas, Core.Account.Account account)
+        public Pet(MageBot.Core.Inventory.Item informations, DataClass datas, MageBot.Core.Account.Account account)
         {
             FoodList = new List<Food>();
             Informations = informations;
@@ -51,7 +51,7 @@ namespace BlueSheep.Core.Pets
             FoodList.Clear();
             List<int> foodIndex = Food.GetFoods(Informations.GID);
 
-            foreach (Core.Inventory.Item item in account.Inventory.Items)
+            foreach (MageBot.Core.Inventory.Item item in account.Inventory.Items)
             {
                 if (foodIndex != null && foodIndex.Contains(item.GID))
                 {
@@ -110,7 +110,7 @@ namespace BlueSheep.Core.Pets
                         ObjectEffectInteger effectInteger = (ObjectEffectInteger)effect;
                         DataClass effectObject = GameData.GetDataObject(D2oFileEnum.Effects, effect.ActionId);
                         //Effect effectEffect = (Effect) effectObject;
-                        string effectString = DataFiles.Data.I18n.I18N.GetText((int)effectObject.Fields["descriptionId"]);
+                        string effectString = MageBot.DataFiles.Data.I18n.I18N.GetText((int)effectObject.Fields["descriptionId"]);
                         effectString = effectString.TrimStart('#');
                         int index = effectString.IndexOf("#", StringComparison.Ordinal);
                         index += 2;

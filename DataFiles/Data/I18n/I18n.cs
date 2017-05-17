@@ -1,4 +1,4 @@
-﻿namespace DataFiles.Data.I18n
+﻿namespace MageBot.DataFiles.Data.I18n
 {
     public class I18N
     {

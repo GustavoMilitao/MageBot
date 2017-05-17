@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
+namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using BlueSheep.Protocol.Types.Game.Mount;
+    using MageBot.Protocol.Types.Game.Mount;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class UpdateMountBoostMessage : Message

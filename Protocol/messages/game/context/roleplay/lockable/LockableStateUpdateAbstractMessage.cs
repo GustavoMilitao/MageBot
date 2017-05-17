@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Lockable
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Lockable
 {
     public class LockableStateUpdateAbstractMessage : Message
     {

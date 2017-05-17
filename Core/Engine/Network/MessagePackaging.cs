@@ -1,6 +1,6 @@
-﻿using BlueSheep.Util.IO;
+﻿using MageBot.Util.IO;
 
-namespace BlueSheep.Engine.Network
+namespace MageBot.Core.Engine.Network
 {
     public class MessagePackaging
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Character.Replay
+namespace MageBot.Protocol.Messages.Game.Character.Replay
 {
     using System.Collections.Generic;
 

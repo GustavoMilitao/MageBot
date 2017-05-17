@@ -1,6 +1,6 @@
 ﻿ 
 
-namespace BlueSheep.Protocol.Messages.Game.Context
+namespace MageBot.Protocol.Messages.Game.Context
 {
     public class GameContextCreateRequestMessage : Message
     {

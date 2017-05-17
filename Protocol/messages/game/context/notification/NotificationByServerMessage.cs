@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Notification
+namespace MageBot.Protocol.Messages.Game.Context.Notification
 {
     using System.Collections.Generic;
 

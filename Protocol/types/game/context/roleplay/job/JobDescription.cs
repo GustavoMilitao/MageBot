@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Job
+namespace MageBot.Protocol.Types.Game.Context.Roleplay.Job
 {
-    using BlueSheep.Protocol.Types.Game.Interactive.Skill;
+    using MageBot.Protocol.Types.Game.Interactive.Skill;
     using System.Collections.Generic;
 
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlueSheep.Core.Path
+namespace MageBot.Core.Path
 {
     class PathCondition
     {

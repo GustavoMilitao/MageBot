@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Idol
+namespace MageBot.Protocol.Messages.Game.Idol
 {
     public class IdolPartyLostMessage : Message
     {

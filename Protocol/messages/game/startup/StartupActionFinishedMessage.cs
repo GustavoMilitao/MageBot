@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Startup
+namespace MageBot.Protocol.Messages.Game.Startup
 {
-    using BlueSheep.Protocol;
+    using MageBot.Protocol;
 
 
     public class StartupActionFinishedMessage : Message

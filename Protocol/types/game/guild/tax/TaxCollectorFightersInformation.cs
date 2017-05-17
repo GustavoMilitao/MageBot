@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Guild.Tax
+namespace MageBot.Protocol.Types.Game.Guild.Tax
 {
-    using BlueSheep.Protocol.Types.Game.Character;
+    using MageBot.Protocol.Types.Game.Character;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class TaxCollectorFightersInformation : NetworkType

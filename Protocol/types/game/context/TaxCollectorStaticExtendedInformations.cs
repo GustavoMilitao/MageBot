@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context
+namespace MageBot.Protocol.Types.Game.Context
 {
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay;
+    using MageBot.Protocol.Types.Game.Context.Roleplay;
 
 
     public class TaxCollectorStaticExtendedInformations : TaxCollectorStaticInformations

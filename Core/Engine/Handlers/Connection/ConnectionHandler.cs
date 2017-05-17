@@ -1,29 +1,29 @@
-﻿using DataFiles.Data.D2o;
-using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Connection;
-using BlueSheep.Protocol.Messages.Game.Approach;
-using BlueSheep.Protocol.Messages.Game.Character.Choice;
-using BlueSheep.Engine.Constants;
-using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Protocol.Messages;
+﻿using MageBot.DataFiles.Data.D2o;
+using MageBot.Util.IO;
+using MageBot.Protocol.Messages.Connection;
+using MageBot.Protocol.Messages.Game.Approach;
+using MageBot.Protocol.Messages.Game.Character.Choice;
+using MageBot.Core.Engine.Constants;
+using MageBot.Util.Enums.Internal;
+using MageBot.Protocol.Messages;
 using Util.Util.Text.Log;
-using BlueSheep.Util.Text;
-using BlueSheep.Util.Text.Connection;
+using MageBot.Util.Text;
+using MageBot.Util.Text.Connection;
 using RSA;
 using System;
 using System.Collections.Generic;
-using BlueSheep.Util.Enums.EnumHelper;
-using BlueSheep.Protocol.Enums;
-using BlueSheep.Engine.Network;
-using BlueSheep.Protocol.Types;
+using MageBot.Util.Enums.EnumHelper;
+using MageBot.Protocol.Enums;
+using MageBot.Core.Engine.Network;
+using MageBot.Protocol.Types;
 
-namespace BlueSheep.Engine.Handlers.Connection
+namespace MageBot.Core.Engine.Handlers.Connection
 {
     class ConnectionHandler
     {
         #region Public methods
         [MessageHandler(typeof(HelloConnectMessage))]
-        public static void HelloConnectMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void HelloConnectMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             account.SetStatus(Status.None);
             if (!account.Config.IsMITM)
@@ -60,7 +60,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(IdentificationSuccessMessage))]
-        public static void IdentificationSuccessMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void IdentificationSuccessMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             IdentificationSuccessMessage msg = (IdentificationSuccessMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -76,7 +76,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(IdentificationFailedMessage))]
-        public static void IdentificationFailedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void IdentificationFailedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             IdentificationFailedMessage identificationFailedMessage = (IdentificationFailedMessage)message;
             account.Log(new ErrorTextInformation("Echec de l'identification."), 0);
@@ -89,7 +89,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(SelectedServerDataExtendedMessage))]
-        public async static void SelectedServerDataExtendedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public async static void SelectedServerDataExtendedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             SelectedServerDataExtendedMessage msg = (SelectedServerDataExtendedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -102,7 +102,7 @@ namespace BlueSheep.Engine.Handlers.Connection
             account.SocketManager.IsChangingServer = true;
             if (!account.Config.IsMITM)
             {
-                account.Log(new ConnectionTextInformation("Connexion au serveur " + DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
+                account.Log(new ConnectionTextInformation("Connexion au serveur " + MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
                 account.SocketManager.Connect(new ConnectionInformations(msg.Address, msg.Port, "de jeu"));
             }
             else
@@ -123,13 +123,13 @@ namespace BlueSheep.Engine.Handlers.Connection
                     account.SocketManager.ListenDofus();
                     await account.PutTaskDelay(200);
                 }
-                account.Log(new ConnectionTextInformation("Connexion au serveur " + DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
+                account.Log(new ConnectionTextInformation("Connexion au serveur " + MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
                 account.SocketManager.Connect(new ConnectionInformations(msg.Address, msg.Port, "of game"));
             }
         }
 
         [MessageHandler(typeof(ServerStatusUpdateMessage))]
-        public static void ServerStatusUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ServerStatusUpdateMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             // Lecture du paquet ServerStatusUpdateMessage
             ServerStatusUpdateMessage serverStatusUpdateMessage = (ServerStatusUpdateMessage)message;
@@ -142,7 +142,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(ServersListMessage))]
-        public static void ServerListMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ServerListMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ServersListMessage msg = new ServersListMessage();
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -152,7 +152,7 @@ namespace BlueSheep.Engine.Handlers.Connection
 
             account.Log(new ConnectionTextInformation("< --- Probably, your server is under maintenance --- >"), 0);
             msg.Servers.ForEach(server => account.Log(new ConnectionTextInformation("< --- Server : " +
-                DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, server.ObjectID).Fields["nameId"])
+                MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, server.ObjectID).Fields["nameId"])
                          + " Status : " + ((ServerStatusEnum)server.Status).Description() + " --- >"), 0));
 
             //foreach (GameServerInformations gsi in msg.servers)
@@ -166,7 +166,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(HelloGameMessage))]
-        public static void HelloGameMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void HelloGameMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             if (!account.Config.IsMITM)
             {
@@ -176,7 +176,7 @@ namespace BlueSheep.Engine.Handlers.Connection
             }
         }
         [MessageHandler(typeof(AuthenticationTicketAcceptedMessage))]
-        public static void AuthenticationTicketAcceptedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void AuthenticationTicketAcceptedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             if (!account.Config.IsMITM)
             {
@@ -186,7 +186,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(AuthenticationTicketRefusedMessage))]
-        public static void AuthenticationTicketAcceptedRefusedTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void AuthenticationTicketAcceptedRefusedTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             AuthenticationTicketRefusedMessage msg = new AuthenticationTicketRefusedMessage();
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -197,7 +197,7 @@ namespace BlueSheep.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(SelectedServerRefusedMessage))]
-        public static void SelectedServerRefusedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void SelectedServerRefusedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             // Lecture du paquet ServerStatusUpdateMessage
             SelectedServerRefusedMessage selectedServerRefusedMessage = (SelectedServerRefusedMessage)message;
@@ -209,7 +209,7 @@ namespace BlueSheep.Engine.Handlers.Connection
             ServerStatus.Test((ServerStatusEnum)selectedServerRefusedMessage.ServerStatus, account);
         }
         [MessageHandler(typeof(IdentificationFailedForBadVersionMessage))]
-        public static void IdentificationFailedForBadVersionMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void IdentificationFailedForBadVersionMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             IdentificationFailedForBadVersionMessage identificationFailedForBadVersionMessage = (IdentificationFailedForBadVersionMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -223,14 +223,14 @@ namespace BlueSheep.Engine.Handlers.Connection
             + identificationFailedForBadVersionMessage.RequiredVersion.Revision + "."
             + identificationFailedForBadVersionMessage.RequiredVersion.Patch + "."
             + identificationFailedForBadVersionMessage.RequiredVersion.BuildType + ")."
-            + " BlueSheep supporte uniquement la version " + GameConstants.Major + "."
+            + " MageBot.supporte uniquement la version " + GameConstants.Major + "."
             + GameConstants.Minor + "." + GameConstants.Release + "."
             + GameConstants.Revision + "." + GameConstants.Patch + "."
             + GameConstants.BuildType + " du jeu. Consultez le forum pour être alerté de la mise à jour du bot."), 0);
             account.SocketManager.DisconnectFromGUI();
         }
         [MessageHandler(typeof(IdentificationFailedBannedMessage))]
-        public static void IdentificationFailedBannedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void IdentificationFailedBannedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             IdentificationFailedBannedMessage msg = (IdentificationFailedBannedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))

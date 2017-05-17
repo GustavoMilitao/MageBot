@@ -1,22 +1,22 @@
-﻿using BlueSheep.Core.Account;
-using BlueSheep.Util.Enums.Internal;
+﻿using MageBot.Core.Account;
+using MageBot.Util.Enums.Internal;
 using Util.Util.Text.Log;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BlueSheep.Engine.Network
+namespace MageBot.Core.Engine.Network
 {
     public class WatchDog
     {
         #region Fields
-        private Account m_Account;
+        private Account.Account m_Account;
         private DateTime PathAction;
         private Thread m_PathDog;
         #endregion
 
         #region Constructors
-        public WatchDog(Account account)
+        public WatchDog(Account.Account account)
         {
             m_Account = account;
         }

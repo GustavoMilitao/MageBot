@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Dialog
+namespace MageBot.Protocol.Messages.Game.Dialog
 {
     public class PauseDialogMessage : Message
     {

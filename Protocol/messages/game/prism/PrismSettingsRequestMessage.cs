@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Prism
+namespace MageBot.Protocol.Messages.Game.Prism
 {
     public class PrismSettingsRequestMessage : Message
     {

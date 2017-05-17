@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Web.Haapi
+namespace MageBot.Protocol.Messages.Web.Haapi
 {
     public class HaapiApiKeyMessage : Message
     {

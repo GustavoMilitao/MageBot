@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Houses
 {
-    using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Lockable;
+    using MageBot.Protocol.Messages.Game.Context.Roleplay.Lockable;
 
 
     public class HouseLockFromInsideRequestMessage : LockableChangeCodeMessage

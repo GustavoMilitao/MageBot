@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Ui
+namespace MageBot.Protocol.Messages.Game.Ui
 {
     public class ClientUIOpenedMessage : Message
     {

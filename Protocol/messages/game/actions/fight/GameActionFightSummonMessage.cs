@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Actions.Fight
+namespace MageBot.Protocol.Messages.Game.Actions.Fight
 {
-    using BlueSheep.Protocol.Messages.Game.Actions;
-    using BlueSheep.Protocol.Types;
-    using BlueSheep.Protocol.Types.Game.Context.Fight;
+    using MageBot.Protocol.Messages.Game.Actions;
+    using MageBot.Protocol.Types;
+    using MageBot.Protocol.Types.Game.Context.Fight;
     using System.Collections.Generic;
 
 

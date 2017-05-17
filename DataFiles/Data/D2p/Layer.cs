@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using BlueSheep.Util.IO;
+using MageBot.Util.IO;
 
-namespace DataFiles.Data.D2p
+namespace MageBot.DataFiles.Data.D2p
 {
     public class Layer
     {

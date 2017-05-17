@@ -1,4 +1,4 @@
-﻿namespace DataFiles.Data.D2p
+﻿namespace MageBot.DataFiles.Data.D2p
 {
     public class ColorMultiplicator
     {

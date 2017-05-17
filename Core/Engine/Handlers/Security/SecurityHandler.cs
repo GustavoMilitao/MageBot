@@ -1,14 +1,14 @@
-﻿using BlueSheep.Protocol.Messages;
+﻿using MageBot.Protocol.Messages;
 using System.Collections.Generic;
-using BlueSheep.Protocol.Messages.Security;
+using MageBot.Protocol.Messages.Security;
 
-namespace BlueSheep.Engine.Handlers.Security
+namespace MageBot.Core.Engine.Handlers.Security
 {
     class SecurityHandler
     {
         #region Public methods
         [MessageHandler(typeof(RawDataMessage))]
-        public static void RawDataMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void RawDataMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             List<int> tt = new List<int>();
             CheckIntegrityMessage checkIntegrityMessage = new CheckIntegrityMessage(tt);
@@ -17,7 +17,7 @@ namespace BlueSheep.Engine.Handlers.Security
         }
 
         [MessageHandler(typeof(CheckIntegrityMessage))]
-        public static void CheckIntegrityMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void CheckIntegrityMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
         }
 

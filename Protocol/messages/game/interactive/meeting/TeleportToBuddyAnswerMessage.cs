@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Interactive.Meeting
+namespace MageBot.Protocol.Messages.Game.Interactive.Meeting
 {
     public class TeleportToBuddyAnswerMessage : Message
     {

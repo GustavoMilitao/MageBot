@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Idol
+namespace MageBot.Protocol.Messages.Game.Idol
 {
-    using BlueSheep.Protocol.Types.Game.Idol;
+    using MageBot.Protocol.Types.Game.Idol;
 
 
     public class IdolPartyRefreshMessage : Message

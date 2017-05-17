@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Job
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Job
 {
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay.Job;
+    using MageBot.Protocol.Types.Game.Context.Roleplay.Job;
 
 
     public class JobLevelUpMessage : Message

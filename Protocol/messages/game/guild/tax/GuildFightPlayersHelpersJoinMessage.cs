@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Guild.Tax
+namespace MageBot.Protocol.Messages.Game.Guild.Tax
 {
-    using BlueSheep.Protocol.Types.Game.Character;
+    using MageBot.Protocol.Types.Game.Character;
 
 
     public class GuildFightPlayersHelpersJoinMessage : Message

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Actions.Fight
+namespace MageBot.Protocol.Messages.Game.Actions.Fight
 {
     public class GameActionFightCastOnTargetRequestMessage : Message
     {

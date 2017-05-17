@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Basic
+namespace MageBot.Protocol.Messages.Game.Basic
 {
-    using BlueSheep.Protocol.Types.Game.Social;
-    using BlueSheep.Protocol;
+    using MageBot.Protocol.Types.Game.Social;
+    using MageBot.Protocol;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class BasicWhoIsMessage : Message

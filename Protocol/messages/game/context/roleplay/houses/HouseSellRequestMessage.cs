@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Houses
 {
     public class HouseSellRequestMessage : Message
     {

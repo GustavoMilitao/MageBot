@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Subscriber
+namespace MageBot.Protocol.Messages.Game.Subscriber
 {
     public class SubscriptionLimitationMessage : Message
     {

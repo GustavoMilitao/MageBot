@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Fight
+namespace MageBot.Protocol.Types.Game.Fight
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class ProtectedEntityWaitingForHelpInfo : NetworkType

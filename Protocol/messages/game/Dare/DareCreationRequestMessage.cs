@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Dare
+namespace MageBot.Protocol.Messages.Game.Dare
 {
-    using BlueSheep.Protocol.Types.Game.Dare;
+    using MageBot.Protocol.Types.Game.Dare;
     using System.Collections.Generic;
-    using BlueSheep.Protocol;
+    using MageBot.Protocol;
 
 
     public class DareCreationRequestMessage : Message

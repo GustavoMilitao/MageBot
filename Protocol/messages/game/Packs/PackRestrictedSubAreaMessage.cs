@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Packs
+namespace MageBot.Protocol.Messages.Game.Packs
 {
     public class PackRestrictedSubAreaMessage : Message
     {

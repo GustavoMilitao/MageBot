@@ -1,7 +1,7 @@
-﻿using BlueSheep.Protocol.Types.Game.Interactive;
+﻿using MageBot.Protocol.Types.Game.Interactive;
 using System.Collections.Generic;
 
-namespace BlueSheep.Core.Map.Elements
+namespace MageBot.Core.Map.Elements
 {
     public class UsableElement
     {

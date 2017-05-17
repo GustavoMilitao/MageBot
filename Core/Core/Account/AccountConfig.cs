@@ -1,11 +1,11 @@
-﻿using BlueSheep.Core.Char;
-using BlueSheep.Core.Fight;
-using BlueSheep.Core.Misc;
-using BlueSheep.Core.Path;
+﻿using MageBot.Core.Char;
+using MageBot.Core.Fight;
+using MageBot.Core.Misc;
+using MageBot.Core.Path;
 using System;
 using System.Collections.Generic;
 
-namespace BlueSheep.Core.Account
+namespace MageBot.Core.Account
 {
     [Serializable()]
     public class AccountConfig
@@ -69,11 +69,11 @@ namespace BlueSheep.Core.Account
         public AccountConfig(Account account)
         {
             Account = account;
-            ConfigRecover = new ConfigManager(account);
-            Flood = new Flood(account);
-            RegenConfig = new Regen.Regen(account);
-            CharacterConfig = new Character(account);
-            HeroicConfig = new Heroic.Heroic(account);
+            ConfigRecover = new ConfigManager(Account);
+            Flood = new Flood(Account);
+            RegenConfig = new Regen.Regen(Account);
+            CharacterConfig = new Character(Account);
+            HeroicConfig = new Heroic.Heroic(Account);
             MonsterRestrictions = new List<Fight.MonsterRestrictions>();
         }
 

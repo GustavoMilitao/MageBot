@@ -1,19 +1,19 @@
-﻿using DataFiles.Data.D2o;
+﻿using MageBot.DataFiles.Data.D2o;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BlueSheep.Core.Pets
+namespace MageBot.Core.Pets
 {
     public class Food
     {
         #region Properties
-        public Core.Inventory.Item Informations { get; set; }
+        public MageBot.Core.Inventory.Item Informations { get; set; }
 
         public DataClass Datas { get; set; }
         #endregion
 
         #region Constructeurs
-        public Food(Core.Inventory.Item informations, DataClass datas)
+        public Food(MageBot.Core.Inventory.Item informations, DataClass datas)
         {
             Informations = informations;
             Datas = datas;

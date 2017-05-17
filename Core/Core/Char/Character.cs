@@ -1,9 +1,9 @@
-﻿using DataFiles.Data.D2o;
-using BlueSheep.Protocol.Enums;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Stats;
+﻿using MageBot.DataFiles.Data.D2o;
+using MageBot.Protocol.Enums;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Stats;
 using System.Collections;
 
-namespace BlueSheep.Core.Char
+namespace MageBot.Core.Char
 {
     public class Character
     {

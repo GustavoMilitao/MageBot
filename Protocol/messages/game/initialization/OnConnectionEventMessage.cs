@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Initialization
+namespace MageBot.Protocol.Messages.Game.Initialization
 {
     public class OnConnectionEventMessage : Message
     {

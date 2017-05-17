@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Core.Base
+﻿namespace MageBot.Core.Base
 {
     public class BEntity
     {

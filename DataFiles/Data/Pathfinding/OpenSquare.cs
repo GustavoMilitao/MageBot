@@ -1,4 +1,4 @@
-﻿namespace DataFiles.Data.Pathfinding
+﻿namespace MageBot.DataFiles.Data.Pathfinding
 {
     public class OpenSquare
     {

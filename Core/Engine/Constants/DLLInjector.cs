@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace BlueSheep.Engine.Constants
+namespace MageBot.Core.Engine.Constants
 {
     public enum DllInjectionResult
     {

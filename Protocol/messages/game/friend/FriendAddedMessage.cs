@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Friend
+namespace MageBot.Protocol.Messages.Game.Friend
 {
-    using BlueSheep.Protocol.Types.Game.Friend;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types.Game.Friend;
+    using MageBot.Protocol.Types;
 
 
     public class FriendAddedMessage : Message

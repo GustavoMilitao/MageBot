@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Pvp
+namespace MageBot.Protocol.Messages.Game.Pvp
 {
     using System.Collections.Generic;
 

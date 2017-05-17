@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Fight.Challenge
+namespace MageBot.Protocol.Messages.Game.Context.Fight.Challenge
 {
     public class ChallengeTargetsListMessage : Message
     {

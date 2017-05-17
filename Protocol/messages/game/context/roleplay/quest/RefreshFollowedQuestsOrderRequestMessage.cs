@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Quest
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Quest
 {
     using System.Collections.Generic;
 

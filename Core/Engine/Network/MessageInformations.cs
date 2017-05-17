@@ -1,10 +1,10 @@
 ﻿using System;
-using BlueSheep.Util.IO;
+using MageBot.Util.IO;
 using System.Collections.Generic;
 using Util.Util.Text.Log;
-using BlueSheep.Core.Account;
+using MageBot.Core.Engine.Treatment;
 
-namespace BlueSheep.Engine.Network
+namespace MageBot.Core.Engine.Network
 {
     public class MessageInformations
     {
@@ -15,12 +15,12 @@ namespace BlueSheep.Engine.Network
         public byte[] m_Data;
         private int? m_LenghtType;
         private int? m_ProtocolID;
-        private Account account;
+        private Account.Account account;
         private List<int> ForbiddenHeaders = new List<int>() { 42, 6469 };
         #endregion
 
         #region Public methods
-        public MessageInformations(Account account)
+        public MessageInformations(Account.Account account)
         {
             this.account = account;
         }

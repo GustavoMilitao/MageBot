@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Character.Stats
+namespace MageBot.Protocol.Messages.Game.Character.Stats
 {
     public class CharacterExperienceGainMessage : Message
     {

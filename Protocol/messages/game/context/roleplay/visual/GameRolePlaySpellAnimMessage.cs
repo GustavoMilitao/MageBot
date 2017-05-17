@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Visual
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Visual
 {
     public class GameRolePlaySpellAnimMessage : Message
     {

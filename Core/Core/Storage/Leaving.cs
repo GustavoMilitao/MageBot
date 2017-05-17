@@ -1,7 +1,7 @@
-﻿using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
-using BlueSheep.Core.Pets;
+﻿using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
+using MageBot.Core.Pets;
 
-namespace BlueSheep.Core.Storage
+namespace MageBot.Core.Storage
 {
     public class Leaving
     {
@@ -21,7 +21,7 @@ namespace BlueSheep.Core.Storage
             int quantity = 0;
             int objectUID = 0;
 
-            foreach (BlueSheep.Core.Inventory.Item item in account.Inventory.Items)
+            foreach (MageBot.Core.Inventory.Item item in account.Inventory.Items)
             {
                 bool isFood = false;
 

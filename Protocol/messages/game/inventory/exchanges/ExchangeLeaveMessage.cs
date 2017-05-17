@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
+namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using BlueSheep.Protocol.Messages.Game.Dialog;
+    using MageBot.Protocol.Messages.Game.Dialog;
 
 
     public class ExchangeLeaveMessage : LeaveDialogMessage

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using BlueSheep.Util.IO;
-using DataFiles.Data.D2p.Elements;
+using MageBot.Util.IO;
+using MageBot.DataFiles.Data.D2p.Elements;
 
-namespace DataFiles.Data.D2p
+namespace MageBot.DataFiles.Data.D2p
 {
     public class Cell
     {

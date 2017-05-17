@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party.Companion
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party.Companion
 {
-    using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Party;
+    using MageBot.Protocol.Messages.Game.Context.Roleplay.Party;
 
 
     public class PartyCompanionUpdateLightMessage : PartyUpdateLightMessage

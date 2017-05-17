@@ -1,11 +1,11 @@
-﻿using BlueSheep.Core.Inventory;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Emote;
-using BlueSheep.Util.Enums.Internal;
+﻿using MageBot.Core.Inventory;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Emote;
+using MageBot.Util.Enums.Internal;
 using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 
-namespace BlueSheep.Core.Regen
+namespace MageBot.Core.Regen
 {
     public class Regen
     {

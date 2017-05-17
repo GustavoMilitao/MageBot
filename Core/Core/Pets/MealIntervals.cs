@@ -1,6 +1,6 @@
-﻿using DataFiles.Data.D2o;
+﻿using MageBot.DataFiles.Data.D2o;
 
-namespace BlueSheep.Core.Pets
+namespace MageBot.Core.Pets
 {
     class MealIntervals
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Character.Alignment
+namespace MageBot.Protocol.Types.Game.Character.Alignment
 {
 
 

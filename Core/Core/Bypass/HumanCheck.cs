@@ -1,5 +1,5 @@
-﻿using BlueSheep.Util.IO;
-using BlueSheep.Core.Account;
+﻿using MageBot.Util.IO;
+using MageBot.Core.Account;
 using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace BlueSheep.Engine.Constants
+namespace MageBot.Core.Engine.Constants
 {
     public class HumanCheck
     {
@@ -18,7 +18,7 @@ namespace BlueSheep.Engine.Constants
         
         public byte[] _hashKey;
 
-        public HumanCheck(Account account)
+        public HumanCheck(Account.Account account)
         {
             _hashKey = HashKey_Gen(account);
         }
@@ -260,7 +260,7 @@ namespace BlueSheep.Engine.Constants
         }
    
 
-        private byte[] HashKey_Gen(Account account)
+        private byte[] HashKey_Gen(Account.Account account)
         {
             try
             {

@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Threading;
-using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages;
+using MageBot.Util.IO;
+using MageBot.Protocol.Messages;
 using Util.Util.Text.Log;
-using BlueSheep.Protocol.Enums;
-using BlueSheep.Util.Enums.EnumHelper;
-using BlueSheep.Protocol.Messages.Game.Basic;
-using BlueSheep.Protocol.Messages.Game.Interactive;
-using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
-using BlueSheep.Protocol.Messages.Game.Inventory.Items;
-using BlueSheep.Protocol.Messages.Game.Dialog;
-using BlueSheep.Protocol.Messages.Game.Approach;
+using MageBot.Protocol.Enums;
+using MageBot.Util.Enums.EnumHelper;
+using MageBot.Protocol.Messages.Game.Basic;
+using MageBot.Protocol.Messages.Game.Interactive;
+using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
+using MageBot.Protocol.Messages.Game.Inventory.Items;
+using MageBot.Protocol.Messages.Game.Dialog;
+using MageBot.Protocol.Messages.Game.Approach;
 
-namespace BlueSheep.Engine.Handlers.Basic
+namespace MageBot.Core.Engine.Handlers.Basic
 {
     class BasicHandler
     {
         #region Public methods
         [MessageHandler(typeof(SequenceNumberRequestMessage))]
-        public static void SequenceNumberRequestMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void SequenceNumberRequestMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             account.Sequence++;
 
@@ -27,7 +27,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(BasicLatencyStatsRequestMessage))]
-        public static void BasicLatencyStatsRequestMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void BasicLatencyStatsRequestMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage((ushort)account.LatencyFrame.GetLatencyAvg(),
                 (ushort)account.LatencyFrame.GetSamplesCount(), (ushort)account.LatencyFrame.GetSamplesMax());
@@ -47,7 +47,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(BasicAckMessage))]
-        public static void BasicAckMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void BasicAckMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             BasicAckMessage basicAckMessage = (BasicAckMessage)message;
 
@@ -63,7 +63,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(BasicNoOperationMessage))]
-        public static void BasicNoOperationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void BasicNoOperationMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             //MainForm.ActualMainForm.ActualizeAccountInformations();
             //if (account.MapData.Begin)
@@ -130,7 +130,7 @@ namespace BlueSheep.Engine.Handlers.Basic
 
         }
         [MessageHandler(typeof(BasicTimeMessage))]
-        public static void BasicTimeMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void BasicTimeMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             BasicTimeMessage btmsg = (BasicTimeMessage)message;
 
@@ -152,7 +152,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(AccountLoggingKickedMessage))]
-        public static void AccountLoggingKickedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void AccountLoggingKickedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             AccountLoggingKickedMessage btmsg = (AccountLoggingKickedMessage)message;
 
@@ -164,7 +164,7 @@ namespace BlueSheep.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(ServerSettingsMessage))]
-        public static void ServerSettingsMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ServerSettingsMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ServerSettingsMessage msg = (ServerSettingsMessage)message;
 

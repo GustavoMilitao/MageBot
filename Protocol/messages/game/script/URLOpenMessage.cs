@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Script
+namespace MageBot.Protocol.Messages.Game.Script
 {
     public class URLOpenMessage : Message
     {

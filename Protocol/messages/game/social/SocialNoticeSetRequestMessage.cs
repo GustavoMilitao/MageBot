@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Social
+namespace MageBot.Protocol.Messages.Game.Social
 {
     public class SocialNoticeSetRequestMessage : Message
     {

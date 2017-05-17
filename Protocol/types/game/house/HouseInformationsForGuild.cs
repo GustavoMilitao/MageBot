@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.House
+namespace MageBot.Protocol.Types.Game.House
 {
     using System.Collections.Generic;
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Security
+namespace MageBot.Protocol.Messages.Security
 {
     public class CheckFileMessage : Message
     {

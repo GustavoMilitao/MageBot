@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace BlueSheep.Protocol.Types
+namespace MageBot.Protocol.Types
 {
     public static class ProtocolTypeManager
     {
@@ -66,10 +66,10 @@ namespace BlueSheep.Protocol.Types
                     //var form = MainForm.AccFrm;
                     //form.UC.Log(new DebugTextInformation("Classe de id : [" + id + "] não implementada "), 0);
                     if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                   "BlueSheep", "Errors")))
+                   "MageBot", "Errors")))
                     {
                         DirectoryInfo d = Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                                                  "BlueSheep", "Errors"));
+                                                  "MageBot", "Errors"));
                         string fileNameError = "Error" + DateTime.Now.ToString().Replace("/", "-").Replace(" ", "").Replace(":", "_");
                         File.WriteAllText(Path.Combine(d.FullName,fileNameError), "Classe de id : [" + id + "] não implementada ");
                     }

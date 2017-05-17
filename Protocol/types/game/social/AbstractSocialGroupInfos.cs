@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Protocol.Types.Game.Social
+﻿namespace MageBot.Protocol.Types.Game.Social
 {
     public class AbstractSocialGroupInfos
     {

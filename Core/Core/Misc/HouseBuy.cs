@@ -1,11 +1,11 @@
-﻿using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Game.Chat;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses;
-using BlueSheep.Protocol.Messages.Game.Interactive;
+﻿using MageBot.Util.IO;
+using MageBot.Protocol.Messages.Game.Chat;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Houses;
+using MageBot.Protocol.Messages.Game.Interactive;
 using Util.Util.Text.Log;
 using System;
 
-namespace BlueSheep.Core.Misc
+namespace MageBot.Core.Misc
 {
     public class HouseBuy
     {

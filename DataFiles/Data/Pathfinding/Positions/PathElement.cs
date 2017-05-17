@@ -1,4 +1,4 @@
-﻿namespace DataFiles.Data.Pathfinding.Positions
+﻿namespace MageBot.DataFiles.Data.Pathfinding.Positions
 {
     public class PathElement
     {

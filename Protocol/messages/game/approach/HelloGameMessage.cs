@@ -1,6 +1,6 @@
 ﻿ 
 
-namespace BlueSheep.Protocol.Messages.Game.Approach
+namespace MageBot.Protocol.Messages.Game.Approach
 {
     public class HelloGameMessage : Message
     {

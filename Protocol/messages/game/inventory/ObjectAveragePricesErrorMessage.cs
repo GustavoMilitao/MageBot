@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory
+namespace MageBot.Protocol.Messages.Game.Inventory
 {
     public class ObjectAveragePricesErrorMessage : Message
     {

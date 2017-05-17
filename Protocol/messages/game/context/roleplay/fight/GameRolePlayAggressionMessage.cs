@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Fight
 {
     public class GameRolePlayAggressionMessage : Message
     {

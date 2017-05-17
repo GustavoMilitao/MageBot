@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BlueSheep.Core.Groups
+namespace MageBot.Core.Groups
 {
     public class Group
     {

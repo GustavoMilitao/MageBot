@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Emote
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Emote
 {
     public class EmotePlayAbstractMessage : Message
     {

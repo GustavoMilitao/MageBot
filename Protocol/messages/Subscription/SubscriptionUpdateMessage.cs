@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Subscription
+namespace MageBot.Protocol.Messages.Subscription
 {
     public class SubscriptionUpdateMessage : Message
     {

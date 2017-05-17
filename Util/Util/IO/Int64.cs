@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlueSheep.Util.IO
+namespace MageBot.Util.IO
 {
     public class Int64 : Binary64
     {

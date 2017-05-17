@@ -1,6 +1,6 @@
-﻿using BlueSheep.Util.IO;
+﻿using MageBot.Util.IO;
 
-namespace BlueSheep.Protocol.Messages
+namespace MageBot.Protocol.Messages
 {
     public abstract class Message
     {

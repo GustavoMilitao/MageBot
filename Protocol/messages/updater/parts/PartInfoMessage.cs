@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Updater.Parts
+namespace MageBot.Protocol.Messages.Updater.Parts
 {
-    using BlueSheep.Protocol.Types.Updater;
+    using MageBot.Protocol.Types.Updater;
 
 
     public class PartInfoMessage : Message

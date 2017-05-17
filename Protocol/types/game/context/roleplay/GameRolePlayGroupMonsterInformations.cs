@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay
+namespace MageBot.Protocol.Types.Game.Context.Roleplay
 {
-    using BlueSheep.Protocol;
+    using MageBot.Protocol;
 
 
     public class GameRolePlayGroupMonsterInformations : GameRolePlayActorInformations

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlueSheep.Protocol
+namespace MageBot.Protocol
 {
     public static class BooleanByteWrapper
     {

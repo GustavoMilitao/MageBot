@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory.Items
+namespace MageBot.Protocol.Messages.Game.Inventory.Items
 {
     public class LivingObjectMessageMessage : Message
     {

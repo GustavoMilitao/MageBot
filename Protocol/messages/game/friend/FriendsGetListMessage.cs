@@ -1,6 +1,6 @@
 ﻿ 
 
-namespace BlueSheep.Protocol.Messages.Game.Friend
+namespace MageBot.Protocol.Messages.Game.Friend
 {
     public class FriendsGetListMessage : Message
     {

@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Protocol.Types.Game.Character.Choice
+﻿namespace MageBot.Protocol.Types.Game.Character.Choice
 {
     public class CharacterBaseInformations : CharacterMinimalPlusLookInformations
     {

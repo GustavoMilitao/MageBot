@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Core.Fight
+﻿namespace MageBot.Core.Fight
 {
     /// <summary>
     /// Enum of condition that can be used in AI scripts.

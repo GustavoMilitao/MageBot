@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Prism
+namespace MageBot.Protocol.Messages.Game.Prism
 {
-    using BlueSheep.Protocol.Types.Game.Character;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types.Game.Character;
+    using MageBot.Protocol.Types;
 
 
     public class PrismFightDefenderAddMessage : Message

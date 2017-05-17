@@ -1,17 +1,17 @@
-﻿using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Job;
-using BlueSheep.Protocol.Types.Game.Context.Roleplay.Job;
-using BlueSheep.Protocol.Types.Game.Interactive.Skill;
-using BlueSheep.Protocol.Messages;
+﻿using MageBot.Util.IO;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Job;
+using MageBot.Protocol.Types.Game.Context.Roleplay.Job;
+using MageBot.Protocol.Types.Game.Interactive.Skill;
+using MageBot.Protocol.Messages;
 using System.Collections.Generic;
 
-namespace BlueSheep.Engine.Handlers.Job
+namespace MageBot.Core.Engine.Handlers.Job
 {
     class JobHandler
     {
          #region Public methods
         [MessageHandler(typeof(JobDescriptionMessage))]
-        public static void JobDescriptionMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void JobDescriptionMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             JobDescriptionMessage msg = (JobDescriptionMessage)message;
 
@@ -27,13 +27,13 @@ namespace BlueSheep.Engine.Handlers.Job
                 {
                     skills.Add(s.SkillId);
                 }
-                Core.Job.Job j = new Core.Job.Job(job.JobId, skills, account);
+                MageBot.Core.Job.Job j = new MageBot.Core.Job.Job(job.JobId, skills, account);
                 account.Jobs.Add(j);
             }
         }
 
         [MessageHandler(typeof(JobExperienceMultiUpdateMessage))]
-        public static void JobExperienceMultiUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void JobExperienceMultiUpdateMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             JobExperienceMultiUpdateMessage msg = (JobExperienceMultiUpdateMessage)message;
 
@@ -43,7 +43,7 @@ namespace BlueSheep.Engine.Handlers.Job
             }
             foreach (JobExperience i in msg.ExperiencesUpdate)
             {
-                foreach (Core.Job.Job j in account.Jobs)
+                foreach (MageBot.Core.Job.Job j in account.Jobs)
                 {
                     if (i.JobId == j.Id)
                     {
@@ -60,7 +60,7 @@ namespace BlueSheep.Engine.Handlers.Job
         }
 
         [MessageHandler(typeof(JobExperienceUpdateMessage))]
-        public static void JobExperienceUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void JobExperienceUpdateMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             JobExperienceUpdateMessage msg = (JobExperienceUpdateMessage)message;
 
@@ -69,7 +69,7 @@ namespace BlueSheep.Engine.Handlers.Job
                 msg.Deserialize(reader);
             }
             JobExperience i = msg.ExperiencesUpdate;
-            foreach (Core.Job.Job j in account.Jobs)
+            foreach (MageBot.Core.Job.Job j in account.Jobs)
             {
                 if (i.JobId == j.Id)
                 {

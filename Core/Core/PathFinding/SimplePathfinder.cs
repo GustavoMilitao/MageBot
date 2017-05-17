@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using BlueSheep.Core.Map;
-using BlueSheep.Core.Fight;
-using DataFiles.Data.Pathfinding.Positions;
+using MageBot.Core.Map;
+using MageBot.Core.Fight;
+using MageBot.DataFiles.Data.Pathfinding.Positions;
 
-namespace DataFiles.Data.Pathfinding
+namespace MageBot.DataFiles.Data.Pathfinding
 {
     public class SimplePathfinder
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlueSheep.Core.Fight
+namespace MageBot.Core.Fight
 {
     public class FightCondition
     {

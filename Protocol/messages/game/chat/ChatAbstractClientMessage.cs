@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Chat
+namespace MageBot.Protocol.Messages.Game.Chat
 {
     public class ChatAbstractClientMessage : Message
     {

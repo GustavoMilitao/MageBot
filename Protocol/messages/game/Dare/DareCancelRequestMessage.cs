@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Dare
+namespace MageBot.Protocol.Messages.Game.Dare
 {
     public class DareCancelRequestMessage : Message
     {

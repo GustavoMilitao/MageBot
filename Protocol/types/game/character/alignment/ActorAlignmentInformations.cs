@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Character.Alignment
+namespace MageBot.Protocol.Types.Game.Character.Alignment
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class ActorAlignmentInformations : NetworkType

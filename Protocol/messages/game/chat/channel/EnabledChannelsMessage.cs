@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Chat.Channel
+namespace MageBot.Protocol.Messages.Game.Chat.Channel
 {
     using System.Collections.Generic;
 

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using BlueSheep.Core.Storage;
+using MageBot.Core.Storage;
 using Util.Util.Text.Log;
-using DataFiles.Data.D2o;
-using BlueSheep.Core.Pets;
+using MageBot.DataFiles.Data.D2o;
+using MageBot.Core.Pets;
 
-namespace BlueSheep.Core
+namespace MageBot.Core
 {
     public class Running
     {
@@ -169,7 +169,7 @@ namespace BlueSheep.Core
             account.PetsList = new List<Pet>();
 
 
-            foreach (Core.Inventory.Item item in account.Inventory.Items)
+            foreach (MageBot.Core.Inventory.Item item in account.Inventory.Items)
             {
                 DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
@@ -195,7 +195,7 @@ namespace BlueSheep.Core
         public void NoFood()
         {
            account.Log(new ActionTextInformation("Aucune nourriture disponible pour " +
-                                                                        DataFiles.Data.I18n.I18N.GetText((int)account.PetsList[m_CurrentPetIndex].Datas
+                                                                        MageBot.DataFiles.Data.I18n.I18N.GetText((int)account.PetsList[m_CurrentPetIndex].Datas
                                                                           .Fields["nameId"]) +
                                                                       "."),0);
 

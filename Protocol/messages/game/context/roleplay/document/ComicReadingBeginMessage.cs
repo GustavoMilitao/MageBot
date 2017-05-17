@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Document
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Document
 {
     public class ComicReadingBeginMessage : Message
     {

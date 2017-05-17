@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlueSheep.Protocol.Messages.Connection
+namespace MageBot.Protocol.Messages.Connection
 {
     public class IdentificationMessage : Message
     {

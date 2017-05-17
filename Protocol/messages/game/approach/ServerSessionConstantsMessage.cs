@@ -1,8 +1,8 @@
 ﻿ 
-using BlueSheep.Protocol.Types.Game.Approach;
+using MageBot.Protocol.Types.Game.Approach;
 using System.Collections.Generic;
 
-namespace BlueSheep.Protocol.Messages.Game.Approach
+namespace MageBot.Protocol.Messages.Game.Approach
 {
     class ServerSessionConstantsMessage : Message
     {

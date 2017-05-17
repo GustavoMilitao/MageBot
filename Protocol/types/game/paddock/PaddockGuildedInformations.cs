@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Paddock
+namespace MageBot.Protocol.Types.Game.Paddock
 {
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay;
+    using MageBot.Protocol.Types.Game.Context.Roleplay;
 
 
     public class PaddockGuildedInformations : PaddockBuyableInformations

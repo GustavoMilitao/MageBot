@@ -1,8 +1,8 @@
-﻿using DataFiles.Data.D2o;
-using BlueSheep.Protocol.Types.Game.Context.Fight;
-using BlueSheep.Core.Base;
+﻿using MageBot.DataFiles.Data.D2o;
+using MageBot.Protocol.Types.Game.Context.Fight;
+using MageBot.Core.Base;
 
-namespace BlueSheep.Core.Fight
+namespace MageBot.Core.Fight
 {
     public class BFighter : BEntity
     {
@@ -37,7 +37,7 @@ namespace BlueSheep.Core.Fight
                 if (CreatureGenericId != 0)
                 {
                     DataClass data = GameData.GetDataObject(D2oFileEnum.Monsters, CreatureGenericId);
-                    return DataFiles.Data.I18n.I18N.GetText((int)data.Fields["nameId"]);
+                    return MageBot.DataFiles.Data.I18n.I18N.GetText((int)data.Fields["nameId"]);
                 }
                 else
                     return "Unknown";

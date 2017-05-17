@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Havenbag
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Havenbag
 {
     public class EditHavenBagCancelRequestMessage : Message
     {

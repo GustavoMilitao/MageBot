@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace BlueSheep.Protocol.Enums
+namespace MageBot.Protocol.Enums
 {
     public enum CommunityIdEnum
     {

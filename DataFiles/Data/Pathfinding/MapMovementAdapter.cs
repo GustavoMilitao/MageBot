@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataFiles.Data.Pathfinding.Positions;
+using MageBot.DataFiles.Data.Pathfinding.Positions;
 
-namespace DataFiles.Data.Pathfinding
+namespace MageBot.DataFiles.Data.Pathfinding
 {
     public class MapMovementAdapter
     {

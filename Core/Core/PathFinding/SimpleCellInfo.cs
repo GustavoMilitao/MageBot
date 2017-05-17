@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataFiles.Data.Pathfinding.Positions;
-using BlueSheep.Core.Map;
+using MageBot.DataFiles.Data.Pathfinding.Positions;
+using MageBot.Core.Map;
 
-namespace DataFiles.Data.Pathfinding
+namespace MageBot.DataFiles.Data.Pathfinding
 {
     internal sealed class SimpleCellInfo
     {

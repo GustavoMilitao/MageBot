@@ -1,7 +1,7 @@
 ﻿ 
 using System.Collections.Generic;
 
-namespace BlueSheep.Protocol.Messages.Game.Approach
+namespace MageBot.Protocol.Messages.Game.Approach
 {
     class ServerOptionalFeaturesMessage : Message
     {

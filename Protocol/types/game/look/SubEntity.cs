@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Protocol.Types.Game.Look
+﻿namespace MageBot.Protocol.Types.Game.Look
 {
     public class SubEntity : NetworkType
     {

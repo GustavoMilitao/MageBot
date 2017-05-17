@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Initialization
+namespace MageBot.Protocol.Messages.Game.Initialization
 {
-    using BlueSheep.Protocol.Types.Game.Character.Restriction;
+    using MageBot.Protocol.Types.Game.Character.Restriction;
 
 
     public class SetCharacterRestrictionsMessage : Message

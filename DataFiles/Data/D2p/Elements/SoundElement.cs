@@ -1,6 +1,6 @@
-﻿using BlueSheep.Util.IO;
+﻿using MageBot.Util.IO;
 
-namespace DataFiles.Data.D2p.Elements
+namespace MageBot.DataFiles.Data.D2p.Elements
 {
     public class SoundElement : BasicElement
     {

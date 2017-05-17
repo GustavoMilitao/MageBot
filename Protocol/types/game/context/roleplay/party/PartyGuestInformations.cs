@@ -8,13 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Party
+namespace MageBot.Protocol.Types.Game.Context.Roleplay.Party
 {
-    using BlueSheep.Protocol.Types.Game.Look;
-    using BlueSheep.Protocol.Types.Game.Character.Status;
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay.Party.Companion;
+    using MageBot.Protocol.Types.Game.Look;
+    using MageBot.Protocol.Types.Game.Character.Status;
+    using MageBot.Protocol.Types.Game.Context.Roleplay.Party.Companion;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class PartyGuestInformations : NetworkType

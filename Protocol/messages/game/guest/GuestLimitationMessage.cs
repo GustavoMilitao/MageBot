@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Guest
+namespace MageBot.Protocol.Messages.Game.Guest
 {
     public class GuestLimitationMessage : Message
     {

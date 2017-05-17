@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Basic
+namespace MageBot.Protocol.Messages.Game.Basic
 {
-    using BlueSheep.Protocol;
+    using MageBot.Protocol;
 
 
     public class BasicSetAwayModeRequestMessage : Message

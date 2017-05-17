@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Character.Choice
+namespace MageBot.Protocol.Messages.Game.Character.Choice
 {
     public class CharacterSelectedForceMessage : Message
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BlueSheep.Protocol.Types.Game.Look
+namespace MageBot.Protocol.Types.Game.Look
 {
     public class EntityLook : NetworkType
     {

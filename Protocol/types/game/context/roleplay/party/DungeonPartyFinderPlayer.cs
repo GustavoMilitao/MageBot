@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Party
+namespace MageBot.Protocol.Types.Game.Context.Roleplay.Party
 {
     public class DungeonPartyFinderPlayer : NetworkType
     {

@@ -1,19 +1,19 @@
-﻿using DataFiles.Data.D2o;
-using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Npc;
-using BlueSheep.Protocol.Messages.Game.Dialog;
-using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
-using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Protocol.Messages;
+﻿using MageBot.DataFiles.Data.D2o;
+using MageBot.Util.IO;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Npc;
+using MageBot.Protocol.Messages.Game.Dialog;
+using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
+using MageBot.Util.Enums.Internal;
+using MageBot.Protocol.Messages;
 using Util.Util.Text.Log;
 using System.Linq;
 
-namespace BlueSheep.Engine.Handlers.Context
+namespace MageBot.Core.Engine.Handlers.Context
 {
     class NpcHandler
     {
         [MessageHandler(typeof(ExchangeStartOkNpcShopMessage))]
-        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameContextRemoveElementMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ExchangeStartOkNpcShopMessage msg = (ExchangeStartOkNpcShopMessage)message;
 
@@ -25,7 +25,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(LeaveDialogMessage))]
-        public static void NpcDialogCreationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void NpcDialogCreationMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             LeaveDialogMessage msg = (LeaveDialogMessage)message;
 
@@ -37,7 +37,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(NpcDialogCreationMessage))]
-        public static void LeaveDialogMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void LeaveDialogMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             NpcDialogCreationMessage msg = (NpcDialogCreationMessage)message;
 
@@ -51,7 +51,7 @@ namespace BlueSheep.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(NpcDialogQuestionMessage))]
-        public static void NpcDialogQuestionMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void NpcDialogQuestionMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             NpcDialogQuestionMessage msg = (NpcDialogQuestionMessage)message;
 
@@ -61,7 +61,7 @@ namespace BlueSheep.Engine.Handlers.Context
             }
             account.Npc.QuestionId = (int)msg.MessageId;
             int mess = (int)GameData.GetDataObject(D2oFileEnum.NpcMessages, account.Npc.QuestionId).Fields["messageId"];
-            account.Log(new BotTextInformation("Dialogue : " + DataFiles.Data.I18n.I18N.GetText(mess)), 0);
+            account.Log(new BotTextInformation("Dialogue : " + MageBot.DataFiles.Data.I18n.I18N.GetText(mess)), 0);
             if (account.Npc.QuestionId == 318 && (int)msg.VisibleReplies[0] == 259)
             {
                 //Bank
@@ -76,10 +76,10 @@ namespace BlueSheep.Engine.Handlers.Context
             if (msg.VisibleReplies.Count == 0)
                 account.Npc.CloseDialog();
             account.Npc.Replies.Clear();
-            account.Npc.Replies = msg.VisibleReplies.Select((id) => new BlueSheep.Core.Npc.NpcReply(account.MapData.Npcs.Find(n => (int)n.ContextualId == account.Npc.Id).NpcId, (int)id)).ToList();
+            account.Npc.Replies = msg.VisibleReplies.Select((id) => new MageBot.Core.Npc.NpcReply(account.MapData.Npcs.Find(n => (int)n.ContextualId == account.Npc.Id).NpcId, (int)id)).ToList();
             if (account.Config.Path != null)
             {
-                account.Config.Path.SearchReplies(DataFiles.Data.I18n.I18N.GetText(mess));
+                account.Config.Path.SearchReplies(MageBot.DataFiles.Data.I18n.I18N.GetText(mess));
             }
         }
 

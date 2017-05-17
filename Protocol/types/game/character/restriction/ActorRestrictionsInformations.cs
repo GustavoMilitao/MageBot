@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Character.Restriction
+namespace MageBot.Protocol.Types.Game.Character.Restriction
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class ActorRestrictionsInformations : NetworkType

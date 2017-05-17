@@ -1,22 +1,22 @@
-﻿using DataFiles.Data.D2o;
+﻿using MageBot.DataFiles.Data.D2o;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BlueSheep.Core.Map.Elements;
-using DataFiles.Data.D2p.Elements;
+using MageBot.Core.Map.Elements;
+using MageBot.DataFiles.Data.D2p.Elements;
 using Util.Util.Text.Log;
-using DataFiles.Data.Pathfinding.Positions;
-using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-using BlueSheep.Core.Monsters;
-using BlueSheep.Util.Enums.Internal;
+using MageBot.DataFiles.Data.Pathfinding.Positions;
+using MageBot.Protocol.Types.Game.Context.Roleplay;
+using MageBot.Core.Monsters;
+using MageBot.Util.Enums.Internal;
 
-namespace BlueSheep.Core.Map
+namespace MageBot.Core.Map
 {
     public class MapData
     {
         #region Fields
         private Account.Account Account;
-        public DataFiles.Data.D2p.Map Data;
+        public MageBot.DataFiles.Data.D2p.Map Data;
 
         /// <summary>
         /// List containing all the players on the map.
@@ -172,7 +172,7 @@ namespace BlueSheep.Core.Map
         /// <summary>
         /// Parse the stated elements array from MapComplementaryInformationsDataMessage.
         /// </summary>
-        public void ParseStatedElements(BlueSheep.Protocol.Types.Game.Interactive.StatedElement[] statedElements)
+        public void ParseStatedElements(MageBot.Protocol.Types.Game.Interactive.StatedElement[] statedElements)
         {
             StatedElements = statedElements.Select(elem => new StatedElement(elem.ElementCellId, elem.ElementId, elem.ElementState)).ToList();
         }
@@ -180,9 +180,9 @@ namespace BlueSheep.Core.Map
         /// <summary>
         /// Parse the interactive elements array from MapComplementaryInformationsDataMessage.
         /// </summary>
-        public void ParseInteractiveElements(BlueSheep.Protocol.Types.Game.Interactive.InteractiveElement[] interactiveElements)
+        public void ParseInteractiveElements(MageBot.Protocol.Types.Game.Interactive.InteractiveElement[] interactiveElements)
         {
-            foreach (BlueSheep.Protocol.Types.Game.Interactive.InteractiveElement element in interactiveElements)
+            foreach (MageBot.Protocol.Types.Game.Interactive.InteractiveElement element in interactiveElements)
             {
                 if (element.ElementTypeId == 85)
                     Account.Safe = new InteractiveElement(element);
@@ -255,11 +255,11 @@ namespace BlueSheep.Core.Map
         /// </summary>
         public void ParseLocation(int mapId, int subAreaId)
         {
-            Data = DataFiles.Data.D2p.MapsManager.FromId(mapId);
+            Data = MageBot.DataFiles.Data.D2p.MapsManager.FromId(mapId);
             Data.SubAreaId = subAreaId;
             DataClass subArea = GameData.GetDataObject(D2oFileEnum.SubAreas, subAreaId);
-            string mapName = DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Areas, (int)subArea.Fields["areaId"]).Fields["nameId"]);
-            string subAreaName = DataFiles.Data.I18n.I18N.GetText((int)subArea.Fields["nameId"]);
+            string mapName = MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Areas, (int)subArea.Fields["areaId"]).Fields["nameId"]);
+            string subAreaName = MageBot.DataFiles.Data.I18n.I18N.GetText((int)subArea.Fields["nameId"]);
             Account.ModifBar(5, 0, 0, "[" + X + ";" + Y + "]" + " " + mapName + " (" + subAreaName + ")");
             Account.ModifBar(5, 0, 0, mapName + " (" + subAreaName + ")");
         }
@@ -267,7 +267,7 @@ namespace BlueSheep.Core.Map
         /// <summary>
         /// Update the state of an interactive element.
         /// </summary>
-        public void UpdateInteractiveElement(BlueSheep.Protocol.Types.Game.Interactive.InteractiveElement element)
+        public void UpdateInteractiveElement(MageBot.Protocol.Types.Game.Interactive.InteractiveElement element)
         {
             Elements.InteractiveElement Ielement = new Elements.InteractiveElement((uint)element.ElementId, element.TypeID, element.EnabledSkills, element.DisabledSkills);
             Tuple<Elements.InteractiveElement, int> temp = new Tuple<Elements.InteractiveElement, int>(null, 0);
@@ -288,7 +288,7 @@ namespace BlueSheep.Core.Map
         /// <summary>
         /// Update the state of an Stated element.
         /// </summary>
-        public void UpdateStatedElement(BlueSheep.Protocol.Types.Game.Interactive.StatedElement element)
+        public void UpdateStatedElement(MageBot.Protocol.Types.Game.Interactive.StatedElement element)
         {
             Elements.StatedElement Selement = new Elements.StatedElement(element.ElementCellId, element.ElementId, element.ElementState);
             if (StatedElements.Find(s => s.Id == Selement.Id) != null)

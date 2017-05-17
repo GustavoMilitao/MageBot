@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Prism
+namespace MageBot.Protocol.Types.Game.Prism
 {
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay;
+    using MageBot.Protocol.Types.Game.Context.Roleplay;
 
 
     public class AlliancePrismInformation : PrismInformation

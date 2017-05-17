@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Display
+namespace MageBot.Protocol.Messages.Game.Context.Display
 {
     public class DisplayNumericalValuePaddockMessage : Message
     {

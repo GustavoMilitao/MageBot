@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace BlueSheep.Core.Path
+namespace MageBot.Core.Path
 {
     public class Action
     {

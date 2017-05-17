@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Party
+namespace MageBot.Protocol.Types.Game.Context.Roleplay.Party
 {
-    using BlueSheep.Protocol.Types.Game.Character.Choice;
-    using BlueSheep.Protocol.Types.Game.Character.Status;
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay.Party.Companion;
+    using MageBot.Protocol.Types.Game.Character.Choice;
+    using MageBot.Protocol.Types.Game.Character.Status;
+    using MageBot.Protocol.Types.Game.Context.Roleplay.Party.Companion;
     using System.Collections.Generic;
 
 

@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Prism
+namespace MageBot.Protocol.Types.Game.Prism
 {
-    using BlueSheep.Protocol.Types.Game.Data.Items;
+    using MageBot.Protocol.Types.Game.Data.Items;
     using System.Collections.Generic;
 
 

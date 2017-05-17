@@ -1,27 +1,27 @@
-﻿using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Game.Chat;
-using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-using BlueSheep.Util.Enums.Internal;
+﻿using MageBot.Util.IO;
+using MageBot.Protocol.Messages.Game.Chat;
+using MageBot.Protocol.Types.Game.Context.Roleplay;
+using MageBot.Util.Enums.Internal;
 using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using BlueSheep.Core.Monsters;
-using BlueSheep.Core.Fight;
+using MageBot.Core.Monsters;
+using MageBot.Core.Fight;
 using System.Threading.Tasks;
-using BlueSheep.Core.Account;
-using BlueSheep.Core.Path;
+using MageBot.Core.Account;
+using MageBot.Core.Path;
 
-namespace Core.Engine.Common
+namespace MageBot.Core.Engine.Common
 {
     public class CLIParser
     {
         /* Command Line Parser */
 
         #region Fields
-        private Account account;
+        private Account.Account account;
 
         /// <summary>
         /// Stores the commands history.
@@ -70,7 +70,7 @@ namespace Core.Engine.Common
         #endregion
 
         #region Constructors
-        public CLIParser(Account Account)
+        public CLIParser(Account.Account Account)
         {
             account = Account;
         }
@@ -794,7 +794,7 @@ namespace Core.Engine.Common
                     result.Add("[PNJ] " + name + " -> id : +" + n.NpcId + " contextual id : " + n.ContextualId + " cell : " + cell + ".");
 
                 }
-                foreach (KeyValuePair<BlueSheep.Core.Map.Elements.InteractiveElement, int> pair in account.MapData.InteractiveElements)
+                foreach (KeyValuePair<MageBot.Core.Map.Elements.InteractiveElement, int> pair in account.MapData.InteractiveElements)
                 {
                     if (verbose)
                         result.Add("[INTERACTIVE ELEMENT] " + pair.Key.Name + " -> id " + pair.Key + " cell : " + pair.Value + " IsUsable : " + pair.Key.IsUsable + ".");

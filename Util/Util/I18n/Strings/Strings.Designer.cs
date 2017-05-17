@@ -205,24 +205,6 @@ namespace Util.Util.I18n.Strings {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a BlueSheep.
-        /// </summary>
-        public static string BlueSheep {
-            get {
-                return ResourceManager.GetString("BlueSheep", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a BlueSheep is now minimized in the system tray.
-        /// </summary>
-        public static string BlueSheepIsNowMinimized {
-            get {
-                return ResourceManager.GetString("BlueSheepIsNowMinimized", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Breed.
         /// </summary>
         public static string Breed {
@@ -997,6 +979,24 @@ namespace Util.Util.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a MageBot.
+        /// </summary>
+        public static string MageBot {
+            get {
+                return ResourceManager.GetString("MageBot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a MageBot is now minimized in the system tray.
+        /// </summary>
+        public static string MageBotIsNowMinimized {
+            get {
+                return ResourceManager.GetString("MageBotIsNowMinimized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Management.
         /// </summary>
         public static string Management {
@@ -1564,12 +1564,12 @@ namespace Util.Util.I18n.Strings {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The bot didn&apos;t receive the map&apos;s informations yet, please check out later, if the poblem persists, report it on the forum : http://forum.bluesheep.com.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The bot didn&apos;t receive the map&apos;s informations yet, please check out later, if the poblem persists, report it on the forum : http://forum.magebot.com.
         /// </summary>
-        public static string TheBotDidntReceiveTheMapsInformationsYetPleaseCheckOutLaterIfThePoblemPersistsReportItOnTheForumHttpForumBluesheepCom {
+        public static string TheBotDidntReceiveTheMapsInformationsYetPleaseCheckOutLaterIfThePoblemPersistsReportItOnTheForumHttpForumMageBotCom {
             get {
                 return ResourceManager.GetString("TheBotDidntReceiveTheMapsInformationsYetPleaseCheckOutLaterIfThePoblemPersistsRep" +
-                        "ortItOnTheForumHttpForumBluesheepCom", resourceCulture);
+                        "ortItOnTheForumHttpForumMageBotCom", resourceCulture);
             }
         }
         

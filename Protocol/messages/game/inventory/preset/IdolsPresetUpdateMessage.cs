@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory.Preset
+namespace MageBot.Protocol.Messages.Game.Inventory.Preset
 {
-    using BlueSheep.Protocol.Types.Game.Inventory.Preset;
+    using MageBot.Protocol.Types.Game.Inventory.Preset;
 
 
     public class IdolsPresetUpdateMessage : Message

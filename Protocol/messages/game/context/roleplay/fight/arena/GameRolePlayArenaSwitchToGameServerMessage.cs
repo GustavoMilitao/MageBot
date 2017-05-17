@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
 {
     using System.Collections.Generic;
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Tinsel
+namespace MageBot.Protocol.Messages.Game.Tinsel
 {
     public class TitleSelectedMessage : Message
     {

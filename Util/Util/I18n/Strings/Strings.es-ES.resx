@@ -282,7 +282,7 @@
   <data name="UnableToMove" xml:space="preserve">
     <value>Es hora de capturar! Pokeball GOOOOOO</value>
   </data>
-  <data name="TheBotDidntReceiveTheMapsInformationsYetPleaseCheckOutLaterIfThePoblemPersistsReportItOnTheForumHttpForumBluesheepCom" xml:space="preserve">
+  <data name="TheBotDidntReceiveTheMapsInformationsYetPleaseCheckOutLaterIfThePoblemPersistsReportItOnTheForumHttpForumMageBotCom" xml:space="preserve">
     <value>Inicio de una lucha contra monstruos de nivel</value>
   </data>
   <data name="EnhanceCharacteristics" xml:space="preserve">
@@ -295,7 +295,7 @@
     <value>No se puede mover</value>
   </data>
   <data name="ToTheGamesServer" xml:space="preserve">
-    <value>El Bot no ha recibido información, Por favor, vuelva más tarde, si el problema persiste, notifique foro: http://forum.bluesheep.com</value>
+    <value>El Bot no ha recibido información, Por favor, vuelva más tarde, si el problema persiste, notifique foro: http://forum.magebot.com</value>
   </data>
   <data name="ToTheAuthenticationsServer" xml:space="preserve">
     <value>Mejorar características</value>
@@ -345,11 +345,11 @@
   <data name="AutomaticReconnectionIn" xml:space="preserve">
     <value>Reconexión automática en</value>
   </data>
-  <data name="BlueSheep" xml:space="preserve">
-    <value>BlueSheep</value>
+  <data name="MageBot" xml:space="preserve">
+    <value>MageBot</value>
   </data>
-  <data name="BlueSheepIsNowMinimized" xml:space="preserve">
-    <value>BlueSheep ahora está minimizado en la bandeja del sistema</value>
+  <data name="MageBotIsNowMinimized" xml:space="preserve">
+    <value>MageBot ahora está minimizado en la bandeja del sistema</value>
   </data>
   <data name="Breed" xml:space="preserve">
     <value>Raza</value>

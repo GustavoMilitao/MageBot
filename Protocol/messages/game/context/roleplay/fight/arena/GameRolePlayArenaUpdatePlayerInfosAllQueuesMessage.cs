@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
 {
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay.Fight.Arena;
+    using MageBot.Protocol.Types.Game.Context.Roleplay.Fight.Arena;
 
 
     public class GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage : GameRolePlayArenaUpdatePlayerInfosMessage

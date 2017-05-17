@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Quest
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Quest
 {
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay.Quest;
+    using MageBot.Protocol.Types.Game.Context.Roleplay.Quest;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class QuestListMessage : Message

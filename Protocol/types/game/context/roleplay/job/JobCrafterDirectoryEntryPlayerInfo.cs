@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Job
+namespace MageBot.Protocol.Types.Game.Context.Roleplay.Job
 {
-    using BlueSheep.Protocol.Types.Game.Character.Status;
+    using MageBot.Protocol.Types.Game.Character.Status;
 
     public class JobCrafterDirectoryEntryPlayerInfo : NetworkType
     {

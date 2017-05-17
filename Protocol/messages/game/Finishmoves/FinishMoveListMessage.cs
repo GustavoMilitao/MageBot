@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Finishmoves
+namespace MageBot.Protocol.Messages.Game.Finishmoves
 {
-    using BlueSheep.Protocol.Types.Game.Finishmoves;
+    using MageBot.Protocol.Types.Game.Finishmoves;
     using System.Collections.Generic;
 
 

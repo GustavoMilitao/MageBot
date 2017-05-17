@@ -1,5 +1,5 @@
-﻿using BlueSheep.DataCenter;
-using DataFiles.Data.D2o;
+﻿using MageBot.DataCenter;
+using MageBot.DataFiles.Data.D2o;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace Core.Engine.Constants
+namespace MageBot.Core.Engine.Constants
 {
     public class IntelliSense
     {
@@ -29,7 +29,7 @@ namespace Core.Engine.Constants
             foreach (DataClass d in GameData.GetDataObjects(D2oFileEnum.Monsters))
             {
                 if (d.Fields.ContainsKey("nameId"))
-                    MonstersList.Add(DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]));
+                    MonstersList.Add(MageBot.DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Core.Engine.Constants
         {
             foreach (DataClass d in GameData.GetDataObjects(D2oFileEnum.Items))
             {
-                ItemsList.Add(DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]));
+                ItemsList.Add(MageBot.DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]));
             }
         }
 

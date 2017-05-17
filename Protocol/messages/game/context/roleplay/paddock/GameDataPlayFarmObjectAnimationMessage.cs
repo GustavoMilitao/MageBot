@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay.Paddock
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Paddock
 {
     using System.Collections.Generic;
 

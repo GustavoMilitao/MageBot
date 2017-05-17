@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Fight
+namespace MageBot.Protocol.Messages.Game.Context.Fight
 {
-    using BlueSheep.Protocol;
+    using MageBot.Protocol;
 
 
     public class GameFightJoinMessage : Message

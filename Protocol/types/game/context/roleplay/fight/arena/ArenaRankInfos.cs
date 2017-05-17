@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Fight.Arena
+namespace MageBot.Protocol.Types.Game.Context.Roleplay.Fight.Arena
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class ArenaRankInfos : NetworkType

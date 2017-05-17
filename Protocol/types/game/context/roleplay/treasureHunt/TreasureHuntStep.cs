@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.TreasureHunt
+namespace MageBot.Protocol.Types.Game.Context.Roleplay.TreasureHunt
 {
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class TreasureHuntStep : NetworkType

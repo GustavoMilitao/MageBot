@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Dungeon
+namespace MageBot.Protocol.Messages.Game.Context.Dungeon
 {
     using System.Collections.Generic;
 

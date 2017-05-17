@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Context.Roleplay.Party.Companion
+namespace MageBot.Protocol.Types.Game.Context.Roleplay.Party.Companion
 {
-    using BlueSheep.Protocol.Types.Game.Look;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types.Game.Look;
+    using MageBot.Protocol.Types;
 
 
     public class PartyCompanionBaseInformations : NetworkType

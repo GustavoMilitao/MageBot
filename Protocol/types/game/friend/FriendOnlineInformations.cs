@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Friend
+namespace MageBot.Protocol.Types.Game.Friend
 {
-    using BlueSheep.Protocol.Types.Game.Character.Status;
-    using BlueSheep.Protocol.Types.Game.Context.Roleplay;
+    using MageBot.Protocol.Types.Game.Character.Status;
+    using MageBot.Protocol.Types.Game.Context.Roleplay;
 
 
     public class FriendOnlineInformations : FriendInformations

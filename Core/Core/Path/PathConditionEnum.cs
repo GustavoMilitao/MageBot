@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Core.Path
+﻿namespace MageBot.Core.Path
 {
     public enum PathConditionEnum
     {

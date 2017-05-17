@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Character.Choice
+namespace MageBot.Protocol.Messages.Game.Character.Choice
 {
     using System.Collections.Generic;
 

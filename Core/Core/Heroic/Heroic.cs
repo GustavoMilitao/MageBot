@@ -1,13 +1,13 @@
-﻿using BlueSheep.Protocol.Messages;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight;
-using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-using BlueSheep.Util.IO;
+﻿using MageBot.Protocol.Messages;
+using MageBot.Protocol.Messages.Game.Context.Roleplay;
+using MageBot.Protocol.Messages.Game.Context.Roleplay.Fight;
+using MageBot.Protocol.Types.Game.Context.Roleplay;
+using MageBot.Util.IO;
 using System;
 using System.Collections.Generic;
 using Util.Util.Enums.Internal;
 
-namespace BlueSheep.Core.Heroic
+namespace MageBot.Core.Heroic
 {
     public class Heroic
     {

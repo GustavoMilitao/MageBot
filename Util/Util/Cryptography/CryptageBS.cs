@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlueSheep.Util.Cryptography
+namespace MageBot.Util.Cryptography
 {
     public class CryptageBS
     {

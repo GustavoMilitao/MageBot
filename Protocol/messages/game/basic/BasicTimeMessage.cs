@@ -1,6 +1,6 @@
 ﻿ 
 
-namespace BlueSheep.Protocol.Messages.Game.Basic
+namespace MageBot.Protocol.Messages.Game.Basic
 {
     public class BasicTimeMessage : Message
     {

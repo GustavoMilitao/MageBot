@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Linq;
 using Util.Util.Text.Log;
-using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages;
-using BlueSheep.Util.Enums.Internal;
-using DataFiles.Data.Pathfinding.Positions;
-using DataFiles.Data.Pathfinding;
-using BlueSheep.Protocol.Messages.Game.Actions.Fight;
-using BlueSheep.Protocol.Messages.Game.Context.Fight;
-using BlueSheep.Protocol.Messages.Game.Character.Stats;
-using BlueSheep.Protocol.Messages.Game.Actions;
-using BlueSheep.Protocol.Messages.Game.Actions.Sequence;
-using BlueSheep.Protocol.Messages.Game.Inventory.Preset;
-using BlueSheep.Protocol.Messages.Game.Context;
-using BlueSheep.Protocol.Types.Game.Context.Fight;
-using BlueSheep.Protocol.Messages.Game.Context.Fight.Character;
-using BlueSheep.Core.Fight;
+using MageBot.Util.IO;
+using MageBot.Protocol.Messages;
+using MageBot.Util.Enums.Internal;
+using MageBot.DataFiles.Data.Pathfinding.Positions;
+using MageBot.DataFiles.Data.Pathfinding;
+using MageBot.Protocol.Messages.Game.Actions.Fight;
+using MageBot.Protocol.Messages.Game.Context.Fight;
+using MageBot.Protocol.Messages.Game.Character.Stats;
+using MageBot.Protocol.Messages.Game.Actions;
+using MageBot.Protocol.Messages.Game.Actions.Sequence;
+using MageBot.Protocol.Messages.Game.Inventory.Preset;
+using MageBot.Protocol.Messages.Game.Context;
+using MageBot.Protocol.Types.Game.Context.Fight;
+using MageBot.Protocol.Messages.Game.Context.Fight.Character;
+using MageBot.Core.Fight;
 
-namespace BlueSheep.Engine.Handlers.Fight
+namespace MageBot.Core.Engine.Handlers.Fight
 {
     class FightHandler
     {
         #region Public methods
         [MessageHandler(typeof(GameActionFightDeathMessage))]
-        public static void GameActionFightDeathMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameActionFightDeathMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameActionFightDeathMessage msg = (GameActionFightDeathMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -34,7 +34,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightDispellableEffectMessage))]
-        public static void GameActionFightDispellableEffectMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameActionFightDispellableEffectMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameActionFightDispellableEffectMessage msg = (GameActionFightDispellableEffectMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -45,7 +45,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightPointsVariationMessage))]
-        public static void GameActionFightPointsVariationMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameActionFightPointsVariationMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameActionFightPointsVariationMessage msg = (GameActionFightPointsVariationMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -56,7 +56,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightLifePointsLostMessage))]
-        public static void GameActionFightLifePointsLostMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameActionFightLifePointsLostMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameActionFightLifePointsLostMessage msg = (GameActionFightLifePointsLostMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -68,7 +68,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightSlideMessage))]
-        public static void GameActionFightSlideMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameActionFightSlideMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameActionFightSlideMessage msg = (GameActionFightSlideMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -79,7 +79,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightSpellCastMessage))]
-        public static void GameActionFightSpellCastMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameActionFightSpellCastMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameActionFightSpellCastMessage msg = (GameActionFightSpellCastMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -90,7 +90,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightSummonMessage))]
-        public static void GameActionFightSummonMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameActionFightSummonMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameActionFightSummonMessage msg = (GameActionFightSummonMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -108,7 +108,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightTeleportOnSameMapMessage))]
-        public static void GameActionFightTeleportOnSameMapMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameActionFightTeleportOnSameMapMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameActionFightTeleportOnSameMapMessage msg = (GameActionFightTeleportOnSameMapMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -119,7 +119,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameEntitiesDispositionMessage))]
-        public static void GameEntitiesDispositionMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameEntitiesDispositionMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameEntitiesDispositionMessage msg = (GameEntitiesDispositionMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -137,7 +137,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightEndMessage))]
-        public async static void GameFightEndMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public async static void GameFightEndMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightEndMessage msg = (GameFightEndMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -161,7 +161,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightHumanReadyStateMessage))]
-        public static void GameFightHumanReadyStateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightHumanReadyStateMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightHumanReadyStateMessage msg = (GameFightHumanReadyStateMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -173,7 +173,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightJoinMessage))]
-        public static void GameFightJoinMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightJoinMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightJoinMessage msg = (GameFightJoinMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -194,7 +194,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightLeaveMessage))]
-        public static void GameFightLeaveMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightLeaveMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightLeaveMessage msg = (GameFightLeaveMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -209,7 +209,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightOptionStateUpdateMessage))]
-        public static void GameFightOptionStateUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightOptionStateUpdateMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightOptionStateUpdateMessage msg = (GameFightOptionStateUpdateMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -220,7 +220,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightShowFighterMessage))]
-        public static void GameFightShowFighterMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightShowFighterMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightShowFighterMessage msg = (GameFightShowFighterMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -232,7 +232,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightShowFighterRandomStaticPoseMessage))]
-        public static void GameFightShowFighterRandomStaticPoseMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightShowFighterRandomStaticPoseMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightShowFighterRandomStaticPoseMessage msg = (GameFightShowFighterRandomStaticPoseMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -243,7 +243,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightStartMessage))]
-        public static void GameFightStartMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightStartMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightStartMessage msg = (GameFightStartMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -254,7 +254,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightSynchronizeMessage))]
-        public static void GameFightSynchronizeMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightSynchronizeMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightSynchronizeMessage msg = (GameFightSynchronizeMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -267,7 +267,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightTurnEndMessage))]
-        public static void GameFightTurnEndMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightTurnEndMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightTurnEndMessage msg = (GameFightTurnEndMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -278,7 +278,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightTurnStartMessage))]
-        public static void GameFightTurnStartMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightTurnStartMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightTurnStartMessage msg = (GameFightTurnStartMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -289,7 +289,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameMapMovementMessage))]
-        public static void GameMapMovementMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameMapMovementMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameMapMovementMessage msg = (GameMapMovementMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -306,7 +306,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightNewRoundMessage))]
-        public static void GameFightNewRoundMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightNewRoundMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightNewRoundMessage msg = (GameFightNewRoundMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -317,7 +317,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightTurnStartPlayingMessage))]
-        public static void GameFightTurnStartPlayingMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightTurnStartPlayingMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightTurnStartPlayingMessage msg = (GameFightTurnStartPlayingMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -335,7 +335,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightPlacementPossiblePositionsMessage))]
-        public static void GameFightPlacementPossiblePositionsMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightPlacementPossiblePositionsMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightPlacementPossiblePositionsMessage msg = (GameFightPlacementPossiblePositionsMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -361,7 +361,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightTurnReadyRequestMessage))]
-        public static void GameFightTurnReadyRequestMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightTurnReadyRequestMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightTurnReadyRequestMessage msg = (GameFightTurnReadyRequestMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -373,7 +373,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(SequenceEndMessage))]
-        public static void SequenceEndMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void SequenceEndMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             SequenceEndMessage msg = (SequenceEndMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -397,7 +397,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(LifePointsRegenBeginMessage))]
-        public static void LifePointsRegenBeginMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void LifePointsRegenBeginMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             LifePointsRegenBeginMessage msg = (LifePointsRegenBeginMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -407,7 +407,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(LifePointsRegenEndMessage))]
-        public static void LifePointsRegenEndMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void LifePointsRegenEndMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             LifePointsRegenEndMessage msg = (LifePointsRegenEndMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -420,7 +420,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightSpectatorJoinMessage))]
-        public static void GameFightSpectatorJoinMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameFightSpectatorJoinMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightSpectatorJoinMessage msg = (GameFightSpectatorJoinMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -435,7 +435,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightLifePointsGainMessage))]
-        public static void GameActionFightLifePointsGainMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameActionFightLifePointsGainMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameActionFightLifePointsGainMessage msg = (GameActionFightLifePointsGainMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -452,7 +452,7 @@ namespace BlueSheep.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameActionFightTackledMessage))]
-        public static void GameActionFightTackledMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void GameActionFightTackledMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameActionFightTackledMessage msg = (GameActionFightTackledMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))

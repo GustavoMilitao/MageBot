@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Authorized
+namespace MageBot.Protocol.Messages.Authorized
 {
     public class AdminCommandMessage : Message
     {

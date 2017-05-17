@@ -1,28 +1,28 @@
 ﻿using System.Linq;
-using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages;
+using MageBot.Util.IO;
+using MageBot.Protocol.Messages;
 using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
-using DataFiles.Data.D2o;
-using BlueSheep.Protocol.Messages.Game.Inventory.Items;
-using BlueSheep.Protocol.Types.Game.Data.Items;
-using BlueSheep.Protocol.Messages.Game.Inventory.Storage;
-using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
-using BlueSheep.Protocol.Messages.Game.Chat.Channel;
-using BlueSheep.Protocol.Messages.Game.Context;
-using BlueSheep.Protocol.Messages.Security;
-using BlueSheep.Protocol.Messages.Game.Friend;
-using BlueSheep.Core.Pets;
-using BlueSheep.Core.Inventory;
+using MageBot.DataFiles.Data.D2o;
+using MageBot.Protocol.Messages.Game.Inventory.Items;
+using MageBot.Protocol.Types.Game.Data.Items;
+using MageBot.Protocol.Messages.Game.Inventory.Storage;
+using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
+using MageBot.Protocol.Messages.Game.Chat.Channel;
+using MageBot.Protocol.Messages.Game.Context;
+using MageBot.Protocol.Messages.Security;
+using MageBot.Protocol.Messages.Game.Friend;
+using MageBot.Core.Pets;
+using MageBot.Core.Inventory;
 
-namespace BlueSheep.Engine.Handlers.Inventory
+namespace MageBot.Core.Engine.Handlers.Inventory
 {
     class InventoryHandler
     {
         #region Public methods
         [MessageHandler(typeof(InventoryContentMessage))]
-        public static void InventoryContentMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InventoryContentMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             InventoryContentMessage inventoryContentMessage = (InventoryContentMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -31,13 +31,13 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
             foreach (ObjectItem item in inventoryContentMessage.Objects)
             {
-                Core.Inventory.Item i = new Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
+                MageBot.Core.Inventory.Item i = new MageBot.Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
                 account.Inventory.Items.Add(i);
             }
             //account.ActualizeInventory();
             // TODO Militão: Populate the new interface
             account.PetsList = new List<Pet>();
-            foreach (Core.Inventory.Item item in account.Inventory.Items)
+            foreach (MageBot.Core.Inventory.Item item in account.Inventory.Items)
             {
                 DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
@@ -48,7 +48,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 }
             }
             if (account.PetsList.Count > 0)
-                account.Log(new BotTextInformation("Vos " + account.PetsList.Count + " familiers vous font un gros bisou de la part de BlueSheep."), 3);
+                account.Log(new BotTextInformation("Vos " + account.PetsList.Count + " familiers vous font un gros bisou de la part de MageBot."), 3);
             if (!account.Config.IsMITM)
             {
                 FriendsGetListMessage friendGetListMessage = new FriendsGetListMessage();
@@ -81,7 +81,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
         }
         [MessageHandler(typeof(InventoryContentAndPresetMessage))]
-        public static void InventoryContentAndPresetMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InventoryContentAndPresetMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             InventoryContentAndPresetMessage msg = (InventoryContentAndPresetMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -90,13 +90,13 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
             foreach (ObjectItem item in msg.Objects)
             {
-                Core.Inventory.Item i = new Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
+                MageBot.Core.Inventory.Item i = new MageBot.Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
                 account.Inventory.Items.Add(i);
             }
             //account.ActualizeInventory();
             // TODO Militão: Populate the new interface
             account.PetsList = new List<Pet>();
-            foreach (Core.Inventory.Item item in account.Inventory.Items)
+            foreach (MageBot.Core.Inventory.Item item in account.Inventory.Items)
             {
                 DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
@@ -107,7 +107,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 }
             }
             account.Log(new BotTextInformation("Vos " +
-            account.PetsList.Count + " familiers vous font un gros bisou de la part de BlueSheep."), 5);
+            account.PetsList.Count + " familiers vous font un gros bisou de la part de MageBot."), 5);
             if (!account.Config.IsMITM)
             {
                 FriendsGetListMessage friendGetListMessage = new FriendsGetListMessage();
@@ -141,7 +141,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
         }
 
         [MessageHandler(typeof(ObjectModifiedMessage))]
-        public static void ObjectModifiedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ObjectModifiedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ObjectModifiedMessage msg = (ObjectModifiedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -151,21 +151,21 @@ namespace BlueSheep.Engine.Handlers.Inventory
             for (int index = 0; index < account.Inventory.Items.Count; index++)
             {
                 if (account.Inventory.Items[index].UID == msg.Object.ObjectUID)
-                    account.Inventory.Items[index] = new Core.Inventory.Item(msg.Object.Effects, msg.Object.ObjectGID, msg.Object.Position, (int)msg.Object.Quantity, (int)msg.Object.ObjectUID);
+                    account.Inventory.Items[index] = new MageBot.Core.Inventory.Item(msg.Object.Effects, msg.Object.ObjectGID, msg.Object.Position, (int)msg.Object.Quantity, (int)msg.Object.ObjectUID);
             }
             DataClass ItemData = GameData.GetDataObject(D2oFileEnum.Items, msg.Object.ObjectGID);
             if ((int)ItemData.Fields["typeId"] == 18)
             {
-                Pet pet = new Pet(new Core.Inventory.Item(msg.Object.Effects.ToList(), msg.Object.ObjectGID, msg.Object.Position, (int)msg.Object.Quantity, (int)msg.Object.ObjectUID), ItemData, account);
+                Pet pet = new Pet(new MageBot.Core.Inventory.Item(msg.Object.Effects.ToList(), msg.Object.ObjectGID, msg.Object.Position, (int)msg.Object.Quantity, (int)msg.Object.ObjectUID), ItemData, account);
                 if (account.PetsModifiedList == null)
                     account.PetsModifiedList = new List<Pet>();
                 account.PetsModifiedList.Add(pet);
-                account.Log(new ActionTextInformation("Familier nourri : " + DataFiles.Data.I18n.I18N.GetText((int)ItemData.Fields["nameId"]) + " " + "."), 3);
+                account.Log(new ActionTextInformation("Familier nourri : " + MageBot.DataFiles.Data.I18n.I18N.GetText((int)ItemData.Fields["nameId"]) + " " + "."), 3);
             }
         }
 
         [MessageHandler(typeof(ObjectQuantityMessage))]
-        public static void ObjectQuantityMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ObjectQuantityMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ObjectQuantityMessage msg = (ObjectQuantityMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -189,7 +189,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
         }
 
         [MessageHandler(typeof(ExchangeErrorMessage))]
-        public static void ExchangeErrorMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeErrorMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             account.Log(new CharacterTextInformation("Echec de l'ouverture du coffre."), 0);
             if (account.Running != null)
@@ -197,7 +197,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
         }
 
         [MessageHandler(typeof(StorageInventoryContentMessage))]
-        public static void StorageInventoryContentMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void StorageInventoryContentMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             StorageInventoryContentMessage storageInventoryContentMessage = (StorageInventoryContentMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -209,7 +209,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
         }
 
         [MessageHandler(typeof(InventoryWeightMessage))]
-        public static void InventoryWeightMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void InventoryWeightMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             InventoryWeightMessage msg = (InventoryWeightMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -227,7 +227,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
         }
 
         [MessageHandler(typeof(ObjectAddedMessage))]
-        public static void ObjectAddedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ObjectAddedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ObjectAddedMessage msg = (ObjectAddedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -235,7 +235,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 msg.Deserialize(reader);
             }
             ObjectItem item = msg.Object;
-            Core.Inventory.Item i = new Core.Inventory.Item(item.Effects, item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
+            MageBot.Core.Inventory.Item i = new MageBot.Core.Inventory.Item(item.Effects, item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
             account.Inventory.Items.Add(i);
             string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
             //System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
@@ -260,7 +260,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
         }
         [MessageHandler(typeof(ObjectDeletedMessage))]
-        public static void ObjectDeletedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ObjectDeletedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ObjectDeletedMessage objectDeletedMessage = (ObjectDeletedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -284,7 +284,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
         }
         [MessageHandler(typeof(StorageObjectUpdateMessage))]
-        public static void StorageObjectUpdateMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void StorageObjectUpdateMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             StorageObjectUpdateMessage storageObjectUpdateMessage = (StorageObjectUpdateMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -306,7 +306,7 @@ namespace BlueSheep.Engine.Handlers.Inventory
                 account.SafeItems.Add(storageObjectUpdateMessage.Object);
         }
         [MessageHandler(typeof(StorageObjectRemoveMessage))]
-        public static void StorageObjectRemoveMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void StorageObjectRemoveMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             StorageObjectRemoveMessage storageObjectRemoveMessage = (StorageObjectRemoveMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -321,14 +321,14 @@ namespace BlueSheep.Engine.Handlers.Inventory
             }
         }
         [MessageHandler(typeof(ExchangeLeaveMessage))]
-        public static void ExchangeLeaveMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeLeaveMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             if (account.Running != null)
                 account.Running.OnSafe = false;
             account.Busy = false;
         }
         [MessageHandler(typeof(ExchangeShopStockStartedMessage))]
-        public static void ExchangeShopStockStartedMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void ExchangeShopStockStartedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ExchangeShopStockStartedMessage msg = (ExchangeShopStockStartedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))

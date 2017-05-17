@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlueSheep.Protocol.Types
+namespace MageBot.Protocol.Types
 {
     public class VersionExtended : Version
     {

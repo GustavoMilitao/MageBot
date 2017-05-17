@@ -1,15 +1,15 @@
-﻿using DataFiles.Data.D2o;
-using BlueSheep.Protocol.Messages.Game.Dialog;
-using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
-using BlueSheep.Protocol.Messages.Game.Inventory.Items;
-using BlueSheep.Util.Enums.Internal;
+﻿using MageBot.DataFiles.Data.D2o;
+using MageBot.Protocol.Messages.Game.Dialog;
+using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
+using MageBot.Protocol.Messages.Game.Inventory.Items;
+using MageBot.Util.Enums.Internal;
 using Util.Util.I18n.Strings;
 using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BlueSheep.Core.Inventory
+namespace MageBot.Core.Inventory
 {
     public class Inventory
     {

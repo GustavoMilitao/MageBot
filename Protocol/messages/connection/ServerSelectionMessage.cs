@@ -1,6 +1,6 @@
 ﻿ 
 
-namespace BlueSheep.Protocol.Messages.Connection
+namespace MageBot.Protocol.Messages.Connection
 {
     public class ServerSelectionMessage : Message
     {

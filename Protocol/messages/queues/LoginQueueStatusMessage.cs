@@ -1,6 +1,6 @@
 ﻿ 
 
-namespace BlueSheep.Protocol.Messages.Queues
+namespace MageBot.Protocol.Messages.Queues
 {
     public class LoginQueueStatusMessage : Message
     {

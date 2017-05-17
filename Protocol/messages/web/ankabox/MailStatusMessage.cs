@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Web.Ankabox
+namespace MageBot.Protocol.Messages.Web.Ankabox
 {
     public class MailStatusMessage : Message
     {

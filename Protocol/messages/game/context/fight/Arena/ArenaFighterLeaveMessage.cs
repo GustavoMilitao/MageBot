@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Fight.Arena
+namespace MageBot.Protocol.Messages.Game.Context.Fight.Arena
 {
-    using BlueSheep.Protocol.Types.Game.Character;
+    using MageBot.Protocol.Types.Game.Character;
 
 
     public class ArenaFighterLeaveMessage : Message

@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Idol
+namespace MageBot.Protocol.Messages.Game.Idol
 {
-    using BlueSheep.Protocol.Types.Game.Idol;
+    using MageBot.Protocol.Types.Game.Idol;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class IdolListMessage : Message

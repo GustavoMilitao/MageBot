@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace BlueSheep.Util.Enums.EnumHelper
+namespace MageBot.Util.Enums.EnumHelper
 {
     public static class EnumHelper
     {

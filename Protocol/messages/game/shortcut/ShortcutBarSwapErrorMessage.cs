@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Shortcut
+namespace MageBot.Protocol.Messages.Game.Shortcut
 {
     public class ShortcutBarSwapErrorMessage : Message
     {

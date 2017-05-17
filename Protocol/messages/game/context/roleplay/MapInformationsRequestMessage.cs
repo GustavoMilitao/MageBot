@@ -1,6 +1,6 @@
 ﻿ 
 
-namespace BlueSheep.Protocol.Messages.Game.Context.Roleplay
+namespace MageBot.Protocol.Messages.Game.Context.Roleplay
 {
     public class MapInformationsRequestMessage : Message
     {

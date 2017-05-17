@@ -1,8 +1,8 @@
-﻿using DataFiles.Data.D2o;
+﻿using MageBot.DataFiles.Data.D2o;
 using System;
 using System.Collections;
 
-namespace BlueSheep.Core.Npc
+namespace MageBot.Core.Npc
 {
     public class NpcReply
         {
@@ -35,7 +35,7 @@ namespace BlueSheep.Core.Npc
                 if (replies == null)
                     return String.Empty;
 
-                return DataFiles.Data.I18n.I18N.GetText(replies.Value);
+                return MageBot.DataFiles.Data.I18n.I18N.GetText(replies.Value);
 
 
             }

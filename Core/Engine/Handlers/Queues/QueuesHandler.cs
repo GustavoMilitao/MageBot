@@ -1,16 +1,16 @@
-﻿using BlueSheep.Util.IO;
-using BlueSheep.Protocol.Messages.Queues;
-using BlueSheep.Protocol.Messages;
+﻿using MageBot.Util.IO;
+using MageBot.Protocol.Messages.Queues;
+using MageBot.Protocol.Messages;
 using Util.Util.Text.Log;
 using Util.Util.I18n.Strings;
 
-namespace BlueSheep.Engine.Handlers.Queues
+namespace MageBot.Core.Engine.Handlers.Queues
 {
     class QueuesHandler
     {
         #region Public methods
         [MessageHandler(typeof(LoginQueueStatusMessage))]
-        public static void LoginQueueStatusTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void LoginQueueStatusTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             LoginQueueStatusMessage loginQueueStatusMessage = (LoginQueueStatusMessage)message;
 
@@ -24,7 +24,7 @@ namespace BlueSheep.Engine.Handlers.Queues
         }
 
         [MessageHandler(typeof(QueueStatusMessage))]
-        public static void QueueStatusMessageTreatment(Message message, byte[] packetDatas, Core.Account.Account account)
+        public static void QueueStatusMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             QueueStatusMessage queueStatusMessage = (QueueStatusMessage)message;
 

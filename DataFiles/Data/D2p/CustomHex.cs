@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace DataFiles.Data.D2p
+namespace MageBot.DataFiles.Data.D2p
 {
     public class CustomHex
     {

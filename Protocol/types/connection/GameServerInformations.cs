@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Protocol.Types.Connection
+﻿namespace MageBot.Protocol.Types.Connection
 {
     public class GameServerInformations : NetworkType
     {

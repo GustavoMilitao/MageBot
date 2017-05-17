@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Common.Basic
+namespace MageBot.Protocol.Messages.Common.Basic
 {
     public class BasicStatMessage : Message
     {

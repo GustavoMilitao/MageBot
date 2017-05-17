@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Inventory.Exchanges
+namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
 {
-    using BlueSheep.Protocol.Types.Game.Data.Items;
+    using MageBot.Protocol.Types.Game.Data.Items;
 
 
     public class ExchangeModifiedPaymentForCraftMessage : Message

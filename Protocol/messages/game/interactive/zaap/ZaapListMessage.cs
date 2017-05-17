@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Messages.Game.Interactive.Zaap
+namespace MageBot.Protocol.Messages.Game.Interactive.Zaap
 {
 
 

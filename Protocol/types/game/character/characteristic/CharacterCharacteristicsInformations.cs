@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Character.Characteristic
+namespace MageBot.Protocol.Types.Game.Character.Characteristic
 {
-    using BlueSheep.Protocol.Types.Game.Character.Alignment;
+    using MageBot.Protocol.Types.Game.Character.Alignment;
     using System.Collections.Generic;
-    using BlueSheep.Protocol.Types;
+    using MageBot.Protocol.Types;
 
 
     public class CharacterCharacteristicsInformations : NetworkType

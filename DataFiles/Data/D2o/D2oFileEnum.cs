@@ -1,4 +1,4 @@
-﻿namespace DataFiles.Data.D2o
+﻿namespace MageBot.DataFiles.Data.D2o
 {
     public enum D2oFileEnum
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace BlueSheep.Core.Frame
+namespace MageBot.Core.Frame
 {
     public class LatencyFrame
     {

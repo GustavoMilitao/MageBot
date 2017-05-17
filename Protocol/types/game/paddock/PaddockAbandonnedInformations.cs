@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Protocol.Types.Game.Paddock
+namespace MageBot.Protocol.Types.Game.Paddock
 {
 
 

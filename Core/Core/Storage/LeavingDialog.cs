@@ -1,6 +1,6 @@
-﻿using BlueSheep.Protocol.Messages.Game.Dialog;
+﻿using MageBot.Protocol.Messages.Game.Dialog;
 
-namespace BlueSheep.Core.Storage
+namespace MageBot.Core.Storage
 {
     public class LeavingDialog
     {

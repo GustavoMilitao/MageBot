@@ -1,4 +1,4 @@
-﻿namespace BlueSheep.Core.Map.Elements
+﻿namespace MageBot.Core.Map.Elements
 {
     public class StatedElement
     {

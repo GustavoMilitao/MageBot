@@ -1,4 +1,4 @@
-﻿using BlueSheep.Util.IO;
+﻿using MageBot.Util.IO;
 using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
@@ -6,10 +6,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.IO;
 using System.Threading;
-using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-using BlueSheep.Protocol.Messages.Game.Chat;
+using MageBot.Protocol.Types.Game.Context.Roleplay;
+using MageBot.Protocol.Messages.Game.Chat;
 
-namespace BlueSheep.Core.Misc
+namespace MageBot.Core.Misc
 {
     public class Flood
     {
@@ -127,7 +127,7 @@ namespace BlueSheep.Core.Misc
 
         public void SaveNameInDisk(GameRolePlayCharacterInformations infos)
         {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, "Flood");
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, "Flood");
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
@@ -170,7 +170,7 @@ namespace BlueSheep.Core.Misc
         private void ReadListAdvancedFloodFromDisk()
         {
             ListOfPlayersWithLevel = new Dictionary<string, long>();
-            string pathPlayers = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, "Flood");
+            string pathPlayers = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, "Flood");
             if (!Directory.Exists(pathPlayers))
                 Directory.CreateDirectory(pathPlayers);
             if (File.Exists(pathPlayers + @"\Players.txt"))
