@@ -6,7 +6,7 @@ Imports Microsoft.Win32
 Public Class UpdaterFrm
     Dim CurrentVersion As String = "0.0.0" '--- Change this to Current version, needs changing on every update
     Dim ProgramName As String = "MageBot" '--- Program Name
-    Dim SiteName As String = "http://bluesheepbot.com/update.html" '--- Update Page
+    Dim SiteName As String = "http://magebot.com/update.html" '--- Update Page
     Dim VersionCHK, GetVer, GetVerLink As String
     Dim GetUpd As Integer
 
@@ -136,7 +136,7 @@ Public Class UpdaterFrm
             Dim Client As WebClient = New WebClient
             AddHandler Client.DownloadProgressChanged, AddressOf client_ProgressChanged
             AddHandler Client.DownloadFileCompleted, AddressOf client_DownloadCompleted
-            Client.DownloadFileAsync(New Uri("http://bluesheepbot.com/MageBot.exe"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot\MageBot.exe")
+            Client.DownloadFileAsync(New Uri("http://magebot.com/MageBot.exe"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot\MageBot.exe")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -145,13 +145,13 @@ Public Class UpdaterFrm
     Private Sub Dll()
         Dim Client As WebClient = New WebClient
         AddHandler Client.DownloadProgressChanged, AddressOf client_ProgressChanged
-        Client.DownloadFileAsync(New Uri("http://bluesheepbot.com/MetroFramework.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.MetroFramework.dll")
+        Client.DownloadFileAsync(New Uri("http://magebot.com/MetroFramework.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.MetroFramework.dll")
         Dim Client2 As WebClient = New WebClient
         AddHandler Client2.DownloadProgressChanged, AddressOf client_ProgressChanged
-        Client2.DownloadFileAsync(New Uri("http://bluesheepbot.com/MetroFramework.Design.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.MetroFramework.Design.dll")
+        Client2.DownloadFileAsync(New Uri("http://magebot.com/MetroFramework.Design.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.MetroFramework.Design.dll")
         Dim Client3 As WebClient = New WebClient
         AddHandler Client3.DownloadProgressChanged, AddressOf client_ProgressChanged
         AddHandler Client3.DownloadFileCompleted, AddressOf dll_DownloadCompleted
-        Client3.DownloadFileAsync(New Uri("http://bluesheepbot.com/MetroFramework.Fonts.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.MetroFramework.Fonts.dll")
+        Client3.DownloadFileAsync(New Uri("http://magebot.com/MetroFramework.Fonts.dll"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\MageBot.MetroFramework.Fonts.dll")
     End Sub
 End Class

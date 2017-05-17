@@ -88,7 +88,7 @@ namespace MageBot.Core.Engine.Constants
             Dic.Add("Lancement d'un sort en", "Launching a spell at");
             Dic.Add("Placement du personnage", "Character's in-fight position");
             Dic.Add("Impossible d'enclencher le déplacement", "Unable to move");
-            Dic.Add("Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.bluesheepbot.com ", "The bot didn't receive the map's informations yet, please check out later, if the poblem persists, report it on the forum : http://forum.bluesheep.com");
+            Dic.Add("Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.magebot.com ", "The bot didn't receive the map's informations yet, please check out later, if the poblem persists, report it on the forum : http://forum.magebot.com");
             Dic.Add("Up de caractéristique", "Enhance characteristics");
             Dic.Add("Envoi de la réponse", "Sending the answer");
             Dic.Add("Aucune réponse disponible dans le trajet", "No answer available in the path for this ask");

@@ -60,5 +60,5 @@ Lancement d'un combat contre monstres de niveau; Inicio de una lucha contra mons
 Lancement d'un sort en; Al lanzar un hechizo sobre
 Placement du personnage; Carácter en posición de luchar
 Impossible d'enclencher le déplacement; No se puede mover
-Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.bluesheepbot.com; El Bot no ha recibido información, Por favor, vuelva más tarde, si el problema persiste, notifique foro: http://forum.bluesheep.com
+Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.magebot.com; El Bot no ha recibido información, Por favor, vuelva más tarde, si el problema persiste, notifique foro: http://forum.magebot.com
 Up de caractéristique; Mejorar características

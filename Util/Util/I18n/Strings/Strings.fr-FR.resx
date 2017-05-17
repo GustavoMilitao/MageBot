@@ -283,7 +283,7 @@
     <value>Impossible d'enclencher le déplacement</value>
   </data>
   <data name="TheBotDidntReceiveTheMapsInformationsYetPleaseCheckOutLaterIfThePoblemPersistsReportItOnTheForumHttpForumMageBotCom" xml:space="preserve">
-    <value>Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.bluesheepbot.com</value>
+    <value>Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.magebot.com</value>
   </data>
   <data name="EnhanceCharacteristics" xml:space="preserve">
     <value>Up de caractéristique</value>

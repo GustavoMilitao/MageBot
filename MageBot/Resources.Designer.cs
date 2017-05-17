@@ -73,16 +73,6 @@ namespace MageBot {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bluesheep_logo {
-            get {
-                object obj = ResourceManager.GetObject("bluesheep-logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap co {
             get {
                 object obj = ResourceManager.GetObject("co", resourceCulture);
@@ -106,6 +96,16 @@ namespace MageBot {
         internal static System.Drawing.Bitmap icon {
             get {
                 object obj = ResourceManager.GetObject("icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap magebot_logo {
+            get {
+                object obj = ResourceManager.GetObject("magebot_logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

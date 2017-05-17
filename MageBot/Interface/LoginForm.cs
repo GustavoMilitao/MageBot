@@ -38,12 +38,12 @@ namespace MageBot.Interface
         #region Interface methods
         private void linkLabelForgottenPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://bluesheepbot.com");
+            Process.Start("http://magebot.com");
         }
 
         private void linkLabelCreateAccount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://bluesheepbot.com/signup.php");
+            Process.Start("http://magebot.com/signup.php");
         }
 
         private void textBoxPassword_GotFocus(object sender, EventArgs e)
@@ -113,7 +113,7 @@ namespace MageBot.Interface
 
             try
             {
-                System.Net.HttpWebRequest WebRequest = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create("http://bluesheepbot.com/c.php?mdp=" + username + password);
+                System.Net.HttpWebRequest WebRequest = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create("http://magebot.com/c.php?mdp=" + username + password);
 
                 System.Net.HttpWebResponse WebResponse = (System.Net.HttpWebResponse)WebRequest.GetResponse();
                 System.IO.StreamReader STR = new System.IO.StreamReader(WebResponse.GetResponseStream());

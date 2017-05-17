@@ -104,23 +104,23 @@ namespace MageBot.Interface
         {
             // Create the MageBot.needed folders
             string applicationDataPath = Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData);
-            string blueSheepPath = Path.Combine (applicationDataPath, "MageBot");
-            if (!Directory.Exists(blueSheepPath))
-                Directory.CreateDirectory(blueSheepPath);
-            if (!Directory.Exists(Path.Combine(blueSheepPath, "Accounts")))
-                Directory.CreateDirectory(Path.Combine(blueSheepPath, "Accounts")).Attributes = FileAttributes.Normal;
-            if (!Directory.Exists(Path.Combine(blueSheepPath, "Groups")))
-                Directory.CreateDirectory(Path.Combine(blueSheepPath, "Groups")).Attributes = FileAttributes.Normal;
-            if (!Directory.Exists(Path.Combine(blueSheepPath, "Temp")))
-                Directory.CreateDirectory(Path.Combine(blueSheepPath, "Temp")).Attributes = FileAttributes.Normal;
-            if (!Directory.Exists(Path.Combine(blueSheepPath, "Paths")))
-                Directory.CreateDirectory(Path.Combine(blueSheepPath, "Paths")).Attributes = FileAttributes.Normal;
-            if (!Directory.Exists(Path.Combine(blueSheepPath, "IAs")))
-                Directory.CreateDirectory(Path.Combine(blueSheepPath, "IAs")).Attributes = FileAttributes.Normal;
-            if (!Directory.Exists(Path.Combine(blueSheepPath, "Logs")))
-                Directory.CreateDirectory(Path.Combine(blueSheepPath, "Logs")).Attributes = FileAttributes.Normal;
+            string mageBotPath = Path.Combine (applicationDataPath, "MageBot");
+            if (!Directory.Exists(mageBotPath))
+                Directory.CreateDirectory(mageBotPath);
+            if (!Directory.Exists(Path.Combine(mageBotPath, "Accounts")))
+                Directory.CreateDirectory(Path.Combine(mageBotPath, "Accounts")).Attributes = FileAttributes.Normal;
+            if (!Directory.Exists(Path.Combine(mageBotPath, "Groups")))
+                Directory.CreateDirectory(Path.Combine(mageBotPath, "Groups")).Attributes = FileAttributes.Normal;
+            if (!Directory.Exists(Path.Combine(mageBotPath, "Temp")))
+                Directory.CreateDirectory(Path.Combine(mageBotPath, "Temp")).Attributes = FileAttributes.Normal;
+            if (!Directory.Exists(Path.Combine(mageBotPath, "Paths")))
+                Directory.CreateDirectory(Path.Combine(mageBotPath, "Paths")).Attributes = FileAttributes.Normal;
+            if (!Directory.Exists(Path.Combine(mageBotPath, "IAs")))
+                Directory.CreateDirectory(Path.Combine(mageBotPath, "IAs")).Attributes = FileAttributes.Normal;
+            if (!Directory.Exists(Path.Combine(mageBotPath, "Logs")))
+                Directory.CreateDirectory(Path.Combine(mageBotPath, "Logs")).Attributes = FileAttributes.Normal;
 
-            string bsConfPath = Path.Combine (blueSheepPath, "bs.conf");
+            string bsConfPath = Path.Combine (mageBotPath, "bs.conf");
             if (File.Exists(bsConfPath))
             {
                 StreamReader sr = new StreamReader(bsConfPath);

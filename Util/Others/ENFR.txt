@@ -56,7 +56,7 @@ Lancement d'un combat contre monstres de niveau; Starting a fight against monste
 Lancement d'un sort en; Launching a spell at
 Placement du personnage; Character's in-fight position
 Impossible d'enclencher le déplacement; Unable to move
-Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.bluesheepbot.com ; The bot didn't receive the map's informations yet, please check out later, if the poblem persists, report it on the forum : http://forum.bluesheep.com
+Le bot n'a pas encore reçu les informations de la map, veuillez patienter. Si le problème persiste, rapportez le beug sur forum : http://forum.magebot.com ; The bot didn't receive the map's informations yet, please check out later, if the poblem persists, report it on the forum : http://forum.magebot.com
 Up de caractéristique; Enhance characteristics
 Envoi de la réponse; Sending the answer
 Aucune réponse disponible dans le trajet; No answer available in the path for this ask
