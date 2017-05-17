@@ -344,7 +344,7 @@ namespace BlueSheep.Core.Account
         }
 
         #region Methodes privées
-        public void Connect()
+        public void Connect(bool begin = false)
         {
             if (TimerConnectionThread != null)
                 TimerConnectionThread.Change(Timeout.Infinite, Timeout.Infinite);
@@ -362,6 +362,9 @@ namespace BlueSheep.Core.Account
                 SocketManager = new SocketManager(this);
 
             SocketManager.Connect(new ConnectionInformations("213.248.126.40", 5555, Strings.Identification));
+
+            if (begin)
+                GetNextMeal();
         }
 
         private void Reconnect(object state)

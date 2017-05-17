@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml;
+using BlueSheep.Core.Job;
 
 namespace BlueSheep.Interface
 {
