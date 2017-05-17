@@ -75,11 +75,12 @@ namespace MageBot.Interface
             // 
             // AccountsBt
             // 
+            this.AccountsBt.Image = global::MageBot.Resources.account;
             this.AccountsBt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AccountsBt.Name = "AccountsBt";
             this.AccountsBt.Size = new System.Drawing.Size(77, 22);
-            this.AccountsBt.Text = Strings.Accounts;
-            this.AccountsBt.ToolTipText = Strings.AccountManagement;
+            this.AccountsBt.Text = "Accounts";
+            this.AccountsBt.ToolTipText = "Account management";
             this.AccountsBt.Click += new System.EventHandler(this.AccountsBt_Click);
             // 
             // toolStripSeparator1
@@ -89,10 +90,11 @@ namespace MageBot.Interface
             // 
             // GroupsBt
             // 
+            this.GroupsBt.Image = global::MageBot.Resources.group;
             this.GroupsBt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.GroupsBt.Name = "GroupsBt";
             this.GroupsBt.Size = new System.Drawing.Size(65, 22);
-            this.GroupsBt.Text = Strings.Groups;
+            this.GroupsBt.Text = "Groups";
             this.GroupsBt.Click += new System.EventHandler(this.GroupsBt_Click);
             // 
             // toolStripSeparator2
@@ -117,13 +119,13 @@ namespace MageBot.Interface
             this.LanguageChoice.MaxDropDownItems = 2;
             this.LanguageChoice.Name = "LanguageChoice";
             this.LanguageChoice.Size = new System.Drawing.Size(140, 25);
-            this.LanguageChoice.Text = Strings.ChangeTheLanguage;
+            this.LanguageChoice.Text = "Change the language";
             this.LanguageChoice.SelectedIndexChanged += new System.EventHandler(this.LanguageChoice_SelectedTextChanged);
             // 
             // notifyIcon
             // 
             this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.notifyIcon.BalloonTipText = Strings.MageBotIsNowMinimized;
+            this.notifyIcon.BalloonTipText = "MageBot is now minimized in the system tray";
             this.notifyIcon.BalloonTipTitle = "[Info]";
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "MageBot";

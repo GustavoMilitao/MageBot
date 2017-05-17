@@ -37,7 +37,7 @@ namespace MageBot.Interface
         {
             InitializeComponent();
             ActualMainForm = this;
-            Text = "MageBot" + version;
+            Text = "MageBot " + version;
             CheckMageBotDatas();
         }
         #endregion
