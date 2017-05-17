@@ -1,7 +1,9 @@
-﻿using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Emote;
+﻿using BlueSheep.Core.Inventory;
+using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Emote;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Util.Text.Log;
 using System;
+using System.Collections.Generic;
 
 namespace BlueSheep.Core.Regen
 {
@@ -9,10 +11,12 @@ namespace BlueSheep.Core.Regen
     {
         public Account.Account Account { get; set; }
         public int RegenChoice { get; set; }
+        public List<Item> RegenItems { get; set; }
 
         public Regen(Account.Account account)
         {
             Account = account;
+            RegenItems = new List<Item>();
         }
 
         public async void PulseRegen()
@@ -20,17 +24,16 @@ namespace BlueSheep.Core.Regen
             if (((Account.CharacterStats.LifePoints / Account.CharacterStats.MaxLifePoints) * 100) < RegenChoice)
             {
                 Account.SetStatus(Status.Regenerating);
-                //List<Item> items = GetRegenItems();
                 //TODO Militão: Add to get Regen Items later.
-                //if (items.Count > 0)
-                //{
-                //    if (UseItems(items))
-                //    {
-                //        await Account.PutTaskDelay(1000);
-                //        PulseRegen();
-                //        return;
-                //    }
-                //}
+                if (RegenItems.Count > 0)
+                {
+                    if (UseItems(RegenItems))
+                    {
+                        await Account.PutTaskDelay(1000);
+                        PulseRegen();
+                        return;
+                    }
+                }
                 int maxLife = Convert.ToInt32(Account.CharacterStats.MaxLifePoints);
                 int life = Convert.ToInt32(Account.CharacterStats.LifePoints);
                 int time = Convert.ToInt32(Math.Round(Convert.ToDecimal(maxLife - life) / 2));
@@ -41,6 +44,26 @@ namespace BlueSheep.Core.Regen
                 if (Account.Config.Path != null && Account.Config.Path.Launched)
                     Account.Config.Path.ParsePath();
             }
+        }
+
+        public void GetRegenItemsByNames(List<string> names)
+        {
+            names.ForEach(n => RegenItems.Add(Account.Inventory.GetItemFromName(n)));
+        }
+
+        private bool UseItems(List<Item> items)
+        {
+            foreach (Item i in items)
+            {
+                if (i.Quantity <= 0)
+                    continue;
+                else
+                {
+                    Account.Inventory.UseItem(i.UID);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
