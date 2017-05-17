@@ -1,9 +1,7 @@
-﻿using BlueSheep.Core.Fight;
+﻿using BlueSheep.Core.Char;
+using BlueSheep.Core.Fight;
 using BlueSheep.Core.Misc;
 using BlueSheep.Core.Path;
-using Core.Core;
-using Core.Core.Heroic;
-using Core.Core.Regen;
 using System;
 using System.Collections.Generic;
 
@@ -43,7 +41,7 @@ namespace BlueSheep.Core.Account
         #endregion
 
         #region Fight
-        public Regen RegenConfig { get; set; }
+        public Regen.Regen RegenConfig { get; set; }
         public int MinMonstersNumber { get; set; }
         public int MaxMonstersNumber { get; set; }
         public int MinMonstersLevel { get; set; }
@@ -64,7 +62,7 @@ namespace BlueSheep.Core.Account
 
         #region Char
         public Character CharacterConfig { get; set; }
-        public Heroic HeroicConfig { get; set; }
+        public Heroic.Heroic HeroicConfig { get; set; }
         #endregion
 
         public AccountConfig(Account account)
@@ -72,9 +70,9 @@ namespace BlueSheep.Core.Account
             Account = account;
             ConfigRecover = new ConfigManager(account);
             Flood = new Flood(account);
-            RegenConfig = new Regen(account);
+            RegenConfig = new Regen.Regen(account);
             CharacterConfig = new Character(account);
-            HeroicConfig = new Heroic(account);
+            HeroicConfig = new Heroic.Heroic(account);
             MonsterRestrictions = new List<Fight.MonsterRestrictions>();
         }
 

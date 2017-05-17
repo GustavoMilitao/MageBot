@@ -18,7 +18,7 @@ namespace BlueSheep.Core.Inventory
         public int maxWeight;
         public int weight;
         public Account.Account Account;
-        public List<Item> Items;
+        public List<Item> Items; // All items
         public List<Item> ItemsToAutoDelete { get; set; }
         public List<Item> ItemsToStayOnCharacter { get; set; }
         public List<Item> ItemsToGetFromBank { get; set; }

@@ -469,7 +469,7 @@ namespace BlueSheep.Engine.Handlers.Context
             if (account.Config.Flood.SaveInMemory && msg.Informations is GameRolePlayCharacterInformations)
             {
                 GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.Informations;
-                account.Config.Flood.SaveNameInMemory(infos);
+                account.Config.Flood.SaveNameInDisk(infos);
             }
         }
 

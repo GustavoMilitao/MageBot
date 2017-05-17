@@ -4,14 +4,14 @@ using BlueSheep.Protocol.Enums;
 using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Stats;
 using System.Collections;
 
-namespace Core.Core
+namespace BlueSheep.Core.Char
 {
     public class Character
     {
-        public Account Account { get; set; }
+        private Account.Account Account { get; set; }
         public BoostableCharacteristicEnum? CaracToAutoUp { get; set; }
 
-        public Character(Account account)
+        public Character(Account.Account account)
         {
             this.Account = account;
         }

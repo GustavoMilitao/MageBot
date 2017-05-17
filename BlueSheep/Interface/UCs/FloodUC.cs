@@ -1,52 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BlueSheep.Util.Text.Log;
+using System;
+using System.Linq;
 using System.IO;
+using System.Collections.Generic;
 
 namespace BlueSheep.Interface.UCs
 {
     public partial class FloodUC : MetroFramework.Controls.MetroUserControl
     {
         #region Fields
-        private AccountUC m_Account;
-        public string FloodContent;
-        private int m_MpCount = 0;
-        private int m_MessageCount = 0;
+        private AccountUC accUserControl { get; set; }
         #endregion
 
         #region Constructors
         public FloodUC(AccountUC account)
         {
             InitializeComponent();
-            m_Account = account;
-            string pathPlayers = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", m_Account.AccountName, "Flood");
-            if (!Directory.Exists(pathPlayers))
-                Directory.CreateDirectory(pathPlayers);
-            PrivateExitBox.Hide();
-            FloodContent = "";
-            Dictionary<string, int> temp = new Dictionary<string, int>();
-            if (File.Exists(pathPlayers + @"\Players.txt"))
+            accUserControl = account;
+            accUserControl.Account.Config.Flood = new Core.Misc.Flood(accUserControl.Account);
+            foreach(KeyValuePair<string, long> p in accUserControl.Account.Config.Flood.ListOfPlayersWithLevel)
             {
-                var sr = new StreamReader(pathPlayers + @"\Players.txt");
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-                    string[] parsed = line.Split(',');
-                    if (parsed.Length > 1)
-                    {
-                        temp.Add(parsed[0], int.Parse(parsed[1]));
-                        PlayerListLb.Items.Add(line);
-                    }
-                    else
-                    {
-                        sr.Close();
-                        File.Delete(pathPlayers + @"\Players.txt");
-                        return;
-                    }
-                    
-                }
-                sr.Close();
-                m_Account.Log(new DebugTextInformation("[ADVANCED FLOOD] Players loaded."), 5);
+                PlayerListLb.Items.Add(String.Join(",", p.Key, p.Value));
             }
+            PrivateExitBox.Hide();
+            accUserControl.Account.Config.Flood.FloodContent = String.Empty;
         }
         #endregion
 
@@ -56,20 +33,17 @@ namespace BlueSheep.Interface.UCs
            PlayerListLb.Items.Add(line);
         }
 
-        public void Increase(bool mp)
+        public void Increase(bool pm)
         {
-            if (mp)
-                m_MpCount++;
-            else
-                m_MessageCount++;
+            accUserControl.Account.Config.Flood.increase(pm);
         }
         #endregion
 
-        #region UI Methods
+        #region events
         private void RemovePlayerBt_Click(object sender, EventArgs e)
         {
 
-            string pathPlayers = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", m_Account.AccountName, "Flood");
+            string pathPlayers = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", accUserControl.Account.AccountName, "Flood");
             if (File.Exists(pathPlayers + "\\Players.txt"))
             {
                 DeleteLine(pathPlayers + "\\Players.txt", PlayerListLb.SelectedItem.ToString());
@@ -82,7 +56,7 @@ namespace BlueSheep.Interface.UCs
 
         private void FloodContentRbox_TextChanged(object sender, EventArgs e)
         {
-            FloodContent = FloodContentRbox.Text;
+            accUserControl.Account.Config.Flood.FloodContent = FloodContentRbox.Text;
         }
 
         private void ClearListeBt_Click(object sender, EventArgs e)
@@ -91,29 +65,29 @@ namespace BlueSheep.Interface.UCs
             {
                 PlayerListLb.Items.Clear();
             }
-            string pathPlayers = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", m_Account.AccountName, "Flood");
+            string pathPlayers = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", accUserControl.Account.AccountName, "Flood");
             if (File.Exists(pathPlayers + "\\Players.txt"))
             {
                 var sw = new StreamWriter(pathPlayers + "\\Players.txt");
-                sw.Write("");
+                //sw.Write("");
                 sw.Close();
             }
         }
 
         private void FloodPlayersBt_Click(object sender, EventArgs e)
         {
-            FloodContent = FloodContentRbox.Text;
+            accUserControl.Account.Config.Flood.FloodContent = FloodContentRbox.Text;
             foreach (var elem in PlayerListLb.Items)
             {
                 try
                 {
                     string[] parsed = ((string)elem).Split(',');
-                    FloodContent = FloodContent.Replace("%name%", parsed[0]).Replace("%level%", parsed[1]);
-                    m_Account.Flood.SendPrivateTo((string)parsed[0], FloodContent);
+                    accUserControl.Account.Config.Flood.FloodContent = accUserControl.Account.Config.Flood.FloodContent.Replace("%name%", parsed[0]).Replace("%level%", parsed[1]);
+                    accUserControl.Account.Config.Flood.SendPrivateTo((string)parsed[0], accUserControl.Account.Config.Flood.FloodContent);
                 }
                 catch (Exception)
                 {
-                    m_Account.Log(new ErrorTextInformation("Impossible d'envoyer le message à: " + (string)elem), 3);
+                    accUserControl.Log(new ErrorTextInformation("Impossible send message to : " + (string)elem), 3);
                 }
             }
         }
@@ -122,21 +96,21 @@ namespace BlueSheep.Interface.UCs
         {
             if (StartStopFloodingBox.Checked == false)
             {
-                m_Account.Flood.stop = true;
-                m_Account.Log(new BotTextInformation("Flood arrêté"), 1);
-                m_Account.Log(new BotTextInformation(m_MpCount + " mps envoyés."), 0);
-                m_Account.Log(new BotTextInformation(m_MessageCount + " messages envoyés."), 0);
-                m_MessageCount = 0;
-                m_MpCount = 0;
+                accUserControl.Account.Config.Flood.FloodStarted = false;
+                accUserControl.Log(new BotTextInformation("Flood stopped"), 1);
+                accUserControl.Log(new BotTextInformation(accUserControl.Account.Config.Flood.PMCount + " PMs sent."), 0);
+                accUserControl.Log(new BotTextInformation(accUserControl.Account.Config.Flood.MessageCount + " Other messages sent."), 0);
+                accUserControl.Account.Config.Flood.PMCount = 0;
+                accUserControl.Account.Config.Flood.MessageCount = 0;
                 return;
             }
-            m_Account.Log(new BotTextInformation("Flood activé"), 1);
+            accUserControl.Log(new BotTextInformation("Flood activated"), 1);
             if (CommerceBox.Checked)
-                m_Account.Flood.StartFlood(5, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
+                accUserControl.Account.Config.Flood.StartFlood(5, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
             if (RecrutementBox.Checked)
-                m_Account.Flood.StartFlood(6, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
+                accUserControl.Account.Config.Flood.StartFlood(6, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
             if (GeneralBox.Checked)
-                m_Account.Flood.StartFlood(0, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
+                accUserControl.Account.Config.Flood.StartFlood(0, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
         }
         #endregion
 

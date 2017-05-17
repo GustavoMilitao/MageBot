@@ -1,5 +1,6 @@
 ﻿namespace BlueSheep.Interface
 {
+    using BlueSheep.Core.Heroic;
     using System;
     using System.ComponentModel;
     using System.Windows.Forms;
@@ -36,7 +37,7 @@
         private SadikTabControl sadikTabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private AccountUC account;
+        private AccountUC accUserControl;
         private int[] SubAreaId = new int[] { 0x5f, 0x60, 0x61, 0x62, 0xad, 0x65 };
         #endregion
 
@@ -44,142 +45,8 @@
         public HeroicUC(AccountUC Account)
         {
             InitializeComponent();
-            account = Account;
-        }
-        #endregion
-
-        #region Public Methods
-        public void AnalysePacket(Common.Message msg, byte[] packetdatas)
-        {
-
-            using (BigEndianReader reader = new BigEndianReader(packetdatas))
-            {
-                msg.Deserialize(reader);
-            }
-            switch ((int)msg.MessageID)
-            {
-                case 226:
-                    MapComplementaryInformationsDataMessage packet = (MapComplementaryInformationsDataMessage)msg;
-                    //if (this.GoAnalyser((int)packet.SubAreaId))
-                    //{
-                    foreach (GameRolePlayActorInformations informations in packet.Actors)
-                    {
-                        GameRolePlayCharacterInformations infos;
-                        if (!(informations is GameRolePlayCharacterInformations))
-                            continue;
-                        else
-                            infos = (GameRolePlayCharacterInformations)informations;
-                        if (GoAgro(infos))
-                        {
-                            Agression((ulong)informations.ContextualId);
-                        }
-                        if (IsGoingToRun(infos))
-                        {
-                            if (Disconnecting.Checked)
-                            {
-                                account.SocketManager.DisconnectFromGUI();
-                            }
-                            else if (UsingItem.Checked && (UsedItem.Text.Length > 0))
-                            {
-                                Run();
-                            }
-                        }
-                    }
-
-                    break;
-                case 5632:
-                    GameRolePlayShowActorMessage npacket = (GameRolePlayShowActorMessage)msg;
-                    GameRolePlayCharacterInformations infoCharacter = npacket.Informations as GameRolePlayCharacterInformations;
-                    if (GoAgro(infoCharacter))
-                    {
-                        Agression((ulong)infoCharacter.ContextualId);
-                    }
-                    if (IsGoingToRun(infoCharacter))
-                    {
-                        if (Disconnecting.Checked)
-                        {
-                            account.SocketManager.DisconnectFromGUI();
-                        }
-                        else if (UsingItem.Checked && (UsedItem.Text.Length > 0))
-                        {
-                            Run();
-                        }
-                    }
-                    break;
-
-            }
-        }
-        #endregion
-
-        #region Private Methods
-        private void Agression(ulong targetid)
-        {
-            GameRolePlayPlayerFightRequestMessage packet = new GameRolePlayPlayerFightRequestMessage
-            {
-                Friendly = false,
-                TargetCellId = -1,
-                TargetId = targetid
-            };
-
-            account.SocketManager.Send(packet);
-        }
-
-        private void Run()
-        {
-            account.Inventory.UseItem(SwitchUid(UsedItem.SelectedText));
-        }
-
-        private bool GoAgro(GameRolePlayCharacterInformations infoCharacter)
-        {
-            if (!sadikCheckbox1.Checked)
-                return false;
-            long num = Math.Abs((long)(infoCharacter.AlignmentInfos.CharacterPower - infoCharacter.ContextualId));
-            bool flag = ((sadikCheckbox1.Checked && (infoCharacter.Name != account.CharacterBaseInformations.Name)) && (num >= NUDLvlAgroMin.Value) && (num <= NUDLvlAgroMax.Value));
-            if (((LViewAgro.Items.Count > 0) && (infoCharacter.HumanoidInfo.Options[1] != null)) && flag)
-            {
-                HumanOptionAlliance alliance = infoCharacter.HumanoidInfo.Options[1] as HumanOptionAlliance;
-                return (flag && ContainslistView(LViewAgro, alliance.AllianceInformations.AllianceName));
-            }
-            return flag;
-        }
-
-        //public bool GoAnalyser(int id)
-        //{
-        //    return ((!this.SubAreaId.Contains<int>(id) && (this.account.Game.Map.Id != 0x24138)) && (this.account.Game.Map.Id != 0x23423));
-        //}
-
-        private bool IsGoingToRun(GameRolePlayCharacterInformations infoCharacter)
-        {
-            if (!sadikCheckbox2.Checked)
-                return false;
-            if (infoCharacter.HumanoidInfo.Options[1] == null)
-            {
-                return false;
-            }
-            long num = Math.Abs((long)(infoCharacter.AlignmentInfos.CharacterPower - infoCharacter.ContextualId));
-            bool flag = ((sadikCheckbox2.Checked && (infoCharacter.Name != account.CharacterBaseInformations.Name)) && (num >= NUDLvlRunMin.Value) && (num <= NUDLvlRunMax.Value));
-            if (((LViewRun.Items.Count > 0) && (infoCharacter.HumanoidInfo.Options[1] != null)) && flag)
-            {
-                HumanOptionAlliance alliance = infoCharacter.HumanoidInfo.Options[1] as HumanOptionAlliance;
-                return (flag && ContainslistView(LViewRun, alliance.AllianceInformations.AllianceName));
-            }
-            return flag;
-        }
-
-        private int SwitchUid(string nameItem)
-        {
-            switch (nameItem)
-            {
-                case "Potion de Rappel":
-                    return account.Inventory.GetItemFromGID(0x224).UID;
-
-                case "Potion de cité :  Bonta":
-                    return account.Inventory.GetItemFromGID(0x1b35).UID;
-
-                case "Potion de cité:  Brâkmar":
-                    return account.Inventory.GetItemFromGID(0x1b34).UID;
-            }
-            return 0;
+            accUserControl = Account;
+            accUserControl.Account.Config.HeroicConfig = new Heroic(accUserControl.Account);
         }
         #endregion
 

@@ -34,7 +34,7 @@ namespace BlueSheep.Core.Misc
         public Flood(Account.Account Account)
         {
             account = Account;
-            ListOfPlayersWithLevel = new Dictionary<string, long>();
+            ReadListAdvancedFloodFromDisk();
         }
         #endregion
 
@@ -70,7 +70,7 @@ namespace BlueSheep.Core.Misc
                     }
                     else
                     {
-                        account.Log(new ErrorTextInformation("Impossible to send informations of : " + elem.Name+" to "+To), 3);
+                        account.Log(new ErrorTextInformation("Impossible to send informations of : " + elem.Name + " to " + To), 3);
                     }
                 }
             }
@@ -125,7 +125,7 @@ namespace BlueSheep.Core.Misc
             }
         }
 
-        public void SaveNameInMemory(GameRolePlayCharacterInformations infos)
+        public void SaveNameInDisk(GameRolePlayCharacterInformations infos)
         {
             string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, "Flood");
             if (!Directory.Exists(path))
@@ -147,7 +147,7 @@ namespace BlueSheep.Core.Misc
                 swriter.Close();
                 ListOfPlayersWithLevel.Add(infos.Name, level);
                 //account.AccountFlood.AddItem(infos.Name + "," + Convert.ToString(level));
-                account.Log(new BotTextInformation("[ADVANCED FLOOD] Player added."), 5);
+                account.Log(new BotTextInformation("[ADVANCED FLOOD] Player added. Name : " + infos.Name + " (level: " + level + ")."), 5);
             }
             catch (Exception ex)
             {
@@ -155,9 +155,45 @@ namespace BlueSheep.Core.Misc
                 account.Log(new ErrorTextInformation(ex.ToString()), 5);
             }
         }
+
+        public void increase(bool pm)
+        {
+            if (pm)
+                PMCount++;
+            else
+                MessageCount++;
+        }
+
         #endregion
 
         #region Private Methods
+        private void ReadListAdvancedFloodFromDisk()
+        {
+            ListOfPlayersWithLevel = new Dictionary<string, long>();
+            string pathPlayers = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BlueSheep", "Accounts", account.AccountName, "Flood");
+            if (!Directory.Exists(pathPlayers))
+                Directory.CreateDirectory(pathPlayers);
+            if (File.Exists(pathPlayers + @"\Players.txt"))
+            {
+                var sr = new StreamReader(pathPlayers + @"\Players.txt");
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    string[] parsed = line.Split(',');
+                    if (parsed.Length > 1)
+                        ListOfPlayersWithLevel.Add(parsed[0], int.Parse(parsed[1]));
+                    else
+                    {
+                        sr.Close();
+                        File.Delete(pathPlayers + @"\Players.txt");
+                        return;
+                    }
+                }
+                sr.Close();
+                account.Log(new DebugTextInformation("[ADVANCED FLOOD] Players loaded."), 5);
+            }
+        }
+
         private string addRandomSmiley(string content)
         {
             int randomIndex = new Random().Next(0, 8);
@@ -170,14 +206,6 @@ namespace BlueSheep.Core.Misc
             int randomIndex = new Random().Next(0, 500);
             string nCon = content + " " + randomIndex.ToString();
             return nCon;
-        }
-
-        private void increase(bool pm)
-        {
-            if (pm)
-                PMCount++;
-            else
-                MessageCount++;
         }
 
         private async void StartFlooding(int channel, bool useSmiley, bool useNumbers, string content, int interval)

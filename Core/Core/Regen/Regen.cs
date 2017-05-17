@@ -1,17 +1,16 @@
-﻿using BlueSheep.Core.Account;
-using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Emote;
+﻿using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Emote;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Util.Text.Log;
 using System;
 
-namespace Core.Core.Regen
+namespace BlueSheep.Core.Regen
 {
     public class Regen
     {
-        public Account Account { get; set; }
+        public Account.Account Account { get; set; }
         public int RegenChoice { get; set; }
 
-        public Regen(Account account)
+        public Regen(Account.Account account)
         {
             Account = account;
         }

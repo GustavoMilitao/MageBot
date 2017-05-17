@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Collections;
+using BlueSheep.Util.Text.Log;
+using Core.Core;
 
 namespace BlueSheep.Interface.UCs
 {
     public partial class CaracUC : MetroFramework.Controls.MetroUserControl
     {
         #region Fields
-        AccountUC account;
-        private int m_count;
+        private AccountUC accUserControl { get; set; }
         #endregion
 
         private delegate void DelegLabel(string text, Label lab);
@@ -17,65 +18,28 @@ namespace BlueSheep.Interface.UCs
         public CaracUC(AccountUC Account)
         {
             InitializeComponent();
-            account = Account;
+            accUserControl = Account;
+            accUserControl.Account.Config.CharacterConfig = new Character(accUserControl.Account);
         }
         #endregion
 
         #region Public Methods
         public void Init()
         {
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.Vitality.Base + account.CharacterStats.Vitality.Additionnal + account.CharacterStats.Vitality.ObjectsAndMountBonus), VitaLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.Wisdom.Base + account.CharacterStats.Wisdom.Additionnal + account.CharacterStats.Wisdom.ObjectsAndMountBonus), WisdomLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.Strength.Base + account.CharacterStats.Strength.Additionnal + account.CharacterStats.Strength.ObjectsAndMountBonus), StreLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.Intelligence.Base + account.CharacterStats.Intelligence.Additionnal + account.CharacterStats.Intelligence.ObjectsAndMountBonus), InteLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.Chance.Base + account.CharacterStats.Chance.Additionnal + account.CharacterStats.Chance.ObjectsAndMountBonus), LuckLb);
-            Invoke(new DelegLabel(ModLabel),  Convert.ToString(account.CharacterStats.Agility.Base + account.CharacterStats.Agility.Additionnal + account.CharacterStats.Agility.ObjectsAndMountBonus), AgiLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.ActionPoints.Base + account.CharacterStats.ActionPoints.Additionnal + account.CharacterStats.ActionPoints.ObjectsAndMountBonus), APLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.MovementPoints.Base + account.CharacterStats.MovementPoints.Additionnal + account.CharacterStats.MovementPoints.ObjectsAndMountBonus),MpLb);
-            Invoke(new DelegLabel(ModLabel), Convert.ToString(account.CharacterStats.StatsPoints), AvailabPtLb);
-            //GetBoost(10);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(accUserControl.Account.CharacterStats.Vitality.Base + accUserControl.Account.CharacterStats.Vitality.Additionnal + accUserControl.Account.CharacterStats.Vitality.ObjectsAndMountBonus), VitaLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(accUserControl.Account.CharacterStats.Wisdom.Base + accUserControl.Account.CharacterStats.Wisdom.Additionnal + accUserControl.Account.CharacterStats.Wisdom.ObjectsAndMountBonus), WisdomLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(accUserControl.Account.CharacterStats.Strength.Base + accUserControl.Account.CharacterStats.Strength.Additionnal + accUserControl.Account.CharacterStats.Strength.ObjectsAndMountBonus), StreLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(accUserControl.Account.CharacterStats.Intelligence.Base + accUserControl.Account.CharacterStats.Intelligence.Additionnal + accUserControl.Account.CharacterStats.Intelligence.ObjectsAndMountBonus), InteLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(accUserControl.Account.CharacterStats.Chance.Base + accUserControl.Account.CharacterStats.Chance.Additionnal + accUserControl.Account.CharacterStats.Chance.ObjectsAndMountBonus), LuckLb);
+            Invoke(new DelegLabel(ModLabel),  Convert.ToString(accUserControl.Account.CharacterStats.Agility.Base + accUserControl.Account.CharacterStats.Agility.Additionnal + accUserControl.Account.CharacterStats.Agility.ObjectsAndMountBonus), AgiLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(accUserControl.Account.CharacterStats.ActionPoints.Base + accUserControl.Account.CharacterStats.ActionPoints.Additionnal + accUserControl.Account.CharacterStats.ActionPoints.ObjectsAndMountBonus), APLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(accUserControl.Account.CharacterStats.MovementPoints.Base + accUserControl.Account.CharacterStats.MovementPoints.Additionnal + accUserControl.Account.CharacterStats.MovementPoints.ObjectsAndMountBonus),MpLb);
+            Invoke(new DelegLabel(ModLabel), Convert.ToString(accUserControl.Account.CharacterStats.StatsPoints), AvailabPtLb);
         }
-
-        
 
         public void UpAuto()
         {
-            if (VitaRb.Checked)
-            {
-                while (Convert.ToInt32(AvailabPtLb.Text) != 0)
-                {
-                    UpStat(11, 1);
-                }
-            }
-            else
-                account.Log(new ErrorTextInformation("L'auto-up ne gère pas les paliers et a donc été désactivé pour des raisons de sécurité (ban 2h sinon)."), 0);
-            //else if (WisRb.Checked)
-            //{
-            //    while (Convert.ToInt32(AvailabPtLb.Text) % 3 == 0)
-            //        UpStat(12, 3);
-            //}
-            //else if (StreRb.Checked)
-            //{
-            //    while (Convert.ToInt32(AvailabPtLb.Text) != 0)
-            //        UpStat(10, 1);
-            //}
-            //else if (InteRb.Checked)
-            //{
-            //    while (Convert.ToInt32(AvailabPtLb.Text) != 0)
-            //        UpStat(15, 1);
-            //}
-            //else if (LuckRb.Checked)
-            //{
-            //    while (Convert.ToInt32(AvailabPtLb.Text) != 0)
-            //        UpStat(13, 1);
-            //}
-            //else if (AgiRb.Checked)
-            //{
-            //    while (Convert.ToInt32(AvailabPtLb.Text) != 0)
-            //        UpStat(14, 1);
-            //}
-                
-
+            accUserControl.Account.Config.CharacterConfig.UpAuto();
         }
 
         public void DecreaseAvailablePoints(int n)
@@ -87,68 +51,40 @@ namespace BlueSheep.Interface.UCs
         #region Interface Methods
         private void sadikButton1_Click(object sender, EventArgs e)
         {
-            UpStat(11,1);
+            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_VITALITY);
         }
 
         private void sadikButton2_Click(object sender, EventArgs e)
         {
-            UpStat(12,3);
+            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_WISDOM);
         }
 
         private void sadikButton3_Click(object sender, EventArgs e)
         {
-            UpStat(10,1);
+            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_STRENGTH);
         }
 
         private void sadikButton4_Click(object sender, EventArgs e)
         {
-            UpStat(15,1);
+            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_INTELLIGENCE);
         }
 
         private void sadikButton5_Click(object sender, EventArgs e)
         {
-            UpStat(13, 1);
+            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_CHANCE);
         }
 
         private void sadikButton6_Click(object sender, EventArgs e)
         {
-            UpStat(14, 1);
+            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_AGILITY);
         }
         #endregion
 
         #region Private Methods
-        private void UpStat(int statId, int boost)
-        {
-            StatsUpgradeRequestMessage msg = new StatsUpgradeRequestMessage(false, (byte)statId, (ushort)boost);
-            account.SocketManager.Send(msg);          
-        }
 
         private void ModLabel(string content, Label lab)
         {
             lab.Text = content;
-        }
-
-        public int GetBoost(int statId)
-        {
-            DataClass d = GameData.GetDataObject(D2oFileEnum.Breeds, (int)account.CharacterBaseInformations.Breed);
-            switch (statId)
-            {
-                case 10:
-                    ArrayList o =(ArrayList)d.Fields["statsPointsForStrength"];
-                    break;
-                case 11:
-                    break;
-                case 12:
-                    break;
-                case 13:
-                    break;
-                case 14:
-                    break;
-                case 15:
-                    break;
-            }
-
-            return 1;
         }
 
         #endregion

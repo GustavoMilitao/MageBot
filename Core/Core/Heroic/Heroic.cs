@@ -8,11 +8,11 @@ using System;
 using System.Collections.Generic;
 using Util.Util.Enums.Internal;
 
-namespace Core.Core.Heroic
+namespace BlueSheep.Core.Heroic
 {
     public class Heroic
     {
-        public Account account { get; set; }
+        public Account.Account account { get; set; }
         public bool HeroicModeOn { get; set; }
         public bool AgroConditionsSet { get; set; }
         public bool RunConditionsSet { get; set; }
@@ -27,9 +27,12 @@ namespace Core.Core.Heroic
         public long MaxLevelAgro { get; set; }
 
 
-        public Heroic(Account account)
+        public Heroic(Account.Account account)
         {
             this.account = account;
+
+            AlliancesNameRun = new List<string>();
+            AlliancesNameAgro = new List<string>();
         }
 
         #region Public Methods

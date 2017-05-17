@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Timer = System.Threading.Timer;
-using System.Threading;
 using System.Collections;
 using System.Windows.Forms.DataVisualization.Charting;
 using BlueSheep.Interface.UCs;
 using System.IO;
 using BlueSheep.Core.Account;
-using Core.Engine.Constants;
 using BlueSheep.Core.Pets;
 using BlueSheep.Util.I18n.Strings;
 using BlueSheep.Protocol.Types.Game.Character.Choice;
@@ -32,6 +29,7 @@ using DataFiles.Data.D2o;
 using BlueSheep.Core;
 using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
 using BlueSheep.Protocol.Messages.Game.Dialog;
+using Core.Engine.Constants;
 
 namespace BlueSheep.Interface
 {
@@ -66,15 +64,15 @@ namespace BlueSheep.Interface
         private delegate void Callback();
         #endregion
 
-        #region Constructeurs
+        #region Constructors
 
         public AccountUC(Account account, bool socket = true, MetroFramework.Forms.MetroForm form = null)
         {
             InitializeComponent();
-            //MonsterTextBox.KeyUp += (s, e) =>
-            //{
-            //    IntelliSense.AutoCompleteTextBox(MonsterTextBox, lstPopup, IntelliSense.MonstersList, e);
-            //};
+            MonsterTextBox.KeyUp += (s, e) =>
+            {
+                IntelliSense.AutoCompleteTextBox(MonsterTextBox, lstPopup, IntelliSense.MonstersList, e);
+            };
             if (form != null)
                 m_ParentForm = form;
             Account = account;
@@ -176,7 +174,7 @@ namespace BlueSheep.Interface
 
         #endregion
 
-        #region Interface Methods
+        #region Events
 
         private void Form_Closed(object sender, EventArgs e)
         {
@@ -196,46 +194,6 @@ namespace BlueSheep.Interface
         private void DeleteConfigBt_Click(object sender, EventArgs e)
         {
             Account.Config.ConfigRecover.DeleteConfig();
-        }
-
-        public void InitMITM()
-        {
-            Account.SocketManager = new SocketManager(Account);
-            Account.SocketManager.InitMITM();
-
-        }
-
-        public void Log(TextInformation text, int levelVerbose)
-        {
-            if (IsDisposed == true)
-                return;
-            if ((int)NUDVerbose.Value < levelVerbose)
-                return;
-            if (LogConsole.InvokeRequired)
-                Invoke(new SetLogsCallback(Log), text, levelVerbose);
-            else
-            {
-
-                text.Text = BlueSheep.Engine.Constants.Translate.GetTranslation(text.Text);
-                text.Text = "[" + DateTime.Now.ToLongTimeString() +
-                    "] (" + text.Category + ") " + text.Text;
-                if (text.Category == "Debug" && !DebugMode.Checked)
-                    return;
-
-                if (LogCb.Checked)
-                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + Account.CharacterBaseInformations.Name + ".txt", true))
-                        fileWriter.WriteLine(text.Text);
-
-                int startIndex = LogConsole.TextLength;
-
-                LogConsole.AppendText(text.Text + "\r\n");
-                LogConsole.Select(LogConsole.Text.Length, 0);
-                LogConsole.ScrollToCaret();
-
-                LogConsole.SelectionStart = startIndex;
-                LogConsole.SelectionLength = text.Text.Length;
-                LogConsole.SelectionColor = text.Color;
-            }
         }
 
         private void DeleteItem_Click(object sender, EventArgs e)
@@ -331,57 +289,6 @@ namespace BlueSheep.Interface
             }
         }
 
-        public void ModifBar(int Bar, int Max, int value, string text)
-        {
-            if (VitaBar.InvokeRequired)
-                Invoke(new DelegBar(ModifBar), Bar, Max, value, text);
-            else
-            {
-                switch (Bar)
-                {
-                    case 1:
-                        XpBar.Maximum = Max;
-                        XpBar.Value = value;
-                        XpBar.Text = text;
-                        break;
-                    case 2:
-                        VitaBar.Maximum = Max;
-                        VitaBar.Value = value;
-                        VitaBar.Text = text;
-                        break;
-                    case 3:
-                        PodsBar.Maximum = Max;
-                        PodsBar.Value = value;
-                        PodsBar.Text = text;
-                        break;
-                    case 4:
-                        KamasLabel.Text = text + " kamas";
-                        break;
-                    case 5:
-                        PosLabel.Text = text;
-                        break;
-                    case 7:
-                        base.ParentForm.Text = text;
-                        break;
-                    case 8:
-                        LevelLb.Text = text;
-                        break;
-                    case 9:
-                        SubcribeLb.Text = text;
-                        break;
-                }
-            }
-        }
-
-        public void AddItem(ListViewItem li, ListView list)
-        {
-            //this.BeginInvoke(new MethodInvoker(LVItems.Items.Add),li);
-            if (list.InvokeRequired == true)
-                Invoke(new DelegListView(AddItem), li, list);
-            else
-                list.Items.Add(li);
-        }
-
         private void LoadPathBt_Click(object sender, EventArgs e)
         {
             PathChoiceForm frm = new PathChoiceForm(this);
@@ -424,89 +331,6 @@ namespace BlueSheep.Interface
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 SearcherLogBox.Text = saveFileDialog1.FileName;
-        }
-
-        public void ActualizeInventory()
-        {
-            BeginInvoke(new MethodInvoker(LVItems.Items.Clear));
-            foreach (Core.Inventory.Item i in Account.Inventory.Items)
-            {
-                string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
-                System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
-                li.ToolTipText = i.Description;
-                AddItem(li, LVItems);
-            }
-            RegenUC.RefreshQuantity();
-
-            BeginInvoke(new MethodInvoker(LVItemBag.Items.Clear));
-            foreach (Core.Inventory.Item i in Account.Inventory.Items)
-            {
-                string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
-                System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
-                li.ToolTipText = i.Description;
-                AddItem(li, LVItemBag);
-            }
-        }
-
-        public void ActualizeFamis()
-        {
-            if (labelNextMeal.InvokeRequired)
-            {
-                BeginInvoke(new MethodInvoker(ActualizeFamis));
-                return;
-            }
-            if (Account.Config.NextMeal.Year != 1)
-                Invoke(new DelegLabel(ModLabel), "Next meal in : " + Account.Config.NextMeal.ToShortTimeString(), labelNextMeal);
-            else
-                Invoke(new DelegLabel(ModLabel), "No next meal", labelNextMeal);
-
-            Invoke(new DelegLabel(ModLabel), Account.Safe != null ? "Safe: Yes " : " Safe: No", labelSafe);
-
-            if (listViewPets.InvokeRequired)
-                BeginInvoke(new MethodInvoker(listViewPets.Items.Clear));
-            else
-                listViewPets.Items.Clear();
-
-            if ((Account.PetsList != null) && (Account.PetsList.Count != 0))
-            {
-                foreach (Pet pet in Account.PetsList)
-                {
-                    ListViewItem listViewItem = new ListViewItem();
-                    listViewItem.SubItems[0].Text = I18N.GetText((int)pet.Datas.Fields["nameId"]);
-                    listViewItem.SubItems.Add(pet.Informations.UID.ToString());
-
-                    if (pet.FoodList.Count != 0)
-                        listViewItem.SubItems.Add(I18N.GetText((int)pet.FoodList[0].Datas.Fields["nameId"]) + " (" + pet.FoodList[0].Informations.Quantity + ")");
-                    else
-                        listViewItem.SubItems.Add("None (0)");
-
-                    if (pet.NextMeal.Year != 1)
-                    {
-                        DateTime nextMeal = new DateTime(pet.NextMeal.Year, pet.NextMeal.Month, pet.NextMeal.Day,
-                            pet.NextMeal.Hour, pet.NextMeal.Minute, 0);
-
-                        listViewItem.SubItems.Add(nextMeal.ToShortDateString() + " " + nextMeal.ToShortTimeString());
-                    }
-                    else
-                        listViewItem.SubItems.Add("No next meal.");
-
-                    listViewItem.SubItems.Add(pet.Effect);
-
-                    AddItem(listViewItem, listViewPets);
-                    //if (listViewPets.Items.Count != 0)
-                    //    listViewPets.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                }
-            }
-        }
-
-        public void ModLabel(string content, Label lab)
-        {
-            if (lab.InvokeRequired)
-            {
-                Invoke(new DelegLabel(ModLabel), content, lab);
-                return;
-            }
-            lab.Text = content;
         }
 
         private void CommandeBox_KeyDown(object sender, KeyEventArgs e)
@@ -702,6 +526,215 @@ namespace BlueSheep.Interface
 
         }
 
+        private void MonsterTextBox_GetFocus(object sender, EventArgs e)
+        {
+            if (MonsterTextBox.Text == "Entrez le nom du monstre...")
+                MonsterTextBox.Text = "";
+        }
+
+        private void MonstersRestrictionView_Supp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && MonstersRestrictionsView.SelectedItems.Count > 0)
+            {
+                for (int i = 0; i < MonstersRestrictionsView.Items.Count; i++)
+                {
+                    if (MonstersRestrictionsView.Items[i].Selected)
+                        MonstersRestrictionsView.Items.RemoveAt(i);
+                }
+            }
+        }
+
+        private void AutoDelAddBt_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < LVItems.Items.Count; i++)
+            {
+                if (LVItems.Items[i].Selected)
+                {
+                    ListViewItem item = new ListViewItem(new string[] { LVItems.Items[i].SubItems[2].Text, Strings.AutoDelete });
+                    GestItemsUC.LVGestItems.Items.Add(item);
+                }
+            }
+        }
+
+        private void RegenAddBt_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < LVItems.Items.Count; i++)
+            {
+                if (LVItems.Items[i].Selected)
+                {
+                    ListViewItem item = new ListViewItem(new string[] { LVItems.Items[i].SubItems[2].Text, LVItems.Items[i].SubItems[3].Text });
+                    RegenUC.LVItems.Items.Add(item);
+                }
+            }
+        }
+
+        private void RelaunchPath_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RelaunchPath.Checked)
+            {
+                RelaunchPath.Text = "✔ " + Strings.RestartThePathToReconnect;
+            }
+            else
+            {
+                RelaunchPath.Text = "✘ " + Strings.RestartThePathToReconnect;
+            }
+            Account.Config.ConfigRecover.SaveConfig();
+        }
+
+        private void sadikCheckbox1_CheckedChanged_1(object sender)
+        {
+            if (sadikCheckbox1.Checked)
+            {
+                PlaceTimer.Interval = 10000;
+                PlaceTimer.Start();
+            }
+            else
+            {
+                PlaceTimer.Stop();
+            }
+        }
+
+        private void sadikButton3_Click(object sender, EventArgs e)
+        {
+            ExchangeRequestOnShopStockMessage packetshop = new ExchangeRequestOnShopStockMessage();
+            Account.SocketManager.Send(packetshop);
+        }
+
+        private void PlaceTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Account.State == Status.Fighting)
+                {
+                    Log(new ErrorTextInformation(Strings.UnableToSwitchToMerchantModeInAFight + " >.<"), 2);
+                }
+                if (Account.SocketManager.State == SocketState.Connected)
+                {
+                    ExchangeShowVendorTaxMessage taxpacket = new ExchangeShowVendorTaxMessage();
+                    Account.SocketManager.Send(taxpacket);
+                    ExchangeStartAsVendorMessage ventepacket = new ExchangeStartAsVendorMessage();
+                    Account.SocketManager.Send(ventepacket);
+                    //Thread.Sleep(500);
+                    Log(new BotTextInformation(Strings.MerchantModeActivationTest), 1);
+                    if (Account.SocketManager.State == SocketState.Closed)
+                    {
+                        Account.SocketManager.DisconnectFromGUI();
+                        PlaceTimer.Stop();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void BtnActualize_Click(object sender, EventArgs e)
+        {
+            ExchangeRequestOnShopStockMessage packetshop = new ExchangeRequestOnShopStockMessage();
+            Account.SocketManager.Send(packetshop);
+            LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
+            Account.SocketManager.Send(packetleave);
+        }
+
+        #endregion
+
+        #region Public methods
+
+        public void actualizeshop(List<ObjectItemToSell> sell)
+        {
+            BeginInvoke(new MethodInvoker(LVItemShop.Items.Clear));
+
+            foreach (ObjectItemToSell i in sell)
+            {
+                Core.Inventory.Item item = new Core.Inventory.Item(i.Effects.ToList(), i.ObjectGID, 0, (int)i.Quantity, (int)i.ObjectUID);
+                string[] row1 = { item.GID.ToString(), item.UID.ToString(), item.Name, item.Quantity.ToString(), item.Type, i.ObjectPrice.ToString() };
+                ListViewItem li = new ListViewItem(row1);
+                li.ToolTipText = item.Description;
+                AddItem(li, LVItemShop);
+            }
+        }
+
+        public bool NeedToAddItem()
+        {
+            if (LVItemBag.InvokeRequired)
+                return (bool)Invoke(new BoolCallback(NeedToAddItem));
+            else
+                return (LVItemBag.SelectedItems != null);
+        }
+
+        public async void addItemToShop()
+        {
+            if (LVItemBag.InvokeRequired)
+            {
+                Invoke(new Callback(addItemToShop));
+                return;
+            }
+            for (int i = 0; i < LVItemBag.Items.Count; i++)
+            {
+                if (LVItemBag.Items[i].Selected)
+                {
+                    try
+                    {
+                        ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage();
+                        msg.ObjectUID = (uint)Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).UID;
+                        msg.Quantity = Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity;
+                        msg.Price = Convert.ToUInt64(numericUpDown1.Value);
+                        Account.SocketManager.Send(msg);
+                        Log(new ActionTextInformation(Strings.AdditionOf + Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Name + "(x " + Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity + ") " + Strings.InTheStoreAtThePriceOf + " : " + msg.Price + " " + Strings.Kamas), 2);
+                        LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
+                        await Account.PutTaskDelay(2000);
+                        Account.SocketManager.Send(packetleave);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+        }
+
+        public void SetStatus(Status status)
+        {
+            Account.State = status;
+            string nstatus = "";
+            switch (status)
+            {
+                case Status.None:
+                    nstatus = Strings.Connected;
+                    break;
+                case Status.Exchanging:
+                    nstatus = "Echange";
+                    break;
+                case Status.Fighting:
+                    nstatus = "Combat";
+                    break;
+                case Status.Gathering:
+                    nstatus = "Récolte";
+                    break;
+                case Status.Moving:
+                    nstatus = "Déplacement";
+                    break;
+                case Status.Speaking:
+                    nstatus = "Dialogue";
+                    break;
+                case Status.Teleporting:
+                    nstatus = "Teleportation";
+                    break;
+                case Status.Regenerating:
+                    nstatus = Strings.Regenerating;
+                    break;
+                case Status.Disconnected:
+                    nstatus = Strings.Disconnected;
+                    break;
+                case Status.Busy:
+                    nstatus = "Occupé";
+                    break;
+            }
+            nstatus = BlueSheep.Engine.Constants.Translate.GetTranslation(nstatus);
+            Invoke(new DelegLabel(ModLabel), nstatus, StatusLb);
+        }
+
         public void ActualizeFightStats(Dictionary<string, int> winLose, Dictionary<DateTime, int> xpwon)
         {
             if (WinLoseFightPie.InvokeRequired)
@@ -754,89 +787,184 @@ namespace BlueSheep.Interface
             XpBarsChart.Invalidate();
         }
 
-        private void MonsterTextBox_GetFocus(object sender, EventArgs e)
+        public void ActualizeInventory()
         {
-            if (MonsterTextBox.Text == "Entrez le nom du monstre...")
-                MonsterTextBox.Text = "";
+            BeginInvoke(new MethodInvoker(LVItems.Items.Clear));
+            foreach (Core.Inventory.Item i in Account.Inventory.Items)
+            {
+                string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
+                System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
+                li.ToolTipText = i.Description;
+                AddItem(li, LVItems);
+            }
+            RegenUC.RefreshQuantity();
+
+            BeginInvoke(new MethodInvoker(LVItemBag.Items.Clear));
+            foreach (Core.Inventory.Item i in Account.Inventory.Items)
+            {
+                string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
+                System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
+                li.ToolTipText = i.Description;
+                AddItem(li, LVItemBag);
+            }
         }
 
-        private void MonstersRestrictionView_Supp(object sender, KeyEventArgs e)
+        public void ActualizeFamis()
         {
-            if (e.KeyCode == Keys.Delete && MonstersRestrictionsView.SelectedItems.Count > 0)
+            if (labelNextMeal.InvokeRequired)
             {
-                for (int i = 0; i < MonstersRestrictionsView.Items.Count; i++)
+                BeginInvoke(new MethodInvoker(ActualizeFamis));
+                return;
+            }
+            if (Account.Config.NextMeal.Year != 1)
+                Invoke(new DelegLabel(ModLabel), "Next meal in : " + Account.Config.NextMeal.ToShortTimeString(), labelNextMeal);
+            else
+                Invoke(new DelegLabel(ModLabel), "No next meal", labelNextMeal);
+
+            Invoke(new DelegLabel(ModLabel), Account.Safe != null ? "Safe: Yes " : " Safe: No", labelSafe);
+
+            if (listViewPets.InvokeRequired)
+                BeginInvoke(new MethodInvoker(listViewPets.Items.Clear));
+            else
+                listViewPets.Items.Clear();
+
+            if ((Account.PetsList != null) && (Account.PetsList.Count != 0))
+            {
+                foreach (Pet pet in Account.PetsList)
                 {
-                    if (MonstersRestrictionsView.Items[i].Selected)
-                        MonstersRestrictionsView.Items.RemoveAt(i);
+                    ListViewItem listViewItem = new ListViewItem();
+                    listViewItem.SubItems[0].Text = I18N.GetText((int)pet.Datas.Fields["nameId"]);
+                    listViewItem.SubItems.Add(pet.Informations.UID.ToString());
+
+                    if (pet.FoodList.Count != 0)
+                        listViewItem.SubItems.Add(I18N.GetText((int)pet.FoodList[0].Datas.Fields["nameId"]) + " (" + pet.FoodList[0].Informations.Quantity + ")");
+                    else
+                        listViewItem.SubItems.Add("None (0)");
+
+                    if (pet.NextMeal.Year != 1)
+                    {
+                        DateTime nextMeal = new DateTime(pet.NextMeal.Year, pet.NextMeal.Month, pet.NextMeal.Day,
+                            pet.NextMeal.Hour, pet.NextMeal.Minute, 0);
+
+                        listViewItem.SubItems.Add(nextMeal.ToShortDateString() + " " + nextMeal.ToShortTimeString());
+                    }
+                    else
+                        listViewItem.SubItems.Add("No next meal.");
+
+                    listViewItem.SubItems.Add(pet.Effect);
+
+                    AddItem(listViewItem, listViewPets);
+                    //if (listViewPets.Items.Count != 0)
+                    //    listViewPets.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                 }
             }
         }
 
-        public void SetStatus(Status status)
+        public void ModLabel(string content, Label lab)
         {
-            Account.State = status;
-            string nstatus = "";
-            switch (status)
+            if (lab.InvokeRequired)
             {
-                case Status.None:
-                    nstatus = Strings.Connected;
-                    break;
-                case Status.Exchanging:
-                    nstatus = "Echange";
-                    break;
-                case Status.Fighting:
-                    nstatus = "Combat";
-                    break;
-                case Status.Gathering:
-                    nstatus = "Récolte";
-                    break;
-                case Status.Moving:
-                    nstatus = "Déplacement";
-                    break;
-                case Status.Speaking:
-                    nstatus = "Dialogue";
-                    break;
-                case Status.Teleporting:
-                    nstatus = "Teleportation";
-                    break;
-                case Status.Regenerating:
-                    nstatus = Strings.Regenerating;
-                    break;
-                case Status.Disconnected:
-                    nstatus = Strings.Disconnected;
-                    break;
-                case Status.Busy:
-                    nstatus = "Occupé";
-                    break;
+                Invoke(new DelegLabel(ModLabel), content, lab);
+                return;
             }
-            nstatus = BlueSheep.Engine.Constants.Translate.GetTranslation(nstatus);
-            Invoke(new DelegLabel(ModLabel), nstatus, StatusLb);
+            lab.Text = content;
         }
-        #endregion
 
-        #region Methodes Publics
+        public void ModifBar(int Bar, int Max, int value, string text)
+        {
+            if (VitaBar.InvokeRequired)
+                Invoke(new DelegBar(ModifBar), Bar, Max, value, text);
+            else
+            {
+                switch (Bar)
+                {
+                    case 1:
+                        XpBar.Maximum = Max;
+                        XpBar.Value = value;
+                        XpBar.Text = text;
+                        break;
+                    case 2:
+                        VitaBar.Maximum = Max;
+                        VitaBar.Value = value;
+                        VitaBar.Text = text;
+                        break;
+                    case 3:
+                        PodsBar.Maximum = Max;
+                        PodsBar.Value = value;
+                        PodsBar.Text = text;
+                        break;
+                    case 4:
+                        KamasLabel.Text = text + " kamas";
+                        break;
+                    case 5:
+                        PosLabel.Text = text;
+                        break;
+                    case 7:
+                        base.ParentForm.Text = text;
+                        break;
+                    case 8:
+                        LevelLb.Text = text;
+                        break;
+                    case 9:
+                        SubcribeLb.Text = text;
+                        break;
+                }
+            }
+        }
+
+        public void AddItem(ListViewItem li, ListView list)
+        {
+            //this.BeginInvoke(new MethodInvoker(LVItems.Items.Add),li);
+            if (list.InvokeRequired == true)
+                Invoke(new DelegListView(AddItem), li, list);
+            else
+                list.Items.Add(li);
+        }
+
+        public void InitMITM()
+        {
+            Account.SocketManager = new SocketManager(Account);
+            Account.SocketManager.InitMITM();
+
+        }
+
+        public void Log(TextInformation text, int levelVerbose)
+        {
+            if (IsDisposed == true)
+                return;
+            if ((int)NUDVerbose.Value < levelVerbose)
+                return;
+            if (LogConsole.InvokeRequired)
+                Invoke(new SetLogsCallback(Log), text, levelVerbose);
+            else
+            {
+
+                text.Text = BlueSheep.Engine.Constants.Translate.GetTranslation(text.Text);
+                text.Text = "[" + DateTime.Now.ToLongTimeString() +
+                    "] (" + text.Category + ") " + text.Text;
+                if (text.Category == "Debug" && !DebugMode.Checked)
+                    return;
+
+                if (LogCb.Checked)
+                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BlueSheep\Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + Account.CharacterBaseInformations.Name + ".txt", true))
+                        fileWriter.WriteLine(text.Text);
+
+                int startIndex = LogConsole.TextLength;
+
+                LogConsole.AppendText(text.Text + "\r\n");
+                LogConsole.Select(LogConsole.Text.Length, 0);
+                LogConsole.ScrollToCaret();
+
+                LogConsole.SelectionStart = startIndex;
+                LogConsole.SelectionLength = text.Text.Length;
+                LogConsole.SelectionColor = text.Color;
+            }
+        }
 
         public void TryReconnect(int secondes)
         {
             Account.TryReconnect(secondes);
-            //Log(new ConnectionTextInformation(Strings.AutomaticReconnectionIn + " " + secondes + " " + Strings.Seconds + "."), 0);
-            //Account.SocketManager.Disconnect("Try Reconnect.");
-            ////TODO : Make it an ENUM
-            //m_TimerConnectionThread = new Timer(TimerConnectionThreadFinished, null, (int)TimeSpan.FromSeconds(secondes).TotalMilliseconds,
-            //    Timeout.Infinite);
         }
-
-        //public void Wait(int min, int max)
-        //{
-        //    Random Random = new Random();
-        //    int Temps = Random.Next(min, max);
-        //    double endwait = Environment.TickCount + Temps;
-        //    while (Environment.TickCount < endwait)
-        //    {
-        //        System.Threading.Thread.Sleep(1);
-        //        Application.DoEvents();
-        //    }
-        //}
 
         public void GetNextMeal()
         {
@@ -929,40 +1057,11 @@ namespace BlueSheep.Interface
         }
         #endregion
 
-        #region Methodes privées
+        #region Private methods
         private void Connect()
         {
-            Account.Connect(checkBoxBegin.Checked);
+            Account.Connect();
         }
-
-        //private void TimerConnectionThreadFinished(object stateInfo)
-        //{
-        //    if (IsDisposed == true)
-        //        return;
-        //    //Init();
-        //    //AccountUC Uc = new AccountUC(this.AccountName, this.AccountPassword, true);
-        //    //this.ParentForm.Controls.Add(Uc);
-        //    //Uc.Show();
-        //    if (m_ParentForm != null)
-        //    {
-        //        if (m_ParentForm is GroupForm)
-        //        {
-        //            ((GroupForm)m_ParentForm).Reconnect(this);
-        //        }
-        //        else
-        //        {
-        //            ((AccountFrm)m_ParentForm).Reconnect();
-        //        }
-        //    }
-        //    //this.Dispose();
-        //}
-
-        //private static int GetRandomTime()
-        //{
-        //    Random random = new Random();
-
-        //    return random.Next(500, 1250);
-        //}
 
         private void Serialize<T>(T obj, string sConfigFilePath)
         {
@@ -980,153 +1079,6 @@ namespace BlueSheep.Interface
         }
         #endregion
 
-
-
-        private void AutoDelAddBt_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < LVItems.Items.Count; i++)
-            {
-                if (LVItems.Items[i].Selected)
-                {
-                    ListViewItem item = new ListViewItem(new string[] { LVItems.Items[i].SubItems[2].Text, Strings.AutoDelete });
-                    GestItemsUC.LVGestItems.Items.Add(item);
-                }
-            }
-        }
-
-        private void RegenAddBt_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < LVItems.Items.Count; i++)
-            {
-                if (LVItems.Items[i].Selected)
-                {
-                    ListViewItem item = new ListViewItem(new string[] { LVItems.Items[i].SubItems[2].Text, LVItems.Items[i].SubItems[3].Text });
-                    RegenUC.LVItems.Items.Add(item);
-                }
-            }
-        }
-
-        private void RelaunchPath_CheckedChanged(object sender, EventArgs e)
-        {
-            if (RelaunchPath.Checked)
-            {
-                RelaunchPath.Text = "✔ " + Strings.RestartThePathToReconnect;
-            }
-            else
-            {
-                RelaunchPath.Text = "✘ " + Strings.RestartThePathToReconnect;
-            }
-            Account.Config.ConfigRecover.SaveConfig();
-        }
-
-        private void sadikCheckbox1_CheckedChanged_1(object sender)
-        {
-            if (sadikCheckbox1.Checked)
-            {
-                PlaceTimer.Interval = 10000;
-                PlaceTimer.Start();
-            }
-            else
-            {
-                PlaceTimer.Stop();
-            }
-        }
-
-        private void sadikButton3_Click(object sender, EventArgs e)
-        {
-            ExchangeRequestOnShopStockMessage packetshop = new ExchangeRequestOnShopStockMessage();
-            Account.SocketManager.Send(packetshop);
-        }
-
-        public async void addItemToShop()
-        {
-            if (LVItemBag.InvokeRequired)
-            {
-                Invoke(new Callback(addItemToShop));
-                return;
-            }
-            for (int i = 0; i < LVItemBag.Items.Count; i++)
-            {
-                if (LVItemBag.Items[i].Selected)
-                {
-                    try
-                    {
-                        ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage();
-                        msg.ObjectUID = (uint)Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).UID;
-                        msg.Quantity = Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity;
-                        msg.Price = Convert.ToUInt64(numericUpDown1.Value);
-                        Account.SocketManager.Send(msg);
-                        Log(new ActionTextInformation(Strings.AdditionOf + Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Name + "(x " + Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity + ") " + Strings.InTheStoreAtThePriceOf + " : " + msg.Price + " " + Strings.Kamas), 2);
-                        LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
-                        await Account.PutTaskDelay(2000);
-                        Account.SocketManager.Send(packetleave);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
-                }
-            }
-        }
-
-        private void PlaceTimer_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Account.State == Status.Fighting)
-                {
-                    Log(new ErrorTextInformation(Strings.UnableToSwitchToMerchantModeInAFight + " >.<"), 2);
-                }
-                if (Account.SocketManager.State == SocketState.Connected)
-                {
-                    ExchangeShowVendorTaxMessage taxpacket = new ExchangeShowVendorTaxMessage();
-                    Account.SocketManager.Send(taxpacket);
-                    ExchangeStartAsVendorMessage ventepacket = new ExchangeStartAsVendorMessage();
-                    Account.SocketManager.Send(ventepacket);
-                    //Thread.Sleep(500);
-                    Log(new BotTextInformation(Strings.MerchantModeActivationTest), 1);
-                    if (Account.SocketManager.State == SocketState.Closed)
-                    {
-                        Account.SocketManager.DisconnectFromGUI();
-                        PlaceTimer.Stop();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
-        public bool NeedToAddItem()
-        {
-            if (LVItemBag.InvokeRequired)
-                return (bool)Invoke(new BoolCallback(NeedToAddItem));
-            else
-                return (LVItemBag.SelectedItems != null);
-        }
-
-        private void BtnActualize_Click(object sender, EventArgs e)
-        {
-            ExchangeRequestOnShopStockMessage packetshop = new ExchangeRequestOnShopStockMessage();
-            Account.SocketManager.Send(packetshop);
-            LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
-            Account.SocketManager.Send(packetleave);
-        }
-
-        public void actualizeshop(List<ObjectItemToSell> sell)
-        {
-            BeginInvoke(new MethodInvoker(LVItemShop.Items.Clear));
-
-            foreach (ObjectItemToSell i in sell)
-            {
-                Core.Inventory.Item item = new Core.Inventory.Item(i.Effects.ToList(), i.ObjectGID, 0, (int)i.Quantity, (int)i.ObjectUID);
-                string[] row1 = { item.GID.ToString(), item.UID.ToString(), item.Name, item.Quantity.ToString(), item.Type, i.ObjectPrice.ToString() };
-                ListViewItem li = new ListViewItem(row1);
-                li.ToolTipText = item.Description;
-                AddItem(li, LVItemShop);
-            }
-        }
     }
 }
 
