@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Almanach
     public class AlmanachCalendarDateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6341;
+        public override int ProtocolId { get; } = 6341;
         
         public override int MessageID
         {

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Delay
     public class GameRolePlayDelayedActionFinishedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6150;
+        public override int ProtocolId { get; } = 6150;
         
         public override int MessageID
         {

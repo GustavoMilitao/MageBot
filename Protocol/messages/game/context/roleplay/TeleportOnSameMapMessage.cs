@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay
     public class TeleportOnSameMapMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6048;
+        public override int ProtocolId { get; } = 6048;
         
         public override int MessageID
         {

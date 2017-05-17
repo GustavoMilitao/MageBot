@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class SymbioticObjectAssociateRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6522;
+        public override int ProtocolId { get; } = 6522;
         
         public override int MessageID
         {

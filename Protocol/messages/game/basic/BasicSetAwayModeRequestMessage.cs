@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Basic
     public class BasicSetAwayModeRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5665;
+        public override int ProtocolId { get; } = 5665;
         
         public override int MessageID
         {

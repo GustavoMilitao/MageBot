@@ -7,7 +7,7 @@ namespace MageBot.Protocol.Messages
 
 
         #region Properties
-        protected abstract int ProtocolId { get; set; }
+        public abstract int ProtocolId { get; }
 
         public virtual int MessageID
         {

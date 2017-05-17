@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Secure
     public class TrustCertificate : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 377;
+        public override int ProtocolId { get; } = 377;
         
         public override int TypeID
         {

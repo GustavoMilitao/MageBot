@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Types.Game.Guild
     public class GuildMember : CharacterMinimalInformations
     {
         
-        protected override int ProtocolId { get; set; } = 88;
+        public override int ProtocolId { get; } = 88;
         
         public override int TypeID
         {

@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay
     public class GameRolePlayShowActorWithEventMessage : GameRolePlayShowActorMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6407;
+        public override int ProtocolId { get; } = 6407;
         
         public override int MessageID
         {

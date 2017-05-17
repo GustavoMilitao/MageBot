@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Document
     public class DocumentReadingBeginMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5675;
+        public override int ProtocolId { get; } = 5675;
         
         public override int MessageID
         {

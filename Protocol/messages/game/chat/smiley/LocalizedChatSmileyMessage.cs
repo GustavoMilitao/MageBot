@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Chat.Smiley
     public class LocalizedChatSmileyMessage : ChatSmileyMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6185;
+        public override int ProtocolId { get; } = 6185;
         
         public override int MessageID
         {

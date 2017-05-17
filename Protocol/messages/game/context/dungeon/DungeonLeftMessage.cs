@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Dungeon
     public class DungeonLeftMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6149;
+        public override int ProtocolId { get; } = 6149;
         
         public override int MessageID
         {

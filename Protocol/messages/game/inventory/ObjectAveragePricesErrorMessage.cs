@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory
     public class ObjectAveragePricesErrorMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6336;
+        public override int ProtocolId { get; } = 6336;
         
         public override int MessageID
         {

@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Game.Initialization
 {
     public class CharacterLoadingCompleteMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 6471;
+        public override int ProtocolId { get; } = 6471;
         public override int MessageID { get { return ProtocolId; } }
 
         public CharacterLoadingCompleteMessage() { }

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Notification
     public class NotificationResetMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6089;
+        public override int ProtocolId { get; } = 6089;
         
         public override int MessageID
         {

@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items
     public class ObjectItemMinimalInformation : Item
     {
         
-        protected override int ProtocolId { get; set; } = 124;
+        public override int ProtocolId { get; } = 124;
         
         public override int TypeID
         {

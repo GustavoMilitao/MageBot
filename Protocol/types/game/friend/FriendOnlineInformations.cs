@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Friend
     public class FriendOnlineInformations : FriendInformations
     {
         
-        protected override int ProtocolId { get; set; } = 92;
+        public override int ProtocolId { get; } = 92;
         
         public override int TypeID
         {

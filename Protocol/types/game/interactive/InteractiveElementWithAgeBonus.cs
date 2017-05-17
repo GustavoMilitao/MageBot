@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Interactive
     public class InteractiveElementWithAgeBonus : InteractiveElement
     {
         
-        protected override int ProtocolId { get; set; } = 398;
+        public override int ProtocolId { get; } = 398;
         
         public override int TypeID
         {

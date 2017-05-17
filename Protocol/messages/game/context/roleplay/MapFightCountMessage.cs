@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay
     public class MapFightCountMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 210;
+        public override int ProtocolId { get; } = 210;
         
         public override int MessageID
         {

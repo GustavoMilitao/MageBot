@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Idol
     public class Idol : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 489;
+        public override int ProtocolId { get; } = 489;
         
         public override int TypeID
         {

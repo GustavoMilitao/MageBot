@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class GameCautiousMapMovementMessage : GameMapMovementMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6497;
+        public override int ProtocolId { get; } = 6497;
         
         public override int MessageID
         {

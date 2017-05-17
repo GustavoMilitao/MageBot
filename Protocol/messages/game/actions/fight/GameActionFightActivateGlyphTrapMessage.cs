@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Actions.Fight
     public class GameActionFightActivateGlyphTrapMessage : AbstractGameActionMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6545;
+        public override int ProtocolId { get; } = 6545;
         
         public override int MessageID
         {

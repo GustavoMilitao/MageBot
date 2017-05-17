@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Prism
     public class PrismFightDefendersSwapMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5902;
+        public override int ProtocolId { get; } = 5902;
         
         public override int MessageID
         {

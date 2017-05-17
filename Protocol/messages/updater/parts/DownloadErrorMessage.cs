@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Updater.Parts
     public class DownloadErrorMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 1513;
+        public override int ProtocolId { get; } = 1513;
         
         public override int MessageID
         {

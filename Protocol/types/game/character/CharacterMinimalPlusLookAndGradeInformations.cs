@@ -2,7 +2,7 @@
 {
     public class CharacterMinimalPlusLookAndGradeInformations : CharacterMinimalPlusLookInformations
     {
-        protected override int ProtocolId { get; set; } = 193;
+        public override int ProtocolId { get; } = 193;
         public override int TypeID { get { return ProtocolId; } }
 
         public uint Grade { get; set; }

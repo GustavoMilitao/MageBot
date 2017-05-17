@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party.Companion
     public class PartyCompanionUpdateLightMessage : PartyUpdateLightMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6472;
+        public override int ProtocolId { get; } = 6472;
         
         public override int MessageID
         {

@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Dare
     public class DareRewardsListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6677;
+        public override int ProtocolId { get; } = 6677;
         
         public override int MessageID
         {

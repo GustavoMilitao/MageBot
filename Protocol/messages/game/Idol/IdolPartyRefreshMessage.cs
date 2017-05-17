@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Idol
     public class IdolPartyRefreshMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6583;
+        public override int ProtocolId { get; } = 6583;
         
         public override int MessageID
         {

@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
 {
     public class BasicAllianceInformations : AbstractSocialGroupInfos
     {
-        protected override int ProtocolId { get; set; } = 419;
+        public override int ProtocolId { get; } = 419;
         public override int TypeID { get { return ProtocolId; } }
 
         public uint AllianceId;

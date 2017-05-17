@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Npc
     public class NpcDialogQuestionMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5617;
+        public override int ProtocolId { get; } = 5617;
         
         public override int MessageID
         {

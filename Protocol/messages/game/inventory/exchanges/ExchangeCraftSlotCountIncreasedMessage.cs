@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeCraftSlotCountIncreasedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6125;
+        public override int ProtocolId { get; } = 6125;
         
         public override int MessageID
         {

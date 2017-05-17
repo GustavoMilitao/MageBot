@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Chat.Smiley
     public class MoodSmileyRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6192;
+        public override int ProtocolId { get; } = 6192;
         
         public override int MessageID
         {

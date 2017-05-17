@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Spell
     public class SpellUpgradeSuccessMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 1201;
+        public override int ProtocolId { get; } = 1201;
         
         public override int MessageID
         {

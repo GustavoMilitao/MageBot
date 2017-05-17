@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Pvp
     public class UpdateMapPlayersAgressableStatusMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6454;
+        public override int ProtocolId { get; } = 6454;
         
         public override int MessageID
         {

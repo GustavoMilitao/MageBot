@@ -14,7 +14,7 @@ namespace MageBot.Protocol.Messages.Game.Interactive
     {
         public const int ProtocolID = 5001;
 
-        protected override int ProtocolId { get; set; } = 5001;
+        public override int ProtocolId { get; } = 5001;
         
         public override int MessageID
         {

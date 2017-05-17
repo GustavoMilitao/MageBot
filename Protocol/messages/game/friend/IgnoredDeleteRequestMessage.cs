@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Friend
     public class IgnoredDeleteRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5680;
+        public override int ProtocolId { get; } = 5680;
         
         public override int MessageID
         {

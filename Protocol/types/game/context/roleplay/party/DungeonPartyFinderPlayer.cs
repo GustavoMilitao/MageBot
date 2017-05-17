@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.Party
     public class DungeonPartyFinderPlayer : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 373;
+        public override int ProtocolId { get; } = 373;
         
         public override int TypeID
         {

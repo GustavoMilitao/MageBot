@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Chat
     public class ChatErrorMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 870;
+        public override int ProtocolId { get; } = 870;
         
         public override int MessageID
         {

@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Messages.Game.Friend
     public class FriendsListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 4002;
+        public override int ProtocolId { get; } = 4002;
         
         public override int MessageID
         {

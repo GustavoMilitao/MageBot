@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party
     public class DungeonPartyFinderRegisterSuccessMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6241;
+        public override int ProtocolId { get; } = 6241;
         
         public override int MessageID
         {

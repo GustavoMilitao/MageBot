@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Quest
     public class FollowedQuestsMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6717;
+        public override int ProtocolId { get; } = 6717;
         
         public override int MessageID
         {

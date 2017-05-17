@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Stats
     public class LifePointsRegenBeginMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5684;
+        public override int ProtocolId { get; } = 5684;
         
         public override int MessageID
         {

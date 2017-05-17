@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class WrapperObjectAssociatedMessage : SymbioticObjectAssociatedMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6523;
+        public override int ProtocolId { get; } = 6523;
         
         public override int MessageID
         {

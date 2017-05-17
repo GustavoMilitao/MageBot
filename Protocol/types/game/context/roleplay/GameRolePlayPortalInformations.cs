@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
     public class GameRolePlayPortalInformations : GameRolePlayActorInformations
     {
         
-        protected override int ProtocolId { get; set; } = 467;
+        public override int ProtocolId { get; } = 467;
         
         public override int TypeID
         {

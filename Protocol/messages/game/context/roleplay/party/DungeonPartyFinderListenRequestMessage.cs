@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party
     public class DungeonPartyFinderListenRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6246;
+        public override int ProtocolId { get; } = 6246;
         
         public override int MessageID
         {

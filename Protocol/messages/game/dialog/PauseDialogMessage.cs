@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Dialog
     public class PauseDialogMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6012;
+        public override int ProtocolId { get; } = 6012;
         
         public override int MessageID
         {

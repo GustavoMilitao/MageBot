@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class GameContextRefreshEntityLookMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5637;
+        public override int ProtocolId { get; } = 5637;
         
         public override int MessageID
         {

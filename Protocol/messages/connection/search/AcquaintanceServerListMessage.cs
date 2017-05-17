@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Connection.Search
     public class AcquaintanceServerListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6142;
+        public override int ProtocolId { get; } = 6142;
         
         public override int MessageID
         {

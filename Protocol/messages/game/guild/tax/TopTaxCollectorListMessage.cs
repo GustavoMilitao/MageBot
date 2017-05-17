@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Guild.Tax
     public class TopTaxCollectorListMessage : AbstractTaxCollectorListMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6565;
+        public override int ProtocolId { get; } = 6565;
         
         public override int MessageID
         {

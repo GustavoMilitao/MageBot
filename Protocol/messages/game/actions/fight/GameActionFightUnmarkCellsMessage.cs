@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Actions.Fight
     public class GameActionFightUnmarkCellsMessage : AbstractGameActionMessage
     {
         
-        protected override int ProtocolId { get; set; } = 5570;
+        public override int ProtocolId { get; } = 5570;
         
         public override int MessageID
         {

@@ -86,7 +86,7 @@ namespace MageBot.Interface.UCs
                 }
                 catch (Exception)
                 {
-                    accUserControl.Log(new ErrorTextInformation("Impossible send message to : " + (string)elem), 3);
+                    accUserControl.Account.Log(new ErrorTextInformation("Impossible send message to : " + (string)elem), 3);
                 }
             }
         }
@@ -96,14 +96,14 @@ namespace MageBot.Interface.UCs
             if (StartStopFloodingBox.Checked == false)
             {
                 accUserControl.Account.Config.Flood.FloodStarted = false;
-                accUserControl.Log(new BotTextInformation("Flood stopped"), 1);
-                accUserControl.Log(new BotTextInformation(accUserControl.Account.Config.Flood.PMCount + " PMs sent."), 0);
-                accUserControl.Log(new BotTextInformation(accUserControl.Account.Config.Flood.MessageCount + " Other messages sent."), 0);
+                accUserControl.Account.Log(new BotTextInformation("Flood stopped"), 1);
+                accUserControl.Account.Log(new BotTextInformation(accUserControl.Account.Config.Flood.PMCount + " PMs sent."), 0);
+                accUserControl.Account.Log(new BotTextInformation(accUserControl.Account.Config.Flood.MessageCount + " Other messages sent."), 0);
                 accUserControl.Account.Config.Flood.PMCount = 0;
                 accUserControl.Account.Config.Flood.MessageCount = 0;
                 return;
             }
-            accUserControl.Log(new BotTextInformation("Flood activated"), 1);
+            accUserControl.Account.Log(new BotTextInformation("Flood activated"), 1);
             if (CommerceBox.Checked)
                 accUserControl.Account.Config.Flood.StartFlood(5, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
             if (RecrutementBox.Checked)

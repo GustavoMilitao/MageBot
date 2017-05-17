@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay
     public class StopToListenRunningFightRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6124;
+        public override int ProtocolId { get; } = 6124;
         
         public override int MessageID
         {

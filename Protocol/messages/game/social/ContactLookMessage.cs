@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Social
     public class ContactLookMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5934;
+        public override int ProtocolId { get; } = 5934;
         
         public override int MessageID
         {

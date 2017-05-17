@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Character.Alignment
     public class ActorExtendedAlignmentInformations : ActorAlignmentInformations
     {
         
-        protected override int ProtocolId { get; set; } = 202;
+        public override int ProtocolId { get; } = 202;
         
         public override int TypeID
         {

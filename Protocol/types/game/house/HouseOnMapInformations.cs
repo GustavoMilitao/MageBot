@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.House
     public class HouseOnMapInformations : HouseInformations
     {
         
-        protected override int ProtocolId { get; set; } = 510;
+        public override int ProtocolId { get; } = 510;
         
         public override int TypeID
         {

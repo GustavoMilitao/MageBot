@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Lockable
     public class LockableStateUpdateStorageMessage : LockableStateUpdateAbstractMessage
     {
         
-        protected override int ProtocolId { get; set; } = 5669;
+        public override int ProtocolId { get; } = 5669;
         
         public override int MessageID
         {

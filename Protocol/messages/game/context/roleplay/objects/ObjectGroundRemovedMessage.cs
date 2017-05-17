@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Objects
     public class ObjectGroundRemovedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 3014;
+        public override int ProtocolId { get; } = 3014;
         
         public override int MessageID
         {

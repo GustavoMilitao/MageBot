@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Types.Game.Mount
     public class MountClientData : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 178;
+        public override int ProtocolId { get; } = 178;
         
         public override int TypeID
         {

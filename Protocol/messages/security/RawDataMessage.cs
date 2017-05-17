@@ -2,7 +2,7 @@
 {
     public class RawDataMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 6253;
+        public override int ProtocolId { get; } = 6253;
         public override int MessageID { get { return ProtocolId; } }
 
         public byte[] Content { get; set; }

@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Character.Restriction
     public class ActorRestrictionsInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 204;
+        public override int ProtocolId { get; } = 204;
         
         public override int TypeID
         {

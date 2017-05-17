@@ -6,6 +6,7 @@ using System.Diagnostics;
 using Util.Util.I18n.Strings;
 using MageBot.Core.Storage.AccountsManager;
 using MageBot.Core.Account;
+using static System.Windows.Forms.ListView;
 
 namespace MageBot.Interface
 {
@@ -154,21 +155,18 @@ namespace MageBot.Interface
         }
         private void DelBt_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listViewAccounts.SelectedItems.Count; i++)
-            //parcours des comptes sélectionnés
+            SelectedListViewItemCollection toDelete = listViewAccounts.SelectedItems;
+            foreach(ListViewItem item in toDelete)
             {
-                ListViewItem listViewItem2 = listViewAccounts.SelectedItems[i];
-                // Sauvegarde des comptes
-                AccountsFileInteractions accountsFileInteractions = new AccountsFileInteractions();
-                List<Account> listaccount = new List<Account>();
-                foreach (ListViewItem item in listViewAccounts.Items)
-                {
-                    listaccount.Add(new Account(item.SubItems[0].Text, item.SubItems[1].Text));
-                }
-                accountsFileInteractions.SaveAccountsInfos(listaccount);
-                // suppression de l'interface
-                listViewAccounts.Items.Remove(listViewItem2);
+                listViewAccounts.Items.Remove(item);
             }
+            AccountsFileInteractions accountsFileInteractions = new AccountsFileInteractions();
+            List<Account> listaccount = new List<Account>();
+            foreach (ListViewItem item in listViewAccounts.Items)
+            {
+                listaccount.Add(new Account(item.SubItems[0].Text, item.SubItems[1].Text));
+            }
+            accountsFileInteractions.SaveAccountsInfos(listaccount);
         }
 
         private void IsMITM_CheckedChanged(object sender)

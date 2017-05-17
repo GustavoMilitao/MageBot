@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Choice
     public class CharacterSelectedForceReadyMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6072;
+        public override int ProtocolId { get; } = 6072;
         
         public override int MessageID
         {

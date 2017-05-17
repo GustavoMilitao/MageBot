@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Chat.Smiley
     public class ChatSmileyExtraPackListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6596;
+        public override int ProtocolId { get; } = 6596;
         
         public override int MessageID
         {

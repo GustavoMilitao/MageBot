@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class ObjectSetPositionMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 3021;
+        public override int ProtocolId { get; } = 3021;
         
         public override int MessageID
         {

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Tinsel
     public class TitleGainedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6364;
+        public override int ProtocolId { get; } = 6364;
         
         public override int MessageID
         {

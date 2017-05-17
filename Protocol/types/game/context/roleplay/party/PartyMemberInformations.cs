@@ -19,7 +19,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.Party
     public class PartyMemberInformations : CharacterBaseInformations
     {
         
-        protected override int ProtocolId { get; set; } = 90;
+        public override int ProtocolId { get; } = 90;
         
         public override int TypeID
         {

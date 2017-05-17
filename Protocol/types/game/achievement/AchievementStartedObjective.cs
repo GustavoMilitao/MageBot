@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Achievement
     public class AchievementStartedObjective : AchievementObjective
     {
         
-        protected override int ProtocolId { get; set; } = 402;
+        public override int ProtocolId { get; } = 402;
         
         public override int TypeID
         {

@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Game.Approach
 {
     public class ServerSettingsMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 6340;
+        public override int ProtocolId { get; } = 6340;
         public override int MessageID { get { return ProtocolId; } }
 
         public string Lang;

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Mount
     public class MountInformationInPaddockRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5975;
+        public override int ProtocolId { get; } = 5975;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeMountsStableBornAddMessage : ExchangeMountsStableAddMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6557;
+        public override int ProtocolId { get; } = 6557;
         
         public override int MessageID
         {

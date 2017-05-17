@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.Fight.Arena
     public class ArenaRankInfos : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 499;
+        public override int ProtocolId { get; } = 499;
         
         public override int TypeID
         {

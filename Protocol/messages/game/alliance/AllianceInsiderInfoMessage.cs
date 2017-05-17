@@ -19,7 +19,7 @@ namespace MageBot.Protocol.Messages.Game.Alliance
     public class AllianceInsiderInfoMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6403;
+        public override int ProtocolId { get; } = 6403;
         
         public override int MessageID
         {

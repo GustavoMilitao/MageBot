@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Initialization
     public class CharacterCapabilitiesMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6339;
+        public override int ProtocolId { get; } = 6339;
         
         public override int MessageID
         {

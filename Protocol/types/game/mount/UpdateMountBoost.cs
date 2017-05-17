@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Mount
     public class UpdateMountBoost : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 356;
+        public override int ProtocolId { get; } = 356;
         
         public override int TypeID
         {

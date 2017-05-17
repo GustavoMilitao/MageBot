@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Chat.Smiley
     public class ChatSmileyMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 801;
+        public override int ProtocolId { get; } = 801;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Context.Fight
     public class GameFightTaxCollectorInformations : GameFightAIInformations
     {
         
-        protected override int ProtocolId { get; set; } = 48;
+        public override int ProtocolId { get; } = 48;
         
         public override int TypeID
         {

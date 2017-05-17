@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class ExchangeObjectsModifiedMessage : ExchangeObjectMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6533;
+        public override int ProtocolId { get; } = 6533;
         
         public override int MessageID
         {

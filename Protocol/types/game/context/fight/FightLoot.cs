@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Context.Fight
     public class FightLoot : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 41;
+        public override int ProtocolId { get; } = 41;
         
         public override int TypeID
         {

@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items
     public class ObjectItemToSellInNpcShop : ObjectItemMinimalInformation
     {
         
-        protected override int ProtocolId { get; set; } = 352;
+        public override int ProtocolId { get; } = 352;
         
         public override int TypeID
         {

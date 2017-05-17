@@ -2,7 +2,7 @@
 {
     public class AbstractCharacterInformation : NetworkType
     {
-        protected override int ProtocolId { get; set; } = 400;
+        public override int ProtocolId { get; } = 400;
         public override int TypeID { get { return ProtocolId; } }
 
         public double ObjectID { get; set; }

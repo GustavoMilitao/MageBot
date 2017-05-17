@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Game.Basic
 {
     public class BasicTimeMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 175;
+        public override int ProtocolId { get; } = 175;
         public override int MessageID { get { return ProtocolId; } }
 
         public double Timestamp;

@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Messages.Game.Idol
     public class IdolFightPreparationUpdateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6586;
+        public override int ProtocolId { get; } = 6586;
         
         public override int MessageID
         {

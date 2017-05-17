@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeStartOkCraftMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5813;
+        public override int ProtocolId { get; } = 5813;
         
         public override int MessageID
         {

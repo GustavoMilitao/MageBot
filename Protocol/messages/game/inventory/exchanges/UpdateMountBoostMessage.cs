@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class UpdateMountBoostMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6179;
+        public override int ProtocolId { get; } = 6179;
         
         public override int MessageID
         {

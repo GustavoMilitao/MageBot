@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Guild.Tax
     public class GuildFightLeaveRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5715;
+        public override int ProtocolId { get; } = 5715;
         
         public override int MessageID
         {

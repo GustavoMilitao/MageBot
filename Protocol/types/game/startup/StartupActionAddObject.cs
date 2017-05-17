@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Types.Game.Startup
     public class StartupActionAddObject : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 52;
+        public override int ProtocolId { get; } = 52;
         
         public override int TypeID
         {

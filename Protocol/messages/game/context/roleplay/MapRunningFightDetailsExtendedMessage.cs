@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay
     public class MapRunningFightDetailsExtendedMessage : MapRunningFightDetailsMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6500;
+        public override int ProtocolId { get; } = 6500;
         
         public override int MessageID
         {

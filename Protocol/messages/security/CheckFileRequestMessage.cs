@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Security
     public class CheckFileRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6154;
+        public override int ProtocolId { get; } = 6154;
         
         public override int MessageID
         {

@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Fight
     public class GameRolePlayShowChallengeMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 301;
+        public override int ProtocolId { get; } = 301;
         
         public override int MessageID
         {

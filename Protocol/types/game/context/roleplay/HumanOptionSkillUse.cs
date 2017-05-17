@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
     public class HumanOptionSkillUse : HumanOption
     {
         
-        protected override int ProtocolId { get; set; } = 495;
+        public override int ProtocolId { get; } = 495;
         
         public override int TypeID
         {

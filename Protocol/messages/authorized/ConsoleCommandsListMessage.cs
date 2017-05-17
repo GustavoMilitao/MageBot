@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Authorized
     public class ConsoleCommandsListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6127;
+        public override int ProtocolId { get; } = 6127;
         
         public override int MessageID
         {

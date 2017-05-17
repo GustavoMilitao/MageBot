@@ -2,7 +2,7 @@
 {
     class TrustStatusMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 6267;
+        public override int ProtocolId { get; } = 6267;
         public override int MessageID { get { return ProtocolId; } }
 
         public bool Trusted;

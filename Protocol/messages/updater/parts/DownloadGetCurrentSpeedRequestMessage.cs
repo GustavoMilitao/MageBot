@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Updater.Parts
     public class DownloadGetCurrentSpeedRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 1510;
+        public override int ProtocolId { get; } = 1510;
         
         public override int MessageID
         {

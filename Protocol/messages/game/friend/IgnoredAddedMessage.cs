@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Friend
     public class IgnoredAddedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5678;
+        public override int ProtocolId { get; } = 5678;
         
         public override int MessageID
         {

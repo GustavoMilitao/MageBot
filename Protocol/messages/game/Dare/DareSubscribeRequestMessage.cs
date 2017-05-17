@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Dare
     public class DareSubscribeRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6666;
+        public override int ProtocolId { get; } = 6666;
         
         public override int MessageID
         {

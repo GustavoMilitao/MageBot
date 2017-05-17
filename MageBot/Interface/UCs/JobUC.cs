@@ -49,7 +49,7 @@ namespace MageBot.Interface
         {
             bool h = job.HasRightTool();
             if (!h)
-                accUserControl.Log(new ErrorTextInformation("L'outil n'est pas équipé :( "),0);
+                accUserControl.Account.Log(new ErrorTextInformation("L'outil n'est pas équipé :( "),0);
             return h;
         }
         #endregion

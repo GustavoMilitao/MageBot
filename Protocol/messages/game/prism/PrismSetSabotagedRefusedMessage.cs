@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Prism
     public class PrismSetSabotagedRefusedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6466;
+        public override int ProtocolId { get; } = 6466;
         
         public override int MessageID
         {

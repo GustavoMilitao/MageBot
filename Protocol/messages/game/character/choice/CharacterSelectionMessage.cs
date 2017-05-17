@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Choice
 {
     public class CharacterSelectionMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 152;
+        public override int ProtocolId { get; } = 152;
         public override int MessageID { get { return ProtocolId; } }
 
         public ulong ID { get; set; }

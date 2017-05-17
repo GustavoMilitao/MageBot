@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Pvp
     public class SetEnableAVARequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6443;
+        public override int ProtocolId { get; } = 6443;
         
         public override int MessageID
         {

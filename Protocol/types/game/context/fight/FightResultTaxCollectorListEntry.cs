@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Fight
     public class FightResultTaxCollectorListEntry : FightResultFighterListEntry
     {
         
-        protected override int ProtocolId { get; set; } = 84;
+        public override int ProtocolId { get; } = 84;
         
         public override int TypeID
         {

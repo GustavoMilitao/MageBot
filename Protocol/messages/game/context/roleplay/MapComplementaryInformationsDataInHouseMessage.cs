@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay
     public class MapComplementaryInformationsDataInHouseMessage : MapComplementaryInformationsDataMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6130;
+        public override int ProtocolId { get; } = 6130;
         
         public override int MessageID
         {

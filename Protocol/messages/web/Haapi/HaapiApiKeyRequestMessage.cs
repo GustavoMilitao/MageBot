@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Web.Haapi
     public class HaapiApiKeyRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6648;
+        public override int ProtocolId { get; } = 6648;
         
         public override int MessageID
         {

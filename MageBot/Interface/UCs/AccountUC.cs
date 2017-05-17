@@ -30,6 +30,7 @@ using MageBot.Core;
 using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
 using MageBot.Protocol.Messages.Game.Dialog;
 using MageBot.Core.Engine.Constants;
+using System.Threading;
 
 namespace MageBot.Interface
 {
@@ -48,6 +49,7 @@ namespace MageBot.Interface
         public RegenUC RegenUC { get; set; }
         public FloodUC FloodUC { get; set; }
         public MetroFramework.Forms.MetroForm m_ParentForm { get; set; }
+        public Thread ReadLogThread { get; set; }
         #endregion
 
         #region Delegates
@@ -76,8 +78,8 @@ namespace MageBot.Interface
             if (form != null)
                 m_ParentForm = form;
             Account = account;
+            Account.QueueChanged += Account_QueueChanged;
             account.PetsModifiedList = new List<Pet>();
-            account.Config = new AccountConfig(Account);
             listViewPets.Columns.Add(Strings.Name, 150, HorizontalAlignment.Left);
             listViewPets.Columns.Add(Strings.UID, 0, HorizontalAlignment.Left);
             listViewPets.Columns.Add(Strings.Food + string.Format(" ({0})", Strings.Amount), -2, HorizontalAlignment.Left);
@@ -166,6 +168,12 @@ namespace MageBot.Interface
             account.WatchDog = new WatchDog(Account);
         }
 
+        private void Account_QueueChanged(object sender, EventArgs e)
+        {
+            var d = Account.InformationQueue.Dequeue();
+            Log(d.Item1, d.Item2);
+        }
+
         public AccountUC()
         {
             InitializeComponent();
@@ -200,7 +208,7 @@ namespace MageBot.Interface
             //Delete an item from inventory
             if (Account.State == Status.Fighting)
             {
-                Log(new ErrorTextInformation("It's impossible to delete an item in fight ^^"), 0);
+                Account.Log(new ErrorTextInformation("It's impossible to delete an item in fight ^^"), 0);
                 return;
             }
             for (int i = 0; i < LVItems.Items.Count; i++)
@@ -217,7 +225,7 @@ namespace MageBot.Interface
             //Drop an item from inventory
             if (Account.State == Status.Fighting)
             {
-                Log(new ErrorTextInformation("It's impossible to drop an item in fight ^^"), 0);
+                Account.Log(new ErrorTextInformation("It's impossible to drop an item in fight ^^"), 0);
                 return;
             }
             for (int i = 0; i < LVItems.Items.Count; i++)
@@ -234,7 +242,7 @@ namespace MageBot.Interface
             //Use an item from inventory
             if (Account.State == Status.Fighting)
             {
-                Log(new ErrorTextInformation("It's impossible to use an item in fight ^^"), 0);
+                Account.Log(new ErrorTextInformation("It's impossible to use an item in fight ^^"), 0);
                 return;
             }
             for (int i = 0; i < LVItems.Items.Count; i++)
@@ -251,7 +259,7 @@ namespace MageBot.Interface
             //Equip an item from inventory
             if (Account.State == Status.Fighting)
             {
-                Log(new ErrorTextInformation("It's impossible to equip an item in fight ^^"), 0);
+                Account.Log(new ErrorTextInformation("It's impossible to equip an item in fight ^^"), 0);
             }
             for (int i = 0; i < LVItems.Items.Count; i++)
             {
@@ -283,7 +291,7 @@ namespace MageBot.Interface
             }
             else
             {
-                Log(new BotTextInformation("Pet feeding stopped"), 3);
+                Account.Log(new BotTextInformation("Pet feeding stopped"), 3);
                 Account.Running = null;
             }
         }
@@ -298,11 +306,11 @@ namespace MageBot.Interface
         {
             if (Account.Config.Path != null)
             {
-                Log(new BotTextInformation("Path started"), 1);
+                Account.Log(new BotTextInformation("Path started"), 1);
                 Account.Config.Path.Start();
             }
             else
-                Log(new ErrorTextInformation("No Path loaded"), 3);
+                Account.Log(new ErrorTextInformation("No Path loaded"), 3);
         }
 
         private void StopPathBt_Click(object sender, EventArgs e)
@@ -310,7 +318,7 @@ namespace MageBot.Interface
             if (Account.Config.Path != null)
             {
                 Account.Config.Path.StopPath();
-                Log(new BotTextInformation("Path stopped"), 1);
+                Account.Log(new BotTextInformation("Path stopped"), 1);
             }
         }
 
@@ -323,7 +331,7 @@ namespace MageBot.Interface
         private void StartWaitingBt_Click(object sender, EventArgs e)
         {
             Account.House = new HouseBuy(Account);
-            Log(new BotTextInformation("Waiting for the sale of a house..."), 1);
+            Account.Log(new BotTextInformation("Waiting for the sale of a house..."), 1);
         }
 
         private void ParcourirBt_Click(object sender, EventArgs e)
@@ -343,9 +351,9 @@ namespace MageBot.Interface
                 foreach (string s in result)
                 {
                     if (s.Contains("ERROR"))
-                        Log(new ErrorTextInformation(s), 0);
+                        Account.Log(new ErrorTextInformation(s), 0);
                     else
-                        Log(new BotTextInformation(s), 0);
+                        Account.Log(new BotTextInformation(s), 0);
                 }
             }
             else if (e.KeyCode == Keys.Up && CLIParser.CommandsHistory.Count > 0)
@@ -605,7 +613,7 @@ namespace MageBot.Interface
             {
                 if (Account.State == Status.Fighting)
                 {
-                    Log(new ErrorTextInformation(Strings.UnableToSwitchToMerchantModeInAFight + " >.<"), 2);
+                    Account.Log(new ErrorTextInformation(Strings.UnableToSwitchToMerchantModeInAFight + " >.<"), 2);
                 }
                 if (Account.SocketManager.State == SocketState.Connected)
                 {
@@ -614,7 +622,7 @@ namespace MageBot.Interface
                     ExchangeStartAsVendorMessage ventepacket = new ExchangeStartAsVendorMessage();
                     Account.SocketManager.Send(ventepacket);
                     //Thread.Sleep(500);
-                    Log(new BotTextInformation(Strings.MerchantModeActivationTest), 1);
+                    Account.Log(new BotTextInformation(Strings.MerchantModeActivationTest), 1);
                     if (Account.SocketManager.State == SocketState.Closed)
                     {
                         Account.SocketManager.DisconnectFromGUI();
@@ -680,7 +688,7 @@ namespace MageBot.Interface
                         msg.Quantity = Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity;
                         msg.Price = Convert.ToUInt64(numericUpDown1.Value);
                         Account.SocketManager.Send(msg);
-                        Log(new ActionTextInformation(Strings.AdditionOf + Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Name + "(x " + Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity + ") " + Strings.InTheStoreAtThePriceOf + " : " + msg.Price + " " + Strings.Kamas), 2);
+                        Account.Log(new ActionTextInformation(Strings.AdditionOf + Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Name + "(x " + Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity + ") " + Strings.InTheStoreAtThePriceOf + " : " + msg.Price + " " + Strings.Kamas), 2);
                         LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
                         await Account.PutTaskDelay(2000);
                         Account.SocketManager.Send(packetleave);
@@ -927,39 +935,6 @@ namespace MageBot.Interface
 
         }
 
-        public void Log(TextInformation text, int levelVerbose)
-        {
-            if (IsDisposed == true)
-                return;
-            if ((int)NUDVerbose.Value < levelVerbose)
-                return;
-            if (LogConsole.InvokeRequired)
-                Invoke(new SetLogsCallback(Log), text, levelVerbose);
-            else
-            {
-
-                text.Text = MageBot.Core.Engine.Constants.Translate.GetTranslation(text.Text);
-                text.Text = "[" + DateTime.Now.ToLongTimeString() +
-                    "] (" + text.Category + ") " + text.Text;
-                if (text.Category == "Debug" && !DebugMode.Checked)
-                    return;
-
-                if (LogCb.Checked)
-                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot.Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + Account.CharacterBaseInformations.Name + ".txt", true))
-                        fileWriter.WriteLine(text.Text);
-
-                int startIndex = LogConsole.TextLength;
-
-                LogConsole.AppendText(text.Text + "\r\n");
-                LogConsole.Select(LogConsole.Text.Length, 0);
-                LogConsole.ScrollToCaret();
-
-                LogConsole.SelectionStart = startIndex;
-                LogConsole.SelectionLength = text.Text.Length;
-                LogConsole.SelectionColor = text.Color;
-            }
-        }
-
         public void TryReconnect(int secondes)
         {
             Account.TryReconnect(secondes);
@@ -1060,6 +1035,39 @@ namespace MageBot.Interface
         private void Connect()
         {
             Account.Connect();
+        }
+
+        private void Log(TextInformation text, int levelVerbose)
+        {
+            if (IsDisposed == true)
+                return;
+            if ((int)NUDVerbose.Value < levelVerbose)
+                return;
+            if (LogConsole.InvokeRequired)
+                Invoke(new SetLogsCallback(Log), text, levelVerbose);
+            else
+            {
+
+                text.Text = MageBot.Core.Engine.Constants.Translate.GetTranslation(text.Text);
+                text.Text = "[" + DateTime.Now.ToLongTimeString() +
+                    "] (" + text.Category + ") " + text.Text;
+                if (text.Category == "Debug" && !DebugMode.Checked)
+                    return;
+
+                if (LogCb.Checked)
+                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot.Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + Account.CharacterBaseInformations.Name + ".txt", true))
+                        fileWriter.WriteLine(text.Text);
+
+                int startIndex = LogConsole.TextLength;
+
+                LogConsole.AppendText(text.Text + "\r\n");
+                LogConsole.Select(LogConsole.Text.Length, 0);
+                LogConsole.ScrollToCaret();
+
+                LogConsole.SelectionStart = startIndex;
+                LogConsole.SelectionLength = text.Text.Length;
+                LogConsole.SelectionColor = text.Color;
+            }
         }
 
         private void Serialize<T>(T obj, string sConfigFilePath)

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Interactive.Meeting
     public class TeleportToBuddyAnswerMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6293;
+        public override int ProtocolId { get; } = 6293;
         
         public override int MessageID
         {

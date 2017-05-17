@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Web.Ankabox
     public class MailStatusMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6275;
+        public override int ProtocolId { get; } = 6275;
         
         public override int MessageID
         {

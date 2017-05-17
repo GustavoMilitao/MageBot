@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Lockable
     public class LockableStateUpdateHouseDoorMessage : LockableStateUpdateAbstractMessage
     {
         
-        protected override int ProtocolId { get; set; } = 5668;
+        public override int ProtocolId { get; } = 5668;
         
         public override int MessageID
         {

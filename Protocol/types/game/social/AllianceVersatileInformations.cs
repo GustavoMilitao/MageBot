@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Social
     public class AllianceVersatileInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 432;
+        public override int ProtocolId { get; } = 432;
         
         public override int TypeID
         {

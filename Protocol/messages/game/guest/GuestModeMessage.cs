@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Guest
     public class GuestModeMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6505;
+        public override int ProtocolId { get; } = 6505;
         
         public override int MessageID
         {

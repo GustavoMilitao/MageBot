@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Havenbag
     public class HavenBagFurnituresRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6637;
+        public override int ProtocolId { get; } = 6637;
         
         public override int MessageID
         {

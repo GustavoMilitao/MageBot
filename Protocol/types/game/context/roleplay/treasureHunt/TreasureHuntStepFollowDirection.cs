@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.TreasureHunt
     public class TreasureHuntStepFollowDirection : TreasureHuntStep
     {
         
-        protected override int ProtocolId { get; set; } = 468;
+        public override int ProtocolId { get; } = 468;
         
         public override int TypeID
         {

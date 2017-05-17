@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Objects
     public class ObjectGroundAddedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 3017;
+        public override int ProtocolId { get; } = 3017;
         
         public override int MessageID
         {

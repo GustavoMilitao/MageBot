@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Character.Characteristic
     public class CharacterSpellModification : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 215;
+        public override int ProtocolId { get; } = 215;
         
         public override int TypeID
         {

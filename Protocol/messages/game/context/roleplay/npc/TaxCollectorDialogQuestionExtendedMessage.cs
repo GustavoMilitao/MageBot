@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Npc
     public class TaxCollectorDialogQuestionExtendedMessage : TaxCollectorDialogQuestionBasicMessage
     {
         
-        protected override int ProtocolId { get; set; } = 5615;
+        public override int ProtocolId { get; } = 5615;
         
         public override int MessageID
         {

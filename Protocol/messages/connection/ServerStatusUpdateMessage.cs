@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Connection
     public class ServerStatusUpdateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 50;
+        public override int ProtocolId { get; } = 50;
         
         public override int MessageID
         {

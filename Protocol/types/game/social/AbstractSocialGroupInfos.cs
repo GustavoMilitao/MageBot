@@ -1,18 +1,18 @@
 ﻿namespace MageBot.Protocol.Types.Game.Social
 {
-    public class AbstractSocialGroupInfos
+    public class AbstractSocialGroupInfos: NetworkType
     {
-        protected virtual int ProtocolId { get; set; } = 416;
-        public virtual int TypeID { get { return ProtocolId; } }
+        public override int ProtocolId { get; } = 416;
+        public override int TypeID { get { return ProtocolId; } }
 
         public AbstractSocialGroupInfos() { }
 
-        public virtual void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             //
         }
 
-        public virtual void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             //
         }

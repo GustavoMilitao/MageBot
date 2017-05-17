@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items.Effects
     public class ObjectEffectMount : ObjectEffect
     {
         
-        protected override int ProtocolId { get; set; } = 179;
+        public override int ProtocolId { get; } = 179;
         
         public override int TypeID
         {

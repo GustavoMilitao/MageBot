@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Fight
     public class GameFightPlacementSwapPositionsCancelMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6543;
+        public override int ProtocolId { get; } = 6543;
         
         public override int MessageID
         {

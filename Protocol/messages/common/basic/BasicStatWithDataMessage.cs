@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Messages.Common.Basic
     public class BasicStatWithDataMessage : BasicStatMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6573;
+        public override int ProtocolId { get; } = 6573;
         
         public override int MessageID
         {

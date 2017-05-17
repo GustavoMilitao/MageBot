@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Updater
     public class ContentPart : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 350;
+        public override int ProtocolId { get; } = 350;
         
         public override int TypeID
         {

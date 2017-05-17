@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Quest
     public class QuestObjectiveValidatedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6098;
+        public override int ProtocolId { get; } = 6098;
         
         public override int MessageID
         {

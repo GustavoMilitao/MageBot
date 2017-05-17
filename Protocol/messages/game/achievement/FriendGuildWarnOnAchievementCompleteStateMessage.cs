@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Achievement
     public class FriendGuildWarnOnAchievementCompleteStateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6383;
+        public override int ProtocolId { get; } = 6383;
         
         public override int MessageID
         {

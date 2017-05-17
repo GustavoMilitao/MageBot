@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Connection.Search
     public class AcquaintanceSearchErrorMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6143;
+        public override int ProtocolId { get; } = 6143;
         
         public override int MessageID
         {

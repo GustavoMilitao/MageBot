@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Purchasable
     public class PurchasableDialogMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5739;
+        public override int ProtocolId { get; } = 5739;
         
         public override int MessageID
         {

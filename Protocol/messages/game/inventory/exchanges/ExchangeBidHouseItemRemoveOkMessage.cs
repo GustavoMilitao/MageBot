@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeBidHouseItemRemoveOkMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5946;
+        public override int ProtocolId { get; } = 5946;
         
         public override int MessageID
         {

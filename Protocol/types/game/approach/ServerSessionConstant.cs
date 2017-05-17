@@ -2,7 +2,7 @@
 {
     public class ServerSessionConstant : NetworkType
     {
-        protected override int ProtocolId { get; set; } = 430;
+        public override int ProtocolId { get; } = 430;
         public override int TypeID { get { return ProtocolId; } }
 
         public ushort ObjectID { get; set; }

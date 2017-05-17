@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Alliance
     public class KohUpdateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6439;
+        public override int ProtocolId { get; } = 6439;
         
         public override int MessageID
         {

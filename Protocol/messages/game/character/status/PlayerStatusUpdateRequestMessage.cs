@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Status
     public class PlayerStatusUpdateRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6387;
+        public override int ProtocolId { get; } = 6387;
         
         public override int MessageID
         {

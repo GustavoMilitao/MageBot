@@ -20,6 +20,8 @@ namespace MageBot.Core.Engine.Constants
         public static bool UseCertificate = Convert.ToBoolean(ConfigurationManager.AppSettings.Get("UseCertificate"));
         public static bool UseLoginToken = Convert.ToBoolean(ConfigurationManager.AppSettings.Get("UseLoginToken"));
         public static long SessionOptionalSalt = Convert.ToInt64(ConfigurationManager.AppSettings.Get("ServerID"));
+        public static string DofusIP1 = ConfigurationManager.AppSettings.Get("Ip1");
+        public static int DofusPort1 = Convert.ToInt32(ConfigurationManager.AppSettings.Get("Port1"));
         #endregion
     }
 }

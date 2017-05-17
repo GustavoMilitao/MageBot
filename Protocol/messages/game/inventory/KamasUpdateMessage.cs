@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory
     public class KamasUpdateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5537;
+        public override int ProtocolId { get; } = 5537;
         
         public override int MessageID
         {

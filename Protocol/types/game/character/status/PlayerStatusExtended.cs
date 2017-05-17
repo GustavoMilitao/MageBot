@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Character.Status
     public class PlayerStatusExtended : PlayerStatus
     {
         
-        protected override int ProtocolId { get; set; } = 414;
+        public override int ProtocolId { get; } = 414;
         
         public override int TypeID
         {

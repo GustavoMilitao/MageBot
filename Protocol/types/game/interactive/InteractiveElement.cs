@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Interactive
     public class InteractiveElement : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 80;
+        public override int ProtocolId { get; } = 80;
         
         public override int TypeID
         {

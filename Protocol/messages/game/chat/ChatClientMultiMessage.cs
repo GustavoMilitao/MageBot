@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Chat
     public class ChatClientMultiMessage : ChatAbstractClientMessage
     {
         
-        protected override int ProtocolId { get; set; } = 861;
+        public override int ProtocolId { get; } = 861;
         
         public override int MessageID
         {

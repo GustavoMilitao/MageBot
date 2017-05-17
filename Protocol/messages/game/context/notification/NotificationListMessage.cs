@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Notification
     public class NotificationListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6087;
+        public override int ProtocolId { get; } = 6087;
         
         public override int MessageID
         {

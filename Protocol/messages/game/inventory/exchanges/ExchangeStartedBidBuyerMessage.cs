@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeStartedBidBuyerMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5904;
+        public override int ProtocolId { get; } = 5904;
         
         public override int MessageID
         {

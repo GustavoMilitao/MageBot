@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Approach
     public class AccountLoggingKickedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6029;
+        public override int ProtocolId { get; } = 6029;
         
         public override int MessageID
         {

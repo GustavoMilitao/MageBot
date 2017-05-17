@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Fight
     public class ProtectedEntityWaitingForHelpInfo : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 186;
+        public override int ProtocolId { get; } = 186;
         
         public override int TypeID
         {

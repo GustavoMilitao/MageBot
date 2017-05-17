@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Mount
     public class MountDataErrorMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6172;
+        public override int ProtocolId { get; } = 6172;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Approach
     public class ServerSessionConstantLong : ServerSessionConstant
     {
         
-        protected override int ProtocolId { get; set; } = 429;
+        public override int ProtocolId { get; } = 429;
         
         public override int TypeID
         {

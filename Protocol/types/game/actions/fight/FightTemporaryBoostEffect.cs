@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Actions.Fight
     public class FightTemporaryBoostEffect : AbstractFightDispellableEffect
     {
         
-        protected override int ProtocolId { get; set; } = 209;
+        public override int ProtocolId { get; } = 209;
         
         public override int TypeID
         {

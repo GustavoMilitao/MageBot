@@ -72,6 +72,7 @@ namespace MageBot.Core.Account
         public int LastPacket { get; set; }
         public Queue<Tuple<TextInformation, int>> InformationQueue { get; set; }
         public Dictionary<int, DataBar> InfBars { get; set; }
+        public event EventHandler QueueChanged;
         #endregion
 
         #region ByPass code use
@@ -93,6 +94,7 @@ namespace MageBot.Core.Account
             Config = new AccountConfig(this);
             PetsModifiedList = new List<Pet>();
             Config.IsMITM = !socket;
+            Config.IsSocket = socket;
             Config.NextMeal = new DateTime();
             Ticket = string.Empty;
             PetsModifiedList = null;
@@ -146,6 +148,12 @@ namespace MageBot.Core.Account
         public void Log(TextInformation text, int verboseLevel)
         {
             InformationQueue.Enqueue(new Tuple<TextInformation, int>(text, verboseLevel));
+            OnChanged();
+        }
+
+        protected virtual void OnChanged()
+        {
+            QueueChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public void Init()
@@ -346,7 +354,7 @@ namespace MageBot.Core.Account
             if (TimerConnectionThread != null)
                 TimerConnectionThread.Change(Timeout.Infinite, Timeout.Infinite);
 
-            Thread.Sleep(GetRandomTime() + new Random().Next(10000));
+            Thread.Sleep(GetRandomTime() /*+ new Random().Next(30000)*/);
 
             Running = new Running(this);
 
@@ -358,7 +366,7 @@ namespace MageBot.Core.Account
             if (SocketManager == null)
                 SocketManager = new SocketManager(this);
 
-            SocketManager.Connect(new ConnectionInformations("213.248.126.40", 5555, Strings.Identification));
+            SocketManager.Connect(new ConnectionInformations(GameConstants.DofusIP1, GameConstants.DofusPort1, Strings.Identification));
 
             if (Config.Begin)
                 GetNextMeal();

@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Spells
     public class SpellListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 1200;
+        public override int ProtocolId { get; } = 1200;
         
         public override int MessageID
         {

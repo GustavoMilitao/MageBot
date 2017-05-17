@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Context
     public class IdentifiedEntityDispositionInformations : EntityDispositionInformations
     {
         
-        protected override int ProtocolId { get; set; } = 107;
+        public override int ProtocolId { get; } = 107;
         
         public override int TypeID
         {

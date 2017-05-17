@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
     public class HumanOptionOrnament : HumanOption
     {
         
-        protected override int ProtocolId { get; set; } = 411;
+        public override int ProtocolId { get; } = 411;
         
         public override int TypeID
         {

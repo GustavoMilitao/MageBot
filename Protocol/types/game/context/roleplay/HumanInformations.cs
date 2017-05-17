@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
     public class HumanInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 157;
+        public override int ProtocolId { get; } = 157;
         
         public override int TypeID
         {

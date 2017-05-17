@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.TreasureHunt
     public class PortalInformation : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 466;
+        public override int ProtocolId { get; } = 466;
         
         public override int TypeID
         {

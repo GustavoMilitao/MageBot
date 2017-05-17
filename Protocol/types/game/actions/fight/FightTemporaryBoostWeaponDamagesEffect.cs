@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Actions.Fight
     public class FightTemporaryBoostWeaponDamagesEffect : FightTemporaryBoostEffect
     {
         
-        protected override int ProtocolId { get; set; } = 211;
+        public override int ProtocolId { get; } = 211;
         
         public override int TypeID
         {

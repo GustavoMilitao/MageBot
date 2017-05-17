@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeItemAutoCraftStopedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5810;
+        public override int ProtocolId { get; } = 5810;
         
         public override int MessageID
         {

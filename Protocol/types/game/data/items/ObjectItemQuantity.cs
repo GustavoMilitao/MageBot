@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items
     public class ObjectItemQuantity : Item
     {
         
-        protected override int ProtocolId { get; set; } = 119;
+        public override int ProtocolId { get; } = 119;
         
         public override int TypeID
         {

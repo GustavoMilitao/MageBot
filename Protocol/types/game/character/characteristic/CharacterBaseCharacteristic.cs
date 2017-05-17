@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Character.Characteristic
     public class CharacterBaseCharacteristic : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 4;
+        public override int ProtocolId { get; } = 4;
         
         public override int TypeID
         {

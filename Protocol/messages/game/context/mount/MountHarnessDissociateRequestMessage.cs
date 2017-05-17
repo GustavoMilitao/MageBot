@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Mount
     public class MountHarnessDissociateRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6696;
+        public override int ProtocolId { get; } = 6696;
         
         public override int MessageID
         {

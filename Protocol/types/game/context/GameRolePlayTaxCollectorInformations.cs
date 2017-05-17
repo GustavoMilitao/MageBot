@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context
     public class GameRolePlayTaxCollectorInformations : GameRolePlayActorInformations
     {
         
-        protected override int ProtocolId { get; set; } = 148;
+        public override int ProtocolId { get; } = 148;
         
         public override int TypeID
         {

@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Fight.Arena
     public class ArenaFighterLeaveMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6700;
+        public override int ProtocolId { get; } = 6700;
         
         public override int MessageID
         {

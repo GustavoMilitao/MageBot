@@ -14,7 +14,7 @@ namespace MageBot.Protocol.Messages.Connection
     public class IdentificationAccountForceMessage : IdentificationMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6119;
+        public override int ProtocolId { get; } = 6119;
         
         public override int MessageID
         {

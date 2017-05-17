@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Context.Fight
     public class GameFightMinimalStatsPreparation : GameFightMinimalStats
     {
         
-        protected override int ProtocolId { get; set; } = 360;
+        public override int ProtocolId { get; } = 360;
         
         public override int TypeID
         {

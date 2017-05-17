@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class LivingObjectDissociateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5723;
+        public override int ProtocolId { get; } = 5723;
         
         public override int MessageID
         {

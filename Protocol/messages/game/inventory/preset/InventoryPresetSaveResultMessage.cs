@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Preset
     public class InventoryPresetSaveResultMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6170;
+        public override int ProtocolId { get; } = 6170;
         
         public override int MessageID
         {

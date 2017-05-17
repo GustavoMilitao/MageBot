@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Atlas
     public class AtlasPointInformationsMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5956;
+        public override int ProtocolId { get; } = 5956;
         
         public override int MessageID
         {

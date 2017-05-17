@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party
     public class AbstractPartyEventMessage : AbstractPartyMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6273;
+        public override int ProtocolId { get; } = 6273;
         
         public override int MessageID
         {

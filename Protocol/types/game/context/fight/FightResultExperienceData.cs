@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Context.Fight
     public class FightResultExperienceData : FightResultAdditionalData
     {
         
-        protected override int ProtocolId { get; set; } = 192;
+        public override int ProtocolId { get; } = 192;
         
         public override int TypeID
         {

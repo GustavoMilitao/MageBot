@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Atlas.Compass
     public class CompassResetMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5584;
+        public override int ProtocolId { get; } = 5584;
         
         public override int MessageID
         {

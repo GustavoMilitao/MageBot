@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Mount
     public class MountHarnessColorsUpdateRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6697;
+        public override int ProtocolId { get; } = 6697;
         
         public override int MessageID
         {

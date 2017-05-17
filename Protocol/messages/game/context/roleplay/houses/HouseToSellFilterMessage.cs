@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Houses
     public class HouseToSellFilterMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6137;
+        public override int ProtocolId { get; } = 6137;
         
         public override int MessageID
         {

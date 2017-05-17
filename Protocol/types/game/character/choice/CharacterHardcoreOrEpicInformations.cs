@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Character.Choice
     public class CharacterHardcoreOrEpicInformations : CharacterBaseInformations
     {
         
-        protected override int ProtocolId { get; set; } = 474;
+        public override int ProtocolId { get; } = 474;
         
         public override int TypeID
         {

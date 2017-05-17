@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Character.Choice
     public class CharacterToRelookInformation : AbstractCharacterToRefurbishInformation
     {
         
-        protected override int ProtocolId { get; set; } = 399;
+        public override int ProtocolId { get; } = 399;
         
         public override int TypeID
         {

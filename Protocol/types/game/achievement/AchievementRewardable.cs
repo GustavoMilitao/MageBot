@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Achievement
     public class AchievementRewardable : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 412;
+        public override int ProtocolId { get; } = 412;
         
         public override int TypeID
         {

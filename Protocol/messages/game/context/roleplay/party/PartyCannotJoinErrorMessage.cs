@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party
     public class PartyCannotJoinErrorMessage : AbstractPartyMessage
     {
         
-        protected override int ProtocolId { get; set; } = 5583;
+        public override int ProtocolId { get; } = 5583;
         
         public override int MessageID
         {

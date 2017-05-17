@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Queues
 {
     public class QueueStatusMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 6100;
+        public override int ProtocolId { get; } = 6100;
         public override int MessageID { get { return ProtocolId; } }
 
         public ushort Position;

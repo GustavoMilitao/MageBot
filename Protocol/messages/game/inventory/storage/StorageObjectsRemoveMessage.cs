@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Storage
     public class StorageObjectsRemoveMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6035;
+        public override int ProtocolId { get; } = 6035;
         
         public override int MessageID
         {

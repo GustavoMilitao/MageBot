@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeBidHouseInListUpdatedMessage : ExchangeBidHouseInListAddedMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6337;
+        public override int ProtocolId { get; } = 6337;
         
         public override int MessageID
         {

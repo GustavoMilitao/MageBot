@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class DecraftResultMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6569;
+        public override int ProtocolId { get; } = 6569;
         
         public override int MessageID
         {

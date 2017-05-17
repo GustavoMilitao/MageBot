@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Fight.Challenge
     public class ChallengeDungeonStackedBonusMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6151;
+        public override int ProtocolId { get; } = 6151;
         
         public override int MessageID
         {

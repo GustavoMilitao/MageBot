@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Actions.Fight
     public class GameActionFightDispellEffectMessage : GameActionFightDispellMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6113;
+        public override int ProtocolId { get; } = 6113;
         
         public override int MessageID
         {

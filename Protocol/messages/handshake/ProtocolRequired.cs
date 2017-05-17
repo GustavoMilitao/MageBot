@@ -5,7 +5,7 @@ namespace MageBot.Protocol.Messages.Handshake
 {
     public class ProtocolRequired : Message
     {
-        protected override int ProtocolId { get; set; } = 1;
+        public override int ProtocolId { get; } = 1;
         public override int MessageID { get { return ProtocolId; } }
 
         public uint RequiredVersion { get; set; }

@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Fight
     public class GameFightSpellCooldown : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 205;
+        public override int ProtocolId { get; } = 205;
         
         public override int TypeID
         {

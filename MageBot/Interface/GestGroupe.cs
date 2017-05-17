@@ -63,7 +63,7 @@ namespace MageBot.Interface
             {
                 ListViewItem listViewItem2 = listViewGroups.SelectedItems[i];
                 string ApplicationDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                string combinedPath = System.IO.Path.Combine(ApplicationDataPath, "MageBot", "Groups", listViewItem2.Text + ".bs");
+                string combinedPath = System.IO.Path.Combine(ApplicationDataPath, "MageBot", "Groups", listViewItem2.Text + ".mb");
                 File.Delete(combinedPath);
                 listViewGroups.Items.Remove(listViewItem2);
             }
@@ -81,7 +81,7 @@ namespace MageBot.Interface
                 if (NameBox.Text.Length > 0)
                 {
                     AccountsFileInteractions accountsFileInteractions = new AccountsFileInteractions();
-                    accountsFileInteractions.SaveGroup(listaccounts, NameBox.Text + ".bs");
+                    accountsFileInteractions.SaveGroup(listaccounts, NameBox.Text + ".mb");
                     listViewGroups.Items.Add(NameBox.Text);
                     groups.Add(new Group(listaccounts, NameBox.Text));
                     listViewAccounts.SelectedItems.Clear();

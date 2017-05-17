@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Paddock
     public class PaddockToSellListRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6141;
+        public override int ProtocolId { get; } = 6141;
         
         public override int MessageID
         {

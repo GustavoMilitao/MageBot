@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Actions
     public class GameActionNoopMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 1002;
+        public override int ProtocolId { get; } = 1002;
         
         public override int MessageID
         {

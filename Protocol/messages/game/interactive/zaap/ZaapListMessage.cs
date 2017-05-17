@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Interactive.Zaap
     public class ZaapListMessage : TeleportDestinationsListMessage
     {
         
-        protected override int ProtocolId { get; set; } = 1604;
+        public override int ProtocolId { get; } = 1604;
         
         public override int MessageID
         {

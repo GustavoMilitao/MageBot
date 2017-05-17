@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Fight
     public class GameFightSpectatorJoinMessage : GameFightJoinMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6504;
+        public override int ProtocolId { get; } = 6504;
         
         public override int MessageID
         {

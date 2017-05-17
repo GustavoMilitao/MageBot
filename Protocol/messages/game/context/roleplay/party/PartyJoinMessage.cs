@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party
     public class PartyJoinMessage : AbstractPartyMessage
     {
         
-        protected override int ProtocolId { get; set; } = 5576;
+        public override int ProtocolId { get; } = 5576;
         
         public override int MessageID
         {

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.TreasureHunt
     public class TreasureHuntFlagRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6508;
+        public override int ProtocolId { get; } = 6508;
         
         public override int MessageID
         {

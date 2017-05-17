@@ -5,7 +5,7 @@ namespace MageBot.Protocol.Types.Game.Look
 {
     public class EntityLook : NetworkType
     {
-        protected override int ProtocolId { get; set; } = 55;
+        public override int ProtocolId { get; } = 55;
         public override int TypeID { get { return ProtocolId; } }
 
         public ushort BonesId { get; set; }

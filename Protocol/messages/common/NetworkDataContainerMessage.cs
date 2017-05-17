@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Common
     public class NetworkDataContainerMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 2;
+        public override int ProtocolId { get; } = 2;
         
         public override int MessageID
         {

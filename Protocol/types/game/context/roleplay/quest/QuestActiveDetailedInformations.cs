@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.Quest
     public class QuestActiveDetailedInformations : QuestActiveInformations
     {
         
-        protected override int ProtocolId { get; set; } = 382;
+        public override int ProtocolId { get; } = 382;
         
         public override int TypeID
         {

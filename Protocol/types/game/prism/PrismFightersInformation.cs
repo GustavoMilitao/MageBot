@@ -19,7 +19,7 @@ namespace MageBot.Protocol.Types.Game.Prism
     public class PrismFightersInformation : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 443;
+        public override int ProtocolId { get; } = 443;
         
         public override int TypeID
         {

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Script
     public class URLOpenMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6266;
+        public override int ProtocolId { get; } = 6266;
         
         public override int MessageID
         {

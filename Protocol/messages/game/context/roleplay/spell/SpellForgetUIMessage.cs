@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Spell
     public class SpellForgetUIMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5565;
+        public override int ProtocolId { get; } = 5565;
         
         public override int MessageID
         {

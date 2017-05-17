@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context
     public class EntityDispositionInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 60;
+        public override int ProtocolId { get; } = 60;
         
         public override int TypeID
         {

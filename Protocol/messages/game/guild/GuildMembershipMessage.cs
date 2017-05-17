@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Guild
     public class GuildMembershipMessage : GuildJoinedMessage
     {
         
-        protected override int ProtocolId { get; set; } = 5835;
+        public override int ProtocolId { get; } = 5835;
         
         public override int MessageID
         {

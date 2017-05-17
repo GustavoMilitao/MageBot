@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Basic
     public class NumericWhoIsRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6298;
+        public override int ProtocolId { get; } = 6298;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Shortcut
     public class ShortcutObjectItem : ShortcutObject
     {
         
-        protected override int ProtocolId { get; set; } = 371;
+        public override int ProtocolId { get; } = 371;
         
         public override int TypeID
         {

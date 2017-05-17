@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeObjectModifyPricedMessage : ExchangeObjectMovePricedMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6238;
+        public override int ProtocolId { get; } = 6238;
         
         public override int MessageID
         {

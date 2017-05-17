@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Types.Game.Friend
     public class IgnoredOnlineInformations : IgnoredInformations
     {
         
-        protected override int ProtocolId { get; set; } = 105;
+        public override int ProtocolId { get; } = 105;
         
         public override int TypeID
         {

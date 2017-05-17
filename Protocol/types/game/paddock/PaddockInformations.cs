@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Paddock
     public class PaddockInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 132;
+        public override int ProtocolId { get; } = 132;
         
         public override int TypeID
         {

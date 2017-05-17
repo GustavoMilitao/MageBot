@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeReplayStopMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6001;
+        public override int ProtocolId { get; } = 6001;
         
         public override int MessageID
         {

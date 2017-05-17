@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Mount
     public class MountEmoteIconUsedOkMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5978;
+        public override int ProtocolId { get; } = 5978;
         
         public override int MessageID
         {

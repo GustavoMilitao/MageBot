@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Creation
     public class CharacterNameSuggestionFailureMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 164;
+        public override int ProtocolId { get; } = 164;
         
         public override int MessageID
         {

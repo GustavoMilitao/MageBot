@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.Quest
     public class QuestObjectiveInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 385;
+        public override int ProtocolId { get; } = 385;
         
         public override int TypeID
         {

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Moderation
     public class PopupWarningMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6134;
+        public override int ProtocolId { get; } = 6134;
         
         public override int MessageID
         {

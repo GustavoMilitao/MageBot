@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Startup
     public class StartupActionAddMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6538;
+        public override int ProtocolId { get; } = 6538;
         
         public override int MessageID
         {

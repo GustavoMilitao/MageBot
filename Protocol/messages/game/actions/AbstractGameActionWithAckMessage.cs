@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Actions
     public class AbstractGameActionWithAckMessage : AbstractGameActionMessage
     {
         
-        protected override int ProtocolId { get; set; } = 1001;
+        public override int ProtocolId { get; } = 1001;
         
         public override int MessageID
         {

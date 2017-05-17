@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Initialization
     public class SetCharacterRestrictionsMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 170;
+        public override int ProtocolId { get; } = 170;
         
         public override int MessageID
         {

@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Game.Approach
 {
     public class AuthenticationTicketMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 110;
+        public override int ProtocolId { get; } = 110;
         public override int MessageID { get { return ProtocolId; } }
 
         public string Lang { get; set; }

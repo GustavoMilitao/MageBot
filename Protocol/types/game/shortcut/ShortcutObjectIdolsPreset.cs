@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Shortcut
     public class ShortcutObjectIdolsPreset : ShortcutObject
     {
         
-        protected override int ProtocolId { get; set; } = 492;
+        public override int ProtocolId { get; } = 492;
         
         public override int TypeID
         {

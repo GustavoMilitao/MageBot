@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class GameContextQuitMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 255;
+        public override int ProtocolId { get; } = 255;
         
         public override int MessageID
         {

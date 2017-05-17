@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Mount
     public class ItemDurability : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 168;
+        public override int ProtocolId { get; } = 168;
         
         public override int TypeID
         {

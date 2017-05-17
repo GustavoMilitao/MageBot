@@ -2,10 +2,12 @@
 
 namespace MageBot.Protocol.Types
 {
-    public class Version
+    public class Version: NetworkType
     {
-        protected virtual int ProtocolId { get; set; } = 11;
-        public virtual int TypeID { get { return ProtocolId; } }
+
+        public override int ProtocolId { get; } = 11;
+
+        public override int TypeID { get { return ProtocolId; } }
 
         public sbyte Major { get; set; }
         public sbyte Minor { get; set; }
@@ -26,7 +28,7 @@ namespace MageBot.Protocol.Types
             this.BuildType = buildType;
         }
 
-        public virtual void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteSByte(Major);
             writer.WriteSByte(Minor);
@@ -36,7 +38,7 @@ namespace MageBot.Protocol.Types
             writer.WriteSByte(BuildType);
         }
 
-        public virtual void Deserialize(IDataReader reader)
+        public override void Deserialize(IDataReader reader)
         {
             Major = reader.ReadSByte();
             if (Major < 0)
@@ -57,6 +59,5 @@ namespace MageBot.Protocol.Types
             if (BuildType < 0)
                 throw new Exception("Forbidden value on BuildType = " + BuildType + ", it doesn't respect the following condition : buildType < 0");
         }
-
     }
 }

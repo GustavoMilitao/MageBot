@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Character.Status
     public class PlayerStatus : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 415;
+        public override int ProtocolId { get; } = 415;
         
         public override int TypeID
         {

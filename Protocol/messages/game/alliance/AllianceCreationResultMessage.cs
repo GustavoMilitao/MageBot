@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Alliance
     public class AllianceCreationResultMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6391;
+        public override int ProtocolId { get; } = 6391;
         
         public override int MessageID
         {

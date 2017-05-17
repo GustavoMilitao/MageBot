@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Common.Basic
     public class BasicPongMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 183;
+        public override int ProtocolId { get; } = 183;
         
         public override int MessageID
         {

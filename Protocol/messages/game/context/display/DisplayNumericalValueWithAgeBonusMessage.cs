@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Display
     public class DisplayNumericalValueWithAgeBonusMessage : DisplayNumericalValueMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6361;
+        public override int ProtocolId { get; } = 6361;
         
         public override int MessageID
         {

@@ -5,7 +5,7 @@ namespace MageBot.Protocol.Messages.Game.Basic
 {
     public class TextInformationMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 780;
+        public override int ProtocolId { get; } = 780;
         public override int MessageID { get { return ProtocolId; } }
 
         public byte MsgType;

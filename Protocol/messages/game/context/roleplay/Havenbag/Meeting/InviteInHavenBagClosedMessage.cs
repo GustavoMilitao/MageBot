@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Havenbag.Meeting
     public class InviteInHavenBagClosedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6645;
+        public override int ProtocolId { get; } = 6645;
         
         public override int MessageID
         {

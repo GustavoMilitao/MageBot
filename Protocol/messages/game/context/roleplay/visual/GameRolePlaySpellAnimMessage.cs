@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Visual
     public class GameRolePlaySpellAnimMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6114;
+        public override int ProtocolId { get; } = 6114;
         
         public override int MessageID
         {

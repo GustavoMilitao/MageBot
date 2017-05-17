@@ -145,11 +145,11 @@ namespace MageBot.Interface
             if (FilesList.SelectedItems.Count > 0 && accUserControl != null)
             {
                 accUserControl.Account.Config.Path = new MageBot.Core.Path.PathManager(accUserControl.Account, FilesList.SelectedItems[0].SubItems[5].Text, FilesList.SelectedItems[0].SubItems[0].Text);
-                accUserControl.Log(new BotTextInformation("Trajet chargé : " + FilesList.SelectedItems[0].Text), 0);
+                accUserControl.Account.Log(new BotTextInformation("Trajet chargé : " + FilesList.SelectedItems[0].Text), 0);
                 accUserControl.Account.Config.Path.Path = FilesList.SelectedItems[0].Text;
                 if (accUserControl.Account.Fight == null)
                 {
-                    accUserControl.Log(new ErrorTextInformation("WARNING : You haven't any AI loaded :p"), 0);
+                    accUserControl.Account.Log(new ErrorTextInformation("WARNING : You haven't any AI loaded :p"), 0);
                 }
                 Close();
             }

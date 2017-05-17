@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Interactive.Zaap
     public class ZaapRespawnUpdatedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6571;
+        public override int ProtocolId { get; } = 6571;
         
         public override int MessageID
         {

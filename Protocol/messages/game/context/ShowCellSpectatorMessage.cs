@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class ShowCellSpectatorMessage : ShowCellMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6158;
+        public override int ProtocolId { get; } = 6158;
         
         public override int MessageID
         {

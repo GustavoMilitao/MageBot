@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Context
     public class TaxCollectorStaticInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 147;
+        public override int ProtocolId { get; } = 147;
         
         public override int TypeID
         {

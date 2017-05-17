@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class MimicryObjectPreviewMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6458;
+        public override int ProtocolId { get; } = 6458;
         
         public override int MessageID
         {

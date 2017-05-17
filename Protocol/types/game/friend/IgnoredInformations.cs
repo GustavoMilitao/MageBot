@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Friend
     public class IgnoredInformations : AbstractContactInformations
     {
         
-        protected override int ProtocolId { get; set; } = 106;
+        public override int ProtocolId { get; } = 106;
         
         public override int TypeID
         {

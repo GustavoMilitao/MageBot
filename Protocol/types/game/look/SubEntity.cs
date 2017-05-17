@@ -2,7 +2,7 @@
 {
     public class SubEntity : NetworkType
     {
-        protected override int ProtocolId { get; set; } = 54;
+        public override int ProtocolId { get; } = 54;
         public override int TypeID { get { return ProtocolId; } }
 
         public byte BindingPointCategory;

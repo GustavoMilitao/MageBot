@@ -21,15 +21,21 @@ namespace MageBot.Protocol.Types
             {
                 if (type.Namespace == null || !type.Namespace.StartsWith(typeof(ProtocolTypeManager).Namespace))
                     continue;
+                NetworkType netType;
 
-                FieldInfo field = type.GetField("ProtocolId");
-
-                if (field != null)
+                // le cast uint est obligatoire car l'objet n'a pas de type
+                try
                 {
-                    // le cast uint est obligatoire car l'objet n'a pas de type
-                    int id = (int)(field.GetValue(type));
+                    netType = !type.IsAbstract? (NetworkType)Activator.CreateInstance(type) : null;
+                }
+                catch
+                {
+                    netType = null;
+                }
+                if (netType != null)
+                {
 
-                    m_types.Add(id, type);
+                    m_types.Add(netType.ProtocolId, type);
 
                     ConstructorInfo ctor = type.GetConstructor(Type.EmptyTypes);
 
@@ -37,7 +43,7 @@ namespace MageBot.Protocol.Types
                         throw new Exception(string.Format("'{0}' doesn't implemented a parameterless constructor", type));
 
                     //m_typesConstructors.Add(id, ConstructorHelper.CreateDelegate(ctor, type)<Func<object>>();
-                    m_typesConstructors.Add(id, ctor.CreateDelegate<Func<object>>());
+                    m_typesConstructors.Add(netType.ProtocolId, ctor.CreateDelegate<Func<object>>());
                 }
             }
         }
@@ -71,7 +77,7 @@ namespace MageBot.Protocol.Types
                         DirectoryInfo d = Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                                   "MageBot", "Errors"));
                         string fileNameError = "Error" + DateTime.Now.ToString().Replace("/", "-").Replace(" ", "").Replace(":", "_");
-                        File.WriteAllText(Path.Combine(d.FullName,fileNameError), "Classe de id : [" + id + "] não implementada ");
+                        File.WriteAllText(Path.Combine(d.FullName, fileNameError), "Classe de id : [" + id + "] não implementada ");
                     }
                     return null;
                 }

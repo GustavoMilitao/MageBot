@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.TreasureHunt
     public class TreasureHuntDigRequestAnswerFailedMessage : TreasureHuntDigRequestAnswerMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6509;
+        public override int ProtocolId { get; } = 6509;
         
         public override int MessageID
         {

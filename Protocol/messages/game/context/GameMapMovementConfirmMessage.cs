@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class GameMapMovementConfirmMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 952;
+        public override int ProtocolId { get; } = 952;
         
         public override int MessageID
         {

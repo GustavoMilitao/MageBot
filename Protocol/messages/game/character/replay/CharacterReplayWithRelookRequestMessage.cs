@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Replay
     public class CharacterReplayWithRelookRequestMessage : CharacterReplayRequestMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6354;
+        public override int ProtocolId { get; } = 6354;
         
         public override int MessageID
         {

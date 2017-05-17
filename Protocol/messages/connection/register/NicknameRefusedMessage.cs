@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Connection.Register
     public class NicknameRefusedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5638;
+        public override int ProtocolId { get; } = 5638;
         
         public override int MessageID
         {

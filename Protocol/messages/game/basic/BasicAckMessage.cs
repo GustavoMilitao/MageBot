@@ -3,7 +3,7 @@ namespace MageBot.Protocol.Messages.Game.Basic
 {
     public class BasicAckMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 6362;
+        public override int ProtocolId { get; } = 6362;
         public override int MessageID { get { return ProtocolId; } }
 
         public uint Seq;

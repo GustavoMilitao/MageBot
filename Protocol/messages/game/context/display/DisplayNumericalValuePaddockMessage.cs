@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Display
     public class DisplayNumericalValuePaddockMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6563;
+        public override int ProtocolId { get; } = 6563;
         
         public override int MessageID
         {

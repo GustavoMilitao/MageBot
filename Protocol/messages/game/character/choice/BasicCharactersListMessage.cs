@@ -7,7 +7,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Choice
 {
     public class BasicCharactersListMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 6475;
+        public override int ProtocolId { get; } = 6475;
         public override int MessageID { get { return ProtocolId; } }
 
         public List<CharacterBaseInformations> Characters;

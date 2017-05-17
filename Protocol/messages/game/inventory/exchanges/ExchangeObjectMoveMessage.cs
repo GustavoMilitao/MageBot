@@ -14,7 +14,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     {
         public const int ProtocolID = 5518;
 
-        protected override int ProtocolId { get; set; } = 5518;
+        public override int ProtocolId { get; } = 5518;
         
         public override int MessageID
         {

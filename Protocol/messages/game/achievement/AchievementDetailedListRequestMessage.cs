@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Achievement
     public class AchievementDetailedListRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6357;
+        public override int ProtocolId { get; } = 6357;
         
         public override int MessageID
         {

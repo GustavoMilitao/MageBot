@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Interactive
     public class InteractiveElementNamedSkill : InteractiveElementSkill
     {
         
-        protected override int ProtocolId { get; set; } = 220;
+        public override int ProtocolId { get; } = 220;
         
         public override int TypeID
         {

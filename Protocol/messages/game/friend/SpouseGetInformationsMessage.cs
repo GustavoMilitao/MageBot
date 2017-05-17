@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Game.Friend
 {
     public class SpouseGetInformationsMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 6355;
+        public override int ProtocolId { get; } = 6355;
         public override int MessageID { get { return ProtocolId; } }
 
         public SpouseGetInformationsMessage() { }

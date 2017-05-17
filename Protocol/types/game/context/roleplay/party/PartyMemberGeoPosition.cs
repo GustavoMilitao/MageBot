@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.Party
     public class PartyMemberGeoPosition : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 378;
+        public override int ProtocolId { get; } = 378;
         
         public override int TypeID
         {

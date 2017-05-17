@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay
     public class ChangeMapMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 221;
+        public override int ProtocolId { get; } = 221;
         
         public override int MessageID
         {

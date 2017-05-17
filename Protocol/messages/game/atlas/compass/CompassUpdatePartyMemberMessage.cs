@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Atlas.Compass
     public class CompassUpdatePartyMemberMessage : CompassUpdateMessage
     {
         
-        protected override int ProtocolId { get; set; } = 5589;
+        public override int ProtocolId { get; } = 5589;
         
         public override int MessageID
         {

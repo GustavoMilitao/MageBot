@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Look
     public class IndexedEntityLook : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 405;
+        public override int ProtocolId { get; } = 405;
         
         public override int TypeID
         {

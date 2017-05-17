@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Fight.Character
     public class GameFightShowFighterMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5864;
+        public override int ProtocolId { get; } = 5864;
         
         public override int MessageID
         {

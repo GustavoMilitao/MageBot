@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeStartOkJobIndexMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5819;
+        public override int ProtocolId { get; } = 5819;
         
         public override int MessageID
         {

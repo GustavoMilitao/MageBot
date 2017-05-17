@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Prism
     public class PrismSubareaEmptyInfo : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 438;
+        public override int ProtocolId { get; } = 438;
         
         public override int TypeID
         {

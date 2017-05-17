@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Character.Choice
     public class RemodelingInformation : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 480;
+        public override int ProtocolId { get; } = 480;
         
         public override int TypeID
         {

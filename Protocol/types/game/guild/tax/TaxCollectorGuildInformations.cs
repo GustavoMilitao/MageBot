@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Guild.Tax
     public class TaxCollectorGuildInformations : TaxCollectorComplementaryInformations
     {
         
-        protected override int ProtocolId { get; set; } = 446;
+        public override int ProtocolId { get; } = 446;
         
         public override int TypeID
         {

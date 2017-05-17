@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class GameContextRemoveMultipleElementsMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 252;
+        public override int ProtocolId { get; } = 252;
         
         public override int MessageID
         {

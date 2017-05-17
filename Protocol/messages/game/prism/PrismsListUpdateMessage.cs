@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Prism
     public class PrismsListUpdateMessage : PrismsListMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6438;
+        public override int ProtocolId { get; } = 6438;
         
         public override int MessageID
         {

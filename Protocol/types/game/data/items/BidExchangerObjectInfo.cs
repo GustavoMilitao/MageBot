@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items
     public class BidExchangerObjectInfo : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 122;
+        public override int ProtocolId { get; } = 122;
         
         public override int TypeID
         {

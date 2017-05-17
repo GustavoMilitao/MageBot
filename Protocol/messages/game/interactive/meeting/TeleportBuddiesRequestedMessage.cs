@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Interactive.Meeting
     public class TeleportBuddiesRequestedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6302;
+        public override int ProtocolId { get; } = 6302;
         
         public override int MessageID
         {

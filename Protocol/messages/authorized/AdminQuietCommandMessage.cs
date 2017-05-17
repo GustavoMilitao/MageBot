@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Authorized
     public class AdminQuietCommandMessage : AdminCommandMessage
     {
         
-        protected override int ProtocolId { get; set; } = 5662;
+        public override int ProtocolId { get; } = 5662;
         
         public override int MessageID
         {

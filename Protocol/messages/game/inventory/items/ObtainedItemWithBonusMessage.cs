@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class ObtainedItemWithBonusMessage : ObtainedItemMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6520;
+        public override int ProtocolId { get; } = 6520;
         
         public override int MessageID
         {

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Web.Krosmaster
     public class KrosmasterInventoryErrorMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6343;
+        public override int ProtocolId { get; } = 6343;
         
         public override int MessageID
         {

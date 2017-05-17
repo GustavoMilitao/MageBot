@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Friend
     public class FriendSetWarnOnLevelGainMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6077;
+        public override int ProtocolId { get; } = 6077;
         
         public override int MessageID
         {

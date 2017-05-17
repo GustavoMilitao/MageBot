@@ -2,7 +2,7 @@
 {
     public class CharacterBasicMinimalInformations : AbstractCharacterInformation
     {
-        protected override int ProtocolId { get; set; } = 503;
+        public override int ProtocolId { get; } = 503;
         public override int TypeID { get { return ProtocolId; } }
 
         public string Name { get; set; }

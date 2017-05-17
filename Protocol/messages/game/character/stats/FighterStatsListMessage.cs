@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Stats
     public class FighterStatsListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6322;
+        public override int ProtocolId { get; } = 6322;
         
         public override int MessageID
         {

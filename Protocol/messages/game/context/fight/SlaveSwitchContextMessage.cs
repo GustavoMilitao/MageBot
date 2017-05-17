@@ -20,7 +20,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Fight
     public class SlaveSwitchContextMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6214;
+        public override int ProtocolId { get; } = 6214;
         
         public override int MessageID
         {

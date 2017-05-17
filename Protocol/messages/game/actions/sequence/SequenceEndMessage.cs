@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Actions.Sequence
     public class SequenceEndMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 956;
+        public override int ProtocolId { get; } = 956;
         
         public override int MessageID
         {

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Basic
     public class BasicDateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 177;
+        public override int ProtocolId { get; } = 177;
         
         public override int MessageID
         {

@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Interactive.Skill
     public class InteractiveUseWithParamRequestMessage : InteractiveUseRequestMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6715;
+        public override int ProtocolId { get; } = 6715;
         
         public override int MessageID
         {

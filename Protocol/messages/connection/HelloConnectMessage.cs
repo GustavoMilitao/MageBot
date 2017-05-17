@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Connection
 {
     public class HelloConnectMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 3;
+        public override int ProtocolId { get; } = 3;
         public override int MessageID { get { return ProtocolId; } }
 
         public string salt;

@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Job
     public class JobCrafterDirectoryListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6046;
+        public override int ProtocolId { get; } = 6046;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party
     public class PartyMemberEjectedMessage : PartyMemberRemoveMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6252;
+        public override int ProtocolId { get; } = 6252;
         
         public override int MessageID
         {

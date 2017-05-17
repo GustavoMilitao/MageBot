@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Friend
     public class FriendSpouseFollowWithCompassRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5606;
+        public override int ProtocolId { get; } = 5606;
         
         public override int MessageID
         {

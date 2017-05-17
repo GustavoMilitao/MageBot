@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Modificator
     public class AreaFightModificatorUpdateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6493;
+        public override int ProtocolId { get; } = 6493;
         
         public override int MessageID
         {

@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context
     public class ActorOrientation : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 353;
+        public override int ProtocolId { get; } = 353;
         
         public override int TypeID
         {

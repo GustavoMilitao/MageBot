@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class ExchangeMultiCraftSetCrafterCanUseHisRessourcesMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6021;
+        public override int ProtocolId { get; } = 6021;
         
         public override int MessageID
         {

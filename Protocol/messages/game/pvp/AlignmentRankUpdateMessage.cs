@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Pvp
     public class AlignmentRankUpdateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6058;
+        public override int ProtocolId { get; } = 6058;
         
         public override int MessageID
         {

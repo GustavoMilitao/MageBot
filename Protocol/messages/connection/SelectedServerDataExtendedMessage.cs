@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Connection
 {
     public class SelectedServerDataExtendedMessage : SelectedServerDataMessage
     {
-        protected override int ProtocolId { get; set; } = 6469;
+        public override int ProtocolId { get; } = 6469;
         public override int MessageID { get { return ProtocolId; } }
 
         public List<ushort> ServerIds;

@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items.Effects
     public class ObjectEffectLadder : ObjectEffectCreature
     {
         
-        protected override int ProtocolId { get; set; } = 81;
+        public override int ProtocolId { get; } = 81;
         
         public override int TypeID
         {

@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
     public class GameRolePlayArenaUpdatePlayerInfosMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6301;
+        public override int ProtocolId { get; } = 6301;
         
         public override int MessageID
         {

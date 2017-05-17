@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items.Effects
     public class ObjectEffectDate : ObjectEffect
     {
         
-        protected override int ProtocolId { get; set; } = 72;
+        public override int ProtocolId { get; } = 72;
         
         public override int TypeID
         {

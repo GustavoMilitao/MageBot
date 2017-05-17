@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Connection
 {
     public class CredentialsAcknowledgementMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 6314;
+        public override int ProtocolId { get; } = 6314;
         public override int MessageID { get { return ProtocolId; } }
 
         public CredentialsAcknowledgementMessage() { }

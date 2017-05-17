@@ -40,27 +40,25 @@ namespace MageBot.Interface
 
         private void Init()
         {
-            AccountUC Uc = new AccountUC(accUserControl.Account ,this);
-            Uc.DebugMode.Checked = true;
-            accUserControl = Uc;
-            Controls.Add(Uc);
-            Uc.Show();
+            accUserControl.DebugMode.Checked = true;
+            Controls.Add(accUserControl);
+            accUserControl.Show();
 
             // Show the form
             Show();
 
             // Not in a group
-            Uc.Account.Config.IsMaster = false;
-            Uc.Account.Config.IsSlave = false;
+            accUserControl.Account.Config.IsMaster = false;
+            accUserControl.Account.Config.IsSlave = false;
 
             // Fill the account form
-            Uc.Dock = DockStyle.Fill;
+            accUserControl.Dock = DockStyle.Fill;
 
             // Call socket/mitm init
-            if (Uc.Account.Config.IsSocket)
-                Uc.Init();
-            else if(Uc.Account.Config.IsMITM)
-                Uc.InitMITM();
+            if (accUserControl.Account.Config.IsSocket)
+                accUserControl.Init();
+            else if(accUserControl.Account.Config.IsMITM)
+                accUserControl.InitMITM();
         }
 
         private void SaveConfig(object sender , object e)

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Common.Basic
     public class AggregateStatMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6669;
+        public override int ProtocolId { get; } = 6669;
         
         public override int MessageID
         {

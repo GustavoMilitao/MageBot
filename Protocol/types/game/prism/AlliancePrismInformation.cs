@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Prism
     public class AlliancePrismInformation : PrismInformation
     {
         
-        protected override int ProtocolId { get; set; } = 427;
+        public override int ProtocolId { get; } = 427;
         
         public override int TypeID
         {

@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
     public class GroupMonsterStaticInformationsWithAlternatives : GroupMonsterStaticInformations
     {
         
-        protected override int ProtocolId { get; set; } = 396;
+        public override int ProtocolId { get; } = 396;
         
         public override int TypeID
         {

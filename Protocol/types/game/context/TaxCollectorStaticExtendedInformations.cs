@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context
     public class TaxCollectorStaticExtendedInformations : TaxCollectorStaticInformations
     {
         
-        protected override int ProtocolId { get; set; } = 440;
+        public override int ProtocolId { get; } = 440;
         
         public override int TypeID
         {

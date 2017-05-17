@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Subscriber
     public class SubscriptionLimitationMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5542;
+        public override int ProtocolId { get; } = 5542;
         
         public override int MessageID
         {

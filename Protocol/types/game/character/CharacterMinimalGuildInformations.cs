@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Types.Game.Character
 {
     public class CharacterMinimalGuildInformations : CharacterMinimalPlusLookInformations
     {
-        protected override int ProtocolId { get; set; } = 445;
+        public override int ProtocolId { get; } = 445;
         public override int TypeID { get { return ProtocolId; } }
 
         public BasicGuildInformations Guild { get; set; }

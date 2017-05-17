@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Actions.Fight
     public class GameActionFightSpellCastMessage : AbstractGameActionFightTargetedAbilityMessage
     {
         
-        protected override int ProtocolId { get; set; } = 1010;
+        public override int ProtocolId { get; } = 1010;
         
         public override int MessageID
         {

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Common.Basic
     public class BasicPingMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 182;
+        public override int ProtocolId { get; } = 182;
         
         public override int MessageID
         {

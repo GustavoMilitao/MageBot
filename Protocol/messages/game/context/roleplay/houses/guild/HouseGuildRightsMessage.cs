@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Houses.Guild
     public class HouseGuildRightsMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5703;
+        public override int ProtocolId { get; } = 5703;
         
         public override int MessageID
         {

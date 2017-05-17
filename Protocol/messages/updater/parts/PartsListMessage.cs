@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Updater.Parts
     public class PartsListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 1502;
+        public override int ProtocolId { get; } = 1502;
         
         public override int MessageID
         {

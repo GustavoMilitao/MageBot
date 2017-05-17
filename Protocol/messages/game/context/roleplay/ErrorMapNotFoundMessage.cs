@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay
     public class ErrorMapNotFoundMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6197;
+        public override int ProtocolId { get; } = 6197;
         
         public override int MessageID
         {

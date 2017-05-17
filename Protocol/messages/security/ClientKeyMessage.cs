@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Security
 {
     public class ClientKeyMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 5607;
+        public override int ProtocolId { get; } = 5607;
         public override int MessageID { get { return ProtocolId; } }
 
         public string Key { get; set; }

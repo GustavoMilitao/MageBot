@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Actions.Fight
     public class GameActionMarkedCell : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 85;
+        public override int ProtocolId { get; } = 85;
         
         public override int TypeID
         {

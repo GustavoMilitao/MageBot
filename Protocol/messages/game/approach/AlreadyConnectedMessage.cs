@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Approach
     public class AlreadyConnectedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 109;
+        public override int ProtocolId { get; } = 109;
         
         public override int MessageID
         {

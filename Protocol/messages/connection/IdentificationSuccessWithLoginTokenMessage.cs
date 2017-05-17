@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Connection
     public class IdentificationSuccessWithLoginTokenMessage : IdentificationSuccessMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6209;
+        public override int ProtocolId { get; } = 6209;
         
         public override int MessageID
         {

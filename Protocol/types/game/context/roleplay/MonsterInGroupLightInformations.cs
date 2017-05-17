@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
     public class MonsterInGroupLightInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 395;
+        public override int ProtocolId { get; } = 395;
         
         public override int TypeID
         {

@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.Job
     public class JobCrafterDirectoryEntryJobInfo : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 195;
+        public override int ProtocolId { get; } = 195;
         
         public override int TypeID
         {

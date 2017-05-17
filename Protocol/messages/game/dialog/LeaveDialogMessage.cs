@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Dialog
     public class LeaveDialogMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5502;
+        public override int ProtocolId { get; } = 5502;
         
         public override int MessageID
         {

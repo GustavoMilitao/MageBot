@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class ShowCellMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5612;
+        public override int ProtocolId { get; } = 5612;
         
         public override int MessageID
         {

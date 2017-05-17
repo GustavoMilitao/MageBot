@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Social
     public class GuildInAllianceVersatileInformations : GuildVersatileInformations
     {
         
-        protected override int ProtocolId { get; set; } = 437;
+        public override int ProtocolId { get; } = 437;
         
         public override int TypeID
         {

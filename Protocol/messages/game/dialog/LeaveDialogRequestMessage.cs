@@ -14,7 +14,7 @@ namespace MageBot.Protocol.Messages.Game.Dialog
     {
         public const int ProtocolID = 5501;
         
-        protected override int ProtocolId { get; set; } = 5501;
+        public override int ProtocolId { get; } = 5501;
         
         public override int MessageID
         {

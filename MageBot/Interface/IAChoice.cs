@@ -146,7 +146,7 @@ namespace MageBot.Interface
             if (FilesList.SelectedItems.Count > 0 && accUserControl != null)
             {
                 accUserControl.Account.Config.FightParser = new FightParser(accUserControl.Account, FilesList.SelectedItems[0].SubItems[5].Text, FilesList.SelectedItems[0].SubItems[0].Text);
-                accUserControl.Log(new BotTextInformation("AI loaded : " + FilesList.SelectedItems[0].Text), 0);
+                accUserControl.Account.Log(new BotTextInformation("AI loaded : " + FilesList.SelectedItems[0].Text), 0);
                 accUserControl.Account.Config.FightParser.Name = FilesList.SelectedItems[0].Text;
                 accUserControl.NomIA.Text = accUserControl.Account.Config.FightParser.Name;
                 accUserControl.Account.Fight = new BFight(accUserControl.Account, accUserControl.Account.Config.FightParser, accUserControl.Account.FightData);

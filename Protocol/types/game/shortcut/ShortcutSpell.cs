@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Shortcut
     public class ShortcutSpell : Shortcut
     {
         
-        protected override int ProtocolId { get; set; } = 368;
+        public override int ProtocolId { get; } = 368;
         
         public override int TypeID
         {

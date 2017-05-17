@@ -5,7 +5,7 @@ namespace MageBot.Protocol.Messages.Game.Approach
 {
     class ServerOptionalFeaturesMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 6305;
+        public override int ProtocolId { get; } = 6305;
         public override int MessageID { get { return ProtocolId; } }
 
         public List<byte> Features;

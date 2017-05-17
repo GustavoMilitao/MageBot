@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Guild
     public class GuildHouseRemoveMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6180;
+        public override int ProtocolId { get; } = 6180;
         
         public override int MessageID
         {

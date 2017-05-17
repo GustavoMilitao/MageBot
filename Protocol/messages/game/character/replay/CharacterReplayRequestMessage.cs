@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Replay
     public class CharacterReplayRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 167;
+        public override int ProtocolId { get; } = 167;
         
         public override int MessageID
         {

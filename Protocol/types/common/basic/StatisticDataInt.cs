@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Common.Basic
     public class StatisticDataInt : StatisticData
     {
         
-        protected override int ProtocolId { get; set; } = 485;
+        public override int ProtocolId { get; } = 485;
         
         public override int TypeID
         {

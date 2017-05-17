@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class ObjectFoundWhileRecoltingMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6017;
+        public override int ProtocolId { get; } = 6017;
         
         public override int MessageID
         {

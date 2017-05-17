@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class LivingObjectChangeSkinRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5725;
+        public override int ProtocolId { get; } = 5725;
         
         public override int MessageID
         {

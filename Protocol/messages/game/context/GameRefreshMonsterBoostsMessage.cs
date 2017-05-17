@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class GameRefreshMonsterBoostsMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6618;
+        public override int ProtocolId { get; } = 6618;
         
         public override int MessageID
         {

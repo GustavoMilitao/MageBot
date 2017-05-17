@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Packs
     public class PackRestrictedSubAreaMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6186;
+        public override int ProtocolId { get; } = 6186;
         
         public override int MessageID
         {

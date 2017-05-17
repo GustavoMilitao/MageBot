@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Context.Fight
     public class FightStartingPositions : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 513;
+        public override int ProtocolId { get; } = 513;
         
         public override int TypeID
         {

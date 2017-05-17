@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Look
     public class AccessoryPreviewErrorMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6521;
+        public override int ProtocolId { get; } = 6521;
         
         public override int MessageID
         {

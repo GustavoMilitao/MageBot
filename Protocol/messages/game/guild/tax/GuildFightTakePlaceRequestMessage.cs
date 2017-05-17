@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Guild.Tax
     public class GuildFightTakePlaceRequestMessage : GuildFightJoinRequestMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6235;
+        public override int ProtocolId { get; } = 6235;
         
         public override int MessageID
         {

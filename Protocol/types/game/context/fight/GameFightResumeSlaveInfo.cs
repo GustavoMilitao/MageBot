@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Context.Fight
     public class GameFightResumeSlaveInfo : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 364;
+        public override int ProtocolId { get; } = 364;
         
         public override int TypeID
         {

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Basic
     public class CurrentServerStatusUpdateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6525;
+        public override int ProtocolId { get; } = 6525;
         
         public override int MessageID
         {

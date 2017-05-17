@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Approach
     public class ReloginTokenStatusMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6539;
+        public override int ProtocolId { get; } = 6539;
         
         public override int MessageID
         {

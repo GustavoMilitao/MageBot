@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Houses
     public class HouseLockFromInsideRequestMessage : LockableChangeCodeMessage
     {
         
-        protected override int ProtocolId { get; set; } = 5885;
+        public override int ProtocolId { get; } = 5885;
         
         public override int MessageID
         {

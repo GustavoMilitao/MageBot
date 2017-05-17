@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
     public class HumanOptionFollowers : HumanOption
     {
         
-        protected override int ProtocolId { get; set; } = 410;
+        public override int ProtocolId { get; } = 410;
         
         public override int TypeID
         {

@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items
     public class Item : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 7;
+        public override int ProtocolId { get; } = 7;
         
         public override int TypeID
         {

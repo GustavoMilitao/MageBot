@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Prism
     public class PrismGeolocalizedInformation : PrismSubareaEmptyInfo
     {
         
-        protected override int ProtocolId { get; set; } = 434;
+        public override int ProtocolId { get; } = 434;
         
         public override int TypeID
         {

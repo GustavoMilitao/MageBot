@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Guild.Tax
     public class GuildFightPlayersEnemiesListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5928;
+        public override int ProtocolId { get; } = 5928;
         
         public override int MessageID
         {

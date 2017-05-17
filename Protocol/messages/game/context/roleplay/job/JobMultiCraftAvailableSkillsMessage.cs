@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Job
     public class JobMultiCraftAvailableSkillsMessage : JobAllowMultiCraftRequestMessage
     {
         
-        protected override int ProtocolId { get; set; } = 5747;
+        public override int ProtocolId { get; } = 5747;
         
         public override int MessageID
         {

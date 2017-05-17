@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Fight
     public class FightTeamInformations : AbstractFightTeamInformations
     {
         
-        protected override int ProtocolId { get; set; } = 33;
+        public override int ProtocolId { get; } = 33;
         
         public override int TypeID
         {

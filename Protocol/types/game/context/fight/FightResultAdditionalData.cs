@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Fight
     public class FightResultAdditionalData : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 191;
+        public override int ProtocolId { get; } = 191;
         
         public override int TypeID
         {

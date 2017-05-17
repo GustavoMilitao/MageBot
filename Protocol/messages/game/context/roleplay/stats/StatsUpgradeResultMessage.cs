@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Stats
     public class StatsUpgradeResultMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5609;
+        public override int ProtocolId { get; } = 5609;
         
         public override int MessageID
         {

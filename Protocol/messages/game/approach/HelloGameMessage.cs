@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Game.Approach
 {
     public class HelloGameMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 101;
+        public override int ProtocolId { get; } = 101;
         public override int MessageID { get { return ProtocolId; } }
 
         public HelloGameMessage() { }

@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Character.Choice
     public class CharacterRemodelingInformation : AbstractCharacterInformation
     {
         
-        protected override int ProtocolId { get; set; } = 479;
+        public override int ProtocolId { get; } = 479;
         
         public override int TypeID
         {

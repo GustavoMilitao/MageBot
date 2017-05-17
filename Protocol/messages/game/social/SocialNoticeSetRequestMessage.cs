@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Social
     public class SocialNoticeSetRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6686;
+        public override int ProtocolId { get; } = 6686;
         
         public override int MessageID
         {

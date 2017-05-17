@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Interactive.Skill
     public class SkillActionDescriptionTimed : SkillActionDescription
     {
         
-        protected override int ProtocolId { get; set; } = 103;
+        public override int ProtocolId { get; } = 103;
         
         public override int TypeID
         {

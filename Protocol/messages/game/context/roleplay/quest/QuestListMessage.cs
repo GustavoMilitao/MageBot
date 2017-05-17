@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Quest
     public class QuestListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5626;
+        public override int ProtocolId { get; } = 5626;
         
         public override int MessageID
         {

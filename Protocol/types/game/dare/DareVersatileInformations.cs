@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Dare
     public class DareVersatileInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 504;
+        public override int ProtocolId { get; } = 504;
         
         public override int TypeID
         {

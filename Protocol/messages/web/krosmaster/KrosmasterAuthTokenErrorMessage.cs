@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Web.Krosmaster
     public class KrosmasterAuthTokenErrorMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6345;
+        public override int ProtocolId { get; } = 6345;
         
         public override int MessageID
         {

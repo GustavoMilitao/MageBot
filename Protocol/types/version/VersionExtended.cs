@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Types
 {
     public class VersionExtended : Version
     {
-        protected override int ProtocolId { get; set; } = 393;
+        public override int ProtocolId { get; } = 393;
         public override int TypeID { get { return ProtocolId; } }
 
         public sbyte Install { get; set; }

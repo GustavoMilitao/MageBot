@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Npc
     public class MapNpcsQuestStatusUpdateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5642;
+        public override int ProtocolId { get; } = 5642;
         
         public override int MessageID
         {

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Interactive
     public class InteractiveUseEndedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6112;
+        public override int ProtocolId { get; } = 6112;
         
         public override int MessageID
         {

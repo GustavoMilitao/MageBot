@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Job
     public class JobCrafterDirectoryEntryRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6043;
+        public override int ProtocolId { get; } = 6043;
         
         public override int MessageID
         {

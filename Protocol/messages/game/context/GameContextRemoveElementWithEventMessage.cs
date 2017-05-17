@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class GameContextRemoveElementWithEventMessage : GameContextRemoveElementMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6412;
+        public override int ProtocolId { get; } = 6412;
         
         public override int MessageID
         {

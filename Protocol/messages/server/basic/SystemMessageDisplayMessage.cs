@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Server.Basic
     public class SystemMessageDisplayMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 189;
+        public override int ProtocolId { get; } = 189;
         
         public override int MessageID
         {

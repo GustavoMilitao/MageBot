@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.Job
     public class DecraftedItemStackInfo : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 481;
+        public override int ProtocolId { get; } = 481;
         
         public override int TypeID
         {

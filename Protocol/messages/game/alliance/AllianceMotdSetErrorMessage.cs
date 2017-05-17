@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Alliance
     public class AllianceMotdSetErrorMessage : SocialNoticeSetErrorMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6683;
+        public override int ProtocolId { get; } = 6683;
         
         public override int MessageID
         {

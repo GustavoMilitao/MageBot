@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
     public class HumanOptionEmote : HumanOption
     {
         
-        protected override int ProtocolId { get; set; } = 407;
+        public override int ProtocolId { get; } = 407;
         
         public override int TypeID
         {

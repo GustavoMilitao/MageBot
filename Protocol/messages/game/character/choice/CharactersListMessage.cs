@@ -2,7 +2,7 @@
 {
     public class CharactersListMessage : BasicCharactersListMessage
     {
-        protected override int ProtocolId { get; set; } = 151;
+        public override int ProtocolId { get; } = 151;
         public override int MessageID { get { return ProtocolId; } }
 
         public bool HasStartupActions;

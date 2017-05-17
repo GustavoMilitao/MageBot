@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Storage
     public class StorageKamasUpdateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5645;
+        public override int ProtocolId { get; } = 5645;
         
         public override int MessageID
         {

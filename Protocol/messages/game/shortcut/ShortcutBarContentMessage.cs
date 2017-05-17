@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Messages.Game.Shortcut
     public class ShortcutBarContentMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6231;
+        public override int ProtocolId { get; } = 6231;
         
         public override int MessageID
         {

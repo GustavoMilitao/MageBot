@@ -6,7 +6,7 @@ namespace MageBot.Protocol.Messages.Game.Approach
 {
     class ServerSessionConstantsMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 6434;
+        public override int ProtocolId { get; } = 6434;
         public override int MessageID { get { return ProtocolId; } }
 
         public List<ServerSessionConstant> Variables;

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class ObjectDeletedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 3024;
+        public override int ProtocolId { get; } = 3024;
         
         public override int MessageID
         {

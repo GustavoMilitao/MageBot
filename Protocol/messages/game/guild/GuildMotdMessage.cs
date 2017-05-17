@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Guild
     public class GuildMotdMessage : SocialNoticeMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6590;
+        public override int ProtocolId { get; } = 6590;
         
         public override int MessageID
         {

@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Paddock
     public class GameDataPlayFarmObjectAnimationMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6026;
+        public override int ProtocolId { get; } = 6026;
         
         public override int MessageID
         {

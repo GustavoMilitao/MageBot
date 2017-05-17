@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items
     public class SellerBuyerDescriptor : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 121;
+        public override int ProtocolId { get; } = 121;
         
         public override int TypeID
         {

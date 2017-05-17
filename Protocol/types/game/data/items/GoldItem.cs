@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items
     public class GoldItem : Item
     {
         
-        protected override int ProtocolId { get; set; } = 123;
+        public override int ProtocolId { get; } = 123;
         
         public override int TypeID
         {

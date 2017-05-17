@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items
     public class ObjectItemGenericQuantityPrice : ObjectItemGenericQuantity
     {
         
-        protected override int ProtocolId { get; set; } = 494;
+        public override int ProtocolId { get; } = 494;
         
         public override int TypeID
         {

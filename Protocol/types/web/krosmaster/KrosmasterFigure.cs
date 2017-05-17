@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Web.Krosmaster
     public class KrosmasterFigure : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 397;
+        public override int ProtocolId { get; } = 397;
         
         public override int TypeID
         {

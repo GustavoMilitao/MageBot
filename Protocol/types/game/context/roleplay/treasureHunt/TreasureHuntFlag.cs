@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.TreasureHunt
     public class TreasureHuntFlag : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 473;
+        public override int ProtocolId { get; } = 473;
         
         public override int TypeID
         {

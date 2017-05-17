@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Guild
     public class GuildEmblem : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 87;
+        public override int ProtocolId { get; } = 87;
         
         public override int TypeID
         {

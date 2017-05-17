@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Basic
     public class BasicWhoIsNoMatchMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 179;
+        public override int ProtocolId { get; } = 179;
         
         public override int MessageID
         {

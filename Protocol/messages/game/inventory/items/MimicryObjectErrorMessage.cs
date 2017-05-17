@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class MimicryObjectErrorMessage : SymbioticObjectErrorMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6461;
+        public override int ProtocolId { get; } = 6461;
         
         public override int MessageID
         {

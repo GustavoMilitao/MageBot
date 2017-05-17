@@ -5,7 +5,7 @@ namespace MageBot.Protocol.Messages.Connection
 {
     public class ServerListMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 30;
+        public override int ProtocolId { get; } = 30;
         public override int MessageID { get { return ProtocolId; } }
 
         public List<GameServerInformations> Servers;

@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.Quest
     public class GameRolePlayNpcQuestFlag : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 384;
+        public override int ProtocolId { get; } = 384;
         
         public override int TypeID
         {

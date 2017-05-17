@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Ui
     public class ClientUIOpenedByObjectMessage : ClientUIOpenedMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6463;
+        public override int ProtocolId { get; } = 6463;
         
         public override int MessageID
         {

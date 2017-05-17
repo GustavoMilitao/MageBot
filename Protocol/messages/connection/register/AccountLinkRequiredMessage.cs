@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Connection.Register
     public class AccountLinkRequiredMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6607;
+        public override int ProtocolId { get; } = 6607;
         
         public override int MessageID
         {

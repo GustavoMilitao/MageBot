@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items.Effects
     public class ObjectEffectMinMax : ObjectEffect
     {
         
-        protected override int ProtocolId { get; set; } = 82;
+        public override int ProtocolId { get; } = 82;
         
         public override int TypeID
         {

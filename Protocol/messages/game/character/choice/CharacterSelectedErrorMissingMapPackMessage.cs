@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Choice
     public class CharacterSelectedErrorMissingMapPackMessage : CharacterSelectedErrorMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6300;
+        public override int ProtocolId { get; } = 6300;
         
         public override int MessageID
         {

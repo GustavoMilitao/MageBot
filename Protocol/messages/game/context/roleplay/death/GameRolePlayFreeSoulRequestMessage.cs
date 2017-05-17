@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Death
     public class GameRolePlayFreeSoulRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 745;
+        public override int ProtocolId { get; } = 745;
         
         public override int MessageID
         {

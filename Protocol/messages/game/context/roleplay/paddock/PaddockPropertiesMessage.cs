@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Paddock
     public class PaddockPropertiesMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5824;
+        public override int ProtocolId { get; } = 5824;
         
         public override int MessageID
         {

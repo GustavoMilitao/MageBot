@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class ExchangeObjectsRemovedMessage : ExchangeObjectMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6532;
+        public override int ProtocolId { get; } = 6532;
         
         public override int MessageID
         {

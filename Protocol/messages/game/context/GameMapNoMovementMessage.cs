@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class GameMapNoMovementMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 954;
+        public override int ProtocolId { get; } = 954;
         
         public override int MessageID
         {

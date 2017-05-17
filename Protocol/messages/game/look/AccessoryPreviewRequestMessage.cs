@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Look
     public class AccessoryPreviewRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6518;
+        public override int ProtocolId { get; } = 6518;
         
         public override int MessageID
         {

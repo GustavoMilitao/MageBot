@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.Party
     public class PartyMemberArenaInformations : PartyMemberInformations
     {
         
-        protected override int ProtocolId { get; set; } = 391;
+        public override int ProtocolId { get; } = 391;
         
         public override int TypeID
         {

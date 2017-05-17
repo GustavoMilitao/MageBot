@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context
     public class MapCoordinates : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 174;
+        public override int ProtocolId { get; } = 174;
         
         public override int TypeID
         {

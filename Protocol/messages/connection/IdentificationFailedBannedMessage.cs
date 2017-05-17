@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Connection
     public class IdentificationFailedBannedMessage : IdentificationFailedMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6174;
+        public override int ProtocolId { get; } = 6174;
         
         public override int MessageID
         {

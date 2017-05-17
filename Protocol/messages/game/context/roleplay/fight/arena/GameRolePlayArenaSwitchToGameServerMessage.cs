@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Fight.Arena
     public class GameRolePlayArenaSwitchToGameServerMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6574;
+        public override int ProtocolId { get; } = 6574;
         
         public override int MessageID
         {

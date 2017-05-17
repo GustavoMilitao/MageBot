@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Finishmoves
     public class FinishMoveListRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6702;
+        public override int ProtocolId { get; } = 6702;
         
         public override int MessageID
         {

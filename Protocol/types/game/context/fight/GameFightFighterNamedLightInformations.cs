@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Context.Fight
     public class GameFightFighterNamedLightInformations : GameFightFighterLightInformations
     {
         
-        protected override int ProtocolId { get; set; } = 456;
+        public override int ProtocolId { get; } = 456;
         
         public override int TypeID
         {

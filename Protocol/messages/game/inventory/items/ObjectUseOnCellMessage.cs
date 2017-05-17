@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class ObjectUseOnCellMessage : ObjectUseMessage
     {
         
-        protected override int ProtocolId { get; set; } = 3013;
+        public override int ProtocolId { get; } = 3013;
         
         public override int MessageID
         {

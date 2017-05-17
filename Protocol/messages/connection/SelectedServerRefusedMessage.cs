@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Connection
     public class SelectedServerRefusedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 41;
+        public override int ProtocolId { get; } = 41;
         
         public override int MessageID
         {

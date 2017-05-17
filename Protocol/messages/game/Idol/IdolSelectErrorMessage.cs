@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Idol
     public class IdolSelectErrorMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6584;
+        public override int ProtocolId { get; } = 6584;
         
         public override int MessageID
         {

@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Inventory.Preset
     public class Preset : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 355;
+        public override int ProtocolId { get; } = 355;
         
         public override int TypeID
         {

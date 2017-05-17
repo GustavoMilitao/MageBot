@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Shortcut
     public class Shortcut : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 369;
+        public override int ProtocolId { get; } = 369;
         
         public override int TypeID
         {

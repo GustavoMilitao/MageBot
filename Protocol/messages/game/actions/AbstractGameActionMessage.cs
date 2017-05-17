@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Actions
     public class AbstractGameActionMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 1000;
+        public override int ProtocolId { get; } = 1000;
         
         public override int MessageID
         {

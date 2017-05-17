@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Emote
     public class EmoteListMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5689;
+        public override int ProtocolId { get; } = 5689;
         
         public override int MessageID
         {

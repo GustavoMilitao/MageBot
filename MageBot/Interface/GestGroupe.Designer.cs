@@ -37,10 +37,10 @@ namespace MageBot.Interface
             this.listViewGroups = new System.Windows.Forms.ListView();
             this.LaunchGroupsSelecBt = new MageBot.Interface.SadikButton();
             this.AddPage = new System.Windows.Forms.TabPage();
+            this.GroupNameLabel = new MageBot.Interface.SadikLabel();
             this.NameBox = new System.Windows.Forms.TextBox();
             this.listViewAccounts = new System.Windows.Forms.ListView();
             this.AddBt = new MageBot.Interface.SadikButton();
-            this.GroupNameLabel = new MageBot.Interface.SadikLabel();
             this.sadikTabControl1.SuspendLayout();
             this.LaunchPage.SuspendLayout();
             this.AddPage.SuspendLayout();
@@ -68,7 +68,7 @@ namespace MageBot.Interface
             this.LaunchPage.Location = new System.Drawing.Point(4, 34);
             this.LaunchPage.Name = "LaunchPage";
             this.LaunchPage.Padding = new System.Windows.Forms.Padding(3);
-            this.LaunchPage.Size = new System.Drawing.Size(274, 206);
+            this.LaunchPage.Size = new System.Drawing.Size(279, 238);
             this.LaunchPage.TabIndex = 0;
             this.LaunchPage.Text = "Lancer";
             // 
@@ -124,6 +124,17 @@ namespace MageBot.Interface
             this.AddPage.TabIndex = 1;
             this.AddPage.Text = "Créer";
             // 
+            // GroupNameLabel
+            // 
+            this.GroupNameLabel.AutoSize = true;
+            this.GroupNameLabel.Font = new System.Drawing.Font("Verdana", 8F);
+            this.GroupNameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
+            this.GroupNameLabel.Location = new System.Drawing.Point(38, 164);
+            this.GroupNameLabel.Name = "GroupNameLabel";
+            this.GroupNameLabel.Size = new System.Drawing.Size(78, 13);
+            this.GroupNameLabel.TabIndex = 19;
+            this.GroupNameLabel.Text = "Group name";
+            // 
             // NameBox
             // 
             this.NameBox.Location = new System.Drawing.Point(41, 180);
@@ -154,17 +165,6 @@ namespace MageBot.Interface
             this.AddBt.TabIndex = 16;
             this.AddBt.Text = "Créer";
             this.AddBt.Click += new System.EventHandler(this.AddBt_Click);
-            // 
-            // GroupNameLabel
-            // 
-            this.GroupNameLabel.AutoSize = true;
-            this.GroupNameLabel.Font = new System.Drawing.Font("Verdana", 8F);
-            this.GroupNameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.GroupNameLabel.Location = new System.Drawing.Point(38, 164);
-            this.GroupNameLabel.Name = "GroupNameLabel";
-            this.GroupNameLabel.Size = new System.Drawing.Size(78, 13);
-            this.GroupNameLabel.TabIndex = 19;
-            this.GroupNameLabel.Text = "Group name";
             // 
             // GestGroupe
             // 

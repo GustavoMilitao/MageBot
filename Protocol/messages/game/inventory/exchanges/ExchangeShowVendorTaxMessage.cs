@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Exchanges
     public class ExchangeShowVendorTaxMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5783;
+        public override int ProtocolId { get; } = 5783;
         
         public override int MessageID
         {

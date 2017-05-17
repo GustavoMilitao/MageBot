@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Choice
     public class CharacterSelectedSuccessMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 153;
+        public override int ProtocolId { get; } = 153;
         
         public override int MessageID
         {

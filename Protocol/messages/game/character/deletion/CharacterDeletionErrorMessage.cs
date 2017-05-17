@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Character.Deletion
     public class CharacterDeletionErrorMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 166;
+        public override int ProtocolId { get; } = 166;
         
         public override int MessageID
         {

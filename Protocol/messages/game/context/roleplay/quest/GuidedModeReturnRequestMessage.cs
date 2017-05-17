@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Quest
     public class GuidedModeReturnRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6088;
+        public override int ProtocolId { get; } = 6088;
         
         public override int MessageID
         {

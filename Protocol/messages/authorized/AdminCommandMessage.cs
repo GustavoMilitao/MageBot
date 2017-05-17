@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Authorized
     public class AdminCommandMessage : Message
     {
 
-        protected override int ProtocolId { get; set; } = 76;
+        public override int ProtocolId { get; } = 76;
         
         public override int MessageID
         {

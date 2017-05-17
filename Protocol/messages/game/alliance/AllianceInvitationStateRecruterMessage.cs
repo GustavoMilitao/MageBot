@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Alliance
     public class AllianceInvitationStateRecruterMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6396;
+        public override int ProtocolId { get; } = 6396;
         
         public override int MessageID
         {

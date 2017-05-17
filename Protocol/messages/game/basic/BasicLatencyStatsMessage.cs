@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Basic
     public class BasicLatencyStatsMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5663;
+        public override int ProtocolId { get; } = 5663;
         
         public override int MessageID
         {

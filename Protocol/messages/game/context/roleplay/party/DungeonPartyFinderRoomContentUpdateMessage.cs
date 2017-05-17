@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party
     public class DungeonPartyFinderRoomContentUpdateMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6250;
+        public override int ProtocolId { get; } = 6250;
         
         public override int MessageID
         {

@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Atlas.Compass
     public class CompassUpdatePvpSeekMessage : CompassUpdateMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6013;
+        public override int ProtocolId { get; } = 6013;
         
         public override int MessageID
         {

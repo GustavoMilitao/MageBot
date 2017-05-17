@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class InventoryContentAndPresetMessage : InventoryContentMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6162;
+        public override int ProtocolId { get; } = 6162;
         
         public override int MessageID
         {

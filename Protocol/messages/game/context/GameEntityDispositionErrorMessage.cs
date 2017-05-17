@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class GameEntityDispositionErrorMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5695;
+        public override int ProtocolId { get; } = 5695;
         
         public override int MessageID
         {

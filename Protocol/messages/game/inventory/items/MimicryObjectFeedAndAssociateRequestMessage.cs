@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Inventory.Items
     public class MimicryObjectFeedAndAssociateRequestMessage : SymbioticObjectAssociateRequestMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6460;
+        public override int ProtocolId { get; } = 6460;
         
         public override int MessageID
         {

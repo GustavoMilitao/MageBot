@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Fight.Challenge
     public class ChallengeTargetsListRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5614;
+        public override int ProtocolId { get; } = 5614;
         
         public override int MessageID
         {

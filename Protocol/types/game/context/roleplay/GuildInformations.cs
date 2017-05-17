@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
     public class GuildInformations : BasicGuildInformations
     {
         
-        protected override int ProtocolId { get; set; } = 127;
+        public override int ProtocolId { get; } = 127;
         
         public override int TypeID
         {

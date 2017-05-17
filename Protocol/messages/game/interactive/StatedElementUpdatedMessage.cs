@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Messages.Game.Interactive
     public class StatedElementUpdatedMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5709;
+        public override int ProtocolId { get; } = 5709;
         
         public override int MessageID
         {

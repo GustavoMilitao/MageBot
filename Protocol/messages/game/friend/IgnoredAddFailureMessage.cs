@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Friend
     public class IgnoredAddFailureMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5679;
+        public override int ProtocolId { get; } = 5679;
         
         public override int MessageID
         {

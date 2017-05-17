@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Interactive.Skill
     public class SkillActionDescriptionCraft : SkillActionDescription
     {
         
-        protected override int ProtocolId { get; set; } = 100;
+        public override int ProtocolId { get; } = 100;
         
         public override int TypeID
         {

@@ -20,7 +20,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay.Party
     public class PartyGuestInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 374;
+        public override int ProtocolId { get; } = 374;
         
         public override int TypeID
         {

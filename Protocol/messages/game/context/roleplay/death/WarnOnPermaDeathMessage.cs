@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Death
     public class WarnOnPermaDeathMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6512;
+        public override int ProtocolId { get; } = 6512;
         
         public override int MessageID
         {

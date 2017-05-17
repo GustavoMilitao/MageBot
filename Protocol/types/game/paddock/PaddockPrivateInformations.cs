@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Paddock
     public class PaddockPrivateInformations : PaddockAbandonnedInformations
     {
         
-        protected override int ProtocolId { get; set; } = 131;
+        public override int ProtocolId { get; } = 131;
         
         public override int TypeID
         {

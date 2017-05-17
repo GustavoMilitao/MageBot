@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Connection
 {
     public class IdentificationFailedMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 20;
+        public override int ProtocolId { get; } = 20;
         public override int MessageID { get { return ProtocolId; } }
 
         public uint Reason = 99;

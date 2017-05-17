@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Actions.Fight
     public class FightTemporarySpellImmunityEffect : AbstractFightDispellableEffect
     {
         
-        protected override int ProtocolId { get; set; } = 366;
+        public override int ProtocolId { get; } = 366;
         
         public override int TypeID
         {

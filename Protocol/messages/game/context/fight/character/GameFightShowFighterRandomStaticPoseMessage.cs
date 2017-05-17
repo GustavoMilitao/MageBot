@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Fight.Character
     public class GameFightShowFighterRandomStaticPoseMessage : GameFightShowFighterMessage
     {
         
-        protected override int ProtocolId { get; set; } = 6218;
+        public override int ProtocolId { get; } = 6218;
         
         public override int MessageID
         {

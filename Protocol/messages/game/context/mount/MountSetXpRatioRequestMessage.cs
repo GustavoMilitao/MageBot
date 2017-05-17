@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Mount
     public class MountSetXpRatioRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5989;
+        public override int ProtocolId { get; } = 5989;
         
         public override int MessageID
         {

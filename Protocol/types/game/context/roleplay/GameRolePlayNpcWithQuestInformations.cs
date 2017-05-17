@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
     public class GameRolePlayNpcWithQuestInformations : GameRolePlayNpcInformations
     {
         
-        protected override int ProtocolId { get; set; } = 383;
+        public override int ProtocolId { get; } = 383;
         
         public override int TypeID
         {

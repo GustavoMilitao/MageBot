@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Finishmoves
     public class FinishMoveInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 506;
+        public override int ProtocolId { get; } = 506;
         
         public override int TypeID
         {

@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Lockable
     public class LockableUseCodeMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5667;
+        public override int ProtocolId { get; } = 5667;
         
         public override int MessageID
         {

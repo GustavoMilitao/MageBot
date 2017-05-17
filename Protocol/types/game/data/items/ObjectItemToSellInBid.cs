@@ -15,7 +15,7 @@ namespace MageBot.Protocol.Types.Game.Data.Items
     public class ObjectItemToSellInBid : ObjectItemToSell
     {
         
-        protected override int ProtocolId { get; set; } = 164;
+        public override int ProtocolId { get; } = 164;
         
         public override int TypeID
         {

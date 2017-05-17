@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Interactive.Skill
     public class SkillActionDescription : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 102;
+        public override int ProtocolId { get; } = 102;
         
         public override int TypeID
         {

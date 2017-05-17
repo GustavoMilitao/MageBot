@@ -4,7 +4,7 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay
 {
     public class MapInformationsRequestMessage : Message
     {
-        protected override int ProtocolId { get; set; } = 225;
+        public override int ProtocolId { get; } = 225;
         public override int MessageID { get { return ProtocolId; } }
 
         public int MapId { get; set; }

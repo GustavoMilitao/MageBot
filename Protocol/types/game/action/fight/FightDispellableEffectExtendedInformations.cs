@@ -17,7 +17,7 @@ namespace MageBot.Protocol.Types.Game.Action.Fight
     public class FightDispellableEffectExtendedInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 208;
+        public override int ProtocolId { get; } = 208;
         
         public override int TypeID
         {

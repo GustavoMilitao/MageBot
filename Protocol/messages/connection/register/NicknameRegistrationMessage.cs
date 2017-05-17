@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Connection.Register
     public class NicknameRegistrationMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 5640;
+        public override int ProtocolId { get; } = 5640;
         
         public override int MessageID
         {

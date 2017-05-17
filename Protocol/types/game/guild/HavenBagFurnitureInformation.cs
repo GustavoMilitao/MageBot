@@ -16,7 +16,7 @@ namespace MageBot.Protocol.Types.Game.Guild
     public class HavenBagFurnitureInformation : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 498;
+        public override int ProtocolId { get; } = 498;
         
         public override int TypeID
         {

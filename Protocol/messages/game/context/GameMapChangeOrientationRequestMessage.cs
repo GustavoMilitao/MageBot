@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Context
     public class GameMapChangeOrientationRequestMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 945;
+        public override int ProtocolId { get; } = 945;
         
         public override int MessageID
         {

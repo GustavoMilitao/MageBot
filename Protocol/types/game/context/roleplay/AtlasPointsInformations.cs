@@ -18,7 +18,7 @@ namespace MageBot.Protocol.Types.Game.Context.Roleplay
     public class AtlasPointsInformations : NetworkType
     {
         
-        protected override int ProtocolId { get; set; } = 175;
+        public override int ProtocolId { get; } = 175;
         
         public override int TypeID
         {

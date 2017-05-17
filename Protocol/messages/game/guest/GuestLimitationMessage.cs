@@ -13,7 +13,7 @@ namespace MageBot.Protocol.Messages.Game.Guest
     public class GuestLimitationMessage : Message
     {
         
-        protected override int ProtocolId { get; set; } = 6506;
+        public override int ProtocolId { get; } = 6506;
         
         public override int MessageID
         {
