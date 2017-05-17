@@ -21,6 +21,7 @@ namespace MageBot.Core.Account
         public bool Enabled { get; set; }
         public ConfigManager ConfigRecover { get; set; }
         public bool Begin { get; set; }
+        public int BotSpeed { get; set; }
         #endregion
 
         #region pet

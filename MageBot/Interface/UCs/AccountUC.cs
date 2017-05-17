@@ -71,10 +71,11 @@ namespace MageBot.Interface
         public AccountUC(Account account, MetroFramework.Forms.MetroForm form = null)
         {
             InitializeComponent();
-            MonsterTextBox.KeyUp += (s, e) =>
-            {
-                IntelliSense.AutoCompleteTextBox(MonsterTextBox, lstPopup, IntelliSense.MonstersList, e);
-            };
+            //MonsterTextBox.KeyUp += (s, e) =>
+            //{
+            //    IntelliSense.AutoCompleteTextBox(MonsterTextBox, lstPopup, IntelliSense.MonstersList, e);
+            //};
+            //TODO Militão 2.0: Refact this monster text box auto complete
             if (form != null)
                 m_ParentForm = form;
             Account = account;
@@ -166,6 +167,20 @@ namespace MageBot.Interface
             account.FightData = new FightData(Account);
             account.MapData = new MapData(Account);
             account.WatchDog = new WatchDog(Account);
+
+
+        }
+
+        private void FillAccountInicialSettings()
+        {
+            if (!Account.Config.ConfigRecover.Restored)
+            {
+                Account.Config.VerboseLevel = (int)NUDVerbose.Value;
+                Account.Config.RegenConfig.RegenChoice = (int)RegenChoice.Value;
+                Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
+                Account.Config.MaxMonstersNumber = (int)nudMaxMonstersNumber.Value;
+                Account.Config.MaxMonstersLevel = (int)nudMaxMonstersLevel.Value;
+            }
         }
 
         private void Account_QueueChanged(object sender, EventArgs e)
@@ -535,8 +550,7 @@ namespace MageBot.Interface
 
         private void MonsterTextBox_GetFocus(object sender, EventArgs e)
         {
-            if (MonsterTextBox.Text == "Entrez le nom du monstre...")
-                MonsterTextBox.Text = "";
+                MonsterTextBox.Text = String.Empty;
         }
 
         private void MonstersRestrictionView_Supp(object sender, KeyEventArgs e)
@@ -1086,6 +1100,10 @@ namespace MageBot.Interface
         }
         #endregion
 
+        private void IsLockingFight_CheckedChanged(object sender)
+        {
+            Account.Config.LockingFights = IsLockingFight.Checked;
+        }
     }
 }
 

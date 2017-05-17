@@ -95,7 +95,7 @@ namespace MageBot.Core.Engine.Constants
             var TempFilteredList = lstAutoCompleteList.Where
                 (n => n.StartsWith(GetLastString(txtControl.Text))).Select(r => r);
 
-            lstTemp = TempFilteredList.ToList<string>();
+            lstTemp = TempFilteredList.ToList();
             if (lstTemp.Count != 0 && GetLastString(txtControl.Text) != "")
             {
                 lstControl.DataSource = lstTemp;
@@ -110,42 +110,33 @@ namespace MageBot.Core.Engine.Constants
             //Code for focusing ListBox Items While Pressing Down and UP Key. 
             if (txtControlKEA.KeyCode == Keys.Down)
             {
-                lstControl.SelectedIndex = 0;
+                lstControl.SelectedIndex = lstControl.SelectedIndex < lstControl.Items.Count - 1 ? lstControl.SelectedIndex + 1 : lstControl.SelectedIndex;
+                txtControl.Text = lstControl.SelectedItem.ToString();
                 lstControl.Focus();
                 txtControlKEA.Handled = true;
             }
             else if (txtControlKEA.KeyCode == Keys.Up)
             {
-                lstControl.SelectedIndex = lstControl.Items.Count - 1;
+                lstControl.SelectedIndex = lstControl.SelectedIndex > 0 ? lstControl.SelectedIndex -1 : lstControl.SelectedIndex;
+                txtControl.Text = lstControl.SelectedItem.ToString();
+
+                //lstControl.SelectedIndex = lstControl.Items.Count - 1;
                 lstControl.Focus();
                 txtControlKEA.Handled = true;
             }
-
-            //text box key press event
-            txtControl.KeyPress += (s, kpeArgs) =>
+            else if (txtControlKEA.KeyCode == Keys.Escape)
             {
-
-                if (kpeArgs.KeyChar == (char)Keys.Enter)
-                {
-                    if (lstControl.Visible)
-                    {
-                        lstControl.Focus();
-                    }
-                    kpeArgs.Handled = true;
-                }
-                else if (kpeArgs.KeyChar == (char)Keys.Escape)
-                {
-                    lstControl.Visible = false;
-                    kpeArgs.Handled = true;
-                }
-                else if (kpeArgs.KeyChar == (char)Keys.Tab)
-                {
-                    txtControl.Text = ((ListBox)s).SelectedItem.ToString();
-                    txtControl.Select(txtControl.Text.Length, 0);
-                    txtControl.Focus();
-                    lstControl.Hide();
-                }
-            };
+                lstControl.Visible = false;
+                txtControlKEA.Handled = true;
+            }
+            else if (txtControlKEA.KeyCode == Keys.Tab ||
+                     txtControlKEA.KeyCode == Keys.Enter)
+            {
+                txtControl.Text = (lstControl).SelectedItem.ToString();
+                txtControl.Select(txtControl.Text.Length, 0);
+                txtControl.Focus();
+                lstControl.Hide();
+            }
 
             txtControl.LostFocus += (s, eventArgs) =>
             {
@@ -154,16 +145,17 @@ namespace MageBot.Core.Engine.Constants
             };
 
             //listbox keyup event
-            lstControl.KeyUp += (s, kueArgs) =>
+            lstControl.KeyPress += (s, kueArgs) =>
             {
-                if (kueArgs.KeyCode == Keys.Tab)
+                if (kueArgs.KeyChar == (char)Keys.Tab||
+                txtControlKEA.KeyCode == Keys.Enter)
                 {
                     txtControl.Text = ((ListBox)s).SelectedItem.ToString();
                     txtControl.Select(txtControl.Text.Length, 0);
                     txtControl.Focus();
                     lstControl.Hide();
                 }
-                else if (kueArgs.KeyCode == Keys.Escape)
+                else if (kueArgs.KeyChar == (char)Keys.Escape)
                 {
                     lstControl.Hide();
                     txtControl.Focus();

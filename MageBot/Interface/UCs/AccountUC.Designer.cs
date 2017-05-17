@@ -79,7 +79,7 @@ namespace MageBot.Interface
             this.metroTabControl2 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.IsLockingFight = new MetroFramework.Controls.MetroCheckBox();
+            this.IsLockingFight = new MageBot.Interface.SadikCheckbox();
             this.NUDTimeoutFight = new System.Windows.Forms.NumericUpDown();
             this.sadikLabel11 = new MageBot.Interface.SadikLabel();
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
@@ -249,36 +249,36 @@ namespace MageBot.Interface
             this.PathDownBt.Image = ((System.Drawing.Image)(resources.GetObject("PathDownBt.Image")));
             this.PathDownBt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.PathDownBt.Name = "PathDownBt";
-            this.PathDownBt.Size = new System.Drawing.Size(65, 22);
-            this.PathDownBt.Text = Strings.Path;
+            this.PathDownBt.Size = new System.Drawing.Size(60, 22);
+            this.PathDownBt.Text = "Path";
             // 
             // LoadPathBt
             // 
             this.LoadPathBt.Name = "LoadPathBt";
-            this.LoadPathBt.Size = new System.Drawing.Size(263, 22);
-            this.LoadPathBt.Text = Strings.LoadAPath;
+            this.LoadPathBt.Size = new System.Drawing.Size(240, 22);
+            this.LoadPathBt.Text = "Load a path";
             this.LoadPathBt.Click += new System.EventHandler(this.LoadPathBt_Click);
             // 
             // LaunchPathBt
             // 
             this.LaunchPathBt.Name = "LaunchPathBt";
-            this.LaunchPathBt.Size = new System.Drawing.Size(263, 22);
-            this.LaunchPathBt.Text = Strings.LaunchThePath;
+            this.LaunchPathBt.Size = new System.Drawing.Size(240, 22);
+            this.LaunchPathBt.Text = "Launch the path";
             this.LaunchPathBt.Click += new System.EventHandler(this.LaunchPathBt_Click);
             // 
             // StopPathBt
             // 
             this.StopPathBt.Name = "StopPathBt";
-            this.StopPathBt.Size = new System.Drawing.Size(263, 22);
-            this.StopPathBt.Text = Strings.StopThePath;
+            this.StopPathBt.Size = new System.Drawing.Size(240, 22);
+            this.StopPathBt.Text = "Stop the path";
             this.StopPathBt.Click += new System.EventHandler(this.StopPathBt_Click);
             // 
             // RelaunchPath
             // 
             this.RelaunchPath.CheckOnClick = true;
             this.RelaunchPath.Name = "RelaunchPath";
-            this.RelaunchPath.Size = new System.Drawing.Size(263, 22);
-            this.RelaunchPath.Text = "✘ " + Strings.RestartThePathToReconnect;
+            this.RelaunchPath.Size = new System.Drawing.Size(240, 22);
+            this.RelaunchPath.Text = "✘ Restart the path to reconnect";
             this.RelaunchPath.CheckedChanged += new System.EventHandler(this.RelaunchPath_CheckedChanged);
             // 
             // toolStripSeparator1
@@ -303,8 +303,8 @@ namespace MageBot.Interface
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(158, 22);
-            this.toolStripButton1.Text = Strings.Connection+"/"+Strings.Disconnection;
+            this.toolStripButton1.Size = new System.Drawing.Size(170, 22);
+            this.toolStripButton1.Text = "Connection/Disconnection";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripSeparator2
@@ -315,8 +315,8 @@ namespace MageBot.Interface
             // SubcribeLb
             // 
             this.SubcribeLb.Name = "SubcribeLb";
-            this.SubcribeLb.Size = new System.Drawing.Size(73, 22);
-            this.SubcribeLb.Text = Strings.NotSubscribed;
+            this.SubcribeLb.Size = new System.Drawing.Size(87, 22);
+            this.SubcribeLb.Text = "Not subscribed";
             // 
             // imageList1
             // 
@@ -375,9 +375,9 @@ namespace MageBot.Interface
             this.KamasLabel.ForeColor = System.Drawing.Color.Black;
             this.KamasLabel.Location = new System.Drawing.Point(494, 394);
             this.KamasLabel.Name = "KamasLabel";
-            this.KamasLabel.Size = new System.Drawing.Size(56, 13);
+            this.KamasLabel.Size = new System.Drawing.Size(57, 13);
             this.KamasLabel.TabIndex = 13;
-            this.KamasLabel.Text = "0 "+Strings.Kamas;
+            this.KamasLabel.Text = "0 Kamas";
             // 
             // StatusLb
             // 
@@ -387,9 +387,9 @@ namespace MageBot.Interface
             this.StatusLb.ForeColor = System.Drawing.Color.Black;
             this.StatusLb.Location = new System.Drawing.Point(17, 394);
             this.StatusLb.Name = "StatusLb";
-            this.StatusLb.Size = new System.Drawing.Size(74, 13);
+            this.StatusLb.Size = new System.Drawing.Size(83, 13);
             this.StatusLb.TabIndex = 10;
-            this.StatusLb.Text = Strings.Disconnected;
+            this.StatusLb.Text = "Disconnected";
             // 
             // VTabAccount
             // 
@@ -418,7 +418,7 @@ namespace MageBot.Interface
             this.ConsolePage.Padding = new System.Windows.Forms.Padding(3);
             this.ConsolePage.Size = new System.Drawing.Size(498, 348);
             this.ConsolePage.TabIndex = 0;
-            this.ConsolePage.Text = Strings.Console;
+            this.ConsolePage.Text = "Console";
             this.ConsolePage.UseVisualStyleBackColor = true;
             // 
             // metroTabControl1
@@ -428,7 +428,7 @@ namespace MageBot.Interface
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(3, 3);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 1;
             this.metroTabControl1.Size = new System.Drawing.Size(492, 342);
             this.metroTabControl1.TabIndex = 6;
             this.metroTabControl1.UseSelectable = true;
@@ -444,7 +444,7 @@ namespace MageBot.Interface
             this.metroTabPage1.Name = "metroTabPage1";
             this.metroTabPage1.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage1.TabIndex = 0;
-            this.metroTabPage1.Text = Strings.Console;
+            this.metroTabPage1.Text = "Console";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
@@ -462,7 +462,7 @@ namespace MageBot.Interface
             // 
             this.LogConsole.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LogConsole.BackColor = System.Drawing.Color.White;
-            this.LogConsole.Location = new System.Drawing.Point(0, 14);
+            this.LogConsole.Location = new System.Drawing.Point(0, 16);
             this.LogConsole.Name = "LogConsole";
             this.LogConsole.ReadOnly = true;
             this.LogConsole.Size = new System.Drawing.Size(484, 262);
@@ -480,7 +480,7 @@ namespace MageBot.Interface
             this.metroTabPage2.Name = "metroTabPage2";
             this.metroTabPage2.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage2.TabIndex = 1;
-            this.metroTabPage2.Text = Strings.Configuration;
+            this.metroTabPage2.Text = "Configuration";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
             this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage2.VerticalScrollbarSize = 10;
@@ -503,9 +503,9 @@ namespace MageBot.Interface
             this.sadikLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel13.Location = new System.Drawing.Point(15, 20);
             this.sadikLabel13.Name = "sadikLabel13";
-            this.sadikLabel13.Size = new System.Drawing.Size(134, 13);
+            this.sadikLabel13.Size = new System.Drawing.Size(104, 13);
             this.sadikLabel13.TabIndex = 3;
-            this.sadikLabel13.Text = Strings.VerbosityLevel + " : ";
+            this.sadikLabel13.Text = "Verbosity level : ";
             // 
             // NUDVerbose
             // 
@@ -533,7 +533,7 @@ namespace MageBot.Interface
             this.sadikGroupBox1.Controls.Add(this.DebugMode);
             this.sadikGroupBox1.Location = new System.Drawing.Point(3, 77);
             this.sadikGroupBox1.Name = "sadikGroupBox1";
-            this.sadikGroupBox1.Size = new System.Drawing.Size(218, 190);
+            this.sadikGroupBox1.Size = new System.Drawing.Size(299, 194);
             this.sadikGroupBox1.TabIndex = 7;
             this.sadikGroupBox1.Text = "sadikGroupBox1";
             // 
@@ -548,7 +548,7 @@ namespace MageBot.Interface
             this.DeleteConfigBt.RoundedCorners = false;
             this.DeleteConfigBt.Size = new System.Drawing.Size(183, 48);
             this.DeleteConfigBt.TabIndex = 10;
-            this.DeleteConfigBt.Text = Strings.RemoveConfiguration;
+            this.DeleteConfigBt.Text = "Remove configuration";
             // 
             // SaveConfig
             // 
@@ -561,7 +561,7 @@ namespace MageBot.Interface
             this.SaveConfig.RoundedCorners = false;
             this.SaveConfig.Size = new System.Drawing.Size(183, 51);
             this.SaveConfig.TabIndex = 9;
-            this.SaveConfig.Text = Strings.SaveConfiguration;
+            this.SaveConfig.Text = "Save configuration";
             // 
             // LogCb
             // 
@@ -571,7 +571,7 @@ namespace MageBot.Interface
             this.LogCb.Name = "LogCb";
             this.LogCb.Size = new System.Drawing.Size(140, 20);
             this.LogCb.TabIndex = 8;
-            this.LogCb.Text = Strings.LogTheConsole;
+            this.LogCb.Text = "Log the console";
             // 
             // DebugMode
             // 
@@ -581,7 +581,7 @@ namespace MageBot.Interface
             this.DebugMode.Name = "DebugMode";
             this.DebugMode.Size = new System.Drawing.Size(140, 20);
             this.DebugMode.TabIndex = 7;
-            this.DebugMode.Text = Strings.DebugMode;
+            this.DebugMode.Text = "Debug mode";
             // 
             // FightPage
             // 
@@ -592,7 +592,7 @@ namespace MageBot.Interface
             this.FightPage.Padding = new System.Windows.Forms.Padding(3);
             this.FightPage.Size = new System.Drawing.Size(498, 348);
             this.FightPage.TabIndex = 1;
-            this.FightPage.Text = Strings.Combat;
+            this.FightPage.Text = "Combat";
             this.FightPage.UseVisualStyleBackColor = true;
             // 
             // metroTabControl2
@@ -621,7 +621,7 @@ namespace MageBot.Interface
             this.metroTabPage3.Name = "metroTabPage3";
             this.metroTabPage3.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage3.TabIndex = 0;
-            this.metroTabPage3.Text = Strings.Configuration;
+            this.metroTabPage3.Text = "Configuration";
             this.metroTabPage3.VerticalScrollbarBarColor = true;
             this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage3.VerticalScrollbarSize = 10;
@@ -632,26 +632,23 @@ namespace MageBot.Interface
             this.groupBox8.Controls.Add(this.IsLockingFight);
             this.groupBox8.Controls.Add(this.NUDTimeoutFight);
             this.groupBox8.Controls.Add(this.sadikLabel11);
-            this.groupBox8.Location = new System.Drawing.Point(36, 209);
+            this.groupBox8.Location = new System.Drawing.Point(3, 203);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(402, 80);
+            this.groupBox8.Size = new System.Drawing.Size(478, 80);
             this.groupBox8.TabIndex = 19;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = Strings.Miscellaneous;
+            this.groupBox8.Text = "Miscellaneous";
             // 
             // IsLockingFight
             // 
-            this.IsLockingFight.AutoSize = true;
-            this.IsLockingFight.DisplayFocus = true;
-            this.IsLockingFight.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.IsLockingFight.Checked = false;
+            this.IsLockingFight.Font = new System.Drawing.Font("Verdana", 8F);
             this.IsLockingFight.Location = new System.Drawing.Point(9, 50);
             this.IsLockingFight.Name = "IsLockingFight";
-            this.IsLockingFight.Size = new System.Drawing.Size(132, 19);
-            this.IsLockingFight.Style = MetroFramework.MetroColorStyle.Blue;
-            this.IsLockingFight.TabIndex = 3;
-            this.IsLockingFight.Text = Strings.CloseCombat;
-            this.IsLockingFight.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.IsLockingFight.UseSelectable = true;
+            this.IsLockingFight.Size = new System.Drawing.Size(204, 18);
+            this.IsLockingFight.TabIndex = 6;
+            this.IsLockingFight.Text = "Close combat";
+            this.IsLockingFight.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.IsLockingFight_CheckedChanged);
             // 
             // NUDTimeoutFight
             // 
@@ -689,9 +686,9 @@ namespace MageBot.Interface
             this.sadikLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel11.Location = new System.Drawing.Point(6, 26);
             this.sadikLabel11.Name = "sadikLabel11";
-            this.sadikLabel11.Size = new System.Drawing.Size(206, 13);
+            this.sadikLabel11.Size = new System.Drawing.Size(141, 13);
             this.sadikLabel11.TabIndex = 0;
-            this.sadikLabel11.Text = string.Format(Strings.SpeedSetting,"x");
+            this.sadikLabel11.Text = "Speed setting: Speed x";
             this.sadikLabel11.Visible = false;
             // 
             // GroupBox2
@@ -699,21 +696,21 @@ namespace MageBot.Interface
             this.GroupBox2.BackColor = System.Drawing.Color.Transparent;
             this.GroupBox2.Controls.Add(this.NomIA);
             this.GroupBox2.Controls.Add(this.ChoiceIABt);
-            this.GroupBox2.Location = new System.Drawing.Point(36, 9);
+            this.GroupBox2.Location = new System.Drawing.Point(3, 3);
             this.GroupBox2.Name = "GroupBox2";
-            this.GroupBox2.Size = new System.Drawing.Size(403, 62);
+            this.GroupBox2.Size = new System.Drawing.Size(478, 62);
             this.GroupBox2.TabIndex = 16;
             this.GroupBox2.TabStop = false;
-            this.GroupBox2.Text = Strings.AI;
+            this.GroupBox2.Text = "AI";
             // 
             // NomIA
             // 
             this.NomIA.AutoSize = true;
             this.NomIA.Location = new System.Drawing.Point(22, 22);
             this.NomIA.Name = "NomIA";
-            this.NomIA.Size = new System.Drawing.Size(68, 19);
+            this.NomIA.Size = new System.Drawing.Size(43, 19);
             this.NomIA.TabIndex = 2;
-            this.NomIA.Text = Strings.NoAI;
+            this.NomIA.Text = "No IA";
             // 
             // ChoiceIABt
             // 
@@ -726,7 +723,7 @@ namespace MageBot.Interface
             this.ChoiceIABt.RoundedCorners = false;
             this.ChoiceIABt.Size = new System.Drawing.Size(190, 38);
             this.ChoiceIABt.TabIndex = 1;
-            this.ChoiceIABt.Text = Strings.ChooseAnIA;
+            this.ChoiceIABt.Text = "Choose an IA";
             this.ChoiceIABt.Click += new System.EventHandler(this.ChoiceIABt_Click);
             // 
             // GroupBox3
@@ -735,12 +732,12 @@ namespace MageBot.Interface
             this.GroupBox3.Controls.Add(this.sadikLabel2);
             this.GroupBox3.Controls.Add(this.sadikLabel1);
             this.GroupBox3.Controls.Add(this.RegenChoice);
-            this.GroupBox3.Location = new System.Drawing.Point(36, 88);
+            this.GroupBox3.Location = new System.Drawing.Point(3, 82);
             this.GroupBox3.Name = "GroupBox3";
-            this.GroupBox3.Size = new System.Drawing.Size(403, 44);
+            this.GroupBox3.Size = new System.Drawing.Size(478, 44);
             this.GroupBox3.TabIndex = 17;
             this.GroupBox3.TabStop = false;
-            this.GroupBox3.Text = Strings.Regeneration;
+            this.GroupBox3.Text = "Regeneration";
             // 
             // sadikLabel2
             // 
@@ -749,9 +746,9 @@ namespace MageBot.Interface
             this.sadikLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel2.Location = new System.Drawing.Point(208, 18);
             this.sadikLabel2.Name = "sadikLabel2";
-            this.sadikLabel2.Size = new System.Drawing.Size(62, 13);
+            this.sadikLabel2.Size = new System.Drawing.Size(59, 13);
             this.sadikLabel2.TabIndex = 3;
-            this.sadikLabel2.Text = "% "+ Strings.OfLife +".";
+            this.sadikLabel2.Text = "% of life.";
             // 
             // sadikLabel1
             // 
@@ -760,9 +757,9 @@ namespace MageBot.Interface
             this.sadikLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel1.Location = new System.Drawing.Point(6, 18);
             this.sadikLabel1.Name = "sadikLabel1";
-            this.sadikLabel1.Size = new System.Drawing.Size(156, 13);
+            this.sadikLabel1.Size = new System.Drawing.Size(109, 13);
             this.sadikLabel1.TabIndex = 2;
-            this.sadikLabel1.Text = Strings.RegenerateFrom + ":";
+            this.sadikLabel1.Text = "Regenerate from:";
             // 
             // RegenChoice
             // 
@@ -770,6 +767,11 @@ namespace MageBot.Interface
             this.RegenChoice.Name = "RegenChoice";
             this.RegenChoice.Size = new System.Drawing.Size(40, 20);
             this.RegenChoice.TabIndex = 1;
+            this.RegenChoice.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
             // 
             // GroupBox4
             // 
@@ -779,22 +781,22 @@ namespace MageBot.Interface
             this.GroupBox4.Controls.Add(this.sadikLabel3);
             this.GroupBox4.Controls.Add(this.PresetEndUpD);
             this.GroupBox4.Controls.Add(this.PresetStartUpD);
-            this.GroupBox4.Location = new System.Drawing.Point(36, 138);
+            this.GroupBox4.Location = new System.Drawing.Point(3, 132);
             this.GroupBox4.Name = "GroupBox4";
-            this.GroupBox4.Size = new System.Drawing.Size(403, 65);
+            this.GroupBox4.Size = new System.Drawing.Size(478, 65);
             this.GroupBox4.TabIndex = 18;
             this.GroupBox4.TabStop = false;
-            this.GroupBox4.Text = Strings.Equipment;
+            this.GroupBox4.Text = "Equipment";
             // 
             // WithItemSetBox
             // 
             this.WithItemSetBox.Checked = false;
             this.WithItemSetBox.Font = new System.Drawing.Font("Verdana", 8F);
-            this.WithItemSetBox.Location = new System.Drawing.Point(9, 22);
+            this.WithItemSetBox.Location = new System.Drawing.Point(6, 22);
             this.WithItemSetBox.Name = "WithItemSetBox";
-            this.WithItemSetBox.Size = new System.Drawing.Size(226, 20);
+            this.WithItemSetBox.Size = new System.Drawing.Size(204, 18);
             this.WithItemSetBox.TabIndex = 5;
-            this.WithItemSetBox.Text = Strings.UseTheFastEquipmentNumber;
+            this.WithItemSetBox.Text = "Use the fast equipment number";
             // 
             // sadikLabel4
             // 
@@ -803,9 +805,9 @@ namespace MageBot.Interface
             this.sadikLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel4.Location = new System.Drawing.Point(273, 41);
             this.sadikLabel4.Name = "sadikLabel4";
-            this.sadikLabel4.Size = new System.Drawing.Size(114, 13);
+            this.sadikLabel4.Size = new System.Drawing.Size(136, 13);
             this.sadikLabel4.TabIndex = 4;
-            this.sadikLabel4.Text = Strings.AtTheEndOfTheFight + ".";
+            this.sadikLabel4.Text = "At the end of the fight.";
             // 
             // sadikLabel3
             // 
@@ -814,9 +816,9 @@ namespace MageBot.Interface
             this.sadikLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel3.Location = new System.Drawing.Point(273, 22);
             this.sadikLabel3.Name = "sadikLabel3";
-            this.sadikLabel3.Size = new System.Drawing.Size(129, 13);
+            this.sadikLabel3.Size = new System.Drawing.Size(159, 13);
             this.sadikLabel3.TabIndex = 3;
-            this.sadikLabel3.Text = Strings.AtTheEntranceInCombat + ".";
+            this.sadikLabel3.Text = "At the entrance in combat.";
             // 
             // PresetEndUpD
             // 
@@ -879,7 +881,7 @@ namespace MageBot.Interface
             this.metroTabPage4.Name = "metroTabPage4";
             this.metroTabPage4.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage4.TabIndex = 1;
-            this.metroTabPage4.Text = Strings.Restrictions;
+            this.metroTabPage4.Text = "Restrictions";
             this.metroTabPage4.VerticalScrollbarBarColor = true;
             this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage4.VerticalScrollbarSize = 10;
@@ -904,9 +906,9 @@ namespace MageBot.Interface
             this.ForceMonstersBt.Location = new System.Drawing.Point(397, 89);
             this.ForceMonstersBt.Name = "ForceMonstersBt";
             this.ForceMonstersBt.RoundedCorners = false;
-            this.ForceMonstersBt.Size = new System.Drawing.Size(65, 26);
+            this.ForceMonstersBt.Size = new System.Drawing.Size(84, 26);
             this.ForceMonstersBt.TabIndex = 31;
-            this.ForceMonstersBt.Text = Strings.Force;
+            this.ForceMonstersBt.Text = "Force";
             this.ForceMonstersBt.Click += new System.EventHandler(this.ForceMonstersBt_Click);
             // 
             // ForbidMonsterBt
@@ -920,14 +922,14 @@ namespace MageBot.Interface
             this.ForbidMonsterBt.RoundedCorners = false;
             this.ForbidMonsterBt.Size = new System.Drawing.Size(65, 26);
             this.ForbidMonsterBt.TabIndex = 30;
-            this.ForbidMonsterBt.Text = Strings.Forbidden;
+            this.ForbidMonsterBt.Text = "Forbidden";
             this.ForbidMonsterBt.Click += new System.EventHandler(this.ForbidMonsterBt_Click);
             // 
             // MonstersRestrictionsView
             // 
             this.MonstersRestrictionsView.Location = new System.Drawing.Point(4, 121);
             this.MonstersRestrictionsView.Name = "MonstersRestrictionsView";
-            this.MonstersRestrictionsView.Size = new System.Drawing.Size(445, 163);
+            this.MonstersRestrictionsView.Size = new System.Drawing.Size(477, 163);
             this.MonstersRestrictionsView.TabIndex = 33;
             this.MonstersRestrictionsView.UseCompatibleStateImageBehavior = false;
             this.MonstersRestrictionsView.View = System.Windows.Forms.View.Details;
@@ -977,7 +979,7 @@ namespace MageBot.Interface
             this.MonsterTextBox.Name = "MonsterTextBox";
             this.MonsterTextBox.Size = new System.Drawing.Size(213, 20);
             this.MonsterTextBox.TabIndex = 27;
-            this.MonsterTextBox.Text = Strings.EnterTheNameOfTheMonster + "...";
+            this.MonsterTextBox.Text = "Enter the name of the monster...";
             this.MonsterTextBox.GotFocus += new System.EventHandler(this.MonsterTextBox_GetFocus);
             // 
             // GroupBox1
@@ -993,10 +995,10 @@ namespace MageBot.Interface
             this.GroupBox1.Controls.Add(this.nudMinMonstersNumber);
             this.GroupBox1.Location = new System.Drawing.Point(4, 13);
             this.GroupBox1.Name = "GroupBox1";
-            this.GroupBox1.Size = new System.Drawing.Size(445, 71);
+            this.GroupBox1.Size = new System.Drawing.Size(477, 71);
             this.GroupBox1.TabIndex = 32;
             this.GroupBox1.TabStop = false;
-            this.GroupBox1.Text = Strings.MonstersRestrictions;
+            this.GroupBox1.Text = "Monsters restrictions";
             // 
             // sadikLabel6
             // 
@@ -1005,9 +1007,9 @@ namespace MageBot.Interface
             this.sadikLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel6.Location = new System.Drawing.Point(6, 39);
             this.sadikLabel6.Name = "sadikLabel6";
-            this.sadikLabel6.Size = new System.Drawing.Size(134, 13);
+            this.sadikLabel6.Size = new System.Drawing.Size(95, 13);
             this.sadikLabel6.TabIndex = 25;
-            this.sadikLabel6.Text = Strings.MonstersLevels;
+            this.sadikLabel6.Text = "Monsters levels";
             // 
             // sadikLabel5
             // 
@@ -1016,18 +1018,18 @@ namespace MageBot.Interface
             this.sadikLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel5.Location = new System.Drawing.Point(6, 18);
             this.sadikLabel5.Name = "sadikLabel5";
-            this.sadikLabel5.Size = new System.Drawing.Size(127, 13);
+            this.sadikLabel5.Size = new System.Drawing.Size(93, 13);
             this.sadikLabel5.TabIndex = 24;
-            this.sadikLabel5.Text = Strings.MonstersNames;
+            this.sadikLabel5.Text = "Monsters count";
             // 
             // lbReplaceMonstersLevel
             // 
             this.lbReplaceMonstersLevel.AutoSize = true;
             this.lbReplaceMonstersLevel.Location = new System.Drawing.Point(199, 42);
             this.lbReplaceMonstersLevel.Name = "lbReplaceMonstersLevel";
-            this.lbReplaceMonstersLevel.Size = new System.Drawing.Size(13, 13);
+            this.lbReplaceMonstersLevel.Size = new System.Drawing.Size(20, 13);
             this.lbReplaceMonstersLevel.TabIndex = 21;
-            this.lbReplaceMonstersLevel.Text = Strings.To;
+            this.lbReplaceMonstersLevel.Text = "To";
             // 
             // nudMaxMonstersLevel
             // 
@@ -1042,7 +1044,7 @@ namespace MageBot.Interface
             this.nudMaxMonstersLevel.TabIndex = 23;
             this.nudMaxMonstersLevel.ThousandsSeparator = true;
             this.nudMaxMonstersLevel.Value = new decimal(new int[] {
-            1000000,
+            1000,
             0,
             0,
             0});
@@ -1064,9 +1066,9 @@ namespace MageBot.Interface
             this.lbReplaceMonstersNumber.AutoSize = true;
             this.lbReplaceMonstersNumber.Location = new System.Drawing.Point(199, 18);
             this.lbReplaceMonstersNumber.Name = "lbReplaceMonstersNumber";
-            this.lbReplaceMonstersNumber.Size = new System.Drawing.Size(13, 13);
+            this.lbReplaceMonstersNumber.Size = new System.Drawing.Size(20, 13);
             this.lbReplaceMonstersNumber.TabIndex = 18;
-            this.lbReplaceMonstersNumber.Text = Strings.To;
+            this.lbReplaceMonstersNumber.Text = "To";
             // 
             // nudMaxMonstersNumber
             // 
@@ -1108,7 +1110,7 @@ namespace MageBot.Interface
             this.metroTabPage5.Name = "metroTabPage5";
             this.metroTabPage5.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage5.TabIndex = 2;
-            this.metroTabPage5.Text = Strings.Statistics;
+            this.metroTabPage5.Text = "Statistics";
             this.metroTabPage5.VerticalScrollbarBarColor = true;
             this.metroTabPage5.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage5.VerticalScrollbarSize = 10;
@@ -1128,7 +1130,7 @@ namespace MageBot.Interface
             this.WinLoseFightPie.Series.Add(series1);
             this.WinLoseFightPie.Size = new System.Drawing.Size(233, 135);
             this.WinLoseFightPie.TabIndex = 3;
-            this.WinLoseFightPie.Text = Strings.WinLoseFightPie;
+            this.WinLoseFightPie.Text = "WinLoseFightPie";
             // 
             // XpBarsChart
             // 
@@ -1144,7 +1146,7 @@ namespace MageBot.Interface
             this.XpBarsChart.Series.Add(series2);
             this.XpBarsChart.Size = new System.Drawing.Size(360, 116);
             this.XpBarsChart.TabIndex = 2;
-            this.XpBarsChart.Text = Strings.chart1;
+            this.XpBarsChart.Text = "chart1";
             // 
             // JobPage
             // 
@@ -1154,7 +1156,7 @@ namespace MageBot.Interface
             this.JobPage.Padding = new System.Windows.Forms.Padding(3);
             this.JobPage.Size = new System.Drawing.Size(498, 348);
             this.JobPage.TabIndex = 6;
-            this.JobPage.Text = Strings.Crafts;
+            this.JobPage.Text = "Crafts";
             this.JobPage.UseVisualStyleBackColor = true;
             // 
             // JobsTabP
@@ -1176,7 +1178,7 @@ namespace MageBot.Interface
             this.FamiPage.Padding = new System.Windows.Forms.Padding(3);
             this.FamiPage.Size = new System.Drawing.Size(498, 348);
             this.FamiPage.TabIndex = 2;
-            this.FamiPage.Text = Strings.Pets;
+            this.FamiPage.Text = "Pets";
             this.FamiPage.UseVisualStyleBackColor = true;
             // 
             // panelAccountInformations
@@ -1201,9 +1203,9 @@ namespace MageBot.Interface
             this.labelSafe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.labelSafe.Location = new System.Drawing.Point(341, 302);
             this.labelSafe.Name = "labelSafe";
-            this.labelSafe.Size = new System.Drawing.Size(56, 13);
+            this.labelSafe.Size = new System.Drawing.Size(71, 13);
             this.labelSafe.TabIndex = 12;
-            this.labelSafe.Text = Strings.SafeBox + " : ";
+            this.labelSafe.Text = "Safe box : ";
             // 
             // labelNextMeal
             // 
@@ -1212,9 +1214,9 @@ namespace MageBot.Interface
             this.labelNextMeal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.labelNextMeal.Location = new System.Drawing.Point(162, 302);
             this.labelNextMeal.Name = "labelNextMeal";
-            this.labelNextMeal.Size = new System.Drawing.Size(155, 13);
+            this.labelNextMeal.Size = new System.Drawing.Size(134, 13);
             this.labelNextMeal.TabIndex = 11;
-            this.labelNextMeal.Text = Strings.NextMeal + string.Format(" : {0}.", Strings.Unknown);
+            this.labelNextMeal.Text = "Next meal : Unknown.";
             // 
             // checkBoxBegin
             // 
@@ -1224,7 +1226,7 @@ namespace MageBot.Interface
             this.checkBoxBegin.Name = "checkBoxBegin";
             this.checkBoxBegin.Size = new System.Drawing.Size(140, 20);
             this.checkBoxBegin.TabIndex = 10;
-            this.checkBoxBegin.Text = Strings.StartingProcreation;
+            this.checkBoxBegin.Text = "Starting procreation";
             this.checkBoxBegin.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.checkBoxBegin_CheckedChanged);
             // 
             // listViewPets
@@ -1244,7 +1246,7 @@ namespace MageBot.Interface
             this.InventairePage.Padding = new System.Windows.Forms.Padding(3);
             this.InventairePage.Size = new System.Drawing.Size(498, 348);
             this.InventairePage.TabIndex = 4;
-            this.InventairePage.Text = Strings.Inventory;
+            this.InventairePage.Text = "Inventory";
             this.InventairePage.UseVisualStyleBackColor = true;
             // 
             // sadikTabControl2
@@ -1276,7 +1278,7 @@ namespace MageBot.Interface
             this.metroTabPage6.Name = "metroTabPage6";
             this.metroTabPage6.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage6.TabIndex = 0;
-            this.metroTabPage6.Text = Strings.Inventory;
+            this.metroTabPage6.Text = "Inventory";
             this.metroTabPage6.VerticalScrollbarBarColor = true;
             this.metroTabPage6.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage6.VerticalScrollbarSize = 10;
@@ -1292,7 +1294,7 @@ namespace MageBot.Interface
             this.RegenAddBt.RoundedCorners = false;
             this.RegenAddBt.Size = new System.Drawing.Size(92, 26);
             this.RegenAddBt.TabIndex = 13;
-            this.RegenAddBt.Text = Strings.Regeneration;
+            this.RegenAddBt.Text = "Regeneration";
             this.RegenAddBt.Click += new System.EventHandler(this.RegenAddBt_Click);
             // 
             // AutoDelAddBt
@@ -1306,7 +1308,7 @@ namespace MageBot.Interface
             this.AutoDelAddBt.RoundedCorners = false;
             this.AutoDelAddBt.Size = new System.Drawing.Size(112, 26);
             this.AutoDelAddBt.TabIndex = 12;
-            this.AutoDelAddBt.Text = Strings.AutoDelete + ".";
+            this.AutoDelAddBt.Text = "Auto delete.";
             this.AutoDelAddBt.Click += new System.EventHandler(this.AutoDelAddBt_Click);
             // 
             // sadikButton2
@@ -1320,7 +1322,7 @@ namespace MageBot.Interface
             this.sadikButton2.RoundedCorners = false;
             this.sadikButton2.Size = new System.Drawing.Size(56, 26);
             this.sadikButton2.TabIndex = 11;
-            this.sadikButton2.Text = Strings.Equip;
+            this.sadikButton2.Text = "Equip";
             this.sadikButton2.Click += new System.EventHandler(this.sadikButton2_Click);
             // 
             // sadikButton1
@@ -1334,7 +1336,7 @@ namespace MageBot.Interface
             this.sadikButton1.RoundedCorners = false;
             this.sadikButton1.Size = new System.Drawing.Size(52, 26);
             this.sadikButton1.TabIndex = 10;
-            this.sadikButton1.Text = Strings.Use;
+            this.sadikButton1.Text = "Use";
             this.sadikButton1.Click += new System.EventHandler(this.sadikButton1_Click);
             // 
             // DropItems
@@ -1348,7 +1350,7 @@ namespace MageBot.Interface
             this.DropItems.RoundedCorners = false;
             this.DropItems.Size = new System.Drawing.Size(53, 26);
             this.DropItems.TabIndex = 9;
-            this.DropItems.Text = Strings.Throw;
+            this.DropItems.Text = "throw";
             this.DropItems.Click += new System.EventHandler(this.DropItems_Click);
             // 
             // DeleteItem
@@ -1362,7 +1364,7 @@ namespace MageBot.Interface
             this.DeleteItem.RoundedCorners = false;
             this.DeleteItem.Size = new System.Drawing.Size(77, 26);
             this.DeleteItem.TabIndex = 8;
-            this.DeleteItem.Text = Strings.Remove;
+            this.DeleteItem.Text = "Remove";
             this.DeleteItem.Click += new System.EventHandler(this.DeleteItem_Click);
             // 
             // LVItems
@@ -1388,7 +1390,7 @@ namespace MageBot.Interface
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Size = new System.Drawing.Size(484, 300);
             this.tabPage9.TabIndex = 1;
-            this.tabPage9.Text = Strings.Management;
+            this.tabPage9.Text = "Management";
             this.tabPage9.VerticalScrollbarBarColor = true;
             this.tabPage9.VerticalScrollbarHighlightOnWheel = false;
             this.tabPage9.VerticalScrollbarSize = 10;
@@ -1402,7 +1404,7 @@ namespace MageBot.Interface
             this.RegenPage.Name = "RegenPage";
             this.RegenPage.Size = new System.Drawing.Size(484, 300);
             this.RegenPage.TabIndex = 2;
-            this.RegenPage.Text = Strings.Regeneration;
+            this.RegenPage.Text = "Regeneration";
             this.RegenPage.VerticalScrollbarBarColor = true;
             this.RegenPage.VerticalScrollbarHighlightOnWheel = false;
             this.RegenPage.VerticalScrollbarSize = 10;
@@ -1415,7 +1417,7 @@ namespace MageBot.Interface
             this.DiversPage.Padding = new System.Windows.Forms.Padding(3);
             this.DiversPage.Size = new System.Drawing.Size(498, 348);
             this.DiversPage.TabIndex = 3;
-            this.DiversPage.Text = Strings.Miscellaneous;
+            this.DiversPage.Text = "Miscellaneous";
             this.DiversPage.UseVisualStyleBackColor = true;
             // 
             // FloodPage
@@ -1452,7 +1454,7 @@ namespace MageBot.Interface
             this.MaisonsPage.Name = "MaisonsPage";
             this.MaisonsPage.Size = new System.Drawing.Size(484, 300);
             this.MaisonsPage.TabIndex = 0;
-            this.MaisonsPage.Text = Strings.Houses;
+            this.MaisonsPage.Text = "Houses";
             this.MaisonsPage.VerticalScrollbarBarColor = true;
             this.MaisonsPage.VerticalScrollbarHighlightOnWheel = false;
             this.MaisonsPage.VerticalScrollbarSize = 10;
@@ -1465,9 +1467,9 @@ namespace MageBot.Interface
             this.sadikLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel9.Location = new System.Drawing.Point(35, 216);
             this.sadikLabel9.Name = "sadikLabel9";
-            this.sadikLabel9.Size = new System.Drawing.Size(146, 13);
+            this.sadikLabel9.Size = new System.Drawing.Size(118, 13);
             this.sadikLabel9.TabIndex = 28;
-            this.sadikLabel9.Text = Strings.SearchForLogFile + " :";
+            this.sadikLabel9.Text = "Search for log file :";
             // 
             // ParcourirBt
             // 
@@ -1480,7 +1482,7 @@ namespace MageBot.Interface
             this.ParcourirBt.RoundedCorners = false;
             this.ParcourirBt.Size = new System.Drawing.Size(95, 26);
             this.ParcourirBt.TabIndex = 27;
-            this.ParcourirBt.Text = Strings.Browse;
+            this.ParcourirBt.Text = "Browse";
             this.ParcourirBt.Click += new System.EventHandler(this.ParcourirBt_Click);
             // 
             // SearcherLogBox
@@ -1498,7 +1500,7 @@ namespace MageBot.Interface
             this.HouseSearcherBox.Name = "HouseSearcherBox";
             this.HouseSearcherBox.Size = new System.Drawing.Size(166, 22);
             this.HouseSearcherBox.TabIndex = 25;
-            this.HouseSearcherBox.Text = Strings.EnableSearch;
+            this.HouseSearcherBox.Text = "Enable search";
             // 
             // sadikLabel8
             // 
@@ -1508,9 +1510,9 @@ namespace MageBot.Interface
             this.sadikLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel8.Location = new System.Drawing.Point(35, 106);
             this.sadikLabel8.Name = "sadikLabel8";
-            this.sadikLabel8.Size = new System.Drawing.Size(169, 13);
+            this.sadikLabel8.Size = new System.Drawing.Size(181, 13);
             this.sadikLabel8.TabIndex = 24;
-            this.sadikLabel8.Text = Strings.SentenceToSayAfterBuying + " :";
+            this.sadikLabel8.Text = "Sentence to say after buying :";
             // 
             // sadikLabel7
             // 
@@ -1520,9 +1522,9 @@ namespace MageBot.Interface
             this.sadikLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel7.Location = new System.Drawing.Point(203, 75);
             this.sadikLabel7.Name = "sadikLabel7";
-            this.sadikLabel7.Size = new System.Drawing.Size(99, 13);
+            this.sadikLabel7.Size = new System.Drawing.Size(103, 13);
             this.sadikLabel7.TabIndex = 23;
-            this.sadikLabel7.Text = Strings.MaximumPrice + " :";
+            this.sadikLabel7.Text = "Maximum price :";
             // 
             // StartWaitingBt
             // 
@@ -1535,7 +1537,7 @@ namespace MageBot.Interface
             this.StartWaitingBt.RoundedCorners = false;
             this.StartWaitingBt.Size = new System.Drawing.Size(390, 26);
             this.StartWaitingBt.TabIndex = 22;
-            this.StartWaitingBt.Text = Strings.LaunchWaitingForTheSale;
+            this.StartWaitingBt.Text = "Launch waiting for the sale";
             this.StartWaitingBt.Click += new System.EventHandler(this.StartWaitingBt_Click);
             // 
             // MaxPrice
@@ -1578,7 +1580,7 @@ namespace MageBot.Interface
             this.metroTabPage9.Name = "metroTabPage9";
             this.metroTabPage9.Size = new System.Drawing.Size(484, 300);
             this.metroTabPage9.TabIndex = 2;
-            this.metroTabPage9.Text = Strings.Map;
+            this.metroTabPage9.Text = "Map";
             this.metroTabPage9.VerticalScrollbarBarColor = true;
             this.metroTabPage9.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage9.VerticalScrollbarSize = 10;
@@ -1602,10 +1604,10 @@ namespace MageBot.Interface
             // 
             this.Id.Text = "Id";
             this.Id.Width = 86;
-            //
-            // name
-            //
-            this.ContextName.Text = Strings.Name;
+            // 
+            // ContextName
+            // 
+            this.ContextName.Text = typeof(Util.Util.I18n.Strings.Strings).Name;
             this.ContextName.Width = 86;
             // 
             // CellId
@@ -1641,7 +1643,7 @@ namespace MageBot.Interface
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Size = new System.Drawing.Size(484, 300);
             this.tabPage8.TabIndex = 3;
-            this.tabPage8.Text = Strings.Heroic;
+            this.tabPage8.Text = "Heroic";
             this.tabPage8.VerticalScrollbarBarColor = true;
             this.tabPage8.VerticalScrollbarHighlightOnWheel = false;
             this.tabPage8.VerticalScrollbarSize = 10;
@@ -1655,7 +1657,7 @@ namespace MageBot.Interface
             this.StatsPage.Name = "StatsPage";
             this.StatsPage.Size = new System.Drawing.Size(484, 300);
             this.StatsPage.TabIndex = 4;
-            this.StatsPage.Text = Strings.Characteristics;
+            this.StatsPage.Text = "Characteristics";
             this.StatsPage.VerticalScrollbarBarColor = true;
             this.StatsPage.VerticalScrollbarHighlightOnWheel = false;
             this.StatsPage.VerticalScrollbarSize = 10;
@@ -1676,7 +1678,7 @@ namespace MageBot.Interface
             this.marchandPage.Name = "marchandPage";
             this.marchandPage.Size = new System.Drawing.Size(484, 300);
             this.marchandPage.TabIndex = 5;
-            this.marchandPage.Text = Strings.MerchantMode;
+            this.marchandPage.Text = "Merchant mode";
             this.marchandPage.VerticalScrollbarBarColor = true;
             this.marchandPage.VerticalScrollbarHighlightOnWheel = false;
             this.marchandPage.VerticalScrollbarSize = 10;
@@ -1692,7 +1694,7 @@ namespace MageBot.Interface
             this.BtnActualize.RoundedCorners = false;
             this.BtnActualize.Size = new System.Drawing.Size(65, 20);
             this.BtnActualize.TabIndex = 13;
-            this.BtnActualize.Text = Strings.Actualize;
+            this.BtnActualize.Text = "Actualize";
             this.BtnActualize.Click += new System.EventHandler(this.BtnActualize_Click);
             // 
             // sadikButton3
@@ -1706,7 +1708,7 @@ namespace MageBot.Interface
             this.sadikButton3.RoundedCorners = false;
             this.sadikButton3.Size = new System.Drawing.Size(65, 20);
             this.sadikButton3.TabIndex = 12;
-            this.sadikButton3.Text = Strings.Add;
+            this.sadikButton3.Text = "Add";
             this.sadikButton3.Click += new System.EventHandler(this.sadikButton3_Click);
             // 
             // sadikLabel10
@@ -1717,9 +1719,9 @@ namespace MageBot.Interface
             this.sadikLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel10.Location = new System.Drawing.Point(364, 135);
             this.sadikLabel10.Name = "sadikLabel10";
-            this.sadikLabel10.Size = new System.Drawing.Size(29, 13);
+            this.sadikLabel10.Size = new System.Drawing.Size(35, 13);
             this.sadikLabel10.TabIndex = 11;
-            this.sadikLabel10.Text = Strings.Price;
+            this.sadikLabel10.Text = "Price";
             // 
             // numericUpDown1
             // 
@@ -1767,7 +1769,7 @@ namespace MageBot.Interface
             this.sadikCheckbox1.Name = "sadikCheckbox1";
             this.sadikCheckbox1.Size = new System.Drawing.Size(177, 20);
             this.sadikCheckbox1.TabIndex = 2;
-            this.sadikCheckbox1.Text =  Strings.EnableMerchantMode;
+            this.sadikCheckbox1.Text = "Enable merchant mode";
             this.sadikCheckbox1.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox1_CheckedChanged_1);
             // 
             // AccountUC
@@ -1961,7 +1963,6 @@ namespace MageBot.Interface
         private System.Windows.Forms.ColumnHeader Type;
         private MetroFramework.Controls.MetroTabPage tabPage8;
         private MetroFramework.Controls.MetroTabPage StatsPage;
-        public MetroFramework.Controls.MetroCheckBox IsLockingFight;
         public MetroFramework.Controls.MetroLabel NomIA;
         private MetroFramework.Controls.MetroTabPage marchandPage;
         private SadikCheckbox sadikCheckbox1;
@@ -1972,5 +1973,6 @@ namespace MageBot.Interface
         public System.Windows.Forms.ListView LVItemBag;
         private System.Windows.Forms.Timer PlaceTimer;
         private SadikButton BtnActualize;
+        public SadikCheckbox IsLockingFight;
     }
 }
