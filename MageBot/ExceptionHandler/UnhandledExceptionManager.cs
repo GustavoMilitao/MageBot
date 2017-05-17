@@ -44,7 +44,6 @@ namespace MageBot.Core.Engine.ExceptionHandler
 
         private static bool _blnLogToUI;
         private static bool _blnLogToFileOK;
-        private static bool _blnLogToEmailOK;
         private static bool _blnLogToScreenshotOK;
 
         private static bool _blnLogToEventLogOK;
@@ -231,7 +230,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
             {
                 return System.IO.File.GetLastWriteTime(objAssembly.Location);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return DateTime.MaxValue;
             }
@@ -289,7 +288,6 @@ namespace MageBot.Core.Engine.ExceptionHandler
 
 		//-- build method params
 		ParameterInfo[] objParameters = sf.GetMethod().GetParameters();
-		ParameterInfo objParameter = default(ParameterInfo);
 		_with1.Append("(");
 		intParam = 0;
 		foreach (ParameterInfo Parameter in objParameters) {
@@ -416,7 +414,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 if (_blnLogToEmail)
                     ExceptionToEmail();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //-- generic catch because any exceptions inside the UEH
                 //-- will cause the code to terminate immediately
@@ -610,7 +608,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 TakeScreenshotPrivate(GetApplicationPath() + _strScreenshotName);
                 _blnLogToScreenshotOK = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _blnLogToScreenshotOK = false;
             }
@@ -626,7 +624,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 System.Diagnostics.EventLog.WriteEntry(System.AppDomain.CurrentDomain.FriendlyName, Environment.NewLine + _strException, EventLogEntryType.Error);
                 _blnLogToEventLogOK = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _blnLogToEventLogOK = false;
             }
@@ -656,7 +654,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 objStreamWriter.Close();
                 _blnLogToFileOK = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _blnLogToFileOK = false;
             }
@@ -691,9 +689,11 @@ namespace MageBot.Core.Engine.ExceptionHandler
             //    //--MsgBox("exception email failed to send:" + Environment.Newline + Environment.Newline + e.Message)
             //}
 
-            MailMessage mm = new MailMessage("adrien.tosssam@laposte.net", "adrien.tosssam@laposte.net");
-            mm.Body = _strException;
-            mm.Subject = "Unhandled Exception notification - " + _strExceptionType;
+            MailMessage mm = new MailMessage("adrien.tosssam@laposte.net", "adrien.tosssam@laposte.net")
+            {
+                Body = _strException,
+                Subject = "Unhandled Exception notification - " + _strExceptionType
+            };
             if (_blnLogToScreenshot & _blnEmailIncludeScreenshot)
             {
                 mm.Attachments.Add(new Attachment(_strScreenshotFullPath));
@@ -709,8 +709,10 @@ namespace MageBot.Core.Engine.ExceptionHandler
         private static void ExceptionToEmail()
         {
             //-- spawn off the email send attempt as a thread for improved throughput
-            Thread objThread = new Thread(new ThreadStart(ThreadHandler));
-            objThread.Name = "SendExceptionEmail";
+            Thread objThread = new Thread(new ThreadStart(ThreadHandler))
+            {
+                Name = "SendExceptionEmail"
+            };
             objThread.Start();
         }
 
@@ -724,7 +726,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
             {
                 return System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "";
             }
@@ -738,7 +740,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
             {
                 return System.Environment.UserDomainName + "\\" + System.Environment.UserName;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "";
             }
@@ -1031,10 +1033,10 @@ namespace MageBot.Core.Engine.ExceptionHandler
         {
             try
             {
-                string strIP = System.Net.Dns.GetHostByName(System.Net.Dns.GetHostName()).AddressList[0].ToString();
+                string strIP = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
                 return strIP;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "127.0.0.1";
             }
@@ -1050,14 +1052,14 @@ namespace MageBot.Core.Engine.ExceptionHandler
         //--
         //-- this is important in an *unhandled exception handler*, because any unhandled exceptions will simply exit!
         //-- 
-        private static bool GetConfigBoolean(string strKey, bool blnDefault = false)
+        private static bool GetConfigBoolean(string strKey, bool? blnDefault = false)
         {
             string strTemp = null;
             try
             {
-                strTemp = ConfigurationSettings.AppSettings.Get(_strClassName + "/" + strKey);
+                strTemp = ConfigurationManager.AppSettings.Get(_strClassName + "/" + strKey);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (blnDefault == null)
                 {
@@ -1065,7 +1067,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 }
                 else
                 {
-                    return blnDefault;
+                    return blnDefault.Value;
                 }
             }
 
@@ -1077,7 +1079,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 }
                 else
                 {
-                    return blnDefault;
+                    return blnDefault.Value;
                 }
             }
             else

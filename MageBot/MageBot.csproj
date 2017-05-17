@@ -82,7 +82,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MetroFramework">
-      <HintPath>..\..\BlueSheep\BlueSheep\MetroFramework.dll</HintPath>
+      <HintPath>.\MetroFramework.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

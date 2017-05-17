@@ -2,7 +2,6 @@
 using MageBot.Core.Fight;
 using MageBot.Core.Engine.Constants;
 using Util.Util.Text.Log;
-using MageBot.Core.Engine.Constants;
 using MageBot.DataFiles.Data.D2o;
 using MageBot.DataFiles.Data.D2p;
 using MageBot.DataFiles.Data.I18n;

@@ -53,7 +53,6 @@ namespace MageBot.Core.Engine.ExceptionHandler
             private string _strUserName = "errorsheep@gmail.com";
 
             private string _strUserPassword = "errorHandler";
-            private int _intRetries = 1;
 
             private string _strLastResponse;
             public string AuthUser
@@ -162,8 +161,8 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 //-- this is helpful for debugging SMTP problems
                 if (_blnDebugMode)
                 {
-                    Debug.WriteLine("SMTP >> " + strCommand + " (after " + intResponseTime.ToString() + "ms)");
-                    Debug.WriteLine("SMTP << " + _strLastResponse);
+                    //Debug.WriteLine("SMTP >> " + strCommand + " (after " + intResponseTime.ToString() + "ms)");
+                    //Debug.WriteLine("SMTP << " + _strLastResponse);
                 }
 
                 //-- if we have a response, check the first 10 characters for the expected response code
@@ -171,7 +170,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 {
                     if (_blnDebugMode)
                     {
-                        Debug.WriteLine("** EXPECTED RESPONSE " + strExpectedResponse + " NOT RETURNED **");
+                        //Debug.WriteLine("** EXPECTED RESPONSE " + strExpectedResponse + " NOT RETURNED **");
                     }
                     return false;
                 }
@@ -220,7 +219,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 //-- resolve server text name to an IP address
                 try
                 {
-                    iphost = Dns.GetHostByName(_strServer);
+                    iphost = Dns.GetHostEntry(_strServer);
                 }
                 catch (Exception e)
                 {
@@ -281,7 +280,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 if (_blnPlainTextOnly)
                 {
                     //-- write plain text body
-                    _with1.Append(Environment.NewLine + mail.Body + Environment.NewLine);
+                    //_with1.Append(Environment.NewLine + mail.Body + Environment.NewLine);
                 }
                 else
                 {
@@ -332,14 +331,16 @@ namespace MageBot.Core.Engine.ExceptionHandler
             {
                 try
                 {
-                    SmtpClient client = new SmtpClient();
-                    client.Port = 465;
-                    client.Host = "smtp.laposte.net";
-                    client.EnableSsl = true;
-                    client.Timeout = 10000;
-                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    client.UseDefaultCredentials = false;
-                    client.Credentials = new System.Net.NetworkCredential("adrien.tosssam@laposte.net", "Baban974");
+                    SmtpClient client = new SmtpClient()
+                    {
+                        Port = 465,
+                        Host = "smtp.laposte.net",
+                        EnableSsl = true,
+                        Timeout = 10000,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new System.Net.NetworkCredential("adrien.tosssam@laposte.net", "Baban974")
+                    };
                     client.Send(m);
                 }
                 catch (SmtpException)

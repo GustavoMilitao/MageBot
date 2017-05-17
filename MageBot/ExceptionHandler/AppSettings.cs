@@ -376,7 +376,6 @@ namespace MageBot.Core.Engine.ExceptionHandler
         private static void GetURLCommandLineArgs(string strURL, ref NameValueCollection objNameValueCollection)
 	{
 		MatchCollection objMatchCollection = default(MatchCollection);
-		Match objMatch = default(Match);
 
 		//-- http://localhost/App.Website/App.Loader.exe?a=1&b=2&c=apple
 		//-- a = 1
@@ -417,7 +416,6 @@ namespace MageBot.Core.Engine.ExceptionHandler
 	{
 
 		MatchCollection objMatchCollection = default(MatchCollection);
-		Match objMatch = default(Match);
 
 		objMatchCollection = Regex.Matches(strArg, "(?<Key>^[^=]+)=(?<Value>[^= ]*$)");
 		if (objMatchCollection.Count == 0) {
@@ -476,7 +474,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
             {
                 return System.IO.File.GetLastWriteTime(objAssembly.Location);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return DateTime.MaxValue;
             }
@@ -519,7 +517,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
         //-- False values: anything else
         public static bool GetBoolean(string key)
         {
-            string strTemp = ConfigurationSettings.AppSettings.Get(key);
+            string strTemp = ConfigurationManager.AppSettings.Get(key);
             if (strTemp == null)
             {
                 return false;
@@ -540,7 +538,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
         //-- Returns the specified String value from the application .config file
         public static string GetString(string key)
         {
-            string strTemp = Convert.ToString(ConfigurationSettings.AppSettings.Get(key));
+            string strTemp = Convert.ToString(ConfigurationManager.AppSettings.Get(key));
             if (strTemp == null)
             {
                 return "";
@@ -557,14 +555,14 @@ namespace MageBot.Core.Engine.ExceptionHandler
         //--
         public static int GetInteger(string key)
         {
-            int intTemp = Convert.ToInt32(ConfigurationSettings.AppSettings.Get(key));
+            int? intTemp = Convert.ToInt32(ConfigurationManager.AppSettings.Get(key));
             if (intTemp == null)
             {
                 return 0;
             }
             else
             {
-                return intTemp;
+                return intTemp.Value;
             }
         }
 

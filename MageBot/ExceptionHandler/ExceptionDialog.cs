@@ -21,7 +21,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
             {
                 System.Diagnostics.Process.Start(strUrl);
             }
-            catch (System.Security.SecurityException ex)
+            catch (System.Security.SecurityException)
             {
                 //-- do nothing; we can't launch without full trust.
             }
@@ -38,7 +38,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 g.Dispose();
                 ctl.Height = Convert.ToInt32(objSizeF.Height) + 5;
             }
-            catch (System.Security.SecurityException ex)
+            catch (System.Security.SecurityException)
             {
                 //-- do nothing; we can't set control sizes without full trust
             }
@@ -83,11 +83,13 @@ namespace MageBot.Core.Engine.ExceptionHandler
         public void SendMail()
         {
             SimpleMail.SMTPClient smtp = new SimpleMail.SMTPClient();
-            MailMessage mm = new MailMessage("donotreply@domain.com", "errorsheep@gmail.com");
-            mm.Body = txtMore.Text;
-            mm.Subject = ErrorBox.Text;
-            mm.BodyEncoding = UTF8Encoding.UTF8;
-            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            MailMessage mm = new MailMessage("donotreply@domain.com", "errorsheep@gmail.com")
+            {
+                Body = txtMore.Text,
+                Subject = ErrorBox.Text,
+                BodyEncoding = UTF8Encoding.UTF8,
+                DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
+            };
             smtp.SendMail(mm);
         }
 
@@ -107,7 +109,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
             LaunchLink(e.LinkText);
         }
 
-        private void btnMore_Click_1(object sender, EventArgs e)
+        private void BtnMore_Click_1(object sender, EventArgs e)
         {
             if (btnMore.Text == ">>")
             {
@@ -131,7 +133,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
             }
         }
 
-        private void sadikButton1_Click(object sender, EventArgs e)
+        private void SadikButton1_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
         }

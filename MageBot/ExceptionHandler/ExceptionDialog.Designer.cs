@@ -49,7 +49,7 @@
             this.btnMore.Size = new System.Drawing.Size(28, 24);
             this.btnMore.TabIndex = 17;
             this.btnMore.Text = ">>";
-            this.btnMore.Click += new System.EventHandler(this.btnMore_Click_1);
+            this.btnMore.Click += new System.EventHandler(this.BtnMore_Click_1);
             // 
             // txtMore
             // 
