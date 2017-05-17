@@ -16,9 +16,9 @@ namespace MageBot.Core.Storage.AccountsManager
         public List<Account.Account> Accounts { get; set; } = new List<Account.Account>();
         private List<Account.Account> GroupAccounts { get; set; } = new List<Account.Account>();
         public List<Group> Groups = new List<Group>();
-        private readonly string m_SavingFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot.accounts.bs";
+        private readonly string m_SavingFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot\Accounts\accounts.mb";
         private readonly string m_SavingDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot";
-        private readonly string m_SavingGroupDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot.Groups";
+        private readonly string m_SavingGroupDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot\Groups";
         #endregion
 
         #region Public methods

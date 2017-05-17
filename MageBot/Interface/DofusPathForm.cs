@@ -27,10 +27,14 @@ namespace MageBot.Interface
         {
             if (flag == 0)
             {
-                FolderBrowserDialog_DofusPath.ShowDialog();
-                TextBox1.Text = FolderBrowserDialog_DofusPath.SelectedPath;
-                BtValider.Text = "Continuer";
-                flag = 1;
+                
+                var result = FolderBrowserDialog_DofusPath.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    TextBox1.Text = FolderBrowserDialog_DofusPath.SelectedPath;
+                    BtValider.Text = "Continue";
+                    flag = 1;
+                }
             }
             else
             {
@@ -39,7 +43,7 @@ namespace MageBot.Interface
                 if (Directory.Exists(directoryPath))
                 {
                     mainfrm.DofusPath = TextBox1.Text;
-                    string combinedPath = Path.Combine (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "bs.conf");
+                    string combinedPath = Path.Combine (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "mb.conf");
                     StreamWriter sr = new StreamWriter(combinedPath);
                     sr.WriteLine(TextBox1.Text);
                     sr.Close();
@@ -48,13 +52,21 @@ namespace MageBot.Interface
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("Impossible de trouver le dossier : \"" + directoryPath);
+                    System.Windows.Forms.MessageBox.Show("Unable to find folder : \"" + directoryPath);
                     flag = 0;
-                    BtValider.Text = "Parcourir";
+                    BtValider.Text = "Browse";
                     TextBox1.Clear();
                 }
             }
         }
         #endregion
+
+        private void DofusPathForm_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            if (flag == 0)
+            {
+                Environment.Exit(0);
+            }
+        }
     }
 }

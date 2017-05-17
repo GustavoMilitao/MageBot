@@ -70,7 +70,7 @@ namespace MageBot.Interface
             this.LaunchPage.Padding = new System.Windows.Forms.Padding(3);
             this.LaunchPage.Size = new System.Drawing.Size(268, 207);
             this.LaunchPage.TabIndex = 0;
-            this.LaunchPage.Text = Strings.Launch;
+            this.LaunchPage.Text = "Launch";
             // 
             // IsMITM
             // 
@@ -94,7 +94,7 @@ namespace MageBot.Interface
             this.DelBt.RoundedCorners = false;
             this.DelBt.Size = new System.Drawing.Size(85, 26);
             this.DelBt.TabIndex = 14;
-            this.DelBt.Text = Strings.Delete;
+            this.DelBt.Text = "Delete";
             this.DelBt.Click += new System.EventHandler(this.DelBt_Click);
             // 
             // listViewAccounts
@@ -118,7 +118,7 @@ namespace MageBot.Interface
             this.LaunchAccountsSelecBt.RoundedCorners = false;
             this.LaunchAccountsSelecBt.Size = new System.Drawing.Size(137, 26);
             this.LaunchAccountsSelecBt.TabIndex = 12;
-            this.LaunchAccountsSelecBt.Text = Strings.LogIn;
+            this.LaunchAccountsSelecBt.Text = "Log In";
             this.LaunchAccountsSelecBt.Click += new System.EventHandler(this.LaunchAccountsSelecBt_Click);
             // 
             // AddPage
@@ -134,29 +134,29 @@ namespace MageBot.Interface
             this.AddPage.Padding = new System.Windows.Forms.Padding(3);
             this.AddPage.Size = new System.Drawing.Size(268, 207);
             this.AddPage.TabIndex = 1;
-            this.AddPage.Text = Strings.Add;
+            this.AddPage.Text = "Add";
             // 
             // sadikLabel2
             // 
             this.sadikLabel2.AutoSize = true;
             this.sadikLabel2.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.sadikLabel2.Location = new System.Drawing.Point(13, 52);
+            this.sadikLabel2.Location = new System.Drawing.Point(13, 67);
             this.sadikLabel2.Name = "sadikLabel2";
             this.sadikLabel2.Size = new System.Drawing.Size(70, 13);
             this.sadikLabel2.TabIndex = 18;
-            this.sadikLabel2.Text = Strings.Password + " :";
+            this.sadikLabel2.Text = "Password :";
             // 
             // sadikLabel1
             // 
             this.sadikLabel1.AutoSize = true;
             this.sadikLabel1.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.sadikLabel1.Location = new System.Drawing.Point(13, 17);
+            this.sadikLabel1.Location = new System.Drawing.Point(13, 28);
             this.sadikLabel1.Name = "sadikLabel1";
             this.sadikLabel1.Size = new System.Drawing.Size(49, 13);
             this.sadikLabel1.TabIndex = 17;
-            this.sadikLabel1.Text = Strings.Name+ " :";
+            this.sadikLabel1.Text = "Name :";
             // 
             // AddBt
             // 
@@ -164,22 +164,22 @@ namespace MageBot.Interface
             this.AddBt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AddBt.Font = new System.Drawing.Font("Verdana", 8F);
             this.AddBt.Image = null;
-            this.AddBt.Location = new System.Drawing.Point(40, 91);
+            this.AddBt.Location = new System.Drawing.Point(40, 152);
             this.AddBt.Name = "AddBt";
             this.AddBt.RoundedCorners = false;
             this.AddBt.Size = new System.Drawing.Size(188, 26);
             this.AddBt.TabIndex = 16;
-            this.AddBt.Text = Strings.Add;
+            this.AddBt.Text = "Add";
             this.AddBt.Click += new System.EventHandler(this.buttonAddAccount_Click);
             // 
             // textBoxPassword
             // 
             this.textBoxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxPassword.Location = new System.Drawing.Point(125, 49);
+            this.textBoxPassword.Location = new System.Drawing.Point(91, 67);
             this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(137, 20);
             this.textBoxPassword.TabIndex = 15;
-            this.textBoxPassword.Text = Strings.Password;
             this.textBoxPassword.GotFocus += new System.EventHandler(this.textBoxPassword_GotFocus);
             this.textBoxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPassword_Enter);
             this.textBoxPassword.LostFocus += new System.EventHandler(this.textBoxPassword_LostFocus);
@@ -187,11 +187,10 @@ namespace MageBot.Interface
             // textBoxAccountName
             // 
             this.textBoxAccountName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxAccountName.Location = new System.Drawing.Point(125, 14);
+            this.textBoxAccountName.Location = new System.Drawing.Point(91, 25);
             this.textBoxAccountName.Name = "textBoxAccountName";
             this.textBoxAccountName.Size = new System.Drawing.Size(137, 20);
             this.textBoxAccountName.TabIndex = 14;
-            this.textBoxAccountName.Text = Strings.Name;
             this.textBoxAccountName.GotFocus += new System.EventHandler(this.textBoxAccountName_GotFocus);
             this.textBoxAccountName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxAccountName_Enter);
             this.textBoxAccountName.LostFocus += new System.EventHandler(this.textBoxAccountName_LostFocus);
@@ -204,7 +203,7 @@ namespace MageBot.Interface
             this.Controls.Add(this.sadikTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GestAccounts";
-            this.Text = Strings.AccountsManager;
+            this.Text = "Accounts manager";
             this.sadikTabControl1.ResumeLayout(false);
             this.LaunchPage.ResumeLayout(false);
             this.AddPage.ResumeLayout(false);

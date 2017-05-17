@@ -26,7 +26,7 @@ namespace MageBot.Interface
             listViewAccounts.Columns.Add(Strings.Name, 200, HorizontalAlignment.Center);
             listViewAccounts.Columns.Add(Strings.Password, 0, HorizontalAlignment.Center);
             DelBt.Text = Strings.Delete;
-            LaunchAccountsSelecBt.Text = Strings.LaunchSelectedAccounts;
+            LaunchAccountsSelecBt.Text = Strings.LogIn;
             Text = Strings.AccountsManager;
             sadikTabControl1.TabPages[0].Text = Strings.Launch;
             sadikTabControl1.TabPages[1].Text = Strings.Add;
@@ -74,17 +74,17 @@ namespace MageBot.Interface
         }
         private void buttonAddAccount_Click(object sender, EventArgs e)
         {
-            if ((textBoxAccountName.Text == string.Empty) || (textBoxAccountName.Text == "Entrez le nom de compte..."))
-                MessageBox.Show("Merci d'entrer un nom de compte.", "BS Error");
-            else if ((textBoxPassword.Text == string.Empty) || (textBoxPassword.Text == "Entrez le mot de passe..."))
-                MessageBox.Show("Merci d'entrer un mot de passe.", "BS Error");
+            if (textBoxAccountName.Text == string.Empty)
+                MessageBox.Show("Enter the account name.", "MB Error");
+            else if (textBoxPassword.Text == string.Empty)
+                MessageBox.Show("Enter the account password.", "MB Error");
             else
             {
                 foreach (ListViewItem bot in listViewAccounts.Items)
                 {
                     if (bot.Text == textBoxAccountName.Text)
                     {
-                        MessageBox.Show("Ce compte a déjà été ajouté.", "BS Error");
+                        MessageBox.Show("This account has already been added.", "MB Error");
                         textBoxAccountName.Text = string.Empty;
                         textBoxPassword.Text = string.Empty;
                         return;
@@ -123,10 +123,8 @@ namespace MageBot.Interface
         }
         private void textBoxPassword_LostFocus(object sender, EventArgs e)
         {
-            if (textBoxPassword.Text == "")
+            if (textBoxPassword.Text == String.Empty)
             {
-                // Réinitialise le text
-                textBoxPassword.Text = Strings.Password;
                 // Réinitialise la mise en forme
                 textBoxPassword.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
             }
@@ -148,10 +146,8 @@ namespace MageBot.Interface
         }
         private void textBoxAccountName_LostFocus(object sender, EventArgs e)
         {
-            if (textBoxAccountName.Text == "")
+            if (textBoxAccountName.Text == String.Empty)
             {
-                // Réinitialise le text
-                textBoxAccountName.Text = Strings.Name;
                 // Réinitialise la mise en forme
                 textBoxAccountName.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
             }

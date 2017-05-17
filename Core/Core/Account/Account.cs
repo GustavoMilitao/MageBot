@@ -87,10 +87,10 @@ namespace MageBot.Core.Account
 
         public Account(string username, string password, bool socket = true)
         {
-            InitBars();
-            Config = new AccountConfig(this);
             AccountName = username;
             AccountPassword = password;
+            InitBars();
+            Config = new AccountConfig(this);
             PetsModifiedList = new List<Pet>();
             Config.IsMITM = !socket;
             Config.NextMeal = new DateTime();
@@ -116,13 +116,10 @@ namespace MageBot.Core.Account
             string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot","Accounts", AccountName);
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
-            Config.ConfigRecover = new ConfigManager(this);
-            Config.Flood = new Flood(this);
             FightData = new FightData(this);
             MapData = new MapData(this);
             WatchDog = new WatchDog(this);
             InformationQueue = new Queue<Tuple<TextInformation, int>>();
-            Config.MonsterRestrictions = new List<MonsterRestrictions>();
         }
 
         private void InitBars()

@@ -1,4 +1,6 @@
-﻿namespace MageBot.Interface
+﻿using Util.Util.I18n.Strings;
+
+namespace MageBot.Interface
 {
     partial class GestGroupe
     {
@@ -38,6 +40,7 @@
             this.NameBox = new System.Windows.Forms.TextBox();
             this.listViewAccounts = new System.Windows.Forms.ListView();
             this.AddBt = new MageBot.Interface.SadikButton();
+            this.GroupNameLabel = new MageBot.Interface.SadikLabel();
             this.sadikTabControl1.SuspendLayout();
             this.LaunchPage.SuspendLayout();
             this.AddPage.SuspendLayout();
@@ -53,7 +56,7 @@
             this.sadikTabControl1.Location = new System.Drawing.Point(20, 60);
             this.sadikTabControl1.Name = "sadikTabControl1";
             this.sadikTabControl1.SelectedIndex = 0;
-            this.sadikTabControl1.Size = new System.Drawing.Size(282, 244);
+            this.sadikTabControl1.Size = new System.Drawing.Size(287, 276);
             this.sadikTabControl1.TabIndex = 13;
             // 
             // LaunchPage
@@ -110,21 +113,22 @@
             // AddPage
             // 
             this.AddPage.BackColor = System.Drawing.Color.White;
+            this.AddPage.Controls.Add(this.GroupNameLabel);
             this.AddPage.Controls.Add(this.NameBox);
             this.AddPage.Controls.Add(this.listViewAccounts);
             this.AddPage.Controls.Add(this.AddBt);
             this.AddPage.Location = new System.Drawing.Point(4, 34);
             this.AddPage.Name = "AddPage";
             this.AddPage.Padding = new System.Windows.Forms.Padding(3);
-            this.AddPage.Size = new System.Drawing.Size(274, 206);
+            this.AddPage.Size = new System.Drawing.Size(279, 238);
             this.AddPage.TabIndex = 1;
             this.AddPage.Text = "Créer";
             // 
             // NameBox
             // 
-            this.NameBox.Location = new System.Drawing.Point(41, 164);
+            this.NameBox.Location = new System.Drawing.Point(41, 180);
             this.NameBox.Name = "NameBox";
-            this.NameBox.Size = new System.Drawing.Size(184, 20);
+            this.NameBox.Size = new System.Drawing.Size(190, 20);
             this.NameBox.TabIndex = 18;
             // 
             // listViewAccounts
@@ -143,19 +147,30 @@
             this.AddBt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AddBt.Font = new System.Drawing.Font("Verdana", 8F);
             this.AddBt.Image = null;
-            this.AddBt.Location = new System.Drawing.Point(41, 190);
+            this.AddBt.Location = new System.Drawing.Point(41, 206);
             this.AddBt.Name = "AddBt";
             this.AddBt.RoundedCorners = false;
-            this.AddBt.Size = new System.Drawing.Size(188, 26);
+            this.AddBt.Size = new System.Drawing.Size(190, 26);
             this.AddBt.TabIndex = 16;
             this.AddBt.Text = "Créer";
             this.AddBt.Click += new System.EventHandler(this.AddBt_Click);
+            // 
+            // GroupNameLabel
+            // 
+            this.GroupNameLabel.AutoSize = true;
+            this.GroupNameLabel.Font = new System.Drawing.Font("Verdana", 8F);
+            this.GroupNameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
+            this.GroupNameLabel.Location = new System.Drawing.Point(38, 164);
+            this.GroupNameLabel.Name = "GroupNameLabel";
+            this.GroupNameLabel.Size = new System.Drawing.Size(78, 13);
+            this.GroupNameLabel.TabIndex = 19;
+            this.GroupNameLabel.Text = "Group name";
             // 
             // GestGroupe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(322, 324);
+            this.ClientSize = new System.Drawing.Size(327, 356);
             this.Controls.Add(this.sadikTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GestGroupe";
@@ -179,5 +194,6 @@
         private SadikButton AddBt;
         private System.Windows.Forms.ListView listViewAccounts;
         private System.Windows.Forms.TextBox NameBox;
+        private SadikLabel GroupNameLabel;
     }
 }

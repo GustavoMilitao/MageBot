@@ -38,13 +38,15 @@ namespace MageBot
                     Application.Run(new MainForm("2.0"));
                 }
                 catch (Exception ex)
-                { MessageBox.Show(ex.Message + ex.StackTrace); }
-                
+                {
+                    MessageBox.Show(ex.Message + ex.StackTrace);
+                }
+
             }
             else
             {
-               System.Windows.Forms.MessageBox.Show("Launch MageBot.via updater !");
-               Environment.Exit(0);
+                System.Windows.Forms.MessageBox.Show("Launch MageBot.via updater !");
+                Environment.Exit(0);
             }
 
             /* Changelog :

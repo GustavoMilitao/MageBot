@@ -31,7 +31,7 @@ namespace MageBot.Interface
             listViewAccounts.Columns.Add(Strings.Password, 0, HorizontalAlignment.Center);
             listViewGroups.Columns.Add(Strings.Name, -2, HorizontalAlignment.Center);
             DelBt.Text = Strings.Delete;
-            LaunchGroupsSelecBt.Text = Strings.LaunchSelectedGroups;
+            LaunchGroupsSelecBt.Text = Strings.LogIn;
             Text = Strings.GroupsManager;
             sadikTabControl1.TabPages[0].Text = Strings.Launch;
             sadikTabControl1.TabPages[1].Text = Strings.Create;

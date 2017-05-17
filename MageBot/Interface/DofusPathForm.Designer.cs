@@ -49,9 +49,9 @@
             this.sadikLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel1.Location = new System.Drawing.Point(20, 56);
             this.sadikLabel1.Name = "sadikLabel1";
-            this.sadikLabel1.Size = new System.Drawing.Size(299, 13);
+            this.sadikLabel1.Size = new System.Drawing.Size(255, 13);
             this.sadikLabel1.TabIndex = 3;
-            this.sadikLabel1.Text = "Veuillez sélectionner le chemin du dossier Dofus2 :";
+            this.sadikLabel1.Text = "Please select the path to the Dofus2 folder:";
             // 
             // BtValider
             // 
@@ -64,21 +64,22 @@
             this.BtValider.RoundedCorners = true;
             this.BtValider.Size = new System.Drawing.Size(308, 26);
             this.BtValider.TabIndex = 4;
-            this.BtValider.Text = "Parcourir";
+            this.BtValider.Text = "Browse";
             this.BtValider.Click += new System.EventHandler(this.BtValider_Click);
             // 
             // DofusPathForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(328, 155);
+            this.ClientSize = new System.Drawing.Size(337, 147);
             this.Controls.Add(this.BtValider);
             this.Controls.Add(this.sadikLabel1);
             this.Controls.Add(this.TextBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DofusPathForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Choix du dossier Dofus 2";
+            this.Text = "Choosing the Dofus 2 folder";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DofusPathForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

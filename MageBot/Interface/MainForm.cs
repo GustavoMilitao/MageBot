@@ -39,6 +39,7 @@ namespace MageBot.Interface
             ActualMainForm = this;
             Text = "MageBot " + version;
             CheckMageBotDatas();
+            Show();
         }
         #endregion
 
@@ -120,7 +121,7 @@ namespace MageBot.Interface
             if (!Directory.Exists(Path.Combine(mageBotPath, "Logs")))
                 Directory.CreateDirectory(Path.Combine(mageBotPath, "Logs")).Attributes = FileAttributes.Normal;
 
-            string bsConfPath = Path.Combine (mageBotPath, "bs.conf");
+            string bsConfPath = Path.Combine (mageBotPath, "mb.conf");
             if (File.Exists(bsConfPath))
             {
                 StreamReader sr = new StreamReader(bsConfPath);
@@ -142,7 +143,7 @@ namespace MageBot.Interface
             }
 
 
-            FileInfo fileInfo = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot.Logs.txt");
+            FileInfo fileInfo = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot\Logs.txt");
             fileInfo.Delete();
             using (fileInfo.Create())
             {

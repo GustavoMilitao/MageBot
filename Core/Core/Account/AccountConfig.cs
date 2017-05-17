@@ -74,7 +74,7 @@ namespace MageBot.Core.Account
             RegenConfig = new Regen.Regen(Account);
             CharacterConfig = new Character(Account);
             HeroicConfig = new Heroic.Heroic(Account);
-            MonsterRestrictions = new List<Fight.MonsterRestrictions>();
+            MonsterRestrictions = new List<MonsterRestrictions>();
         }
 
         public AccountConfig()
