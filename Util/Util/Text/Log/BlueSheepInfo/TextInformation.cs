@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace BlueSheep.Util.Text.Log
+namespace Util.Util.Text.Log
 {
     public abstract class TextInformation
     {

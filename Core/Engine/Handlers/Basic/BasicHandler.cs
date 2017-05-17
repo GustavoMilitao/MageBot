@@ -2,7 +2,7 @@
 using System.Threading;
 using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using BlueSheep.Protocol.Enums;
 using BlueSheep.Util.Enums.EnumHelper;
 using BlueSheep.Protocol.Messages.Game.Basic;
@@ -40,7 +40,7 @@ namespace BlueSheep.Engine.Handlers.Basic
                     basicLatencyStatsMessage.Pack(writer);
 
                     account.SocketManager.Send(writer.Content);
-                    account.Log(new BlueSheep.Util.Text.Log.DebugTextInformation("[SND] 5663 (BasicLatencyStatsMessage)"), 0);
+                    account.Log(new DebugTextInformation("[SND] 5663 (BasicLatencyStatsMessage)"), 0);
                 }
             }
 

@@ -5,7 +5,7 @@ using BlueSheep.Protocol.Messages.Game.Dialog;
 using BlueSheep.Protocol.Messages.Game.Inventory.Exchanges;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Protocol.Messages;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using System.Linq;
 
 namespace BlueSheep.Engine.Handlers.Context

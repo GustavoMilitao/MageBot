@@ -1,7 +1,7 @@
 ﻿using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Game.Interactive;
 using BlueSheep.Protocol.Types.Game.Interactive;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 
 namespace BlueSheep.Core.Storage
 {

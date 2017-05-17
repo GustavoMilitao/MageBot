@@ -1,6 +1,5 @@
-﻿using BlueSheep.Util.Text.Log;
+﻿using Util.Util.Text.Log;
 using System;
-using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 

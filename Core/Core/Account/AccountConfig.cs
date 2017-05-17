@@ -17,6 +17,7 @@ namespace BlueSheep.Core.Account
         public bool IsSlave { get; set; }
         public bool DebugMode { get; set; }
         public bool IsMITM { get; set; }
+        public bool IsSocket { get; set; }
         public bool Enabled { get; set; }
         public ConfigManager ConfigRecover { get; set; }
         public bool Begin { get; set; }

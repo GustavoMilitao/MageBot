@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using System.IO;
-using System.Xml;
 using BlueSheep.Core.Job;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 
 namespace BlueSheep.Interface
 {

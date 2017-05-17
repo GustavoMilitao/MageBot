@@ -1,4 +1,4 @@
-﻿using BlueSheep.Util.Text.Log;
+﻿using Util.Util.Text.Log;
 using System;
 using System.IO;
 using System.Xml.Serialization;

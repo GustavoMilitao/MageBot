@@ -1,6 +1,6 @@
 ﻿using BlueSheep.Util.IO;
 using BlueSheep.Core.Account;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.IO;

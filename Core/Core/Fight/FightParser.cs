@@ -1,6 +1,5 @@
-﻿using DataFiles.Data;
-using DataFiles.Data.D2o;
-using BlueSheep.Util.Text.Log;
+﻿using DataFiles.Data.D2o;
+using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -62,8 +61,8 @@ namespace BlueSheep.Core.Fight
         public static readonly IList<String> Endflags = new ReadOnlyCollection<string>
         (new List<String> { "</Spells>", "</Targets>", "</Strategy>", "</Position>"/*, "</Challenges>"*/ });
 
-        public static readonly IList<Char> operateurs = new ReadOnlyCollection<char>
-        (new List<Char> { '<', '>', '=' });
+        public static readonly IList<char> operateurs = new ReadOnlyCollection<char>
+        (new List<char> { '<', '>', '=' });
         #endregion
 
         #region Constructors

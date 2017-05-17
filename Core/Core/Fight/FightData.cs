@@ -7,7 +7,7 @@ using BlueSheep.Protocol.Types.Game.Context.Fight;
 using DataFiles.Data.Pathfinding;
 using DataFiles.Data.Pathfinding.Positions;
 using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using BlueSheep.Util.Enums.Fight;
 using System;
 using System.Collections;

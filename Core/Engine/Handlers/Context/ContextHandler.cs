@@ -1,5 +1,4 @@
-﻿using DataFiles.Data;
-using DataFiles.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Game.Basic;
 using BlueSheep.Protocol.Messages.Game.Chat;
@@ -22,7 +21,7 @@ using DataFiles.Data.Pathfinding;
 using DataFiles.Data.Pathfinding.Positions;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Protocol.Messages;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -8,10 +8,7 @@ namespace BlueSheep.Interface
         /// </summary>
 
         #region Fields
-        private string m_user;
-        private string m_pass;
-        private bool m_socket;
-        public AccountUC UC { get; set; }
+        public AccountUC accUserControl { get; set; }
         #endregion
 
         private delegate void Callback();
@@ -22,13 +19,11 @@ namespace BlueSheep.Interface
             InitializeComponent();
         }
 
-        public AccountFrm(string username, string password, bool socket)
+        public AccountFrm(AccountUC accUserControl)
         {
             InitializeComponent();
             // Add the UC
-            m_user = username;
-            m_pass = password;
-            m_socket = socket;
+            this.accUserControl = accUserControl;
             Init();
         }
 
@@ -39,15 +34,15 @@ namespace BlueSheep.Interface
                 Invoke(new Callback(Reconnect));
                 return;
             }
-            Controls.Remove(UC);
+            Controls.Remove(accUserControl);
             Init();
         }
 
         private void Init()
         {
-            AccountUC Uc = new AccountUC(m_user, m_pass, m_socket, this);
+            AccountUC Uc = new AccountUC(accUserControl.Account ,this);
             Uc.DebugMode.Checked = true;
-            UC = Uc;
+            accUserControl = Uc;
             Controls.Add(Uc);
             Uc.Show();
 
@@ -55,22 +50,22 @@ namespace BlueSheep.Interface
             Show();
 
             // Not in a group
-            Uc.IsMaster = false;
-            Uc.IsSlave = false;
+            Uc.Account.Config.IsMaster = false;
+            Uc.Account.Config.IsSlave = false;
 
             // Fill the account form
             Uc.Dock = DockStyle.Fill;
 
             // Call socket/mitm init
-            if (m_socket)
+            if (Uc.Account.Config.IsSocket)
                 Uc.Init();
-            else
+            else if(Uc.Account.Config.IsMITM)
                 Uc.InitMITM();
         }
 
         private void SaveConfig(object sender , object e)
         {
-            UC.ConfigManager.SaveConfig();
+            accUserControl.Account.Config.ConfigRecover.SaveConfig();
         }
         #endregion
     }

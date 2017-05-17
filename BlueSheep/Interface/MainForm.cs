@@ -1,4 +1,4 @@
-﻿using BlueSheep.Util.I18n.Strings;
+﻿using Util.Util.I18n.Strings;
 using Core.Engine.Constants;
 using DataFiles.Data.D2o;
 using DataFiles.Data.D2p;

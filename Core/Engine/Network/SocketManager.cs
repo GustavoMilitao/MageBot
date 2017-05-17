@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using BlueSheep.Protocol.Messages;
 using BlueSheep.Core.Frame;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Common.Basic;
 using BlueSheep.Engine.Network;

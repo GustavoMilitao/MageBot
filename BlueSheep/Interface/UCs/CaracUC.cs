@@ -1,8 +1,6 @@
-﻿using System;
+﻿using BlueSheep.Core.Char;
+using System;
 using System.Windows.Forms;
-using System.Collections;
-using BlueSheep.Util.Text.Log;
-using Core.Core;
 
 namespace BlueSheep.Interface.UCs
 {

@@ -1,5 +1,4 @@
-﻿using BlueSheep.Core.Account;
-using BlueSheep.Protocol.Messages;
+﻿using BlueSheep.Protocol.Messages;
 using BlueSheep.Protocol.Messages.Game.Context.Roleplay;
 using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Fight;
 using BlueSheep.Protocol.Types.Game.Context.Roleplay;

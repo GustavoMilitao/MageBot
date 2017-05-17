@@ -1,5 +1,4 @@
-﻿using DataFiles.Data;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DataFiles.Data.D2o;
 using BlueSheep.Protocol.Types.Game.Data.Items.Effects;

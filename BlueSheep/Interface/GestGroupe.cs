@@ -1,6 +1,6 @@
 ﻿using BlueSheep.Core.Account;
 using BlueSheep.Core.Groups;
-using BlueSheep.Util.I18n.Strings;
+using Util.Util.I18n.Strings;
 using Core.Storage.AccountsManager;
 using System;
 using System.Collections.Generic;

@@ -6,7 +6,7 @@ using BlueSheep.Protocol.Messages.Game.Character.Choice;
 using BlueSheep.Engine.Constants;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Protocol.Messages;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using BlueSheep.Util.Text;
 using BlueSheep.Util.Text.Connection;
 using RSA;

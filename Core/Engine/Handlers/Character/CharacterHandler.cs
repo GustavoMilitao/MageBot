@@ -1,5 +1,4 @@
-﻿using DataFiles.Data;
-using DataFiles.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Game.Achievement;
 using BlueSheep.Protocol.Messages.Game.Character.Choice;
@@ -10,7 +9,7 @@ using BlueSheep.Protocol.Messages.Game.Inventory.Spells;
 using BlueSheep.Protocol.Types.Game.Character.Status;
 using BlueSheep.Protocol.Types.Game.Data.Items;
 using BlueSheep.Protocol.Messages;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using BlueSheep.Util.Enums.Char;
 using BlueSheep.Util.Enums.EnumHelper;
 using System;

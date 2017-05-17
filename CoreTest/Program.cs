@@ -1,7 +1,7 @@
 ﻿using BlueSheep.Core.Account;
 using BlueSheep.Core.Fight;
 using BlueSheep.Engine.Constants;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using Core.Engine.Constants;
 using DataFiles.Data.D2o;
 using DataFiles.Data.D2p;

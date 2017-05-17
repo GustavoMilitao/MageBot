@@ -1,6 +1,6 @@
 ﻿using BlueSheep.Protocol.Enums;
 using BlueSheep.Core.Account;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 
 namespace BlueSheep.Util.Text
 {

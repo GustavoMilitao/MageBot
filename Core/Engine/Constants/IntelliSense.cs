@@ -1,6 +1,5 @@
 ﻿using BlueSheep.DataCenter;
 using DataFiles.Data.D2o;
-using DataFiles.Data.I18n;
 using System;
 using System.Collections;
 using System.Collections.Generic;

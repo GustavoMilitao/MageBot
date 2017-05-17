@@ -1,5 +1,4 @@
-﻿using DataFiles.Data;
-using DataFiles.Data.D2o;
+﻿using DataFiles.Data.D2o;
 
 namespace BlueSheep.Core.Fight
 {

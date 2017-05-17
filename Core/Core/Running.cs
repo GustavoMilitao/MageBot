@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BlueSheep.Core.Storage;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using DataFiles.Data.D2o;
 using BlueSheep.Core.Pets;
 

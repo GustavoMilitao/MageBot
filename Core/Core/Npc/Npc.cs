@@ -3,7 +3,7 @@ using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Npc;
 using BlueSheep.Protocol.Messages.Game.Dialog;
 using BlueSheep.Protocol.Types.Game.Context.Roleplay;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using System.Collections.Generic;
 
 namespace BlueSheep.Core.Npc

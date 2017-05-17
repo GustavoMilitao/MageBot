@@ -51,9 +51,9 @@
     <Compile Include="Util\Enums\Internal\RestrictionLevel.cs" />
     <Compile Include="Util\Enums\Internal\Status.cs" />
     <Compile Include="Util\I18n\Strings\Strings.Designer.cs">
-      <DependentUpon>Strings.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Util\I18n\Strings\Strings.pt-BR.Designer.cs">
       <DependentUpon>Strings.pt-BR.resx</DependentUpon>
@@ -93,8 +93,8 @@
       <LastGenOutput>Strings.pt-BR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Util\I18n\Strings\Strings.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

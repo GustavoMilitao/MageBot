@@ -1,7 +1,4 @@
-﻿using BlueSheep.Core.Inventory;
-using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Util.I18n.Strings;
-using System;
+﻿using Util.Util.I18n.Strings;
 using System.Collections.Generic;
 using System.Windows.Forms;
 

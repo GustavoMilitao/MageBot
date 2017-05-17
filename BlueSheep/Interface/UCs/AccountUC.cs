@@ -9,7 +9,7 @@ using BlueSheep.Interface.UCs;
 using System.IO;
 using BlueSheep.Core.Account;
 using BlueSheep.Core.Pets;
-using BlueSheep.Util.I18n.Strings;
+using Util.Util.I18n.Strings;
 using BlueSheep.Protocol.Types.Game.Character.Choice;
 using BlueSheep.Protocol.Types.Game.Data.Items;
 using BlueSheep.Core.Map;
@@ -18,7 +18,7 @@ using BlueSheep.Core.Fight;
 using BlueSheep.Core.Npc;
 using BlueSheep.Core.Job;
 using BlueSheep.Engine.Network;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using BlueSheep.Core.Network;
 using BlueSheep.Util.Enums.Internal;
 using BlueSheep.Core.Misc;
@@ -66,7 +66,7 @@ namespace BlueSheep.Interface
 
         #region Constructors
 
-        public AccountUC(Account account, bool socket = true, MetroFramework.Forms.MetroForm form = null)
+        public AccountUC(Account account, MetroFramework.Forms.MetroForm form = null)
         {
             InitializeComponent();
             MonsterTextBox.KeyUp += (s, e) =>
@@ -78,7 +78,6 @@ namespace BlueSheep.Interface
             Account = account;
             account.PetsModifiedList = new List<Pet>();
             account.Config = new AccountConfig(account);
-            account.Config.IsMITM = !socket;
             listViewPets.Columns.Add(Strings.Name, 150, HorizontalAlignment.Left);
             listViewPets.Columns.Add(Strings.UID, 0, HorizontalAlignment.Left);
             listViewPets.Columns.Add(Strings.Food + string.Format(" ({0})", Strings.Amount), -2, HorizontalAlignment.Left);

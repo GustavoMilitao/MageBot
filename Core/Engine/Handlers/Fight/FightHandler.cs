@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages;
 using BlueSheep.Util.Enums.Internal;

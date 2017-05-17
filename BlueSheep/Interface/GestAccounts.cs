@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
+using Util.Util.I18n.Strings;
+using Core.Storage.AccountsManager;
+using BlueSheep.Core.Account;
 
 namespace BlueSheep.Interface
 {
@@ -41,11 +44,14 @@ namespace BlueSheep.Interface
 
         private void LaunchAccountsSelecBt_Click(object sender, EventArgs e)
         {
+            AccountUC accUserControl;
             foreach (ListViewItem account in listViewAccounts.SelectedItems)
             {
                 if (!IsMITM.Checked)
                 {
-                    AccountFrm frm = new AccountFrm(account.SubItems[0].Text, account.SubItems[1].Text, true);
+                    AccountFrm frm = new AccountFrm(
+                        accUserControl = new AccountUC(
+                            new Account(account.SubItems[0].Text, account.SubItems[1].Text, true)));
                     frm.Show();
                     MainForm.AccFrm = frm;
                     MainForm.ActualMainForm.AddForm(frm);
@@ -56,7 +62,9 @@ namespace BlueSheep.Interface
                     string directoryPath = System.IO.Path.Combine(MainForm.ActualMainForm.DofusPath, "app", "Dofus.exe");
                     proc.StartInfo.FileName = directoryPath;
                     proc.Start();
-                    AccountFrm frm = new AccountFrm(account.SubItems[0].Text, account.SubItems[1].Text, false);
+                    AccountFrm frm = new AccountFrm(
+                        accUserControl = new AccountUC(
+                            new Account(account.SubItems[0].Text, account.SubItems[1].Text, false)));
                     frm.Show();
                     MainForm.ActualMainForm.AddForm(frm);
                     MainForm.AccFrm = frm;
@@ -86,10 +94,10 @@ namespace BlueSheep.Interface
                 ListViewItem li = new ListViewItem(row1);
                 listViewAccounts.Items.Add(li);
                 AccountsFileInteractions accountsFileInteractions = new AccountsFileInteractions();
-                List<Bot> listaccount = new List<Bot>();
+                List<Account> listaccount = new List<Account>();
                 foreach (ListViewItem item in listViewAccounts.Items)
                 {
-                    listaccount.Add(new Bot(new Account(item.SubItems[0].Text, item.SubItems[1].Text)));
+                    listaccount.Add(new Account(item.SubItems[0].Text, item.SubItems[1].Text));
                 }
                 accountsFileInteractions.SaveAccountsInfos(listaccount);
                 textBoxAccountName.Text = string.Empty;
@@ -156,10 +164,10 @@ namespace BlueSheep.Interface
                 ListViewItem listViewItem2 = listViewAccounts.SelectedItems[i];
                 // Sauvegarde des comptes
                 AccountsFileInteractions accountsFileInteractions = new AccountsFileInteractions();
-                List<Bot> listaccount = new List<Bot>();
+                List<Account> listaccount = new List<Account>();
                 foreach (ListViewItem item in listViewAccounts.Items)
                 {
-                    listaccount.Add(new Bot(new Account(item.SubItems[0].Text, item.SubItems[1].Text)));
+                    listaccount.Add(new Account(item.SubItems[0].Text, item.SubItems[1].Text));
                 }
                 accountsFileInteractions.SaveAccountsInfos(listaccount);
                 // suppression de l'interface
@@ -181,7 +189,7 @@ namespace BlueSheep.Interface
             accountsFileInteractions.RecoverAccountsInfos();
             foreach (Account accountObject in accountsFileInteractions.Accounts)
             {
-                string[] row1 = { accountObject.Name, accountObject.Password };
+                string[] row1 = { accountObject.AccountName, accountObject.AccountPassword };
                 ListViewItem li = new ListViewItem(row1);
                 listViewAccounts.Items.Add(li);
             }

@@ -1,6 +1,6 @@
 ﻿using BlueSheep.Core.Account;
 using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

@@ -2,7 +2,7 @@
 using BlueSheep.Protocol.Messages.Game.Chat;
 using BlueSheep.Protocol.Types.Game.Context.Roleplay;
 using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;

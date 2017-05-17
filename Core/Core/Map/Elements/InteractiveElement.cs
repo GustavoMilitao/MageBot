@@ -1,5 +1,4 @@
-﻿using DataFiles.Data;
-using DataFiles.Data.D2o;
+﻿using DataFiles.Data.D2o;
 using BlueSheep.Protocol.Types.Game.Interactive;
 using System.Collections.Generic;
 using System.Linq;

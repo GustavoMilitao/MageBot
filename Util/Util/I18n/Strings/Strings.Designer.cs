@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueSheep.Util.I18n.Strings {
+namespace Util.Util.I18n.Strings {
     using System;
     
     

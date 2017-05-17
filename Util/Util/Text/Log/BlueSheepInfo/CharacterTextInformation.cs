@@ -1,7 +1,7 @@
-﻿using BlueSheep.Util.I18n.Strings;
+﻿using Util.Util.I18n.Strings;
 using System.Drawing;
 
-namespace BlueSheep.Util.Text.Log
+namespace Util.Util.Text.Log
 {
     public class CharacterTextInformation : TextInformation
     {

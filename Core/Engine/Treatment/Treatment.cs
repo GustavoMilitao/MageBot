@@ -4,7 +4,7 @@ using BlueSheep.Protocol.Messages;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using BlueSheep.Core.Account;
 
 namespace BlueSheep.Engine.Treatment

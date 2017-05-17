@@ -1,7 +1,7 @@
 ﻿using System;
 using BlueSheep.Util.IO;
 using System.Collections.Generic;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using BlueSheep.Core.Account;
 
 namespace BlueSheep.Engine.Network

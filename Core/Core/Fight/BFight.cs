@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BlueSheep.Util.IO;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using BlueSheep.Util.Enums.Internal;
 using DataFiles.Data.Pathfinding.Positions;
 using DataFiles.Data.Pathfinding;

@@ -2,7 +2,7 @@
 using BlueSheep.Protocol.Messages.Game.Chat;
 using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Houses;
 using BlueSheep.Protocol.Messages.Game.Interactive;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using System;
 
 namespace BlueSheep.Core.Misc

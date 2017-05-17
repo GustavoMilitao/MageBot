@@ -1,5 +1,5 @@
 ﻿using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Util.Text.Log;
+using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,8 +41,8 @@ namespace BlueSheep.Core.Path
         public static readonly IList<String> Actions = new ReadOnlyCollection<string>
         (new List<String> { "exchange(", "npc(","cell(", "object(", "zaap(", "zaapi(", "use(", "move(" });
 
-        public static readonly IList<Char> operateurs = new ReadOnlyCollection<char>
-        (new List<Char> { '<', '>', '=' });
+        public static readonly IList<char> operateurs = new ReadOnlyCollection<char>
+        (new List<char> { '<', '>', '=' });
         #endregion
 
         

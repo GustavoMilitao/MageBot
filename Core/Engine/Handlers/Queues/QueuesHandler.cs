@@ -1,8 +1,8 @@
 ﻿using BlueSheep.Util.IO;
 using BlueSheep.Protocol.Messages.Queues;
 using BlueSheep.Protocol.Messages;
-using BlueSheep.Util.Text.Log;
-using BlueSheep.Util.I18n.Strings;
+using Util.Util.Text.Log;
+using Util.Util.I18n.Strings;
 
 namespace BlueSheep.Engine.Handlers.Queues
 {

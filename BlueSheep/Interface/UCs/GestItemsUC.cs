@@ -1,6 +1,6 @@
 ﻿using BlueSheep.Util.Enums.Internal;
-using BlueSheep.Util.I18n.Strings;
-using BlueSheep.Util.Text.Log;
+using Util.Util.I18n.Strings;
+using Util.Util.Text.Log;
 using Core.Engine.Constants;
 using System;
 using System.Collections.Generic;

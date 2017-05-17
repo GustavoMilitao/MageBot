@@ -1,5 +1,4 @@
 ﻿using DataFiles.Data.D2o;
-using BlueSheep.Core.Account;
 using BlueSheep.Protocol.Enums;
 using BlueSheep.Protocol.Messages.Game.Context.Roleplay.Stats;
 using System.Collections;
