@@ -81,11 +81,10 @@ namespace MageBot.Core.Account
 
         #region Updater events (Fill in interface)
         public event EventHandler ActualizePets;
-        public event EventHandler ActualizeAccountInfo;
         public event EventHandler ActualizeMap;
         public event EventHandler ActualizeFightStats;
         public event EventHandler ActualizeInventory;
-        public event EventHandler Actualizeshop;
+        public event EventHandler ActualizeShop;
         public event EventHandler ActualizeJobs;
         #endregion
 
@@ -423,11 +422,6 @@ namespace MageBot.Core.Account
             ActualizePets?.Invoke(this, EventArgs.Empty);
         }
 
-        public virtual void UpdateAccInfo()
-        {
-            ActualizeAccountInfo?.Invoke(this, EventArgs.Empty);
-        }
-
         public virtual void UpdateMap()
         {
             ActualizeMap?.Invoke(this, EventArgs.Empty);
@@ -450,7 +444,7 @@ namespace MageBot.Core.Account
 
         public virtual void UpdateShop(List<ObjectItemToSell> objectsInfos)
         {
-            Actualizeshop?.Invoke(this, new ActualizeShopItemsEventArgs(objectsInfos));
+            ActualizeShop?.Invoke(this, new ActualizeShopItemsEventArgs(objectsInfos));
         }
 
         public virtual void UpdateInfBars()

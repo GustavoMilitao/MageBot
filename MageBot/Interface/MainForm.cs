@@ -194,7 +194,6 @@ namespace MageBot.Interface
             //}
             IntelliSense.InitMonsters();
             IntelliSense.InitItems();
-            IntelliSense.InitServers();
         }
 
 

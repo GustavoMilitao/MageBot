@@ -407,7 +407,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 List<int> items = account.Inventory.GetItemsToTransfer();
                 account.Inventory.TransferItems(items);
-                account.Inventory.GetItems(account.Inventory.ItemsToGetFromBank.Select(item => item.UID).ToList());
+                account.Inventory.GetItems(account.Config.ItemsToGetFromBank.Select(item => item.UID).ToList());
             }
             // Get and put items from/to bank
         }
@@ -482,7 +482,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (!account.Inventory.ListeningToExchange)
+            if (!account.Config.ListeningToExchange)
                 return;
             List<int> items = account.Inventory.GetItemsToTransfer();
             account.Inventory.TransferItems(items);
@@ -499,7 +499,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (account.Inventory.ListeningToExchange)
+            if (account.Config.ListeningToExchange)
                 account.Inventory.AcceptExchange();
         }
 
@@ -512,7 +512,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (msg.Ready && account.Inventory.ListeningToExchange)
+            if (msg.Ready && account.Config.ListeningToExchange)
                 account.Inventory.ExchangeReady();
         }
 

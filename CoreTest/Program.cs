@@ -149,7 +149,6 @@ namespace CoreTest
         //}
         IntelliSense.InitMonsters();
         IntelliSense.InitItems();
-        IntelliSense.InitServers();
     }
 
 }

@@ -29,8 +29,6 @@ using MageBot.DataFiles.Data.D2o;
 using MageBot.Core;
 using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
 using MageBot.Protocol.Messages.Game.Dialog;
-using MageBot.Core.Engine.Constants;
-using System.Threading;
 
 namespace MageBot.Interface
 {
@@ -53,7 +51,6 @@ namespace MageBot.Interface
 
         #region Delegates
         private delegate void SetLogsCallback(TextInformation textInformations, int levelVerbose);
-        private delegate void ActualizeAccountInformationsCallback();
         private delegate void SetLicenceCallback(bool response, string text);
         private delegate void DelegBar(int Bar, int Max, int value, string text);
         private delegate void DelegListView(ListViewItem delta, ListView gamma);
@@ -81,6 +78,11 @@ namespace MageBot.Interface
             Account.QueueChanged += Account_QueueChanged;
             Account.InfBarsChanged += Account_InfBarsChanged;
             Account.ActualizeFightStats += Account_ActualizeFightStats;
+            Account.ActualizePets += Account_ActualizePets;
+            Account.ActualizeMap += Account_ActualizeMap;
+            Account.ActualizeInventory += Account_ActualizeInventory;
+            Account.ActualizeShop += Account_ActualizeShop;
+            Account.ActualizeJobs += Account_ActualizeJobs;
             account.PetsModifiedList = new List<Pet>();
             listViewPets.Columns.Add(Strings.Name, 150, HorizontalAlignment.Left);
             listViewPets.Columns.Add(Strings.UID, 0, HorizontalAlignment.Left);
@@ -172,9 +174,35 @@ namespace MageBot.Interface
 
         }
 
+        private void Account_ActualizeJobs(object sender, EventArgs e)
+        {
+            ActualizeJobs();
+        }
+
+        private void Account_ActualizeShop(object sender, EventArgs e)
+        {
+            ActualizeShopItemsEventArgs args = (ActualizeShopItemsEventArgs)e;
+            Actualizeshop(args.ObjectsInfos);
+        }
+
+        private void Account_ActualizeInventory(object sender, EventArgs e)
+        {
+            ActualizeInventory();
+        }
+
+        private void Account_ActualizeMap(object sender, EventArgs e)
+        {
+            ActualizeMap();
+        }
+
+        private void Account_ActualizePets(object sender, EventArgs e)
+        {
+            ActualizeFamis();
+        }
+
         private void Account_ActualizeFightStats(object sender, EventArgs e)
         {
-            ActualizeFightStats();
+            ActualizeFightStats(Account.FightData.WinLoseDic,Account.FightData.XpWon);
         }
 
         private void Account_InfBarsChanged(object sender, EventArgs e)
@@ -407,9 +435,9 @@ namespace MageBot.Interface
         public void ActualizeMap()
         {
             BeginInvoke(new MethodInvoker(MapView.Items.Clear));
-            foreach (MageBot.Core.Map.Elements.InteractiveElement e in Account.MapData.InteractiveElements.Keys)
+            foreach (Core.Map.Elements.InteractiveElement e in Account.MapData.InteractiveElements.Keys)
             {
-                MageBot.Core.Map.Elements.StatedElement element = Account.MapData.StatedElements.Find(s => s.Id == e.Id);
+                Core.Map.Elements.StatedElement element = Account.MapData.StatedElements.Find(s => s.Id == e.Id);
                 string type = Strings.Unknown + " (" + e.TypeId + ")";
                 switch (e.TypeId)
                 {
@@ -420,16 +448,16 @@ namespace MageBot.Interface
                         type = type.Replace(Strings.Unknown, "Zaapi");
                         break;
                     case 105:
-                        type = type.Replace(Strings.Unknown, "Poubelle");
+                        type = type.Replace(Strings.Unknown, "Trash can");
                         break;
                     case 120:
-                        type = type.Replace(Strings.Unknown, "Enclos");
+                        type = type.Replace(Strings.Unknown, "Paddock");
                         break;
                     case -1:
-                        type = type.Replace(Strings.Unknown, "Porte/Escalier ?");
+                        type = type.Replace(Strings.Unknown, "Door / Stairs ?");
                         break;
                     case 119:
-                        type = type.Replace(Strings.Unknown, "Livre d'artisans");
+                        type = type.Replace(Strings.Unknown, "Book of artisans");
                         break;
                 }
                 string cellId = "?";
@@ -673,17 +701,45 @@ namespace MageBot.Interface
             Account.SocketManager.Send(packetleave);
         }
 
+        private void IsLockingFight_CheckedChanged(object sender)
+        {
+            Account.Config.LockingFights = IsLockingFight.Checked;
+        }
+
+        private void WithItemSetBox_CheckedChanged(object sender)
+        {
+            Account.Config.StartFightWithItemSet = WithItemSetBox.Checked;
+            Account.Config.StartFightWithItemSet = WithItemSetBox.Checked;
+            Account.Config.PresetStartUpId = (byte)PresetStartUpD.Value;
+            Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
+        }
+
+        private void PresetStartUpD_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.PresetStartUpId = (byte)PresetStartUpD.Value;
+        }
+
+        private void PresetEndUpD_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
+        }
+
+        private void NUDTimeoutFight_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
+        }
+
         #endregion
 
         #region Public methods
 
-        public void actualizeshop(List<ObjectItemToSell> sell)
+        public void Actualizeshop(List<ObjectItemToSell> sell)
         {
             BeginInvoke(new MethodInvoker(LVItemShop.Items.Clear));
 
             foreach (ObjectItemToSell i in sell)
             {
-                MageBot.Core.Inventory.Item item = new MageBot.Core.Inventory.Item(i.Effects.ToList(), i.ObjectGID, 0, (int)i.Quantity, (int)i.ObjectUID);
+                Core.Inventory.Item item = new Core.Inventory.Item(i.Effects.ToList(), i.ObjectGID, 0, (int)i.Quantity, (int)i.ObjectUID);
                 string[] row1 = { item.GID.ToString(), item.UID.ToString(), item.Name, item.Quantity.ToString(), item.Type, i.ObjectPrice.ToString() };
                 ListViewItem li = new ListViewItem(row1);
                 li.ToolTipText = item.Description;
@@ -1114,34 +1170,6 @@ namespace MageBot.Interface
 
         }
         #endregion
-
-        private void IsLockingFight_CheckedChanged(object sender)
-        {
-            Account.Config.LockingFights = IsLockingFight.Checked;
-        }
-
-        private void WithItemSetBox_CheckedChanged(object sender)
-        {
-            Account.Config.StartFightWithItemSet = WithItemSetBox.Checked;
-            Account.Config.StartFightWithItemSet = WithItemSetBox.Checked;
-            Account.Config.PresetStartUpId = (byte)PresetStartUpD.Value;
-            Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
-        }
-
-        private void PresetStartUpD_ValueChanged(object sender, EventArgs e)
-        {
-            Account.Config.PresetStartUpId = (byte)PresetStartUpD.Value;
-        }
-
-        private void PresetEndUpD_ValueChanged(object sender, EventArgs e)
-        {
-            Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
-        }
-
-        private void NUDTimeoutFight_ValueChanged(object sender, EventArgs e)
-        {
-            Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
-        }
     }
 }
 

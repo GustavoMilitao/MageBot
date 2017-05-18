@@ -317,8 +317,8 @@ namespace MageBot.Core.Engine.Handlers.Inventory
                 msg.Deserialize(reader);
             }
             account.UpdateShop(msg.ObjectsInfos.ToList());
-            if (account.Inventory.ItemsToAddToShop.Count > 0)
-                account.Inventory.ItemsToAddToShop.ForEach(item => account.Inventory.AddItemToShop(item.Item1,item.Item2,item.Item3));
+            if (account.Config.ItemsToAddToShop.Count > 0)
+                account.Config.ItemsToAddToShop.ForEach(item => account.Inventory.AddItemToShop(item.Item1,item.Item2,item.Item3));
         }
         #endregion
     }

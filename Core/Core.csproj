@@ -133,10 +133,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataCenter\DataCenter.csproj">
-      <Project>{08641dd9-bce0-495c-945f-87cca26d9927}</Project>
-      <Name>DataCenter</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataFiles\DataFiles.csproj">
       <Project>{44759c8e-e748-40fa-b71e-a04d919ff887}</Project>
       <Name>DataFiles</Name>

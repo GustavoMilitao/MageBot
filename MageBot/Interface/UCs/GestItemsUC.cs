@@ -41,7 +41,7 @@ namespace MageBot.Interface.UCs
         #region Public Methods
         public List<int> GetItemsToGetFromBank()
         {
-            return accUserControl.Account.Inventory.ItemsToGetFromBank.Select(i => i.UID).ToList();
+            return accUserControl.Account.Config.ItemsToGetFromBank.Select(i => i.UID).ToList();
         }
 
         public List<int> GetItemsToTransfer()
@@ -83,7 +83,7 @@ namespace MageBot.Interface.UCs
 
         private List<int> GetItemsNoBank()
         {
-            return accUserControl.Account.Inventory.ItemsToGetFromBank.Select(i => i.UID).ToList();
+            return accUserControl.Account.Config.ItemsToGetFromBank.Select(i => i.UID).ToList();
         }
         #endregion
 

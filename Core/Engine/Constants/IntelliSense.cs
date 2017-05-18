@@ -1,6 +1,4 @@
-﻿using MageBot.DataCenter;
-using MageBot.DataFiles.Data.D2o;
-using System;
+﻿using MageBot.DataFiles.Data.D2o;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,8 +12,6 @@ namespace MageBot.Core.Engine.Constants
     {
         public static List<string> MonstersList = new List<string>();
         public static List<string> ItemsList = new List<string>();
-        public static List<Server> ServersList = new List<Server>();
-
 
         [DllImport("user32")]
         private extern static int GetCaretPos(out Point p);
@@ -41,34 +37,9 @@ namespace MageBot.Core.Engine.Constants
             }
         }
 
-        public static void InitServers()
-        {
-            foreach (DataClass d in GameData.GetDataObjects(D2oFileEnum.Servers))
-            {
-                ServersList.Add(CreateNewObjectServerFromGameData(d));
-            }
-        }
-
         #endregion
 
         #region Private methods
-
-        private static Server CreateNewObjectServerFromGameData(DataClass data)
-        {
-            Server server = new Server()
-            {
-                Id = (int)data.Fields["id"],
-                NameId = Convert.ToUInt32(data["nameId"]),
-                CommentId = Convert.ToUInt32(data["commentId"]),
-                OpeningDate = Convert.ToDouble(data["openingDate"]),
-                Language = Convert.ToString(data["language"]),
-                PopulationId = Convert.ToInt32(data["populationId"]),
-                GameTypeId = Convert.ToUInt32(data["gameTypeId"]),
-                CommunityId = Convert.ToInt32(data["communityId"]),
-                RestrictedToLanguages = ArrayListToStringList((ArrayList)data["restrictedToLanguages"])
-            };
-            return server;
-        }
 
         private static List<string> ArrayListToStringList(ArrayList arrayList)
         {
