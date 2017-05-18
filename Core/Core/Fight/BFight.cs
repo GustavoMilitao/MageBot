@@ -20,11 +20,10 @@ namespace MageBot.Core.Fight
     public class BFight
     {
         #region Fields 
-        public Account.Account m_Account;
+        private Account.Account m_Account;
         private FightParser m_AI;
         private FightData m_Data;
         public int flag;
-        public bool Infinite { get; set; }
 
         #region Private Fields
         private Object clock = new Object();
@@ -194,7 +193,7 @@ namespace MageBot.Core.Fight
             m_Account.Log(new ActionTextInformation("Combat closed"), 4);
         }
 
-        public void LockFighForParty()
+        public void LockFightForParty()
         {
             GameFightOptionToggleMessage msg = new GameFightOptionToggleMessage((byte)FightOptionsEnum.FIGHT_OPTION_SET_TO_PARTY_ONLY);
             m_Account.SocketManager.Send(msg);

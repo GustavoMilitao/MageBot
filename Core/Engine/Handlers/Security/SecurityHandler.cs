@@ -30,7 +30,5 @@ namespace MageBot.Core.Engine.Handlers.Security
             return ret;
         }
         #endregion
-
-
     }
 }

@@ -8,11 +8,11 @@ namespace MageBot.Core.Pets
     public class Pet
     {
         #region Properties
-        public MageBot.Core.Inventory.Item Informations { get; set; }
+        public Inventory.Item Informations { get; set; }
 
         public DataClass Datas { get; set; }
 
-        public MageBot.Core.Account.Account account { get; set; }
+        public Account.Account account { get; set; }
 
         public List<Food> FoodList { get; set; }
 

@@ -17,13 +17,8 @@ namespace MageBot.Core.Inventory
         public int kamas;
         public int maxWeight;
         public int weight;
-        public Account.Account Account;
+        private Account.Account Account;
         public List<Item> Items; // All items
-        public List<Item> ItemsToAutoDelete { get; set; }
-        public List<Item> ItemsToStayOnCharacter { get; set; }
-        public List<Item> ItemsToGetFromBank { get; set; }
-        public List<Tuple<Item,int,ulong>> ItemsToAddToShop { get; set; }
-        public bool ListeningToExchange { get; set; }
         public int weightPercent
         {
             get
@@ -175,7 +170,7 @@ namespace MageBot.Core.Inventory
 
         public List<int> GetItemsToTransfer()
         {
-            List<int> stayingItems = ItemsToStayOnCharacter.Select(item => item.UID).ToList();
+            List<int> stayingItems = Account.Config.ItemsToStayOnCharacter.Select(item => item.UID).ToList();
             List<int> items = new List<int>();
             foreach (Item i in Items)
             {
@@ -226,16 +221,19 @@ namespace MageBot.Core.Inventory
             Account.Log(new ActionTextInformation("Echange accepté"), 5);
         }
 
-        #endregion
 
-        #region PrivateMethods
+        public bool ItemExists(int uid)
+        {
+            return Items.FirstOrDefault(i => i.UID == uid) != null ? true : false;
+        }
+
         public void PerformAutoDeletion()
         {
             if (Account.State != Status.Fighting)
             {
-                if (ItemsToAutoDelete.Count > 0)
+                if (Account.Config.ItemsToAutoDelete.Count > 0)
                 {
-                    foreach (Item item in ItemsToAutoDelete)
+                    foreach (Item item in Account.Config.ItemsToAutoDelete)
                     {
                         Account.Inventory.DeleteItem(item.UID, item.Quantity);
                     }
@@ -246,13 +244,10 @@ namespace MageBot.Core.Inventory
                 Account.Log(new ErrorTextInformation("Impossible to destroy an item in combat"), 2);
             }
         }
+
         #endregion
 
-        #region Private Methods 
-        public bool ItemExists(int uid)
-        {
-            return Items.FirstOrDefault(i => i.UID == uid) != null ? true : false;
-        }
+        #region Private Methods
 
         private int ItemQuantity(int uid)
         {

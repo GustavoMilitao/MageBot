@@ -55,8 +55,7 @@ namespace MageBot.Core.Engine.Handlers.Job
                     }
                 }
             }
-            //account.ActualizeJobs();
-            // TODO Militão: Populate the new interface
+            account.UpdateJobs();
         }
 
         [MessageHandler(typeof(JobExperienceUpdateMessage))]
@@ -80,10 +79,7 @@ namespace MageBot.Core.Engine.Handlers.Job
                     break;
                 }
             }
-            //foreach (JobUC j in account.JobsUC)
-            //    j.UpdateJob();
-            // TODO Militão: Populate the new interface
-
+            account.UpdateJobs();
         }
 
         #endregion

@@ -14,7 +14,7 @@ namespace MageBot.Interface
         /// </summary>
 
 
-        //TODO Traduire en anglais ces vieux noms
+        //TODO Complete it
         #region Fields
         AccountUC accUserControl { get; set; }
         private List<BSpell> SpellsList { get; set; }

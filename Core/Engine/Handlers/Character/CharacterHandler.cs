@@ -20,15 +20,11 @@ namespace MageBot.Core.Engine.Handlers.Character
 {
     class CharacterHandler
     {
-        delegate void AddMemberCallBack(string MemberName);
-
         #region Public methods
         [MessageHandler(typeof(CharactersListMessage))]
         public static void CharactersListMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             CharactersListMessage charactersListMessage = (CharactersListMessage)message;
-
-            //packetDatas = packetDatas.ToList().SkipWhile(a => a == 0).ToArray();
 
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
@@ -36,8 +32,6 @@ namespace MageBot.Core.Engine.Handlers.Character
             }
 
             account.CharacterBaseInformations = charactersListMessage.Characters[0];
-
-            //MainForm.ActualMainForm.ActualizeAccountInformations();
 
             if (!account.Config.IsMITM)
             {
@@ -63,8 +57,6 @@ namespace MageBot.Core.Engine.Handlers.Character
             account.Log(new BotTextInformation("Breed: " + ((BreedEnum)account.CharacterBaseInformations.Breed).Description() + " Sex: " + ((Sex)Convert.ToInt32(account.CharacterBaseInformations.Sex)).Description()), 1);
             account.ModifBar(7, 0, 0, account.AccountName + " - " + account.CharacterBaseInformations.Name);
             account.ModifBar(8, 0, 0, Convert.ToString(account.CharacterBaseInformations.Level));
-
-            //MainForm.ActualMainForm.ActualizeAccountInformations();
         }
 
         [MessageHandler(typeof(CharacterSelectedErrorMessage))]
@@ -85,16 +77,6 @@ namespace MageBot.Core.Engine.Handlers.Character
             if (!account.Config.ConfigRecover.Restored)
                 account.Config.ConfigRecover.RecoverConfig();
             account.CharacterStats = msg.Stats;
-            //account.Config.CharacterConfig.Init();
-            //TODO Militão: Populate the view with the new interface
-            //if (account.MyGroup != null)
-            //{
-            //    {
-            //        AddMemberCallBack d = new AddMemberCallBack(((GroupForm)account.ParentForm).AddMember);
-            //        ((GroupForm)account.ParentForm).Invoke(d, account.CharacterBaseInformations.Name);
-            //    }
-            //}
-            //TODO Militão: Populates (add) new char to group.
             uint percent = (msg.Stats.LifePoints / msg.Stats.MaxLifePoints) * 100;
             string text = msg.Stats.LifePoints + "/" + msg.Stats.MaxLifePoints + "(" + percent + "%)";
             account.ModifBar(2, (int)msg.Stats.MaxLifePoints, (int)msg.Stats.LifePoints, "Vitalité");
@@ -206,14 +188,6 @@ namespace MageBot.Core.Engine.Handlers.Character
             {
                 msg.Deserialize(reader);
             }
-            //if (msg.result == 1)
-            //{
-            //    //account.CaracUC.DecreaseAvailablePoints(msg.nbCharacBoost);
-            //    account.Log(new BotTextInformation("Caractéristique augmentée."),0);
-            //}
-            //else
-            //    account.Log(new ErrorTextInformation("Echec de l'up de caractéristique."), 0);
-
         }
 
         [MessageHandler(typeof(PlayerStatusUpdateMessage))]

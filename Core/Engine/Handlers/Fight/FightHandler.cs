@@ -137,7 +137,7 @@ namespace MageBot.Core.Engine.Handlers.Fight
         }
 
         [MessageHandler(typeof(GameFightEndMessage))]
-        public async static void GameFightEndMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void GameFightEndMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameFightEndMessage msg = (GameFightEndMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -145,19 +145,6 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             account.FightData.FightStop();
-            account.SetStatus(Status.None);
-            await account.PutTaskDelay(2000);
-            if (account.Config.AutoRelaunchFight && account.State != Status.Fighting)
-            {
-                bool findFight = account.Fight.SearchFight().Result;
-                while (!findFight)
-                {
-                    account.Map.ChangeMap();
-                    await account.PutTaskDelay(3000);
-                    findFight = account.Fight.SearchFight().Result;
-                }
-            }
-            //account.Fight.infinite = true; // Swap it with checkbox
         }
 
         [MessageHandler(typeof(GameFightHumanReadyStateMessage))]
@@ -301,8 +288,7 @@ namespace MageBot.Core.Engine.Handlers.Fight
             {
                 account.FightData.UpdateFighterCell((long)msg.ActorId, clientMovement.CellEnd.CellId);
             }
-            //account.ActualizeMap();
-            // TODO Militão: Populate the new interface
+            account.UpdateMap();
         }
 
         [MessageHandler(typeof(GameFightNewRoundMessage))]
@@ -348,9 +334,9 @@ namespace MageBot.Core.Engine.Handlers.Fight
             {
                 account.Fight.PlaceCharacter(msg.PositionsForChallengers.Select(item => (int)item).ToList());
             }
-            if (account.FightData.StartFightWithItemSet)
+            if (account.Config.StartFightWithItemSet)
             {
-                byte id = account.FightData.PresetStartUpId;
+                byte id = account.Config.PresetStartUpId;
                 InventoryPresetUseMessage msg2 = new InventoryPresetUseMessage((byte)(id - 1));
                 account.SocketManager.Send(msg2);
                 account.Log(new ActionTextInformation("Fast equipment number " + Convert.ToString(id)), 5);

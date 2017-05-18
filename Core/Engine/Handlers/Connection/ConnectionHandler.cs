@@ -96,14 +96,13 @@ namespace MageBot.Core.Engine.Handlers.Connection
             {
                 msg.Deserialize(reader);
             }
-            //account.Log(new BotTextInformation(selectedServerDataExtendedMessage.address + " " + (int)selectedServerDataExtendedMessage.port));
             account.Ticket = AES.AES.TicketTrans(msg.Ticket).ToString();
             account.HumanCheck = new HumanCheck(account);
             account.SocketManager.IsChangingServer = true;
             if (!account.Config.IsMITM)
             {
-                account.Log(new ConnectionTextInformation("Connexion au serveur " + MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
-                account.SocketManager.Connect(new ConnectionInformations(msg.Address, msg.Port, "de jeu"));
+                account.Log(new ConnectionTextInformation("Connected to server " + DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
+                account.SocketManager.Connect(new ConnectionInformations(msg.Address, msg.Port, " of game"));
             }
             else
             {
@@ -118,7 +117,6 @@ namespace MageBot.Core.Engine.Handlers.Connection
                     nmsg.Serialize(writer);
                     nmsg.Pack(writer);
                     account.SocketManager.SendToDofusClient(writer.Content);
-                    //account.SocketManager.DisconnectFromDofusClient();
                     account.SocketManager.DisconnectServer("42 packet handling.");
                     account.SocketManager.ListenDofus();
                     await account.PutTaskDelay(200);
@@ -131,13 +129,11 @@ namespace MageBot.Core.Engine.Handlers.Connection
         [MessageHandler(typeof(ServerStatusUpdateMessage))]
         public static void ServerStatusUpdateMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
-            // Lecture du paquet ServerStatusUpdateMessage
             ServerStatusUpdateMessage serverStatusUpdateMessage = (ServerStatusUpdateMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
                 serverStatusUpdateMessage.Deserialize(reader);
             }
-            // Cherche le statut du serveur
             ServerStatus.Test((ServerStatusEnum)serverStatusUpdateMessage.Server.Status, account);
         }
 
@@ -154,13 +150,6 @@ namespace MageBot.Core.Engine.Handlers.Connection
             msg.Servers.ForEach(server => account.Log(new ConnectionTextInformation("< --- Server : " +
                 MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, server.ObjectID).Fields["nameId"])
                          + " Status : " + ((ServerStatusEnum)server.Status).Description() + " --- >"), 0));
-
-            //foreach (GameServerInformations gsi in msg.servers)
-            //{
-            //    account.Log(new ConnectionTextInformation("Server : "+
-            //        IntelliSense.ServersList.Where(server => server.Id == gsi.id).FirstOrDefault().Name), 0);
-            //}
-
             account.Log(new ConnectionTextInformation("Serveur complet."), 0);
             account.TryReconnect(600);
         }
@@ -199,13 +188,11 @@ namespace MageBot.Core.Engine.Handlers.Connection
         [MessageHandler(typeof(SelectedServerRefusedMessage))]
         public static void SelectedServerRefusedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
-            // Lecture du paquet ServerStatusUpdateMessage
             SelectedServerRefusedMessage selectedServerRefusedMessage = (SelectedServerRefusedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
                 selectedServerRefusedMessage.Deserialize(reader);
             }
-            // Cherche le statut du serveur
             ServerStatus.Test((ServerStatusEnum)selectedServerRefusedMessage.ServerStatus, account);
         }
         [MessageHandler(typeof(IdentificationFailedForBadVersionMessage))]

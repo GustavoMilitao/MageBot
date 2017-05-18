@@ -63,18 +63,15 @@ namespace MageBot.Core.Engine.Handlers.Basic
         }
 
         [MessageHandler(typeof(BasicNoOperationMessage))]
-        public static void BasicNoOperationMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void BasicNoOperationMessageTreatment(Message message, byte[] packetDatas, Account.Account account)
         {
-            //MainForm.ActualMainForm.ActualizeAccountInformations();
-            //if (account.MapData.Begin)
-            //    account.ActualizeFamis();
-            // TODO Militão: Populate the new interface
+            if (account.Config.Begin)
+                account.UpdatePets();
             Thread.Sleep(GetRandomTime());
 
             if (account.LastPacketID.Count == 0)
                 return;
 
-            //switch ((uint)account.LastPacketID.Dequeue())
             switch ((uint)account.LastPacket)
             {
                 case InteractiveUseRequestMessage.ProtocolID:
@@ -116,14 +113,6 @@ namespace MageBot.Core.Engine.Handlers.Basic
                     if (account.Running != null)
                         account.Running.Init();
                     return;
-                //case GameMapMovementRequestMessage.ProtocolId:
-
-                //    return;
-
-                //case GameMapMovementConfirmMessage.ProtocolId:
-                //    account.Fight.LaunchFight(account.Fight.flag);
-                //    return;
-
                 default:
                     return;
             }
@@ -138,17 +127,6 @@ namespace MageBot.Core.Engine.Handlers.Basic
             {
                 btmsg.Deserialize(reader);
             }
-            //double serverTimeLag = btmsg.timestamp + btmsg.timezoneOffset * 60 * 1000; // - ((new DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc) - DateTime.MinValue) + DateTime.MinValue).TotalMilliseconds;
-            //DateTime epoch = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
-            ////System.DateTime date = System.DateTime.FromOADate(msg.subscriptionEndDate); 
-            ////epoch.AddSeconds(msg.subscriptionEndDate / 1000) + 3600);
-            //epoch = epoch.AddMilliseconds(account.serverTimeLag + serverTimeLag);
-            //if (epoch.Minute > 0)
-            //{
-            //    // account.AboDofLabel.Text = date.Date.ToString();
-            //    account.Log(new BotTextInformation(epoch.Date.ToShortDateString()), 0);
-            //}
-            //account.serverTimeLag = serverTimeLag;
         }
 
         [MessageHandler(typeof(AccountLoggingKickedMessage))]
@@ -160,7 +138,7 @@ namespace MageBot.Core.Engine.Handlers.Basic
             {
                 btmsg.Deserialize(reader);
             }
-            account.Log(new ErrorTextInformation(String.Format("Compte banni {0} jours, {1} heures, {2} minutes :'( ", btmsg.Days, btmsg.Hours, btmsg.Minutes)), 0);
+            account.Log(new ErrorTextInformation(String.Format("Account kicked for {0} days, {1} hours, {2} minutes :'( ", btmsg.Days, btmsg.Hours, btmsg.Minutes)), 0);
         }
 
         [MessageHandler(typeof(ServerSettingsMessage))]

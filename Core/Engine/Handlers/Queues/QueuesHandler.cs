@@ -19,7 +19,7 @@ namespace MageBot.Core.Engine.Handlers.Queues
                 loginQueueStatusMessage.Deserialize(reader);
             }
 
-            account.Log(new QueueTextInformation("File d'attente : " + loginQueueStatusMessage.Position +
+            account.Log(new QueueTextInformation(Strings.PositionInQueue+" : " + loginQueueStatusMessage.Position +
                 "/" + loginQueueStatusMessage.Total + "."),0);
         }
 

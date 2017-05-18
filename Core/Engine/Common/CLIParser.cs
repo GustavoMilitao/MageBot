@@ -921,7 +921,6 @@ namespace MageBot.Core.Engine.Common
                 {
                     if (launch && account.State != Status.Fighting)
                     {
-                        account.Fight.Infinite = infinite;
                         await account.Fight.SearchFight();
                         result.Add("Recherche d'un combat...");
                     }

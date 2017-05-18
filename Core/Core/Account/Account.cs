@@ -61,18 +61,32 @@ namespace MageBot.Core.Account
         #endregion
 
         #region Internal code use
-        public bool Busy { get; set; }
         public Status State { get; set; }
         public WatchDog WatchDog { get; set; }
         public SocketManager SocketManager { get; set; }
-        public int Sequence { get; set; }
         public LatencyFrame LatencyFrame { get; set; }
         public Running Running { get; set; }
         public Queue<int> LastPacketID { get; set; }
-        public int LastPacket { get; set; }
         public Queue<Tuple<TextInformation, int>> InformationQueue { get; set; }
         public Dictionary<int, DataBar> InfBars { get; set; }
+        public int Sequence { get; set; }
+        public bool Busy { get; set; }
+        public int LastPacket { get; set; }
+        #endregion
+
+        #region Events to Fill in interface
         public event EventHandler QueueChanged;
+        public event EventHandler InfBarsChanged;
+        #endregion
+
+        #region Updater events (Fill in interface)
+        public event EventHandler ActualizePets;
+        public event EventHandler ActualizeAccountInfo;
+        public event EventHandler ActualizeMap;
+        public event EventHandler ActualizeFightStats;
+        public event EventHandler ActualizeInventory;
+        public event EventHandler Actualizeshop;
+        public event EventHandler ActualizeJobs;
         #endregion
 
         #region ByPass code use
@@ -85,6 +99,8 @@ namespace MageBot.Core.Account
         #endregion
 
         #endregion
+
+        #region public methods
 
         public Account(string username, string password, bool socket = true)
         {
@@ -115,28 +131,13 @@ namespace MageBot.Core.Account
             Jobs = new List<Job.Job>();
             Gather = new Gather(this);
 
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot","Accounts", AccountName);
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", AccountName);
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
             FightData = new FightData(this);
             MapData = new MapData(this);
             WatchDog = new WatchDog(this);
             InformationQueue = new Queue<Tuple<TextInformation, int>>();
-        }
-
-        private void InitBars()
-        {
-            InfBars = new Dictionary<int, DataBar>
-            {
-                { 1, new DataBar() { Text = "Experience" } },
-                { 2, new DataBar() { Text = "Life" } },
-                { 3, new DataBar() { Text = "Pods" } },
-                { 4, new DataBar() { Text = "Kamas" } },
-                { 5, new DataBar() { Text = "Pos" } },
-                { 7, new DataBar() { Text = "ParentForm" } },
-                { 8, new DataBar() { Text = "Level" } },
-                { 9, new DataBar() { Text = "Subscribe" } }
-            };
         }
 
         public void StartFeeding()
@@ -149,11 +150,6 @@ namespace MageBot.Core.Account
         {
             InformationQueue.Enqueue(new Tuple<TextInformation, int>(text, verboseLevel));
             OnChanged();
-        }
-
-        protected virtual void OnChanged()
-        {
-            QueueChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public void Init()
@@ -262,7 +258,6 @@ namespace MageBot.Core.Account
             }
         }
 
-
         public void SetStatus(Status state)
         {
             this.State = state;
@@ -336,6 +331,7 @@ namespace MageBot.Core.Account
                 InfBars[bar].Max = max;
                 InfBars[bar].Value = value;
                 InfBars[bar].Text = text;
+                UpdateInfBars();
             }
 
         }
@@ -348,7 +344,6 @@ namespace MageBot.Core.Account
                 Timeout.Infinite);
         }
 
-        #region Methodes privées
         public void Connect()
         {
             if (TimerConnectionThread != null)
@@ -371,6 +366,10 @@ namespace MageBot.Core.Account
             if (Config.Begin)
                 GetNextMeal();
         }
+
+        #endregion
+
+        #region Methodes privées
 
         private void Reconnect(object state)
         {
@@ -400,7 +399,81 @@ namespace MageBot.Core.Account
             MyWriter.Close();
 
         }
+
+        private void InitBars()
+        {
+            InfBars = new Dictionary<int, DataBar>
+            {
+                { 1, new DataBar() { Text = "Experience" } },
+                { 2, new DataBar() { Text = "Life" } },
+                { 3, new DataBar() { Text = "Pods" } },
+                { 4, new DataBar() { Text = "Kamas" } },
+                { 5, new DataBar() { Text = "Pos" } },
+                { 7, new DataBar() { Text = "ParentForm" } },
+                { 8, new DataBar() { Text = "Level" } },
+                { 9, new DataBar() { Text = "Subscribe" } }
+            };
+        }
+
         #endregion
 
+        #region Updaters
+        public virtual void UpdatePets()
+        {
+            ActualizePets?.Invoke(this, EventArgs.Empty);
+        }
+
+        public virtual void UpdateAccInfo()
+        {
+            ActualizeAccountInfo?.Invoke(this, EventArgs.Empty);
+        }
+
+        public virtual void UpdateMap()
+        {
+            ActualizeMap?.Invoke(this, EventArgs.Empty);
+        }
+
+        public virtual void UpdateFightStats()
+        {
+            ActualizeFightStats?.Invoke(this, EventArgs.Empty);
+        }
+
+        public virtual void UpdateInventory()
+        {
+            ActualizeInventory?.Invoke(this, EventArgs.Empty);
+        }
+
+        public virtual void UpdateJobs()
+        {
+            ActualizeJobs?.Invoke(this, EventArgs.Empty);
+        }
+
+        public virtual void UpdateShop(List<ObjectItemToSell> objectsInfos)
+        {
+            Actualizeshop?.Invoke(this, new ActualizeShopItemsEventArgs(objectsInfos));
+        }
+
+        public virtual void UpdateInfBars()
+        {
+            InfBarsChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnChanged()
+        {
+            QueueChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        #endregion
+
+    }
+
+    public class ActualizeShopItemsEventArgs : EventArgs
+    {
+        public List<ObjectItemToSell> ObjectsInfos { get; set; }
+
+        public ActualizeShopItemsEventArgs(List<ObjectItemToSell> objectsInfos)
+        {
+            ObjectsInfos = objectsInfos;
+        }
     }
 }

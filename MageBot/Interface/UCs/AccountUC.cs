@@ -49,7 +49,6 @@ namespace MageBot.Interface
         public RegenUC RegenUC { get; set; }
         public FloodUC FloodUC { get; set; }
         public MetroFramework.Forms.MetroForm m_ParentForm { get; set; }
-        public Thread ReadLogThread { get; set; }
         #endregion
 
         #region Delegates
@@ -167,11 +166,11 @@ namespace MageBot.Interface
             account.FightData = new FightData(Account);
             account.MapData = new MapData(Account);
             account.WatchDog = new WatchDog(Account);
-
+            FillAccountInitialSettings();
 
         }
 
-        private void FillAccountInicialSettings()
+        private void FillAccountInitialSettings()
         {
             if (!Account.Config.ConfigRecover.Restored)
             {
@@ -180,6 +179,7 @@ namespace MageBot.Interface
                 Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
                 Account.Config.MaxMonstersNumber = (int)nudMaxMonstersNumber.Value;
                 Account.Config.MaxMonstersLevel = (int)nudMaxMonstersLevel.Value;
+                Account.Config.MaxPriceHouse = (ulong)MaxPrice.Value;
             }
         }
 
@@ -1103,6 +1103,29 @@ namespace MageBot.Interface
         private void IsLockingFight_CheckedChanged(object sender)
         {
             Account.Config.LockingFights = IsLockingFight.Checked;
+        }
+
+        private void WithItemSetBox_CheckedChanged(object sender)
+        {
+            Account.Config.StartFightWithItemSet = WithItemSetBox.Checked;
+            Account.Config.StartFightWithItemSet = WithItemSetBox.Checked;
+            Account.Config.PresetStartUpId = (byte)PresetStartUpD.Value;
+            Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
+        }
+
+        private void PresetStartUpD_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.PresetStartUpId = (byte)PresetStartUpD.Value;
+        }
+
+        private void PresetEndUpD_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
+        }
+
+        private void NUDTimeoutFight_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
         }
     }
 }

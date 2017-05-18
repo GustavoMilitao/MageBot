@@ -32,16 +32,12 @@ namespace MageBot.Core.Fight
         #endregion
 
         #region Public Fields
-        public Account.Account Account { get; set; }
+        private Account.Account Account { get; set; }
         public List<BFighter> Fighters { get; set; } = new List<BFighter>();
-        public int TimeoutFight { get; set; }
         public List<BFighter> DeadEnnemies { get; set; } = new List<BFighter>();
         public int TurnId { get; set; }
 
-        public bool StartFightWithItemSet { get; set; }
-        public byte PresetStartUpId { get; set; }
-        public bool EndFightWithItemSet { get; set; }
-        public sbyte PresetEndUpId { get; set; }
+        
         public bool IsFighterTurn { get; set; } = false;
         public bool IsFightStarted { get; set; } = false;
         public bool WaitForReady { get; set; } = false;
@@ -400,13 +396,14 @@ namespace MageBot.Core.Fight
             Account.SetStatus(Status.Busy);
             Reset();
             PerformAutoTimeoutFight(2000);
-            if (EndFightWithItemSet)
+            if (Account.Config.EndFightWithItemSet)
             {
-                sbyte id = PresetEndUpId;
+                sbyte id = Account.Config.PresetEndUpId;
                 InventoryPresetUseMessage msg2 = new InventoryPresetUseMessage((byte)(id - 1));
                 Account.SocketManager.Send(msg2);
                 Account.Log(new ActionTextInformation("Fast equipment number " + Convert.ToString(id)), 5);
             }
+            Account.SetStatus(Status.None);
             PulseRegen();
         }
 
@@ -500,7 +497,7 @@ namespace MageBot.Core.Fight
         /// </summary>
         public async void PerformAutoTimeoutFight(int originalTime)
         {
-            await Account.PutTaskDelay(Convert.ToInt32(originalTime * TimeoutFight));
+            await Account.PutTaskDelay(Convert.ToInt32(originalTime * Account.Config.BotSpeed));
         }
 
         /// <summary>

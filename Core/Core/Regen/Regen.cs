@@ -24,7 +24,6 @@ namespace MageBot.Core.Regen
             if (((Account.CharacterStats.LifePoints / Account.CharacterStats.MaxLifePoints) * 100) < RegenChoice)
             {
                 Account.SetStatus(Status.Regenerating);
-                //TODO Militão: Add to get Regen Items later.
                 if (RegenItems.Count > 0)
                 {
                     if (UseItems(RegenItems))

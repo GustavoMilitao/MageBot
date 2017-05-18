@@ -24,6 +24,8 @@ using MageBot.Protocol.Messages;
 using Util.Util.Text.Log;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.IO;
 
 namespace MageBot.Core.Engine.Handlers.Context
 {
@@ -53,8 +55,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             account.MapData.ParseInteractiveElements(msg.InteractiveElements.ToArray());
             account.Config.Enabled = true;
             account.MapData.DoAction();
-            //account.ActualizeMap();
-            // TODO Militão: Populate the new interface
+            account.UpdateMap();
         }
 
         [MessageHandler(typeof(MapComplementaryInformationsWithCoordsMessage))]
@@ -78,11 +79,11 @@ namespace MageBot.Core.Engine.Handlers.Context
             if (account.MapData.Data != null)
             {
                 account.MapData.Data.Id = currentMapMessage.MapId;
-                //if (account.MapID == account.MapData.LastMapId && account.Fight != null)
-                //{
-                //    account.FightData.winLoseDic["Gagné"]++;
-                //    account.ActualizeFightStats(account.FightData.winLoseDic, account.FightData.xpWon);
-                //}
+                if (account.MapData.Data.Id == account.MapData.LastMapId && account.Fight != null)
+                {
+                    account.FightData.WinLoseDic["Win"]++;
+                    account.UpdateFightStats();
+                }
             }
             if (!account.Config.IsMITM)
             {
@@ -121,35 +122,22 @@ namespace MageBot.Core.Engine.Handlers.Context
             }
             switch (msg.MsgId)
             {
-                //case 89:
-                //    account.Log(new DofAlertTextInformation("Bienvenue sur DOFUS, dans le Monde des Douze !" + System.Environment.NewLine + "Il est interdit de transmettre votre identifiant ou votre mot de passe."), 1);
-                //    break;
-                //case 153:
-                //    account.Log(new DofInfoCanal("Votre adresse ip actuelle est " + msg.parameters[0]), 0);
-                //    break;
-                //case 171:
-                //    account.Log(new ErrorTextInformation(string.Format("Impossible de lancer ce sort, vous avez une portée de {0} à {1}, et vous visez à {2} !", msg.parameters[0], msg.parameters[1], msg.parameters[2])), 4);
-                //    break;
                 case 36:
                     if (account.Config.LockingSpectators)
                         account.Fight.LockFightForSpectators();
                     break;
                 case 34:
-                    //account.Log(new ErrorTextInformation(string.Format("Vous avez perdu {0} points d'énergie", msg.parameters[0])), 0);
-                    //account.Log(new ErrorTextInformation("Combat perdu"), 0);
                     if (account.Fight != null)
                     {
-                        account.FightData.WinLoseDic["Perdu"]++;
-                        //account.ActualizeFightStats(account.FightData.winLoseDic, account.FightData.xpWon);
-                        // TODO Militão: Populate the new interface
+                        account.FightData.WinLoseDic["Lose"]++;
+                        account.UpdateFightStats();
                     }
                     break;
             }
-            //default:
 
 
             DataClass data = GameData.GetDataObject(D2oFileEnum.InfoMessages, msg.MsgType * 10000 + msg.MsgId);
-            string text = MageBot.DataFiles.Data.I18n.I18N.GetText((int)data.Fields["textId"]);
+            string text = DataFiles.Data.I18n.I18N.GetText((int)data.Fields["textId"]);
             for (int i = 0; i < msg.Parameters.Count; i++)
             {
                 var parameter = msg.Parameters[i];
@@ -172,9 +160,6 @@ namespace MageBot.Core.Engine.Handlers.Context
                 case 0:
                     account.Log(new GeneralTextInformation(msg.SenderName + ": " + msg.Content), 1);
                     break;
-                case 1:
-                    //account.Log(new DofAlertTextInformation("Bienvenue sur DOFUS, dans le Monde des Douze !" + System.Environment.NewLine + "Il est interdit de transmettre votre identifiant ou votre mot de passe."));
-                    break;
                 case 2:
                     account.Log(new GuildTextInformation(msg.SenderName + ": " + msg.Content), 1);
                     break;
@@ -192,43 +177,6 @@ namespace MageBot.Core.Engine.Handlers.Context
                     break;
             }
         }
-
-        //[MessageHandler(typeof(GameMapMovementConfirmMessage))]
-        //public static void GameMapMovementConfirmMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
-        //{
-        //    GameMapMovementConfirmMessage msg = (GameMapMovementConfirmMessage)message;
-
-        //    using (BigEndianReader reader = new BigEndianReader(packetDatas))
-        //    {
-        //        msg.Deserialize(reader);
-        //    }
-        //    MageBot.Core.Fight.Entity Character = null;
-        //    foreach (MageBot.Core.Fight.Entity e in account.Map.Entities)
-        //    {
-        //        if (e.Id == account.CharacterBaseInformations.id)
-        //            Character = e;
-        //    }
-        //    int mapChangeData = ((MageBot.DataFiles.Data.D2p.Map)account.Map.Data).Cells[Character.CellId].MapChangeData;
-        //    if (mapChangeData != 0)
-        //    {
-        //        int neighbourId = 0;
-        //        if (neighbourId == -2)
-        //        {
-        //            if ((mapChangeData & 64) > 0)
-        //                neighbourId = ((MageBot.DataFiles.Data.D2p.Map)account.Map.Data).TopNeighbourId;
-        //            if ((mapChangeData & 16) > 0)
-        //                neighbourId = ((MageBot.DataFiles.Data.D2p.Map)account.Map.Data).LeftNeighbourId;
-        //            if ((mapChangeData & 4) > 0)
-        //                neighbourId = ((MageBot.DataFiles.Data.D2p.Map)account.Map.Data).BottomNeighbourId;
-        //            if ((mapChangeData & 1) > 0)
-        //                neighbourId = ((MageBot.DataFiles.Data.D2p.Map)account.Map.Data).RightNeighbourId;
-        //        }
-        //        if (neighbourId >= 0)
-        //            account.Map.LaunchChangeMap(neighbourId);
-        //    }
-        //    account.SetStatus(Status.None);
-
-        //}
 
         [MessageHandler(typeof(GameMapMovementMessage))]
         public static void GameMapMovementMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
@@ -258,29 +206,8 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            //if (account.Fight != null && account.FightData.IsFollowingGroup)
-            //{
-            //    account.Fight.LaunchFight(account.FightData.followingGroup.m_contextualId);
-            //    return;
-            //}
-            //if (account.Path != null)
-            //{
-            //    account.SetStatus(Status.None);
-            //    account.Log(new DebugTextInformation("[Path] NoMovement : Continue the path..."), 0);
-            //    account.Path.PerformActionsStack();
-            //}
-            //account.Map.Moving = false;
-            //account.Map.ConfirmMove();
             if (account.Config.Path != null)
                 account.Config.Path.PerformActionsStack();
-
-            //else if (account.Map.Moving)
-            //{
-            //    account.SetStatus(Status.None);
-            //    if (account.Path != null)
-            //        account.Path.ParsePath();
-            //}
-
         }
 
         [MessageHandler(typeof(PopupWarningMessage))]
@@ -293,11 +220,9 @@ namespace MageBot.Core.Engine.Handlers.Context
                 msg.Deserialize(reader);
             }
             account.Log(new ErrorTextInformation("[FROM " + msg.Author + " ] : " + msg.Content), 0);
-            account.Log(new BotTextInformation("You has been locked for " + msg.LockDuration + ". Stopping MageBot.actions while blocked..."), 0);
-            account.Log(new ErrorTextInformation("Y a un popup sur l'écran, surement un modo :s"), 0);
-            //account.Wait(msg.LockDuration, msg.LockDuration);
+            account.Log(new BotTextInformation("You has been locked for " + msg.LockDuration + ". Stopping MageBot actions while blocked..."), 0);
+            account.Log(new ErrorTextInformation("There is a popup on the screen, probably a moderator :s"), 0);
             await account.PutTaskDelay(msg.LockDuration);
-            //account.SocketManager.Disconnect("Alerte au modo ! Alerte au modo !");
         }
 
         [MessageHandler(typeof(SystemMessageDisplayMessage))]
@@ -310,7 +235,6 @@ namespace MageBot.Core.Engine.Handlers.Context
                 msg.Deserialize(reader);
             }
             msg.Parameters.ForEach(item => account.Log(new DofAlertTextInformation(item), 0));
-            // account.SocketManager.Disconnect("Alerte au modo ! Alerte au modo !");
         }
 
 
@@ -350,7 +274,6 @@ namespace MageBot.Core.Engine.Handlers.Context
             }
             if (msg.FightMap.MapId == account.MapData.Id && msg.MemberName == account.MyGroup.GetMaster().CharacterBaseInformations.Name)
             {
-                //account.Wait(500, 1500);
                 await account.PutTaskDelay(1500);
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
@@ -420,20 +343,19 @@ namespace MageBot.Core.Engine.Handlers.Context
         [MessageHandler(typeof(HousePropertiesMessage))]
         public static void HousePropertiesMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
-            //HousePropertiesMessage msg = (HousePropertiesMessage)message;
+            HousePropertiesMessage msg = (HousePropertiesMessage)message;
 
-            //using (BigEndianReader reader = new BigEndianReader(packetDatas))
-            //{
-            //    msg.Deserialize(reader);
-            //}
-            //if (!String.IsNullOrEmpty(account.Config.HouseSearcherLogPath))
-            //{
-            //    StreamWriter SourceFile = new StreamWriter(account.Config.HouseSearcherLogPath, true);
-            //    SourceFile.WriteLine("Abandoned house in : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]");
-            //    SourceFile.Close();
-            //}
-            //TODO Militão: Treat this
-            //account.Log(new BotTextInformation("Maison abandonnée en : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]"), 1);
+            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            {
+                msg.Deserialize(reader);
+            }
+            if (account.Config.HouseSearcherEnabled && !String.IsNullOrEmpty(account.Config.HouseSearcherLogPath))
+            {
+                StreamWriter SourceFile = new StreamWriter(account.Config.HouseSearcherLogPath, true);
+                SourceFile.WriteLine("Abandoned house in : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]");
+                SourceFile.Close();
+            }
+            account.Log(new BotTextInformation("Abandoned house in : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]"), 1);
         }
 
         [MessageHandler(typeof(GameContextRemoveElementMessage))]
@@ -520,33 +442,6 @@ namespace MageBot.Core.Engine.Handlers.Context
             //account.Gather.Current_Job.ActualizeStats(account.Gather.Stats);
         }
 
-        ////////////////////////////////// PACKET DELETED ///////////////////////////////////////////////
-
-        //[MessageHandler(typeof(DisplayNumericalValueWithAgeBonusMessage))]
-        //public static void DisplayNumericalValueWithAgeBonusTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
-        //{
-        //    DisplayNumericalValueWithAgeBonusMessage msg = (DisplayNumericalValueWithAgeBonusMessage)message;
-
-        //    using (BigEndianReader reader = new BigEndianReader(packetDatas))
-        //    {
-        //        msg.Deserialize(reader);
-        //    }
-        //    account.ModifBar(6, 0, 0, "Connecté");
-        //    if ((int)msg.type == 1 && msg.entityId == account.CharacterBaseInformations.id)
-        //    {
-        //        if (account.Gather.resourceName == "Unknown")
-        //            return;
-        //        account.Log(new ActionTextInformation("Ressource récoltée : " + account.Gather.resourceName + " +" + msg.value + msg.valueOfBonus), 3);
-        //        if (account.Gather.Stats.ContainsKey(account.Gather.resourceName))
-        //            account.Gather.Stats[account.Gather.resourceName] += msg.value + msg.valueOfBonus;
-        //        else
-        //            account.Gather.Stats.Add(account.Gather.resourceName, msg.value + msg.valueOfBonus);
-        //        account.Gather.Current_Job.ActualizeStats(account.Gather.Stats);
-        //        if (account.PerformGather() == false && account.Path != null)
-        //            account.Path.PerformActionsStack();
-        //    }
-        //}
-
         [MessageHandler(typeof(InteractiveUseErrorMessage))]
         public static void InteractiveUseErrorMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
@@ -556,10 +451,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            //if (account.Gather.Error())
-            //    return;
             account.Gather.BanElementId(account.Gather.Id);
-            //account.Log(new ErrorTextInformation("Erreur lors de l'utilisation de l'element numero " + msg.elemId + ". Pg lelz. Poursuite du trajet."), 0);
             if (account.Config.Path != null)
                 account.Config.Path.PerformFlag();
         }

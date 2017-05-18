@@ -34,10 +34,9 @@ namespace MageBot.Core.Engine.Handlers.Inventory
                 MageBot.Core.Inventory.Item i = new MageBot.Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
                 account.Inventory.Items.Add(i);
             }
-            //account.ActualizeInventory();
-            // TODO Militão: Populate the new interface
+            account.UpdateInventory();
             account.PetsList = new List<Pet>();
-            foreach (MageBot.Core.Inventory.Item item in account.Inventory.Items)
+            foreach (Core.Inventory.Item item in account.Inventory.Items)
             {
                 DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
@@ -93,8 +92,7 @@ namespace MageBot.Core.Engine.Handlers.Inventory
                 MageBot.Core.Inventory.Item i = new MageBot.Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
                 account.Inventory.Items.Add(i);
             }
-            //account.ActualizeInventory();
-            // TODO Militão: Populate the new interface
+            account.UpdateInventory();
             account.PetsList = new List<Pet>();
             foreach (MageBot.Core.Inventory.Item item in account.Inventory.Items)
             {
@@ -106,8 +104,8 @@ namespace MageBot.Core.Engine.Handlers.Inventory
                     pet.SetFood();
                 }
             }
-            account.Log(new BotTextInformation("Vos " +
-            account.PetsList.Count + " familiers vous font un gros bisou de la part de MageBot."), 5);
+            account.Log(new BotTextInformation("Your " +
+            account.PetsList.Count + " pets send you a big kiss from MageBot."), 5);
             if (!account.Config.IsMITM)
             {
                 FriendsGetListMessage friendGetListMessage = new FriendsGetListMessage();
@@ -160,7 +158,7 @@ namespace MageBot.Core.Engine.Handlers.Inventory
                 if (account.PetsModifiedList == null)
                     account.PetsModifiedList = new List<Pet>();
                 account.PetsModifiedList.Add(pet);
-                account.Log(new ActionTextInformation("Familier nourri : " + MageBot.DataFiles.Data.I18n.I18N.GetText((int)ItemData.Fields["nameId"]) + " " + "."), 3);
+                account.Log(new ActionTextInformation("Pet fed : " + MageBot.DataFiles.Data.I18n.I18N.GetText((int)ItemData.Fields["nameId"]) + " " + "."), 3);
             }
         }
 
@@ -177,8 +175,7 @@ namespace MageBot.Core.Engine.Handlers.Inventory
                 if (account.Inventory.Items[index].UID == msg.ObjectUID)
                 {
                     account.Inventory.Items[index].Quantity = (int)msg.Quantity;
-                    //account.ActualizeInventory();
-                    // TODO Militão: Populate the new interface
+                    account.UpdateInventory();
                 }
             }
             if (account.Running != null)
@@ -191,7 +188,7 @@ namespace MageBot.Core.Engine.Handlers.Inventory
         [MessageHandler(typeof(ExchangeErrorMessage))]
         public static void ExchangeErrorMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
-            account.Log(new CharacterTextInformation("Echec de l'ouverture du coffre."), 0);
+            account.Log(new CharacterTextInformation("Failed to open trunk."), 0);
             if (account.Running != null)
                 account.Running.OnSafe = false;
         }
@@ -235,24 +232,9 @@ namespace MageBot.Core.Engine.Handlers.Inventory
                 msg.Deserialize(reader);
             }
             ObjectItem item = msg.Object;
-            MageBot.Core.Inventory.Item i = new MageBot.Core.Inventory.Item(item.Effects, item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
+            Core.Inventory.Item i = new Core.Inventory.Item(item.Effects, item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
             account.Inventory.Items.Add(i);
             string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
-            //System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
-            //li.ToolTipText = i.Description;
-            //account.AddItem(li, account.LVItems);
-            //if (i.Type == "Sac de ressource")
-            //{
-            //    foreach (JobUC uc in account.JobsUC)
-            //    {
-            //        if (uc.OpenBagCb.Checked)
-            //        {
-            //            account.Inventory.UseItem(i.UID);
-            //            account.Log(new ActionTextInformation("Ouverture automatique d'un sac de récolte : " + i.Name), 2);
-            //        }
-            //    }
-            //}
-            // TODO Militão: Populate the new interface
             if (account.Running != null)
             {
                 foreach (Pet pet in account.PetsList)
@@ -275,8 +257,7 @@ namespace MageBot.Core.Engine.Handlers.Inventory
                     break;
                 }
             }
-            //account.ActualizeInventory();
-            // TODO Militão: Populate the new interface
+            account.UpdateInventory();            
             if (account.Running != null)
             {
                 foreach (Pet pet in account.PetsList)
@@ -335,8 +316,7 @@ namespace MageBot.Core.Engine.Handlers.Inventory
             {
                 msg.Deserialize(reader);
             }
-            //account.actualizeshop(msg.ObjectsInfos.ToList());
-            // TODO Militão: Populate the new interface
+            account.UpdateShop(msg.ObjectsInfos.ToList());
             if (account.Inventory.ItemsToAddToShop.Count > 0)
                 account.Inventory.ItemsToAddToShop.ForEach(item => account.Inventory.AddItemToShop(item.Item1,item.Item2,item.Item3));
         }

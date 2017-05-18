@@ -13,7 +13,6 @@ namespace MageBot.Core.Misc
         public ulong priceHouse;
         public int ElementIdd;
         public int SkillInstanceID;
-        public string SentenceToSay { get; set; }
 
         public HouseBuy(Account.Account Account)
         {
@@ -52,9 +51,9 @@ namespace MageBot.Core.Misc
             HouseBuyRequestMessage msg = new HouseBuyRequestMessage(priceHouse);
             account.SocketManager.Send(msg);
             account.Log(new BotTextInformation("Maison achetée pour " + priceHouse + " kamas !"), 0);
-            if (!String.IsNullOrEmpty(SentenceToSay))
+            if (!String.IsNullOrEmpty(account.Config.SentenceToSay))
             {
-                Say(SentenceToSay);
+                Say(account.Config.SentenceToSay);
             }
         }
 

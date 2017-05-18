@@ -1,5 +1,6 @@
 ﻿using MageBot.Core.Char;
 using MageBot.Core.Fight;
+using MageBot.Core.Inventory;
 using MageBot.Core.Misc;
 using MageBot.Core.Path;
 using System;
@@ -11,7 +12,7 @@ namespace MageBot.Core.Account
     public class AccountConfig
     {
         #region General
-        public Account Account { get; set; }
+        private Account Account { get; set; }
         public int VerboseLevel;
         public bool IsMaster { get; set; }
         public bool IsSlave { get; set; }
@@ -40,6 +41,11 @@ namespace MageBot.Core.Account
 
         #region Inventory
         public int MaxPodsPercent { get; set; }
+        public List<Item> ItemsToAutoDelete { get; set; }
+        public List<Item> ItemsToStayOnCharacter { get; set; }
+        public List<Item> ItemsToGetFromBank { get; set; }
+        public List<Tuple<Item, int, ulong>> ItemsToAddToShop { get; set; }
+        public bool ListeningToExchange { get; set; }
         #endregion
 
         #region Fight
@@ -51,6 +57,10 @@ namespace MageBot.Core.Account
         public bool LockingFights { get; set; }
         public bool LockingSpectators { get; set; }
         public bool LockingForGroupOnly { get; set; }
+        public bool StartFightWithItemSet { get; set; }
+        public byte PresetStartUpId { get; set; }
+        public bool EndFightWithItemSet { get; set; }
+        public sbyte PresetEndUpId { get; set; }
         public List<MonsterRestrictions> MonsterRestrictions { get; set; }
         public FightParser FightParser { get; set; }
         public bool AutoRelaunchFight { get; set; }
@@ -60,6 +70,8 @@ namespace MageBot.Core.Account
         #region House
         public ulong MaxPriceHouse { get; set; }
         public string HouseSearcherLogPath { get; set; }
+        public bool HouseSearcherEnabled { get; set; }
+        public string SentenceToSay { get; set; }
         #endregion
 
         #region Char
@@ -70,6 +82,10 @@ namespace MageBot.Core.Account
         public AccountConfig(Account account)
         {
             Account = account;
+            ItemsToAddToShop = new List<Tuple<Item, int, ulong>>();
+            ItemsToAutoDelete = new List<Item>();
+            ItemsToGetFromBank = new List<Item>();
+            ItemsToStayOnCharacter = new List<Item>();
             ConfigRecover = new ConfigManager(Account);
             Flood = new Flood(Account);
             RegenConfig = new Regen.Regen(Account);
