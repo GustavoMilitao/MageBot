@@ -79,6 +79,8 @@ namespace MageBot.Interface
                 m_ParentForm = form;
             Account = account;
             Account.QueueChanged += Account_QueueChanged;
+            Account.InfBarsChanged += Account_InfBarsChanged;
+            Account.ActualizeFightStats += Account_ActualizeFightStats;
             account.PetsModifiedList = new List<Pet>();
             listViewPets.Columns.Add(Strings.Name, 150, HorizontalAlignment.Left);
             listViewPets.Columns.Add(Strings.UID, 0, HorizontalAlignment.Left);
@@ -168,6 +170,19 @@ namespace MageBot.Interface
             account.WatchDog = new WatchDog(Account);
             FillAccountInitialSettings();
 
+        }
+
+        private void Account_ActualizeFightStats(object sender, EventArgs e)
+        {
+            ActualizeFightStats();
+        }
+
+        private void Account_InfBarsChanged(object sender, EventArgs e)
+        {
+            foreach (KeyValuePair<int, DataBar> d in Account.InfBars)
+            {
+                ModifBar(d.Key, d.Value.Max, d.Value.Value, d.Value.Text);
+            }
         }
 
         private void FillAccountInitialSettings()
@@ -550,7 +565,7 @@ namespace MageBot.Interface
 
         private void MonsterTextBox_GetFocus(object sender, EventArgs e)
         {
-                MonsterTextBox.Text = String.Empty;
+            MonsterTextBox.Text = String.Empty;
         }
 
         private void MonstersRestrictionView_Supp(object sender, KeyEventArgs e)

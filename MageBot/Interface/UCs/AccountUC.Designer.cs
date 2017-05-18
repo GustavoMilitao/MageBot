@@ -1605,7 +1605,7 @@ namespace MageBot.Interface
             // 
             // ContextName
             // 
-            this.ContextName.Text = typeof(Util.Util.I18n.Strings.Strings).Name;
+            this.ContextName.Text = Strings.Name;
             this.ContextName.Width = 86;
             // 
             // CellId
