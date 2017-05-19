@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using MageBot.Core.Map;
 using MageBot.Core.Misc;
 using MageBot.Core.Engine.Constants;
@@ -22,6 +21,8 @@ using MageBot.Core.Map.Elements;
 using MageBot.Core.Network;
 using MageBot.Core.Engine.Network;
 using MageBot.Util.Enums.Internal;
+using MageBot.Core.Path;
+using MageBot.Core.Char;
 
 namespace MageBot.Core.Account
 {
@@ -58,6 +59,13 @@ namespace MageBot.Core.Account
         public Pods Pods { get; set; }
         public List<ObjectItem> SafeItems { get; set; }
         public CharacterCharacteristicsInformations CharacterStats { get; set; }
+        public FightParser FightParser { get; set; }
+        public PathManager Path { get; set; }
+        public ConfigManager ConfigRecover { get; set; }
+        public Flood Flood { get; set; }
+        public Regen.Regen Regen { get; set; }
+        public Character Character { get; set; }
+        public Heroic.Heroic Heroic { get; set; }
         #endregion
 
         #region Internal code use
@@ -67,16 +75,21 @@ namespace MageBot.Core.Account
         public LatencyFrame LatencyFrame { get; set; }
         public Running Running { get; set; }
         public Queue<int> LastPacketID { get; set; }
-        public Queue<Tuple<TextInformation, int>> InformationQueue { get; set; }
         public Dictionary<int, DataBar> InfBars { get; set; }
         public int Sequence { get; set; }
         public bool Busy { get; set; }
         public int LastPacket { get; set; }
+        public DateTime NextMeal { get; set; }
+        public DateTime NextMealP { get; set; } //TODO Militão: What is this?
         #endregion
 
         #region Events to Fill in interface
-        public event EventHandler QueueChanged;
+        public event EventHandler LogChanged;
         public event EventHandler InfBarsChanged;
+        public event EventHandler LoggerClear;
+        public event EventHandler StatusChanged;
+        public event EventHandler AccountRestart;
+        public event EventHandler ApplicationWait;
         #endregion
 
         #region Updater events (Fill in interface)
@@ -106,22 +119,21 @@ namespace MageBot.Core.Account
             AccountName = username;
             AccountPassword = password;
             InitBars();
-            Config = new AccountConfig(this);
+            Config = new AccountConfig();
             PetsModifiedList = new List<Pet>();
             Config.IsMITM = !socket;
             Config.IsSocket = socket;
-            Config.NextMeal = new DateTime();
+            NextMeal = new DateTime();
             Ticket = string.Empty;
-            PetsModifiedList = null;
-            PetsList = null;
-            Safe = null;
-            CharacterBaseInformations = null;
+            PetsList = new List<Pet>();
+            Safe = new InteractiveElement();
+            CharacterBaseInformations = new CharacterBaseInformations();
             Sequence = 0;
-            LatencyFrame = null;
-            Pods = null;
+            LatencyFrame = new LatencyFrame(this);
+            Pods = new Pods();
             SafeItems = new List<ObjectItem>();
             LastPacketID = new Queue<int>();
-            Running = null;
+            Running = new Running();
             Fight = null;
             Map = new Map.Map(this);
             Inventory = new Inventory.Inventory(this);
@@ -129,14 +141,17 @@ namespace MageBot.Core.Account
             Npc = new Npc.Npc(this);
             Jobs = new List<Job.Job>();
             Gather = new Gather(this);
-
             string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", AccountName);
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
             FightData = new FightData(this);
             MapData = new MapData(this);
             WatchDog = new WatchDog(this);
-            InformationQueue = new Queue<Tuple<TextInformation, int>>();
+            ConfigRecover = new ConfigManager(this);
+            Flood = new Flood(this);
+            Regen = new Regen.Regen(this);
+            Character = new Character(this);
+            Heroic = new Heroic.Heroic(this);
         }
 
         public void StartFeeding()
@@ -147,8 +162,7 @@ namespace MageBot.Core.Account
 
         public void Log(TextInformation text, int verboseLevel)
         {
-            InformationQueue.Enqueue(new Tuple<TextInformation, int>(text, verboseLevel));
-            OnChanged();
+            OnLog(text,verboseLevel);
         }
 
         public void Init()
@@ -206,38 +220,38 @@ namespace MageBot.Core.Account
                 if (pet.NonFeededForMissingFood)
                     continue;
 
-                if (Config.NextMeal.Year == 1)
+                if (NextMeal.Year == 1)
                 {
-                    Config.NextMeal = pet.NextMeal;
+                    NextMeal = pet.NextMeal;
                     continue;
                 }
 
-                if (pet.NextMeal <= Config.NextMeal)
-                    Config.NextMeal = pet.NextMeal;
+                if (pet.NextMeal <= NextMeal)
+                    NextMeal = pet.NextMeal;
             }
         }
 
         public void GetNextMeal()
         {
-            Config.NextMealP = new DateTime();
+            NextMealP = new DateTime();
 
-            if (Config.NextMealP.Year == 1)
+            if (NextMealP.Year == 1)
             {
-                Config.NextMealP = new DateTime(Config.NextMeal.Year, Config.NextMeal.Month, Config.NextMeal.Day, Config.NextMeal.Hour,
-                    Config.NextMeal.Minute, 0);
+                NextMealP = new DateTime(NextMeal.Year, NextMeal.Month, NextMeal.Day, NextMeal.Hour,
+                    NextMeal.Minute, 0);
             }
 
-            else if (Config.NextMeal <= Config.NextMealP)
+            else if (NextMeal <= NextMealP)
             {
-                Config.NextMealP = new DateTime(Config.NextMeal.Year, Config.NextMeal.Month, Config.NextMeal.Day, Config.NextMeal.Hour,
-                    Config.NextMeal.Minute, 0);
+                NextMealP = new DateTime(NextMeal.Year, NextMeal.Month, NextMeal.Day, NextMeal.Hour,
+                    NextMeal.Minute, 0);
             }
 
-            if (Config.NextMealP.Year != 1)
+            if (NextMealP.Year != 1)
             {
-                Config.NextMealP = Config.NextMealP.AddMinutes(2);
+                NextMealP = NextMealP.AddMinutes(2);
 
-                DateTime difference = new DateTime((Config.NextMealP - DateTime.Now).Ticks);
+                DateTime difference = new DateTime((NextMealP - DateTime.Now).Ticks);
 
                 Log(new GeneralTextInformation("Prochain repas dans " + difference.Hour + " heure(s) " +
                      difference.Minute + " minute(s)."), 3);
@@ -259,7 +273,8 @@ namespace MageBot.Core.Account
 
         public void SetStatus(Status state)
         {
-            this.State = state;
+            State = state;
+            OnStatusChanged();
         }
 
         public bool AllowedGroup(List<string> monsters)
@@ -318,11 +333,6 @@ namespace MageBot.Core.Account
             return true;
         }
 
-        public async Task PutTaskDelay(int milisec)
-        {
-            await Task.Delay(milisec);
-        }
-
         public void ModifBar(int bar, int max, int value, string text)
         {
             if (InfBars.ContainsKey(bar))
@@ -348,7 +358,7 @@ namespace MageBot.Core.Account
             if (TimerConnectionThread != null)
                 TimerConnectionThread.Change(Timeout.Infinite, Timeout.Infinite);
 
-            Thread.Sleep(GetRandomTime() /*+ new Random().Next(30000)*/);
+            Wait(GetRandomTime() /*+ new Random().Next(30000)*/);
 
             Running = new Running(this);
 
@@ -372,7 +382,8 @@ namespace MageBot.Core.Account
 
         private void Reconnect(object state)
         {
-            Init();
+            ClearLogger();
+            OnAccountRestart();
         }
 
         private static int GetRandomTime()
@@ -410,7 +421,7 @@ namespace MageBot.Core.Account
                 { 5, new DataBar() { Text = "Pos" } },
                 { 7, new DataBar() { Text = "ParentForm" } },
                 { 8, new DataBar() { Text = "Level" } },
-                { 9, new DataBar() { Text = "Subscribe" } }
+                { 9, new DataBar() { Text = "Not subscribed" } }
             };
         }
 
@@ -452,10 +463,34 @@ namespace MageBot.Core.Account
             InfBarsChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        protected virtual void OnChanged()
+        #endregion
+
+        #region Interface Events
+        protected virtual void ClearLogger()
         {
-            QueueChanged?.Invoke(this, EventArgs.Empty);
+            LoggerClear?.Invoke(this, EventArgs.Empty);
         }
+
+        public virtual void Wait(int milisec)
+        {
+            ApplicationWait?.Invoke(this, new ApplicationWaitEventArgs(milisec));
+        }
+
+        protected virtual void OnStatusChanged()
+        {
+            StatusChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnAccountRestart()
+        {
+            AccountRestart?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnLog(TextInformation text, int verboseLevel)
+        {
+            LogChanged?.Invoke(this, new LogEventArgs(text, verboseLevel));
+        }
+
 
         #endregion
 
@@ -468,6 +503,29 @@ namespace MageBot.Core.Account
         public ActualizeShopItemsEventArgs(List<ObjectItemToSell> objectsInfos)
         {
             ObjectsInfos = objectsInfos;
+        }
+    }
+
+    public class LogEventArgs : EventArgs
+    {
+        public TextInformation Text { get; set; }
+
+        public int VerboseLevel { get; set; }
+
+        public LogEventArgs(TextInformation text, int verboseLevel)
+        {
+            Text = text;
+            VerboseLevel = verboseLevel;
+        }
+    }
+
+    public class ApplicationWaitEventArgs : EventArgs
+    {
+        public int Milisec { get; set; }
+
+        public ApplicationWaitEventArgs(int milisec)
+        {
+            Milisec = milisec;
         }
     }
 }

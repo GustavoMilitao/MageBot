@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MageBot.Core.Engine.Network;
+using System.Threading;
 
 namespace MageBot.Core.Map
 {
@@ -84,8 +85,9 @@ namespace MageBot.Core.Map
                 {
                     int randomCellId = list[RandomCell(0, list.Count)];
                     //m_MapId = neighbourId;
-                    if (MoveToCell(randomCellId).Result)
+                    if (MoveToCell(randomCellId))
                     {
+                        ChangeMap(neighbourId);
                         return true;
                     }
                     list.Remove(randomCellId);
@@ -94,11 +96,10 @@ namespace MageBot.Core.Map
             return false;
         }
 
-        public async Task<bool> MoveToCell(int cellId)
+        public bool MoveToCell(int cellId)
         {
             if (Account.State != Status.Fighting)
             {
-                Account.SetStatus(Status.Moving);
                 MovementPath path = (new Pathfinder(Account.MapData)).FindPath(Account.MapData.Character.Disposition.CellId, cellId);
                 if (path != null)
                 {
@@ -111,7 +112,8 @@ namespace MageBot.Core.Map
                         timetowait = serverMovement.Count() * 300;
                     }
                     Move(serverMovement);
-                    await Account.PutTaskDelay(timetowait);
+                    //await Account.PutTaskDelay(timetowait);
+                    Account.Wait(timetowait);
                     ConfirmMove();
                 }
             }
@@ -121,14 +123,14 @@ namespace MageBot.Core.Map
 
         public bool MoveToDoor(int cellId)
         {
-            return MoveToCellWithDistance(cellId, 1, true).Result;
+            return MoveToCellWithDistance(cellId, 1, true);
         }
 
         public bool MoveToElement(int id, int maxDistance)
         {
             Elements.StatedElement element = Account.MapData.StatedElements.Find(s => s.Id == id);
             if (element != null)
-                return MoveToCellWithDistance((int)element.CellId, maxDistance, false).Result;
+                return MoveToCellWithDistance((int)element.CellId, maxDistance, false);
             else
                 return false;
         }
@@ -137,7 +139,7 @@ namespace MageBot.Core.Map
         {
             Elements.StatedElement element = Account.MapData.StatedElements.Find(s => s.Id == id);
             if (element != null)
-                return MoveToCellWithDistance((int)element.CellId, 1, true).Result;
+                return MoveToCellWithDistance((int)element.CellId, 1, true);
             else
             {
                 return false;
@@ -146,8 +148,8 @@ namespace MageBot.Core.Map
 
         public void ChangeMap(int mapId)
         {
-            if (Account.Config.Path != null)
-                Account.Config.Path.ClearStack();
+            if (Account.Path != null)
+                Account.Path.ClearStack();
             ChangeMapMessage msg = new ChangeMapMessage(mapId);
             Account.SetStatus(Status.Busy);
             Account.SocketManager.Send(msg);
@@ -179,7 +181,7 @@ namespace MageBot.Core.Map
             Account.SetStatus(Status.None);
         }
 
-        public async void useZaapiTo(int mapid)
+        public void useZaapiTo(int mapid)
         {
 
             InteractiveElement e = Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.TypeId == 106);
@@ -187,20 +189,20 @@ namespace MageBot.Core.Map
             {
                 MoveToSecureElement((int)e.Id);
                 UseElement((int)e.Id, e.EnabledSkills[0].SkillInstanceUid);
-                await Account.PutTaskDelay(100);
+                Account.Wait(100);
                 TeleportRequestMessage msg = new TeleportRequestMessage(1, mapid);
                 Account.SocketManager.Send(msg);
             }
         }
 
-        public async void UseZaapTo(int mapid)
+        public void UseZaapTo(int mapid)
         {
             InteractiveElement e = Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.TypeId == 16);
             if (e != null)
             {
                 MoveToSecureElement((int)e.Id);
                 UseElement((int)e.Id, e.EnabledSkills[0].SkillInstanceUid);
-                await Account.PutTaskDelay(100);
+                Account.Wait(100);
                 TeleportRequestMessage msg = new TeleportRequestMessage(0, mapid);
                 Account.SocketManager.Send(msg);
             }
@@ -224,7 +226,7 @@ namespace MageBot.Core.Map
             }
         }
 
-        private async Task<bool> MoveToCellWithDistance(int cellId, int maxDistance, bool bool1)
+        private bool MoveToCellWithDistance(int cellId, int maxDistance, bool bool1)
         {
             MovementPath path = null;
             int savDistance = -1;
@@ -265,7 +267,7 @@ namespace MageBot.Core.Map
             {
                 timetowait = serverMovement.Count() * 320;
             }
-            await Account.PutTaskDelay(timetowait);
+            Account.Wait(timetowait);
             Move(serverMovement);
             return true;
         }

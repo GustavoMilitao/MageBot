@@ -74,12 +74,12 @@ namespace MageBot.Core.Engine.Handlers.Character
             {
                 msg.Deserialize(reader);
             }
-            if (!account.Config.ConfigRecover.Restored)
-                account.Config.ConfigRecover.RecoverConfig();
+            if (!account.Config.Restored)
+                account.ConfigRecover.RecoverConfig();
             account.CharacterStats = msg.Stats;
             uint percent = (msg.Stats.LifePoints / msg.Stats.MaxLifePoints) * 100;
             string text = msg.Stats.LifePoints + "/" + msg.Stats.MaxLifePoints + "(" + percent + "%)";
-            account.ModifBar(2, (int)msg.Stats.MaxLifePoints, (int)msg.Stats.LifePoints, "Vitalité");
+            account.ModifBar(2, (int)msg.Stats.MaxLifePoints, (int)msg.Stats.LifePoints, "Life");
             double i = msg.Stats.Experience - msg.Stats.ExperienceLevelFloor;
             double j = msg.Stats.ExperienceNextLevelFloor - msg.Stats.ExperienceLevelFloor;
             try
@@ -131,7 +131,7 @@ namespace MageBot.Core.Engine.Handlers.Character
             }
             account.ModifBar(8, 0, 0, Convert.ToString(msg.NewLevel));
             account.Log(new BotTextInformation("Level up ! New level : " + Convert.ToString(msg.NewLevel)), 3);
-            account.Config.CharacterConfig.UpAuto();
+            account.Character.UpAuto();
         }
 
         [MessageHandler(typeof(AchievementFinishedMessage))]

@@ -63,7 +63,7 @@ namespace MageBot.Interface
 
         private void SaveConfig(object sender , object e)
         {
-            accUserControl.Account.Config.ConfigRecover.SaveConfig();
+            accUserControl.Account.ConfigRecover.SaveConfig();
         }
         #endregion
     }

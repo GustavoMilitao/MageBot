@@ -39,7 +39,7 @@ namespace MageBot.Core.Groups
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Map.ChangeMap(move);
-                        System.Threading.Thread.Sleep(500);
+                        ac.Wait(500);
                     }
                 }
             }
@@ -56,7 +56,7 @@ namespace MageBot.Core.Groups
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Inventory.UseItem(uid);
-                        System.Threading.Thread.Sleep(500);
+                        ac.Wait(500);
                     }
                 }
             }
@@ -68,12 +68,12 @@ namespace MageBot.Core.Groups
             {
                 if (a.Config.IsMaster == true)
                 {
-                    a.Map.UseZaapTo((int)a.Config.Path.Current_Action.m_delta);
+                    a.Map.UseZaapTo((int)a.Path.Current_Action.m_delta);
                     foreach (Account.Account ac in accounts)
                     {
                         if (ac.Config.IsSlave == true)
-                            ac.Map.UseZaapTo((int)a.Config.Path.Current_Action.m_delta);
-                        System.Threading.Thread.Sleep(500);
+                            ac.Map.UseZaapTo((int)a.Path.Current_Action.m_delta);
+                        ac.Wait(500);
                     }
                     return;
                 }
@@ -86,30 +86,30 @@ namespace MageBot.Core.Groups
             {
                 if (a.Config.IsMaster == true)
                 {
-                    a.Map.useZaapiTo((int)a.Config.Path.Current_Action.m_delta);
+                    a.Map.useZaapiTo((int)a.Path.Current_Action.m_delta);
                     foreach (Account.Account ac in accounts)
                     {
                         if (ac.Config.IsSlave == true)
-                            ac.Map.useZaapiTo((int)a.Config.Path.Current_Action.m_delta);
-                        System.Threading.Thread.Sleep(500);
+                            ac.Map.useZaapiTo((int)a.Path.Current_Action.m_delta);
+                        ac.Wait(500);
                     }
                     return;
                 }
             }
         }
 
-        public async void MoveToCellGroup(int delta)
+        public void MoveToCellGroup(int delta)
         {
             foreach (Account.Account a in accounts)
             {
                 if (a.Config.IsMaster == true)
                 {
-                    await a.Map.MoveToCell(delta);
+                    a.Map.MoveToCell(delta);
                     foreach (Account.Account ac in accounts)
                     {
                         if (ac.Config.IsSlave == true)
-                            await ac.Map.MoveToCell(delta);
-                        System.Threading.Thread.Sleep(500);
+                            ac.Map.MoveToCell(delta);
+                        ac.Wait(500);
                     }
                     return;
                 }
@@ -127,7 +127,7 @@ namespace MageBot.Core.Groups
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Map.MoveToSecureElement(delta);
-                        System.Threading.Thread.Sleep(500);
+                        ac.Wait(500);
                     }
                     return;
                 }
@@ -145,7 +145,7 @@ namespace MageBot.Core.Groups
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Npc.TalkToNpc(delta);
-                        System.Threading.Thread.Sleep(500);
+                        ac.Wait(500);
                     }
                     return;
                 }
@@ -163,13 +163,13 @@ namespace MageBot.Core.Groups
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Inventory.RequestExchange(delta);
-                        System.Threading.Thread.Sleep(2000);
+                        ac.Wait(2000);
                     }
                     return;
                 }
             }
         }
-    #endregion
+        #endregion
 
     }
 }

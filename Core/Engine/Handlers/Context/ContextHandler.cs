@@ -42,7 +42,7 @@ namespace MageBot.Core.Engine.Handlers.Context
         public static void MapComplementaryInformationsDataMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             MapComplementaryInformationsDataMessage msg = (MapComplementaryInformationsDataMessage)message;
-            account.Config.HeroicConfig.AnalysePacket(message, packetDatas);
+            account.Heroic.AnalysePacket(message, packetDatas);
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
                 msg.Deserialize(reader);
@@ -54,6 +54,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             account.MapData.ParseActors(msg.Actors.ToArray());
             account.MapData.ParseInteractiveElements(msg.InteractiveElements.ToArray());
             account.Config.Enabled = true;
+            account.SetStatus(Status.None);
             account.MapData.DoAction();
             account.UpdateMap();
         }
@@ -206,12 +207,12 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (account.Config.Path != null)
-                account.Config.Path.PerformActionsStack();
+            if (account.Path != null)
+                account.Path.PerformActionsStack();
         }
 
         [MessageHandler(typeof(PopupWarningMessage))]
-        public async static void PopupWarningMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void PopupWarningMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             PopupWarningMessage msg = (PopupWarningMessage)message;
 
@@ -222,7 +223,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             account.Log(new ErrorTextInformation("[FROM " + msg.Author + " ] : " + msg.Content), 0);
             account.Log(new BotTextInformation("You has been locked for " + msg.LockDuration + ". Stopping MageBot actions while blocked..."), 0);
             account.Log(new ErrorTextInformation("There is a popup on the screen, probably a moderator :s"), 0);
-            await account.PutTaskDelay(msg.LockDuration);
+            account.Wait(msg.LockDuration);
         }
 
         [MessageHandler(typeof(SystemMessageDisplayMessage))]
@@ -264,7 +265,7 @@ namespace MageBot.Core.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(PartyMemberInFightMessage))]
-        public async static void PartyMemberInFightMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void PartyMemberInFightMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             PartyMemberInFightMessage msg = (PartyMemberInFightMessage)message;
 
@@ -274,7 +275,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             }
             if (msg.FightMap.MapId == account.MapData.Id && msg.MemberName == account.MyGroup.GetMaster().CharacterBaseInformations.Name)
             {
-                await account.PutTaskDelay(1500);
+                account.Wait(1500);
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
                     GameFightJoinRequestMessage msg2 = new GameFightJoinRequestMessage(msg.MemberId, msg.FightId);
@@ -302,7 +303,7 @@ namespace MageBot.Core.Engine.Handlers.Context
                 account.House.UseHouse();
             }
             account.MapData.UpdateInteractiveElement(msg.InteractiveElement);
-
+            account.UpdateMap();
         }
 
         [MessageHandler(typeof(StatedElementUpdatedMessage))]
@@ -315,6 +316,7 @@ namespace MageBot.Core.Engine.Handlers.Context
                 msg.Deserialize(reader);
             }
             account.MapData.UpdateStatedElement(msg.StatedElement);
+            account.UpdateMap();
         }
 
         [MessageHandler(typeof(PurchasableDialogMessage))]
@@ -374,7 +376,7 @@ namespace MageBot.Core.Engine.Handlers.Context
         public static void GameRolePlayShowActorMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             GameRolePlayShowActorMessage msg = (GameRolePlayShowActorMessage)message;
-            account.Config.HeroicConfig.AnalysePacket(msg, packetDatas);
+            account.Heroic.AnalysePacket(msg, packetDatas);
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
             {
                 msg.Deserialize(reader);
@@ -382,15 +384,15 @@ namespace MageBot.Core.Engine.Handlers.Context
 
             account.MapData.ParseActors(new List<GameRolePlayActorInformations>() { msg.Informations }.ToArray());
 
-            if (account.Config.Flood.FloodStarted && account.Config.Flood.InPrivateChannel && msg.Informations is GameRolePlayCharacterInformations)
+            if (account.Config.FloodStarted && account.Config.FloodInPrivateChannel && msg.Informations is GameRolePlayCharacterInformations)
             {
                 GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.Informations;
-                account.Config.Flood.SendPrivateTo(infos);
+                account.Flood.SendPrivateTo(infos);
             }
-            if (account.Config.Flood.SaveInMemory && msg.Informations is GameRolePlayCharacterInformations)
+            if (account.Config.FloodSaveInMemory && msg.Informations is GameRolePlayCharacterInformations)
             {
                 GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.Informations;
-                account.Config.Flood.SaveNameInDisk(infos);
+                account.Flood.SaveNameInDisk(infos);
             }
         }
 
@@ -403,7 +405,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (account.Config.Path != null && account.Inventory != null)
+            if (account.Path != null && account.Inventory != null)
             {
                 List<int> items = account.Inventory.GetItemsToTransfer();
                 account.Inventory.TransferItems(items);
@@ -452,8 +454,8 @@ namespace MageBot.Core.Engine.Handlers.Context
                 msg.Deserialize(reader);
             }
             account.Gather.BanElementId(account.Gather.Id);
-            if (account.Config.Path != null)
-                account.Config.Path.PerformFlag();
+            if (account.Path != null)
+                account.Path.PerformFlag();
         }
 
         [MessageHandler(typeof(InteractiveUseEndedMessage))]
@@ -469,12 +471,12 @@ namespace MageBot.Core.Engine.Handlers.Context
                 return;
             account.SetStatus(Status.None);
             account.Gather.Id = -1;
-            if (account.Config.Path != null)
-                account.Config.Path.PerformFlag();
+            if (account.Path != null)
+                account.Path.PerformFlag();
         }
 
         [MessageHandler(typeof(ExchangeStartedWithPodsMessage))]
-        public async static void ExchangeStartedWithPodsMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void ExchangeStartedWithPodsMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             ExchangeStartedWithPodsMessage msg = (ExchangeStartedWithPodsMessage)message;
 
@@ -486,7 +488,7 @@ namespace MageBot.Core.Engine.Handlers.Context
                 return;
             List<int> items = account.Inventory.GetItemsToTransfer();
             account.Inventory.TransferItems(items);
-            await account.PutTaskDelay(3000);
+            account.Wait(3000);
             account.Inventory.ExchangeReady();
         }
 

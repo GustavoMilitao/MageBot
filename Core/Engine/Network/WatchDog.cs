@@ -51,7 +51,7 @@ namespace MageBot.Core.Engine.Network
             if (DateTime.Compare(now, after) == 0 && CheckState())
             {
                 m_Account.Log(new DebugTextInformation("[WatchDog] Relaunch path"), 0);
-                m_Account.Config.Path.ParsePath();
+                m_Account.Path.ParsePath();
                 StartPathDog();
             }
             else

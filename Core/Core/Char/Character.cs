@@ -8,7 +8,6 @@ namespace MageBot.Core.Char
     public class Character
     {
         private Account.Account Account { get; set; }
-        public BoostableCharacteristicEnum? CaracToAutoUp { get; set; }
 
         public Character(Account.Account account)
         {
@@ -17,13 +16,13 @@ namespace MageBot.Core.Char
 
         public void UpAuto()
         {
-            if (CaracToAutoUp.HasValue)
+            if (Account.Config.CaracToAutoUp.HasValue)
             {
-                int boost = GetBoost(CaracToAutoUp.Value);
+                int boost = GetBoost(Account.Config.CaracToAutoUp.Value);
                 int quantity = Account.CharacterStats.StatsPoints / boost;
                 for (int i = 0; i < quantity; i++)
                 {
-                    UpStat(CaracToAutoUp.Value, boost);
+                    UpStat(Account.Config.CaracToAutoUp.Value, boost);
                 }
             }
         }

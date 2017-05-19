@@ -39,6 +39,25 @@ namespace MageBot.Core.Map.Elements
 
         public int TypeId { get; private set; }
 
+        public string Type
+        {
+            get
+            {
+                List<DataClass> ld = GameData.GetDataObjects(D2oFileEnum.Skills).ToList();
+
+                foreach (DataClass d in ld)
+                {
+                    if ((int)d.Fields["interactiveId"] == TypeId)
+                    {
+                        return DataFiles.Data.I18n.I18N.GetText(
+                    (int)GameData.GetDataObject(D2oFileEnum.ItemTypes,
+                    (int)GameData.GetDataObject(D2oFileEnum.Items, (int)d.Fields["gatheredRessourceItem"]).Fields["typeId"]).Fields["nameId"]);
+                    }
+                }
+                return "Unknown";
+            }
+        }
+
         public string Name
         {
             get
@@ -48,7 +67,7 @@ namespace MageBot.Core.Map.Elements
                 foreach (DataClass d in ld)
                 {
                     if ((int)d.Fields["interactiveId"] == TypeId)
-                        return MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, (int)d.Fields["gatheredRessourceItem"]).Fields["nameId"]);
+                        return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, (int)d.Fields["gatheredRessourceItem"]).Fields["nameId"]);
                 }
                 return "Unknown";
             }

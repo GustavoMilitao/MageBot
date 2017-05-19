@@ -155,7 +155,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
                 {
                     intResponseTime += _intResponseTimeExpected;
                     _strLastResponse = GetData(tcp);
-                    Thread.Sleep(_intResponseTimeExpected);
+                    System.Threading.Thread.Sleep(_intResponseTimeExpected);
                 }
 
                 //-- this is helpful for debugging SMTP problems
@@ -195,7 +195,7 @@ namespace MageBot.Core.Engine.ExceptionHandler
             //        _intRetries += 1;
             //        if (_intRetries <= _intMaxRetries)
             //        {
-            //            Thread.Sleep(intRetryInterval);
+            //            Account.Wait(intRetryInterval);
             //            SendMail(mail);
             //        }
             //        else

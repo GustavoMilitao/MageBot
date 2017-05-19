@@ -1,5 +1,8 @@
-﻿namespace Util.Util.Enums.Internal
+﻿using System;
+
+namespace Util.Util.Enums.Internal
 {
+    [Serializable()]
     public enum PotionEnum
     {
         MemoryPotion = 0x224,

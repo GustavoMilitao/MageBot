@@ -11,16 +11,16 @@ namespace MageBot.DataFiles.Data.D2p
         // Methods
         public static Map FromId(int id)
         {
-            lock (MapsManager.CheckLock)
+            lock (CheckLock)
             {
-                if (MapsManager.MapId_Map.ContainsKey(id))
-                {
-                    return MapsManager.MapId_Map[id];
-                }
+                //if (MapsManager.MapId_Map.ContainsKey(id))
+                //{
+                //    return MapsManager.MapId_Map[id];
+                //}
                 string str = ((id % 10).ToString() + "/" + id.ToString() + ".dlm");
-                if (MapsManager.D2pFileManager.MapExists(str))
+                if (D2pFileManager.MapExists(str))
                 {
-                    MemoryStream stream = new MemoryStream(MapsManager.D2pFileManager.method_1(str)) { Position = 2 };
+                    MemoryStream stream = new MemoryStream(D2pFileManager.method_1(str)) { Position = 2 };
                     DeflateStream stream2 = new DeflateStream(stream, CompressionMode.Decompress);
                     byte[] buffer = new byte[50001];
                     MemoryStream destination = new MemoryStream(buffer);
@@ -29,18 +29,18 @@ namespace MageBot.DataFiles.Data.D2p
                     BigEndianReader reader = new BigEndianReader(destination);
                     Map map2 = new Map();
                     map2.Init(reader);
-                    MapsManager.MapId_Map.Add(id, map2);
-                    if ((MapsManager.MapId_Map.Count > 1000))
-                    {
-                        MapsManager.MapId_Map.Remove(MapsManager.MapId_Map.Keys.First());
-                    }
+                    //MapId_Map.Add(id, map2);
+                    //if ((MapId_Map.Count > 1000))
+                    //{
+                    //    MapId_Map.Remove(MapId_Map.Keys.First());
+                    //}
                     return map2;
                 }
-                MapsManager.MapId_Map.Add(id, null);
-                if ((MapsManager.MapId_Map.Count > 1000))
-                {
-                    MapsManager.MapId_Map.Remove(MapsManager.MapId_Map.Keys.First());
-                }
+                //MapId_Map.Add(id, null);
+                //if ((MapId_Map.Count > 1000))
+                //{
+                //    MapId_Map.Remove(MapId_Map.Keys.First());
+                //}
                 return null;
             }
         }
@@ -51,14 +51,14 @@ namespace MageBot.DataFiles.Data.D2p
             //{
             //    throw new Exception();
             //}
-            MapsManager.MapId_Map = new Dictionary<int, Map>();
-            MapsManager.D2pFileManager = new D2pFileManager(directory);
+            //MapId_Map = new Dictionary<int, Map>();
+            D2pFileManager = new D2pFileManager(directory);
             MapsManager.CheckLock = new object();
         }
 
         // Fields
         private static D2pFileManager D2pFileManager;
-        private static Dictionary<int, Map> MapId_Map;
+        //private static Dictionary<int, Map> MapId_Map;
         private static object CheckLock;
     }
 }

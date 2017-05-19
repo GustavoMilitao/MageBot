@@ -73,7 +73,7 @@ namespace MageBot.Core.Fight
                 case FightConditionEnum.BossInFight:
                     return account.FightData.BossInFight();
                 case FightConditionEnum.DistanceFromTarget:
-                    int distance = account.FightData.DistanceFrom(account.Config.FightParser.Target);
+                    int distance = account.FightData.DistanceFrom(account.FightParser.Target);
                     switch (m_operateur)
                     {
                         case '<':
@@ -139,7 +139,7 @@ namespace MageBot.Core.Fight
                             return false;
                     }
                 case FightConditionEnum.TargetLife:
-                    int TargetPercent = (account.Config.FightParser.Target.LifePoints / account.Config.FightParser.Target.MaxLifePoints) * 100;
+                    int TargetPercent = (account.FightParser.Target.LifePoints / account.FightParser.Target.MaxLifePoints) * 100;
                     switch (m_operateur)
                     {
                         case '<':
@@ -164,17 +164,17 @@ namespace MageBot.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.AirElementResistPercent < Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.AirElementResistPercent < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.AirElementResistPercent > Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.AirElementResistPercent > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.AirElementResistPercent == Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.AirElementResistPercent == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -185,17 +185,17 @@ namespace MageBot.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.EarthElementResistPercent < Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.EarthElementResistPercent < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.EarthElementResistPercent > Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.EarthElementResistPercent > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.EarthElementResistPercent == Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.EarthElementResistPercent == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -206,17 +206,17 @@ namespace MageBot.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.FireElementResistPercent < Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.FireElementResistPercent < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.FireElementResistPercent > Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.FireElementResistPercent > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.FireElementResistPercent == Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.FireElementResistPercent == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -227,17 +227,17 @@ namespace MageBot.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.NeutralElementResistPercent < Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.NeutralElementResistPercent < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.NeutralElementResistPercent > Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.NeutralElementResistPercent > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.NeutralElementResistPercent == Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.NeutralElementResistPercent == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
@@ -248,17 +248,17 @@ namespace MageBot.Core.Fight
                     switch (m_operateur)
                     {
                         case '<':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.WaterElementResistPercent < Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.WaterElementResistPercent < Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '>':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.WaterElementResistPercent > Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.WaterElementResistPercent > Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;
                         case '=':
-                            if (account.Config.FightParser.Target.GameFightMinimalStats.WaterElementResistPercent == Convert.ToInt32(m_delta))
+                            if (account.FightParser.Target.GameFightMinimalStats.WaterElementResistPercent == Convert.ToInt32(m_delta))
                                 return true;
                             else
                                 return false;

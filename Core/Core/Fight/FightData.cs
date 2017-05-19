@@ -495,9 +495,9 @@ namespace MageBot.Core.Fight
         /// <summary>
         /// Perform the auto-timeout.
         /// </summary>
-        public async void PerformAutoTimeoutFight(int originalTime)
+        public void PerformAutoTimeoutFight(int originalTime)
         {
-            await Account.PutTaskDelay(Convert.ToInt32(originalTime * Account.Config.BotSpeed));
+            Account.Wait(Convert.ToInt32(originalTime * Account.Config.BotSpeed));
         }
 
         /// <summary>
@@ -940,7 +940,7 @@ namespace MageBot.Core.Fight
         /// </summary>
         private void PulseRegen()
         {
-            Account.Config.RegenConfig.PulseRegen();
+            Account.Regen.PulseRegen();
         }
         #endregion
     }

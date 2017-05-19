@@ -660,4 +660,7 @@
   <data name="LogIn" xml:space="preserve">
     <value>Log In</value>
   </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>Professions</value>
+  </data>
 </root>

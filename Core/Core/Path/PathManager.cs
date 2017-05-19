@@ -16,13 +16,12 @@ namespace MageBot.Core.Path
 
         public string Path;
         public string PathName { get; set; }
-        public string Current_Map { get; set; }
-        public string Current_Flag
+        private string Current_Map { get; set; }
+        private string Current_Flag
         {
             get { return flag; }
-            internal set { flag = value; }
+            set { flag = value; }
         }
-        public bool Relaunch { get; set; }
         public bool Launched { get; set; }
         public Thread Thread { get; set; }
         public List<Action> ActionsStack { get; set; }
@@ -146,12 +145,12 @@ namespace MageBot.Core.Path
                     //On lance un combat, les actions seront effectuées après le combat
                     if (Account.Config.IsMaster == true && Account.MyGroup != null && Account.Fight != null)
                     {
-                        if (Account.State != Status.Fighting && !Account.Fight.SearchFight().Result)
+                        if (Account.State != Status.Fighting && !Account.Fight.SearchFight())
                             PerformActionsStack();
                     }
                     else if (Account.Config.IsSlave == false && Account.Fight != null)
                     {
-                        if (Account.State != Status.Fighting && !Account.Fight.SearchFight().Result)
+                        if (Account.State != Status.Fighting && !Account.Fight.SearchFight())
                             PerformActionsStack();
                     }
                     else

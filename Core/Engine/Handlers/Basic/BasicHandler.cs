@@ -67,7 +67,7 @@ namespace MageBot.Core.Engine.Handlers.Basic
         {
             if (account.Config.Begin)
                 account.UpdatePets();
-            Thread.Sleep(GetRandomTime());
+            account.Wait(GetRandomTime());
 
             if (account.LastPacketID.Count == 0)
                 return;

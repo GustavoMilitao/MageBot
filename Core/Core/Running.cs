@@ -17,7 +17,7 @@ namespace MageBot.Core
         private Feeding m_Feeding;
         private LeavingDialog m_LeavingDialog;
         private bool m_OnSafe;
-        private Account.Account account;
+        private Account.Account Account;
         #endregion
 
         #region Properties
@@ -68,7 +68,7 @@ namespace MageBot.Core
 
         public Running(Account.Account account)
         {
-            this.account = account;
+            this.Account = account;
             m_Openning = null;
             m_Leaving = null;
             m_Getting = null;
@@ -77,27 +77,27 @@ namespace MageBot.Core
         #endregion
 
         #region Public methods
-        public async void Init()
+        public void Init()
         {
-            if (m_CurrentPetIndex == account.PetsList.Count)
+            if (m_CurrentPetIndex == Account.PetsList.Count)
             {
-                account.SetNextMeal();
-                account.GetNextMeal();
+                Account.SetNextMeal();
+                Account.GetNextMeal();
                 return;
             }
 
-            if ((CheckTime(account.PetsList[m_CurrentPetIndex])) ||
+            if ((CheckTime(Account.PetsList[m_CurrentPetIndex])) ||
                 ((m_Feeding != null) && (m_Feeding.SecondFeeding)))
             {
                 if (
-                    account.PetsList[m_CurrentPetIndex].Informations.Position == 8)
+                    Account.PetsList[m_CurrentPetIndex].Informations.Position == 8)
                 {
                     Console.WriteLine();
                 }
 
-                if (account.PetsList[m_CurrentPetIndex].FoodList.Count == 0)
+                if (Account.PetsList[m_CurrentPetIndex].FoodList.Count == 0)
                 {
-                    if (account.Safe == null)
+                    if (Account.Safe == null)
                     {
                         NoFood();
                         return;
@@ -107,7 +107,7 @@ namespace MageBot.Core
                     {
                         m_OnSafe = true;
                         m_Openning = new Opening();
-                        m_Openning.Init(account);
+                        m_Openning.Init(Account);
                         return;
                     }
 
@@ -115,9 +115,9 @@ namespace MageBot.Core
                     return;
                 }
 
-                m_Feeding = new Feeding(account);
-                m_Feeding.Init(account.PetsList[m_CurrentPetIndex]);
-                await account.PutTaskDelay(1000);
+                m_Feeding = new Feeding(Account);
+                m_Feeding.Init(Account.PetsList[m_CurrentPetIndex]);
+                Account.Wait(1000);
                 m_CurrentPetIndex++;
                 return;
             }
@@ -129,7 +129,7 @@ namespace MageBot.Core
         public void LeavingFoodToSafe()
         {
             if (m_Leaving == null)
-                m_Leaving = new Leaving(account);
+                m_Leaving = new Leaving(Account);
 
             m_Leaving.Init();
         }
@@ -137,25 +137,25 @@ namespace MageBot.Core
         public void GettingFoodFromSafe()
         {
             if (m_Getting == null)
-                m_Getting = new Getting(account);
+                m_Getting = new Getting(Account);
 
             m_Getting.Init();
         }
 
         public void CheckStatisticsUp()
         {
-            foreach (Pet petModified in account.PetsModifiedList)
+            foreach (Pet petModified in Account.PetsModifiedList)
             {
-                if (m_CurrentPetIndex >= account.PetsList.Count)
+                if (m_CurrentPetIndex >= Account.PetsList.Count)
                     continue;
                 if (petModified.Informations.UID ==
-                    account.PetsList[m_CurrentPetIndex].Informations.UID)
+                    Account.PetsList[m_CurrentPetIndex].Informations.UID)
                 {
-                    Pet pet = account.PetsList[m_CurrentPetIndex];
+                    Pet pet = Account.PetsList[m_CurrentPetIndex];
 
                     if (pet.Effect != petModified.Effect)
                     {
-                       account.Log(new ActionTextInformation("Up de caractéristique, " + petModified.Datas.Name + " " + petModified.Informations.UID + "."),4);
+                       Account.Log(new ActionTextInformation("Up de caractéristique, " + petModified.Datas.Name + " " + petModified.Informations.UID + "."),4);
 
                         m_Feeding.SecondFeeding = true;
                     }
@@ -166,20 +166,20 @@ namespace MageBot.Core
                 }
             }
 
-            account.PetsList = new List<Pet>();
+            Account.PetsList = new List<Pet>();
 
 
-            foreach (MageBot.Core.Inventory.Item item in account.Inventory.Items)
+            foreach (MageBot.Core.Inventory.Item item in Account.Inventory.Items)
             {
                 DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
                 {
-                    Pet petToAdd = new Pet(item, itemData, account);
-                    account.PetsList.Add(petToAdd);
+                    Pet petToAdd = new Pet(item, itemData, Account);
+                    Account.PetsList.Add(petToAdd);
                 }
             }
 
-            account.PetsModifiedList = null;
+            Account.PetsModifiedList = null;
 
             Init();
         }
@@ -189,19 +189,19 @@ namespace MageBot.Core
             if (m_LeavingDialog == null)
                 m_LeavingDialog = new LeavingDialog();
 
-            m_LeavingDialog.Init(account);
+            m_LeavingDialog.Init(Account);
         }
 
         public void NoFood()
         {
-           account.Log(new ActionTextInformation("Aucune nourriture disponible pour " +
-                                                                        MageBot.DataFiles.Data.I18n.I18N.GetText((int)account.PetsList[m_CurrentPetIndex].Datas
+           Account.Log(new ActionTextInformation("Aucune nourriture disponible pour " +
+                                                                        MageBot.DataFiles.Data.I18n.I18N.GetText((int)Account.PetsList[m_CurrentPetIndex].Datas
                                                                           .Fields["nameId"]) +
                                                                       "."),0);
 
-           account.PetsList[m_CurrentPetIndex].NonFeededForMissingFood = true;
+           Account.PetsList[m_CurrentPetIndex].NonFeededForMissingFood = true;
 
-           account.PetsList[m_CurrentPetIndex].NextMeal = new DateTime();
+           Account.PetsList[m_CurrentPetIndex].NextMeal = new DateTime();
             m_CurrentPetIndex++;
             Init();
         }

@@ -8,10 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+
 namespace MageBot.Protocol.Enums
 {
-    
-    
+
+    [Serializable()]
     public enum BoostableCharacteristicEnum
     {
         

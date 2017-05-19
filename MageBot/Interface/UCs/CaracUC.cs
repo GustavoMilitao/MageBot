@@ -17,7 +17,7 @@ namespace MageBot.Interface.UCs
         {
             InitializeComponent();
             accUserControl = Account;
-            accUserControl.Account.Config.CharacterConfig = new Character(accUserControl.Account);
+            accUserControl.Account.Character = new Character(accUserControl.Account);
         }
         #endregion
 
@@ -37,7 +37,7 @@ namespace MageBot.Interface.UCs
 
         public void UpAuto()
         {
-            accUserControl.Account.Config.CharacterConfig.UpAuto();
+            accUserControl.Account.Character.UpAuto();
         }
 
         public void DecreaseAvailablePoints(int n)
@@ -49,32 +49,32 @@ namespace MageBot.Interface.UCs
         #region Interface Methods
         private void sadikButton1_Click(object sender, EventArgs e)
         {
-            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_VITALITY);
+            accUserControl.Account.Character.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_VITALITY);
         }
 
         private void sadikButton2_Click(object sender, EventArgs e)
         {
-            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_WISDOM);
+            accUserControl.Account.Character.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_WISDOM);
         }
 
         private void sadikButton3_Click(object sender, EventArgs e)
         {
-            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_STRENGTH);
+            accUserControl.Account.Character.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_STRENGTH);
         }
 
         private void sadikButton4_Click(object sender, EventArgs e)
         {
-            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_INTELLIGENCE);
+            accUserControl.Account.Character.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_INTELLIGENCE);
         }
 
         private void sadikButton5_Click(object sender, EventArgs e)
         {
-            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_CHANCE);
+            accUserControl.Account.Character.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_CHANCE);
         }
 
         private void sadikButton6_Click(object sender, EventArgs e)
         {
-            accUserControl.Account.Config.CharacterConfig.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_AGILITY);
+            accUserControl.Account.Character.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_AGILITY);
         }
         #endregion
 

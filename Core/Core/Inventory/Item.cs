@@ -2,9 +2,11 @@
 using System.Linq;
 using MageBot.DataFiles.Data.D2o;
 using MageBot.Protocol.Types.Game.Data.Items.Effects;
+using System;
 
 namespace MageBot.Core.Inventory
 {
+    [Serializable()]
     public class Item
     {
         public Item(List<ObjectEffect> effects, int gid, int position, int quantity, int uid)

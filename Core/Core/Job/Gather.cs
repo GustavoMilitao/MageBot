@@ -164,9 +164,9 @@ namespace MageBot.Core.Job
         public bool Error()
         {
             _Error++;
-            if (_Error > 1 && account.Config.Path != null)
+            if (_Error > 1 && account.Path != null)
             {
-                account.Config.Path.PerformActionsStack();
+                account.Path.PerformActionsStack();
                 return true;
             }
             else

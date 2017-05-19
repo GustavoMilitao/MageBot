@@ -121,14 +121,14 @@ namespace MageBot.Core.Inventory
             }
         }
 
-        public async void AddItemToShop(Item item, int quantity, ulong price)
+        public void AddItemToShop(Item item, int quantity, ulong price)
         {
             ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage((uint)item.UID,quantity,price);
             
             Account.SocketManager.Send(msg);
             Account.Log(new ActionTextInformation(Strings.AdditionOf + item.Name + "(x " + quantity + ") " + Strings.InTheStoreAtThePriceOf + " : " + price + " " + Strings.Kamas), 2);
             LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
-            await Account.PutTaskDelay(2000);
+            Account.Wait(2000);
             Account.SocketManager.Send(packetleave);
         }
 

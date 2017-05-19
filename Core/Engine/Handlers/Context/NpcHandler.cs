@@ -77,9 +77,9 @@ namespace MageBot.Core.Engine.Handlers.Context
                 account.Npc.CloseDialog();
             account.Npc.Replies.Clear();
             account.Npc.Replies = msg.VisibleReplies.Select((id) => new MageBot.Core.Npc.NpcReply(account.MapData.Npcs.Find(n => (int)n.ContextualId == account.Npc.Id).NpcId, (int)id)).ToList();
-            if (account.Config.Path != null)
+            if (account.Path != null)
             {
-                account.Config.Path.SearchReplies(MageBot.DataFiles.Data.I18n.I18N.GetText(mess));
+                account.Path.SearchReplies(MageBot.DataFiles.Data.I18n.I18N.GetText(mess));
             }
         }
 

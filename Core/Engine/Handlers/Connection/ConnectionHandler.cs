@@ -89,7 +89,7 @@ namespace MageBot.Core.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(SelectedServerDataExtendedMessage))]
-        public async static void SelectedServerDataExtendedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void SelectedServerDataExtendedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
         {
             SelectedServerDataExtendedMessage msg = (SelectedServerDataExtendedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -119,7 +119,7 @@ namespace MageBot.Core.Engine.Handlers.Connection
                     account.SocketManager.SendToDofusClient(writer.Content);
                     account.SocketManager.DisconnectServer("42 packet handling.");
                     account.SocketManager.ListenDofus();
-                    await account.PutTaskDelay(200);
+                    account.Wait(200);
                 }
                 account.Log(new ConnectionTextInformation("Connexion au serveur " + MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Servers, msg.ServerId).Fields["nameId"])), 0);
                 account.SocketManager.Connect(new ConnectionInformations(msg.Address, msg.Port, "of game"));

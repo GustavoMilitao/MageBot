@@ -3,8 +3,10 @@ using MageBot.Core.Fight;
 using MageBot.Core.Inventory;
 using MageBot.Core.Misc;
 using MageBot.Core.Path;
+using MageBot.Protocol.Enums;
 using System;
 using System.Collections.Generic;
+using Util.Util.Enums.Internal;
 
 namespace MageBot.Core.Account
 {
@@ -12,7 +14,6 @@ namespace MageBot.Core.Account
     public class AccountConfig
     {
         #region General
-        private Account Account { get; set; }
         public int VerboseLevel;
         public bool IsMaster { get; set; }
         public bool IsSlave { get; set; }
@@ -20,22 +21,26 @@ namespace MageBot.Core.Account
         public bool IsMITM { get; set; }
         public bool IsSocket { get; set; }
         public bool Enabled { get; set; }
-        public ConfigManager ConfigRecover { get; set; }
+        public bool Restored { get; set; }
         public bool Begin { get; set; }
         public int BotSpeed { get; set; }
         #endregion
 
-        #region pet
-        public DateTime NextMeal { get; set; }
-        public DateTime NextMealP { get; set; } //TODO Militão: What is this?
-        #endregion
-
         #region flood
-        public Flood Flood { get; set; }
+        public Dictionary<string, long> ListOfPlayersWithLevel { get; set; }
+        public bool AddRandomingSmiley { get; set; }
+        public bool AddRandomingNumber { get; set; }
+        public bool FloodStarted { get; set; }
+        public bool FloodSaveInMemory { get; set; }
+        public bool FloodInCommerceChannel { get; set; }
+        public bool FloodInRecruitmentChannel { get; set; }
+        public bool FloodInGeneralChannel { get; set; }
+        public bool FloodInPrivateChannel { get; set; }
+        public int FloodInterval { get; set; }
+        public string FloodContent { get; set; }
         #endregion
 
         #region Path
-        public PathManager Path { get; set; }
         public bool RelaunchPath { get; set; }
         #endregion
 
@@ -49,7 +54,8 @@ namespace MageBot.Core.Account
         #endregion
 
         #region Fight
-        public Regen.Regen RegenConfig { get; set; }
+        public int RegenChoice { get; set; }
+        public List<Item> RegenItems { get; set; }
         public int MinMonstersNumber { get; set; }
         public int MaxMonstersNumber { get; set; }
         public int MinMonstersLevel { get; set; }
@@ -62,7 +68,6 @@ namespace MageBot.Core.Account
         public bool EndFightWithItemSet { get; set; }
         public sbyte PresetEndUpId { get; set; }
         public List<MonsterRestrictions> MonsterRestrictions { get; set; }
-        public FightParser FightParser { get; set; }
         public bool AutoRelaunchFight { get; set; }
         public bool LockPerformed { get; set; }
         #endregion
@@ -75,27 +80,29 @@ namespace MageBot.Core.Account
         #endregion
 
         #region Char
-        public Character CharacterConfig { get; set; }
-        public Heroic.Heroic HeroicConfig { get; set; }
+        public BoostableCharacteristicEnum? CaracToAutoUp { get; set; }
+        public bool HeroicModeOn { get; set; }
+        public bool AgroConditionsSet { get; set; }
+        public bool RunConditionsSet { get; set; }
+        public long MinLevelRun { get; set; }
+        public long MaxLevelRun { get; set; }
+        public List<string> AlliancesNameRun { get; set; }
+        public List<string> AlliancesNameAgro { get; set; }
+        public bool DisconnectWhenRun { get; set; }
+        public bool UseItemWhenRun { get; set; }
+        public PotionEnum? ItemToUseWhenRun { get; set; }
+        public long MinLevelAgro { get; set; }
+        public long MaxLevelAgro { get; set; }
         #endregion
 
-        public AccountConfig(Account account)
+        public AccountConfig()
         {
-            Account = account;
             ItemsToAddToShop = new List<Tuple<Item, int, ulong>>();
             ItemsToAutoDelete = new List<Item>();
             ItemsToGetFromBank = new List<Item>();
             ItemsToStayOnCharacter = new List<Item>();
-            ConfigRecover = new ConfigManager(Account);
-            Flood = new Flood(Account);
-            RegenConfig = new Regen.Regen(Account);
-            CharacterConfig = new Character(Account);
-            HeroicConfig = new Heroic.Heroic(Account);
             MonsterRestrictions = new List<MonsterRestrictions>();
+            Enabled = true;
         }
-
-        public AccountConfig()
-        { }
-
     }
 }

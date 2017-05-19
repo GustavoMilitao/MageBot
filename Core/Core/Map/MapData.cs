@@ -149,17 +149,20 @@ namespace MageBot.Core.Map
         {
             foreach (GameRolePlayActorInformations i in actors)
             {
-                if (i is GameRolePlayGroupMonsterInformations)
+                if (i is GameRolePlayGroupMonsterInformations 
+                    && !Monsters.Any(m => m.m_contextualId == i.ContextualId))
                 {
                     GameRolePlayGroupMonsterInformations m = (GameRolePlayGroupMonsterInformations)i;
                     Monsters.Add(new MonsterGroup(m.StaticInfos, m.Disposition.CellId, m.ContextualId));
                 }
-                else if (i is GameRolePlayCharacterInformations)
+                else if (i is GameRolePlayCharacterInformations
+                    && !Players.Any(p => p.ContextualId == i.ContextualId))
                 {
                     GameRolePlayCharacterInformations p = (GameRolePlayCharacterInformations)i;
                     Players.Add(p);
                 }
-                else if (i is GameRolePlayNpcInformations)
+                else if (i is GameRolePlayNpcInformations
+                    && !Npcs.Any(n => n.ContextualId == i.ContextualId))
                 {
                     GameRolePlayNpcInformations npc = (GameRolePlayNpcInformations)i;
                     Npcs.Add(npc);
@@ -186,7 +189,7 @@ namespace MageBot.Core.Map
             {
                 if (element.ElementTypeId == 85)
                     Account.Safe = new InteractiveElement(element);
-                Elements.InteractiveElement Ielement = new Elements.InteractiveElement((uint)element.ElementId, element.ElementTypeId, element.EnabledSkills, element.DisabledSkills);
+                InteractiveElement Ielement = new InteractiveElement((uint)element.ElementId, element.ElementTypeId, element.EnabledSkills, element.DisabledSkills);
                 InteractiveElements.Add(Ielement, -1);
                 if (Ielement.EnabledSkills.Count > 0)
                 {
@@ -230,14 +233,14 @@ namespace MageBot.Core.Map
         /// </summary>
         public void DoAction()
         {
-            if (Account.Config.Path != null && Account.Config.Path.Launched)
+            if (Account.Path != null && Account.Path.Launched)
             {
                 Account.Log(new DebugTextInformation("[Path] DoAction"), 0);
-                Account.Config.Path.ParsePath();
+                Account.Path.ParsePath();
             }
-            if (Account.Config.Path != null && Account.Config.Path.Relaunch)
+            if (Account.Path != null && Account.Config.RelaunchPath)
             {
-                Account.Config.Path.Start();
+                Account.Path.Start();
             }
             if (Account.PetsList.Count != 0 && Account.Config.Begin)
             {
@@ -255,13 +258,12 @@ namespace MageBot.Core.Map
         /// </summary>
         public void ParseLocation(int mapId, int subAreaId)
         {
-            Data = MageBot.DataFiles.Data.D2p.MapsManager.FromId(mapId);
+            Data = DataFiles.Data.D2p.MapsManager.FromId(mapId);
             Data.SubAreaId = subAreaId;
             DataClass subArea = GameData.GetDataObject(D2oFileEnum.SubAreas, subAreaId);
-            string mapName = MageBot.DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Areas, (int)subArea.Fields["areaId"]).Fields["nameId"]);
-            string subAreaName = MageBot.DataFiles.Data.I18n.I18N.GetText((int)subArea.Fields["nameId"]);
+            string mapName = DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Areas, (int)subArea.Fields["areaId"]).Fields["nameId"]);
+            string subAreaName = DataFiles.Data.I18n.I18N.GetText((int)subArea.Fields["nameId"]);
             Account.ModifBar(5, 0, 0, "[" + X + ";" + Y + "]" + " " + mapName + " (" + subAreaName + ")");
-            Account.ModifBar(5, 0, 0, mapName + " (" + subAreaName + ")");
         }
 
         /// <summary>
@@ -269,12 +271,12 @@ namespace MageBot.Core.Map
         /// </summary>
         public void UpdateInteractiveElement(MageBot.Protocol.Types.Game.Interactive.InteractiveElement element)
         {
-            Elements.InteractiveElement Ielement = new Elements.InteractiveElement((uint)element.ElementId, element.TypeID, element.EnabledSkills, element.DisabledSkills);
-            Tuple<Elements.InteractiveElement, int> temp = new Tuple<Elements.InteractiveElement, int>(null, 0);
+            InteractiveElement Ielement = new InteractiveElement((uint)element.ElementId, element.TypeID, element.EnabledSkills, element.DisabledSkills);
+            Tuple<InteractiveElement, int> temp = new Tuple<InteractiveElement, int>(null, 0);
             foreach (KeyValuePair<Elements.InteractiveElement, int> pair in InteractiveElements)
             {
                 if (pair.Key.Id == Ielement.Id)
-                    temp = new Tuple<Elements.InteractiveElement, int>(pair.Key, pair.Value);
+                    temp = new Tuple<InteractiveElement, int>(pair.Key, pair.Value);
             }
             if (temp.Item1 != null)
             {
@@ -288,9 +290,9 @@ namespace MageBot.Core.Map
         /// <summary>
         /// Update the state of an Stated element.
         /// </summary>
-        public void UpdateStatedElement(MageBot.Protocol.Types.Game.Interactive.StatedElement element)
+        public void UpdateStatedElement(Protocol.Types.Game.Interactive.StatedElement element)
         {
-            Elements.StatedElement Selement = new Elements.StatedElement(element.ElementCellId, element.ElementId, element.ElementState);
+            StatedElement Selement = new StatedElement(element.ElementCellId, element.ElementId, element.ElementState);
             if (StatedElements.Find(s => s.Id == Selement.Id) != null)
                 StatedElements.Find(s => s.Id == Selement.Id).State = Selement.State;
             else

@@ -10,12 +10,7 @@ using System.IO;
 using MageBot.Core.Account;
 using MageBot.Core.Pets;
 using Util.Util.I18n.Strings;
-using MageBot.Protocol.Types.Game.Character.Choice;
 using MageBot.Protocol.Types.Game.Data.Items;
-using MageBot.Core.Map;
-using MageBot.Core.Inventory;
-using MageBot.Core.Fight;
-using MageBot.Core.Npc;
 using MageBot.Core.Job;
 using MageBot.Core.Engine.Network;
 using Util.Util.Text.Log;
@@ -75,64 +70,10 @@ namespace MageBot.Interface
             if (form != null)
                 m_ParentForm = form;
             Account = account;
-            Account.QueueChanged += Account_QueueChanged;
-            Account.InfBarsChanged += Account_InfBarsChanged;
-            Account.ActualizeFightStats += Account_ActualizeFightStats;
-            Account.ActualizePets += Account_ActualizePets;
-            Account.ActualizeMap += Account_ActualizeMap;
-            Account.ActualizeInventory += Account_ActualizeInventory;
-            Account.ActualizeShop += Account_ActualizeShop;
-            Account.ActualizeJobs += Account_ActualizeJobs;
-            account.PetsModifiedList = new List<Pet>();
-            listViewPets.Columns.Add(Strings.Name, 150, HorizontalAlignment.Left);
-            listViewPets.Columns.Add(Strings.UID, 0, HorizontalAlignment.Left);
-            listViewPets.Columns.Add(Strings.Food + string.Format(" ({0})", Strings.Amount), -2, HorizontalAlignment.Left);
-            listViewPets.Columns.Add(Strings.NextMeal, -2, HorizontalAlignment.Left);
-            listViewPets.Columns.Add(Strings.Characteristics, -2, HorizontalAlignment.Left);
-            LVItems.Columns.Add(Strings.GID, 0, HorizontalAlignment.Center);
-            LVItems.Columns.Add(Strings.UID, 0, HorizontalAlignment.Center);
-            LVItems.Columns.Add(Strings.Name, -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add(Strings.Amount, -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add(Strings.Type, -2, HorizontalAlignment.Center);
-            LVItems.Columns.Add(string.Format("{0} {1}", Strings.Price, Strings.Medium.ToLower()), -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add(Strings.GID, 0, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add(Strings.UID, 0, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add(Strings.Name, -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add(Strings.Amount, -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add(Strings.Type, -2, HorizontalAlignment.Center);
-            LVItemBag.Columns.Add(string.Format("{0} {1}", Strings.Price, Strings.Medium.ToLower()), -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add(Strings.GID, 0, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add(Strings.UID, 0, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add(Strings.Name, -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add(Strings.Amount, -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add(Strings.GID, -2, HorizontalAlignment.Center);
-            LVItemShop.Columns.Add(Strings.SellingPrice, -2, HorizontalAlignment.Center);
-            ComparateurBox.SelectedIndex = 0;
-            MonstersRestrictionsView.Columns.Add(Strings.Name, -2);
-            MonstersRestrictionsView.Columns.Add(Strings.Comparator, -2);
-            MonstersRestrictionsView.Columns.Add(Strings.Number, -2);
-            MonstersRestrictionsView.Columns.Add(Strings.Restriction, -2);
+            FillAccountEvents();
+            FillAccountInitialSettings();
+            // Jobs
             JobsUC = new List<JobUC>();
-            account.Config.NextMeal = new DateTime();
-            account.Ticket = string.Empty;
-            account.PetsList = new List<Pet>();
-            account.Safe = new MageBot.Core.Map.Elements.InteractiveElement();
-            account.CharacterBaseInformations = new CharacterBaseInformations();
-            account.Sequence = 0;
-            account.LatencyFrame = new MageBot.Core.Frame.LatencyFrame(Account);
-            account.Pods = new MageBot.Core.Inventory.Pods();
-            account.SafeItems = new List<ObjectItem>();
-            account.LastPacketID = new Queue<int>();
-            account.Running = new MageBot.Core.Running();
-            //Fight = new BFight(this);
-            account.Fight = null;
-            account.Map = new Map(Account);
-            account.Inventory = new Inventory(Account);
-            account.Spells = new List<BSpell>();
-            account.Npc = new Npc(Account);
-
-            account.Jobs = new List<Job>();
-            account.Gather = new Gather(Account);
 
             //Heroic mode
             HeroicUC = new HeroicUC(this);
@@ -163,15 +104,94 @@ namespace MageBot.Interface
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
-            //Config Manager
-            account.Config.ConfigRecover = new ConfigManager(Account);
+            listViewPets.Columns.Add(Strings.Name, 150, HorizontalAlignment.Left);
+            listViewPets.Columns.Add(Strings.UID, 0, HorizontalAlignment.Left);
+            listViewPets.Columns.Add(Strings.Food + string.Format(" ({0})", Strings.Amount), -2, HorizontalAlignment.Left);
+            listViewPets.Columns.Add(Strings.NextMeal, -2, HorizontalAlignment.Left);
+            listViewPets.Columns.Add(Strings.Characteristics, -2, HorizontalAlignment.Left);
+            LVItems.Columns.Add(Strings.GID, 0, HorizontalAlignment.Center);
+            LVItems.Columns.Add(Strings.UID, 0, HorizontalAlignment.Center);
+            LVItems.Columns.Add(Strings.Name, -2, HorizontalAlignment.Center);
+            LVItems.Columns.Add(Strings.Amount, -2, HorizontalAlignment.Center);
+            LVItems.Columns.Add(Strings.Type, -2, HorizontalAlignment.Center);
+            LVItems.Columns.Add(string.Format("{0} {1}", Strings.Price, Strings.Medium.ToLower()), -2, HorizontalAlignment.Center);
+            LVItemBag.Columns.Add(Strings.GID, 0, HorizontalAlignment.Center);
+            LVItemBag.Columns.Add(Strings.UID, 0, HorizontalAlignment.Center);
+            LVItemBag.Columns.Add(Strings.Name, -2, HorizontalAlignment.Center);
+            LVItemBag.Columns.Add(Strings.Amount, -2, HorizontalAlignment.Center);
+            LVItemBag.Columns.Add(Strings.Type, -2, HorizontalAlignment.Center);
+            LVItemBag.Columns.Add(string.Format("{0} {1}", Strings.Price, Strings.Medium.ToLower()), -2, HorizontalAlignment.Center);
+            LVItemShop.Columns.Add(Strings.GID, 0, HorizontalAlignment.Center);
+            LVItemShop.Columns.Add(Strings.UID, 0, HorizontalAlignment.Center);
+            LVItemShop.Columns.Add(Strings.Name, -2, HorizontalAlignment.Center);
+            LVItemShop.Columns.Add(Strings.Amount, -2, HorizontalAlignment.Center);
+            LVItemShop.Columns.Add(Strings.GID, -2, HorizontalAlignment.Center);
+            LVItemShop.Columns.Add(Strings.SellingPrice, -2, HorizontalAlignment.Center);
+            ComparateurBox.SelectedIndex = 0;
+            MonstersRestrictionsView.Columns.Add(Strings.Name, -2);
+            MonstersRestrictionsView.Columns.Add(Strings.Comparator, -2);
+            MonstersRestrictionsView.Columns.Add(Strings.Number, -2);
+            MonstersRestrictionsView.Columns.Add(Strings.Restriction, -2);
+        }
 
-            account.Config.Flood = new MageBot.Core.Misc.Flood(Account);
-            account.FightData = new FightData(Account);
-            account.MapData = new MapData(Account);
-            account.WatchDog = new WatchDog(Account);
+        private void FillAccountEvents()
+        {
+            Account.LogChanged += Account_LogChanged;
+            Account.InfBarsChanged += Account_InfBarsChanged;
+            Account.ActualizeFightStats += Account_ActualizeFightStats;
+            Account.ActualizePets += Account_ActualizePets;
+            Account.ActualizeMap += Account_ActualizeMap;
+            Account.ActualizeInventory += Account_ActualizeInventory;
+            Account.ActualizeShop += Account_ActualizeShop;
+            Account.ActualizeJobs += Account_ActualizeJobs;
+            Account.LoggerClear += Account_loggerClear;
+            Account.StatusChanged += Account_StatusChanged;
+            Account.AccountRestart += Account_AccountRestart;
+            Account.ApplicationWait += Account_ApplicationWait;
+        }
+
+        private void Account_ApplicationWait(object sender, EventArgs e)
+        {
+            ApplicationWaitEventArgs args = (ApplicationWaitEventArgs)e;
+            Wait(args.Milisec);
+        }
+
+        private void Wait(int milisec)
+        {
+            Random Random = new Random();
+            double endwait = Environment.TickCount + milisec;
+            while (Environment.TickCount < endwait)
+            {
+                System.Threading.Thread.Sleep(1);
+                Application.DoEvents();
+            }
+        }
+
+
+        private void Account_AccountRestart(object sender, EventArgs e)
+        {
+            AccountConfig accConf = Account.Config;
+            string userName = Account.AccountName;
+            string pass = Account.AccountPassword;
+            Account = null;
+            Account = new Account(userName, pass);
+            FillAccountEvents();
             FillAccountInitialSettings();
+            Account.Config = accConf;
+            Account.Init();
+        }
 
+        private void Account_StatusChanged(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
+
+        private void Account_loggerClear(object sender, EventArgs e)
+        {
+            if (LogConsole.InvokeRequired)
+                Invoke(new MethodInvoker(LogConsole.Clear));
+            else
+                LogConsole.Clear();
         }
 
         private void Account_ActualizeJobs(object sender, EventArgs e)
@@ -202,7 +222,7 @@ namespace MageBot.Interface
 
         private void Account_ActualizeFightStats(object sender, EventArgs e)
         {
-            ActualizeFightStats(Account.FightData.WinLoseDic,Account.FightData.XpWon);
+            ActualizeFightStats(Account.FightData.WinLoseDic, Account.FightData.XpWon);
         }
 
         private void Account_InfBarsChanged(object sender, EventArgs e)
@@ -215,10 +235,10 @@ namespace MageBot.Interface
 
         private void FillAccountInitialSettings()
         {
-            if (!Account.Config.ConfigRecover.Restored)
+            if (!Account.Config.Restored)
             {
                 Account.Config.VerboseLevel = (int)NUDVerbose.Value;
-                Account.Config.RegenConfig.RegenChoice = (int)RegenChoice.Value;
+                Account.Config.RegenChoice = (int)RegenChoice.Value;
                 Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
                 Account.Config.MaxMonstersNumber = (int)nudMaxMonstersNumber.Value;
                 Account.Config.MaxMonstersLevel = (int)nudMaxMonstersLevel.Value;
@@ -226,10 +246,10 @@ namespace MageBot.Interface
             }
         }
 
-        private void Account_QueueChanged(object sender, EventArgs e)
+        private void Account_LogChanged(object sender, EventArgs e)
         {
-            var d = Account.InformationQueue.Dequeue();
-            Log(d.Item1, d.Item2);
+            LogEventArgs args = (LogEventArgs)e;
+            Log(args.Text,args.VerboseLevel);
         }
 
         public AccountUC()
@@ -253,12 +273,12 @@ namespace MageBot.Interface
 
         private void SaveConfig_Click(object sender, EventArgs e)
         {
-            Account.Config.ConfigRecover.SaveConfig();
+            Account.ConfigRecover.SaveConfig();
         }
 
         private void DeleteConfigBt_Click(object sender, EventArgs e)
         {
-            Account.Config.ConfigRecover.DeleteConfig();
+            Account.ConfigRecover.DeleteConfig();
         }
 
         private void DeleteItem_Click(object sender, EventArgs e)
@@ -332,7 +352,7 @@ namespace MageBot.Interface
         {
             if (Account.SocketManager.State == SocketState.Connected)
             {
-                Account.SocketManager.DisconnectFromGUI();
+                Account.Disconnect();
             }
             else
             {
@@ -362,10 +382,10 @@ namespace MageBot.Interface
 
         private void LaunchPathBt_Click(object sender, EventArgs e)
         {
-            if (Account.Config.Path != null)
+            if (Account.Path != null)
             {
                 Account.Log(new BotTextInformation("Path started"), 1);
-                Account.Config.Path.Start();
+                Account.Path.Start();
             }
             else
                 Account.Log(new ErrorTextInformation("No Path loaded"), 3);
@@ -373,9 +393,9 @@ namespace MageBot.Interface
 
         private void StopPathBt_Click(object sender, EventArgs e)
         {
-            if (Account.Config.Path != null)
+            if (Account.Path != null)
             {
-                Account.Config.Path.StopPath();
+                Account.Path.StopPath();
                 Account.Log(new BotTextInformation("Path stopped"), 1);
             }
         }
@@ -435,52 +455,29 @@ namespace MageBot.Interface
         public void ActualizeMap()
         {
             BeginInvoke(new MethodInvoker(MapView.Items.Clear));
-            foreach (Core.Map.Elements.InteractiveElement e in Account.MapData.InteractiveElements.Keys)
+            var join = Account.MapData.InteractiveElements.Keys.ToList().Join
+                (Account.MapData.StatedElements,
+                 interactive => (int)interactive.Id,
+                 stated => stated.Id,
+                 (interactive, stated) => new
+                 {
+                     Id = interactive.Id,
+                     Name = interactive.Name,
+                     TypeId = interactive.TypeId,
+                     Type = interactive.Type,
+                     IsUsable = interactive.IsUsable,
+                     EnabledSkills = interactive.EnabledSkills,
+                     DisabledSkills = interactive.DisabledSkills,
+                     CellId = stated.CellId,
+                     State = stated.State
+                 }).ToList().OrderBy(a => a.CellId);
+            foreach (var e in join)
             {
-                Core.Map.Elements.StatedElement element = Account.MapData.StatedElements.Find(s => s.Id == e.Id);
-                string type = Strings.Unknown + " (" + e.TypeId + ")";
-                switch (e.TypeId)
-                {
-                    case 16:
-                        type = type.Replace(Strings.Unknown, "Zaap");
-                        break;
-                    case 106:
-                        type = type.Replace(Strings.Unknown, "Zaapi");
-                        break;
-                    case 105:
-                        type = type.Replace(Strings.Unknown, "Trash can");
-                        break;
-                    case 120:
-                        type = type.Replace(Strings.Unknown, "Paddock");
-                        break;
-                    case -1:
-                        type = type.Replace(Strings.Unknown, "Door / Stairs ?");
-                        break;
-                    case 119:
-                        type = type.Replace(Strings.Unknown, "Book of artisans");
-                        break;
-                }
-                string cellId = "?";
-                if (element != null)
-                    cellId = Convert.ToString(element.CellId);
-
-                AddItem(new ListViewItem(new string[] { Convert.ToString(e.Id), cellId, type }), MapView);
+                AddItem(new ListViewItem(new string[] { Convert.ToString(e.Id), e.Name,e.CellId.ToString(), e.Type }), MapView);
             }
-            //foreach (MageBot.Core.Map.Elements.InteractiveElement d in Map.Doors.Values)
-            //{
-            //    MageBot.Core.Map.Elements.StatedElement element = null;
-            //    if (Map.StatedElements.ContainsKey((int)d.Id))
-            //    {
-            //        element = Map.StatedElements[(int)d.Id];
-            //    }
-            //    string cellId = "?";
-            //    if (element != null)
-            //        cellId = Convert.ToString(element.CellId);
-            //    AddItem(new ListViewItem(new string[] { Convert.ToString(d.Id), cellId, "Porte" }), MapView);
-            //}
             foreach (GameRolePlayNpcInformations n in Account.MapData.Npcs)
             {
-                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), I18N.GetText((int)n.ContextualId), "?", "NPC" }), MapView);
+                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Npcs,n.NpcId).Fields["nameId"]),Convert.ToString(n.Disposition.CellId), "NPC" }), MapView);
             }
             foreach (GameRolePlayCharacterInformations c in Account.MapData.Players)
             {
@@ -642,7 +639,7 @@ namespace MageBot.Interface
             {
                 RelaunchPath.Text = "✘ " + Strings.RestartThePathToReconnect;
             }
-            Account.Config.ConfigRecover.SaveConfig();
+            Account.ConfigRecover.SaveConfig();
         }
 
         private void sadikCheckbox1_CheckedChanged_1(object sender)
@@ -678,7 +675,7 @@ namespace MageBot.Interface
                     Account.SocketManager.Send(taxpacket);
                     ExchangeStartAsVendorMessage ventepacket = new ExchangeStartAsVendorMessage();
                     Account.SocketManager.Send(ventepacket);
-                    //Thread.Sleep(500);
+                    //Account.Wait(500);
                     Account.Log(new BotTextInformation(Strings.MerchantModeActivationTest), 1);
                     if (Account.SocketManager.State == SocketState.Closed)
                     {
@@ -755,7 +752,7 @@ namespace MageBot.Interface
                 return (LVItemBag.SelectedItems != null);
         }
 
-        public async void addItemToShop()
+        public void addItemToShop()
         {
             if (LVItemBag.InvokeRequired)
             {
@@ -775,7 +772,7 @@ namespace MageBot.Interface
                         Account.SocketManager.Send(msg);
                         Account.Log(new ActionTextInformation(Strings.AdditionOf + Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Name + "(x " + Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity + ") " + Strings.InTheStoreAtThePriceOf + " : " + msg.Price + " " + Strings.Kamas), 2);
                         LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
-                        await Account.PutTaskDelay(2000);
+                        Account.Wait(2000);
                         Account.SocketManager.Send(packetleave);
                     }
                     catch (Exception ex)
@@ -786,32 +783,31 @@ namespace MageBot.Interface
             }
         }
 
-        public void SetStatus(Status status)
+        public void UpdateStatus()
         {
-            Account.State = status;
-            string nstatus = "";
-            switch (status)
+            string nstatus = String.Empty;
+            switch (Account.State)
             {
                 case Status.None:
                     nstatus = Strings.Connected;
                     break;
                 case Status.Exchanging:
-                    nstatus = "Echange";
+                    nstatus = "Exchanging";
                     break;
                 case Status.Fighting:
-                    nstatus = "Combat";
+                    nstatus = "Fighting";
                     break;
                 case Status.Gathering:
-                    nstatus = "Récolte";
+                    nstatus = "Harvesting";
                     break;
                 case Status.Moving:
-                    nstatus = "Déplacement";
+                    nstatus = "Moving";
                     break;
                 case Status.Speaking:
-                    nstatus = "Dialogue";
+                    nstatus = "Speaking";
                     break;
                 case Status.Teleporting:
-                    nstatus = "Teleportation";
+                    nstatus = "Teleporting";
                     break;
                 case Status.Regenerating:
                     nstatus = Strings.Regenerating;
@@ -820,10 +816,10 @@ namespace MageBot.Interface
                     nstatus = Strings.Disconnected;
                     break;
                 case Status.Busy:
-                    nstatus = "Occupé";
+                    nstatus = "Busy";
                     break;
             }
-            nstatus = MageBot.Core.Engine.Constants.Translate.GetTranslation(nstatus);
+            nstatus = Core.Engine.Constants.Translate.GetTranslation(nstatus);
             Invoke(new DelegLabel(ModLabel), nstatus, StatusLb);
         }
 
@@ -908,8 +904,8 @@ namespace MageBot.Interface
                 BeginInvoke(new MethodInvoker(ActualizeFamis));
                 return;
             }
-            if (Account.Config.NextMeal.Year != 1)
-                Invoke(new DelegLabel(ModLabel), "Next meal in : " + Account.Config.NextMeal.ToShortTimeString(), labelNextMeal);
+            if (Account.NextMeal.Year != 1)
+                Invoke(new DelegLabel(ModLabel), "Next meal in : " + Account.NextMeal.ToShortTimeString(), labelNextMeal);
             else
                 Invoke(new DelegLabel(ModLabel), "No next meal", labelNextMeal);
 
@@ -964,7 +960,8 @@ namespace MageBot.Interface
 
         public void ModifBar(int Bar, int Max, int value, string text)
         {
-            if (VitaBar.InvokeRequired)
+            if (VitaBar.InvokeRequired || XpBar.InvokeRequired ||
+                PodsBar.InvokeRequired || KamasLabel.InvokeRequired)
                 Invoke(new DelegBar(ModifBar), Bar, Max, value, text);
             else
             {
@@ -992,7 +989,7 @@ namespace MageBot.Interface
                         PosLabel.Text = text;
                         break;
                     case 7:
-                        base.ParentForm.Text = text;
+                        ParentForm.Text = text;
                         break;
                     case 8:
                         LevelLb.Text = text;
@@ -1119,7 +1116,10 @@ namespace MageBot.Interface
         #region Private methods
         private void Connect()
         {
-            Account.Connect();
+            if (Account.Config.IsSocket)
+                Account.Init();
+            else if (Account.Config.IsMITM)
+                Account.InitMITM();
         }
 
         private void Log(TextInformation text, int levelVerbose)
@@ -1133,7 +1133,7 @@ namespace MageBot.Interface
             else
             {
 
-                text.Text = MageBot.Core.Engine.Constants.Translate.GetTranslation(text.Text);
+                text.Text = Core.Engine.Constants.Translate.GetTranslation(text.Text);
                 text.Text = "[" + DateTime.Now.ToLongTimeString() +
                     "] (" + text.Category + ") " + text.Text;
                 if (text.Category == "Debug" && !DebugMode.Checked)
@@ -1170,6 +1170,16 @@ namespace MageBot.Interface
 
         }
         #endregion
+
+        private void SaveConfig_Click_1(object sender, EventArgs e)
+        {
+            Account.ConfigRecover.SaveConfig();
+        }
+
+        private void DeleteConfigBt_Click_1(object sender, EventArgs e)
+        {
+            Account.ConfigRecover.DeleteConfig();
+        }
     }
 }
 

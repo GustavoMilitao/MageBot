@@ -402,7 +402,7 @@ namespace MageBot.Core.Engine.Handlers.Fight
             }
             int percent = ((int)msg.LifePoints / (int)msg.MaxLifePoints) * 100;
             account.Log(new BotTextInformation("Fin de la régénération. + " + msg.LifePointsGained + " points de vie"), 2);
-            account.ModifBar(2, (int)msg.MaxLifePoints, (int)msg.LifePoints, "Vitalité");
+            account.ModifBar(2, (int)msg.MaxLifePoints, (int)msg.LifePoints, "Life");
         }
 
         [MessageHandler(typeof(GameFightSpectatorJoinMessage))]

@@ -14,13 +14,14 @@ using MageBot.Protocol.Enums;
 using MageBot.Core.Monsters;
 using MageBot.Core.Engine.Network;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace MageBot.Core.Fight
 {
     public class BFight
     {
         #region Fields 
-        private Account.Account m_Account;
+        private Account.Account Account;
         private FightParser m_AI;
         private FightData m_Data;
         public int flag;
@@ -35,7 +36,7 @@ namespace MageBot.Core.Fight
         #region Constructors
         public BFight(Account.Account account, FightParser AI, FightData data)
         {
-            m_Account = account;
+            Account = account;
             m_AI = AI;
             m_Data = data;
             flag = 1;
@@ -50,7 +51,7 @@ namespace MageBot.Core.Fight
         {
             if (flag != 1)
                 return;
-            m_Account.SetStatus(Status.Fighting);
+            Account.SetStatus(Status.Fighting);
             Dictionary<BSpell, BFighter> plan = m_AI.GetPlan();
             foreach (KeyValuePair<BSpell, BFighter> pair in plan)
             {
@@ -76,29 +77,31 @@ namespace MageBot.Core.Fight
         /// <summary>
         /// Search for a fight on the map.
         /// </summary>
-        public async Task<bool> SearchFight()
+        public bool SearchFight()
         {
-            int minNumber = m_Account.Config.MinMonstersNumber;
-            int maxNumber = m_Account.Config.MaxMonstersNumber;
-            int minLevel = m_Account.Config.MinMonstersLevel;
-            int maxLevel = m_Account.Config.MaxMonstersLevel;
-            MonsterGroup monsters = m_Account.MapData.Monsters.FirstOrDefault(monst => monst.monstersCount >= minNumber &&
+            int minNumber = Account.Config.MinMonstersNumber;
+            int maxNumber = Account.Config.MaxMonstersNumber;
+            int minLevel = Account.Config.MinMonstersLevel;
+            int maxLevel = Account.Config.MaxMonstersLevel;
+            MonsterGroup monsters = Account.MapData.Monsters.FirstOrDefault(monst => monst.monstersCount >= minNumber &&
                                                                                        monst.monstersCount <= maxNumber &&
                                                                                        monst.monstersLevel >= minLevel &&
                                                                                        monst.monstersLevel <= maxLevel &&
-                                                                                       m_Account.AllowedGroup(monst.NameList()) &&
+                                                                                       Account.AllowedGroup(monst.NameList()) &&
                                                                                        !Banned.Contains(monst));
             if (monsters != null)
             {
-                if (m_Account.Map.MoveToCell(monsters.m_cellId).Result)
+                if (Account.Map.MoveToCell(monsters.m_cellId))
                 {
-                    m_Account.SetStatus(Status.None);
-                    m_Account.Log(new ActionTextInformation(string.Format("Fight started, {0} monsters of level {1} ({2})", monsters.monstersCount, monsters.monstersLevel, monsters.monstersName(true))), 1);
-                    await m_Account.PutTaskDelay(2000);
-                    m_Account.Fight.LaunchFight((int)monsters.m_contextualId);
-                    await m_Account.PutTaskDelay(2000);
-                    if (m_Account.State != Status.Fighting)
-                        await SearchFight();
+                    Account.SetStatus(Status.None);
+                    Account.Log(new ActionTextInformation(string.Format("Fight started, {0} monsters of level {1} ({2})", monsters.monstersCount, monsters.monstersLevel, monsters.monstersName(true))), 1);
+                    //m_Account.PutTaskDelay(2000);
+                    Account.Wait(2000);
+                    Account.Fight.LaunchFight((int)monsters.m_contextualId);
+                    //await m_Account.PutTaskDelay(2000);
+                    Account.Wait(2000);
+                    if (Account.State != Status.Fighting)
+                        SearchFight();
                     return true;
                 }
             }
@@ -111,8 +114,8 @@ namespace MageBot.Core.Fight
         public void LaunchFight(int id)
         {
             GameRolePlayAttackMonsterRequestMessage msg = new GameRolePlayAttackMonsterRequestMessage(id);
-            m_Account.SocketManager.Send(msg);
-            m_Account.Log(new ActionTextInformation("Launch Fight !"), 1);
+            Account.SocketManager.Send(msg);
+            Account.Log(new ActionTextInformation("Launch Fight !"), 1);
         }
 
         /// <summary>
@@ -134,7 +137,7 @@ namespace MageBot.Core.Fight
         public void PlaceCharacter(List<int> PlacementCells)
         {
             m_error = 0;
-            m_Account.Log(new BotTextInformation("Placement du personnage."), 5);
+            Account.Log(new BotTextInformation("Placement du personnage."), 5);
             try
             {
                 PlacementEnum position = m_AI.GetPositioning();
@@ -174,12 +177,12 @@ namespace MageBot.Core.Fight
                 if (cell != -1)
                 {
                     GameFightPlacementPositionRequestMessage msg = new GameFightPlacementPositionRequestMessage((ushort)cell);
-                    m_Account.SocketManager.Send(msg);
+                    Account.SocketManager.Send(msg);
                 }
             }
             catch (Exception ex)
             {
-                m_Account.Log(new ErrorTextInformation(ex.Message), 0);
+                Account.Log(new ErrorTextInformation(ex.Message), 0);
             }
         }
 
@@ -189,29 +192,29 @@ namespace MageBot.Core.Fight
         public void LockFight()
         {
             GameFightOptionToggleMessage msg = new GameFightOptionToggleMessage((byte)FightOptionsEnum.FIGHT_OPTION_SET_CLOSED);
-            m_Account.SocketManager.Send(msg);
-            m_Account.Log(new ActionTextInformation("Combat closed"), 4);
+            Account.SocketManager.Send(msg);
+            Account.Log(new ActionTextInformation("Combat closed"), 4);
         }
 
         public void LockFightForParty()
         {
             GameFightOptionToggleMessage msg = new GameFightOptionToggleMessage((byte)FightOptionsEnum.FIGHT_OPTION_SET_TO_PARTY_ONLY);
-            m_Account.SocketManager.Send(msg);
-            m_Account.Log(new ActionTextInformation("Combat closed to party only"), 4);
+            Account.SocketManager.Send(msg);
+            Account.Log(new ActionTextInformation("Combat closed to party only"), 4);
         }
 
         public void LockFightForSpectators()
         {
             GameFightOptionToggleMessage msg = new GameFightOptionToggleMessage((byte)FightOptionsEnum.FIGHT_OPTION_SET_SECRET);
-            m_Account.SocketManager.Send(msg);
-            m_Account.Log(new ActionTextInformation("Combat spectator closed"), 4);
+            Account.SocketManager.Send(msg);
+            Account.Log(new ActionTextInformation("Combat spectator closed"), 4);
         }
 
         public void AskForHelpInFight()
         {
             GameFightOptionToggleMessage msg = new GameFightOptionToggleMessage((byte)FightOptionsEnum.FIGHT_OPTION_ASK_FOR_HELP);
-            m_Account.SocketManager.Send(msg);
-            m_Account.Log(new ActionTextInformation("Asking for help"), 4);
+            Account.SocketManager.Send(msg);
+            Account.Log(new ActionTextInformation("Asking for help"), 4);
         }
 
         #endregion
@@ -257,7 +260,7 @@ namespace MageBot.Core.Fight
         private void KickPlayer(ulong id)
         {
             GameContextKickMessage msg = new GameContextKickMessage(id);
-            m_Account.SocketManager.Send(msg);
+            Account.SocketManager.Send(msg);
         }
 
         /// <summary>
@@ -270,12 +273,12 @@ namespace MageBot.Core.Fight
             {
                 GameActionFightCastRequestMessage msg = new GameActionFightCastRequestMessage((ushort)spellId, (short)cellId);
                 msg.Serialize(writer);
-                writer.Content = m_Account.HumanCheck.Hash_function(writer.Content);
+                writer.Content = Account.HumanCheck.Hash_function(writer.Content);
                 MessagePackaging pack = new MessagePackaging(writer);
                 pack.Pack(msg.MessageID);
-                m_Account.SocketManager.Send(pack.Writer.Content);
-                m_Account.Log(new ActionTextInformation("Lancement d'un sort en " + cellId), 5);
-                m_Account.Log(new DebugTextInformation("[SND] 1005 (GameActionFightCastRequestMessage)"), 0);
+                Account.SocketManager.Send(pack.Writer.Content);
+                Account.Log(new ActionTextInformation("Lancement d'un sort en " + cellId), 5);
+                Account.Log(new DebugTextInformation("[SND] 1005 (GameActionFightCastRequestMessage)"), 0);
             }
         }
 
@@ -315,7 +318,7 @@ namespace MageBot.Core.Fight
                         }
                     }
                 }
-                SimplePathfinder pathfinder = new SimplePathfinder(m_Account.MapData);
+                SimplePathfinder pathfinder = new SimplePathfinder(Account.MapData);
                 pathfinder.SetFight(m_Data.Fighters, m_Data.Fighter.MovementPoints);
                 MovementPath path = pathfinder.FindPath(m_Data.Fighter.CellId, cellId);
                 if (path != null)
@@ -323,14 +326,14 @@ namespace MageBot.Core.Fight
                     List<UInt32> serverMovement = MapMovementAdapter.GetServerMovement(path);
                     using (BigEndianWriter writer = new BigEndianWriter())
                     {
-                        GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.ToList().Select(ui => (short)ui).ToList(), m_Account.MapData.Id);
+                        GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.ToList().Select(ui => (short)ui).ToList(), Account.MapData.Id);
                         msg.Serialize(writer);
-                        writer.Content = m_Account.HumanCheck.Hash_function(writer.Content);
+                        writer.Content = Account.HumanCheck.Hash_function(writer.Content);
                         MessagePackaging pack = new MessagePackaging(writer);
                         pack.Pack(msg.MessageID);
                         flag = 0;
-                        m_Account.SocketManager.Send(pack.Writer.Content);
-                        m_Account.Log(new DebugTextInformation("[SND] 950 (GameMapMovementRequestMessage)"), 0);
+                        Account.SocketManager.Send(pack.Writer.Content);
+                        Account.Log(new DebugTextInformation("[SND] 950 (GameMapMovementRequestMessage)"), 0);
                     }
                     return true;
                 }
@@ -344,7 +347,7 @@ namespace MageBot.Core.Fight
         public void EndTurn()
         {
             GameFightTurnFinishMessage msg = new GameFightTurnFinishMessage();
-            m_Account.SocketManager.Send(msg);
+            Account.SocketManager.Send(msg);
         }
 
         /// <summary>
@@ -377,7 +380,7 @@ namespace MageBot.Core.Fight
                 }
                 flag = -1;
 
-                m_Account.Log(new BotTextInformation("EndMove"), 5);
+                Account.Log(new BotTextInformation("EndMove"), 5);
             }
             else
                 EndTurn();

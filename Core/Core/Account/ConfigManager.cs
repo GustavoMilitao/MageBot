@@ -5,11 +5,11 @@ using System.Xml.Serialization;
 
 namespace MageBot.Core.Account
 {
+    [Serializable()]
     public class ConfigManager
     {
         #region Fields
-        private MageBot.Core.Account.Account account;
-        public bool Restored { get; set; }
+        private Account account;
         #endregion
 
         #region Constructors
@@ -30,24 +30,24 @@ namespace MageBot.Core.Account
                 {
                     account.Config = configuration;
                     account.Log(new BotTextInformation("Restored settings."), 0);
-                    Restored = true;
+                    account.Config.Restored = true;
                     return true;
                 }
                 account.Log(new ErrorTextInformation("Error to load config file."), 0);
-                Restored = false;
+                account.Config.Restored = false;
                 return false;
             }
             account.Log(new BotTextInformation("No config for this character."), 0);
-            Restored = false;
+            account.Config.Restored = false;
             return false;
         }
 
         public void SaveConfig()
         {
-            string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
-
             if (account.Config != null && account.Config.Enabled)
             {
+                string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
+                CreateDirectoryIfNotExists();
                 Serialize(account.Config, spath);
             }
         }
@@ -61,11 +61,24 @@ namespace MageBot.Core.Account
         #endregion
 
         #region Private Methods
+        private void CreateDirectoryIfNotExists()
+        {
+            if (!Directory.Exists(System.IO.Path.Combine(
+                                    Environment.GetFolderPath(
+                                        Environment.SpecialFolder.ApplicationData),
+                                    "MageBot", "Accounts", account.AccountName)
+                                    ))
+                Directory.CreateDirectory(System.IO.Path.Combine(
+                                    Environment.GetFolderPath(
+                                        Environment.SpecialFolder.ApplicationData),
+                                    "MageBot", "Accounts", account.AccountName));
+        }
+
         private void Serialize<T>(T obj, string sConfigFilePath)
         {
             try
             {
-                System.Xml.Serialization.XmlSerializer XmlBuddy = new System.Xml.Serialization.XmlSerializer(typeof(T));
+                XmlSerializer XmlBuddy = new XmlSerializer(typeof(T));
                 System.Xml.XmlWriterSettings MySettings = new System.Xml.XmlWriterSettings();
                 MySettings.Indent = true;
                 MySettings.CloseOutput = true;

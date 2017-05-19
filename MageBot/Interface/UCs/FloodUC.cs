@@ -16,13 +16,13 @@ namespace MageBot.Interface.UCs
         {
             InitializeComponent();
             accUserControl = account;
-            accUserControl.Account.Config.Flood = new MageBot.Core.Misc.Flood(accUserControl.Account);
-            foreach(KeyValuePair<string, long> p in accUserControl.Account.Config.Flood.ListOfPlayersWithLevel)
+            accUserControl.Account.Flood = new MageBot.Core.Misc.Flood(accUserControl.Account);
+            foreach(KeyValuePair<string, long> p in accUserControl.Account.Config.ListOfPlayersWithLevel)
             {
                 PlayerListLb.Items.Add(String.Join(",", p.Key, p.Value));
             }
             PrivateExitBox.Hide();
-            accUserControl.Account.Config.Flood.FloodContent = String.Empty;
+            accUserControl.Account.Config.FloodContent = String.Empty;
         }
         #endregion
 
@@ -34,7 +34,7 @@ namespace MageBot.Interface.UCs
 
         public void Increase(bool pm)
         {
-            accUserControl.Account.Config.Flood.increase(pm);
+            accUserControl.Account.Flood.increase(pm);
         }
         #endregion
 
@@ -55,7 +55,7 @@ namespace MageBot.Interface.UCs
 
         private void FloodContentRbox_TextChanged(object sender, EventArgs e)
         {
-            accUserControl.Account.Config.Flood.FloodContent = FloodContentRbox.Text;
+            accUserControl.Account.Config.FloodContent = FloodContentRbox.Text;
         }
 
         private void ClearListeBt_Click(object sender, EventArgs e)
@@ -75,14 +75,14 @@ namespace MageBot.Interface.UCs
 
         private void FloodPlayersBt_Click(object sender, EventArgs e)
         {
-            accUserControl.Account.Config.Flood.FloodContent = FloodContentRbox.Text;
+            accUserControl.Account.Config.FloodContent = FloodContentRbox.Text;
             foreach (var elem in PlayerListLb.Items)
             {
                 try
                 {
                     string[] parsed = ((string)elem).Split(',');
-                    accUserControl.Account.Config.Flood.FloodContent = accUserControl.Account.Config.Flood.FloodContent.Replace("%name%", parsed[0]).Replace("%level%", parsed[1]);
-                    accUserControl.Account.Config.Flood.SendPrivateTo((string)parsed[0], accUserControl.Account.Config.Flood.FloodContent);
+                    accUserControl.Account.Config.FloodContent = accUserControl.Account.Config.FloodContent.Replace("%name%", parsed[0]).Replace("%level%", parsed[1]);
+                    accUserControl.Account.Flood.SendPrivateTo((string)parsed[0], accUserControl.Account.Config.FloodContent);
                 }
                 catch (Exception)
                 {
@@ -95,21 +95,21 @@ namespace MageBot.Interface.UCs
         {
             if (StartStopFloodingBox.Checked == false)
             {
-                accUserControl.Account.Config.Flood.FloodStarted = false;
+                accUserControl.Account.Config.FloodStarted = false;
                 accUserControl.Account.Log(new BotTextInformation("Flood stopped"), 1);
-                accUserControl.Account.Log(new BotTextInformation(accUserControl.Account.Config.Flood.PMCount + " PMs sent."), 0);
-                accUserControl.Account.Log(new BotTextInformation(accUserControl.Account.Config.Flood.MessageCount + " Other messages sent."), 0);
-                accUserControl.Account.Config.Flood.PMCount = 0;
-                accUserControl.Account.Config.Flood.MessageCount = 0;
+                accUserControl.Account.Log(new BotTextInformation(accUserControl.Account.Flood.PMCount + " PMs sent."), 0);
+                accUserControl.Account.Log(new BotTextInformation(accUserControl.Account.Flood.MessageCount + " Other messages sent."), 0);
+                accUserControl.Account.Flood.PMCount = 0;
+                accUserControl.Account.Flood.MessageCount = 0;
                 return;
             }
             accUserControl.Account.Log(new BotTextInformation("Flood activated"), 1);
             if (CommerceBox.Checked)
-                accUserControl.Account.Config.Flood.StartFlood(5, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
+                accUserControl.Account.Flood.StartFlood(5, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
             if (RecrutementBox.Checked)
-                accUserControl.Account.Config.Flood.StartFlood(6, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
+                accUserControl.Account.Flood.StartFlood(6, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
             if (GeneralBox.Checked)
-                accUserControl.Account.Config.Flood.StartFlood(0, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
+                accUserControl.Account.Flood.StartFlood(0, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
         }
         #endregion
 

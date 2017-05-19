@@ -12,26 +12,14 @@ namespace MageBot.Core.Heroic
     public class Heroic
     {
         public Account.Account account { get; set; }
-        public bool HeroicModeOn { get; set; }
-        public bool AgroConditionsSet { get; set; }
-        public bool RunConditionsSet { get; set; }
-        public long MinLevelRun { get; set; }
-        public long MaxLevelRun { get; set; }
-        public List<string> AlliancesNameRun { get; set; }
-        public List<string> AlliancesNameAgro { get; set; }
-        public bool DisconnectWhenRun { get; set; }
-        public bool UseItemWhenRun { get; set; }
-        public PotionEnum? ItemToUseWhenRun { get; set; }
-        public long MinLevelAgro { get; set; }
-        public long MaxLevelAgro { get; set; }
 
 
         public Heroic(Account.Account account)
         {
             this.account = account;
 
-            AlliancesNameRun = new List<string>();
-            AlliancesNameAgro = new List<string>();
+            account.Config.AlliancesNameRun = new List<string>();
+            account.Config.AlliancesNameAgro = new List<string>();
         }
 
         #region Public Methods
@@ -61,11 +49,11 @@ namespace MageBot.Core.Heroic
                         }
                         if (IsGoingToRun(infos))
                         {
-                            if (DisconnectWhenRun)
+                            if (account.Config.DisconnectWhenRun)
                             {
                                 account.SocketManager.DisconnectFromGUI();
                             }
-                            else if (UseItemWhenRun && ItemToUseWhenRun.HasValue)
+                            else if (account.Config.UseItemWhenRun && account.Config.ItemToUseWhenRun.HasValue)
                             {
                                 Run();
                             }
@@ -82,11 +70,11 @@ namespace MageBot.Core.Heroic
                     }
                     if (IsGoingToRun(infoCharacter))
                     {
-                        if (DisconnectWhenRun)
+                        if (account.Config.DisconnectWhenRun)
                         {
                             account.SocketManager.DisconnectFromGUI();
                         }
-                        else if (UseItemWhenRun && ItemToUseWhenRun.HasValue)
+                        else if (account.Config.UseItemWhenRun && account.Config.ItemToUseWhenRun.HasValue)
                         {
                             Run();
                         }
@@ -112,7 +100,7 @@ namespace MageBot.Core.Heroic
 
         private void Run()
         {
-            int item = SwitchUid(ItemToUseWhenRun.Value);
+            int item = SwitchUid(account.Config.ItemToUseWhenRun.Value);
             if (!account.Inventory.ItemExists(item))
             {
                 account.SocketManager.DisconnectFromGUI();
@@ -125,32 +113,32 @@ namespace MageBot.Core.Heroic
 
         private bool GoAgro(GameRolePlayCharacterInformations infoCharacter)
         {
-            if (!AgroConditionsSet)
+            if (!account.Config.AgroConditionsSet)
                 return false;
             long num = Math.Abs((long)(infoCharacter.AlignmentInfos.CharacterPower - infoCharacter.ContextualId));
-            bool flag = (AgroConditionsSet && (infoCharacter.Name != account.CharacterBaseInformations.Name)) && (num >= MinLevelAgro) && (num <= MaxLevelAgro);
-            if (((AlliancesNameAgro.Count > 0) && (infoCharacter.HumanoidInfo.Options[1] != null)) && flag)
+            bool flag = (account.Config.AgroConditionsSet && (infoCharacter.Name != account.CharacterBaseInformations.Name)) && (num >= account.Config.MinLevelAgro) && (num <= account.Config.MaxLevelAgro);
+            if (((account.Config.AlliancesNameAgro.Count > 0) && (infoCharacter.HumanoidInfo.Options[1] != null)) && flag)
             {
                 HumanOptionAlliance alliance = infoCharacter.HumanoidInfo.Options[1] as HumanOptionAlliance;
-                return (flag && AlliancesNameAgro.Contains(alliance.AllianceInformations.AllianceName));
+                return (flag && account.Config.AlliancesNameAgro.Contains(alliance.AllianceInformations.AllianceName));
             }
             return flag;
         }
 
         private bool IsGoingToRun(GameRolePlayCharacterInformations infoCharacter)
         {
-            if (!RunConditionsSet)
+            if (!account.Config.RunConditionsSet)
                 return false;
             if (infoCharacter.HumanoidInfo.Options[1] == null)
             {
                 return false;
             }
             long num = Math.Abs((long)(infoCharacter.AlignmentInfos.CharacterPower - infoCharacter.ContextualId));
-            bool flag = (RunConditionsSet && (infoCharacter.Name != account.CharacterBaseInformations.Name)) && (num >= MinLevelRun) && (num <= MaxLevelRun);
-            if (((AlliancesNameRun.Count > 0) && (infoCharacter.HumanoidInfo.Options[1] != null)) && flag)
+            bool flag = (account.Config.RunConditionsSet && (infoCharacter.Name != account.CharacterBaseInformations.Name)) && (num >= account.Config.MinLevelRun) && (num <= account.Config.MaxLevelRun);
+            if (((account.Config.AlliancesNameRun.Count > 0) && (infoCharacter.HumanoidInfo.Options[1] != null)) && flag)
             {
                 HumanOptionAlliance alliance = infoCharacter.HumanoidInfo.Options[1] as HumanOptionAlliance;
-                return (flag && AlliancesNameRun.Contains(alliance.AllianceInformations.AllianceName));
+                return (flag && account.Config.AlliancesNameRun.Contains(alliance.AllianceInformations.AllianceName));
             }
             return flag;
         }

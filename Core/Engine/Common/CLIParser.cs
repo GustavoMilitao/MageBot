@@ -13,6 +13,7 @@ using MageBot.Core.Fight;
 using System.Threading.Tasks;
 using MageBot.Core.Account;
 using MageBot.Core.Path;
+using System.Threading;
 
 namespace MageBot.Core.Engine.Common
 {
@@ -103,7 +104,7 @@ namespace MageBot.Core.Engine.Common
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] { "-cell = 0", "-dir = null" });
                     ParseArguments(passedCommands);
-                    return Move().Result;
+                    return Move();
                 case "/mapid":
                     return new List<string>() { "L'id de la map est : " + account.MapData.Id };
                 case "/cellid":
@@ -135,7 +136,7 @@ namespace MageBot.Core.Engine.Common
                     DefineOptionalParameter(new string[] { });
                     DefineSwitches(new string[] { "-launch", "-lock", "-l", "-v", "-t", "-me", "-i" });
                     ParseArguments(passedCommands);
-                    return Fight().Result;
+                    return Fight();
                 case "/gather":
                     DefineRequiredParameters(new string[] { });
                     DefineOptionalParameter(new string[] { });
@@ -627,7 +628,7 @@ namespace MageBot.Core.Engine.Common
         /// Do the moving action.
         /// </summary>
         /// <returns>A display string of the action</returns>
-        private async Task<List<string>> Move()
+        private List<string> Move()
         {
             int cell = Int32.Parse(GetParamValue("-cell"));
             string dir = GetParamValue("-dir");
@@ -636,15 +637,17 @@ namespace MageBot.Core.Engine.Common
             {
                 if (cell != 0)
                 {
-                    result.Add("Déplacement vers la cellid : " + cell);
-                    await account.Map.MoveToCell(cell);
+                    result.Add("Moving to cellid : " + cell);
+                    account.Map.MoveToCell(cell);
 
                 }
 
                 if (dir != "null" && new List<string>() { "bottom", "up", "left", "right" }.Contains(dir))
                 {
-                    result.Add("Déplacement : " + dir);
-                    account.Map.ChangeMap(dir);
+                    if(!account.Map.ChangeMap(dir))
+                        result.Add("There is no way to switch to the selected map : " + dir);
+                    else
+                        result.Add("Moving : " + dir);
                 }
             }
             catch (Exception ex)
@@ -744,24 +747,24 @@ namespace MageBot.Core.Engine.Common
                     switch (canal)
                     {
                         case 'g':
-                            account.Config.Flood.SendMessage(2, message);
-                            result.Add("Message envoyé. \n");
+                            account.Flood.SendMessage(2, message);
+                            result.Add("Message sent. \n");
                             break;
                         case 'r':
-                            account.Config.Flood.SendMessage(6, message);
-                            result.Add("Message envoyé. \n");
+                            account.Flood.SendMessage(6, message);
+                            result.Add("Message sent. \n");
                             break;
                         case 'b':
-                            account.Config.Flood.SendMessage(5, message);
-                            result.Add("Message envoyé. \n");
+                            account.Flood.SendMessage(5, message);
+                            result.Add("Message sent. \n");
                             break;
                         case 'a':
-                            account.Config.Flood.SendMessage(3, message);
-                            result.Add("Message envoyé. \n");
+                            account.Flood.SendMessage(3, message);
+                            result.Add("Message sent. \n");
                             break;
                         case 's':
-                            account.Config.Flood.SendMessage(0, message);
-                            result.Add("Message envoyé. \n");
+                            account.Flood.SendMessage(0, message);
+                            result.Add("Message sent. \n");
                             break;
                     }
                 }
@@ -844,19 +847,19 @@ namespace MageBot.Core.Engine.Common
             {
                 if (path != "null")
                 {
-                    account.Config.Path = new PathManager(account, path, name);
-                    account.Config.Path.StopPath();
+                    account.Path = new PathManager(account, path, name);
+                    account.Path.StopPath();
                     result.Add("Trajet chargé : " + name);
                 }
                 if (start)
                 {
-                    account.Config.Path.Start();
+                    account.Path.Start();
                     //account.Path.ParsePath();
                     result.Add("Lancement du trajet.");
                 }
                 if (stop)
                 {
-                    account.Config.Path.StopPath();
+                    account.Path.StopPath();
                     result.Add("Arrêt du trajet...");
                 }
             }
@@ -874,7 +877,7 @@ namespace MageBot.Core.Engine.Common
         /// <summary>
         /// Interface to manage fights
         /// </summary>
-        private async Task<List<string>> Fight()
+        private List<string> Fight()
         {
             bool launch = IsSwitchOn("-launch");
             bool Lock = IsSwitchOn("-lock");
@@ -921,7 +924,7 @@ namespace MageBot.Core.Engine.Common
                 {
                     if (launch && account.State != Status.Fighting)
                     {
-                        await account.Fight.SearchFight();
+                        account.Fight.SearchFight();
                         result.Add("Recherche d'un combat...");
                     }
                     if (Lock && account.FightData.WaitForReady)

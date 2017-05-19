@@ -1,7 +1,9 @@
 ﻿using MageBot.Util.Enums.Internal;
+using System;
 
 namespace MageBot.Core.Fight
 {
+    [Serializable()]
     public class MonsterRestrictions
     {
         public string MonsterName { get; set; }

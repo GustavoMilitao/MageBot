@@ -46,7 +46,7 @@
         {
             InitializeComponent();
             accUserControl = Account;
-            accUserControl.Account.Config.HeroicConfig = new Heroic(accUserControl.Account);
+            accUserControl.Account.Heroic = new Heroic(accUserControl.Account);
         }
         #endregion
 

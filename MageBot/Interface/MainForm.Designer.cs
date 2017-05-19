@@ -69,7 +69,7 @@ namespace MageBot.Interface
             this.LanguageChoice});
             this.toolStrip1.Location = new System.Drawing.Point(20, 60);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(905, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(984, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -79,8 +79,8 @@ namespace MageBot.Interface
             this.AccountsBt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AccountsBt.Name = "AccountsBt";
             this.AccountsBt.Size = new System.Drawing.Size(77, 22);
-            this.AccountsBt.Text = Strings.Accounts;
-            this.AccountsBt.ToolTipText = Strings.AccountManagement;
+            this.AccountsBt.Text = "Accounts";
+            this.AccountsBt.ToolTipText = "Account management";
             this.AccountsBt.Click += new System.EventHandler(this.AccountsBt_Click);
             // 
             // toolStripSeparator1
@@ -94,7 +94,7 @@ namespace MageBot.Interface
             this.GroupsBt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.GroupsBt.Name = "GroupsBt";
             this.GroupsBt.Size = new System.Drawing.Size(65, 22);
-            this.GroupsBt.Text = Strings.Groups;
+            this.GroupsBt.Text = "Groups";
             this.GroupsBt.Click += new System.EventHandler(this.GroupsBt_Click);
             // 
             // toolStripSeparator2
@@ -119,7 +119,7 @@ namespace MageBot.Interface
             this.LanguageChoice.MaxDropDownItems = 2;
             this.LanguageChoice.Name = "LanguageChoice";
             this.LanguageChoice.Size = new System.Drawing.Size(140, 25);
-            this.LanguageChoice.Text = Strings.ChangeTheLanguage;
+            this.LanguageChoice.Text = "Change the language";
             this.LanguageChoice.SelectedIndexChanged += new System.EventHandler(this.LanguageChoice_SelectedTextChanged);
             // 
             // notifyIcon
@@ -136,7 +136,7 @@ namespace MageBot.Interface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(945, 627);
+            this.ClientSize = new System.Drawing.Size(1024, 768);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;

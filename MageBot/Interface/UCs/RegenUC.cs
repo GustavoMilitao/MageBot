@@ -15,7 +15,7 @@ namespace MageBot.Interface.UCs
         {
             InitializeComponent();
             accUserControl = Account;
-            accUserControl.Account.Config.RegenConfig = new MageBot.Core.Regen.Regen(accUserControl.Account);
+            accUserControl.Account.Regen = new MageBot.Core.Regen.Regen(accUserControl.Account);
             Init();
         }
         #endregion
@@ -23,7 +23,7 @@ namespace MageBot.Interface.UCs
         #region Public Methods
         public void PulseRegen()
         {
-            accUserControl.Account.Config.RegenConfig.PulseRegen();
+            accUserControl.Account.Regen.PulseRegen();
         }
 
         public void RefreshQuantity()
@@ -47,7 +47,7 @@ namespace MageBot.Interface.UCs
             foreach (ListViewItem i in LVItems.Items)
                 if (int.Parse(i.SubItems[1].Text) > 0)
                     names.Add(i.SubItems[0].Text);
-            accUserControl.Account.Config.RegenConfig.GetRegenItemsByNames(names);
+            accUserControl.Account.Regen.GetRegenItemsByNames(names);
         }
 
         private void Init()
