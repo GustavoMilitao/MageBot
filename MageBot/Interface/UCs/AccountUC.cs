@@ -690,6 +690,8 @@ namespace MageBot.Interface
 
         private void sadikButton3_Click(object sender, EventArgs e)
         {
+            ExchangeRequestOnShopStockMessage packetshop = new ExchangeRequestOnShopStockMessage();
+            Account.SocketManager.Send(packetshop);
             addItemToShop();
             ActualizeShopAndBagItems();
         }
