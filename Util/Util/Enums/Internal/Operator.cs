@@ -2,6 +2,7 @@
 {
     public enum Operator
     {
+        None,
         More,
         MoreEqual,
         Less,

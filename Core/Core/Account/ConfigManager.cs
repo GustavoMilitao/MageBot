@@ -2,6 +2,8 @@
 using System;
 using System.IO;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace MageBot.Core.Account
 {
@@ -22,15 +24,17 @@ namespace MageBot.Core.Account
         #region Public Methods
         public bool RecoverConfig()
         {
-            string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
+            string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + "Config.json");
             if (File.Exists(spath))
             {
-                AccountConfig configuration = DeserializeConfig(spath);
+                AccountConfig configuration = DeserializeConfig<AccountConfig>(spath);
                 if (configuration != null)
                 {
                     account.Config = configuration;
                     account.Log(new BotTextInformation("Restored settings."), 0);
                     account.Config.Restored = true;
+                    if (account.Config.WaitingForTheSale)
+                        account.House = new Misc.HouseBuy(account);
                     return true;
                 }
                 account.Log(new ErrorTextInformation("Error to load config file."), 0);
@@ -46,7 +50,7 @@ namespace MageBot.Core.Account
         {
             if (account.Config != null && account.Config.Enabled)
             {
-                string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
+                string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + "Config.json");
                 CreateDirectoryIfNotExists();
                 Serialize(account.Config, spath);
             }
@@ -54,7 +58,7 @@ namespace MageBot.Core.Account
 
         public void DeleteConfig()
         {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + ".xml");
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + "Config.json");
             if (File.Exists(path))
                 File.Delete(path);
         }
@@ -78,15 +82,24 @@ namespace MageBot.Core.Account
         {
             try
             {
-                XmlSerializer XmlBuddy = new XmlSerializer(typeof(T));
-                System.Xml.XmlWriterSettings MySettings = new System.Xml.XmlWriterSettings();
-                MySettings.Indent = true;
-                MySettings.CloseOutput = true;
-                MySettings.OmitXmlDeclaration = true;
-                System.Xml.XmlWriter MyWriter = System.Xml.XmlWriter.Create(sConfigFilePath, MySettings);
-                XmlBuddy.Serialize(MyWriter, obj);
-                MyWriter.Flush();
-                MyWriter.Close();
+                File.WriteAllText(sConfigFilePath,JsonConvert.SerializeObject(obj));
+                //JsonSerializer serializer = new JsonSerializer();
+                //serializer.Serialize()
+                //using (MemoryStream memoryStream = new MemoryStream())
+                //using (StreamReader reader = new StreamReader(memoryStream))
+                //{
+                //    DataContractSerializer serializer = new DataContractSerializer(typeof(T));
+                //    serializer.WriteObject(memoryStream, obj);
+                //}
+                //DataContractSerializer XmlBuddy = new DataContractSerializer(typeof(T));
+                //System.Xml.XmlWriterSettings MySettings = new System.Xml.XmlWriterSettings();
+                //MySettings.Indent = true;
+                //MySettings.CloseOutput = true;
+                //MySettings.OmitXmlDeclaration = true;
+                //System.Xml.XmlWriter MyWriter = System.Xml.XmlWriter.Create(sConfigFilePath, MySettings);
+                //XmlBuddy..Serialize(MyWriter, obj);
+                //MyWriter.Flush();
+                //MyWriter.Close();
             }
             catch (Exception ex)
             {
@@ -94,22 +107,30 @@ namespace MageBot.Core.Account
             }
         }
 
-        private AccountConfig DeserializeConfig(string file)
+        private T DeserializeConfig<T>(string file)
         {
-            StreamReader sr = new StreamReader(file);
-            XmlSerializer seria = new XmlSerializer(typeof(AccountConfig));
+            //using (Stream stream = new MemoryStream())
+            //{
+            //    stream.Write(data, 0, data.Length);
+            //    stream.Position = 0;
+            //    DataContractSerializer deserializer = new DataContractSerializer(toType);
+            //    return deserializer.ReadObject(stream);
+            //}
+            //StreamReader sr = new StreamReader(file);
+            //XmlSerializer seria = new XmlSerializer(typeof(AccountConfig));
             try
             {
-                AccountConfig conf = (AccountConfig)seria.Deserialize(sr);
-                return conf;
+                //AccountConfig conf = (AccountConfig)seria.Deserialize(sr);
+                //return conf;
+                var Content = File.ReadAllText(file);
+                var result = JsonConvert.DeserializeObject<T>(Content);
+                return result;
             }
             catch
             {
                 account.Log(new ErrorTextInformation("Failed to get Saved config"), 0);
-                sr.Close();
             }
-            return null;
-
+            return default(T);
         }
 
 

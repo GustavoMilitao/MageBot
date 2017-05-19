@@ -243,13 +243,16 @@ namespace MageBot.Interface
                 Account.Config.MaxMonstersNumber = (int)nudMaxMonstersNumber.Value;
                 Account.Config.MaxMonstersLevel = (int)nudMaxMonstersLevel.Value;
                 Account.Config.MaxPriceHouse = (ulong)MaxPrice.Value;
+                Account.Config.PresetStartUpId = (byte)PresetStartUpD.Value;
+                Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
+                Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
             }
         }
 
         private void Account_LogChanged(object sender, EventArgs e)
         {
             LogEventArgs args = (LogEventArgs)e;
-            Log(args.Text,args.VerboseLevel);
+            Log(args.Text, args.VerboseLevel);
         }
 
         public AccountUC()
@@ -363,6 +366,7 @@ namespace MageBot.Interface
 
         private void checkBoxBegin_CheckedChanged(object sender)
         {
+            Account.Config.Begin = checkBoxBegin.Checked;
             if (checkBoxBegin.Checked)
             {
                 Account.StartFeeding();
@@ -408,14 +412,23 @@ namespace MageBot.Interface
 
         private void StartWaitingBt_Click(object sender, EventArgs e)
         {
-            Account.House = new HouseBuy(Account);
-            Account.Log(new BotTextInformation("Waiting for the sale of a house..."), 1);
+            if (!Account.Config.WaitingForTheSale)
+            {
+                Account.Config.WaitingForTheSale = true;
+                Account.House = new HouseBuy(Account);
+                Account.Log(new BotTextInformation("Waiting for the sale of a house..."), 1);
+            }
+            else
+                Account.Log(new BotTextInformation("Waiting for the sale already on..."), 1);
         }
 
         private void ParcourirBt_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
                 SearcherLogBox.Text = saveFileDialog1.FileName;
+                Account.Config.HouseSearcherLogPath = saveFileDialog1.FileName;
+            }
         }
 
         private void CommandeBox_KeyDown(object sender, KeyEventArgs e)
@@ -473,11 +486,11 @@ namespace MageBot.Interface
                  }).ToList().OrderBy(a => a.CellId);
             foreach (var e in join)
             {
-                AddItem(new ListViewItem(new string[] { Convert.ToString(e.Id), e.Name,e.CellId.ToString(), e.Type }), MapView);
+                AddItem(new ListViewItem(new string[] { Convert.ToString(e.Id), e.Name, e.CellId.ToString(), e.Type }), MapView);
             }
             foreach (GameRolePlayNpcInformations n in Account.MapData.Npcs)
             {
-                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Npcs,n.NpcId).Fields["nameId"]),Convert.ToString(n.Disposition.CellId), "NPC" }), MapView);
+                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Npcs, n.NpcId).Fields["nameId"]), Convert.ToString(n.Disposition.CellId), "NPC" }), MapView);
             }
             foreach (GameRolePlayCharacterInformations c in Account.MapData.Players)
             {
@@ -559,29 +572,49 @@ namespace MageBot.Interface
 
         private void ForbidMonsterBt_Click(object sender, EventArgs e)
         {
-            //if (Fight == null)
-            //{
-            //    MessageBox.Show("Veuillez choisir une IA avant de régler les restrictions");
-            //    return;
-            //}
             if (MonsterTextBox.Text.Length > 0)
             {
-                ListViewItem l = new ListViewItem(new string[] { MonsterTextBox.Text, (string)ComparateurBox.SelectedItem, Convert.ToString(NUDRestrictions.Value), "Interdit" });
+                Account.Config.MonsterRestrictions.Add(
+                    new Core.Fight.MonsterRestrictions()
+                    {
+                        MonsterName = MonsterTextBox.Text,
+                        Operator = ConvertOperator((string)ComparateurBox.SelectedItem),
+                        Quantity = (int)NUDRestrictions.Value,
+                        RestrictionLevel = RestrictionLevel.Forbidden
+                    });
+                ListViewItem l = new ListViewItem(new string[] { MonsterTextBox.Text, (string)ComparateurBox.SelectedItem, Convert.ToString(NUDRestrictions.Value), Strings.Forbidden });
                 MonstersRestrictionsView.Items.Add(l);
             }
             MonstersRestrictionsView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
+        private Operator ConvertOperator(string oper)
+        {
+            switch (oper)
+            {
+                case ">": return Operator.More;
+                case "<": return Operator.Less;
+                case ">=": return Operator.MoreEqual;
+                case "<=": return Operator.LessEqual;
+                case "=": return Operator.Equal;
+                case "<>": return Operator.Different;
+                default: return Operator.None;
+            }
+        }
+
         private void ForceMonstersBt_Click(object sender, EventArgs e)
         {
-            //if (Fight == null)
-            //{
-            //    MessageBox.Show("Veuillez choisir une IA avant de régler les restrictions");
-            //    return;
-            //}
+            Account.Config.MonsterRestrictions.Add(
+                    new Core.Fight.MonsterRestrictions()
+                    {
+                        MonsterName = MonsterTextBox.Text,
+                        Operator = ConvertOperator((string)ComparateurBox.SelectedItem),
+                        Quantity = (int)NUDRestrictions.Value,
+                        RestrictionLevel = RestrictionLevel.Required
+                    });
             if (MonsterTextBox.Text.Length > 0)
             {
-                ListViewItem l = new ListViewItem(new string[] { MonsterTextBox.Text, (string)ComparateurBox.SelectedItem, Convert.ToString(NUDRestrictions.Value), "Obligatoire" });
+                ListViewItem l = new ListViewItem(new string[] { MonsterTextBox.Text, (string)ComparateurBox.SelectedItem, Convert.ToString(NUDRestrictions.Value), Strings.Required });
                 MonstersRestrictionsView.Items.Add(l);
             }
             MonstersRestrictionsView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -657,8 +690,8 @@ namespace MageBot.Interface
 
         private void sadikButton3_Click(object sender, EventArgs e)
         {
-            ExchangeRequestOnShopStockMessage packetshop = new ExchangeRequestOnShopStockMessage();
-            Account.SocketManager.Send(packetshop);
+            addItemToShop();
+            ActualizeShopAndBagItems();
         }
 
         private void PlaceTimer_Tick(object sender, EventArgs e)
@@ -691,6 +724,11 @@ namespace MageBot.Interface
         }
 
         private void BtnActualize_Click(object sender, EventArgs e)
+        {
+            ActualizeShopAndBagItems();
+        }
+
+        private void ActualizeShopAndBagItems()
         {
             ExchangeRequestOnShopStockMessage packetshop = new ExchangeRequestOnShopStockMessage();
             Account.SocketManager.Send(packetshop);
@@ -766,7 +804,8 @@ namespace MageBot.Interface
                     try
                     {
                         ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage();
-                        msg.ObjectUID = (uint)Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).UID;
+                        Core.Inventory.Item item = Account.Inventory.GetItemFromUID(Convert.ToInt32(LVItemBag.Items[i].SubItems[1].Text));
+                        msg.ObjectUID = (uint)item.UID;
                         msg.Quantity = Account.Inventory.GetItemFromName(LVItemBag.Items[i].SubItems[2].Text).Quantity;
                         msg.Price = Convert.ToUInt64(numericUpDown1.Value);
                         Account.SocketManager.Send(msg);
@@ -1174,11 +1213,68 @@ namespace MageBot.Interface
         private void SaveConfig_Click_1(object sender, EventArgs e)
         {
             Account.ConfigRecover.SaveConfig();
+            MessageBox.Show("Configuration saved!");
         }
 
         private void DeleteConfigBt_Click_1(object sender, EventArgs e)
         {
             Account.ConfigRecover.DeleteConfig();
+            MessageBox.Show("Configuration deleted!");
+        }
+
+        private void DebugMode_CheckedChanged(object sender)
+        {
+            Account.Config.DebugMode = DebugMode.Checked;
+        }
+
+        private void LogCb_CheckedChanged(object sender)
+        {
+            Account.Config.LogConsoleToText = LogCb.Checked;
+        }
+
+        private void NUDVerbose_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.VerboseLevel = (int)NUDVerbose.Value;
+        }
+
+        private void RegenChoice_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.RegenChoice = (int)RegenChoice.Value;
+        }
+
+        private void nudMinMonstersNumber_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.MinMonstersNumber = (int)nudMinMonstersNumber.Value;
+        }
+
+        private void nudMinMonstersLevel_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.MinMonstersLevel = (int)nudMinMonstersLevel.Value;
+        }
+
+        private void nudMaxMonstersNumber_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.MaxMonstersNumber = (int)nudMaxMonstersNumber.Value;
+        }
+
+        private void nudMaxMonstersLevel_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.MaxMonstersLevel = (int)nudMaxMonstersLevel.Value;
+        }
+
+        private void PhraseADire_TextChanged(object sender, EventArgs e)
+        {
+            Account.Config.SentenceToSay = PhraseADire.Text;
+        }
+
+        private void HouseSearcherBox_CheckedChanged(object sender)
+        {
+            Account.Config.HouseSearcherEnabled = HouseSearcherBox.Checked;
+        }
+
+        private void MaxPrice_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.MaxPriceHouse = (ulong)MaxPrice.Value;
         }
     }
 }

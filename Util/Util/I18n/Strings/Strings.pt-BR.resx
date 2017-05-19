@@ -669,4 +669,7 @@
   <data name="Jobs" xml:space="preserve">
     <value>Profissões</value>
   </data>
+  <data name="Required" xml:space="preserve">
+    <value>Obrigatório</value>
+  </data>
 </root>

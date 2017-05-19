@@ -32,12 +32,12 @@ namespace MageBot.Interface
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountUC));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.PosLabel = new System.Windows.Forms.ToolStripLabel();
             this.ToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -462,7 +462,7 @@ namespace MageBot.Interface
             // 
             this.LogConsole.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LogConsole.BackColor = System.Drawing.Color.White;
-            this.LogConsole.Location = new System.Drawing.Point(-2, 3);
+            this.LogConsole.Location = new System.Drawing.Point(-2, 5);
             this.LogConsole.Name = "LogConsole";
             this.LogConsole.ReadOnly = true;
             this.LogConsole.Size = new System.Drawing.Size(484, 315);
@@ -523,6 +523,7 @@ namespace MageBot.Interface
             0,
             0,
             0});
+            this.NUDVerbose.ValueChanged += new System.EventHandler(this.NUDVerbose_ValueChanged);
             // 
             // sadikGroupBox1
             // 
@@ -574,6 +575,7 @@ namespace MageBot.Interface
             this.LogCb.Size = new System.Drawing.Size(140, 20);
             this.LogCb.TabIndex = 8;
             this.LogCb.Text = "Log the console";
+            this.LogCb.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.LogCb_CheckedChanged);
             // 
             // DebugMode
             // 
@@ -584,6 +586,7 @@ namespace MageBot.Interface
             this.DebugMode.Size = new System.Drawing.Size(140, 20);
             this.DebugMode.TabIndex = 7;
             this.DebugMode.Text = "Debug mode";
+            this.DebugMode.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.DebugMode_CheckedChanged);
             // 
             // FightPage
             // 
@@ -605,7 +608,7 @@ namespace MageBot.Interface
             this.metroTabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl2.Location = new System.Drawing.Point(3, 3);
             this.metroTabControl2.Name = "metroTabControl2";
-            this.metroTabControl2.SelectedIndex = 0;
+            this.metroTabControl2.SelectedIndex = 1;
             this.metroTabControl2.Size = new System.Drawing.Size(489, 386);
             this.metroTabControl2.TabIndex = 1;
             this.metroTabControl2.UseSelectable = true;
@@ -774,6 +777,7 @@ namespace MageBot.Interface
             0,
             0,
             0});
+            this.RegenChoice.ValueChanged += new System.EventHandler(this.RegenChoice_ValueChanged);
             // 
             // GroupBox4
             // 
@@ -971,7 +975,10 @@ namespace MageBot.Interface
             this.ComparateurBox.Items.AddRange(new object[] {
             ">",
             "<",
-            "="});
+            ">=",
+            "<=",
+            "=",
+            "<>"});
             this.ComparateurBox.Location = new System.Drawing.Point(223, 89);
             this.ComparateurBox.Name = "ComparateurBox";
             this.ComparateurBox.Size = new System.Drawing.Size(58, 26);
@@ -1053,6 +1060,7 @@ namespace MageBot.Interface
             0,
             0,
             0});
+            this.nudMaxMonstersLevel.ValueChanged += new System.EventHandler(this.nudMaxMonstersLevel_ValueChanged);
             // 
             // nudMinMonstersLevel
             // 
@@ -1065,6 +1073,7 @@ namespace MageBot.Interface
             this.nudMinMonstersLevel.Name = "nudMinMonstersLevel";
             this.nudMinMonstersLevel.Size = new System.Drawing.Size(48, 20);
             this.nudMinMonstersLevel.TabIndex = 22;
+            this.nudMinMonstersLevel.ValueChanged += new System.EventHandler(this.nudMinMonstersLevel_ValueChanged);
             // 
             // lbReplaceMonstersNumber
             // 
@@ -1091,6 +1100,7 @@ namespace MageBot.Interface
             0,
             0,
             0});
+            this.nudMaxMonstersNumber.ValueChanged += new System.EventHandler(this.nudMaxMonstersNumber_ValueChanged);
             // 
             // nudMinMonstersNumber
             // 
@@ -1103,6 +1113,7 @@ namespace MageBot.Interface
             this.nudMinMonstersNumber.Name = "nudMinMonstersNumber";
             this.nudMinMonstersNumber.Size = new System.Drawing.Size(48, 20);
             this.nudMinMonstersNumber.TabIndex = 19;
+            this.nudMinMonstersNumber.ValueChanged += new System.EventHandler(this.nudMinMonstersNumber_ValueChanged);
             // 
             // metroTabPage5
             // 
@@ -1113,7 +1124,7 @@ namespace MageBot.Interface
             this.metroTabPage5.HorizontalScrollbarSize = 10;
             this.metroTabPage5.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage5.Name = "metroTabPage5";
-            this.metroTabPage5.Size = new System.Drawing.Size(468, 344);
+            this.metroTabPage5.Size = new System.Drawing.Size(481, 344);
             this.metroTabPage5.TabIndex = 2;
             this.metroTabPage5.Text = "Statistics";
             this.metroTabPage5.VerticalScrollbarBarColor = true;
@@ -1122,33 +1133,33 @@ namespace MageBot.Interface
             // 
             // WinLoseFightPie
             // 
-            chartArea3.Name = "ChartArea1";
-            this.WinLoseFightPie.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.WinLoseFightPie.Legends.Add(legend3);
+            chartArea7.Name = "ChartArea1";
+            this.WinLoseFightPie.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.WinLoseFightPie.Legends.Add(legend7);
             this.WinLoseFightPie.Location = new System.Drawing.Point(23, 138);
             this.WinLoseFightPie.Name = "WinLoseFightPie";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.WinLoseFightPie.Series.Add(series3);
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.WinLoseFightPie.Series.Add(series7);
             this.WinLoseFightPie.Size = new System.Drawing.Size(233, 135);
             this.WinLoseFightPie.TabIndex = 3;
             this.WinLoseFightPie.Text = "WinLoseFightPie";
             // 
             // XpBarsChart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.XpBarsChart.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.XpBarsChart.Legends.Add(legend4);
+            chartArea8.Name = "ChartArea1";
+            this.XpBarsChart.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.XpBarsChart.Legends.Add(legend8);
             this.XpBarsChart.Location = new System.Drawing.Point(23, 21);
             this.XpBarsChart.Name = "XpBarsChart";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.XpBarsChart.Series.Add(series4);
+            series8.ChartArea = "ChartArea1";
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            this.XpBarsChart.Series.Add(series8);
             this.XpBarsChart.Size = new System.Drawing.Size(360, 116);
             this.XpBarsChart.TabIndex = 2;
             this.XpBarsChart.Text = "chart1";
@@ -1393,7 +1404,7 @@ namespace MageBot.Interface
             this.tabPage9.HorizontalScrollbarSize = 10;
             this.tabPage9.Location = new System.Drawing.Point(4, 38);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(468, 344);
+            this.tabPage9.Size = new System.Drawing.Size(481, 344);
             this.tabPage9.TabIndex = 1;
             this.tabPage9.Text = "Management";
             this.tabPage9.VerticalScrollbarBarColor = true;
@@ -1407,7 +1418,7 @@ namespace MageBot.Interface
             this.RegenPage.HorizontalScrollbarSize = 10;
             this.RegenPage.Location = new System.Drawing.Point(4, 38);
             this.RegenPage.Name = "RegenPage";
-            this.RegenPage.Size = new System.Drawing.Size(468, 344);
+            this.RegenPage.Size = new System.Drawing.Size(481, 344);
             this.RegenPage.TabIndex = 2;
             this.RegenPage.Text = "Regeneration";
             this.RegenPage.VerticalScrollbarBarColor = true;
@@ -1436,7 +1447,7 @@ namespace MageBot.Interface
             this.FloodPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FloodPage.Location = new System.Drawing.Point(3, 3);
             this.FloodPage.Name = "FloodPage";
-            this.FloodPage.SelectedIndex = 5;
+            this.FloodPage.SelectedIndex = 0;
             this.FloodPage.Size = new System.Drawing.Size(489, 386);
             this.FloodPage.TabIndex = 1;
             this.FloodPage.UseSelectable = true;
@@ -1457,7 +1468,7 @@ namespace MageBot.Interface
             this.MaisonsPage.HorizontalScrollbarSize = 10;
             this.MaisonsPage.Location = new System.Drawing.Point(4, 38);
             this.MaisonsPage.Name = "MaisonsPage";
-            this.MaisonsPage.Size = new System.Drawing.Size(468, 344);
+            this.MaisonsPage.Size = new System.Drawing.Size(481, 344);
             this.MaisonsPage.TabIndex = 0;
             this.MaisonsPage.Text = "Houses";
             this.MaisonsPage.VerticalScrollbarBarColor = true;
@@ -1506,6 +1517,7 @@ namespace MageBot.Interface
             this.HouseSearcherBox.Size = new System.Drawing.Size(166, 22);
             this.HouseSearcherBox.TabIndex = 25;
             this.HouseSearcherBox.Text = "Enable search";
+            this.HouseSearcherBox.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.HouseSearcherBox_CheckedChanged);
             // 
             // sadikLabel8
             // 
@@ -1562,6 +1574,7 @@ namespace MageBot.Interface
             this.MaxPrice.Size = new System.Drawing.Size(120, 20);
             this.MaxPrice.TabIndex = 21;
             this.MaxPrice.ThousandsSeparator = true;
+            this.MaxPrice.ValueChanged += new System.EventHandler(this.MaxPrice_ValueChanged);
             // 
             // PhraseADire
             // 
@@ -1569,6 +1582,7 @@ namespace MageBot.Interface
             this.PhraseADire.Name = "PhraseADire";
             this.PhraseADire.Size = new System.Drawing.Size(390, 20);
             this.PhraseADire.TabIndex = 20;
+            this.PhraseADire.TextChanged += new System.EventHandler(this.PhraseADire_TextChanged);
             // 
             // metroTabPage9
             // 
@@ -1578,7 +1592,7 @@ namespace MageBot.Interface
             this.metroTabPage9.HorizontalScrollbarSize = 10;
             this.metroTabPage9.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage9.Name = "metroTabPage9";
-            this.metroTabPage9.Size = new System.Drawing.Size(468, 344);
+            this.metroTabPage9.Size = new System.Drawing.Size(481, 344);
             this.metroTabPage9.TabIndex = 2;
             this.metroTabPage9.Text = "Map";
             this.metroTabPage9.VerticalScrollbarBarColor = true;
@@ -1595,7 +1609,7 @@ namespace MageBot.Interface
             this.MapView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MapView.Location = new System.Drawing.Point(0, 0);
             this.MapView.Name = "MapView";
-            this.MapView.Size = new System.Drawing.Size(468, 344);
+            this.MapView.Size = new System.Drawing.Size(481, 344);
             this.MapView.TabIndex = 2;
             this.MapView.UseCompatibleStateImageBehavior = false;
             this.MapView.View = System.Windows.Forms.View.Details;
@@ -1627,7 +1641,7 @@ namespace MageBot.Interface
             this.StatsPage.HorizontalScrollbarSize = 10;
             this.StatsPage.Location = new System.Drawing.Point(4, 38);
             this.StatsPage.Name = "StatsPage";
-            this.StatsPage.Size = new System.Drawing.Size(468, 344);
+            this.StatsPage.Size = new System.Drawing.Size(481, 344);
             this.StatsPage.TabIndex = 4;
             this.StatsPage.Text = "Characteristics";
             this.StatsPage.VerticalScrollbarBarColor = true;
@@ -1641,7 +1655,7 @@ namespace MageBot.Interface
             this.tabPage8.HorizontalScrollbarSize = 10;
             this.tabPage8.Location = new System.Drawing.Point(4, 38);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(468, 344);
+            this.tabPage8.Size = new System.Drawing.Size(481, 344);
             this.tabPage8.TabIndex = 3;
             this.tabPage8.Text = "Heroic";
             this.tabPage8.VerticalScrollbarBarColor = true;
@@ -1655,7 +1669,7 @@ namespace MageBot.Interface
             this.tabPage2.HorizontalScrollbarSize = 10;
             this.tabPage2.Location = new System.Drawing.Point(4, 38);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(468, 344);
+            this.tabPage2.Size = new System.Drawing.Size(481, 344);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Flood";
             this.tabPage2.VerticalScrollbarBarColor = true;

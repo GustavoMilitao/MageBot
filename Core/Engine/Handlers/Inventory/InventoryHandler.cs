@@ -309,7 +309,7 @@ namespace MageBot.Core.Engine.Handlers.Inventory
             account.Busy = false;
         }
         [MessageHandler(typeof(ExchangeShopStockStartedMessage))]
-        public static void ExchangeShopStockStartedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void ExchangeShopStockStartedMessageTreatment(Message message, byte[] packetDatas, Account.Account account)
         {
             ExchangeShopStockStartedMessage msg = (ExchangeShopStockStartedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -317,8 +317,8 @@ namespace MageBot.Core.Engine.Handlers.Inventory
                 msg.Deserialize(reader);
             }
             account.UpdateShop(msg.ObjectsInfos.ToList());
-            if (account.Config.ItemsToAddToShop.Count > 0)
-                account.Config.ItemsToAddToShop.ForEach(item => account.Inventory.AddItemToShop(item.Item1,item.Item2,item.Item3));
+            //if (account.Config.ItemsToAddToShop.Count > 0)
+            //    account.Config.ItemsToAddToShop.ForEach(item => account.Inventory.AddItemToShop(item.Item1,item.Item2,item.Item3));
         }
         #endregion
     }

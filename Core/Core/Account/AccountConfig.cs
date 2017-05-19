@@ -24,6 +24,7 @@ namespace MageBot.Core.Account
         public bool Restored { get; set; }
         public bool Begin { get; set; }
         public int BotSpeed { get; set; }
+        public bool LogConsoleToText { get; set; }
         #endregion
 
         #region flood
@@ -77,6 +78,7 @@ namespace MageBot.Core.Account
         public string HouseSearcherLogPath { get; set; }
         public bool HouseSearcherEnabled { get; set; }
         public string SentenceToSay { get; set; }
+        public bool WaitingForTheSale { get; set; }
         #endregion
 
         #region Char

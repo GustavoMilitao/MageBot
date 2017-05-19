@@ -68,7 +68,7 @@ namespace MageBot.Core
 
         public Running(Account.Account account)
         {
-            this.Account = account;
+            Account = account;
             m_Openning = null;
             m_Leaving = null;
             m_Getting = null;

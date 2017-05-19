@@ -1393,6 +1393,15 @@ namespace Util.Util.I18n.Strings {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Required.
+        /// </summary>
+        public static string Required {
+            get {
+                return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Restart the path to reconnect.
         /// </summary>
         public static string RestartThePathToReconnect {

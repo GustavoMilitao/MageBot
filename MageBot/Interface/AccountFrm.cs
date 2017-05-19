@@ -40,7 +40,6 @@ namespace MageBot.Interface
 
         private void Init()
         {
-            accUserControl.DebugMode.Checked = true;
             Controls.Add(accUserControl);
             accUserControl.Show();
 
