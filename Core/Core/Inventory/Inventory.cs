@@ -14,7 +14,7 @@ namespace MageBot.Core.Inventory
     public class Inventory
     {
         #region Fields
-        public int kamas;
+        public ulong Kamas { get; set; }
         public int maxWeight;
         public int weight;
         private Account.Account Account;
@@ -36,7 +36,7 @@ namespace MageBot.Core.Inventory
             Account = account;
 
             Items = new List<Item>();
-            kamas = 0;
+            Kamas = 0;
             maxWeight = 0;
             weight = 0;
         }
@@ -123,8 +123,8 @@ namespace MageBot.Core.Inventory
 
         public void AddItemToShop(Item item, int quantity, ulong price)
         {
-            ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage((uint)item.UID,quantity,price);
-            
+            ExchangeObjectMovePricedMessage msg = new ExchangeObjectMovePricedMessage((uint)item.UID, quantity, price);
+
             Account.SocketManager.Send(msg);
             Account.Log(new ActionTextInformation(Strings.AdditionOf + item.Name + "(x " + quantity + ") " + Strings.InTheStoreAtThePriceOf + " : " + price + " " + Strings.Kamas), 2);
             LeaveDialogRequestMessage packetleave = new LeaveDialogRequestMessage();
@@ -168,6 +168,17 @@ namespace MageBot.Core.Inventory
             Account.Log(new BotTextInformation("Path : All objects were transfered."), 3);
         }
 
+        public void TransferKamas(long quantity = -1)
+        {
+            ExchangeObjectMoveKamaMessage kmsg = null;
+            //-1 means ALL Kamas in inventory
+            if (quantity == -1)
+                kmsg = new ExchangeObjectMoveKamaMessage((long)Account.Inventory.Kamas);
+            else
+                kmsg = new ExchangeObjectMoveKamaMessage(quantity);
+            Account.SocketManager.Send(kmsg);
+        }
+
         public List<int> GetItemsToTransfer()
         {
             List<int> stayingItems = Account.Config.ItemsToStayOnCharacter.Select(item => item.UID).ToList();
@@ -197,8 +208,8 @@ namespace MageBot.Core.Inventory
 
         public void ExchangeReady()
         {
-            Account.SocketManager.Send(new ExchangeReadyMessage(true, 1));
-            Account.Log(new ActionTextInformation("Echange prêt"), 5);
+            Account.SocketManager.Send(new ExchangeReadyMessage(true, 2));
+            Account.Log(new ActionTextInformation("Exchange done"), 5);
         }
 
         public void RequestExchange(string name)

@@ -92,6 +92,7 @@ namespace MageBot.Core.Engine.Handlers.Character
             }
             account.ModifBar(1, (int)msg.Stats.ExperienceNextLevelFloor - (int)msg.Stats.ExperienceLevelFloor, (int)msg.Stats.Experience - (int)msg.Stats.ExperienceLevelFloor, "Experience");
             account.ModifBar(4, 0, 0, msg.Stats.Kamas.ToString());
+            account.Inventory.Kamas = msg.Stats.Kamas;
             account.UpdateCharacterStats();
         }
 

@@ -177,7 +177,9 @@ namespace MageBot.Core.Map
         /// </summary>
         public void ParseStatedElements(MageBot.Protocol.Types.Game.Interactive.StatedElement[] statedElements)
         {
-            StatedElements = statedElements.Select(elem => new StatedElement(elem.ElementCellId, elem.ElementId, elem.ElementState)).ToList();
+            StatedElements = 
+                statedElements.Where(element => element.OnCurrentMap)
+                .Select(elem => new StatedElement(elem.ElementCellId, elem.ElementId, elem.ElementState)).ToList();
         }
 
         /// <summary>
@@ -185,7 +187,8 @@ namespace MageBot.Core.Map
         /// </summary>
         public void ParseInteractiveElements(MageBot.Protocol.Types.Game.Interactive.InteractiveElement[] interactiveElements)
         {
-            foreach (MageBot.Protocol.Types.Game.Interactive.InteractiveElement element in interactiveElements)
+            var elementsOnTheMap = interactiveElements.Where(element => element.OnCurrentMap).ToList();
+            foreach (Protocol.Types.Game.Interactive.InteractiveElement element in elementsOnTheMap)
             {
                 if (element.ElementTypeId == 85)
                     Account.Safe = new InteractiveElement(element);
@@ -269,22 +272,25 @@ namespace MageBot.Core.Map
         /// <summary>
         /// Update the state of an interactive element.
         /// </summary>
-        public void UpdateInteractiveElement(MageBot.Protocol.Types.Game.Interactive.InteractiveElement element)
+        public void UpdateInteractiveElement(Protocol.Types.Game.Interactive.InteractiveElement element)
         {
-            InteractiveElement Ielement = new InteractiveElement((uint)element.ElementId, element.ElementTypeId, element.EnabledSkills, element.DisabledSkills);
-            Tuple<InteractiveElement, int> temp = new Tuple<InteractiveElement, int>(null, 0);
-            foreach (KeyValuePair<Elements.InteractiveElement, int> pair in InteractiveElements)
+            if (element.OnCurrentMap)
             {
-                if (pair.Key.Id == Ielement.Id)
-                    temp = new Tuple<InteractiveElement, int>(pair.Key, pair.Value);
+                InteractiveElement Ielement = new InteractiveElement((uint)element.ElementId, element.ElementTypeId, element.EnabledSkills, element.DisabledSkills);
+                Tuple<InteractiveElement, int> temp = new Tuple<InteractiveElement, int>(null, 0);
+                foreach (KeyValuePair<Elements.InteractiveElement, int> pair in InteractiveElements)
+                {
+                    if (pair.Key.Id == Ielement.Id)
+                        temp = new Tuple<InteractiveElement, int>(pair.Key, pair.Value);
+                }
+                if (temp.Item1 != null)
+                {
+                    InteractiveElements.Remove(temp.Item1);
+                    InteractiveElements.Add(Ielement, temp.Item2);
+                }
+                else
+                    InteractiveElements.Add(Ielement, -1);
             }
-            if (temp.Item1 != null)
-            {
-                InteractiveElements.Remove(temp.Item1);
-                InteractiveElements.Add(Ielement, temp.Item2);
-            }
-            else
-                InteractiveElements.Add(Ielement, -1);
         }
 
         /// <summary>
@@ -292,11 +298,14 @@ namespace MageBot.Core.Map
         /// </summary>
         public void UpdateStatedElement(Protocol.Types.Game.Interactive.StatedElement element)
         {
-            StatedElement Selement = new StatedElement(element.ElementCellId, element.ElementId, element.ElementState);
-            if (StatedElements.Find(s => s.Id == Selement.Id) != null)
-                StatedElements.Find(s => s.Id == Selement.Id).State = Selement.State;
-            else
-                StatedElements.Add(Selement);
+            if (element.OnCurrentMap)
+            {
+                StatedElement Selement = new StatedElement(element.ElementCellId, element.ElementId, element.ElementState);
+                if (StatedElements.Find(s => s.Id == Selement.Id) != null)
+                    StatedElements.Find(s => s.Id == Selement.Id).State = Selement.State;
+                else
+                    StatedElements.Add(Selement);
+            }
         }
 
         /// <summary>
@@ -314,13 +323,17 @@ namespace MageBot.Core.Map
         /// </summary>
         public bool CanGatherElement(int id)
         {
-            Elements.StatedElement element = StatedElements.Find(s => s.Id == id);
-            if (element.State != 0)
+            StatedElement statedElement = StatedElements.Find(s => s.Id == id);
+            InteractiveElement interactiveElement =
+                InteractiveElements.Keys.ToList().Find(el => el.Id == id);
+            if (!interactiveElement.IsUsable 
+                || (statedElement.State != 0 
+                    && statedElement.State != 1))
                 return false;
             MapPoint characterPoint = new MapPoint(Character.Disposition.CellId);
-            if (element != null)
+            if (statedElement != null)
             {
-                MapPoint elementPoint = new MapPoint((int)element.CellId);
+                MapPoint elementPoint = new MapPoint((int)statedElement.CellId);
                 List<MapPoint> goodPointsList = GetListPointAtGoodDistance(characterPoint, elementPoint, Account.Inventory.WeaponRange);
                 if (goodPointsList.Count > 0)
                 {

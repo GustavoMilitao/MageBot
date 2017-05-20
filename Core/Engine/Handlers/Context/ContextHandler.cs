@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.IO;
+using MageBot.Protocol.Messages.Game.Inventory;
 
 namespace MageBot.Core.Engine.Handlers.Context
 {
@@ -481,6 +482,8 @@ namespace MageBot.Core.Engine.Handlers.Context
             List<int> items = account.Inventory.GetItemsToTransfer();
             account.Inventory.TransferItems(items);
             account.Wait(3000);
+            account.Inventory.TransferKamas();
+            account.Wait(3000);
             account.Inventory.ExchangeReady();
         }
 
@@ -510,6 +513,17 @@ namespace MageBot.Core.Engine.Handlers.Context
                 account.Inventory.ExchangeReady();
         }
 
+        [MessageHandler(typeof(KamasUpdateMessage))]
+        public static void KamasUpdateMessageTreatment(Message message, byte[] packetDatas, Account.Account account)
+        {
+            KamasUpdateMessage msg = (KamasUpdateMessage)message;
+            using (BigEndianReader reader = new BigEndianReader(packetDatas))
+            {
+                msg.Deserialize(reader);
+            }
+            account.Inventory.Kamas = msg.KamasTotal;
+            account.UpdateInfBars();
+        }
 
         #endregion
     }

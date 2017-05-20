@@ -132,6 +132,12 @@ namespace MageBot.Core.Job
                         {
                             account.SetStatus(Status.Gathering);
                             account.Map.UseElement(Id, SkillInstanceUid);
+                            account.Wait(3200);
+                            if (account.State == Status.Gathering)
+                            {
+                                account.SetStatus(Status.None);
+                                return false;
+                            }
                             return true;
                         }
                         else
