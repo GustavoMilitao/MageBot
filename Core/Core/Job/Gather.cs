@@ -5,6 +5,7 @@ using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MageBot.DataFiles.Data.D2o;
 
 namespace MageBot.Core.Job
 {

@@ -56,12 +56,13 @@ namespace MageBot.Core.Inventory
             }
         }
 
-        public int WeaponRange
+        public int JobAbstractWeaponRange
         {
             get
             {
-                Item weapon = Items.FirstOrDefault(i => i.Position == (int)InventoryPositionEnum.Weapon);
-                return weapon != null ? (int)GameData.GetDataObject(D2oFileEnum.Items, weapon.GID).Fields["range"] : 1;
+                //Item weapon = Items.FirstOrDefault(i => i.Position == (int)InventoryPositionEnum.Weapon);
+                //return weapon != null ? (int)GameData.GetDataObject(D2oFileEnum.Items, weapon.GID).Fields["range"] : 1;
+                return 4;
             }
         }
 

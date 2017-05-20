@@ -149,7 +149,7 @@ namespace MageBot.Core.Map
         {
             foreach (GameRolePlayActorInformations i in actors)
             {
-                if (i is GameRolePlayGroupMonsterInformations 
+                if (i is GameRolePlayGroupMonsterInformations
                     && !Monsters.Any(m => m.m_contextualId == i.ContextualId))
                 {
                     GameRolePlayGroupMonsterInformations m = (GameRolePlayGroupMonsterInformations)i;
@@ -177,7 +177,7 @@ namespace MageBot.Core.Map
         /// </summary>
         public void ParseStatedElements(MageBot.Protocol.Types.Game.Interactive.StatedElement[] statedElements)
         {
-            StatedElements = 
+            StatedElements =
                 statedElements.Where(element => element.OnCurrentMap)
                 .Select(elem => new StatedElement(elem.ElementCellId, elem.ElementId, elem.ElementState)).ToList();
         }
@@ -326,15 +326,15 @@ namespace MageBot.Core.Map
             StatedElement statedElement = StatedElements.Find(s => s.Id == id);
             InteractiveElement interactiveElement =
                 InteractiveElements.Keys.ToList().Find(el => el.Id == id);
-            if (!interactiveElement.IsUsable 
-                || (statedElement.State != 0 
+            if (!interactiveElement.IsUsable
+                || (statedElement.State != 0
                     && statedElement.State != 1))
                 return false;
             MapPoint characterPoint = new MapPoint(Character.Disposition.CellId);
             if (statedElement != null)
             {
                 MapPoint elementPoint = new MapPoint((int)statedElement.CellId);
-                List<MapPoint> goodPointsList = GetListPointAtGoodDistance(characterPoint, elementPoint, Account.Inventory.WeaponRange);
+                List<MapPoint> goodPointsList = GetListPointAtGoodDistance(characterPoint, elementPoint, Account.Inventory.JobAbstractWeaponRange);
                 if (goodPointsList.Count > 0)
                 {
                     foreach (MapPoint mp in goodPointsList)
@@ -407,35 +407,22 @@ namespace MageBot.Core.Map
                 Others.Find(p => p.ContextualId == id).Disposition.CellId = (short)cell;
         }
 
-        public List<MapPoint> GetListPointAtGoodDistance(MapPoint characterPoint, MapPoint elementPoint, int weaponRange)
+        public List<MapPoint> GetListPointAtGoodDistance(MapPoint characterPoint, MapPoint elementPoint, int maxDistance)
         {
             List<MapPoint> list = new List<MapPoint>();
-            int num = -1;
-            int direction = 1;
-            while (true)
+            for (int i = 0; i < maxDistance; i++)
             {
-                int i = 0;
-                while (i < weaponRange)
+                for (int direction = 0; direction < 8; direction++)
                 {
-                    i += 1;
                     MapPoint nearestCellInDirection = elementPoint.GetNearestCellInDirection(direction, i);
                     if (nearestCellInDirection.IsInMap() && Data.IsWalkable(nearestCellInDirection.CellId))
                     {
-                        int dist = characterPoint.DistanceToCell(nearestCellInDirection);
-                        if ((num == -1) || (num >= dist))
-                        {
-                            if (dist < num)
-                                list.Clear();
-                            num = dist;
-                            list.Add(nearestCellInDirection);
-                        }
-                        break;
+                        list.Add(nearestCellInDirection);
                     }
                 }
-                direction = (direction + 2);
-                if (direction > 7)
-                    return list;
             }
+            return list.GroupBy(elem => elem.CellId).Select(g => g.FirstOrDefault()).ToList()
+                   .OrderBy(item => item.DistanceTo(elementPoint)).ToList();
         }
         #endregion
     }
