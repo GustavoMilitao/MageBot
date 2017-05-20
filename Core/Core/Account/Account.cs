@@ -97,7 +97,6 @@ namespace MageBot.Core.Account
         #region Updater events (Fill in interface)
         public event EventHandler ActualizePets;
         public event EventHandler ActualizeMap;
-        public event EventHandler ActualizeFightStats;
         public event EventHandler ActualizeInventory;
         public event EventHandler ActualizeShop;
         public event EventHandler ActualizeJobs;
@@ -440,11 +439,6 @@ namespace MageBot.Core.Account
             ActualizeMap?.Invoke(this, EventArgs.Empty);
         }
 
-        public virtual void UpdateFightStats()
-        {
-            ActualizeFightStats?.Invoke(this, EventArgs.Empty);
-        }
-
         public virtual void UpdateInventory()
         {
             ActualizeInventory?.Invoke(this, EventArgs.Empty);
@@ -498,7 +492,7 @@ namespace MageBot.Core.Account
             LogChanged?.Invoke(this, new LogEventArgs(text, verboseLevel));
         }
 
-        protected virtual void OnRecoverConfig()
+        public virtual void OnRecoverConfig()
         {
             ConfigRecovered?.Invoke(this, EventArgs.Empty);
         }

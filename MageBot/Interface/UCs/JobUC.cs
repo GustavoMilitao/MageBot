@@ -21,9 +21,7 @@ namespace MageBot.Interface
         {
             InitializeComponent();
             accUserControl = Account;
-            accUserControl.Account.Jobs = new List<Job>();
             job = j;
-            accUserControl.Account.Jobs.Add(job);
             sadikTabControl1.TabPages[0].Controls.Add(g);
             sadikTabControl1.TabPages[1].Controls.Add(gg);
             Dock = DockStyle.Fill;

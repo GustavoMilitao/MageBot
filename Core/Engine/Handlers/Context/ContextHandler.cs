@@ -80,11 +80,6 @@ namespace MageBot.Core.Engine.Handlers.Context
             if (account.MapData.Data != null)
             {
                 account.MapData.Data.Id = currentMapMessage.MapId;
-                if (account.MapData.Data.Id == account.MapData.LastMapId && account.Fight != null)
-                {
-                    account.FightData.WinLoseDic["Win"]++;
-                    account.UpdateFightStats();
-                }
             }
             if (!account.Config.IsMITM)
             {
@@ -128,11 +123,7 @@ namespace MageBot.Core.Engine.Handlers.Context
                         account.Fight.LockFightForSpectators();
                     break;
                 case 34:
-                    if (account.Fight != null)
-                    {
-                        account.FightData.WinLoseDic["Lose"]++;
-                        account.UpdateFightStats();
-                    }
+                    // Fight lose
                     break;
             }
 

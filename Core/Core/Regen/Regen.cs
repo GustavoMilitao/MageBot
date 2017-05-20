@@ -27,6 +27,8 @@ namespace MageBot.Core.Regen
                     if (UseItems(Account.Config.RegenItems))
                     {
                         Account.Wait(1000);
+                        Account.UpdateInventory();
+                        Account.UpdateInfBars();
                         PulseRegen();
                         return;
                     }

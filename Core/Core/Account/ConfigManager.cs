@@ -33,8 +33,7 @@ namespace MageBot.Core.Account
                     account.Config = configuration;
                     account.Log(new BotTextInformation("Restored settings."), 0);
                     account.Config.Restored = true;
-                    if (account.Config.WaitingForTheSale)
-                        account.House = new Misc.HouseBuy(account);
+                    account.OnRecoverConfig();
                     return true;
                 }
                 account.Log(new ErrorTextInformation("Error to load config file."), 0);

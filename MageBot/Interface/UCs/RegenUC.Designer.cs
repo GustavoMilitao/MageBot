@@ -48,6 +48,7 @@
             this.Controls.Add(this.LVItems);
             this.Name = "RegenUC";
             this.Size = new System.Drawing.Size(410, 290);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RegenUC_KeyPress);
             this.ResumeLayout(false);
 
         }

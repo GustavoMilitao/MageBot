@@ -174,10 +174,6 @@ namespace MageBot.Core.Engine.Handlers.Character
 
                 }
                 account.ModifBar(1, (int)account.CharacterStats.ExperienceNextLevelFloor - (int)account.CharacterStats.ExperienceLevelFloor, (int)account.CharacterStats.Experience - (int)account.CharacterStats.ExperienceLevelFloor, "Experience");
-                if (account.Fight != null)
-                {
-                    account.FightData.XpWon[DateTime.Today] += (int)msg.ExperienceCharacter;
-                }
             }
         }
 

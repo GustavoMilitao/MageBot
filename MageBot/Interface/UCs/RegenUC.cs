@@ -1,6 +1,8 @@
 ﻿using Util.Util.I18n.Strings;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using MageBot.Core.Inventory;
+using System.Windows.Input;
 
 namespace MageBot.Interface.UCs
 {
@@ -21,10 +23,6 @@ namespace MageBot.Interface.UCs
         #endregion
 
         #region Public Methods
-        public void PulseRegen()
-        {
-            accUserControl.Account.Regen.PulseRegen();
-        }
 
         public void RefreshQuantity()
         {
@@ -32,7 +30,15 @@ namespace MageBot.Interface.UCs
             {
                 try
                 {
-                    LVItems.Items[i].SubItems[1].Text = accUserControl.Account.Inventory.GetItemFromName(LVItems.Items[i].SubItems[0].Text).Quantity.ToString();
+                    Item item = accUserControl.Account.Inventory.GetItemFromName(LVItems.Items[i].SubItems[0].Text);
+                    if (item.Quantity == 0)
+                    {
+                        LVItems.Items.RemoveAt(i);
+                    }
+                    else
+                    {
+                        LVItems.Items[i].SubItems[1].Text = item.Quantity.ToString();
+                    }
                     LVItems.Invalidate();
                 }
                 catch { }
@@ -41,14 +47,6 @@ namespace MageBot.Interface.UCs
         #endregion
 
         #region Private methods
-        private void GetRegenItems()
-        {
-            var names = new List<string>();
-            foreach (ListViewItem i in LVItems.Items)
-                if (int.Parse(i.SubItems[1].Text) > 0)
-                    names.Add(i.SubItems[0].Text);
-            accUserControl.Account.Regen.GetRegenItemsByNames(names);
-        }
 
         private void Init()
         {
@@ -70,6 +68,23 @@ namespace MageBot.Interface.UCs
                 }
             }
         }
+
+        private void RegenUC_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Key.Delete)
+            {
+                foreach (ListViewItem lvi in LVItems.SelectedItems)
+                {
+                    Item item = accUserControl.Account.Inventory.GetItemFromName(lvi.SubItems[0].Text);
+                    if (item != null)
+                    {
+                        accUserControl.Account.Config.RegenItems.RemoveAll(it => it.UID == item.UID);
+                        LVItems.Items.Remove(lvi);
+                    }
+                }
+            }
+        }
         #endregion
+
     }
 }

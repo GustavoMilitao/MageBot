@@ -22,8 +22,6 @@ namespace MageBot.Core.Fight
     {
         #region Fields
         #region Dictionary
-        public Dictionary<DateTime, int> XpWon { get; set; }
-        public Dictionary<string, int> WinLoseDic { get; set; }
         public Dictionary<int, int> DurationByEffect { get; set; } = new Dictionary<int, int>();
         public Dictionary<int, int> LastTurnLaunchBySpell { get; set; } = new Dictionary<int, int>();
         public Dictionary<int, int> TotalLaunchBySpell { get; set; } = new Dictionary<int, int>();
@@ -81,13 +79,6 @@ namespace MageBot.Core.Fight
         public FightData(Account.Account Account)
         {
             this.Account = Account;
-            XpWon = new Dictionary<DateTime, int>();
-            WinLoseDic = new Dictionary<string, int>
-            {
-                { "Win", 0 },
-                { "Lose", 0 }
-            };
-            XpWon.Add(DateTime.Today, 0);
             DataClass[] data = GameData.GetDataObjects(D2oFileEnum.Monsters);
             List<DataClass> b = data.ToList().FindAll(e => ((bool)e.Fields["isBoss"]) == true).ToList();
             Boss = new Dictionary<string, int>();

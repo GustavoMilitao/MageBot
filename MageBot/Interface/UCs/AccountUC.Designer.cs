@@ -32,12 +32,6 @@ namespace MageBot.Interface
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountUC));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.PosLabel = new System.Windows.Forms.ToolStripLabel();
             this.ToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -79,6 +73,9 @@ namespace MageBot.Interface
             this.metroTabControl2 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.LockSpectator = new MageBot.Interface.SadikCheckbox();
+            this.AskForHelp = new MageBot.Interface.SadikCheckbox();
+            this.LockForParty = new MageBot.Interface.SadikCheckbox();
             this.IsLockingFight = new MageBot.Interface.SadikCheckbox();
             this.NUDTimeoutFight = new System.Windows.Forms.NumericUpDown();
             this.sadikLabel11 = new MageBot.Interface.SadikLabel();
@@ -112,9 +109,6 @@ namespace MageBot.Interface
             this.lbReplaceMonstersNumber = new System.Windows.Forms.Label();
             this.nudMaxMonstersNumber = new System.Windows.Forms.NumericUpDown();
             this.nudMinMonstersNumber = new System.Windows.Forms.NumericUpDown();
-            this.metroTabPage5 = new MetroFramework.Controls.MetroTabPage();
-            this.WinLoseFightPie = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.XpBarsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.JobPage = new System.Windows.Forms.TabPage();
             this.JobsTabP = new MageBot.Interface.SadikTabControl();
             this.FamiPage = new System.Windows.Forms.TabPage();
@@ -136,7 +130,7 @@ namespace MageBot.Interface
             this.tabPage9 = new MetroFramework.Controls.MetroTabPage();
             this.RegenPage = new MetroFramework.Controls.MetroTabPage();
             this.DiversPage = new System.Windows.Forms.TabPage();
-            this.FloodPage = new MetroFramework.Controls.MetroTabControl();
+            this.MiscPage = new MetroFramework.Controls.MetroTabControl();
             this.MaisonsPage = new MetroFramework.Controls.MetroTabPage();
             this.sadikLabel9 = new MageBot.Interface.SadikLabel();
             this.ParcourirBt = new MageBot.Interface.SadikButton();
@@ -164,9 +158,6 @@ namespace MageBot.Interface
             this.LVItemShop = new System.Windows.Forms.ListView();
             this.LVItemBag = new System.Windows.Forms.ListView();
             this.sadikCheckbox1 = new MageBot.Interface.SadikCheckbox();
-            this.LockForParty = new MageBot.Interface.SadikCheckbox();
-            this.AskForHelp = new MageBot.Interface.SadikCheckbox();
-            this.LockSpectator = new MageBot.Interface.SadikCheckbox();
             this.toolStrip1.SuspendLayout();
             this.VTabAccount.SuspendLayout();
             this.ConsolePage.SuspendLayout();
@@ -194,9 +185,6 @@ namespace MageBot.Interface
             ((System.ComponentModel.ISupportInitialize)(this.nudMinMonstersLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaxMonstersNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinMonstersNumber)).BeginInit();
-            this.metroTabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WinLoseFightPie)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.XpBarsChart)).BeginInit();
             this.JobPage.SuspendLayout();
             this.FamiPage.SuspendLayout();
             this.panelAccountInformations.SuspendLayout();
@@ -204,7 +192,7 @@ namespace MageBot.Interface
             this.sadikTabControl2.SuspendLayout();
             this.metroTabPage6.SuspendLayout();
             this.DiversPage.SuspendLayout();
-            this.FloodPage.SuspendLayout();
+            this.MiscPage.SuspendLayout();
             this.MaisonsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPrice)).BeginInit();
             this.metroTabPage9.SuspendLayout();
@@ -431,7 +419,7 @@ namespace MageBot.Interface
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(3, 3);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(489, 386);
             this.metroTabControl1.TabIndex = 6;
             this.metroTabControl1.UseSelectable = true;
@@ -465,7 +453,7 @@ namespace MageBot.Interface
             // 
             this.LogConsole.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LogConsole.BackColor = System.Drawing.Color.White;
-            this.LogConsole.Location = new System.Drawing.Point(-2, 6);
+            this.LogConsole.Location = new System.Drawing.Point(-2, 8);
             this.LogConsole.Name = "LogConsole";
             this.LogConsole.ReadOnly = true;
             this.LogConsole.Size = new System.Drawing.Size(484, 315);
@@ -607,7 +595,6 @@ namespace MageBot.Interface
             // 
             this.metroTabControl2.Controls.Add(this.metroTabPage3);
             this.metroTabControl2.Controls.Add(this.metroTabPage4);
-            this.metroTabControl2.Controls.Add(this.metroTabPage5);
             this.metroTabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl2.Location = new System.Drawing.Point(3, 3);
             this.metroTabControl2.Name = "metroTabControl2";
@@ -650,11 +637,44 @@ namespace MageBot.Interface
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Miscellaneous";
             // 
+            // LockSpectator
+            // 
+            this.LockSpectator.Checked = false;
+            this.LockSpectator.Font = new System.Drawing.Font("Verdana", 8F);
+            this.LockSpectator.Location = new System.Drawing.Point(162, 71);
+            this.LockSpectator.Name = "LockSpectator";
+            this.LockSpectator.Size = new System.Drawing.Size(117, 18);
+            this.LockSpectator.TabIndex = 9;
+            this.LockSpectator.Text = "Lock Spectator";
+            this.LockSpectator.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.LockSpectator_CheckedChanged);
+            // 
+            // AskForHelp
+            // 
+            this.AskForHelp.Checked = false;
+            this.AskForHelp.Font = new System.Drawing.Font("Verdana", 8F);
+            this.AskForHelp.Location = new System.Drawing.Point(162, 95);
+            this.AskForHelp.Name = "AskForHelp";
+            this.AskForHelp.Size = new System.Drawing.Size(105, 18);
+            this.AskForHelp.TabIndex = 8;
+            this.AskForHelp.Text = "Ask for help";
+            this.AskForHelp.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.AskForHelp_CheckedChanged);
+            // 
+            // LockForParty
+            // 
+            this.LockForParty.Checked = false;
+            this.LockForParty.Font = new System.Drawing.Font("Verdana", 8F);
+            this.LockForParty.Location = new System.Drawing.Point(9, 95);
+            this.LockForParty.Name = "LockForParty";
+            this.LockForParty.Size = new System.Drawing.Size(138, 18);
+            this.LockForParty.TabIndex = 7;
+            this.LockForParty.Text = "Party Only Combat";
+            this.LockForParty.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.LockForParty_CheckedChanged);
+            // 
             // IsLockingFight
             // 
             this.IsLockingFight.Checked = false;
             this.IsLockingFight.Font = new System.Drawing.Font("Verdana", 8F);
-            this.IsLockingFight.Location = new System.Drawing.Point(9, 50);
+            this.IsLockingFight.Location = new System.Drawing.Point(9, 71);
             this.IsLockingFight.Name = "IsLockingFight";
             this.IsLockingFight.Size = new System.Drawing.Size(204, 18);
             this.IsLockingFight.TabIndex = 6;
@@ -668,7 +688,7 @@ namespace MageBot.Interface
             0,
             0,
             65536});
-            this.NUDTimeoutFight.Location = new System.Drawing.Point(211, 24);
+            this.NUDTimeoutFight.Location = new System.Drawing.Point(162, 24);
             this.NUDTimeoutFight.Maximum = new decimal(new int[] {
             5,
             0,
@@ -1119,55 +1139,6 @@ namespace MageBot.Interface
             this.nudMinMonstersNumber.TabIndex = 19;
             this.nudMinMonstersNumber.ValueChanged += new System.EventHandler(this.nudMinMonstersNumber_ValueChanged);
             // 
-            // metroTabPage5
-            // 
-            this.metroTabPage5.Controls.Add(this.WinLoseFightPie);
-            this.metroTabPage5.Controls.Add(this.XpBarsChart);
-            this.metroTabPage5.HorizontalScrollbarBarColor = true;
-            this.metroTabPage5.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage5.HorizontalScrollbarSize = 10;
-            this.metroTabPage5.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage5.Name = "metroTabPage5";
-            this.metroTabPage5.Size = new System.Drawing.Size(481, 344);
-            this.metroTabPage5.TabIndex = 2;
-            this.metroTabPage5.Text = "Statistics";
-            this.metroTabPage5.VerticalScrollbarBarColor = true;
-            this.metroTabPage5.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage5.VerticalScrollbarSize = 10;
-            // 
-            // WinLoseFightPie
-            // 
-            chartArea7.Name = "ChartArea1";
-            this.WinLoseFightPie.ChartAreas.Add(chartArea7);
-            legend7.Name = "Legend1";
-            this.WinLoseFightPie.Legends.Add(legend7);
-            this.WinLoseFightPie.Location = new System.Drawing.Point(23, 138);
-            this.WinLoseFightPie.Name = "WinLoseFightPie";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.WinLoseFightPie.Series.Add(series7);
-            this.WinLoseFightPie.Size = new System.Drawing.Size(233, 135);
-            this.WinLoseFightPie.TabIndex = 3;
-            this.WinLoseFightPie.Text = "WinLoseFightPie";
-            // 
-            // XpBarsChart
-            // 
-            chartArea8.Name = "ChartArea1";
-            this.XpBarsChart.ChartAreas.Add(chartArea8);
-            legend8.Name = "Legend1";
-            this.XpBarsChart.Legends.Add(legend8);
-            this.XpBarsChart.Location = new System.Drawing.Point(23, 21);
-            this.XpBarsChart.Name = "XpBarsChart";
-            series8.ChartArea = "ChartArea1";
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            this.XpBarsChart.Series.Add(series8);
-            this.XpBarsChart.Size = new System.Drawing.Size(360, 116);
-            this.XpBarsChart.TabIndex = 2;
-            this.XpBarsChart.Text = "chart1";
-            // 
             // JobPage
             // 
             this.JobPage.Controls.Add(this.JobsTabP);
@@ -1392,10 +1363,10 @@ namespace MageBot.Interface
             this.LVItems.BackColor = System.Drawing.Color.White;
             this.LVItems.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.LVItems.FullRowSelect = true;
-            this.LVItems.Location = new System.Drawing.Point(0, 84);
+            this.LVItems.Location = new System.Drawing.Point(0, 40);
             this.LVItems.Name = "LVItems";
             this.LVItems.ShowItemToolTips = true;
-            this.LVItems.Size = new System.Drawing.Size(481, 260);
+            this.LVItems.Size = new System.Drawing.Size(481, 304);
             this.LVItems.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.LVItems.TabIndex = 7;
             this.LVItems.UseCompatibleStateImageBehavior = false;
@@ -1431,7 +1402,7 @@ namespace MageBot.Interface
             // 
             // DiversPage
             // 
-            this.DiversPage.Controls.Add(this.FloodPage);
+            this.DiversPage.Controls.Add(this.MiscPage);
             this.DiversPage.Location = new System.Drawing.Point(104, 4);
             this.DiversPage.Name = "DiversPage";
             this.DiversPage.Padding = new System.Windows.Forms.Padding(3);
@@ -1440,21 +1411,21 @@ namespace MageBot.Interface
             this.DiversPage.Text = "Miscellaneous";
             this.DiversPage.UseVisualStyleBackColor = true;
             // 
-            // FloodPage
+            // MiscPage
             // 
-            this.FloodPage.Controls.Add(this.MaisonsPage);
-            this.FloodPage.Controls.Add(this.metroTabPage9);
-            this.FloodPage.Controls.Add(this.StatsPage);
-            this.FloodPage.Controls.Add(this.tabPage8);
-            this.FloodPage.Controls.Add(this.tabPage2);
-            this.FloodPage.Controls.Add(this.marchandPage);
-            this.FloodPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FloodPage.Location = new System.Drawing.Point(3, 3);
-            this.FloodPage.Name = "FloodPage";
-            this.FloodPage.SelectedIndex = 0;
-            this.FloodPage.Size = new System.Drawing.Size(489, 386);
-            this.FloodPage.TabIndex = 1;
-            this.FloodPage.UseSelectable = true;
+            this.MiscPage.Controls.Add(this.MaisonsPage);
+            this.MiscPage.Controls.Add(this.metroTabPage9);
+            this.MiscPage.Controls.Add(this.StatsPage);
+            this.MiscPage.Controls.Add(this.tabPage8);
+            this.MiscPage.Controls.Add(this.tabPage2);
+            this.MiscPage.Controls.Add(this.marchandPage);
+            this.MiscPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MiscPage.Location = new System.Drawing.Point(3, 3);
+            this.MiscPage.Name = "MiscPage";
+            this.MiscPage.SelectedIndex = 0;
+            this.MiscPage.Size = new System.Drawing.Size(489, 386);
+            this.MiscPage.TabIndex = 1;
+            this.MiscPage.UseSelectable = true;
             // 
             // MaisonsPage
             // 
@@ -1602,18 +1573,21 @@ namespace MageBot.Interface
             this.metroTabPage9.VerticalScrollbarBarColor = true;
             this.metroTabPage9.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage9.VerticalScrollbarSize = 10;
+            this.metroTabPage9.Click += new System.EventHandler(this.metroTabPage9_Click);
             // 
             // MapView
             // 
+            this.MapView.Alignment = System.Windows.Forms.ListViewAlignment.Default;
+            this.MapView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MapView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Id,
             this.ContextName,
             this.CellId,
             this.Type});
-            this.MapView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MapView.Location = new System.Drawing.Point(0, 0);
+            this.MapView.Enabled = false;
+            this.MapView.Location = new System.Drawing.Point(3, 15);
             this.MapView.Name = "MapView";
-            this.MapView.Size = new System.Drawing.Size(481, 344);
+            this.MapView.Size = new System.Drawing.Size(461, 326);
             this.MapView.TabIndex = 2;
             this.MapView.UseCompatibleStateImageBehavior = false;
             this.MapView.View = System.Windows.Forms.View.Details;
@@ -1707,7 +1681,7 @@ namespace MageBot.Interface
             this.BtnActualize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnActualize.Font = new System.Drawing.Font("Verdana", 8F);
             this.BtnActualize.Image = null;
-            this.BtnActualize.Location = new System.Drawing.Point(222, 133);
+            this.BtnActualize.Location = new System.Drawing.Point(216, 133);
             this.BtnActualize.Name = "BtnActualize";
             this.BtnActualize.RoundedCorners = false;
             this.BtnActualize.Size = new System.Drawing.Size(65, 20);
@@ -1721,7 +1695,7 @@ namespace MageBot.Interface
             this.sadikButton3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sadikButton3.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikButton3.Image = null;
-            this.sadikButton3.Location = new System.Drawing.Point(293, 133);
+            this.sadikButton3.Location = new System.Drawing.Point(287, 133);
             this.sadikButton3.Name = "sadikButton3";
             this.sadikButton3.RoundedCorners = false;
             this.sadikButton3.Size = new System.Drawing.Size(65, 20);
@@ -1735,7 +1709,7 @@ namespace MageBot.Interface
             this.sadikLabel10.BackColor = System.Drawing.Color.Transparent;
             this.sadikLabel10.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.sadikLabel10.Location = new System.Drawing.Point(364, 135);
+            this.sadikLabel10.Location = new System.Drawing.Point(358, 135);
             this.sadikLabel10.Name = "sadikLabel10";
             this.sadikLabel10.Size = new System.Drawing.Size(35, 13);
             this.sadikLabel10.TabIndex = 11;
@@ -1743,7 +1717,7 @@ namespace MageBot.Interface
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(399, 133);
+            this.numericUpDown1.Location = new System.Drawing.Point(393, 133);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             1000000000,
             0,
@@ -1760,7 +1734,7 @@ namespace MageBot.Interface
             this.LVItemShop.Location = new System.Drawing.Point(1, 159);
             this.LVItemShop.Name = "LVItemShop";
             this.LVItemShop.ShowItemToolTips = true;
-            this.LVItemShop.Size = new System.Drawing.Size(484, 112);
+            this.LVItemShop.Size = new System.Drawing.Size(477, 112);
             this.LVItemShop.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.LVItemShop.TabIndex = 9;
             this.LVItemShop.UseCompatibleStateImageBehavior = false;
@@ -1773,7 +1747,7 @@ namespace MageBot.Interface
             this.LVItemBag.Location = new System.Drawing.Point(1, 3);
             this.LVItemBag.Name = "LVItemBag";
             this.LVItemBag.ShowItemToolTips = true;
-            this.LVItemBag.Size = new System.Drawing.Size(484, 124);
+            this.LVItemBag.Size = new System.Drawing.Size(477, 124);
             this.LVItemBag.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.LVItemBag.TabIndex = 8;
             this.LVItemBag.UseCompatibleStateImageBehavior = false;
@@ -1789,39 +1763,6 @@ namespace MageBot.Interface
             this.sadikCheckbox1.TabIndex = 2;
             this.sadikCheckbox1.Text = "Enable merchant mode";
             this.sadikCheckbox1.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox1_CheckedChanged_1);
-            // 
-            // LockForParty
-            // 
-            this.LockForParty.Checked = false;
-            this.LockForParty.Font = new System.Drawing.Font("Verdana", 8F);
-            this.LockForParty.Location = new System.Drawing.Point(9, 74);
-            this.LockForParty.Name = "LockForParty";
-            this.LockForParty.Size = new System.Drawing.Size(138, 18);
-            this.LockForParty.TabIndex = 7;
-            this.LockForParty.Text = "Party Only Combat";
-            this.LockForParty.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.LockForParty_CheckedChanged);
-            // 
-            // AskForHelp
-            // 
-            this.AskForHelp.Checked = false;
-            this.AskForHelp.Font = new System.Drawing.Font("Verdana", 8F);
-            this.AskForHelp.Location = new System.Drawing.Point(162, 74);
-            this.AskForHelp.Name = "AskForHelp";
-            this.AskForHelp.Size = new System.Drawing.Size(105, 18);
-            this.AskForHelp.TabIndex = 8;
-            this.AskForHelp.Text = "Ask for help";
-            this.AskForHelp.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.AskForHelp_CheckedChanged);
-            // 
-            // LockSpectator
-            // 
-            this.LockSpectator.Checked = false;
-            this.LockSpectator.Font = new System.Drawing.Font("Verdana", 8F);
-            this.LockSpectator.Location = new System.Drawing.Point(162, 50);
-            this.LockSpectator.Name = "LockSpectator";
-            this.LockSpectator.Size = new System.Drawing.Size(105, 18);
-            this.LockSpectator.TabIndex = 9;
-            this.LockSpectator.Text = "Lock Spectator";
-            this.LockSpectator.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.LockSpectator_CheckedChanged);
             // 
             // AccountUC
             // 
@@ -1874,9 +1815,6 @@ namespace MageBot.Interface
             ((System.ComponentModel.ISupportInitialize)(this.nudMinMonstersLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaxMonstersNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinMonstersNumber)).EndInit();
-            this.metroTabPage5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.WinLoseFightPie)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.XpBarsChart)).EndInit();
             this.JobPage.ResumeLayout(false);
             this.FamiPage.ResumeLayout(false);
             this.panelAccountInformations.ResumeLayout(false);
@@ -1885,7 +1823,7 @@ namespace MageBot.Interface
             this.sadikTabControl2.ResumeLayout(false);
             this.metroTabPage6.ResumeLayout(false);
             this.DiversPage.ResumeLayout(false);
-            this.FloodPage.ResumeLayout(false);
+            this.MiscPage.ResumeLayout(false);
             this.MaisonsPage.ResumeLayout(false);
             this.MaisonsPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPrice)).EndInit();
@@ -1981,9 +1919,6 @@ namespace MageBot.Interface
         private System.Windows.Forms.Label lbReplaceMonstersNumber;
         internal System.Windows.Forms.NumericUpDown nudMaxMonstersNumber;
         internal System.Windows.Forms.NumericUpDown nudMinMonstersNumber;
-        private MetroFramework.Controls.MetroTabPage metroTabPage5;
-        private System.Windows.Forms.DataVisualization.Charting.Chart WinLoseFightPie;
-        private System.Windows.Forms.DataVisualization.Charting.Chart XpBarsChart;
         private MetroFramework.Controls.MetroTabControl sadikTabControl2;
         private MetroFramework.Controls.MetroTabPage metroTabPage6;
         private SadikButton RegenAddBt;
@@ -1995,7 +1930,7 @@ namespace MageBot.Interface
         public System.Windows.Forms.ListView LVItems;
         private MetroFramework.Controls.MetroTabPage tabPage9;
         private MetroFramework.Controls.MetroTabPage RegenPage;
-        private MetroFramework.Controls.MetroTabControl FloodPage;
+        private MetroFramework.Controls.MetroTabControl MiscPage;
         private MetroFramework.Controls.MetroTabPage MaisonsPage;
         private SadikLabel sadikLabel9;
         private SadikButton ParcourirBt;

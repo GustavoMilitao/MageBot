@@ -31,7 +31,6 @@
             this.sadikTabControl1 = new MageBot.Interface.SadikTabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.g = new System.Windows.Forms.DataGridView();
             this.gg = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -47,7 +46,6 @@
             // 
             this.sadikTabControl1.Controls.Add(this.tabPage4);
             this.sadikTabControl1.Controls.Add(this.tabPage5);
-            this.sadikTabControl1.Controls.Add(this.tabPage6);
             this.sadikTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sadikTabControl1.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikTabControl1.ItemSize = new System.Drawing.Size(0, 30);
@@ -76,16 +74,6 @@
             this.tabPage5.Size = new System.Drawing.Size(402, 245);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Craft";
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.BackColor = System.Drawing.Color.White;
-            this.tabPage6.Location = new System.Drawing.Point(4, 34);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(402, 245);
-            this.tabPage6.TabIndex = 2;
-            this.tabPage6.Text = "Stats";
             // 
             // g
             // 
@@ -165,6 +153,5 @@
         public System.Windows.Forms.DataGridView gg;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TabPage tabPage6;
     }
 }

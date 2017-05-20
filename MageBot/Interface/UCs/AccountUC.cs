@@ -73,13 +73,12 @@ namespace MageBot.Interface
                 m_ParentForm = form;
             Account = account;
             FillAccountEvents();
-            FillAccountInitialSettings();
             // Jobs
             JobsUC = new List<JobUC>();
 
             //Heroic mode
             HeroicUC = new HeroicUC(this);
-            FloodPage.TabPages[3].Controls.Add(HeroicUC);
+            MiscPage.TabPages[3].Controls.Add(HeroicUC);
             HeroicUC.Show();
 
             //Items management
@@ -134,6 +133,7 @@ namespace MageBot.Interface
             MonstersRestrictionsView.Columns.Add(Strings.Comparator, -2);
             MonstersRestrictionsView.Columns.Add(Strings.Number, -2);
             MonstersRestrictionsView.Columns.Add(Strings.Restriction, -2);
+            FillAccountInitialSettings();
         }
 
         public AccountUC()
@@ -426,6 +426,7 @@ namespace MageBot.Interface
                 {
                     ListViewItem item = new ListViewItem(new string[] { LVItems.Items[i].SubItems[2].Text, LVItems.Items[i].SubItems[3].Text });
                     RegenUC.LVItems.Items.Add(item);
+                    Account.Config.RegenItems.Add(Account.Inventory.GetItemFromUID(Convert.ToInt32(LVItems.Items[i].SubItems[1].Text)));
                 }
             }
         }
@@ -636,6 +637,7 @@ namespace MageBot.Interface
                 li.ToolTipText = item.Description;
                 AddItem(li, LVItemShop);
             }
+            ResizeGrid(LVItemShop);
         }
 
         public void AddItemToShop()
@@ -710,58 +712,6 @@ namespace MageBot.Interface
             Invoke(new DelegLabel(ModLabel), nstatus, StatusLb);
         }
 
-        public void ActualizeFightStats(Dictionary<string, int> winLose, Dictionary<DateTime, int> xpwon)
-        {
-            if (WinLoseFightPie.InvokeRequired)
-            {
-                Invoke(new DelegGatherPie(ActualizeFightStats), winLose, xpwon);
-                return;
-            }
-#if __MonoCS__
-
-#else
-            if (WinLoseFightPie.Titles.Count < 1)
-                WinLoseFightPie.Titles.Add("Résultats des combats");
-#endif
-            WinLoseFightPie.Series.Clear();
-            WinLoseFightPie.ChartAreas[0].BackColor = Color.Transparent;
-            Series series1 = new Series
-            {
-                Name = "series1",
-                IsVisibleInLegend = false,
-                Color = System.Drawing.Color.DeepSkyBlue,
-                ChartType = SeriesChartType.Pie
-            };
-            WinLoseFightPie.Series.Add(series1);
-            int i = 0;
-            foreach (KeyValuePair<string, int> pair in winLose)
-            {
-                series1.Points.Add(pair.Value);
-                var p1 = series1.Points[i];
-                p1.AxisLabel = pair.Key + " (" + pair.Value + ")";
-                p1.LegendText = pair.Key;
-                i += 1;
-            }
-            XpBarsChart.Series.Clear();
-#if __MonoCS__
-
-#else
-            if (XpBarsChart.Titles.Count < 1)
-                XpBarsChart.Titles.Add("Experience gagnée");
-#endif
-            foreach (KeyValuePair<DateTime, int> p in xpwon)
-            {
-                Series series = new Series(p.Key.ToShortDateString());
-                series.Name = p.Key.ToShortDateString();
-                series.IsVisibleInLegend = true;
-                series.ChartType = SeriesChartType.Column;
-                series.Points.Add(p.Value);
-                XpBarsChart.Series.Add(series);
-            }
-            WinLoseFightPie.Invalidate();
-            XpBarsChart.Invalidate();
-        }
-
         public void ActualizeInventory()
         {
             BeginInvoke(new MethodInvoker(LVItems.Items.Clear));
@@ -772,6 +722,7 @@ namespace MageBot.Interface
                 li.ToolTipText = i.Description;
                 AddItem(li, LVItems);
             }
+            ResizeGrid(LVItems);
             RegenUC.RefreshQuantity();
 
             BeginInvoke(new MethodInvoker(LVItemBag.Items.Clear));
@@ -782,6 +733,7 @@ namespace MageBot.Interface
                 li.ToolTipText = i.Description;
                 AddItem(li, LVItemBag);
             }
+            ResizeGrid(LVItemBag);
         }
 
         public void ActualizeFamis()
@@ -833,6 +785,7 @@ namespace MageBot.Interface
                     //    listViewPets.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                 }
             }
+            ResizeGrid(listViewPets);
         }
 
         public void ModLabel(string content, Label lab)
@@ -1030,6 +983,7 @@ namespace MageBot.Interface
             {
                 AddItem(new ListViewItem(new string[] { Convert.ToString("[CID]:" + c.ContextualId + "[ACCID]:" + c.AccountId), c.Name, Convert.ToString(c.Disposition.CellId), "Player" }), MapView);
             }
+            ResizeGrid(MapView);
         }
 
         public void ActualizeJobs()
@@ -1043,8 +997,6 @@ namespace MageBot.Interface
                 {
                     JobsTabP.TabPages.Add(j.Name);
                     SadikTabControl t = new SadikTabControl();
-                    t.TabPages.Add("Configuration");
-                    t.TabPages.Add("Statistiques");
                     JobUC uc = new JobUC(this, j);
                     JobsUC.Add(uc);
                     JobsTabP.TabPages[JobsTabP.TabCount - 1].Controls.Add(uc);
@@ -1066,14 +1018,14 @@ namespace MageBot.Interface
                     foreach (int i in j.Skills)
                     {
                         DataClass d = GameData.GetDataObject(D2oFileEnum.Skills, i);
-                        if (j.Level > (int)d.Fields["levelMin"])
+                        if (j.Level >= (int)d.Fields["levelMin"])
                         {
                             string name = I18N.GetText((int)d.Fields["nameId"]);
                             foreach (int c in (ArrayList)d.Fields["craftableItemIds"])
                             {
                                 string rname = "Unknown";
                                 DataClass data = GameData.GetDataObject(D2oFileEnum.Items, c);
-                                if (data != null)
+                                if (data != null && j.Level >= (int)data.Fields["level"])
                                 {
                                     rname = I18N.GetText((int)data.Fields["nameId"]);
                                     uc.gg.Rows.Add(name, rname, c);
@@ -1081,9 +1033,9 @@ namespace MageBot.Interface
                             }
                         }
                     }
-                    uc.g.AutoResizeColumns();
+                    uc.g.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
                     uc.g.Columns[2].Visible = false;
-                    uc.gg.AutoResizeColumns();
+                    uc.gg.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
                     uc.gg.Columns[2].Visible = false;
                     uc.Show();
                 }
@@ -1160,7 +1112,6 @@ namespace MageBot.Interface
         {
             Account.LogChanged += Account_LogChanged;
             Account.InfBarsChanged += Account_InfBarsChanged;
-            Account.ActualizeFightStats += Account_ActualizeFightStats;
             Account.ActualizePets += Account_ActualizePets;
             Account.ActualizeMap += Account_ActualizeMap;
             Account.ActualizeInventory += Account_ActualizeInventory;
@@ -1193,6 +1144,14 @@ namespace MageBot.Interface
                 Account.Config.DisconnectWhenRun = true;
                 Account.Config.ItemToUseWhenRun = PotionEnum.MemoryPotion;
                 //TODO : Fill other modules initial settings
+            }
+        }
+
+        private void ResizeGrid(ListView grid)
+        {
+            foreach (ColumnHeader ch in grid.Columns)
+            {
+                ch.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             }
         }
 
@@ -1267,11 +1226,6 @@ namespace MageBot.Interface
             ActualizeFamis();
         }
 
-        private void Account_ActualizeFightStats(object sender, EventArgs e)
-        {
-            ActualizeFightStats(Account.FightData.WinLoseDic, Account.FightData.XpWon);
-        }
-
         private void Account_InfBarsChanged(object sender, EventArgs e)
         {
             foreach (KeyValuePair<int, DataBar> d in Account.InfBars)
@@ -1339,6 +1293,11 @@ namespace MageBot.Interface
         #endregion
 
         #endregion
+
+        private void metroTabPage9_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
