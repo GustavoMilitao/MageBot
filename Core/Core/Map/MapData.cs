@@ -271,7 +271,7 @@ namespace MageBot.Core.Map
         /// </summary>
         public void UpdateInteractiveElement(MageBot.Protocol.Types.Game.Interactive.InteractiveElement element)
         {
-            InteractiveElement Ielement = new InteractiveElement((uint)element.ElementId, element.TypeID, element.EnabledSkills, element.DisabledSkills);
+            InteractiveElement Ielement = new InteractiveElement((uint)element.ElementId, element.ElementTypeId, element.EnabledSkills, element.DisabledSkills);
             Tuple<InteractiveElement, int> temp = new Tuple<InteractiveElement, int>(null, 0);
             foreach (KeyValuePair<Elements.InteractiveElement, int> pair in InteractiveElements)
             {
