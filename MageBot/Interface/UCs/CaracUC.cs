@@ -36,9 +36,10 @@ namespace MageBot.Interface.UCs
             Invoke(new DelegLabel(ModLabel), Convert.ToString(accUserControl.Account.CharacterStats.StatsPoints), AvailabPtLb);
         }
 
-        public void InitialConf(BoostableCharacteristicEnum? upStat)
+        public void FillRecoveredConfig()
         {
-            if(upStat.HasValue)
+            BoostableCharacteristicEnum? upStat = accUserControl.Account.Config.CaracToAutoUp;
+            if (upStat.HasValue)
             {
                 switch(upStat.Value)
                 {

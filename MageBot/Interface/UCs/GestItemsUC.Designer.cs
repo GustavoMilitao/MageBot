@@ -62,7 +62,7 @@
             this.ItemTxtBox.Name = "ItemTxtBox";
             this.ItemTxtBox.Size = new System.Drawing.Size(249, 20);
             this.ItemTxtBox.TabIndex = 29;
-            this.ItemTxtBox.Text = "Entrez le nom d\'un item...";
+            this.ItemTxtBox.Text = "Enter the name of an item ...";
             this.ItemTxtBox.GotFocus += new System.EventHandler(this.ItemTxtBox_GotFocus);
             this.ItemTxtBox.LostFocus += new System.EventHandler(this.ItemTxtBox_LostFocus);
             // 
@@ -84,9 +84,9 @@
             this.ActionChoiceCombo.FormattingEnabled = true;
             this.ActionChoiceCombo.ItemHeight = 20;
             this.ActionChoiceCombo.Items.AddRange(new object[] {
-            "Suppression automatique",
-            "Retirer de la banque",
-            "Ne pas déposer en banque"});
+            "Automatic deletion",
+            "Remove from bank",
+            "Do not bank"});
             this.ActionChoiceCombo.Location = new System.Drawing.Point(83, 46);
             this.ActionChoiceCombo.Name = "ActionChoiceCombo";
             this.ActionChoiceCombo.Size = new System.Drawing.Size(182, 26);
@@ -103,7 +103,7 @@
             this.AddBt.RoundedCorners = false;
             this.AddBt.Size = new System.Drawing.Size(120, 26);
             this.AddBt.TabIndex = 32;
-            this.AddBt.Text = "Ajouter";
+            this.AddBt.Text = "Add";
             this.AddBt.Click += new System.EventHandler(this.AddBt_Click);
             // 
             // sadikLabel1
@@ -143,7 +143,7 @@
             this.AutoDeletionBox.Name = "AutoDeletionBox";
             this.AutoDeletionBox.Size = new System.Drawing.Size(235, 20);
             this.AutoDeletionBox.TabIndex = 35;
-            this.AutoDeletionBox.Text = "Suppression automatique toutes les ";
+            this.AutoDeletionBox.Text = "Automatically delete every";
             this.AutoDeletionBox.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.AutoDeletionBox_CheckedChanged);
             // 
             // sadikLabel2
@@ -171,9 +171,9 @@
             this.sadikLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel3.Location = new System.Drawing.Point(306, 15);
             this.sadikLabel3.Name = "sadikLabel3";
-            this.sadikLabel3.Size = new System.Drawing.Size(93, 26);
+            this.sadikLabel3.Size = new System.Drawing.Size(135, 13);
             this.sadikLabel3.TabIndex = 38;
-            this.sadikLabel3.Text = "% de pods \r\npour la banque";
+            this.sadikLabel3.Text = "% Weight for the bank";
             // 
             // ListenerBox
             // 
@@ -183,7 +183,8 @@
             this.ListenerBox.Name = "ListenerBox";
             this.ListenerBox.Size = new System.Drawing.Size(235, 20);
             this.ListenerBox.TabIndex = 39;
-            this.ListenerBox.Text = "Se mettre en écoute des échanges.";
+            this.ListenerBox.Text = "Listen to the exchanges";
+            this.ListenerBox.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.ListenerBox_CheckedChanged);
             // 
             // GestItemsUC
             // 
@@ -202,7 +203,7 @@
             this.Controls.Add(this.ItemTxtBox);
             this.Controls.Add(this.LVGestItems);
             this.Name = "GestItemsUC";
-            this.Size = new System.Drawing.Size(410, 290);
+            this.Size = new System.Drawing.Size(453, 290);
             ((System.ComponentModel.ISupportInitialize)(this.NUDAutoDeletion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUDBank)).EndInit();
             this.ResumeLayout(false);
@@ -217,7 +218,7 @@
         private SadikCombo ActionChoiceCombo;
         private SadikButton AddBt;
         private SadikLabel sadikLabel1;
-        private System.Windows.Forms.NumericUpDown NUDAutoDeletion;
+        public System.Windows.Forms.NumericUpDown NUDAutoDeletion;
         private SadikLabel sadikLabel2;
         public System.Windows.Forms.NumericUpDown NUDBank;
         private SadikLabel sadikLabel3;

@@ -48,8 +48,8 @@ namespace MageBot.Core.Account
         public List<Item> ItemsToAutoDelete { get; set; }
         public List<Item> ItemsToStayOnCharacter { get; set; }
         public List<Item> ItemsToGetFromBank { get; set; }
-        public List<Tuple<Item, int, ulong>> ItemsToAddToShop { get; set; }
         public bool ListeningToExchange { get; set; }
+        public int AutoDeletionTime { get; set; }
         #endregion
 
         #region Fight
@@ -98,7 +98,6 @@ namespace MageBot.Core.Account
 
         public AccountConfig()
         {
-            ItemsToAddToShop = new List<Tuple<Item, int, ulong>>();
             ItemsToAutoDelete = new List<Item>();
             ItemsToGetFromBank = new List<Item>();
             ItemsToStayOnCharacter = new List<Item>();

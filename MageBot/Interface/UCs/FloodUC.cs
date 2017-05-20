@@ -30,7 +30,7 @@ namespace MageBot.Interface.UCs
             PlayerListLb.Items.Add(line);
         }
 
-        public void FillInitialConfig()
+        public void FillRecoveredConfig()
         {
             FloodContentRbox.Text = accUserControl.Account.Config.FloodContent;
             CommerceBox.Checked = accUserControl.Account.Config.FloodInCommerceChannel;

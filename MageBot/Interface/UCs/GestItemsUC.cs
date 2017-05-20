@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using MageBot.Core.Inventory;
 
 namespace MageBot.Interface.UCs
 {
@@ -39,51 +40,53 @@ namespace MageBot.Interface.UCs
 
 
         #region Public Methods
-        public List<int> GetItemsToGetFromBank()
+
+        public void FillRecoveredConfig()
         {
-            return accUserControl.Account.Config.ItemsToGetFromBank.Select(i => i.UID).ToList();
+            NUDBank.Value = accUserControl.Account.Config.MaxPodsPercent;
+            ListenerBox.Checked = accUserControl.Account.Config.ListeningToExchange;
+            NUDAutoDeletion.Value = accUserControl.Account.Config.AutoDeletionTime;
+            LVGestItems.Clear();
+            //Automatic deletion
+            //Remove from bank
+            //Do not bank
+            foreach (Item i in accUserControl.Account.Config.ItemsToAutoDelete)
+            {
+                string[] row = { i.Name, "Automatic deletion" };
+                LVGestItems.Items.Add(
+                    new ListViewItem(row));
+            }
+            foreach (Item i in accUserControl.Account.Config.ItemsToGetFromBank)
+            {
+                string[] row = { i.Name, "Remove from bank" };
+                LVGestItems.Items.Add(
+                    new ListViewItem(row));
+            }
+            foreach (Item i in accUserControl.Account.Config.ItemsToStayOnCharacter)
+            {
+                string[] row = { i.Name, "Do not bank" };
+                LVGestItems.Items.Add(
+                    new ListViewItem(row));
+            }
+
         }
 
-        public List<int> GetItemsToTransfer()
-        {
-            return accUserControl.Account.Inventory.GetItemsToTransfer();
-        }
         #endregion
 
-        #region PrivateMethods
+        #region Private Methods
         private void PerformAutoDeletion(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (LVGestItems.InvokeRequired)
-            {
-                Invoke(new AutoDeleteCallback(PerformAutoDeletion), sender, e);
-                return;
-            }
-            if (accUserControl.Account.State == Status.Fighting)
-            {
-                accUserControl.Account.Log(new ErrorTextInformation("Automatic deletion can not be performed in battle. Restarting counter"), 2);
-                Reset();
-                return;
-            }
-            if (LVGestItems.Items.Count > 0)
-            {
-                foreach (ListViewItem item in LVGestItems.Items)
-                {
-                    if (item.SubItems[1].Text == "Suppression automatique")
-                    {
-                        MageBot.Core.Inventory.Item i = accUserControl.Account.Inventory.GetItemFromName(item.SubItems[0].Text);
-                        if (i != null)
-                            accUserControl.Account.Inventory.DeleteItem(i.UID, i.Quantity);
-                    }
-                }
-                Reset();
-            }
-            else
-                Reset();
+            accUserControl.Account.Inventory.PerformAutoDeletion();
+            Reset();
         }
 
-        private List<int> GetItemsNoBank()
+        private void Reset()
         {
-            return accUserControl.Account.Config.ItemsToGetFromBank.Select(i => i.UID).ToList();
+            AutoDeletionTimer.Dispose();
+            AutoDeletionTimer = new System.Timers.Timer(Convert.ToDouble(NUDAutoDeletion.Value * 1000));
+            AutoDeletionTimer.Elapsed += new System.Timers.ElapsedEventHandler(PerformAutoDeletion);
+            if (AutoDeletionBox.Checked)
+                AutoDeletionTimer.Start();
         }
         #endregion
 
@@ -92,7 +95,18 @@ namespace MageBot.Interface.UCs
         {
             if (ItemTxtBox.Text.Length > 0 && ActionChoiceCombo.SelectedItem != null)
             {
+                //0 - automatic deletion, 1 - get from bank, 2 - do not bank
                 ListViewItem item = new ListViewItem(new string[] { ItemTxtBox.Text, (string)ActionChoiceCombo.SelectedItem });
+                Item i = accUserControl.Account.Inventory.GetItemFromName(ItemTxtBox.Text);
+                if (i != null)
+                {
+                    switch (ActionChoiceCombo.SelectedIndex)
+                    {
+                        case 0: accUserControl.Account.Config.ItemsToAutoDelete.Add(i); break;
+                        case 1: accUserControl.Account.Config.ItemsToGetFromBank.Add(i); break;
+                        case 2: accUserControl.Account.Config.ItemsToStayOnCharacter.Add(i); break;
+                    }
+                }
                 LVGestItems.Items.Add(item);
                 ItemTxtBox.Text = "Enter the name of item...";
             }
@@ -134,21 +148,35 @@ namespace MageBot.Interface.UCs
                 for (int i = 0; i < LVGestItems.Items.Count; i++)
                 {
                     if (LVGestItems.Items[i].Selected)
+                    {
+                        //Automatic deletion
+                        //Remove from bank
+                        //Do not bank
                         LVGestItems.Items.RemoveAt(i);
+                        string itemName = LVGestItems.Items[i].SubItems[0].Text;
+                        string action = LVGestItems.Items[i].SubItems[1].Text;
+                        switch(action)
+                        {
+                            case "Automatic deletion":
+                                accUserControl.Account.Config.ItemsToAutoDelete.RemoveAll(item => item.Name == itemName);
+                                break;
+                            case "Remove from bank":
+                                accUserControl.Account.Config.ItemsToGetFromBank.RemoveAll(item => item.Name == itemName);
+                                break;
+                            case "Do not bank":
+                                accUserControl.Account.Config.ItemsToStayOnCharacter.RemoveAll(item => item.Name == itemName);
+                                break;
+                        }
+                    }
                 }
             }
         }
 
-        private void Reset()
+        private void ListenerBox_CheckedChanged(object sender)
         {
-            AutoDeletionTimer.Dispose();
-            AutoDeletionTimer = new System.Timers.Timer(Convert.ToDouble(NUDAutoDeletion.Value * 1000));
-            AutoDeletionTimer.Elapsed += new System.Timers.ElapsedEventHandler(PerformAutoDeletion);
-            if (AutoDeletionBox.Checked)
-                AutoDeletionTimer.Start();
+            accUserControl.Account.Config.ListeningToExchange = ListenerBox.Checked;
         }
+
         #endregion
-
-
     }
 }

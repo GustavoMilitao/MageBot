@@ -1189,6 +1189,7 @@ namespace MageBot.Interface
                 Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
                 Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
                 Account.Config.FloodInterval = 60;
+                Account.Config.AutoDeletionTime = (int)GestItemsUC.NUDAutoDeletion.Value;
                 //TODO : Fill other modules initial settings
             }
         }
@@ -1317,7 +1318,10 @@ namespace MageBot.Interface
             SearcherLogBox.Text = Account.Config.HouseSearcherLogPath;
             if(Account.Config.WaitingForTheSale)
                 Account.House = new HouseBuy(Account);
-            CaracUC.InitialConf(Account.Config.CaracToAutoUp);
+            CaracUC.FillRecoveredConfig();
+            FloodUC.FillRecoveredConfig();
+            GestItemsUC.FillRecoveredConfig();
+
             //TODO: Set other modules config by recovered config
 
         }
