@@ -158,6 +158,7 @@ namespace MageBot.Interface
             this.LVItemShop = new System.Windows.Forms.ListView();
             this.LVItemBag = new System.Windows.Forms.ListView();
             this.sadikCheckbox1 = new MageBot.Interface.SadikCheckbox();
+            this.sadikCheckbox2 = new MageBot.Interface.SadikCheckbox();
             this.toolStrip1.SuspendLayout();
             this.VTabAccount.SuspendLayout();
             this.ConsolePage.SuspendLayout();
@@ -723,14 +724,15 @@ namespace MageBot.Interface
             // GroupBox2
             // 
             this.GroupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.GroupBox2.Controls.Add(this.sadikCheckbox2);
             this.GroupBox2.Controls.Add(this.NomIA);
             this.GroupBox2.Controls.Add(this.ChoiceIABt);
             this.GroupBox2.Location = new System.Drawing.Point(3, 3);
             this.GroupBox2.Name = "GroupBox2";
-            this.GroupBox2.Size = new System.Drawing.Size(478, 62);
+            this.GroupBox2.Size = new System.Drawing.Size(478, 61);
             this.GroupBox2.TabIndex = 16;
             this.GroupBox2.TabStop = false;
-            this.GroupBox2.Text = "AI";
+            this.GroupBox2.Text = "AI and Path";
             // 
             // NomIA
             // 
@@ -747,10 +749,10 @@ namespace MageBot.Interface
             this.ChoiceIABt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ChoiceIABt.Font = new System.Drawing.Font("Verdana", 8F);
             this.ChoiceIABt.Image = null;
-            this.ChoiceIABt.Location = new System.Drawing.Point(197, 15);
+            this.ChoiceIABt.Location = new System.Drawing.Point(177, 13);
             this.ChoiceIABt.Name = "ChoiceIABt";
             this.ChoiceIABt.RoundedCorners = false;
-            this.ChoiceIABt.Size = new System.Drawing.Size(190, 38);
+            this.ChoiceIABt.Size = new System.Drawing.Size(106, 38);
             this.ChoiceIABt.TabIndex = 1;
             this.ChoiceIABt.Text = "Choose an IA";
             this.ChoiceIABt.Click += new System.EventHandler(this.ChoiceIABt_Click);
@@ -1763,6 +1765,18 @@ namespace MageBot.Interface
             this.sadikCheckbox1.Text = "Enable merchant mode";
             this.sadikCheckbox1.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox1_CheckedChanged_1);
             // 
+            // sadikCheckbox2
+            // 
+            this.sadikCheckbox2.Checked = false;
+            this.sadikCheckbox2.Font = new System.Drawing.Font("Verdana", 8F);
+            this.sadikCheckbox2.Location = new System.Drawing.Point(303, 13);
+            this.sadikCheckbox2.Name = "sadikCheckbox2";
+            this.sadikCheckbox2.Size = new System.Drawing.Size(106, 18);
+            this.sadikCheckbox2.TabIndex = 6;
+            this.sadikCheckbox2.Text = "Relaunch path";
+            this.sadikCheckbox2.UseWaitCursor = true;
+            this.sadikCheckbox2.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox2_CheckedChanged);
+            // 
             // AccountUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1963,5 +1977,6 @@ namespace MageBot.Interface
         public SadikCheckbox LockSpectator;
         public SadikCheckbox AskForHelp;
         public SadikCheckbox LockForParty;
+        public SadikCheckbox sadikCheckbox2;
     }
 }

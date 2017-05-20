@@ -32,19 +32,19 @@ namespace MageBot.Core.Path
         private bool Stop { get; set; }
 
         public static readonly IList<String> flags = new ReadOnlyCollection<string>
-        (new List<String> {"<Move>","<Fight>","<Gather>","<Dialog>"});
+        (new List<String> { "<Move>", "<Fight>", "<Gather>", "<Dialog>" });
 
         public static readonly IList<String> Endflags = new ReadOnlyCollection<string>
         (new List<String> { "</Move>", "</Fight>", "</Gather>", "</Dialog>" });
 
         public static readonly IList<String> Actions = new ReadOnlyCollection<string>
-        (new List<String> { "exchange(", "npc(","cell(", "object(", "zaap(", "zaapi(", "use(", "move(" });
+        (new List<String> { "exchange(", "npc(", "cell(", "object(", "zaap(", "zaapi(", "use(", "move(" });
 
         public static readonly IList<char> operateurs = new ReadOnlyCollection<char>
         (new List<char> { '<', '>', '=' });
         #endregion
 
-        
+
 
         #region Constructors
         public PathManager(Account.Account account, string Path, string name)
@@ -105,7 +105,7 @@ namespace MageBot.Core.Path
                             if (resp.Contains(l[1]))
                             {
                                 Account.Npc.SendReply(rep.Id);
-                                Account.Log(new BotTextInformation("Envoi de la réponse : " + rep.GetText()),1);
+                                Account.Log(new BotTextInformation("Envoi de la réponse : " + rep.GetText()), 1);
                                 sr.Close();
                                 return;
                             }
@@ -113,7 +113,7 @@ namespace MageBot.Core.Path
                     }
                 }
                 sr.Close();
-                Account.Log(new ErrorTextInformation("Aucune réponse disponible dans le trajet"),0);
+                Account.Log(new ErrorTextInformation("Aucune réponse disponible dans le trajet"), 0);
             }
         }
 
@@ -126,21 +126,21 @@ namespace MageBot.Core.Path
                 return;
             switch (Current_Flag)
             {
-                case "<Move>":
-                    //Aucune action spécifique au flag, on éxécute directement les actions
-                    if (Account.Config.IsMaster == true && Account.MyGroup != null)
-                    {
-                        PerformActionsStack();
-                    }
-                    else if (Account.Config.IsSlave == false)
-                    {
-                        PerformActionsStack();
-                    }
-                    else
-                    {
-                        Account.Log(new ErrorTextInformation("Impossible d'enclencher le déplacement. (mûle ?)"), 0);
-                    }
-                    break;
+                //case "<Move>":
+                //    //Aucune action spécifique au flag, on éxécute directement les actions
+                //    if (Account.Config.IsMaster == true && Account.MyGroup != null)
+                //    {
+                //        PerformActionsStack();
+                //    }
+                //    else if (Account.Config.IsSlave == false)
+                //    {
+                //        PerformActionsStack();
+                //    }
+                //    else
+                //    {
+                //        Account.Log(new ErrorTextInformation("Impossible d'enclencher le déplacement. (mûle ?)"), 0);
+                //    }
+                //    break;
                 case "<Fight>":
                     //On lance un combat, les actions seront effectuées après le combat
                     if (Account.Config.IsMaster == true && Account.MyGroup != null && Account.Fight != null)
@@ -160,8 +160,16 @@ namespace MageBot.Core.Path
                     break;
                 case "<Gather>":
                     //On récolte la map, les actions seront effectuées après la récolte
-                    if (!Account.PerformGather())
-                        PerformActionsStack();
+                    bool haveSomethingToGather;
+                    do
+                    {
+                        haveSomethingToGather = Account.PerformGather();
+                    } while (haveSomethingToGather);
+                    Account.Wait(3000);
+                    PerformActionsStack();
+                    break;
+                default:
+                    PerformActionsStack();
                     break;
             }
             Account.WatchDog.Update();
@@ -186,7 +194,7 @@ namespace MageBot.Core.Path
             ActionsStack = new List<Action>();
             foreach (string line in m_content)
             {
-                if (line == "" || line == string.Empty || line == null || line.StartsWith("#"))
+                if (line == "" || line == string.Empty || line == null || line.StartsWith("@"))
                     continue;
                 if (line.Contains("+Condition "))
                 {
@@ -211,11 +219,9 @@ namespace MageBot.Core.Path
                 {
                     Current_Map = Account.MapData.Pos;
                     AnalyseLine(line);
-                    return;
                 }
 
             }
-            Lost();
         }
 
         /// <summary>
@@ -284,7 +290,7 @@ namespace MageBot.Core.Path
                             e = PathConditionEnum.Alive;
                             break;
                     }
-                    line = line.Remove(0,line.IndexOf(op) + 1);
+                    line = line.Remove(0, line.IndexOf(op) + 1);
                     PathCondition c = new PathCondition(e, line, op, Account);
                     conditions.Add(c);
                     return;
@@ -299,7 +305,7 @@ namespace MageBot.Core.Path
         {
             if (line.IndexOf(':') != -1)
             {
-                line = line.Remove(0, line.IndexOf(':') + 1);              
+                line = line.Remove(0, line.IndexOf(':') + 1);
             }
             line = line.Trim();
             foreach (string s in Actions)
@@ -323,7 +329,7 @@ namespace MageBot.Core.Path
                     ActionsStack.Add(a);
                     return;
                 }
-                
+
             }
 
         }

@@ -268,13 +268,7 @@ namespace MageBot.Interface
 
         private void LaunchPathBt_Click(object sender, EventArgs e)
         {
-            if (Account.Path != null)
-            {
-                Account.Log(new BotTextInformation("Path started"), 1);
-                Account.Path.Start();
-            }
-            else
-                Account.Log(new ErrorTextInformation("No Path loaded"), 3);
+            LaunchPath();
         }
 
         private void StopPathBt_Click(object sender, EventArgs e)
@@ -1171,6 +1165,19 @@ namespace MageBot.Interface
             }
         }
 
+        private void LaunchPath()
+        {
+            if (Account.Path != null)
+            {
+                Account.Log(new BotTextInformation("Path started"), 1);
+                Account.Path.Start();
+                if (Account.Config.RelaunchPath)
+                    LaunchPath();
+            }
+            else
+                Account.Log(new ErrorTextInformation("No Path loaded"), 3);
+        }
+
         #region Account Object events
 
         private void Account_ApplicationWait(object sender, EventArgs e)
@@ -1277,6 +1284,7 @@ namespace MageBot.Interface
             PhraseADire.Text = Account.Config.SentenceToSay;
             HouseSearcherBox.Checked = Account.Config.HouseSearcherEnabled;
             SearcherLogBox.Text = Account.Config.HouseSearcherLogPath;
+            sadikCheckbox2.Checked = Account.Config.RelaunchPath;
             if (Account.Config.WaitingForTheSale)
                 Account.House = new HouseBuy(Account);
             CaracUC.FillRecoveredConfig();
@@ -1302,6 +1310,11 @@ namespace MageBot.Interface
         private void metroTabPage9_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void sadikCheckbox2_CheckedChanged(object sender)
+        {
+            Account.Config.RelaunchPath = sadikCheckbox2.Checked;
         }
     }
 }

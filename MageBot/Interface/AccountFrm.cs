@@ -47,7 +47,7 @@ namespace MageBot.Interface
             Show();
 
             // Not in a group
-            accUserControl.Account.Config.IsMaster = false;
+            accUserControl.Account.Config.IsMaster = true;
             accUserControl.Account.Config.IsSlave = false;
 
             // Fill the account form

@@ -57,16 +57,17 @@ namespace MageBot.Interface
                         //enleve @NAME
                         break;
                     case 1:
+                        infos[i] = line.Remove(0, 7).Trim();
+                        //enleve @AUTHOR
+                        
+                        break;
+                    case 2:
                         infos[i] = line.Remove(0, 6).Trim();
                         //@BREED
                         break;
-                    case 2:
+                    case 3:
                         infos[i] = line.Remove(0, 8).Trim();
                         //enleve @VERSION
-                        break;
-                    case 3:
-                        infos[i] = line.Remove(0, 7).Trim();
-                        //enleve @AUTHOR
                         break;
                     case 4:
                         infos[i] = line.Remove(0, 12).Trim();
@@ -130,11 +131,11 @@ namespace MageBot.Interface
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(combinedPath);
             if (di.GetFiles().Count() == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Aucune IA, veuillez en télécharger sur le forum ou créer le vôtre :) ");
+                MessageBox.Show("No AI, please download on the forum or create your own :) ");
             }
             else
             {
-                foreach (System.IO.FileInfo file in di.GetFiles())
+                foreach (FileInfo file in di.GetFiles())
                 {
                     LoadIA(file);
                 }

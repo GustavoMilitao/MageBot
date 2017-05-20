@@ -37,7 +37,7 @@ namespace MageBot.Core.Path
             switch (m_action)
             {
                 case "move(":
-                    m_delta = RandomDir((string)m_delta);
+                    m_delta = (string)m_delta;
                     if (Account.Config.IsMaster == true && Account.MyGroup != null)
                     {
                         Account.MyGroup.MoveGroup((string)m_delta);

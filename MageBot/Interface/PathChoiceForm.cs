@@ -39,7 +39,7 @@ namespace MageBot.Interface
 
         private void AddBt_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string combinedPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Paths", openFileDialog1.SafeFileName);
                 if (!File.Exists(combinedPath))
@@ -50,7 +50,7 @@ namespace MageBot.Interface
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("Le trajet a déjà été ajouté !");
+                    MessageBox.Show("The path has already been added!");
                 }
             }
         }
@@ -76,14 +76,14 @@ namespace MageBot.Interface
         {
             string combinedPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Paths");
             openFileDialog1.InitialDirectory = combinedPath;
-            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(combinedPath);
+            DirectoryInfo di = new DirectoryInfo(combinedPath);
             if (di.GetFiles().Count() == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Aucun trajet, veuillez en télécharger sur le forum ou créer le vôtre :) ");
+                MessageBox.Show("No path found, please download on the forum or create your own :)");
             }
             else
             {
-                foreach (System.IO.FileInfo file in di.GetFiles())
+                foreach (FileInfo file in di.GetFiles())
                 {
                     LoadPath(file);
                 }
@@ -123,7 +123,7 @@ namespace MageBot.Interface
                         //enleve @VERSION
                         break;
                     case 4:
-                        infos[i] = line.Remove(0, 9).Trim();
+                        infos[i] = line.Remove(0, 7).Trim();
                         //enleve @AUTHOR
                         break;
                 }
@@ -145,7 +145,7 @@ namespace MageBot.Interface
             if (FilesList.SelectedItems.Count > 0 && accUserControl != null)
             {
                 accUserControl.Account.Path = new MageBot.Core.Path.PathManager(accUserControl.Account, FilesList.SelectedItems[0].SubItems[5].Text, FilesList.SelectedItems[0].SubItems[0].Text);
-                accUserControl.Account.Log(new BotTextInformation("Trajet chargé : " + FilesList.SelectedItems[0].Text), 0);
+                accUserControl.Account.Log(new BotTextInformation("Path loaded : " + FilesList.SelectedItems[0].Text), 0);
                 accUserControl.Account.Path.Path = FilesList.SelectedItems[0].Text;
                 if (accUserControl.Account.Fight == null)
                 {

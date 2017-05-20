@@ -447,8 +447,8 @@ namespace MageBot.Core.Engine.Handlers.Context
                 msg.Deserialize(reader);
             }
             account.Gather.BanElementId(account.Gather.Id);
-            if (account.Path != null)
-                account.Path.PerformFlag();
+            //if (account.Path != null)
+                //account.Path.PerformFlag();
         }
 
         [MessageHandler(typeof(InteractiveUseEndedMessage))]
@@ -464,8 +464,8 @@ namespace MageBot.Core.Engine.Handlers.Context
                 return;
             account.SetStatus(Status.None);
             account.Gather.Id = -1;
-            if (account.Path != null)
-                account.Path.PerformFlag();
+            //if (account.Path != null)
+            //    account.Path.PerformFlag();
         }
 
         [MessageHandler(typeof(ExchangeStartedWithPodsMessage))]
