@@ -31,7 +31,6 @@
             this.sadikTabControl4 = new MageBot.Interface.SadikTabControl();
             this.tpNormal = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.PrivateExitBox = new MageBot.Interface.SadikCheckbox();
             this.PrivateEnterBox = new MageBot.Interface.SadikCheckbox();
             this.GeneralBox = new MageBot.Interface.SadikCheckbox();
             this.RecrutementBox = new MageBot.Interface.SadikCheckbox();
@@ -89,27 +88,16 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.PrivateExitBox);
             this.groupBox7.Controls.Add(this.PrivateEnterBox);
             this.groupBox7.Controls.Add(this.GeneralBox);
             this.groupBox7.Controls.Add(this.RecrutementBox);
             this.groupBox7.Controls.Add(this.CommerceBox);
             this.groupBox7.Location = new System.Drawing.Point(298, 6);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(159, 150);
+            this.groupBox7.Size = new System.Drawing.Size(140, 150);
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Canaux";
-            // 
-            // PrivateExitBox
-            // 
-            this.PrivateExitBox.Checked = false;
-            this.PrivateExitBox.Font = new System.Drawing.Font("Verdana", 8F);
-            this.PrivateExitBox.Location = new System.Drawing.Point(6, 123);
-            this.PrivateExitBox.Name = "PrivateExitBox";
-            this.PrivateExitBox.Size = new System.Drawing.Size(140, 20);
-            this.PrivateExitBox.TabIndex = 4;
-            this.PrivateExitBox.Text = "Privé (Sortie)";
+            this.groupBox7.Text = "Channel";
             // 
             // PrivateEnterBox
             // 
@@ -119,7 +107,8 @@
             this.PrivateEnterBox.Name = "PrivateEnterBox";
             this.PrivateEnterBox.Size = new System.Drawing.Size(140, 20);
             this.PrivateEnterBox.TabIndex = 3;
-            this.PrivateEnterBox.Text = "Privé (Entrée)";
+            this.PrivateEnterBox.Text = "Private (Entry)";
+            this.PrivateEnterBox.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.PrivateEnterBox_CheckedChanged);
             // 
             // GeneralBox
             // 
@@ -129,7 +118,8 @@
             this.GeneralBox.Name = "GeneralBox";
             this.GeneralBox.Size = new System.Drawing.Size(140, 20);
             this.GeneralBox.TabIndex = 2;
-            this.GeneralBox.Text = "Général";
+            this.GeneralBox.Text = "General";
+            this.GeneralBox.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.GeneralBox_CheckedChanged);
             // 
             // RecrutementBox
             // 
@@ -139,7 +129,8 @@
             this.RecrutementBox.Name = "RecrutementBox";
             this.RecrutementBox.Size = new System.Drawing.Size(140, 20);
             this.RecrutementBox.TabIndex = 1;
-            this.RecrutementBox.Text = "Recrutement";
+            this.RecrutementBox.Text = "Recruitment";
+            this.RecrutementBox.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.RecrutementBox_CheckedChanged);
             // 
             // CommerceBox
             // 
@@ -149,7 +140,8 @@
             this.CommerceBox.Name = "CommerceBox";
             this.CommerceBox.Size = new System.Drawing.Size(140, 20);
             this.CommerceBox.TabIndex = 0;
-            this.CommerceBox.Text = "Commerce";
+            this.CommerceBox.Text = "Trade";
+            this.CommerceBox.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.CommerceBox_CheckedChanged);
             // 
             // groupBox6
             // 
@@ -160,7 +152,7 @@
             this.groupBox6.Size = new System.Drawing.Size(246, 150);
             this.groupBox6.TabIndex = 4;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Contenu";
+            this.groupBox6.Text = "Content";
             // 
             // StartStopFloodingBox
             // 
@@ -170,7 +162,7 @@
             this.StartStopFloodingBox.Name = "StartStopFloodingBox";
             this.StartStopFloodingBox.Size = new System.Drawing.Size(190, 15);
             this.StartStopFloodingBox.TabIndex = 1;
-            this.StartStopFloodingBox.Text = "Lancer/Arrêter le flood.";
+            this.StartStopFloodingBox.Text = "Start / Stop the Flood.";
             this.StartStopFloodingBox.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.StartStopFloodingBox_CheckedChanged);
             // 
             // FloodContentRbox
@@ -201,15 +193,15 @@
             this.sadikLabel10.AutoSize = true;
             this.sadikLabel10.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.sadikLabel10.Location = new System.Drawing.Point(105, 73);
+            this.sadikLabel10.Location = new System.Drawing.Point(63, 73);
             this.sadikLabel10.Name = "sadikLabel10";
-            this.sadikLabel10.Size = new System.Drawing.Size(244, 13);
+            this.sadikLabel10.Size = new System.Drawing.Size(249, 13);
             this.sadikLabel10.TabIndex = 3;
-            this.sadikLabel10.Text = "Intervalle entre deux phrases (secondes)";
+            this.sadikLabel10.Text = "Interval between two sentences (seconds)";
             // 
             // NUDFlood
             // 
-            this.NUDFlood.Location = new System.Drawing.Point(29, 71);
+            this.NUDFlood.Location = new System.Drawing.Point(6, 71);
             this.NUDFlood.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -221,13 +213,14 @@
             0,
             0});
             this.NUDFlood.Name = "NUDFlood";
-            this.NUDFlood.Size = new System.Drawing.Size(70, 20);
+            this.NUDFlood.Size = new System.Drawing.Size(51, 20);
             this.NUDFlood.TabIndex = 2;
             this.NUDFlood.Value = new decimal(new int[] {
             60,
             0,
             0,
             0});
+            this.NUDFlood.ValueChanged += new System.EventHandler(this.NUDFlood_ValueChanged);
             // 
             // IsRandomingNumberBox
             // 
@@ -237,7 +230,8 @@
             this.IsRandomingNumberBox.Name = "IsRandomingNumberBox";
             this.IsRandomingNumberBox.Size = new System.Drawing.Size(354, 20);
             this.IsRandomingNumberBox.TabIndex = 1;
-            this.IsRandomingNumberBox.Text = "Ajouter un nombre aléatoire à la fin du message";
+            this.IsRandomingNumberBox.Text = "Add a random number at the end of the message";
+            this.IsRandomingNumberBox.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.IsRandomingNumberBox_CheckedChanged);
             // 
             // IsRandomingSmileyBox
             // 
@@ -247,7 +241,8 @@
             this.IsRandomingSmileyBox.Name = "IsRandomingSmileyBox";
             this.IsRandomingSmileyBox.Size = new System.Drawing.Size(343, 20);
             this.IsRandomingSmileyBox.TabIndex = 0;
-            this.IsRandomingSmileyBox.Text = "Ajouter un smiley aléatoire à la fin du message";
+            this.IsRandomingSmileyBox.Text = "Add a random smiley at the end of the message";
+            this.IsRandomingSmileyBox.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.IsRandomingSmileyBox_CheckedChanged);
             // 
             // tpAvancé
             // 
@@ -272,7 +267,7 @@
             this.groupBox11.Size = new System.Drawing.Size(430, 180);
             this.groupBox11.TabIndex = 5;
             this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Contrôles";
+            this.groupBox11.Text = "Controls";
             // 
             // PlayerListLb
             // 
@@ -293,7 +288,7 @@
             this.ClearListeBt.RoundedCorners = false;
             this.ClearListeBt.Size = new System.Drawing.Size(131, 34);
             this.ClearListeBt.TabIndex = 3;
-            this.ClearListeBt.Text = "Supprimer tout";
+            this.ClearListeBt.Text = "Delete all";
             this.ClearListeBt.Click += new System.EventHandler(this.ClearListeBt_Click);
             // 
             // RemovePlayerBt
@@ -307,7 +302,7 @@
             this.RemovePlayerBt.RoundedCorners = false;
             this.RemovePlayerBt.Size = new System.Drawing.Size(131, 34);
             this.RemovePlayerBt.TabIndex = 2;
-            this.RemovePlayerBt.Text = "Supprimer le joueur";
+            this.RemovePlayerBt.Text = "Delete player";
             this.RemovePlayerBt.Click += new System.EventHandler(this.RemovePlayerBt_Click);
             // 
             // IsMemoryCheck
@@ -318,7 +313,8 @@
             this.IsMemoryCheck.Name = "IsMemoryCheck";
             this.IsMemoryCheck.Size = new System.Drawing.Size(229, 22);
             this.IsMemoryCheck.TabIndex = 0;
-            this.IsMemoryCheck.Text = "Activer la mémorisation intelligente";
+            this.IsMemoryCheck.Text = "Enable Intelligent Storage";
+            this.IsMemoryCheck.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.IsMemoryCheck_CheckedChanged);
             // 
             // FloodPlayersBt
             // 
@@ -331,7 +327,7 @@
             this.FloodPlayersBt.RoundedCorners = false;
             this.FloodPlayersBt.Size = new System.Drawing.Size(333, 47);
             this.FloodPlayersBt.TabIndex = 4;
-            this.FloodPlayersBt.Text = "Flooder les joueurs";
+            this.FloodPlayersBt.Text = "Flooding players";
             this.FloodPlayersBt.Click += new System.EventHandler(this.FloodPlayersBt_Click);
             // 
             // FloodUC
@@ -359,7 +355,6 @@
         private SadikTabControl sadikTabControl4;
         private System.Windows.Forms.TabPage tpNormal;
         private System.Windows.Forms.GroupBox groupBox7;
-        private SadikCheckbox PrivateExitBox;
         public SadikCheckbox PrivateEnterBox;
         private SadikCheckbox GeneralBox;
         private SadikCheckbox RecrutementBox;

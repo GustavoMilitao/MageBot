@@ -90,6 +90,8 @@ namespace MageBot.Core.Account
         public event EventHandler StatusChanged;
         public event EventHandler AccountRestart;
         public event EventHandler ApplicationWait;
+        public event EventHandler ConfigRecovered;
+        public event EventHandler UpdateStats;
         #endregion
 
         #region Updater events (Fill in interface)
@@ -378,7 +380,7 @@ namespace MageBot.Core.Account
 
         #endregion
 
-        #region Methodes privées
+        #region Private methods
 
         private void Reconnect(object state)
         {
@@ -463,6 +465,11 @@ namespace MageBot.Core.Account
             InfBarsChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        public virtual void UpdateCharacterStats()
+        {
+            UpdateStats?.Invoke(this, EventArgs.Empty);
+        }
+
         #endregion
 
         #region Interface Events
@@ -491,6 +498,10 @@ namespace MageBot.Core.Account
             LogChanged?.Invoke(this, new LogEventArgs(text, verboseLevel));
         }
 
+        protected virtual void OnRecoverConfig()
+        {
+            ConfigRecovered?.Invoke(this, EventArgs.Empty);
+        }
 
         #endregion
 

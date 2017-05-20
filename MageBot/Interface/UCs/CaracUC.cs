@@ -1,4 +1,5 @@
 ﻿using MageBot.Core.Char;
+using MageBot.Protocol.Enums;
 using System;
 using System.Windows.Forms;
 
@@ -35,15 +36,26 @@ namespace MageBot.Interface.UCs
             Invoke(new DelegLabel(ModLabel), Convert.ToString(accUserControl.Account.CharacterStats.StatsPoints), AvailabPtLb);
         }
 
-        public void UpAuto()
+        public void InitialConf(BoostableCharacteristicEnum? upStat)
         {
-            accUserControl.Account.Character.UpAuto();
+            if(upStat.HasValue)
+            {
+                switch(upStat.Value)
+                {
+                    case BoostableCharacteristicEnum.BOOSTABLE_CHARAC_AGILITY: AgiRb.Checked = true;break;
+                    case BoostableCharacteristicEnum.BOOSTABLE_CHARAC_CHANCE: LuckRb.Checked = true;break;
+                    case BoostableCharacteristicEnum.BOOSTABLE_CHARAC_INTELLIGENCE: InteRb.Checked = true;break;
+                    case BoostableCharacteristicEnum.BOOSTABLE_CHARAC_STRENGTH: StreRb.Checked = true;break;
+                    case BoostableCharacteristicEnum.BOOSTABLE_CHARAC_VITALITY: VitaRb.Checked = true;break;
+                    case BoostableCharacteristicEnum.BOOSTABLE_CHARAC_WISDOM: WisRb.Checked = true;break;
+                }
+            }
+            else
+            {
+                NoneRb.Checked = true;
+            }
         }
 
-        public void DecreaseAvailablePoints(int n)
-        {
-            AvailabPtLb.Text = Convert.ToString(Convert.ToInt32(AvailabPtLb.Text) - n);
-        }
         #endregion
 
         #region Interface Methods
@@ -76,6 +88,41 @@ namespace MageBot.Interface.UCs
         {
             accUserControl.Account.Character.UpStat(Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_AGILITY);
         }
+
+        private void AgiRb_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.CaracToAutoUp = Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_AGILITY;
+        }
+
+        private void LuckRb_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.CaracToAutoUp = Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_CHANCE;
+        }
+
+        private void InteRb_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.CaracToAutoUp = Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_INTELLIGENCE;
+        }
+
+        private void StreRb_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.CaracToAutoUp = Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_STRENGTH;
+        }
+
+        private void WisRb_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.CaracToAutoUp = Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_WISDOM;
+        }
+
+        private void VitaRb_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.CaracToAutoUp = Protocol.Enums.BoostableCharacteristicEnum.BOOSTABLE_CHARAC_VITALITY;
+        }
+
+        private void NoneRb_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.CaracToAutoUp = null;
+        }
         #endregion
 
         #region Private Methods
@@ -85,8 +132,8 @@ namespace MageBot.Interface.UCs
             lab.Text = content;
         }
 
+
         #endregion
 
-        
     }
 }

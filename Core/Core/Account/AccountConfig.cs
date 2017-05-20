@@ -28,10 +28,8 @@ namespace MageBot.Core.Account
         #endregion
 
         #region flood
-        public Dictionary<string, long> ListOfPlayersWithLevel { get; set; }
         public bool AddRandomingSmiley { get; set; }
         public bool AddRandomingNumber { get; set; }
-        public bool FloodStarted { get; set; }
         public bool FloodSaveInMemory { get; set; }
         public bool FloodInCommerceChannel { get; set; }
         public bool FloodInRecruitmentChannel { get; set; }
@@ -64,6 +62,7 @@ namespace MageBot.Core.Account
         public bool LockingFights { get; set; }
         public bool LockingSpectators { get; set; }
         public bool LockingForGroupOnly { get; set; }
+        public bool AskForHelp { get; set; }
         public bool StartFightWithItemSet { get; set; }
         public byte PresetStartUpId { get; set; }
         public bool EndFightWithItemSet { get; set; }

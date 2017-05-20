@@ -384,15 +384,16 @@ namespace MageBot.Core.Engine.Handlers.Context
 
             account.MapData.ParseActors(new List<GameRolePlayActorInformations>() { msg.Informations }.ToArray());
 
-            if (account.Config.FloodStarted && account.Config.FloodInPrivateChannel && msg.Informations is GameRolePlayCharacterInformations)
+            if (account.Flood.FloodStarted && account.Config.FloodInPrivateChannel && msg.Informations is GameRolePlayCharacterInformations)
             {
                 GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.Informations;
                 account.Flood.SendPrivateTo(infos);
-            }
-            if (account.Config.FloodSaveInMemory && msg.Informations is GameRolePlayCharacterInformations)
-            {
-                GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.Informations;
-                account.Flood.SaveNameInDisk(infos);
+                if (account.Config.FloodSaveInMemory)
+                {
+                    long level = (long)Math.Abs((infos.AlignmentInfos.CharacterPower - infos.ContextualId));
+                    account.Flood.ListOfPlayersWithLevel.Add(infos.Name, level);
+                    account.Flood.SaveNameInDisk();
+                }
             }
         }
 

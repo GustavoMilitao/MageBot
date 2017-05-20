@@ -16,12 +16,10 @@ namespace MageBot.Interface.UCs
         {
             InitializeComponent();
             accUserControl = account;
-            accUserControl.Account.Flood = new MageBot.Core.Misc.Flood(accUserControl.Account);
-            foreach(KeyValuePair<string, long> p in accUserControl.Account.Config.ListOfPlayersWithLevel)
+            foreach (KeyValuePair<string, long> p in accUserControl.Account.Config.ListOfPlayersWithLevel)
             {
                 PlayerListLb.Items.Add(String.Join(",", p.Key, p.Value));
             }
-            PrivateExitBox.Hide();
             accUserControl.Account.Config.FloodContent = String.Empty;
         }
         #endregion
@@ -29,20 +27,32 @@ namespace MageBot.Interface.UCs
         #region Public Methods
         public void AddItem(string line)
         {
-           PlayerListLb.Items.Add(line);
+            PlayerListLb.Items.Add(line);
         }
 
-        public void Increase(bool pm)
+        public void FillInitialConfig()
         {
-            accUserControl.Account.Flood.increase(pm);
+            FloodContentRbox.Text = accUserControl.Account.Config.FloodContent;
+            CommerceBox.Checked = accUserControl.Account.Config.FloodInCommerceChannel;
+            RecrutementBox.Checked = accUserControl.Account.Config.FloodInRecruitmentChannel;
+            GeneralBox.Checked = accUserControl.Account.Config.FloodInGeneralChannel;
+            PrivateEnterBox.Checked = accUserControl.Account.Config.FloodInPrivateChannel;
+            IsRandomingSmileyBox.Checked = accUserControl.Account.Config.AddRandomingSmiley;
+            IsRandomingNumberBox.Checked = accUserControl.Account.Config.AddRandomingNumber;
+            NUDFlood.Value = accUserControl.Account.Config.FloodInterval;
+            IsMemoryCheck.Checked = accUserControl.Account.Config.FloodSaveInMemory;
+            foreach (KeyValuePair<string, long> player in accUserControl.Account.Flood.ListOfPlayersWithLevel)
+            {
+                PlayerListLb.Items.Add(player.Key + "," + player.Value);
+            }
         }
+
         #endregion
 
         #region events
         private void RemovePlayerBt_Click(object sender, EventArgs e)
         {
-
-            string pathPlayers = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", accUserControl.Account.AccountName, "Flood");
+            string pathPlayers = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", accUserControl.Account.AccountName, "Flood");
             if (File.Exists(pathPlayers + "\\Players.txt"))
             {
                 DeleteLine(pathPlayers + "\\Players.txt", PlayerListLb.SelectedItem.ToString());
@@ -51,6 +61,9 @@ namespace MageBot.Interface.UCs
             {
                 PlayerListLb.Items.Remove(PlayerListLb.SelectedItem);
             }
+            string playerName = ((string)PlayerListLb.SelectedItem).Split(',')[0];
+            if (accUserControl.Account.Flood.ListOfPlayersWithLevel.ContainsKey(playerName))
+                accUserControl.Account.Flood.ListOfPlayersWithLevel.Remove(playerName);
         }
 
         private void FloodContentRbox_TextChanged(object sender, EventArgs e)
@@ -68,21 +81,20 @@ namespace MageBot.Interface.UCs
             if (File.Exists(pathPlayers + "\\Players.txt"))
             {
                 var sw = new StreamWriter(pathPlayers + "\\Players.txt");
-                //sw.Write("");
                 sw.Close();
             }
+            accUserControl.Account.Flood.ListOfPlayersWithLevel.Clear();
         }
 
         private void FloodPlayersBt_Click(object sender, EventArgs e)
         {
-            accUserControl.Account.Config.FloodContent = FloodContentRbox.Text;
             foreach (var elem in PlayerListLb.Items)
             {
                 try
                 {
                     string[] parsed = ((string)elem).Split(',');
                     accUserControl.Account.Config.FloodContent = accUserControl.Account.Config.FloodContent.Replace("%name%", parsed[0]).Replace("%level%", parsed[1]);
-                    accUserControl.Account.Flood.SendPrivateTo((string)parsed[0], accUserControl.Account.Config.FloodContent);
+                    accUserControl.Account.Flood.SendPrivateTo(parsed[0], accUserControl.Account.Config.FloodContent);
                 }
                 catch (Exception)
                 {
@@ -95,7 +107,7 @@ namespace MageBot.Interface.UCs
         {
             if (StartStopFloodingBox.Checked == false)
             {
-                accUserControl.Account.Config.FloodStarted = false;
+                accUserControl.Account.Flood.FloodStarted = false;
                 accUserControl.Account.Log(new BotTextInformation("Flood stopped"), 1);
                 accUserControl.Account.Log(new BotTextInformation(accUserControl.Account.Flood.PMCount + " PMs sent."), 0);
                 accUserControl.Account.Log(new BotTextInformation(accUserControl.Account.Flood.MessageCount + " Other messages sent."), 0);
@@ -104,12 +116,47 @@ namespace MageBot.Interface.UCs
                 return;
             }
             accUserControl.Account.Log(new BotTextInformation("Flood activated"), 1);
-            if (CommerceBox.Checked)
-                accUserControl.Account.Flood.StartFlood(5, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
-            if (RecrutementBox.Checked)
-                accUserControl.Account.Flood.StartFlood(6, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
-            if (GeneralBox.Checked)
-                accUserControl.Account.Flood.StartFlood(0, IsRandomingSmileyBox.Checked, IsRandomingNumberBox.Checked, FloodContentRbox.Text, (int)NUDFlood.Value);
+            accUserControl.Account.Flood.StartFlood();
+        }
+
+        private void CommerceBox_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.FloodInCommerceChannel = CommerceBox.Checked;
+        }
+
+        private void RecrutementBox_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.FloodInRecruitmentChannel = RecrutementBox.Checked;
+        }
+
+        private void GeneralBox_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.FloodInGeneralChannel = GeneralBox.Checked;
+        }
+
+        private void PrivateEnterBox_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.FloodInPrivateChannel = PrivateEnterBox.Checked;
+        }
+
+        private void IsRandomingSmileyBox_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.AddRandomingSmiley = IsRandomingSmileyBox.Checked;
+        }
+
+        private void IsRandomingNumberBox_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.AddRandomingNumber = IsRandomingNumberBox.Checked;
+        }
+
+        private void NUDFlood_ValueChanged(object sender, EventArgs e)
+        {
+            accUserControl.Account.Config.FloodInterval = (int)NUDFlood.Value;
+        }
+
+        private void IsMemoryCheck_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.FloodSaveInMemory = IsMemoryCheck.Checked;
         }
         #endregion
 
@@ -133,8 +180,7 @@ namespace MageBot.Interface.UCs
 
             File.WriteAllText(path, texte);
         }
+
         #endregion
-
-
     }
 }

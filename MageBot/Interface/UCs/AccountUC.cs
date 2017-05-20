@@ -24,6 +24,8 @@ using MageBot.DataFiles.Data.D2o;
 using MageBot.Core;
 using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
 using MageBot.Protocol.Messages.Game.Dialog;
+using MageBot.Core.Fight;
+using MageBot.Util.Enums.EnumHelper;
 
 namespace MageBot.Interface
 {
@@ -132,127 +134,6 @@ namespace MageBot.Interface
             MonstersRestrictionsView.Columns.Add(Strings.Comparator, -2);
             MonstersRestrictionsView.Columns.Add(Strings.Number, -2);
             MonstersRestrictionsView.Columns.Add(Strings.Restriction, -2);
-        }
-
-        private void FillAccountEvents()
-        {
-            Account.LogChanged += Account_LogChanged;
-            Account.InfBarsChanged += Account_InfBarsChanged;
-            Account.ActualizeFightStats += Account_ActualizeFightStats;
-            Account.ActualizePets += Account_ActualizePets;
-            Account.ActualizeMap += Account_ActualizeMap;
-            Account.ActualizeInventory += Account_ActualizeInventory;
-            Account.ActualizeShop += Account_ActualizeShop;
-            Account.ActualizeJobs += Account_ActualizeJobs;
-            Account.LoggerClear += Account_loggerClear;
-            Account.StatusChanged += Account_StatusChanged;
-            Account.AccountRestart += Account_AccountRestart;
-            Account.ApplicationWait += Account_ApplicationWait;
-        }
-
-        private void Account_ApplicationWait(object sender, EventArgs e)
-        {
-            ApplicationWaitEventArgs args = (ApplicationWaitEventArgs)e;
-            Wait(args.Milisec);
-        }
-
-        private void Wait(int milisec)
-        {
-            Random Random = new Random();
-            double endwait = Environment.TickCount + milisec;
-            while (Environment.TickCount < endwait)
-            {
-                System.Threading.Thread.Sleep(1);
-                Application.DoEvents();
-            }
-        }
-
-
-        private void Account_AccountRestart(object sender, EventArgs e)
-        {
-            AccountConfig accConf = Account.Config;
-            string userName = Account.AccountName;
-            string pass = Account.AccountPassword;
-            Account = null;
-            Account = new Account(userName, pass);
-            FillAccountEvents();
-            FillAccountInitialSettings();
-            Account.Config = accConf;
-            Account.Init();
-        }
-
-        private void Account_StatusChanged(object sender, EventArgs e)
-        {
-            UpdateStatus();
-        }
-
-        private void Account_loggerClear(object sender, EventArgs e)
-        {
-            if (LogConsole.InvokeRequired)
-                Invoke(new MethodInvoker(LogConsole.Clear));
-            else
-                LogConsole.Clear();
-        }
-
-        private void Account_ActualizeJobs(object sender, EventArgs e)
-        {
-            ActualizeJobs();
-        }
-
-        private void Account_ActualizeShop(object sender, EventArgs e)
-        {
-            ActualizeShopItemsEventArgs args = (ActualizeShopItemsEventArgs)e;
-            Actualizeshop(args.ObjectsInfos);
-        }
-
-        private void Account_ActualizeInventory(object sender, EventArgs e)
-        {
-            ActualizeInventory();
-        }
-
-        private void Account_ActualizeMap(object sender, EventArgs e)
-        {
-            ActualizeMap();
-        }
-
-        private void Account_ActualizePets(object sender, EventArgs e)
-        {
-            ActualizeFamis();
-        }
-
-        private void Account_ActualizeFightStats(object sender, EventArgs e)
-        {
-            ActualizeFightStats(Account.FightData.WinLoseDic, Account.FightData.XpWon);
-        }
-
-        private void Account_InfBarsChanged(object sender, EventArgs e)
-        {
-            foreach (KeyValuePair<int, DataBar> d in Account.InfBars)
-            {
-                ModifBar(d.Key, d.Value.Max, d.Value.Value, d.Value.Text);
-            }
-        }
-
-        private void FillAccountInitialSettings()
-        {
-            if (!Account.Config.Restored)
-            {
-                Account.Config.VerboseLevel = (int)NUDVerbose.Value;
-                Account.Config.RegenChoice = (int)RegenChoice.Value;
-                Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
-                Account.Config.MaxMonstersNumber = (int)nudMaxMonstersNumber.Value;
-                Account.Config.MaxMonstersLevel = (int)nudMaxMonstersLevel.Value;
-                Account.Config.MaxPriceHouse = (ulong)MaxPrice.Value;
-                Account.Config.PresetStartUpId = (byte)PresetStartUpD.Value;
-                Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
-                Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
-            }
-        }
-
-        private void Account_LogChanged(object sender, EventArgs e)
-        {
-            LogEventArgs args = (LogEventArgs)e;
-            Log(args.Text, args.VerboseLevel);
         }
 
         public AccountUC()
@@ -465,105 +346,6 @@ namespace MageBot.Interface
             }
         }
 
-        public void ActualizeMap()
-        {
-            BeginInvoke(new MethodInvoker(MapView.Items.Clear));
-            var join = Account.MapData.InteractiveElements.Keys.ToList().Join
-                (Account.MapData.StatedElements,
-                 interactive => (int)interactive.Id,
-                 stated => stated.Id,
-                 (interactive, stated) => new
-                 {
-                     Id = interactive.Id,
-                     Name = interactive.Name,
-                     TypeId = interactive.TypeId,
-                     Type = interactive.Type,
-                     IsUsable = interactive.IsUsable,
-                     EnabledSkills = interactive.EnabledSkills,
-                     DisabledSkills = interactive.DisabledSkills,
-                     CellId = stated.CellId,
-                     State = stated.State
-                 }).ToList().OrderBy(a => a.CellId);
-            foreach (var e in join)
-            {
-                AddItem(new ListViewItem(new string[] { Convert.ToString(e.Id), e.Name, e.CellId.ToString(), e.Type }), MapView);
-            }
-            foreach (GameRolePlayNpcInformations n in Account.MapData.Npcs)
-            {
-                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Npcs, n.NpcId).Fields["nameId"]), Convert.ToString(n.Disposition.CellId), "NPC" }), MapView);
-            }
-            foreach (GameRolePlayCharacterInformations c in Account.MapData.Players)
-            {
-                AddItem(new ListViewItem(new string[] { Convert.ToString("[CID]:" + c.ContextualId + "[ACCID]:" + c.AccountId), c.Name, Convert.ToString(c.Disposition.CellId), "Player" }), MapView);
-            }
-        }
-
-        public void ActualizeJobs()
-        {
-            if (JobsTabP.InvokeRequired)
-                Invoke(new MethodInvoker(ActualizeJobs));
-            else
-            {
-                JobsTabP.TabPages.Clear();
-                foreach (Job j in Account.Jobs)
-                {
-                    JobsTabP.TabPages.Add(j.Name);
-                    SadikTabControl t = new SadikTabControl();
-                    t.TabPages.Add("Configuration");
-                    t.TabPages.Add("Statistiques");
-                    JobUC uc = new JobUC(this, j);
-                    JobsUC.Add(uc);
-                    JobsTabP.TabPages[JobsTabP.TabCount - 1].Controls.Add(uc);
-                    t.Dock = DockStyle.Fill;
-                    foreach (int i in j.Skills)
-                    {
-                        DataClass d = GameData.GetDataObject(D2oFileEnum.Skills, i);
-                        if ((int)d.Fields["gatheredRessourceItem"] == -1)
-                            continue;
-                        if (j.Level >= (int)d.Fields["levelMin"])
-                        {
-                            string name = I18N.GetText((int)d.Fields["nameId"]);
-                            int rid = (int)d.Fields["interactiveId"];
-                            string typename = I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Interactives, rid).Fields["nameId"]);
-                            uc.g.Rows.Add(name, typename, rid);
-                        }
-                    }
-
-                    foreach (int i in j.Skills)
-                    {
-                        DataClass d = GameData.GetDataObject(D2oFileEnum.Skills, i);
-                        if (j.Level > (int)d.Fields["levelMin"])
-                        {
-                            string name = I18N.GetText((int)d.Fields["nameId"]);
-                            foreach (int c in (ArrayList)d.Fields["craftableItemIds"])
-                            {
-                                string rname = "Unknown";
-                                DataClass data = GameData.GetDataObject(D2oFileEnum.Items, c);
-                                if (data != null)
-                                {
-                                    rname = I18N.GetText((int)data.Fields["nameId"]);
-                                    uc.gg.Rows.Add(name, rname, c);
-                                }
-                            }
-                        }
-                    }
-                    uc.g.AutoResizeColumns();
-                    uc.g.Columns[2].Visible = false;
-                    uc.gg.AutoResizeColumns();
-                    uc.gg.Columns[2].Visible = false;
-                    uc.Show();
-                }
-            }
-        }
-
-        public void Enable(bool param1)
-        {
-            if (InvokeRequired)
-                Invoke(new DelegBool(Enable), param1);
-            else
-                Enabled = param1;
-        }
-
         private void LVItems_ColumnClick(object sender, EventArgs e)
         {
             // Call the sort method to manually sort.
@@ -586,20 +368,6 @@ namespace MageBot.Interface
                 MonstersRestrictionsView.Items.Add(l);
             }
             MonstersRestrictionsView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-        }
-
-        private Operator ConvertOperator(string oper)
-        {
-            switch (oper)
-            {
-                case ">": return Operator.More;
-                case "<": return Operator.Less;
-                case ">=": return Operator.MoreEqual;
-                case "<=": return Operator.LessEqual;
-                case "=": return Operator.Equal;
-                case "<>": return Operator.Different;
-                default: return Operator.None;
-            }
         }
 
         private void ForceMonstersBt_Click(object sender, EventArgs e)
@@ -692,7 +460,7 @@ namespace MageBot.Interface
         {
             ExchangeRequestOnShopStockMessage packetshop = new ExchangeRequestOnShopStockMessage();
             Account.SocketManager.Send(packetshop);
-            addItemToShop();
+            AddItemToShop();
             ActualizeShopAndBagItems();
         }
 
@@ -741,6 +509,7 @@ namespace MageBot.Interface
         private void IsLockingFight_CheckedChanged(object sender)
         {
             Account.Config.LockingFights = IsLockingFight.Checked;
+            Account.Config.LockPerformed = false;
         }
 
         private void WithItemSetBox_CheckedChanged(object sender)
@@ -766,6 +535,91 @@ namespace MageBot.Interface
             Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
         }
 
+        private void SaveConfig_Click_1(object sender, EventArgs e)
+        {
+            Account.ConfigRecover.SaveConfig();
+            MessageBox.Show("Configuration saved!");
+        }
+
+        private void DeleteConfigBt_Click_1(object sender, EventArgs e)
+        {
+            Account.ConfigRecover.DeleteConfig();
+            MessageBox.Show("Configuration deleted!");
+        }
+
+        private void DebugMode_CheckedChanged(object sender)
+        {
+            Account.Config.DebugMode = DebugMode.Checked;
+        }
+
+        private void LogCb_CheckedChanged(object sender)
+        {
+            Account.Config.LogConsoleToText = LogCb.Checked;
+        }
+
+        private void NUDVerbose_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.VerboseLevel = (int)NUDVerbose.Value;
+        }
+
+        private void RegenChoice_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.RegenChoice = (int)RegenChoice.Value;
+        }
+
+        private void nudMinMonstersNumber_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.MinMonstersNumber = (int)nudMinMonstersNumber.Value;
+        }
+
+        private void nudMinMonstersLevel_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.MinMonstersLevel = (int)nudMinMonstersLevel.Value;
+        }
+
+        private void nudMaxMonstersNumber_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.MaxMonstersNumber = (int)nudMaxMonstersNumber.Value;
+        }
+
+        private void nudMaxMonstersLevel_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.MaxMonstersLevel = (int)nudMaxMonstersLevel.Value;
+        }
+
+        private void PhraseADire_TextChanged(object sender, EventArgs e)
+        {
+            Account.Config.SentenceToSay = PhraseADire.Text;
+        }
+
+        private void HouseSearcherBox_CheckedChanged(object sender)
+        {
+            Account.Config.HouseSearcherEnabled = HouseSearcherBox.Checked;
+        }
+
+        private void MaxPrice_ValueChanged(object sender, EventArgs e)
+        {
+            Account.Config.MaxPriceHouse = (ulong)MaxPrice.Value;
+        }
+
+        private void LockForParty_CheckedChanged(object sender)
+        {
+            Account.Config.LockingForGroupOnly = LockForParty.Checked;
+            Account.Config.LockPerformed = false;
+        }
+
+        private void LockSpectator_CheckedChanged(object sender)
+        {
+            Account.Config.LockingSpectators = LockSpectator.Checked;
+            Account.Config.LockPerformed = false;
+        }
+
+        private void AskForHelp_CheckedChanged(object sender)
+        {
+            Account.Config.AskForHelp = AskForHelp.Checked;
+            Account.Config.LockPerformed = false;
+        }
+
         #endregion
 
         #region Public methods
@@ -784,19 +638,11 @@ namespace MageBot.Interface
             }
         }
 
-        public bool NeedToAddItem()
-        {
-            if (LVItemBag.InvokeRequired)
-                return (bool)Invoke(new BoolCallback(NeedToAddItem));
-            else
-                return (LVItemBag.SelectedItems != null);
-        }
-
-        public void addItemToShop()
+        public void AddItemToShop()
         {
             if (LVItemBag.InvokeRequired)
             {
-                Invoke(new Callback(addItemToShop));
+                Invoke(new Callback(AddItemToShop));
                 return;
             }
             for (int i = 0; i < LVItemBag.Items.Count; i++)
@@ -1152,6 +998,106 @@ namespace MageBot.Interface
             return true;
 
         }
+
+        public void ActualizeMap()
+        {
+            BeginInvoke(new MethodInvoker(MapView.Items.Clear));
+            var join = Account.MapData.InteractiveElements.Keys.ToList().Join
+                (Account.MapData.StatedElements,
+                 interactive => (int)interactive.Id,
+                 stated => stated.Id,
+                 (interactive, stated) => new
+                 {
+                     Id = interactive.Id,
+                     Name = interactive.Name,
+                     TypeId = interactive.TypeId,
+                     Type = interactive.Type,
+                     IsUsable = interactive.IsUsable,
+                     EnabledSkills = interactive.EnabledSkills,
+                     DisabledSkills = interactive.DisabledSkills,
+                     CellId = stated.CellId,
+                     State = stated.State
+                 }).ToList().OrderBy(a => a.CellId);
+            foreach (var e in join)
+            {
+                AddItem(new ListViewItem(new string[] { Convert.ToString(e.Id), e.Name, e.CellId.ToString(), e.Type }), MapView);
+            }
+            foreach (GameRolePlayNpcInformations n in Account.MapData.Npcs)
+            {
+                AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Npcs, n.NpcId).Fields["nameId"]), Convert.ToString(n.Disposition.CellId), "NPC" }), MapView);
+            }
+            foreach (GameRolePlayCharacterInformations c in Account.MapData.Players)
+            {
+                AddItem(new ListViewItem(new string[] { Convert.ToString("[CID]:" + c.ContextualId + "[ACCID]:" + c.AccountId), c.Name, Convert.ToString(c.Disposition.CellId), "Player" }), MapView);
+            }
+        }
+
+        public void ActualizeJobs()
+        {
+            if (JobsTabP.InvokeRequired)
+                Invoke(new MethodInvoker(ActualizeJobs));
+            else
+            {
+                JobsTabP.TabPages.Clear();
+                foreach (Job j in Account.Jobs)
+                {
+                    JobsTabP.TabPages.Add(j.Name);
+                    SadikTabControl t = new SadikTabControl();
+                    t.TabPages.Add("Configuration");
+                    t.TabPages.Add("Statistiques");
+                    JobUC uc = new JobUC(this, j);
+                    JobsUC.Add(uc);
+                    JobsTabP.TabPages[JobsTabP.TabCount - 1].Controls.Add(uc);
+                    t.Dock = DockStyle.Fill;
+                    foreach (int i in j.Skills)
+                    {
+                        DataClass d = GameData.GetDataObject(D2oFileEnum.Skills, i);
+                        if ((int)d.Fields["gatheredRessourceItem"] == -1)
+                            continue;
+                        if (j.Level >= (int)d.Fields["levelMin"])
+                        {
+                            string name = I18N.GetText((int)d.Fields["nameId"]);
+                            int rid = (int)d.Fields["interactiveId"];
+                            string typename = I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Interactives, rid).Fields["nameId"]);
+                            uc.g.Rows.Add(name, typename, rid);
+                        }
+                    }
+
+                    foreach (int i in j.Skills)
+                    {
+                        DataClass d = GameData.GetDataObject(D2oFileEnum.Skills, i);
+                        if (j.Level > (int)d.Fields["levelMin"])
+                        {
+                            string name = I18N.GetText((int)d.Fields["nameId"]);
+                            foreach (int c in (ArrayList)d.Fields["craftableItemIds"])
+                            {
+                                string rname = "Unknown";
+                                DataClass data = GameData.GetDataObject(D2oFileEnum.Items, c);
+                                if (data != null)
+                                {
+                                    rname = I18N.GetText((int)data.Fields["nameId"]);
+                                    uc.gg.Rows.Add(name, rname, c);
+                                }
+                            }
+                        }
+                    }
+                    uc.g.AutoResizeColumns();
+                    uc.g.Columns[2].Visible = false;
+                    uc.gg.AutoResizeColumns();
+                    uc.gg.Columns[2].Visible = false;
+                    uc.Show();
+                }
+            }
+        }
+
+        public void Enable(bool param1)
+        {
+            if (InvokeRequired)
+                Invoke(new DelegBool(Enable), param1);
+            else
+                Enabled = param1;
+        }
+
         #endregion
 
         #region Private methods
@@ -1196,88 +1142,196 @@ namespace MageBot.Interface
             }
         }
 
-        private void Serialize<T>(T obj, string sConfigFilePath)
+        private Operator ConvertOperator(string oper)
         {
+            switch (oper)
+            {
+                case ">": return Operator.More;
+                case "<": return Operator.Less;
+                case ">=": return Operator.MoreEqual;
+                case "<=": return Operator.LessEqual;
+                case "=": return Operator.Equal;
+                case "<>": return Operator.Different;
+                default: return Operator.None;
+            }
+        }
 
-            System.Xml.Serialization.XmlSerializer XmlBuddy = new System.Xml.Serialization.XmlSerializer(typeof(T));
-            System.Xml.XmlWriterSettings MySettings = new System.Xml.XmlWriterSettings();
-            MySettings.Indent = true;
-            MySettings.CloseOutput = true;
-            MySettings.OmitXmlDeclaration = true;
-            System.Xml.XmlWriter MyWriter = System.Xml.XmlWriter.Create(sConfigFilePath, MySettings);
-            XmlBuddy.Serialize(MyWriter, obj);
-            MyWriter.Flush();
-            MyWriter.Close();
+        private void FillAccountEvents()
+        {
+            Account.LogChanged += Account_LogChanged;
+            Account.InfBarsChanged += Account_InfBarsChanged;
+            Account.ActualizeFightStats += Account_ActualizeFightStats;
+            Account.ActualizePets += Account_ActualizePets;
+            Account.ActualizeMap += Account_ActualizeMap;
+            Account.ActualizeInventory += Account_ActualizeInventory;
+            Account.ActualizeShop += Account_ActualizeShop;
+            Account.ActualizeJobs += Account_ActualizeJobs;
+            Account.LoggerClear += Account_loggerClear;
+            Account.StatusChanged += Account_StatusChanged;
+            Account.AccountRestart += Account_AccountRestart;
+            Account.ApplicationWait += Account_ApplicationWait;
+            Account.ConfigRecovered += Account_ConfigRecovered;
+            Account.UpdateStats += Account_UpdateStats;
+            //TODO: Fill other modules events
+        }
+
+        private void FillAccountInitialSettings()
+        {
+            if (!Account.Config.Restored)
+            {
+                Account.Config.VerboseLevel = (int)NUDVerbose.Value;
+                Account.Config.RegenChoice = (int)RegenChoice.Value;
+                Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
+                Account.Config.MaxMonstersNumber = (int)nudMaxMonstersNumber.Value;
+                Account.Config.MaxMonstersLevel = (int)nudMaxMonstersLevel.Value;
+                Account.Config.MaxPriceHouse = (ulong)MaxPrice.Value;
+                Account.Config.PresetStartUpId = (byte)PresetStartUpD.Value;
+                Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
+                Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
+                Account.Config.FloodInterval = 60;
+                //TODO : Fill other modules initial settings
+            }
+        }
+
+        private void Wait(int milisec)
+        {
+            Random Random = new Random();
+            double endwait = Environment.TickCount + milisec;
+            while (Environment.TickCount < endwait)
+            {
+                System.Threading.Thread.Sleep(1);
+                Application.DoEvents();
+            }
+        }
+
+        #region Account Object events
+
+        private void Account_ApplicationWait(object sender, EventArgs e)
+        {
+            ApplicationWaitEventArgs args = (ApplicationWaitEventArgs)e;
+            Wait(args.Milisec);
+        }
+
+        private void Account_AccountRestart(object sender, EventArgs e)
+        {
+            AccountConfig accConf = Account.Config;
+            string userName = Account.AccountName;
+            string pass = Account.AccountPassword;
+            Account = null;
+            Account = new Account(userName, pass);
+            FillAccountEvents();
+            FillAccountInitialSettings();
+            Account.Config = accConf;
+            Account.Init();
+        }
+
+        private void Account_StatusChanged(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
+
+        private void Account_loggerClear(object sender, EventArgs e)
+        {
+            if (LogConsole.InvokeRequired)
+                Invoke(new MethodInvoker(LogConsole.Clear));
+            else
+                LogConsole.Clear();
+        }
+
+        private void Account_ActualizeJobs(object sender, EventArgs e)
+        {
+            ActualizeJobs();
+        }
+
+        private void Account_ActualizeShop(object sender, EventArgs e)
+        {
+            ActualizeShopItemsEventArgs args = (ActualizeShopItemsEventArgs)e;
+            Actualizeshop(args.ObjectsInfos);
+        }
+
+        private void Account_ActualizeInventory(object sender, EventArgs e)
+        {
+            ActualizeInventory();
+        }
+
+        private void Account_ActualizeMap(object sender, EventArgs e)
+        {
+            ActualizeMap();
+        }
+
+        private void Account_ActualizePets(object sender, EventArgs e)
+        {
+            ActualizeFamis();
+        }
+
+        private void Account_ActualizeFightStats(object sender, EventArgs e)
+        {
+            ActualizeFightStats(Account.FightData.WinLoseDic, Account.FightData.XpWon);
+        }
+
+        private void Account_InfBarsChanged(object sender, EventArgs e)
+        {
+            foreach (KeyValuePair<int, DataBar> d in Account.InfBars)
+            {
+                ModifBar(d.Key, d.Value.Max, d.Value.Value, d.Value.Text);
+            }
+        }
+
+        private void Account_LogChanged(object sender, EventArgs e)
+        {
+            LogEventArgs args = (LogEventArgs)e;
+            Log(args.Text, args.VerboseLevel);
+        }
+
+        private void Account_ConfigRecovered(object sender, EventArgs e)
+        {
+            DebugMode.Checked = Account.Config.DebugMode;
+            LogCb.Checked = Account.Config.LogConsoleToText;
+            nudMinMonstersLevel.Value = Account.Config.MinMonstersLevel;
+            nudMaxMonstersLevel.Value = Account.Config.MaxMonstersLevel;
+            nudMinMonstersNumber.Value = Account.Config.MinMonstersNumber;
+            nudMaxMonstersNumber.Value = Account.Config.MaxMonstersNumber;
+            MonstersRestrictionsView.Clear();
+            foreach(MonsterRestrictions mr in Account.Config.MonsterRestrictions)
+            {
+                string[] row = { mr.MonsterName,
+                                 mr.Operator.Description(),
+                                 Convert.ToString(mr.Quantity),
+                                 mr.RestrictionLevel.Description() };
+                MonstersRestrictionsView.Items.Add(new ListViewItem(row));
+            }
+            RegenChoice.Value = Account.Config.RegenChoice;
+            WithItemSetBox.Checked = Account.Config.EndFightWithItemSet || Account.Config.StartFightWithItemSet;
+            PresetEndUpD.Value = Account.Config.PresetEndUpId;
+            PresetStartUpD.Value = Account.Config.PresetStartUpId;
+            NUDTimeoutFight.Value = Account.Config.BotSpeed;
+            IsLockingFight.Checked = Account.Config.LockingFights;
+            IsLockingFight.Checked = Account.Config.LockingFights;
+            LockForParty.Checked = Account.Config.LockingForGroupOnly;
+            AskForHelp.Checked = Account.Config.AskForHelp;
+            LockSpectator.Checked = Account.Config.LockingSpectators;
+            checkBoxBegin.Checked = Account.Config.Begin;
+            MaxPrice.Value = Account.Config.MaxPriceHouse;
+            PhraseADire.Text = Account.Config.SentenceToSay;
+            HouseSearcherBox.Checked = Account.Config.HouseSearcherEnabled;
+            SearcherLogBox.Text = Account.Config.HouseSearcherLogPath;
+            if(Account.Config.WaitingForTheSale)
+                Account.House = new HouseBuy(Account);
+            CaracUC.InitialConf(Account.Config.CaracToAutoUp);
+            //TODO: Set other modules config by recovered config
 
         }
+
+        private void Account_UpdateStats(object sender, EventArgs e)
+        {
+            if (CaracUC != null)
+                CaracUC.Init();
+        }
+
+
         #endregion
 
-        private void SaveConfig_Click_1(object sender, EventArgs e)
-        {
-            Account.ConfigRecover.SaveConfig();
-            MessageBox.Show("Configuration saved!");
-        }
-
-        private void DeleteConfigBt_Click_1(object sender, EventArgs e)
-        {
-            Account.ConfigRecover.DeleteConfig();
-            MessageBox.Show("Configuration deleted!");
-        }
-
-        private void DebugMode_CheckedChanged(object sender)
-        {
-            Account.Config.DebugMode = DebugMode.Checked;
-        }
-
-        private void LogCb_CheckedChanged(object sender)
-        {
-            Account.Config.LogConsoleToText = LogCb.Checked;
-        }
-
-        private void NUDVerbose_ValueChanged(object sender, EventArgs e)
-        {
-            Account.Config.VerboseLevel = (int)NUDVerbose.Value;
-        }
-
-        private void RegenChoice_ValueChanged(object sender, EventArgs e)
-        {
-            Account.Config.RegenChoice = (int)RegenChoice.Value;
-        }
-
-        private void nudMinMonstersNumber_ValueChanged(object sender, EventArgs e)
-        {
-            Account.Config.MinMonstersNumber = (int)nudMinMonstersNumber.Value;
-        }
-
-        private void nudMinMonstersLevel_ValueChanged(object sender, EventArgs e)
-        {
-            Account.Config.MinMonstersLevel = (int)nudMinMonstersLevel.Value;
-        }
-
-        private void nudMaxMonstersNumber_ValueChanged(object sender, EventArgs e)
-        {
-            Account.Config.MaxMonstersNumber = (int)nudMaxMonstersNumber.Value;
-        }
-
-        private void nudMaxMonstersLevel_ValueChanged(object sender, EventArgs e)
-        {
-            Account.Config.MaxMonstersLevel = (int)nudMaxMonstersLevel.Value;
-        }
-
-        private void PhraseADire_TextChanged(object sender, EventArgs e)
-        {
-            Account.Config.SentenceToSay = PhraseADire.Text;
-        }
-
-        private void HouseSearcherBox_CheckedChanged(object sender)
-        {
-            Account.Config.HouseSearcherEnabled = HouseSearcherBox.Checked;
-        }
-
-        private void MaxPrice_ValueChanged(object sender, EventArgs e)
-        {
-            Account.Config.MaxPriceHouse = (ulong)MaxPrice.Value;
-        }
+        #endregion
     }
 }
 

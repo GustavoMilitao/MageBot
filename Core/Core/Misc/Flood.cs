@@ -17,6 +17,8 @@ namespace MageBot.Core.Misc
     {
         #region Fields
         Account.Account Account { get; set; }
+        public Dictionary<string, long> ListOfPlayersWithLevel { get; set; }
+        public bool FloodStarted { get; set; }
         public int MessageCount { get; set; }
         public int PMCount { get; set; }
         #endregion
@@ -30,10 +32,24 @@ namespace MageBot.Core.Misc
         #endregion
 
         #region Public Methods
-        public void StartFlood(int channel, bool useSmiley, bool useNumbers, string content, int interval)
+        public void StartFlood()
         {
-            Thread t = new Thread(() => StartFlooding(channel, useSmiley, useNumbers, content, interval));
-            t.Start();
+            Thread t = null;
+            if (Account.Config.FloodInCommerceChannel)
+            {
+                t = new Thread(() => StartFlooding(5, Account.Config.AddRandomingSmiley, Account.Config.AddRandomingNumber, Account.Config.FloodContent, Account.Config.FloodInterval));
+                t.Start();
+            }
+            if (Account.Config.FloodInRecruitmentChannel)
+            {
+                t = new Thread(() => StartFlooding(6, Account.Config.AddRandomingSmiley, Account.Config.AddRandomingNumber, Account.Config.FloodContent, Account.Config.FloodInterval));
+                t.Start();
+            }
+            if (Account.Config.FloodInGeneralChannel)
+            {
+                t = new Thread(() => StartFlooding(0, Account.Config.AddRandomingSmiley, Account.Config.AddRandomingNumber, Account.Config.FloodContent, Account.Config.FloodInterval));
+                t.Start();
+            }
         }
 
         public void StartPrivateFloodOrInfoFromListTo(List<GameRolePlayCharacterInformations> listaPlayers, string To = "")
@@ -116,29 +132,19 @@ namespace MageBot.Core.Misc
             }
         }
 
-        public void SaveNameInDisk(GameRolePlayCharacterInformations infos)
+        public void SaveNameInDisk()
         {
             string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", Account.AccountName, "Flood");
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
-
             try
             {
-                if (Account.Config.ListOfPlayersWithLevel.Count > 0)
+                StreamWriter sw = new StreamWriter(path + @"\Players.txt");
+                foreach(KeyValuePair<string, long> player in ListOfPlayersWithLevel)
                 {
-                    if (Account.Config.ListOfPlayersWithLevel.Keys.ToList().Find(p => p == infos.Name) != null)
-                    {
-                        Account.Log(new ErrorTextInformation("[ADVANCED FLOOD] Player already loaded !"), 5);
-                        return;
-                    }
+                    sw.WriteLine(player.Key + "," + player.Value);
                 }
-                var swriter = new StreamWriter(path + @"\Players.txt", true);
-                long level = (long)Math.Abs((infos.AlignmentInfos.CharacterPower - infos.ContextualId));
-                swriter.WriteLine(infos.Name + "," + Convert.ToString(level));
-                swriter.Close();
-                Account.Config.ListOfPlayersWithLevel.Add(infos.Name, level);
-                //account.AccountFlood.AddItem(infos.Name + "," + Convert.ToString(level));
-                Account.Log(new BotTextInformation("[ADVANCED FLOOD] Player added. Name : " + infos.Name + " (level: " + level + ")."), 5);
+                sw.Close();
             }
             catch (Exception ex)
             {
@@ -160,7 +166,7 @@ namespace MageBot.Core.Misc
         #region Private Methods
         private void ReadListAdvancedFloodFromDisk()
         {
-            Account.Config.ListOfPlayersWithLevel = new Dictionary<string, long>();
+            ListOfPlayersWithLevel = new Dictionary<string, long>();
             string pathPlayers = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", Account.AccountName, "Flood");
             if (!Directory.Exists(pathPlayers))
                 Directory.CreateDirectory(pathPlayers);
@@ -172,7 +178,7 @@ namespace MageBot.Core.Misc
                     string line = sr.ReadLine();
                     string[] parsed = line.Split(',');
                     if (parsed.Length > 1)
-                        Account.Config.ListOfPlayersWithLevel.Add(parsed[0], int.Parse(parsed[1]));
+                        ListOfPlayersWithLevel.Add(parsed[0], int.Parse(parsed[1]));
                     else
                     {
                         sr.Close();
@@ -201,13 +207,13 @@ namespace MageBot.Core.Misc
 
         private void StartFlooding(int channel, bool useSmiley, bool useNumbers, string content, int interval)
         {
-            Account.Config.FloodStarted = true;
+            FloodStarted = true;
             string ncontent = content;
-            while (Account.Config.FloodStarted == false)
+            while (FloodStarted)
             {
-                if (useSmiley == true)
+                if (useSmiley)
                     ncontent = addRandomSmiley(content);
-                if (useNumbers == true)
+                if (useNumbers)
                     ncontent = addRandomNumber(ncontent);
                 SendMessage(channel, ncontent);
                 Account.Wait(interval * 1000);

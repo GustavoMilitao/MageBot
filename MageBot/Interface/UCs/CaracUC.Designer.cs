@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaracUC));
             this.sadikGroupBox1 = new MageBot.Interface.SadikGroupBox();
+            this.NoneRb = new MageBot.Interface.SadikRadioButton();
+            this.sadikLabel4 = new MageBot.Interface.SadikLabel();
             this.sadikGroupBox2 = new MageBot.Interface.SadikGroupBox();
             this.AvailabPtLb = new MageBot.Interface.SadikLabel();
             this.sadikLabel3 = new MageBot.Interface.SadikLabel();
@@ -78,6 +80,8 @@
             // sadikGroupBox1
             // 
             this.sadikGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.sadikGroupBox1.Controls.Add(this.NoneRb);
+            this.sadikGroupBox1.Controls.Add(this.sadikLabel4);
             this.sadikGroupBox1.Controls.Add(this.sadikGroupBox2);
             this.sadikGroupBox1.Controls.Add(this.sadikLabel2);
             this.sadikGroupBox1.Controls.Add(this.sadikButton6);
@@ -111,16 +115,37 @@
             this.sadikGroupBox1.Controls.Add(this.pictureBox1);
             this.sadikGroupBox1.Location = new System.Drawing.Point(16, 3);
             this.sadikGroupBox1.Name = "sadikGroupBox1";
-            this.sadikGroupBox1.Size = new System.Drawing.Size(226, 263);
+            this.sadikGroupBox1.Size = new System.Drawing.Size(252, 308);
             this.sadikGroupBox1.TabIndex = 0;
             this.sadikGroupBox1.Text = "sadikGroupBox1";
+            // 
+            // NoneRb
+            // 
+            this.NoneRb.Checked = true;
+            this.NoneRb.Font = new System.Drawing.Font("Verdana", 8F);
+            this.NoneRb.Location = new System.Drawing.Point(118, 35);
+            this.NoneRb.Name = "NoneRb";
+            this.NoneRb.Size = new System.Drawing.Size(22, 20);
+            this.NoneRb.TabIndex = 40;
+            this.NoneRb.CheckedChanged += new MageBot.Interface.SadikRadioButton.CheckedChangedEventHandler(this.NoneRb_CheckedChanged);
+            // 
+            // sadikLabel4
+            // 
+            this.sadikLabel4.AutoSize = true;
+            this.sadikLabel4.Font = new System.Drawing.Font("Verdana", 8F);
+            this.sadikLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
+            this.sadikLabel4.Location = new System.Drawing.Point(19, 35);
+            this.sadikLabel4.Name = "sadikLabel4";
+            this.sadikLabel4.Size = new System.Drawing.Size(36, 13);
+            this.sadikLabel4.TabIndex = 39;
+            this.sadikLabel4.Text = "None";
             // 
             // sadikGroupBox2
             // 
             this.sadikGroupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.sadikGroupBox2.Controls.Add(this.AvailabPtLb);
             this.sadikGroupBox2.Controls.Add(this.sadikLabel3);
-            this.sadikGroupBox2.Location = new System.Drawing.Point(88, 207);
+            this.sadikGroupBox2.Location = new System.Drawing.Point(93, 236);
             this.sadikGroupBox2.Name = "sadikGroupBox2";
             this.sadikGroupBox2.Size = new System.Drawing.Size(131, 41);
             this.sadikGroupBox2.TabIndex = 38;
@@ -142,7 +167,7 @@
             this.sadikLabel3.AutoSize = true;
             this.sadikLabel3.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.sadikLabel3.Location = new System.Drawing.Point(2, 13);
+            this.sadikLabel3.Location = new System.Drawing.Point(3, 13);
             this.sadikLabel3.Name = "sadikLabel3";
             this.sadikLabel3.Size = new System.Drawing.Size(106, 13);
             this.sadikLabel3.TabIndex = 0;
@@ -165,7 +190,7 @@
             this.sadikButton6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sadikButton6.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikButton6.Image = null;
-            this.sadikButton6.Location = new System.Drawing.Point(169, 170);
+            this.sadikButton6.Location = new System.Drawing.Point(174, 199);
             this.sadikButton6.Name = "sadikButton6";
             this.sadikButton6.RoundedCorners = false;
             this.sadikButton6.Size = new System.Drawing.Size(27, 22);
@@ -179,7 +204,7 @@
             this.sadikButton5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sadikButton5.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikButton5.Image = null;
-            this.sadikButton5.Location = new System.Drawing.Point(169, 142);
+            this.sadikButton5.Location = new System.Drawing.Point(174, 171);
             this.sadikButton5.Name = "sadikButton5";
             this.sadikButton5.RoundedCorners = false;
             this.sadikButton5.Size = new System.Drawing.Size(27, 22);
@@ -193,7 +218,7 @@
             this.sadikButton4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sadikButton4.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikButton4.Image = null;
-            this.sadikButton4.Location = new System.Drawing.Point(169, 114);
+            this.sadikButton4.Location = new System.Drawing.Point(174, 143);
             this.sadikButton4.Name = "sadikButton4";
             this.sadikButton4.RoundedCorners = false;
             this.sadikButton4.Size = new System.Drawing.Size(27, 22);
@@ -207,7 +232,7 @@
             this.sadikButton3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sadikButton3.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikButton3.Image = null;
-            this.sadikButton3.Location = new System.Drawing.Point(169, 86);
+            this.sadikButton3.Location = new System.Drawing.Point(174, 115);
             this.sadikButton3.Name = "sadikButton3";
             this.sadikButton3.RoundedCorners = false;
             this.sadikButton3.Size = new System.Drawing.Size(27, 22);
@@ -221,7 +246,7 @@
             this.sadikButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sadikButton2.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikButton2.Image = null;
-            this.sadikButton2.Location = new System.Drawing.Point(169, 58);
+            this.sadikButton2.Location = new System.Drawing.Point(174, 87);
             this.sadikButton2.Name = "sadikButton2";
             this.sadikButton2.RoundedCorners = false;
             this.sadikButton2.Size = new System.Drawing.Size(27, 22);
@@ -235,7 +260,7 @@
             this.sadikButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sadikButton1.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikButton1.Image = null;
-            this.sadikButton1.Location = new System.Drawing.Point(169, 30);
+            this.sadikButton1.Location = new System.Drawing.Point(174, 59);
             this.sadikButton1.Name = "sadikButton1";
             this.sadikButton1.RoundedCorners = false;
             this.sadikButton1.Size = new System.Drawing.Size(27, 22);
@@ -258,62 +283,68 @@
             // 
             this.AgiRb.Checked = false;
             this.AgiRb.Font = new System.Drawing.Font("Verdana", 8F);
-            this.AgiRb.Location = new System.Drawing.Point(113, 172);
+            this.AgiRb.Location = new System.Drawing.Point(118, 201);
             this.AgiRb.Name = "AgiRb";
             this.AgiRb.Size = new System.Drawing.Size(22, 20);
             this.AgiRb.TabIndex = 29;
+            this.AgiRb.CheckedChanged += new MageBot.Interface.SadikRadioButton.CheckedChangedEventHandler(this.AgiRb_CheckedChanged);
             // 
             // LuckRb
             // 
             this.LuckRb.Checked = false;
             this.LuckRb.Font = new System.Drawing.Font("Verdana", 8F);
-            this.LuckRb.Location = new System.Drawing.Point(113, 144);
+            this.LuckRb.Location = new System.Drawing.Point(118, 173);
             this.LuckRb.Name = "LuckRb";
             this.LuckRb.Size = new System.Drawing.Size(22, 20);
             this.LuckRb.TabIndex = 28;
+            this.LuckRb.CheckedChanged += new MageBot.Interface.SadikRadioButton.CheckedChangedEventHandler(this.LuckRb_CheckedChanged);
             // 
             // InteRb
             // 
             this.InteRb.Checked = false;
             this.InteRb.Font = new System.Drawing.Font("Verdana", 8F);
-            this.InteRb.Location = new System.Drawing.Point(113, 116);
+            this.InteRb.Location = new System.Drawing.Point(118, 145);
             this.InteRb.Name = "InteRb";
             this.InteRb.Size = new System.Drawing.Size(22, 20);
             this.InteRb.TabIndex = 27;
+            this.InteRb.CheckedChanged += new MageBot.Interface.SadikRadioButton.CheckedChangedEventHandler(this.InteRb_CheckedChanged);
             // 
             // StreRb
             // 
             this.StreRb.Checked = false;
             this.StreRb.Font = new System.Drawing.Font("Verdana", 8F);
-            this.StreRb.Location = new System.Drawing.Point(113, 88);
+            this.StreRb.Location = new System.Drawing.Point(118, 117);
             this.StreRb.Name = "StreRb";
             this.StreRb.Size = new System.Drawing.Size(22, 20);
             this.StreRb.TabIndex = 26;
+            this.StreRb.CheckedChanged += new MageBot.Interface.SadikRadioButton.CheckedChangedEventHandler(this.StreRb_CheckedChanged);
             // 
             // WisRb
             // 
             this.WisRb.Checked = false;
             this.WisRb.Font = new System.Drawing.Font("Verdana", 8F);
-            this.WisRb.Location = new System.Drawing.Point(113, 60);
+            this.WisRb.Location = new System.Drawing.Point(118, 89);
             this.WisRb.Name = "WisRb";
             this.WisRb.Size = new System.Drawing.Size(22, 20);
             this.WisRb.TabIndex = 25;
+            this.WisRb.CheckedChanged += new MageBot.Interface.SadikRadioButton.CheckedChangedEventHandler(this.WisRb_CheckedChanged);
             // 
             // VitaRb
             // 
             this.VitaRb.Checked = false;
             this.VitaRb.Font = new System.Drawing.Font("Verdana", 8F);
-            this.VitaRb.Location = new System.Drawing.Point(113, 32);
+            this.VitaRb.Location = new System.Drawing.Point(118, 61);
             this.VitaRb.Name = "VitaRb";
             this.VitaRb.Size = new System.Drawing.Size(22, 20);
             this.VitaRb.TabIndex = 24;
+            this.VitaRb.CheckedChanged += new MageBot.Interface.SadikRadioButton.CheckedChangedEventHandler(this.VitaRb_CheckedChanged);
             // 
             // MpLb
             // 
             this.MpLb.AutoSize = true;
             this.MpLb.Font = new System.Drawing.Font("Verdana", 8F);
             this.MpLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.MpLb.Location = new System.Drawing.Point(59, 235);
+            this.MpLb.Location = new System.Drawing.Point(64, 264);
             this.MpLb.Name = "MpLb";
             this.MpLb.Size = new System.Drawing.Size(14, 13);
             this.MpLb.TabIndex = 23;
@@ -324,7 +355,7 @@
             this.APLb.AutoSize = true;
             this.APLb.Font = new System.Drawing.Font("Verdana", 8F);
             this.APLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.APLb.Location = new System.Drawing.Point(59, 207);
+            this.APLb.Location = new System.Drawing.Point(64, 236);
             this.APLb.Name = "APLb";
             this.APLb.Size = new System.Drawing.Size(14, 13);
             this.APLb.TabIndex = 22;
@@ -335,7 +366,7 @@
             this.WisdomLb.AutoSize = true;
             this.WisdomLb.Font = new System.Drawing.Font("Verdana", 8F);
             this.WisdomLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.WisdomLb.Location = new System.Drawing.Point(59, 67);
+            this.WisdomLb.Location = new System.Drawing.Point(64, 96);
             this.WisdomLb.Name = "WisdomLb";
             this.WisdomLb.Size = new System.Drawing.Size(14, 13);
             this.WisdomLb.TabIndex = 21;
@@ -346,7 +377,7 @@
             this.AgiLb.AutoSize = true;
             this.AgiLb.Font = new System.Drawing.Font("Verdana", 8F);
             this.AgiLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.AgiLb.Location = new System.Drawing.Point(59, 179);
+            this.AgiLb.Location = new System.Drawing.Point(64, 208);
             this.AgiLb.Name = "AgiLb";
             this.AgiLb.Size = new System.Drawing.Size(14, 13);
             this.AgiLb.TabIndex = 20;
@@ -357,7 +388,7 @@
             this.LuckLb.AutoSize = true;
             this.LuckLb.Font = new System.Drawing.Font("Verdana", 8F);
             this.LuckLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.LuckLb.Location = new System.Drawing.Point(59, 151);
+            this.LuckLb.Location = new System.Drawing.Point(64, 180);
             this.LuckLb.Name = "LuckLb";
             this.LuckLb.Size = new System.Drawing.Size(14, 13);
             this.LuckLb.TabIndex = 19;
@@ -368,7 +399,7 @@
             this.InteLb.AutoSize = true;
             this.InteLb.Font = new System.Drawing.Font("Verdana", 8F);
             this.InteLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.InteLb.Location = new System.Drawing.Point(59, 123);
+            this.InteLb.Location = new System.Drawing.Point(64, 152);
             this.InteLb.Name = "InteLb";
             this.InteLb.Size = new System.Drawing.Size(14, 13);
             this.InteLb.TabIndex = 18;
@@ -379,7 +410,7 @@
             this.StreLb.AutoSize = true;
             this.StreLb.Font = new System.Drawing.Font("Verdana", 8F);
             this.StreLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.StreLb.Location = new System.Drawing.Point(59, 95);
+            this.StreLb.Location = new System.Drawing.Point(64, 124);
             this.StreLb.Name = "StreLb";
             this.StreLb.Size = new System.Drawing.Size(14, 13);
             this.StreLb.TabIndex = 17;
@@ -390,7 +421,7 @@
             this.VitaLb.AutoSize = true;
             this.VitaLb.Font = new System.Drawing.Font("Verdana", 8F);
             this.VitaLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.VitaLb.Location = new System.Drawing.Point(59, 39);
+            this.VitaLb.Location = new System.Drawing.Point(64, 68);
             this.VitaLb.Name = "VitaLb";
             this.VitaLb.Size = new System.Drawing.Size(14, 13);
             this.VitaLb.TabIndex = 16;
@@ -399,7 +430,7 @@
             // pictureBox8
             // 
             this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(17, 226);
+            this.pictureBox8.Location = new System.Drawing.Point(22, 255);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(19, 22);
             this.pictureBox8.TabIndex = 15;
@@ -408,7 +439,7 @@
             // pictureBox7
             // 
             this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
-            this.pictureBox7.Location = new System.Drawing.Point(17, 198);
+            this.pictureBox7.Location = new System.Drawing.Point(22, 227);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(19, 22);
             this.pictureBox7.TabIndex = 14;
@@ -417,7 +448,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(17, 170);
+            this.pictureBox6.Location = new System.Drawing.Point(22, 199);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(19, 22);
             this.pictureBox6.TabIndex = 13;
@@ -426,7 +457,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(17, 142);
+            this.pictureBox5.Location = new System.Drawing.Point(22, 171);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(19, 22);
             this.pictureBox5.TabIndex = 12;
@@ -435,7 +466,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(17, 114);
+            this.pictureBox4.Location = new System.Drawing.Point(22, 143);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(19, 22);
             this.pictureBox4.TabIndex = 11;
@@ -444,7 +475,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(17, 86);
+            this.pictureBox3.Location = new System.Drawing.Point(22, 115);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(19, 22);
             this.pictureBox3.TabIndex = 10;
@@ -453,7 +484,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(17, 58);
+            this.pictureBox2.Location = new System.Drawing.Point(22, 87);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(19, 22);
             this.pictureBox2.TabIndex = 9;
@@ -462,7 +493,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(17, 30);
+            this.pictureBox1.Location = new System.Drawing.Point(22, 59);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(19, 22);
             this.pictureBox1.TabIndex = 8;
@@ -474,7 +505,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.sadikGroupBox1);
             this.Name = "CaracUC";
-            this.Size = new System.Drawing.Size(410, 283);
+            this.Size = new System.Drawing.Size(407, 326);
             this.sadikGroupBox1.ResumeLayout(false);
             this.sadikGroupBox1.PerformLayout();
             this.sadikGroupBox2.ResumeLayout(false);
@@ -527,6 +558,7 @@
         public SadikRadioButton StreRb;
         public SadikRadioButton WisRb;
         public SadikRadioButton VitaRb;
-
+        public SadikRadioButton NoneRb;
+        private SadikLabel sadikLabel4;
     }
 }

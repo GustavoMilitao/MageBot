@@ -164,6 +164,9 @@ namespace MageBot.Interface
             this.LVItemShop = new System.Windows.Forms.ListView();
             this.LVItemBag = new System.Windows.Forms.ListView();
             this.sadikCheckbox1 = new MageBot.Interface.SadikCheckbox();
+            this.LockForParty = new MageBot.Interface.SadikCheckbox();
+            this.AskForHelp = new MageBot.Interface.SadikCheckbox();
+            this.LockSpectator = new MageBot.Interface.SadikCheckbox();
             this.toolStrip1.SuspendLayout();
             this.VTabAccount.SuspendLayout();
             this.ConsolePage.SuspendLayout();
@@ -462,7 +465,7 @@ namespace MageBot.Interface
             // 
             this.LogConsole.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LogConsole.BackColor = System.Drawing.Color.White;
-            this.LogConsole.Location = new System.Drawing.Point(-2, 5);
+            this.LogConsole.Location = new System.Drawing.Point(-2, 6);
             this.LogConsole.Name = "LogConsole";
             this.LogConsole.ReadOnly = true;
             this.LogConsole.Size = new System.Drawing.Size(484, 315);
@@ -608,7 +611,7 @@ namespace MageBot.Interface
             this.metroTabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl2.Location = new System.Drawing.Point(3, 3);
             this.metroTabControl2.Name = "metroTabControl2";
-            this.metroTabControl2.SelectedIndex = 1;
+            this.metroTabControl2.SelectedIndex = 0;
             this.metroTabControl2.Size = new System.Drawing.Size(489, 386);
             this.metroTabControl2.TabIndex = 1;
             this.metroTabControl2.UseSelectable = true;
@@ -634,12 +637,15 @@ namespace MageBot.Interface
             // groupBox8
             // 
             this.groupBox8.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox8.Controls.Add(this.LockSpectator);
+            this.groupBox8.Controls.Add(this.AskForHelp);
+            this.groupBox8.Controls.Add(this.LockForParty);
             this.groupBox8.Controls.Add(this.IsLockingFight);
             this.groupBox8.Controls.Add(this.NUDTimeoutFight);
             this.groupBox8.Controls.Add(this.sadikLabel11);
             this.groupBox8.Location = new System.Drawing.Point(3, 203);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(478, 80);
+            this.groupBox8.Size = new System.Drawing.Size(478, 138);
             this.groupBox8.TabIndex = 19;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Miscellaneous";
@@ -681,7 +687,6 @@ namespace MageBot.Interface
             0,
             0,
             0});
-            this.NUDTimeoutFight.Visible = false;
             this.NUDTimeoutFight.ValueChanged += new System.EventHandler(this.NUDTimeoutFight_ValueChanged);
             // 
             // sadikLabel11
@@ -694,7 +699,6 @@ namespace MageBot.Interface
             this.sadikLabel11.Size = new System.Drawing.Size(141, 13);
             this.sadikLabel11.TabIndex = 0;
             this.sadikLabel11.Text = "Speed setting: Speed x";
-            this.sadikLabel11.Visible = false;
             // 
             // GroupBox2
             // 
@@ -1786,6 +1790,39 @@ namespace MageBot.Interface
             this.sadikCheckbox1.Text = "Enable merchant mode";
             this.sadikCheckbox1.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox1_CheckedChanged_1);
             // 
+            // LockForParty
+            // 
+            this.LockForParty.Checked = false;
+            this.LockForParty.Font = new System.Drawing.Font("Verdana", 8F);
+            this.LockForParty.Location = new System.Drawing.Point(9, 74);
+            this.LockForParty.Name = "LockForParty";
+            this.LockForParty.Size = new System.Drawing.Size(138, 18);
+            this.LockForParty.TabIndex = 7;
+            this.LockForParty.Text = "Party Only Combat";
+            this.LockForParty.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.LockForParty_CheckedChanged);
+            // 
+            // AskForHelp
+            // 
+            this.AskForHelp.Checked = false;
+            this.AskForHelp.Font = new System.Drawing.Font("Verdana", 8F);
+            this.AskForHelp.Location = new System.Drawing.Point(162, 74);
+            this.AskForHelp.Name = "AskForHelp";
+            this.AskForHelp.Size = new System.Drawing.Size(105, 18);
+            this.AskForHelp.TabIndex = 8;
+            this.AskForHelp.Text = "Ask for help";
+            this.AskForHelp.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.AskForHelp_CheckedChanged);
+            // 
+            // LockSpectator
+            // 
+            this.LockSpectator.Checked = false;
+            this.LockSpectator.Font = new System.Drawing.Font("Verdana", 8F);
+            this.LockSpectator.Location = new System.Drawing.Point(162, 50);
+            this.LockSpectator.Name = "LockSpectator";
+            this.LockSpectator.Size = new System.Drawing.Size(105, 18);
+            this.LockSpectator.TabIndex = 9;
+            this.LockSpectator.Text = "Lock Spectator";
+            this.LockSpectator.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.LockSpectator_CheckedChanged);
+            // 
             // AccountUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1989,5 +2026,8 @@ namespace MageBot.Interface
         private System.Windows.Forms.Timer PlaceTimer;
         private SadikButton BtnActualize;
         public SadikCheckbox IsLockingFight;
+        public SadikCheckbox LockSpectator;
+        public SadikCheckbox AskForHelp;
+        public SadikCheckbox LockForParty;
     }
 }
