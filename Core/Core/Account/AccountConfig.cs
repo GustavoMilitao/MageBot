@@ -4,9 +4,9 @@ using MageBot.Core.Inventory;
 using MageBot.Core.Misc;
 using MageBot.Core.Path;
 using MageBot.Protocol.Enums;
+using MageBot.Util.Enums.Internal;
 using System;
 using System.Collections.Generic;
-using Util.Util.Enums.Internal;
 
 namespace MageBot.Core.Account
 {

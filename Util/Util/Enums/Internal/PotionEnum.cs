@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Util.Util.Enums.Internal
+namespace MageBot.Util.Enums.Internal
 {
     [Serializable()]
     public enum PotionEnum

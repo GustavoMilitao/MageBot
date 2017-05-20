@@ -1,9 +1,11 @@
 ﻿namespace MageBot.Interface
 {
     using MageBot.Core.Heroic;
+    using MageBot.Util.Enums.Internal;
     using System;
     using System.ComponentModel;
     using System.Windows.Forms;
+    using System.Windows.Input;
 
     public class HeroicUC : MetroFramework.Controls.MetroUserControl
     {
@@ -50,12 +52,37 @@
         }
         #endregion
 
+        #region Public Methods
+        public void FillRecoveredConfig()
+        {
+            sadikCheckbox1.Checked = accUserControl.Account.Config.AgroConditionsSet;
+            NUDLvlAgroMin.Value = accUserControl.Account.Config.MinLevelAgro;
+            NUDLvlAgroMax.Value = accUserControl.Account.Config.MaxLevelAgro;
+            foreach(string s in accUserControl.Account.Config.AlliancesNameAgro)
+            {
+                LViewAgro.Items.Add(new ListViewItem(s));
+            }
+            sadikCheckbox2.Checked = accUserControl.Account.Config.RunConditionsSet;
+            NUDLvlRunMin.Value = accUserControl.Account.Config.MinLevelRun;
+            NUDLvlRunMax.Value = accUserControl.Account.Config.MaxLevelRun;
+            if (accUserControl.Account.Config.DisconnectWhenRun)
+                Disconnecting.Checked = accUserControl.Account.Config.DisconnectWhenRun;
+            else if (accUserControl.Account.Config.UseItemWhenRun)
+                UsingItem.Checked = accUserControl.Account.Config.UseItemWhenRun;
+            foreach (string s in accUserControl.Account.Config.AlliancesNameRun)
+            {
+                LViewRun.Items.Add(new ListViewItem(s));
+            }
+        }
+        #endregion
+
         #region UI Methods
         private void addAllianceAgro_Click(object sender, EventArgs e)
         {
-            if ((AllianceTxtBAgro.Text.Length > 0) && (LViewAgro.Items.Count < 50))
+            if ((!String.IsNullOrEmpty(AllianceTxtBAgro.Text)) && (LViewAgro.Items.Count < 50))
             {
                 LViewAgro.Items.Add(AllianceTxtBAgro.Text);
+                accUserControl.Account.Config.AlliancesNameAgro.Add(AllianceTxtBAgro.Text);
                 AllianceTxtBAgro.Text = "";
             }
         }
@@ -65,23 +92,77 @@
             if ((AllianceTxtBRun.Text.Length > 0) && (LViewRun.Items.Count < 50))
             {
                 LViewRun.Items.Add(AllianceTxtBRun.Text);
+                accUserControl.Account.Config.AlliancesNameRun.Add(AllianceTxtBRun.Text);
                 AllianceTxtBRun.Text = "";
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void sadikCheckbox1_CheckedChanged(object sender)
         {
-            if (LViewAgro.SelectedItems.Count > 0)
+            accUserControl.Account.Config.AgroConditionsSet = sadikCheckbox1.Checked;
+        }
+
+        private void NUDLvlAgroMin_ValueChanged(object sender, EventArgs e)
+        {
+            accUserControl.Account.Config.MinLevelAgro = (long)NUDLvlAgroMin.Value;
+        }
+
+        private void NUDLvlAgroMax_ValueChanged(object sender, EventArgs e)
+        {
+            accUserControl.Account.Config.MaxLevelAgro = (long)NUDLvlAgroMax.Value;
+        }
+
+        private void sadikCheckbox2_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.RunConditionsSet = sadikCheckbox2.Checked;
+        }
+
+        private void NUDLvlRunMin_ValueChanged(object sender, EventArgs e)
+        {
+            accUserControl.Account.Config.MinLevelRun = (long)NUDLvlRunMin.Value;
+        }
+
+        private void NUDLvlRunMax_ValueChanged(object sender, EventArgs e)
+        {
+            accUserControl.Account.Config.MaxLevelRun = (long)NUDLvlRunMax.Value;
+        }
+
+        private void Disconnecting_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.DisconnectWhenRun = Disconnecting.Checked;
+        }
+
+        private void UsingItem_CheckedChanged(object sender)
+        {
+            accUserControl.Account.Config.UseItemWhenRun = UsingItem.Checked;
+        }
+
+        private void UsedItem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            accUserControl.Account.Config.ItemToUseWhenRun = (PotionEnum)UsedItem.SelectedIndex;
+        }
+
+        private void LViewRun_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Key.Delete)
             {
-                LViewAgro.Items.Remove(LViewAgro.SelectedItems[0]);
+                foreach (ListViewItem lvi in LViewRun.SelectedItems)
+                {
+                    accUserControl.Account.Config.AlliancesNameRun.RemoveAll(s => s == lvi.SubItems[0].Text);
+                    LViewRun.Items.Remove(lvi);
+                }
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void LViewAgro_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (LViewRun.SelectedItems.Count > 0)
+            if (e.KeyChar == (char)Key.Delete)
             {
-                LViewRun.Items.Remove(LViewRun.SelectedItems[0]);
+                foreach (ListViewItem lvi in LViewAgro.SelectedItems)
+                {
+                    accUserControl.Account.Config.AlliancesNameAgro.RemoveAll(s => s == lvi.SubItems[0].Text);
+                    LViewAgro.Items.Remove(lvi);
+                }
             }
         }
 
@@ -149,7 +230,7 @@
             this.addAllianceAgro.RoundedCorners = false;
             this.addAllianceAgro.Size = new System.Drawing.Size(286, 22);
             this.addAllianceAgro.TabIndex = 29;
-            this.addAllianceAgro.Text = "Ajouter alliance/guilde";
+            this.addAllianceAgro.Text = "Add alliance / guild";
             this.addAllianceAgro.Click += new System.EventHandler(this.addAllianceAgro_Click);
             // 
             // sadikLabel2
@@ -159,9 +240,9 @@
             this.sadikLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel2.Location = new System.Drawing.Point(228, 47);
             this.sadikLabel2.Name = "sadikLabel2";
-            this.sadikLabel2.Size = new System.Drawing.Size(14, 13);
+            this.sadikLabel2.Size = new System.Drawing.Size(18, 13);
             this.sadikLabel2.TabIndex = 20;
-            this.sadikLabel2.Text = "à";
+            this.sadikLabel2.Text = "to";
             // 
             // NUDLvlAgroMin
             // 
@@ -174,6 +255,7 @@
             this.NUDLvlAgroMin.Name = "NUDLvlAgroMin";
             this.NUDLvlAgroMin.Size = new System.Drawing.Size(51, 20);
             this.NUDLvlAgroMin.TabIndex = 18;
+            this.NUDLvlAgroMin.ValueChanged += new System.EventHandler(this.NUDLvlAgroMin_ValueChanged);
             // 
             // NUDLvlAgroMax
             // 
@@ -186,6 +268,7 @@
             this.NUDLvlAgroMax.Name = "NUDLvlAgroMax";
             this.NUDLvlAgroMax.Size = new System.Drawing.Size(44, 20);
             this.NUDLvlAgroMax.TabIndex = 17;
+            this.NUDLvlAgroMax.ValueChanged += new System.EventHandler(this.NUDLvlAgroMax_ValueChanged);
             // 
             // sadikCheckbox1
             // 
@@ -195,7 +278,8 @@
             this.sadikCheckbox1.Name = "sadikCheckbox1";
             this.sadikCheckbox1.Size = new System.Drawing.Size(210, 20);
             this.sadikCheckbox1.TabIndex = 16;
-            this.sadikCheckbox1.Text = "Activer";
+            this.sadikCheckbox1.Text = "Activate";
+            this.sadikCheckbox1.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox1_CheckedChanged);
             // 
             // LViewAgro
             // 
@@ -204,6 +288,7 @@
             this.LViewAgro.Size = new System.Drawing.Size(286, 93);
             this.LViewAgro.TabIndex = 15;
             this.LViewAgro.UseCompatibleStateImageBehavior = false;
+            this.LViewAgro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LViewAgro_KeyPress);
             // 
             // groupBox3
             // 
@@ -223,7 +308,7 @@
             this.groupBox3.Size = new System.Drawing.Size(374, 233);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Fuite";
+            this.groupBox3.Text = "Flight";
             // 
             // addAllianceRun
             // 
@@ -236,7 +321,7 @@
             this.addAllianceRun.RoundedCorners = false;
             this.addAllianceRun.Size = new System.Drawing.Size(148, 26);
             this.addAllianceRun.TabIndex = 28;
-            this.addAllianceRun.Text = "Ajouter alliance/guilde";
+            this.addAllianceRun.Text = "Add alliance / guild";
             this.addAllianceRun.Click += new System.EventHandler(this.addAllianceRun_Click);
             // 
             // AllianceTxtBRun
@@ -254,13 +339,14 @@
             this.UsedItem.FormattingEnabled = true;
             this.UsedItem.ItemHeight = 20;
             this.UsedItem.Items.AddRange(new object[] {
-            "Potion de cité : Bonta",
-            "Potion de cité : Brâkmar",
-            "Potion de rappel"});
+            "Memory potion",
+            "City potion: Bonta",
+            "City potion: Brakmar"});
             this.UsedItem.Location = new System.Drawing.Point(155, 94);
             this.UsedItem.Name = "UsedItem";
             this.UsedItem.Size = new System.Drawing.Size(208, 26);
             this.UsedItem.TabIndex = 26;
+            this.UsedItem.SelectedIndexChanged += new System.EventHandler(this.UsedItem_SelectedIndexChanged);
             // 
             // LViewRun
             // 
@@ -269,6 +355,7 @@
             this.LViewRun.Size = new System.Drawing.Size(359, 63);
             this.LViewRun.TabIndex = 25;
             this.LViewRun.UseCompatibleStateImageBehavior = false;
+            this.LViewRun.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LViewRun_KeyPress);
             // 
             // sadikLabel3
             // 
@@ -277,9 +364,9 @@
             this.sadikLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel3.Location = new System.Drawing.Point(212, 47);
             this.sadikLabel3.Name = "sadikLabel3";
-            this.sadikLabel3.Size = new System.Drawing.Size(14, 13);
+            this.sadikLabel3.Size = new System.Drawing.Size(18, 13);
             this.sadikLabel3.TabIndex = 24;
-            this.sadikLabel3.Text = "à";
+            this.sadikLabel3.Text = "to";
             // 
             // sadikLabel4
             // 
@@ -288,9 +375,9 @@
             this.sadikLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel4.Location = new System.Drawing.Point(15, 47);
             this.sadikLabel4.Name = "sadikLabel4";
-            this.sadikLabel4.Size = new System.Drawing.Size(140, 13);
+            this.sadikLabel4.Size = new System.Drawing.Size(132, 13);
             this.sadikLabel4.TabIndex = 23;
-            this.sadikLabel4.Text = "Personnages de niveau";
+            this.sadikLabel4.Text = "Characters from level";
             // 
             // NUDLvlRunMin
             // 
@@ -303,6 +390,7 @@
             this.NUDLvlRunMin.Name = "NUDLvlRunMin";
             this.NUDLvlRunMin.Size = new System.Drawing.Size(45, 20);
             this.NUDLvlRunMin.TabIndex = 22;
+            this.NUDLvlRunMin.ValueChanged += new System.EventHandler(this.NUDLvlRunMin_ValueChanged);
             // 
             // NUDLvlRunMax
             // 
@@ -315,16 +403,18 @@
             this.NUDLvlRunMax.Name = "NUDLvlRunMax";
             this.NUDLvlRunMax.Size = new System.Drawing.Size(41, 20);
             this.NUDLvlRunMax.TabIndex = 21;
+            this.NUDLvlRunMax.ValueChanged += new System.EventHandler(this.NUDLvlRunMax_ValueChanged);
             // 
             // Disconnecting
             // 
-            this.Disconnecting.Checked = false;
+            this.Disconnecting.Checked = true;
             this.Disconnecting.Font = new System.Drawing.Font("Verdana", 8F);
             this.Disconnecting.Location = new System.Drawing.Point(9, 74);
             this.Disconnecting.Name = "Disconnecting";
             this.Disconnecting.Size = new System.Drawing.Size(140, 20);
             this.Disconnecting.TabIndex = 2;
-            this.Disconnecting.Text = "Déconnecter";
+            this.Disconnecting.Text = "Disconnect";
+            this.Disconnecting.CheckedChanged += new MageBot.Interface.SadikRadioButton.CheckedChangedEventHandler(this.Disconnecting_CheckedChanged);
             // 
             // UsingItem
             // 
@@ -334,7 +424,8 @@
             this.UsingItem.Name = "UsingItem";
             this.UsingItem.Size = new System.Drawing.Size(140, 20);
             this.UsingItem.TabIndex = 1;
-            this.UsingItem.Text = "Prendre une potion";
+            this.UsingItem.Text = "Take a potion";
+            this.UsingItem.CheckedChanged += new MageBot.Interface.SadikRadioButton.CheckedChangedEventHandler(this.UsingItem_CheckedChanged);
             // 
             // sadikCheckbox2
             // 
@@ -344,7 +435,8 @@
             this.sadikCheckbox2.Name = "sadikCheckbox2";
             this.sadikCheckbox2.Size = new System.Drawing.Size(140, 20);
             this.sadikCheckbox2.TabIndex = 0;
-            this.sadikCheckbox2.Text = "Activer";
+            this.sadikCheckbox2.Text = "Activate";
+            this.sadikCheckbox2.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox2_CheckedChanged);
             // 
             // sadikLabel1
             // 
@@ -353,9 +445,9 @@
             this.sadikLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
             this.sadikLabel1.Location = new System.Drawing.Point(15, 47);
             this.sadikLabel1.Name = "sadikLabel1";
-            this.sadikLabel1.Size = new System.Drawing.Size(140, 13);
+            this.sadikLabel1.Size = new System.Drawing.Size(132, 13);
             this.sadikLabel1.TabIndex = 19;
-            this.sadikLabel1.Text = "Personnages de niveau";
+            this.sadikLabel1.Text = "Characters from level";
             // 
             // groupBox2
             // 
@@ -372,7 +464,7 @@
             this.groupBox2.Size = new System.Drawing.Size(325, 221);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Agression";
+            this.groupBox2.Text = "Agress";
             // 
             // sadikTabControl1
             // 
@@ -429,16 +521,7 @@
 
         }
 
-        private bool ContainslistView(ListView listView, string s)
-        {
-            ListViewItem item = new ListViewItem
-            {
-                Text = s
-            };
-            return listView.Items.Contains(item);
-        }
         #endregion
-
     }
 }
 

@@ -1190,6 +1190,8 @@ namespace MageBot.Interface
                 Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
                 Account.Config.FloodInterval = 60;
                 Account.Config.AutoDeletionTime = (int)GestItemsUC.NUDAutoDeletion.Value;
+                Account.Config.DisconnectWhenRun = true;
+                Account.Config.ItemToUseWhenRun = PotionEnum.MemoryPotion;
                 //TODO : Fill other modules initial settings
             }
         }
@@ -1321,6 +1323,7 @@ namespace MageBot.Interface
             CaracUC.FillRecoveredConfig();
             FloodUC.FillRecoveredConfig();
             GestItemsUC.FillRecoveredConfig();
+            HeroicUC.FillRecoveredConfig();
 
             //TODO: Set other modules config by recovered config
 
