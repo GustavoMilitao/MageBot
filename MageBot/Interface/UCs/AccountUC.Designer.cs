@@ -1422,7 +1422,7 @@ namespace MageBot.Interface
             this.MiscPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MiscPage.Location = new System.Drawing.Point(3, 3);
             this.MiscPage.Name = "MiscPage";
-            this.MiscPage.SelectedIndex = 0;
+            this.MiscPage.SelectedIndex = 1;
             this.MiscPage.Size = new System.Drawing.Size(489, 386);
             this.MiscPage.TabIndex = 1;
             this.MiscPage.UseSelectable = true;
@@ -1584,7 +1584,6 @@ namespace MageBot.Interface
             this.ContextName,
             this.CellId,
             this.Type});
-            this.MapView.Enabled = false;
             this.MapView.Location = new System.Drawing.Point(3, 15);
             this.MapView.Name = "MapView";
             this.MapView.Size = new System.Drawing.Size(461, 326);

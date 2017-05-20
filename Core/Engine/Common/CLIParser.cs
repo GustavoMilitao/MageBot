@@ -934,7 +934,7 @@ namespace MageBot.Core.Engine.Common
                     }
                 }
                 else
-                    throw new Exception("L'utilisation de cette commande nécessite d'avoir une IA chargée.");
+                    throw new Exception("This command needs an AI to be executed.");
             }
             catch (Exception ex)
             {

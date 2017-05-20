@@ -51,6 +51,7 @@ namespace MageBot.Interface
         private delegate void SetLicenceCallback(bool response, string text);
         private delegate void DelegBar(int Bar, int Max, int value, string text);
         private delegate void DelegListView(ListViewItem delta, ListView gamma);
+        private delegate void DelegListViewResize(ListView LV);
         private delegate void DelegLabel(string text, Label lab);
         private delegate void DelegBool(bool param1);
         private delegate void DelegGatherPie(Dictionary<string, int> ressources, Dictionary<DateTime, int> xp);
@@ -1075,12 +1076,11 @@ namespace MageBot.Interface
                 text.Text = Core.Engine.Constants.Translate.GetTranslation(text.Text);
                 text.Text = "[" + DateTime.Now.ToLongTimeString() +
                     "] (" + text.Category + ") " + text.Text;
+                if (LogCb.Checked)
+                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot\Logs" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + Account.CharacterBaseInformations.Name + ".txt", true))
+                        fileWriter.WriteLine(text.Text);
                 if (text.Category == "Debug" && !DebugMode.Checked)
                     return;
-
-                if (LogCb.Checked)
-                    using (StreamWriter fileWriter = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MageBot.Logs\" + DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + Account.CharacterBaseInformations.Name + ".txt", true))
-                        fileWriter.WriteLine(text.Text);
 
                 int startIndex = LogConsole.TextLength;
 
@@ -1149,9 +1149,14 @@ namespace MageBot.Interface
 
         private void ResizeGrid(ListView grid)
         {
-            foreach (ColumnHeader ch in grid.Columns)
+            if (grid.InvokeRequired)
+                Invoke(new DelegListViewResize(ResizeGrid), grid);
+            else
             {
-                ch.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                foreach (ColumnHeader ch in grid.Columns)
+                {
+                    ch.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                }
             }
         }
 
@@ -1249,7 +1254,7 @@ namespace MageBot.Interface
             nudMinMonstersNumber.Value = Account.Config.MinMonstersNumber;
             nudMaxMonstersNumber.Value = Account.Config.MaxMonstersNumber;
             MonstersRestrictionsView.Clear();
-            foreach(MonsterRestrictions mr in Account.Config.MonsterRestrictions)
+            foreach (MonsterRestrictions mr in Account.Config.MonsterRestrictions)
             {
                 string[] row = { mr.MonsterName,
                                  mr.Operator.Description(),
@@ -1272,7 +1277,7 @@ namespace MageBot.Interface
             PhraseADire.Text = Account.Config.SentenceToSay;
             HouseSearcherBox.Checked = Account.Config.HouseSearcherEnabled;
             SearcherLogBox.Text = Account.Config.HouseSearcherLogPath;
-            if(Account.Config.WaitingForTheSale)
+            if (Account.Config.WaitingForTheSale)
                 Account.House = new HouseBuy(Account);
             CaracUC.FillRecoveredConfig();
             FloodUC.FillRecoveredConfig();

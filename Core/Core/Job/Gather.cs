@@ -25,12 +25,12 @@ namespace MageBot.Core.Job
                 return Current_El.Name;
             }
         }
-        
+
         /// <summary>
         /// Store the gathering stats.
         /// </summary>
         public Dictionary<string, int> Stats = new Dictionary<string, int>();
-       
+
         public InteractiveElement Current_El;
         public int Id
         {
@@ -75,72 +75,63 @@ namespace MageBot.Core.Job
         /// </param>
         public bool GoGather(List<int> ressources)
         {
-            List<int> ListeRessourcesID = ressources.Distinct().ToList();
-            List<int> ListDistance = new List<int>();
-            List<UsableElement> ListUsableElement = new List<UsableElement>();
             try
             {
-                if (ListeRessourcesID.Count > 0)
-                {
-                    foreach (var RessourceID in ListeRessourcesID)
+                #region Getting elements and join to some informations
+                List<int> resIDList = ressources.Distinct().ToList();
+                var usableElementsOnTheMap = account.MapData.UsableElements.Values.Join(account.MapData.InteractiveElements.Keys,
+                    usableElem => usableElem.Element.Id,
+                    interactiveElem => interactiveElem.Id,
+                    (usableElem, interactiveElem) => new
                     {
-                        foreach (var UsableElement in account.MapData.UsableElements)
-                        {
-                            foreach (InteractiveElement InteractiveElement in account.MapData.InteractiveElements.Keys)
-                            {
-                                if (UsableElement.Value.Element.Id == InteractiveElement.Id && InteractiveElement.IsUsable)
-                                {
-                                    if (InteractiveElement.TypeId == RessourceID && account.MapData.NoEntitiesOnCell(UsableElement.Value.CellId))
-                                    {
-                                        ListUsableElement.Add(UsableElement.Value);
-                                        ListDistance.Add(GetRessourceDistance((int)UsableElement.Value.Element.Id));
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                else
+                        Id = interactiveElem.Id,
+                        Name = interactiveElem.Name,
+                        CellId = usableElem.CellId,
+                        IsUsable = interactiveElem.IsUsable,
+                        TypeID = interactiveElem.TypeId,
+                        Type = interactiveElem.Type,
+                        EnabledSkills = interactiveElem.EnabledSkills,
+                        DisabledSkills = interactiveElem.DisabledSkills,
+                        Element = usableElem.Element
+                    }).ToList();
+                if (resIDList.Count > 0)
+                    usableElementsOnTheMap = usableElementsOnTheMap.Where(elem => resIDList.Contains(elem.TypeID)).ToList();
+                usableElementsOnTheMap = usableElementsOnTheMap.Where(elem => elem.IsUsable
+                    && account.MapData.NoEntitiesOnCell(elem.CellId)).ToList();
+                var usableElementsWithDistance = usableElementsOnTheMap.Select(elem => new
                 {
-                    foreach (var UsableElement in account.MapData.UsableElements)
-                    {
-                        foreach (InteractiveElement InteractiveElement in account.MapData.InteractiveElements.Keys)
-                        {
-                            if (UsableElement.Value.Element.Id == InteractiveElement.Id && InteractiveElement.IsUsable)
-                            {
-                                if (account.MapData.NoEntitiesOnCell(UsableElement.Value.CellId))
-                                {
-                                    ListUsableElement.Add(UsableElement.Value);
-                                    ListDistance.Add(GetRessourceDistance((int)UsableElement.Value.Element.Id));
-                                }
-                            }
-                        }
-                    }
-                }
+                    Id = elem.Id,
+                    Name = elem.Name,
+                    CellId = elem.CellId,
+                    IsUsable = elem.IsUsable,
+                    TypeID = elem.TypeID,
+                    Type = elem.Type,
+                    EnabledSkills = elem.EnabledSkills,
+                    DisabledSkills = elem.DisabledSkills,
+                    Element = elem.Element,
+                    ResourceDistance = GetRessourceDistance((int)elem.Id)
+                }).OrderBy(elem => elem.ResourceDistance);
+                #endregion
 
-                if (ListDistance.Count > 0)
+                if (usableElementsWithDistance.Count() > 0)
                 {
-                    foreach (UsableElement UsableElement in TrierDistanceElement(ListDistance, ListUsableElement))
+                    foreach (var element in usableElementsWithDistance)
                     {
-                        if (UsableElement.Element.IsUsable == false || m_BannedId.Contains((int)UsableElement.Element.Id))
+                        if (!element.IsUsable || m_BannedId.Contains((int)element.Id))
                             continue;
-                        Id = (int)UsableElement.Element.Id;
-                        SkillInstanceUid = UsableElement.Skills[0].SkillInstanceUid;
-                        Current_El = UsableElement.Element;
-                        int distance = GetRessourceDistance((int)UsableElement.Element.Id);
-                        account.Log(new DebugTextInformation("[Gather] Distance from element " + UsableElement.Element.Id + " = " + distance), 0);
+                        Id = (int)element.Id;
+                        SkillInstanceUid = element.EnabledSkills.FirstOrDefault().SkillInstanceUid;
+                        Current_El = element.Element;
+                        int distance = element.ResourceDistance;
+                        account.Log(new DebugTextInformation("[Gather] Distance from element " + element.Id + " = " + distance), 0);
                         if (distance == -1)
                         {
                             continue;
                         }
-                        if (account.MapData.CanGatherElement(Id, distance))
+                        if (account.MapData.CanGatherElement(Id))
                         {
                             account.SetStatus(Status.Gathering);
                             account.Map.UseElement(Id, SkillInstanceUid);
-                            return true;
-                        }
-                        else if (account.Map.MoveToElement((int)UsableElement.Element.Id, account.Inventory.WeaponRange))
-                        {
                             return true;
                         }
                         else

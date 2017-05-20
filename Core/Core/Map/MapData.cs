@@ -312,13 +312,11 @@ namespace MageBot.Core.Map
         /// <summary>
         /// Return whether or not we can gather an element at the specified distance.
         /// </summary>
-        public bool CanGatherElement(int id, int distance)
+        public bool CanGatherElement(int id)
         {
             Elements.StatedElement element = StatedElements.Find(s => s.Id == id);
-            if (element.State == 0 || element.State == 2)
+            if (element.State != 0)
                 return false;
-            if (distance <= 1 && distance >= 0)
-                return true;
             MapPoint characterPoint = new MapPoint(Character.Disposition.CellId);
             if (element != null)
             {
@@ -329,9 +327,12 @@ namespace MageBot.Core.Map
                     foreach (MapPoint mp in goodPointsList)
                         Account.Log(new DebugTextInformation("[CanGatherElement] GoodPoints -> " + mp.CellId), 0);
                     Account.Log(new DebugTextInformation("[CanGatherElement] Player CellId ? " + characterPoint.CellId), 0);
-                    var selectedPoint = goodPointsList.FirstOrDefault((point) => point.CellId == characterPoint.CellId);
+                    var selectedPoint = goodPointsList.FirstOrDefault();
                     if (selectedPoint != null)
+                    {
+                        Account.Map.MoveToCell(selectedPoint.CellId);
                         return true;
+                    }
                 }
                 Account.Gather.BanElementId(id);
                 return false;
