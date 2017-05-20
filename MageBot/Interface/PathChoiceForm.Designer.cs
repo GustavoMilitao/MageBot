@@ -53,7 +53,7 @@
             this.AddBt.RoundedCorners = false;
             this.AddBt.Size = new System.Drawing.Size(133, 26);
             this.AddBt.TabIndex = 0;
-            this.AddBt.Text = "Ajouter";
+            this.AddBt.Text = "Add";
             this.AddBt.Click += new System.EventHandler(this.AddBt_Click);
             // 
             // DelBt
@@ -67,7 +67,7 @@
             this.DelBt.RoundedCorners = false;
             this.DelBt.Size = new System.Drawing.Size(131, 26);
             this.DelBt.TabIndex = 1;
-            this.DelBt.Text = "Supprimer";
+            this.DelBt.Text = "Delete";
             this.DelBt.Click += new System.EventHandler(this.DelBt_Click);
             // 
             // LoadBt
@@ -81,7 +81,7 @@
             this.LoadBt.RoundedCorners = false;
             this.LoadBt.Size = new System.Drawing.Size(236, 26);
             this.LoadBt.TabIndex = 2;
-            this.LoadBt.Text = "Charger";
+            this.LoadBt.Text = "Load";
             this.LoadBt.Click += new System.EventHandler(this.LoadBt_Click);
             // 
             // FilesList
@@ -99,7 +99,7 @@
             this.FilesList.Location = new System.Drawing.Point(13, 93);
             this.FilesList.MultiSelect = false;
             this.FilesList.Name = "FilesList";
-            this.FilesList.Size = new System.Drawing.Size(512, 351);
+            this.FilesList.Size = new System.Drawing.Size(704, 351);
             this.FilesList.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.FilesList.TabIndex = 5;
             this.FilesList.UseCompatibleStateImageBehavior = false;
@@ -108,20 +108,20 @@
             // 
             // Nom
             // 
-            this.Nom.Text = "Nom";
+            this.Nom.Text = "Name";
             this.Nom.Width = 133;
             // 
             // Location
             // 
             this.Location.Text = "Location";
             this.Location.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Location.Width = 69;
+            this.Location.Width = 85;
             // 
             // Type
             // 
             this.Type.Text = "Type";
             this.Type.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Type.Width = 81;
+            this.Type.Width = 93;
             // 
             // Version
             // 
@@ -131,7 +131,7 @@
             // 
             // Auteur
             // 
-            this.Auteur.Text = "Auteur";
+            this.Auteur.Text = "Author";
             this.Auteur.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Auteur.Width = 111;
             // 
@@ -139,6 +139,7 @@
             // 
             this.Path.Text = "Path";
             this.Path.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Path.Width = 217;
             // 
             // openFileDialog1
             // 
@@ -149,14 +150,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 450);
+            this.ClientSize = new System.Drawing.Size(740, 488);
             this.Controls.Add(this.FilesList);
             this.Controls.Add(this.LoadBt);
             this.Controls.Add(this.DelBt);
             this.Controls.Add(this.AddBt);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PathChoiceForm";
-            this.Text = "Gestion des trajets";
+            this.Text = "Path Management";
             this.Load += new System.EventHandler(this.PathChoiceForm_Load);
             this.ResumeLayout(false);
 

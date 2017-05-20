@@ -46,18 +46,18 @@
             // 
             this.FilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Nom,
+            this.Author,
             this.Classe,
             this.Version,
-            this.Author,
             this.Description,
             this.Path});
             this.FilesList.FullRowSelect = true;
             this.FilesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.FilesList.HideSelection = false;
-            this.FilesList.Location = new System.Drawing.Point(11, 88);
+            this.FilesList.Location = new System.Drawing.Point(12, 93);
             this.FilesList.MultiSelect = false;
             this.FilesList.Name = "FilesList";
-            this.FilesList.Size = new System.Drawing.Size(466, 344);
+            this.FilesList.Size = new System.Drawing.Size(694, 344);
             this.FilesList.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.FilesList.TabIndex = 1;
             this.FilesList.UseCompatibleStateImageBehavior = false;
@@ -66,35 +66,33 @@
             // 
             // Nom
             // 
-            this.Nom.Text = "Nom";
+            this.Nom.Text = "Name";
             this.Nom.Width = 100;
             // 
             // Classe
             // 
-            this.Classe.DisplayIndex = 2;
-            this.Classe.Text = "Classe";
+            this.Classe.Text = "Class";
             this.Classe.Width = 111;
             // 
             // Version
             // 
-            this.Version.DisplayIndex = 3;
             this.Version.Text = "Version";
             this.Version.Width = 53;
             // 
             // Author
             // 
-            this.Author.DisplayIndex = 1;
-            this.Author.Text = "Auteur";
+            this.Author.Text = "Author";
             this.Author.Width = 112;
             // 
             // Description
             // 
             this.Description.Text = "Description";
-            this.Description.Width = 200;
+            this.Description.Width = 152;
             // 
             // Path
             // 
             this.Path.Text = "Path";
+            this.Path.Width = 154;
             // 
             // AddBt
             // 
@@ -107,7 +105,7 @@
             this.AddBt.RoundedCorners = false;
             this.AddBt.Size = new System.Drawing.Size(115, 26);
             this.AddBt.TabIndex = 2;
-            this.AddBt.Text = "Ajouter";
+            this.AddBt.Text = "Add";
             this.AddBt.Click += new System.EventHandler(this.AddBt_Click);
             // 
             // DelBt
@@ -121,7 +119,7 @@
             this.DelBt.RoundedCorners = false;
             this.DelBt.Size = new System.Drawing.Size(117, 26);
             this.DelBt.TabIndex = 3;
-            this.DelBt.Text = "Supprimer";
+            this.DelBt.Text = "Delete";
             this.DelBt.Click += new System.EventHandler(this.DelBt_Click);
             // 
             // LoadBt
@@ -135,7 +133,7 @@
             this.LoadBt.RoundedCorners = false;
             this.LoadBt.Size = new System.Drawing.Size(221, 26);
             this.LoadBt.TabIndex = 4;
-            this.LoadBt.Text = "Charger";
+            this.LoadBt.Text = "Load";
             this.LoadBt.Click += new System.EventHandler(this.LoadBt_Click);
             // 
             // openFileDialog1
@@ -146,14 +144,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(489, 441);
+            this.ClientSize = new System.Drawing.Size(719, 474);
             this.Controls.Add(this.LoadBt);
             this.Controls.Add(this.DelBt);
             this.Controls.Add(this.AddBt);
             this.Controls.Add(this.FilesList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "IAChoice";
-            this.Text = "Choix de l\'IA";
+            this.Text = "Choose an AI";
             this.ResumeLayout(false);
 
         }
