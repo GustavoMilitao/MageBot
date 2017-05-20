@@ -16,7 +16,7 @@ namespace MageBot.Interface.UCs
         {
             InitializeComponent();
             accUserControl = account;
-            foreach (KeyValuePair<string, long> p in accUserControl.Account.Config.ListOfPlayersWithLevel)
+            foreach (KeyValuePair<string, long> p in accUserControl.Account.Flood.ListOfPlayersWithLevel)
             {
                 PlayerListLb.Items.Add(String.Join(",", p.Key, p.Value));
             }

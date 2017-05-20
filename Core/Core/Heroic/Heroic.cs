@@ -5,7 +5,7 @@ using MageBot.Protocol.Types.Game.Context.Roleplay;
 using MageBot.Util.IO;
 using System;
 using System.Collections.Generic;
-using Util.Util.Enums.Internal;
+using MageBot.Util.Enums.Internal;
 
 namespace MageBot.Core.Heroic
 {
