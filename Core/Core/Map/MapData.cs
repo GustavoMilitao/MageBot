@@ -236,15 +236,15 @@ namespace MageBot.Core.Map
         /// </summary>
         public void DoAction()
         {
-            if (Account.Path != null && Account.Path.Launched)
-            {
-                Account.Log(new DebugTextInformation("[Path] DoAction"), 0);
-                Account.Path.ParsePath();
-            }
-            if (Account.Path != null && Account.Config.RelaunchPath)
-            {
-                Account.Path.Start();
-            }
+            //if (Account.Path != null && Account.Path.Launched)
+            //{
+            //    Account.Log(new DebugTextInformation("[Path] DoAction"), 0);
+            //    Account.Path.ParsePath();
+            //}
+            //if (Account.Path != null && Account.Config.RelaunchPath)
+            //{
+            //    Account.Path.Start();
+            //}
             if (Account.PetsList.Count != 0 && Account.Config.Begin)
             {
                 Account.StartFeeding();

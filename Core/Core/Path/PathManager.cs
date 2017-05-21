@@ -44,8 +44,6 @@ namespace MageBot.Core.Path
         (new List<char> { '<', '>', '=' });
         #endregion
 
-
-
         #region Constructors
         public PathManager(Account.Account account, string Path, string name)
         {
@@ -65,8 +63,8 @@ namespace MageBot.Core.Path
         {
             Launched = true;
             Stop = false;
-            ParsePath();
             Account.WatchDog.StartPathDog();
+            ParsePath();
         }
 
         /// <summary>
@@ -165,7 +163,6 @@ namespace MageBot.Core.Path
                     {
                         haveSomethingToGather = Account.PerformGather();
                     } while (haveSomethingToGather);
-                    Account.Wait(3000);
                     PerformActionsStack();
                     break;
                 default:
@@ -192,30 +189,20 @@ namespace MageBot.Core.Path
             //TODO: Fix the parser
             conditions = new List<PathCondition>();
             ActionsStack = new List<Action>();
-            foreach (string line in m_content)
+
+            var listActionsPath = m_content.Where(elem => !String.IsNullOrEmpty(elem) && !elem.StartsWith("@"));
+            foreach (string line in listActionsPath)
             {
-                if (line == "" || line == string.Empty || line == null || line.StartsWith("@"))
-                    continue;
                 if (line.Contains("+Condition "))
-                {
                     ParseCondition(line);
-                    continue;
-                }
-
-                if (flags.Any(flag => line.Contains(flag)))
-                {
+                else if (flags.Any(flag => line.Contains(flag)))
                     flag = flags.ElementAt(flags.IndexOf(line));
-                    continue;
-                }
-
-                if (Endflags.Any(Endflag => line.Contains(Endflag)))
+                else if (Endflags.Any(Endflag => line.Contains(Endflag)))
                 {
                     conditions.Clear();
                     flag = String.Empty;
-                    continue;
                 }
-
-                if (CheckConditions(false))
+                else if (CheckConditions(false))
                 {
                     Current_Map = Account.MapData.Pos;
                     AnalyseLine(line);
@@ -247,7 +234,7 @@ namespace MageBot.Core.Path
         /// </summary>
         private void AnalyseLine(string line)
         {
-            if (line.Contains("#"))
+            if (line.Contains("@"))
                 return;
             if (CheckConditions(true) && flag != String.Empty)
             {
@@ -263,35 +250,35 @@ namespace MageBot.Core.Path
         {
             line = line.Remove(0, 10);
             line = line.Trim();
-            foreach (char op in operateurs)
+            foreach (char oper in operateurs)
             {
-                if (line.IndexOf(op) != -1)
+                if (line.IndexOf(oper) != -1)
                 {
-                    PathConditionEnum e = PathConditionEnum.Null;
-                    string b = line.Substring(0, line.IndexOf(op));
+                    PathConditionEnum condition = PathConditionEnum.Null;
+                    string b = line.Substring(0, line.IndexOf(oper));
                     switch (b)
                     {
-                        case "Aucune":
-                            e = PathConditionEnum.Null;
+                        case "None":
+                            condition = PathConditionEnum.Null;
                             break;
                         case "LastMap":
-                            e = PathConditionEnum.LastMapId;
+                            condition = PathConditionEnum.LastMapId;
                             break;
                         case "Level":
-                            e = PathConditionEnum.Level;
+                            condition = PathConditionEnum.Level;
                             break;
                         case "Pods":
-                            e = PathConditionEnum.Pods;
+                            condition = PathConditionEnum.Pods;
                             break;
                         case "%Pods":
-                            e = PathConditionEnum.PodsPercent;
+                            condition = PathConditionEnum.PodsPercent;
                             break;
                         case "Alive":
-                            e = PathConditionEnum.Alive;
+                            condition = PathConditionEnum.Alive;
                             break;
                     }
-                    line = line.Remove(0, line.IndexOf(op) + 1);
-                    PathCondition c = new PathCondition(e, line, op, Account);
+                    line = line.Remove(0, line.IndexOf(oper) + 1);
+                    PathCondition c = new PathCondition(condition, line, oper, Account);
                     conditions.Add(c);
                     return;
                 }
@@ -344,7 +331,7 @@ namespace MageBot.Core.Path
                 if (c.CheckCondition() == false)
                 {
                     if (analysed)
-                        Account.Log(new BotTextInformation("Trajet : Condition non respectée"), 5);
+                        Account.Log(new BotTextInformation("Path : Condition not met"), 5);
                     return false;
                 }
             }

@@ -199,8 +199,8 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (account.Path != null)
-                account.Path.PerformActionsStack();
+            //if (account.Path != null)
+            //    account.Path.PerformActionsStack();
         }
 
         [MessageHandler(typeof(PopupWarningMessage))]

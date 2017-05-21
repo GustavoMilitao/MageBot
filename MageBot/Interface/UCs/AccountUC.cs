@@ -26,6 +26,7 @@ using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
 using MageBot.Protocol.Messages.Game.Dialog;
 using MageBot.Core.Fight;
 using MageBot.Util.Enums.EnumHelper;
+using System.Threading;
 
 namespace MageBot.Interface
 {
@@ -268,7 +269,8 @@ namespace MageBot.Interface
 
         private void LaunchPathBt_Click(object sender, EventArgs e)
         {
-            LaunchPath();
+            Thread t = new Thread(LaunchPath);
+            t.Start();
         }
 
         private void StopPathBt_Click(object sender, EventArgs e)
