@@ -46,7 +46,7 @@
             this.AccountTabs.Location = new System.Drawing.Point(20, 60);
             this.AccountTabs.Name = "AccountTabs";
             this.AccountTabs.SelectedIndex = 0;
-            this.AccountTabs.Size = new System.Drawing.Size(935, 464);
+            this.AccountTabs.Size = new System.Drawing.Size(660, 420);
             this.AccountTabs.TabIndex = 0;
             // 
             // tabPage2
@@ -91,17 +91,18 @@
             this.MasterChoice.Font = new System.Drawing.Font("Verdana", 8F);
             this.MasterChoice.FormattingEnabled = true;
             this.MasterChoice.ItemHeight = 20;
-            this.MasterChoice.Location = new System.Drawing.Point(709, 48);
+            this.MasterChoice.Location = new System.Drawing.Point(430, 41);
             this.MasterChoice.Name = "MasterChoice";
             this.MasterChoice.Size = new System.Drawing.Size(243, 26);
             this.MasterChoice.TabIndex = 1;
+            this.MasterChoice.SelectedIndexChanged += new System.EventHandler(this.MasterChoice_SelectedIndexChanged);
             // 
             // sadikLabel2
             // 
             this.sadikLabel2.AutoSize = true;
             this.sadikLabel2.Font = new System.Drawing.Font("Verdana", 8F);
             this.sadikLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(135)))), ((int)(((byte)(135)))));
-            this.sadikLabel2.Location = new System.Drawing.Point(706, 22);
+            this.sadikLabel2.Location = new System.Drawing.Point(427, 25);
             this.sadikLabel2.Name = "sadikLabel2";
             this.sadikLabel2.Size = new System.Drawing.Size(85, 13);
             this.sadikLabel2.TabIndex = 2;
@@ -111,7 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(975, 544);
+            this.ClientSize = new System.Drawing.Size(700, 500);
             this.Controls.Add(this.sadikLabel2);
             this.Controls.Add(this.MasterChoice);
             this.Controls.Add(this.AccountTabs);

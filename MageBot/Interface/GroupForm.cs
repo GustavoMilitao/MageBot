@@ -25,8 +25,8 @@ namespace MageBot.Interface
         public GroupForm(List<Account> accounts, string name)
         {
             InitializeComponent();
-            Text = name;
             accounts.ForEach(i => i.Config.IsSocket = true);
+            listAccounts = new List<AccountUC>();
             foreach (Account account in accounts)
             {
                 TabPage tab = new TabPage(account.AccountName);
@@ -35,9 +35,11 @@ namespace MageBot.Interface
                 AccountUC naccount = new AccountUC(account, this);
                 listAccounts.Add(naccount);
                 tab.Controls.Add(naccount);
+                MasterChoice.Items.Add(account.AccountName);
                 naccount.Dock = DockStyle.Fill;
                 naccount.Show();
             }
+            Text = name;
         }
 
         #endregion
@@ -52,7 +54,7 @@ namespace MageBot.Interface
         #region events
         private void MasterChoice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string item = (string)MasterChoice1.SelectedItem;
+            string item = (string)MasterChoice.SelectedItem;
             AccountUC master = listAccounts.Where(i => i.Account.AccountName == item).FirstOrDefault();
             master.Account.Config.IsMaster = true;
             master.Account.Config.IsSlave = false;

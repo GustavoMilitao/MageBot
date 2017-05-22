@@ -245,14 +245,13 @@ namespace MageBot.Core.Engine.Handlers.Context
 
                 PartyAcceptInvitationMessage msg2 = new PartyAcceptInvitationMessage(msg.PartyId);
                 account.SocketManager.Send(msg2);
-                account.Log(new BotTextInformation("J'ai rejoint le groupe :3"), 3);
+                account.Log(new BotTextInformation("I joined the group :3"), 3);
 
             }
             else
             {
                 PartyRefuseInvitationMessage msg2 = new PartyRefuseInvitationMessage(msg.PartyId);
                 account.SocketManager.Send(msg2);
-
             }
         }
 

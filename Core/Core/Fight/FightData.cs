@@ -278,7 +278,7 @@ namespace MageBot.Core.Fight
         public void SetSpellCasted(long id, int spellId, int destinationCellId)
         {
             BFighter fighter = GetFighter(id);
-            if (fighter != null && fighter.Id == Fighter.Id)
+            if (fighter != null && Fighter != null && fighter.Id == Fighter.Id)
             {
                 int spellLevel = -1;
                 BSpell spell = Account.Spells.FirstOrDefault(s => s.SpellId == spellId);

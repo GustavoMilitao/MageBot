@@ -154,13 +154,13 @@ namespace MageBot.Protocol.Messages.Game.Context.Roleplay.Party
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
-            m_fightMap = new MapCoordinatesExtended();
-            m_fightMap.Deserialize(reader);
             m_reason = reader.ReadByte();
             m_memberId = reader.ReadVarUhLong();
             m_memberAccountId = reader.ReadInt();
             m_memberName = reader.ReadUTF();
             m_fightId = reader.ReadInt();
+            m_fightMap = new MapCoordinatesExtended();
+            m_fightMap.Deserialize(reader);
             m_timeBeforeFightStart = reader.ReadVarShort();
         }
     }
