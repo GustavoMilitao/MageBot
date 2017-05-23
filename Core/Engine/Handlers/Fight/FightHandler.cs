@@ -145,9 +145,10 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             account.FightData.FightStop();
-            if (account.Path != null)
+            if (account.Path != null && account.Path.Launched)
                 if (!account.Fight.SearchFight())
-                    account.Path.ResumeThread();
+                    //account.Path.WaitHandler.Set();
+                    account.Path.Thread.Resume();
                 //account.Path.PerformFlag();
         }
 

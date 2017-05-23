@@ -22,7 +22,8 @@ namespace MageBot.Core.Fight
     {
         #region Fields
         #region Dictionary
-        public Dictionary<int, int> DurationByEffect { get; set; } = new Dictionary<int, int>();
+        public Dictionary<uint, int> DurationByEffect { get; set; } = new Dictionary<uint, int>();
+        public Dictionary<int, int> FightStates { get; set; } = new Dictionary<int, int>();
         public Dictionary<int, int> LastTurnLaunchBySpell { get; set; } = new Dictionary<int, int>();
         public Dictionary<int, int> TotalLaunchBySpell { get; set; } = new Dictionary<int, int>();
         public Dictionary<int, Dictionary<int, int>> TotalLaunchByCellBySpell { get; set; } = new Dictionary<int, Dictionary<int, int>>();
@@ -35,7 +36,7 @@ namespace MageBot.Core.Fight
         public List<BFighter> DeadEnnemies { get; set; } = new List<BFighter>();
         public int TurnId { get; set; }
 
-        
+
         public bool IsFighterTurn { get; set; } = false;
         public bool IsFightStarted { get; set; } = false;
         public bool WaitForReady { get; set; } = false;
@@ -171,7 +172,7 @@ namespace MageBot.Core.Fight
         /// </summary>
         public BFighter GetSummoner()
         {
-            Tuple<long, int> temp = new Tuple<long,int>(0, -1);
+            Tuple<long, int> temp = new Tuple<long, int>(0, -1);
             foreach (KeyValuePair<long, List<BFighter>> pair in M_Summons)
             {
                 if (pair.Value.Count > temp.Item2)
@@ -201,7 +202,7 @@ namespace MageBot.Core.Fight
                 DeadEnnemies.Add(fighter);
                 Account.Log(new ActionTextInformation(fighter.Name + " is dead !"), 5);
             }
-            Fighters.Remove(fighter);          
+            Fighters.Remove(fighter);
         }
 
         /// <summary>
@@ -209,24 +210,37 @@ namespace MageBot.Core.Fight
         /// </summary>
         public void SetEffect(AbstractFightDispellableEffect effect, int actionId = -1)
         {
-            if (effect is FightTemporaryBoostStateEffect m_effect1)
+            FightTemporaryBoostEffect effectToUpdate = (FightTemporaryBoostEffect)effect;
+
+            if (!IsDead && effectToUpdate.TargetId == Fighter.Id)
             {
-                if (!IsDead && m_effect1.TargetId == Fighter.Id)
+                if (DurationByEffect.ContainsKey(effectToUpdate.EffectId))
                 {
-                    if (DurationByEffect.ContainsKey(m_effect1.StateId))
-                        DurationByEffect.Remove(m_effect1.StateId);
-                    DurationByEffect.Add(m_effect1.StateId, effect.TurnDuration);
+                    DurationByEffect.Remove(effectToUpdate.EffectId);
+                    DurationByEffect.Add(effectToUpdate.EffectId, effectToUpdate.TurnDuration);
+                }
+                else
+                {
+                    DurationByEffect.Add(effectToUpdate.EffectId, effectToUpdate.TurnDuration);
+                    if (actionId == 168)
+                        Fighter.ActionPoints -= effectToUpdate.Delta;
+                    else if (actionId == 169)
+                        Fighter.MovementPoints -= effectToUpdate.Delta;
+                    else if (actionId == 116)
+                        Account.CharacterStats.Range.ContextModif -= effectToUpdate.Delta;
                 }
             }
-            else if (effect is FightTemporaryBoostEffect m_effect2)
+            if(effectToUpdate is FightTemporaryBoostStateEffect state)
             {
-                if (actionId == 168)
-                    Fighter.ActionPoints -= m_effect2.Delta;
-                else if (actionId == 169)
-                    Fighter.MovementPoints -= m_effect2.Delta;
-                else if (!IsDead && actionId == 116 && m_effect2.TargetId == Fighter.Id)
-                    Account.CharacterStats.Range.ContextModif -= m_effect2.Delta;
-
+                if (FightStates.ContainsKey(state.StateId))
+                {
+                    FightStates.Remove(state.StateId);
+                    FightStates.Add(state.StateId, effectToUpdate.TurnDuration);
+                }
+                else
+                {
+                    FightStates.Add(state.StateId, state.TurnDuration);
+                }
             }
         }
 
@@ -269,7 +283,7 @@ namespace MageBot.Core.Fight
                 }
                 Account.Log(new ActionTextInformation(fighter.Name + ": " + delta + "PV."), 5);
             }
-            
+
         }
 
         /// <summary>
@@ -421,40 +435,40 @@ namespace MageBot.Core.Fight
         {
             if (id == Account.CharacterBaseInformations.ObjectID)
             {
-                int num4 = 0;
-                List<int> list = new List<int>();
                 IsFighterTurn = false;
-                TotalLaunchBySpell.Clear(); //Nettoyage des variables de vérification de lancement d'un sort
-                TotalLaunchByCellBySpell.Clear(); //Nettoyage des variables de vérification de lancement d'un sort
-                for (int i = 0; i < DurationByEffect.Keys.Count; i++)
-                {
-                    Dictionary<int, int> durationPerEffect = DurationByEffect;
-                    num4 = Enumerable.ElementAtOrDefault<int>(DurationByEffect.Keys, i);
-                    durationPerEffect[num4] = (durationPerEffect[num4] - 1);
-                    if (DurationByEffect[Enumerable.ElementAtOrDefault<int>(DurationByEffect.Keys, i)] <= 0)
-                        list.Add(Enumerable.ElementAtOrDefault<int>(DurationByEffect.Keys, i));
-                }
-                while (list.Count > 0)
-                {
-                    DurationByEffect.Remove(list[0]);
-                    list.RemoveAt(0);
-                }
-                for (int i = 0; i < LastTurnLaunchBySpell.Keys.Count; i++)
-                {
-                    Dictionary<int, int> dictionary = LastTurnLaunchBySpell;
-                    num4 = Enumerable.ElementAtOrDefault<int>(LastTurnLaunchBySpell.Keys, i);
-                    dictionary[num4] = (dictionary[num4] - 1);
-                    if (LastTurnLaunchBySpell[Enumerable.ElementAtOrDefault<int>(LastTurnLaunchBySpell.Keys, i)] <= 0)
-                        list.Add(Enumerable.ElementAtOrDefault<int>(LastTurnLaunchBySpell.Keys, i));
-                }
-                while (list.Count > 0)
-                {
-                    LastTurnLaunchBySpell.Remove(list[0]);
-                    list.RemoveAt(0);
-                }
-                Account.Log(new ActionTextInformation("Fin du tour"), 5);
+                TotalLaunchBySpell.Clear(); //Cleaning Spell Check Varying Variables
+                TotalLaunchByCellBySpell.Clear(); //Cleaning Spell Check Varying Variables
+                UpdateEffectsDuration();
+                UpdateLastTurnLaunchSpell();
+                Account.Log(new ActionTextInformation("End of turn"), 5);
             }
 
+        }
+
+        private void UpdateLastTurnLaunchSpell()
+        {
+            Dictionary<int, int> lastTurnLaunchSpell = new Dictionary<int, int>();
+            foreach (KeyValuePair<int, int> lastLaunchSpell in LastTurnLaunchBySpell)
+            {
+                lastTurnLaunchSpell.Add(lastLaunchSpell.Key, lastLaunchSpell.Value - 1);
+            }
+            LastTurnLaunchBySpell = lastTurnLaunchSpell;
+        }
+
+        private void UpdateEffectsDuration()
+        {
+            Dictionary<uint, int> newDuration = new Dictionary<uint, int>();
+            foreach (KeyValuePair<uint, int> duration in DurationByEffect)
+            {
+                newDuration.Add(duration.Key, duration.Value - 1);
+            }
+            DurationByEffect = newDuration;
+            Dictionary<int, int> newStates = new Dictionary<int, int>();
+            foreach (KeyValuePair<int, int> state in FightStates)
+            {
+                newStates.Add(state.Key, state.Value);
+            }
+            FightStates = newStates;
         }
 
         /// <summary>
@@ -478,6 +492,7 @@ namespace MageBot.Core.Fight
             LastTurnLaunchBySpell.Clear();
             TotalLaunchByCellBySpell.Clear();
             DurationByEffect.Clear();
+            FightStates.Clear();
             IsFightStarted = isFightStarted;
             WaitForReady = (!isFightStarted && canSayReady);
             FollowingGroup = null;
@@ -500,7 +515,7 @@ namespace MageBot.Core.Fight
             int SavDistance = -1;
             foreach (BFighter TestFighter in Fighters)
             {
-                if (TestFighter.TeamId == Fighter.TeamId || TestFighter.IsAlive == false)
+                if (TestFighter.TeamId == Fighter.TeamId || !TestFighter.IsAlive)
                     continue;
                 int dist = DistanceFrom(TestFighter);
                 if (((dist < SavDistance) || (SavDistance == -1)) && TestFighter != Fighter)
@@ -914,13 +929,13 @@ namespace MageBot.Core.Fight
             ArrayList listOfStates = (ArrayList)spellLevelsData.Fields["statesRequired"];
             foreach (var state in listOfStates)
             {
-                if (!(DurationByEffect.ContainsKey((int)state)))
+                if (!(FightStates.ContainsKey((int)state)))
                     return SpellInabilityReason.RequiredState;
             }
             listOfStates = (ArrayList)spellLevelsData.Fields["statesForbidden"];
             foreach (var state in listOfStates)
             {
-                if (DurationByEffect.ContainsKey((int)state))
+                if (FightStates.ContainsKey((int)state))
                     return SpellInabilityReason.ForbiddenState;
             }
             return SpellInabilityReason.None;

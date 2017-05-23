@@ -16,7 +16,6 @@ namespace MageBot.Core.Path
 
         public string Path;
         public string PathName { get; set; }
-        private bool paused { get; set; }
         private string Current_Map { get; set; }
         private string Current_Flag
         {
@@ -25,6 +24,7 @@ namespace MageBot.Core.Path
         }
         public bool Launched { get; set; }
         public Thread Thread { get; set; }
+        //public EventWaitHandle WaitHandler { get; set; }
         public List<Action> ActionsStack { get; set; }
         public Action Current_Action { get; set; }
         private string flag { get; set; }
@@ -62,6 +62,7 @@ namespace MageBot.Core.Path
         /// </summary>
         public void Start()
         {
+            //WaitHandler = new EventWaitHandle(false, EventResetMode.ManualReset);
             Thread = new Thread(() =>
             {
                 Account.Log(new BotTextInformation("Path started"), 1);
@@ -82,8 +83,9 @@ namespace MageBot.Core.Path
             Launched = false;
             ClearStack();
             Account.WatchDog.StopPathDog();
-            Thread.Abort();
+            //WaitHandler.Set();
             Thread.Join();
+            Thread.Abort();
         }
 
         /// <summary>
@@ -171,11 +173,14 @@ namespace MageBot.Core.Path
                     if (!Account.Fight.SearchFight())
                         PerformActionsStack();
                     else
-                        PauseThread();
+                    {
+                        //WaitHandler.WaitOne();
+                        Thread.Suspend();
+                    }
                 }
                 else
                 {
-                    PauseThread();
+                    Thread.Suspend();
                 }
             }
             else if (Account.Config.IsSlave == false && Account.Fight != null)
@@ -190,11 +195,13 @@ namespace MageBot.Core.Path
                     if (!Account.Fight.SearchFight())
                         PerformActionsStack();
                     else
-                        PauseThread();
+                    {
+                        Thread.Suspend();
+                    }
                 }
                 else
                 {
-                    PauseThread();
+                    Thread.Suspend();
                 }
             }
             else
@@ -202,20 +209,6 @@ namespace MageBot.Core.Path
                 Account.Log(new ErrorTextInformation("This Character isn't the master, path cannot do action."), 0);
                 Thread.Abort();
             }
-        }
-
-        public void ResumeThread()
-        {
-            paused = false;
-        }
-
-        public void PauseThread()
-        {
-            paused = true;
-            do
-            {
-                Thread.Sleep(1);
-            } while (paused);
         }
 
         /// <summary>

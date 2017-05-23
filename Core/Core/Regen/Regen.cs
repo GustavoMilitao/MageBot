@@ -19,7 +19,7 @@ namespace MageBot.Core.Regen
 
         public void PulseRegen()
         {
-            if (((Account.CharacterStats.LifePoints / Account.CharacterStats.MaxLifePoints) * 100) < Account.Config.RegenChoice)
+            if (((Account.CharacterStats.LifePoints / (Account.CharacterStats.MaxLifePoints * 1.0)) * 100) < Account.Config.RegenChoice)
             {
                 Account.SetStatus(Status.Regenerating);
                 if (Account.Config.RegenItems.Count > 0)
