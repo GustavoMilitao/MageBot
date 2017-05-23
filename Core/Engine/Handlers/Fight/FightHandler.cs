@@ -146,7 +146,8 @@ namespace MageBot.Core.Engine.Handlers.Fight
             }
             account.FightData.FightStop();
             if (account.Path != null)
-                account.Path.PerformFlag();
+                account.Path.PauseEvent.Set();
+                //account.Path.PerformFlag();
         }
 
         [MessageHandler(typeof(GameFightHumanReadyStateMessage))]
@@ -319,7 +320,7 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 account.Fight.ExecutePlan();
             }
             else
-                account.Log(new ErrorTextInformation("Aucune IA, le bot ne peut pas combattre !"), 0);
+                account.Log(new ErrorTextInformation("No AI, the bot can not fight !"), 0);
         }
 
         [MessageHandler(typeof(GameFightPlacementPossiblePositionsMessage))]
@@ -403,8 +404,9 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             int percent = ((int)msg.LifePoints / (int)msg.MaxLifePoints) * 100;
-            account.Log(new BotTextInformation("Fin de la régénération. + " + msg.LifePointsGained + " points de vie"), 2);
+            account.Log(new BotTextInformation("Regeneration ends. + " + msg.LifePointsGained + " lifepoints"), 2);
             account.ModifBar(2, (int)msg.MaxLifePoints, (int)msg.LifePoints, "Life");
+            account.SetStatus(Status.None);
         }
 
         [MessageHandler(typeof(GameFightSpectatorJoinMessage))]

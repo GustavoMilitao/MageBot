@@ -45,8 +45,8 @@ namespace MageBot.Interface
             foreach (ListViewItem item in listViewGroups.SelectedItems)
             {
                 Group group = SearchGroups(item.Text);
-                GroupForm frm = new GroupForm(group.accounts, group.name);
-                foreach (Account account in group.accounts)
+                GroupForm frm = new GroupForm(group.Accounts, group.name);
+                foreach (Account account in group.Accounts)
                 {
                     account.Init();
                 }

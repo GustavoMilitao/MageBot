@@ -24,6 +24,8 @@ namespace MageBot.Core.Path
         }
         public bool Launched { get; set; }
         public Thread Thread { get; set; }
+        public ManualResetEvent ShutDonwEvent { get; set; }
+        public ManualResetEvent PauseEvent { get; set; }
         public List<Action> ActionsStack { get; set; }
         public Action Current_Action { get; set; }
         private string flag { get; set; }
@@ -61,10 +63,17 @@ namespace MageBot.Core.Path
         /// </summary>
         public void Start()
         {
-            Launched = true;
-            Stop = false;
-            Account.WatchDog.StartPathDog();
-            ParsePath();
+            ShutDonwEvent = new ManualResetEvent(false);
+            PauseEvent = new ManualResetEvent(true);
+            Thread = new Thread(() =>
+            {
+                Account.Log(new BotTextInformation("Path started"), 1);
+                Launched = true;
+                Stop = false;
+                Account.WatchDog.StartPathDog();
+                ParsePath();
+            });
+            Thread.Start();
         }
 
         /// <summary>
@@ -124,52 +133,76 @@ namespace MageBot.Core.Path
                 return;
             switch (Current_Flag)
             {
-                //case "<Move>":
-                //    //Aucune action spécifique au flag, on éxécute directement les actions
-                //    if (Account.Config.IsMaster == true && Account.MyGroup != null)
-                //    {
-                //        PerformActionsStack();
-                //    }
-                //    else if (Account.Config.IsSlave == false)
-                //    {
-                //        PerformActionsStack();
-                //    }
-                //    else
-                //    {
-                //        Account.Log(new ErrorTextInformation("Impossible d'enclencher le déplacement. (mûle ?)"), 0);
-                //    }
-                //    break;
                 case "<Fight>":
-                    //On lance un combat, les actions seront effectuées après le combat
-                    if (Account.Config.IsMaster == true && Account.MyGroup != null && Account.Fight != null)
-                    {
-                        if (Account.State != Status.Fighting && !Account.Fight.SearchFight())
-                            PerformActionsStack();
-                    }
-                    else if (Account.Config.IsSlave == false && Account.Fight != null)
-                    {
-                        if (Account.State != Status.Fighting && !Account.Fight.SearchFight())
-                            PerformActionsStack();
-                    }
-                    else
-                    {
-                        Account.Log(new ErrorTextInformation("Impossible d'enclencher le déplacement. (mûle ? Aucune IA ?)"), 0);
-                    }
+                    // Start a fight, the actions will be carried out after the fight
+                    FightFlag();
                     break;
                 case "<Gather>":
-                    //On récolte la map, les actions seront effectuées après la récolte
-                    bool haveSomethingToGather;
-                    do
-                    {
-                        haveSomethingToGather = Account.PerformGather();
-                    } while (haveSomethingToGather);
-                    PerformActionsStack();
+                    //We collect the map, the actions will be carried out after the harvest
+                    GatherFlag();
                     break;
                 default:
                     PerformActionsStack();
                     break;
             }
             Account.WatchDog.Update();
+        }
+
+        private void GatherFlag()
+        {
+            bool haveSomethingToGather;
+            do
+            {
+                haveSomethingToGather = Account.PerformGather();
+            } while (haveSomethingToGather);
+            PerformActionsStack();
+        }
+
+        private void FightFlag()
+        {
+            if (Account.Config.IsMaster == true && Account.MyGroup != null && Account.Fight != null)
+            {
+                if (Account.State != Status.Fighting)
+                {
+                    do
+                    {
+                        Account.Wait(1);
+                    } while (Account.MyGroup.Accounts.Any(acc => acc.State != Status.None));
+                    //Wait for team regenerating
+                    if (!Account.Fight.SearchFight())
+                        PerformActionsStack();
+                    else
+                        PauseEvent.Reset();
+                }
+                else
+                {
+                    PauseEvent.Reset();
+                }
+            }
+            else if (Account.Config.IsSlave == false && Account.Fight != null)
+            {
+                if (Account.State != Status.Fighting)
+                {
+                    do
+                    {
+                        Account.Wait(1);
+                    } while (Account.State != Status.None);
+                    //Wait for team regenerating
+                    if (!Account.Fight.SearchFight())
+                        PerformActionsStack();
+                    else
+                        PauseEvent.Reset();
+                }
+                else
+                {
+                    PauseEvent.Reset();
+                }
+            }
+            else
+            {
+                Account.Log(new ErrorTextInformation("This Character isn't the master, path cannot do action."), 0);
+                Thread.Abort();
+            }
         }
 
         /// <summary>

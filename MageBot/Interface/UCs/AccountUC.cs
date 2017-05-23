@@ -269,8 +269,7 @@ namespace MageBot.Interface
 
         private void LaunchPathBt_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(LaunchPath);
-            t.Start();
+            LaunchPath();
         }
 
         private void StopPathBt_Click(object sender, EventArgs e)
@@ -1171,10 +1170,7 @@ namespace MageBot.Interface
         {
             if (Account.Path != null)
             {
-                Account.Log(new BotTextInformation("Path started"), 1);
                 Account.Path.Start();
-                if (Account.Config.RelaunchPath)
-                    LaunchPath();
             }
             else
                 Account.Log(new ErrorTextInformation("No Path loaded"), 3);

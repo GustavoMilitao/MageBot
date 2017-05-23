@@ -5,14 +5,14 @@ namespace MageBot.Core.Groups
     public class Group
     {
         #region Fields
-        public List<Account.Account> accounts;
+        public List<Account.Account> Accounts { get; set; }
         public string name;
         #endregion
 
         #region Constructeurs
         public Group(List<Account.Account> list, string namee)
         {
-            accounts = list;
+            Accounts = list;
             name = namee;
         }
         #endregion
@@ -20,7 +20,7 @@ namespace MageBot.Core.Groups
         #region Publics methods
         public Account.Account GetMaster()
         {
-            foreach (Account.Account a in accounts)
+            foreach (Account.Account a in Accounts)
             {
                 if (a.Config.IsMaster)
                     return a;
@@ -30,12 +30,12 @@ namespace MageBot.Core.Groups
 
         public void MoveGroup(string move)
         {
-            foreach (Account.Account a in accounts)
+            foreach (Account.Account a in Accounts)
             {
                 if (a.Config.IsMaster)
                 {
                     a.Map.ChangeMap(move);
-                    foreach (Account.Account ac in accounts)
+                    foreach (Account.Account ac in Accounts)
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Map.ChangeMap(move);
@@ -47,12 +47,12 @@ namespace MageBot.Core.Groups
 
         public void UseItemGroup(int uid)
         {
-            foreach (Account.Account a in accounts)
+            foreach (Account.Account a in Accounts)
             {
                 if (a.Config.IsMaster == true)
                 {
                     a.Inventory.UseItem(uid);
-                    foreach (Account.Account ac in accounts)
+                    foreach (Account.Account ac in Accounts)
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Inventory.UseItem(uid);
@@ -64,12 +64,12 @@ namespace MageBot.Core.Groups
 
         public void UseZaapGroup()
         {
-            foreach (Account.Account a in accounts)
+            foreach (Account.Account a in Accounts)
             {
                 if (a.Config.IsMaster == true)
                 {
                     a.Map.UseZaapTo((int)a.Path.Current_Action.m_delta);
-                    foreach (Account.Account ac in accounts)
+                    foreach (Account.Account ac in Accounts)
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Map.UseZaapTo((int)a.Path.Current_Action.m_delta);
@@ -82,12 +82,12 @@ namespace MageBot.Core.Groups
 
         public void UseZaapiGroup()
         {
-            foreach (Account.Account a in accounts)
+            foreach (Account.Account a in Accounts)
             {
                 if (a.Config.IsMaster == true)
                 {
                     a.Map.useZaapiTo((int)a.Path.Current_Action.m_delta);
-                    foreach (Account.Account ac in accounts)
+                    foreach (Account.Account ac in Accounts)
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Map.useZaapiTo((int)a.Path.Current_Action.m_delta);
@@ -100,12 +100,12 @@ namespace MageBot.Core.Groups
 
         public void MoveToCellGroup(int delta)
         {
-            foreach (Account.Account a in accounts)
+            foreach (Account.Account a in Accounts)
             {
                 if (a.Config.IsMaster == true)
                 {
                     a.Map.MoveToCell(delta);
-                    foreach (Account.Account ac in accounts)
+                    foreach (Account.Account ac in Accounts)
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Map.MoveToCell(delta);
@@ -118,12 +118,12 @@ namespace MageBot.Core.Groups
 
         public void MoveToElementGroup(int delta)
         {
-            foreach (Account.Account a in accounts)
+            foreach (Account.Account a in Accounts)
             {
                 if (a.Config.IsMaster == true)
                 {
                     a.Map.MoveToSecureElement(delta);
-                    foreach (Account.Account ac in accounts)
+                    foreach (Account.Account ac in Accounts)
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Map.MoveToSecureElement(delta);
@@ -136,12 +136,12 @@ namespace MageBot.Core.Groups
 
         public void TalkToNpcGroup(int delta)
         {
-            foreach (Account.Account a in accounts)
+            foreach (Account.Account a in Accounts)
             {
                 if (a.Config.IsMaster == true)
                 {
                     a.Npc.TalkToNpc(delta);
-                    foreach (Account.Account ac in accounts)
+                    foreach (Account.Account ac in Accounts)
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Npc.TalkToNpc(delta);
@@ -154,12 +154,12 @@ namespace MageBot.Core.Groups
 
         public void RequestExchangeGroup(string delta)
         {
-            foreach (Account.Account a in accounts)
+            foreach (Account.Account a in Accounts)
             {
                 if (a.Config.IsMaster == true)
                 {
                     a.Inventory.RequestExchange(delta);
-                    foreach (Account.Account ac in accounts)
+                    foreach (Account.Account ac in Accounts)
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Inventory.RequestExchange(delta);

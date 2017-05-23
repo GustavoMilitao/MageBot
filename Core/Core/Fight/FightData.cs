@@ -191,15 +191,15 @@ namespace MageBot.Core.Fight
         public void SetFighterDeath(long id)
         {
             BFighter fighter = GetFighter(id);
-            DeadEnnemies.Add(fighter);
-            if (!IsDead && fighter.Id == Fighter.Id)
+            if (fighter.Id == Fighter.Id)
             {
-                Account.Log(new ErrorTextInformation("Personnage mort :'("), 0);
+                Account.Log(new ErrorTextInformation("Character Dead :'("), 0);
                 IsDead = true;
             }
             else if (fighter.CreatureGenericId != 0)
             {
-                Account.Log(new ActionTextInformation(fighter.Name + " est mort !"), 5);
+                DeadEnnemies.Add(fighter);
+                Account.Log(new ActionTextInformation(fighter.Name + " is dead !"), 5);
             }
             Fighters.Remove(fighter);          
         }

@@ -40,8 +40,16 @@ namespace MageBot.Core.Regen
                 Account.SocketManager.Send(msg);
                 Account.Log(new GeneralTextInformation(String.Format("Regenerating for {0} seconds.", time)), 2);
                 Account.Wait((time + 1) * 1000);
-                if (Account.Path != null && Account.Path.Launched)
-                    Account.Path.ParsePath();
+                EndRegen();
+            }
+        }
+
+        private void EndRegen()
+        {
+            if(Account.State == Status.Regenerating)
+            {
+                EmotePlayRequestMessage msg = new EmotePlayRequestMessage(1);
+                Account.SocketManager.Send(msg);
             }
         }
 
