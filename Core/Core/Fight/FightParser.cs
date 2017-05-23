@@ -70,6 +70,7 @@ namespace MageBot.Core.Fight
         {
             this.Account = Account;
             AIPath = Path;
+            Name = name;
             spells = new Dictionary<BSpell, int>();
             targets = new Dictionary<string, int>();
             positions = new List<PlacementEnum>();

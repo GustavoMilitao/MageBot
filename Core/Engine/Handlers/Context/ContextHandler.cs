@@ -375,14 +375,15 @@ namespace MageBot.Core.Engine.Handlers.Context
 
             account.MapData.ParseActors(new List<GameRolePlayActorInformations>() { msg.Informations }.ToArray());
 
-            if (account.Flood.FloodStarted && account.Config.FloodInPrivateChannel && msg.Informations is GameRolePlayCharacterInformations)
+            if (account.Config.FloodInPrivateChannel && msg.Informations is GameRolePlayCharacterInformations)
             {
                 GameRolePlayCharacterInformations infos = (GameRolePlayCharacterInformations)msg.Informations;
                 account.Flood.SendPrivateTo(infos);
                 if (account.Config.FloodSaveInMemory)
                 {
                     long level = (long)Math.Abs((infos.AlignmentInfos.CharacterPower - infos.ContextualId));
-                    account.Flood.ListOfPlayersWithLevel.Add(infos.Name, level);
+                    if (!account.Flood.ListOfPlayersWithLevel.ContainsKey(infos.Name))
+                        account.Flood.ListOfPlayersWithLevel.Add(infos.Name, level);
                     account.Flood.SaveNameInDisk();
                 }
             }
@@ -428,7 +429,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             }
             if (account.Gather.Current_El == null)
                 return;
-            account.Log(new ActionTextInformation("Ressource récoltée : " + account.Gather.resourceName + " +" + msg.BaseQuantity), 3);
+            account.Log(new ActionTextInformation("Resource gathered : " + account.Gather.resourceName + " +" + msg.BaseQuantity), 3);
             if (account.Gather.Stats.ContainsKey(account.Gather.resourceName))
                 account.Gather.Stats[account.Gather.resourceName] += (int)msg.BaseQuantity;
             else
@@ -447,7 +448,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             }
             account.Gather.BanElementId(account.Gather.Id);
             //if (account.Path != null)
-                //account.Path.PerformFlag();
+            //account.Path.PerformFlag();
         }
 
         [MessageHandler(typeof(InteractiveUseEndedMessage))]

@@ -159,7 +159,7 @@ namespace MageBot.Core.Engine.Handlers.Character
             {
                 msg.Deserialize(reader);
             }
-            account.Log(new ActionTextInformation("Experience gagnée : + " + msg.ExperienceCharacter + " points d'expérience"), 4);
+            account.Log(new ActionTextInformation("Experience won : + " + msg.ExperienceCharacter + " experience points"), 4);
             if (account.CharacterStats != null)
             {
                 account.CharacterStats.Experience += msg.ExperienceCharacter;

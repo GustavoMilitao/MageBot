@@ -146,7 +146,8 @@ namespace MageBot.Core.Engine.Handlers.Fight
             }
             account.FightData.FightStop();
             if (account.Path != null)
-                account.Path.PauseEvent.Set();
+                if (!account.Fight.SearchFight())
+                    account.Path.ResumeThread();
                 //account.Path.PerformFlag();
         }
 
@@ -344,6 +345,8 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 account.SocketManager.Send(msg2);
                 account.Log(new ActionTextInformation("Fast equipment number " + Convert.ToString(id)), 5);
             }
+            if (account.MyGroup != null)
+                account.Wait((account.MyGroup.Accounts.Count - 1) * 1000);
             GameFightReadyMessage nmsg = new GameFightReadyMessage(true);
             account.SocketManager.Send(nmsg);
             account.Log(new BotTextInformation("Send Ready !"), 5);

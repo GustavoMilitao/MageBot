@@ -286,7 +286,7 @@ namespace MageBot.Core.Account
                 {
                     switch (i.RestrictionLevel)
                     {
-                        case Util.Enums.Internal.RestrictionLevel.Forbidden:
+                        case RestrictionLevel.Forbidden:
                             switch (i.Operator)
                             {
                                 case Util.Enums.Internal.Operator.More:

@@ -1283,6 +1283,20 @@ namespace MageBot.Interface
             HouseSearcherBox.Checked = Account.Config.HouseSearcherEnabled;
             SearcherLogBox.Text = Account.Config.HouseSearcherLogPath;
             sadikCheckbox2.Checked = Account.Config.RelaunchPath;
+            if (!String.IsNullOrEmpty(Account.Config.PreLoadedAI))
+            {
+                Account.FightParser = new FightParser(Account, Account.Config.PreLoadedAI, Account.Config.PreLoadedAIName);
+                Account.Log(new BotTextInformation("AI loaded : " + Account.Config.PreLoadedAIName), 0);
+                if(NomIA.InvokeRequired)
+                    Invoke(new Callback(() => NomIA.Text = Account.FightParser.Name));
+                Account.Fight = new BFight(Account, Account.FightParser, Account.FightData);
+            }
+            if (!String.IsNullOrEmpty(Account.Config.PreLoadedPath))
+            {
+                Account.Path = new Core.Path.PathManager(Account, Account.Config.PreLoadedPath, Account.Config.PreLoadedPathName);
+                Account.Log(new BotTextInformation("Path loaded : " + Account.Config.PreLoadedPathName), 0);
+                PathDownBt.Text = Account.Path.PathName;
+            }
             if (Account.Config.WaitingForTheSale)
                 Account.House = new HouseBuy(Account);
             CaracUC.FillRecoveredConfig();

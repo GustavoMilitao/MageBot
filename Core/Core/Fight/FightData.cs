@@ -260,7 +260,7 @@ namespace MageBot.Core.Fight
         public void UpdateFighterLifePoints(long id, int delta)
         {
             BFighter fighter = GetFighter(id);
-            if (fighter != null)
+            if (fighter != null && Fighter != null)
             {
                 fighter.LifePoints += delta;
                 if (fighter.Id == Fighter.Id)

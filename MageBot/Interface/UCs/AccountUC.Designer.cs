@@ -80,6 +80,7 @@ namespace MageBot.Interface
             this.NUDTimeoutFight = new System.Windows.Forms.NumericUpDown();
             this.sadikLabel11 = new MageBot.Interface.SadikLabel();
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
+            this.sadikCheckbox2 = new MageBot.Interface.SadikCheckbox();
             this.NomIA = new MetroFramework.Controls.MetroLabel();
             this.ChoiceIABt = new MageBot.Interface.SadikButton();
             this.GroupBox3 = new System.Windows.Forms.GroupBox();
@@ -158,7 +159,6 @@ namespace MageBot.Interface
             this.LVItemShop = new System.Windows.Forms.ListView();
             this.LVItemBag = new System.Windows.Forms.ListView();
             this.sadikCheckbox1 = new MageBot.Interface.SadikCheckbox();
-            this.sadikCheckbox2 = new MageBot.Interface.SadikCheckbox();
             this.toolStrip1.SuspendLayout();
             this.VTabAccount.SuspendLayout();
             this.ConsolePage.SuspendLayout();
@@ -733,6 +733,17 @@ namespace MageBot.Interface
             this.GroupBox2.TabIndex = 16;
             this.GroupBox2.TabStop = false;
             this.GroupBox2.Text = "AI and Path";
+            // 
+            // sadikCheckbox2
+            // 
+            this.sadikCheckbox2.Checked = false;
+            this.sadikCheckbox2.Font = new System.Drawing.Font("Verdana", 8F);
+            this.sadikCheckbox2.Location = new System.Drawing.Point(303, 33);
+            this.sadikCheckbox2.Name = "sadikCheckbox2";
+            this.sadikCheckbox2.Size = new System.Drawing.Size(106, 18);
+            this.sadikCheckbox2.TabIndex = 6;
+            this.sadikCheckbox2.Text = "Relaunch path";
+            this.sadikCheckbox2.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox2_CheckedChanged);
             // 
             // NomIA
             // 
@@ -1764,18 +1775,6 @@ namespace MageBot.Interface
             this.sadikCheckbox1.TabIndex = 2;
             this.sadikCheckbox1.Text = "Enable merchant mode";
             this.sadikCheckbox1.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox1_CheckedChanged_1);
-            // 
-            // sadikCheckbox2
-            // 
-            this.sadikCheckbox2.Checked = false;
-            this.sadikCheckbox2.Font = new System.Drawing.Font("Verdana", 8F);
-            this.sadikCheckbox2.Location = new System.Drawing.Point(303, 13);
-            this.sadikCheckbox2.Name = "sadikCheckbox2";
-            this.sadikCheckbox2.Size = new System.Drawing.Size(106, 18);
-            this.sadikCheckbox2.TabIndex = 6;
-            this.sadikCheckbox2.Text = "Relaunch path";
-            this.sadikCheckbox2.UseWaitCursor = true;
-            this.sadikCheckbox2.CheckedChanged += new MageBot.Interface.SadikCheckbox.CheckedChangedEventHandler(this.sadikCheckbox2_CheckedChanged);
             // 
             // AccountUC
             // 

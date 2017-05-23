@@ -46,7 +46,7 @@
             this.AccountTabs.Location = new System.Drawing.Point(20, 60);
             this.AccountTabs.Name = "AccountTabs";
             this.AccountTabs.SelectedIndex = 0;
-            this.AccountTabs.Size = new System.Drawing.Size(660, 420);
+            this.AccountTabs.Size = new System.Drawing.Size(760, 520);
             this.AccountTabs.TabIndex = 0;
             // 
             // tabPage2
@@ -112,7 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 500);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.sadikLabel2);
             this.Controls.Add(this.MasterChoice);
             this.Controls.Add(this.AccountTabs);

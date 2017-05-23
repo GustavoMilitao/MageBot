@@ -1,6 +1,7 @@
 ﻿using MageBot.DataFiles.Data.D2o;
 using MageBot.Protocol.Enums;
 using MageBot.Protocol.Messages.Game.Context.Roleplay.Stats;
+using System;
 using System.Collections;
 
 namespace MageBot.Core.Char
@@ -65,15 +66,12 @@ namespace MageBot.Core.Char
 
         private int GetBoostByArrayListAndUpPoints(ArrayList boost, int upPoints)
         {
-            if (boost.Count > 1)
+            int boostPoint = 0;
+            foreach (ArrayList upPointsAndBoostCost in boost)
             {
-                int boostPoint = 0;
-                foreach (ArrayList upPointsAndBoostCost in boost)
-                {
-                    boostPoint = (int)upPointsAndBoostCost[0] > upPoints ? boostPoint : (int)upPointsAndBoostCost[1];
-                }
+                boostPoint = Convert.ToInt32(upPointsAndBoostCost[0]) > upPoints ? boostPoint : Convert.ToInt32(upPointsAndBoostCost[1]);
             }
-            return (int)boost[1];
+            return boostPoint;
         }
 
         #endregion

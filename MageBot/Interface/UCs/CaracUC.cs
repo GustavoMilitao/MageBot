@@ -38,7 +38,14 @@ namespace MageBot.Interface.UCs
 
         public void FillRecoveredConfig()
         {
-            BoostableCharacteristicEnum? upStat = accUserControl.Account.Config.CaracToAutoUp;
+            AgiRb.Checked = false;
+            LuckRb.Checked = false;
+            InteRb.Checked = false;
+            StreRb.Checked = false;
+            VitaRb.Checked = false;
+            WisRb.Checked = false;
+            NoneRb.Checked = false;
+             BoostableCharacteristicEnum? upStat = accUserControl.Account.Config.CaracToAutoUp;
             if (upStat.HasValue)
             {
                 switch(upStat.Value)

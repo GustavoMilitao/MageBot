@@ -145,8 +145,11 @@ namespace MageBot.Interface
             if (FilesList.SelectedItems.Count > 0 && accUserControl != null)
             {
                 accUserControl.Account.Path = new MageBot.Core.Path.PathManager(accUserControl.Account, FilesList.SelectedItems[0].SubItems[5].Text, FilesList.SelectedItems[0].SubItems[0].Text);
+                accUserControl.Account.Config.PreLoadedPath = accUserControl.Account.Path.Path;
+                accUserControl.Account.Config.PreLoadedPathName = accUserControl.Account.Path.PathName;
                 accUserControl.Account.Log(new BotTextInformation("Path loaded : " + FilesList.SelectedItems[0].Text), 0);
                 accUserControl.Account.Path.Path = FilesList.SelectedItems[0].Text;
+                accUserControl.PathDownBt.Text = accUserControl.Account.Path.PathName;
                 if (accUserControl.Account.Fight == null)
                 {
                     accUserControl.Account.Log(new ErrorTextInformation("WARNING : You haven't any AI loaded :p"), 0);

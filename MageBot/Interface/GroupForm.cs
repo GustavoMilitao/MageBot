@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Util.Util.I18n.Strings;
 
 namespace MageBot.Interface
 {
@@ -52,7 +53,7 @@ namespace MageBot.Interface
         #endregion
 
         #region events
-        private void MasterChoice_SelectedIndexChanged(object sender, EventArgs e)
+        public void MasterChoice_SelectedIndexChanged(object sender, EventArgs e)
         {
             string item = (string)MasterChoice.SelectedItem;
             AccountUC master = listAccounts.Where(i => i.Account.AccountName == item).FirstOrDefault();

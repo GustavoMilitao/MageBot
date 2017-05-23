@@ -41,6 +41,8 @@ namespace MageBot.Core.Account
 
         #region Path
         public bool RelaunchPath { get; set; }
+        public string PreLoadedPath { get; set; }
+        public string PreLoadedPathName { get; set; }
         #endregion
 
         #region Inventory
@@ -68,8 +70,9 @@ namespace MageBot.Core.Account
         public bool EndFightWithItemSet { get; set; }
         public sbyte PresetEndUpId { get; set; }
         public List<MonsterRestrictions> MonsterRestrictions { get; set; }
-        public bool AutoRelaunchFight { get; set; }
         public bool LockPerformed { get; set; }
+        public string PreLoadedAI { get; set; }
+        public string PreLoadedAIName { get; set; }
         #endregion
 
         #region House
