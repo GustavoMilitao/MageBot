@@ -199,7 +199,7 @@ namespace MageBot.Core.Fight
         public void SetFighterDeath(long id)
         {
             BFighter fighter = GetFighter(id);
-            if (fighter.Id == Fighter.Id)
+            if (Fighter != null && fighter != null && fighter.Id == Fighter.Id)
             {
                 Account.Log(new ErrorTextInformation("Character Dead :'("), 0);
                 IsDead = true;
@@ -219,7 +219,7 @@ namespace MageBot.Core.Fight
         {
             FightTemporaryBoostEffect effectToUpdate = (FightTemporaryBoostEffect)effect;
 
-            if (!IsDead && effectToUpdate.TargetId == Fighter.Id)
+            if (!IsDead && Fighter != null && effectToUpdate.TargetId == Fighter.Id)
             {
                 if (DurationByEffect.ContainsKey(effectToUpdate.EffectId))
                 {
@@ -284,7 +284,7 @@ namespace MageBot.Core.Fight
             if (fighter != null && Fighter != null)
             {
                 fighter.LifePoints += delta;
-                if (fighter.Id == Fighter.Id)
+                if (Fighter != null && fighter != null && fighter.Id == Fighter.Id)
                 {
                     Account.ModifBar(2, Account.FightData.Fighter.MaxLifePoints, Account.FightData.Fighter.LifePoints, "Life");
                 }
@@ -740,7 +740,7 @@ namespace MageBot.Core.Fight
             int num = 0;
             foreach (BFighter fighter in Fighters)
             {
-                if (fighter.GameFightMinimalStats.Summoner == Fighter.Id)
+                if (Fighter != null && fighter != null && fighter.GameFightMinimalStats.Summoner == Fighter.Id)
                     num++;
             }
             return num;

@@ -1123,23 +1123,20 @@ namespace MageBot.Interface
 
         private void FillAccountInitialSettings()
         {
-            if (!Account.Config.Restored)
-            {
-                Account.Config.VerboseLevel = (int)NUDVerbose.Value;
-                Account.Config.RegenChoice = (int)RegenChoice.Value;
-                Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
-                Account.Config.MaxMonstersNumber = (int)nudMaxMonstersNumber.Value;
-                Account.Config.MaxMonstersLevel = (int)nudMaxMonstersLevel.Value;
-                Account.Config.MaxPriceHouse = (ulong)MaxPrice.Value;
-                Account.Config.PresetStartUpId = (byte)PresetStartUpD.Value;
-                Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
-                Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
-                Account.Config.FloodInterval = 60;
-                Account.Config.AutoDeletionTime = (int)GestItemsUC.NUDAutoDeletion.Value;
-                Account.Config.DisconnectWhenRun = true;
-                Account.Config.ItemToUseWhenRun = PotionEnum.MemoryPotion;
-                //TODO : Fill other modules initial settings
-            }
+            Account.Config.VerboseLevel = (int)NUDVerbose.Value;
+            Account.Config.RegenChoice = (int)RegenChoice.Value;
+            Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
+            Account.Config.MaxMonstersNumber = (int)nudMaxMonstersNumber.Value;
+            Account.Config.MaxMonstersLevel = (int)nudMaxMonstersLevel.Value;
+            Account.Config.MaxPriceHouse = (ulong)MaxPrice.Value;
+            Account.Config.PresetStartUpId = (byte)PresetStartUpD.Value;
+            Account.Config.PresetEndUpId = (sbyte)PresetEndUpD.Value;
+            Account.Config.BotSpeed = (int)NUDTimeoutFight.Value;
+            Account.Config.FloodInterval = 60;
+            Account.Config.AutoDeletionTime = (int)GestItemsUC.NUDAutoDeletion.Value;
+            Account.Config.DisconnectWhenRun = true;
+            Account.Config.ItemToUseWhenRun = PotionEnum.MemoryPotion;
+            //TODO : Fill other modules initial settings
         }
 
         private void ResizeGrid(ListView grid)
@@ -1170,7 +1167,15 @@ namespace MageBot.Interface
         {
             if (Account.Path != null)
             {
-                Account.Path.Start();
+                if (Account.MyGroup != null)
+                {
+                    Account.MyGroup.Path = Account.Path;
+                    Account.MyGroup.Path.Start();
+                }
+                else
+                {
+                    Account.Path.Start();
+                }
             }
             else
                 Account.Log(new ErrorTextInformation("No Path loaded"), 3);
@@ -1287,7 +1292,7 @@ namespace MageBot.Interface
             {
                 Account.FightParser = new FightParser(Account, Account.Config.PreLoadedAI, Account.Config.PreLoadedAIName);
                 Account.Log(new BotTextInformation("AI loaded : " + Account.Config.PreLoadedAIName), 0);
-                if(NomIA.InvokeRequired)
+                if (NomIA.InvokeRequired)
                     Invoke(new Callback(() => NomIA.Text = Account.FightParser.Name));
                 Account.Fight = new BFight(Account, Account.FightParser, Account.FightData);
             }

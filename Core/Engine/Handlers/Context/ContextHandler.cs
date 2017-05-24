@@ -244,6 +244,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
 
                 PartyAcceptInvitationMessage msg2 = new PartyAcceptInvitationMessage(msg.PartyId);
+                account.MyGroup.PartyId = msg.PartyId;
                 account.SocketManager.Send(msg2);
                 account.Log(new BotTextInformation("I joined the group :3"), 3);
 
@@ -266,7 +267,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             }
             if (msg.FightMap.MapId == account.MapData.Id && msg.MemberName == account.MyGroup.GetMaster().CharacterBaseInformations.Name)
             {
-                account.Wait(1500);
+                account.Wait(500);
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
                     GameFightJoinRequestMessage msg2 = new GameFightJoinRequestMessage(msg.MemberId, msg.FightId);

@@ -15,13 +15,10 @@ namespace MageBot.Core.Account
     {
         #region General
         public int VerboseLevel;
-        public bool IsMaster { get; set; }
-        public bool IsSlave { get; set; }
         public bool DebugMode { get; set; }
         public bool IsMITM { get; set; }
         public bool IsSocket { get; set; }
         public bool Enabled { get; set; }
-        public bool Restored { get; set; }
         public bool Begin { get; set; }
         public int BotSpeed { get; set; }
         public bool LogConsoleToText { get; set; }

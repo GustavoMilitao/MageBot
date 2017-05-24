@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using MageBot.Protocol.Messages.Game.Context.Roleplay.Party;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+using MageBot.Core.Path;
+using Util.Util.Text.Log;
 
 namespace MageBot.Core.Groups
 {
@@ -6,6 +11,9 @@ namespace MageBot.Core.Groups
     {
         #region Fields
         public List<Account.Account> Accounts { get; set; }
+        public Account.Account LastAccountLaunchedFight { get; set; }
+        public uint PartyId { get; set; }
+        public PathManager Path { get; set; }
         public string name;
         #endregion
 
@@ -20,155 +28,135 @@ namespace MageBot.Core.Groups
         #region Publics methods
         public Account.Account GetMaster()
         {
-            foreach (Account.Account a in Accounts)
-            {
-                if (a.Config.IsMaster)
-                    return a;
-            }
-            return null;
+            return Accounts.Find(acc => acc.IsMaster);
         }
 
         public void MoveGroup(string move)
         {
-            foreach (Account.Account a in Accounts)
+            Accounts.ForEach(acc =>
             {
-                if (a.Config.IsMaster)
-                {
-                    a.Map.ChangeMap(move);
-                    foreach (Account.Account ac in Accounts)
-                    {
-                        if (ac.Config.IsSlave == true)
-                            ac.Map.ChangeMap(move);
-                        //ac.Wait(500);
-                    }
-                }
-            }
+                acc.Map.ChangeMap(move);
+            });
         }
 
         public void UseItemGroup(int uid)
         {
-            foreach (Account.Account a in Accounts)
+            Accounts.ForEach(acc =>
             {
-                if (a.Config.IsMaster == true)
-                {
-                    a.Inventory.UseItem(uid);
-                    foreach (Account.Account ac in Accounts)
-                    {
-                        if (ac.Config.IsSlave == true)
-                            ac.Inventory.UseItem(uid);
-                        ac.Wait(500);
-                    }
-                }
-            }
+                acc.Inventory.UseItem(uid);
+                //acc.Wait(500);
+            });
         }
 
         public void UseZaapGroup()
         {
-            foreach (Account.Account a in Accounts)
+            var master = GetMaster();
+            var slaves = GetSlaves();
+            slaves.ForEach(acc =>
             {
-                if (a.Config.IsMaster == true)
-                {
-                    a.Map.UseZaapTo((int)a.Path.Current_Action.m_delta);
-                    foreach (Account.Account ac in Accounts)
-                    {
-                        if (ac.Config.IsSlave == true)
-                            ac.Map.UseZaapTo((int)a.Path.Current_Action.m_delta);
-                        ac.Wait(500);
-                    }
-                    return;
-                }
-            }
+                acc.Map.UseZaapTo((int)master.Path.Current_Action.m_delta);
+                //acc.Wait(500);
+            });
+            master.Map.UseZaapTo((int)master.Path.Current_Action.m_delta);
+            //master.Wait(500);
         }
 
         public void UseZaapiGroup()
         {
-            foreach (Account.Account a in Accounts)
+            var master = GetMaster();
+            var slaves = GetSlaves();
+            slaves.ForEach(acc =>
             {
-                if (a.Config.IsMaster == true)
-                {
-                    a.Map.useZaapiTo((int)a.Path.Current_Action.m_delta);
-                    foreach (Account.Account ac in Accounts)
-                    {
-                        if (ac.Config.IsSlave == true)
-                            ac.Map.useZaapiTo((int)a.Path.Current_Action.m_delta);
-                        ac.Wait(500);
-                    }
-                    return;
-                }
-            }
+                acc.Map.useZaapiTo((int)master.Path.Current_Action.m_delta);
+                //acc.Wait(500);
+            });
+            master.Map.useZaapiTo((int)master.Path.Current_Action.m_delta);
+            //master.Wait(500);
+        }
+
+        public List<Account.Account> GetSlaves()
+        {
+            return Accounts.Where(acc => !acc.IsMaster).ToList();
         }
 
         public void MoveToCellGroup(int delta)
         {
-            foreach (Account.Account a in Accounts)
+            Accounts.ForEach(acc =>
             {
-                if (a.Config.IsMaster == true)
-                {
-                    a.Map.MoveToCell(delta);
-                    foreach (Account.Account ac in Accounts)
-                    {
-                        if (ac.Config.IsSlave == true)
-                            ac.Map.MoveToCell(delta);
-                        ac.Wait(500);
-                    }
-                    return;
-                }
-            }
+                acc.Map.MoveToCell(delta);
+                //acc.Wait(500);
+            });
         }
 
         public void MoveToElementGroup(int delta)
         {
-            foreach (Account.Account a in Accounts)
+            Accounts.ForEach(acc =>
             {
-                if (a.Config.IsMaster == true)
-                {
-                    a.Map.MoveToSecureElement(delta);
-                    foreach (Account.Account ac in Accounts)
-                    {
-                        if (ac.Config.IsSlave == true)
-                            ac.Map.MoveToSecureElement(delta);
-                        ac.Wait(500);
-                    }
-                    return;
-                }
-            }
+                acc.Map.MoveToSecureElement(delta);
+                //acc.Wait(500);
+            });
         }
 
         public void TalkToNpcGroup(int delta)
         {
-            foreach (Account.Account a in Accounts)
+            Accounts.ForEach(acc =>
             {
-                if (a.Config.IsMaster == true)
-                {
-                    a.Npc.TalkToNpc(delta);
-                    foreach (Account.Account ac in Accounts)
-                    {
-                        if (ac.Config.IsSlave == true)
-                            ac.Npc.TalkToNpc(delta);
-                        ac.Wait(500);
-                    }
-                    return;
-                }
-            }
+                acc.Npc.TalkToNpc(delta);
+                //acc.Wait(500);
+            });
         }
 
         public void RequestExchangeGroup(string delta)
         {
-            foreach (Account.Account a in Accounts)
+            Accounts.ForEach(acc =>
             {
-                if (a.Config.IsMaster == true)
-                {
-                    a.Inventory.RequestExchange(delta);
-                    foreach (Account.Account ac in Accounts)
-                    {
-                        if (ac.Config.IsSlave == true)
-                            ac.Inventory.RequestExchange(delta);
-                        ac.Wait(2000);
-                    }
-                    return;
-                }
-            }
+                acc.Inventory.RequestExchange(delta);
+                acc.Wait(20000); // I have 20 sec to accept the trade request TODO: Change it!
+                List<int> items = acc.Inventory.GetItemsToTransfer();
+                acc.Inventory.TransferItems(items);
+                acc.Wait(3000);
+                acc.Inventory.TransferKamas();
+                acc.Wait(3000);
+                acc.Inventory.ExchangeReady();
+            });
         }
+
+        public void QuitAllAccToGroupButNotRemoveObjects()
+        {
+            Accounts.ForEach(acc =>
+            {
+                PartyLeaveRequestMessage msg = new PartyLeaveRequestMessage(PartyId);
+                acc.SocketManager.Send(msg);
+                acc.Wait(500);
+                acc.IsMaster = false;
+            });
+        }
+
+        public void InviteGroupByMaster()
+        {
+            var master = GetMaster();
+            var slaves = GetSlaves();
+            slaves.ForEach(accSlave =>
+            {
+                PartyInvitationRequestMessage msg = new PartyInvitationRequestMessage(accSlave.CharacterBaseInformations.Name);
+                master.SocketManager.Send(msg);
+            });
+        }
+
+        public void DefineNewFightLauncher()
+        {
+            var r = new Random();
+            var i = r.Next(0, Accounts.Count - 2);
+            var newMaster = Accounts.Where(acc => acc.AccountName != LastAccountLaunchedFight.AccountName).ToList()[i];
+            newMaster.Log(new BotTextInformation("This is the Master account now !"), 1);
+            Accounts.ForEach(acc =>
+            {
+                acc.IsMaster = false;
+            });
+            newMaster.IsMaster = true;
+            newMaster.MyGroup.Path.Account = newMaster;
+        }
+
         #endregion
 
     }

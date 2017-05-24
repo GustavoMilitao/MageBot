@@ -147,11 +147,19 @@ namespace MageBot.Core.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-
             TreatObtainedLoot(account, msg);
+            if (account.IsMaster && account.MyGroup != null)
+            {
+                account.MyGroup.DefineNewFightLauncher();
+                account.FightData.FightStop();
+                account.MyGroup.Path.PerformFlag();
+            }
+            else
+            {
+                account.FightData.FightStop();
+            }
 
-            account.Wait(20000+account.GetRandomTime());
-            account.FightData.FightStop();
+            //account.Wait(20000+account.GetRandomTime());
             //if (account.Path != null && account.Path.Launched)
             //    account.Path.PerformFlag();
         }
@@ -274,7 +282,7 @@ namespace MageBot.Core.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-
+            account.Wait((int)msg.WaitTime);
         }
 
         [MessageHandler(typeof(GameMapMovementMessage))]
@@ -346,7 +354,7 @@ namespace MageBot.Core.Engine.Handlers.Fight
             if (account.MyGroup != null)
                 account.Wait((account.MyGroup.Accounts.Count - 1) * 1000);
             PerformLockFight(account);
-            account.Wait(1000);
+            //account.Wait(1000);
             GameFightReadyMessage nmsg = new GameFightReadyMessage(true);
             account.SocketManager.Send(nmsg);
             account.Log(new BotTextInformation("Send Ready !"), 5);
@@ -462,7 +470,7 @@ namespace MageBot.Core.Engine.Handlers.Fight
         {
             if (account.MyGroup != null)
             {
-                if (account.Config.IsMaster && account.Config.LockingFights && account.Fight != null && !account.LockPerformed)
+                if (account.IsMaster && account.Config.LockingFights && account.Fight != null && !account.LockPerformed)
                 {
                     account.FightData.PerformAutoTimeoutFight(2000);
                     account.Fight.LockFight();
@@ -486,9 +494,9 @@ namespace MageBot.Core.Engine.Handlers.Fight
             Dictionary<ushort, int> itemsByQuantity = new Dictionary<ushort, int>();
             msg.Results.ForEach(res => itemsWithQuantity.AddRange(res.Rewards.Objects));
 
-            for (int i = 0; i < itemsWithQuantity.Count; i+=2)
+            for (int i = 0; i < itemsWithQuantity.Count; i += 2)
             {
-                if(i +1 < itemsWithQuantity.Count)
+                if (i + 1 < itemsWithQuantity.Count)
                 {
                     if (itemsByQuantity.ContainsKey(itemsWithQuantity[i]))
                         itemsByQuantity[itemsWithQuantity[i]] += itemsWithQuantity[i + 1];
@@ -501,7 +509,7 @@ namespace MageBot.Core.Engine.Handlers.Fight
             List<string> itemsNamesWithQuantity = new List<string>();
             itemsByQuantity.Keys.ToList().ForEach(item => itemsNamesWithQuantity.Add(I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, item).Fields["nameId"]) +
                                                 " x " + itemsByQuantity[item]));
-            account.Log(new BotTextInformation("Total obtained items :"), 0);
+            account.Log(new BotTextInformation("Total obtained items"), 0);
             foreach (string s in itemsNamesWithQuantity)
             {
                 account.Log(new BotTextInformation(s), 0);

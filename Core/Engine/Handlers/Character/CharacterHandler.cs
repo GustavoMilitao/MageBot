@@ -74,8 +74,8 @@ namespace MageBot.Core.Engine.Handlers.Character
             {
                 msg.Deserialize(reader);
             }
-            if (!account.Config.Restored)
-                account.ConfigRecover.RecoverConfig();
+            if (!account.ConfRecovered)
+                account.ConfRecovered = account.ConfigRecover.RecoverConfig();
             account.CharacterStats = msg.Stats;
             uint percent = (msg.Stats.LifePoints / msg.Stats.MaxLifePoints) * 100;
             string text = msg.Stats.LifePoints + "/" + msg.Stats.MaxLifePoints + "(" + percent + "%)";

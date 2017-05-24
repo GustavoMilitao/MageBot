@@ -179,6 +179,7 @@ namespace MageBot.Core.Engine.Network
             connectionTimer = new Timer(
                 new TimerCallback(connectedTimerCallback),
                 null, Timeout.Infinite, Timeout.Infinite);
+
         }
         #endregion
 
@@ -738,7 +739,9 @@ namespace MageBot.Core.Engine.Network
     public class NetClient : NetBase
     {
         #region Constructor
-        public NetClient() : base() { }
+        public NetClient() : base()
+        {
+        }
         #endregion
 
         #region Connect

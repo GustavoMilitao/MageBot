@@ -27,21 +27,22 @@ namespace MageBot.Core.Account
             string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + "Config.json");
             if (File.Exists(spath))
             {
-                AccountConfig configuration = DeserializeConfig<AccountConfig>(spath);
-                if (configuration != null)
+                if (!account.ConfRecovered)
                 {
-                    account.Config = configuration;
-                    account.Log(new BotTextInformation("Restored settings."), 0);
-                    account.Config.Restored = true;
-                    account.OnRecoverConfig();
-                    return true;
+                    AccountConfig configuration = DeserializeConfig<AccountConfig>(spath);
+                    if (configuration != null)
+                    {
+                        account.Config = configuration;
+                        account.Log(new BotTextInformation("Restored settings."), 0);
+                        account.OnRecoverConfig();
+                        return true;
+                    }
+                    account.Log(new ErrorTextInformation("Error to load config file."), 0);
+                    return false;
                 }
-                account.Log(new ErrorTextInformation("Error to load config file."), 0);
-                account.Config.Restored = false;
                 return false;
             }
             account.Log(new BotTextInformation("No config for this character."), 0);
-            account.Config.Restored = false;
             return false;
         }
 

@@ -82,6 +82,8 @@ namespace MageBot.Core.Account
         public DateTime NextMeal { get; set; }
         public DateTime NextMealP { get; set; } //TODO Militão: What is this?
         public bool LockPerformed { get; set; }
+        public bool IsMaster { get; set; }
+        public bool ConfRecovered { get; set; }
         #endregion
 
         #region Events to Fill in interface

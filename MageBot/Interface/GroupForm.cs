@@ -28,11 +28,12 @@ namespace MageBot.Interface
             InitializeComponent();
             accounts.ForEach(i => i.Config.IsSocket = true);
             listAccounts = new List<AccountUC>();
+            var group = new Group(accounts, Name);
             foreach (Account account in accounts)
             {
                 TabPage tab = new TabPage(account.AccountName);
                 AccountTabs.TabPages.Add(tab);
-                account.MyGroup = new Group(accounts, Name);
+                account.MyGroup = group;
                 AccountUC naccount = new AccountUC(account, this);
                 listAccounts.Add(naccount);
                 tab.Controls.Add(naccount);
@@ -57,16 +58,14 @@ namespace MageBot.Interface
         {
             string item = (string)MasterChoice.SelectedItem;
             AccountUC master = listAccounts.Where(i => i.Account.AccountName == item).FirstOrDefault();
-            master.Account.Config.IsMaster = true;
-            master.Account.Config.IsSlave = false;
+            master.Account.IsMaster = true;
             master.Account.Log(new BotTextInformation("This is the Master account now !"), 1);
             master.Focus();
             foreach(AccountUC ac in listAccounts)
             {
                 if(ac.Account.AccountName != master.Account.AccountName)
                 {
-                    ac.Account.Config.IsSlave = true;
-                    ac.Account.Config.IsMaster = false;
+                    ac.Account.IsMaster = false;
                     Invite(ac.Account.CharacterBaseInformations.Name, master.Account);
                 }
             }

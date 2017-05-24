@@ -12,7 +12,7 @@ namespace MageBot.Core.Path
     public class PathManager
     {
         #region Fields
-        private Account.Account Account;
+        public Account.Account Account { get; set; }
 
         public string Path;
         public string PathName { get; set; }
@@ -154,27 +154,11 @@ namespace MageBot.Core.Path
 
         private void FightFlag()
         {
-            if (Account.Config.IsMaster == true && Account.MyGroup != null && Account.Fight != null)
+            if (Account.IsMaster && Account.MyGroup != null && Account.Fight != null)
             {
                 WaitAccountsFightOrRegen();
                 if (!Account.Fight.SearchFight())
                     PerformActionsStack();
-                else
-                {
-                    WaitAccountsFightOrRegen();
-                    FightFlag();
-                }
-            }
-            else if (Account.Config.IsSlave == false && Account.Fight != null)
-            {
-                WaitAccountFightOrRegen();
-                if (!Account.Fight.SearchFight())
-                    PerformActionsStack();
-                else
-                {
-                    WaitAccountFightOrRegen();
-                    FightFlag();
-                }
             }
             else
             {

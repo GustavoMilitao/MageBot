@@ -38,7 +38,7 @@ namespace MageBot.Core.Path
             {
                 case "move(":
                     m_delta = (string)m_delta;
-                    if (Account.Config.IsMaster == true && Account.MyGroup != null)
+                    if (Account.IsMaster && Account.MyGroup != null)
                     {
                         Account.MyGroup.MoveGroup((string)m_delta);
                         //account.PutTaskDelay(3000);
@@ -46,7 +46,7 @@ namespace MageBot.Core.Path
                         if (Account.State == Util.Enums.Internal.Status.Busy)
                             PerformAction();
                     }
-                    else if (Account.Config.IsSlave == false)
+                    else
                     {
                         Account.Map.ChangeMap((string)m_delta);
                         //account.PutTaskDelay(3000);
@@ -54,111 +54,83 @@ namespace MageBot.Core.Path
                         if (Account.State == Util.Enums.Internal.Status.Busy)
                             PerformAction();
                     }
-                    else
-                    {
-                        Account.Log(new ErrorTextInformation("Configuration error : This character is a islave and haven't any group."),0);
-                    }
                     break;
                 case "object(":
-                    if (Account.Config.IsMaster == true && Account.MyGroup != null)
+                    if (Account.IsMaster && Account.MyGroup != null)
                     {
                         Account.MyGroup.UseItemGroup(Account.Inventory.GetItemFromGID(Convert.ToInt32(m_delta)).UID);
                         //account.PutTaskDelay(3000);
                         Account.Wait(3000);
                     }
-                    else if (Account.Config.IsSlave == false)
+                    else
                     {
                         Account.Inventory.UseItem(Account.Inventory.GetItemFromGID(Convert.ToInt32(m_delta)).UID);
                     }
-                    else
-                    {
-                        Account.Log(new ErrorTextInformation("Configuration error : This character is a islave and haven't any group."), 0);
-                    }
                     break;
                 case "cell(":
-                    if (Account.Config.IsMaster == true && Account.MyGroup != null)
+                    if (Account.IsMaster && Account.MyGroup != null)
                     {
                         Account.MyGroup.MoveToCellGroup(Convert.ToInt32(m_delta));
                         //account.PutTaskDelay(3000);
                         Account.Wait(3000);
                     }
-                    else if (Account.Config.IsSlave == false)
+                    else 
                     {
                         Account.Map.MoveToCell(Convert.ToInt32(m_delta));
-                    }
-                    else
-                    {
-                        Account.Log(new ErrorTextInformation("Impossible d'enclencher le déplacement. (mûle ? plus d'objet ?)"), 0);
-                    }       
-                    Account.Log(new BotTextInformation("Trajet : Déplacement sur la cellule " + Convert.ToString(m_delta)),5);
+                    }    
+                    Account.Log(new BotTextInformation("Path: Moving to the cell " + Convert.ToString(m_delta)),5);
                     break;
                 case "npc(":
-                    if (Account.Config.IsMaster == true && Account.MyGroup != null)
+                    if (Account.IsMaster && Account.MyGroup != null)
                     {
                         Account.MyGroup.TalkToNpcGroup(Convert.ToInt32(m_delta));
                         //await account.PutTaskDelay(3000);
                         Account.Wait(3000);
                     }
-                    else if (Account.Config.IsSlave == false)
+                    else 
                     {
                         Account.Npc.TalkToNpc(Convert.ToInt32(m_delta));
                     }
-                    else
-                    {
-                        Account.Log(new ErrorTextInformation("Impossible d'enclencher le dialogue. (mûle ?)"), 0);
-                    } 
                     break;
                     
                 case "use(":
                     Account.Map.MoveToSecureElement(Convert.ToInt32(m_delta));
                     break;
                 case "zaap(":
-                    if (Account.Config.IsMaster == true && Account.MyGroup != null)
+                    if (Account.IsMaster && Account.MyGroup != null)
                     {
                         Account.MyGroup.UseZaapGroup();
                         //await account.PutTaskDelay(3000);
                         Account.Wait(3000);
                     }
-                    else if (Account.Config.IsSlave == false)
-                    {
-                        Account.Map.UseZaapTo(Convert.ToInt32(Account.Path.Current_Action.m_delta));
-                    }
                     else
                     {
-                        Account.Log(new ErrorTextInformation("Impossible d'enclencher le déplacement. (mûle ? plus d'objet ?)"), 0);
-                    }                         
+                        Account.Map.UseZaapTo(Convert.ToInt32(Account.Path.Current_Action.m_delta));
+                    }                       
                     break;
                 case "zaapi(":
-                    if (Account.Config.IsMaster == true && Account.MyGroup != null)
+                    if (Account.IsMaster && Account.MyGroup != null)
                     {
                         Account.MyGroup.UseZaapiGroup();
                         //await account.PutTaskDelay(3000);
                         Account.Wait(3000);
                     }
-                    else if (Account.Config.IsSlave == false)
+                    else
                     {
                         Account.Map.useZaapiTo(Convert.ToInt32(Account.Path.Current_Action.m_delta));
                     }
-                    else
-                    {
-                        Account.Log(new ErrorTextInformation("Impossible d'enclencher le déplacement. (mûle ? plus d'objet ?)"), 0);
-                    } 
                     break;
                 case "exchange(":
-                    if (Account.Config.IsMaster == true && Account.MyGroup != null)
+                    if (Account.IsMaster && Account.MyGroup != null)
                     {
                         Account.MyGroup.RequestExchangeGroup((string)m_delta);
                         //await account.PutTaskDelay(3000);
                         Account.Wait(3000);
                     }
-                    else if (Account.Config.IsSlave == false)
+                    else
                     {
                         Account.Inventory.RequestExchange((string)m_delta);
                     }
-                    else
-                    {
-                        Account.Log(new ErrorTextInformation("Impossible d'enclencher le dialogue. (mûle ?)"), 0);
-                    } 
                     break;
             }
             Account.WatchDog.Update();
