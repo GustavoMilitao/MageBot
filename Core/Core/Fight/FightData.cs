@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using MageBot.Core.Monsters;
+using MageBot.Util.Enums.EnumHelper;
 
 namespace MageBot.Core.Fight
 {
@@ -115,8 +116,10 @@ namespace MageBot.Core.Fight
         /// <returns>The cellId we need to move to. -1 if we can't use. 0 if we don't need to move.</returns>
         public int CanUseSpell(BSpell spell, BFighter target)
         {
+            
             if (CanLaunchSpell(spell.SpellId) != SpellInabilityReason.None)
             {
+                Account.Log(new DebugTextInformation("Spell Inability Reason : " + CanLaunchSpell(spell.SpellId).Description()), 0);
                 return -1;
             }
 
@@ -141,6 +144,10 @@ namespace MageBot.Core.Fight
                         distance = tempDistance;
                         moveCell = cell;
                     }
+                }
+                else
+                {
+                    Account.Log(new DebugTextInformation("Spell Inability Reason : " + CanLaunchSpellOn(spell.SpellId, cell, target.CellId, true).Description()), 0);
                 }
             }
             return moveCell;
@@ -819,12 +826,12 @@ namespace MageBot.Core.Fight
             if ((spellId != 0 && (bool)spellLevelsData.Fields["castInDiagonal"]) || (weaponData != null && !(bool)weaponData.Fields["castInLine"]))
                 minRange = (minRange * 2);
             if (minRange < 0)
-                minRange = 0;
+                minRange = (int)spellLevelsData.Fields["minRange"];
             int maxRange = (spellId != 0) ? (int)spellLevelsData.Fields["range"] + ((bool)spellLevelsData.Fields["rangeCanBeBoosted"] ? (Account.CharacterStats.Range.ObjectsAndMountBonus + Account.CharacterStats.Range.ContextModif) : 0) : (int)spellLevelsData.Fields["range"];
             if ((spellId != 0 && (bool)spellLevelsData.Fields["castInDiagonal"]) || (weaponData != null && !(bool)weaponData.Fields["castInLine"]))
                 maxRange = (maxRange * 2);
             if (maxRange < 0)
-                maxRange = 0;
+                maxRange = (int)spellLevelsData.Fields["minRange"];
             if (distanceToTarget < minRange && distanceToTarget > 0)
                 return SpellInabilityReason.MinRange;
             if (distanceToTarget > maxRange)
@@ -898,7 +905,7 @@ namespace MageBot.Core.Fight
             }
             catch (NullReferenceException)
             {
-                Account.Log(new ErrorTextInformation("Le sort spécifié n'existe pas dans votre liste de sorts."), 0);
+                Account.Log(new ErrorTextInformation("The specified spell does not exist in your spell list."), 0);
                 return SpellInabilityReason.UnknownSpell;
             }
             int id = Convert.ToInt32(ids[level - 1]);

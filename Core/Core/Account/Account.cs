@@ -81,6 +81,7 @@ namespace MageBot.Core.Account
         public int LastPacket { get; set; }
         public DateTime NextMeal { get; set; }
         public DateTime NextMealP { get; set; } //TODO Militão: What is this?
+        public bool LockPerformed { get; set; }
         #endregion
 
         #region Events to Fill in interface

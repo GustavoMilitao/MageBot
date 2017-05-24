@@ -70,7 +70,6 @@ namespace MageBot.Core.Account
         public bool EndFightWithItemSet { get; set; }
         public sbyte PresetEndUpId { get; set; }
         public List<MonsterRestrictions> MonsterRestrictions { get; set; }
-        public bool LockPerformed { get; set; }
         public string PreLoadedAI { get; set; }
         public string PreLoadedAIName { get; set; }
         #endregion

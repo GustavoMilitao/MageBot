@@ -39,7 +39,7 @@ namespace MageBot.Core.Groups
                     {
                         if (ac.Config.IsSlave == true)
                             ac.Map.ChangeMap(move);
-                        ac.Wait(500);
+                        //ac.Wait(500);
                     }
                 }
             }

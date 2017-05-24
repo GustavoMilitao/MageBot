@@ -16,6 +16,9 @@ using MageBot.Protocol.Messages.Game.Context;
 using MageBot.Protocol.Types.Game.Context.Fight;
 using MageBot.Protocol.Messages.Game.Context.Fight.Character;
 using MageBot.Core.Fight;
+using MageBot.DataFiles.Data.D2o;
+using System.Collections.Generic;
+using MageBot.DataFiles.Data.I18n;
 
 namespace MageBot.Core.Engine.Handlers.Fight
 {
@@ -144,7 +147,10 @@ namespace MageBot.Core.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.Wait(5000);
+
+            TreatObtainedLoot(account, msg);
+
+            account.Wait(20000+account.GetRandomTime());
             account.FightData.FightStop();
             //if (account.Path != null && account.Path.Launched)
             //    account.Path.PerformFlag();
@@ -173,13 +179,6 @@ namespace MageBot.Core.Engine.Handlers.Fight
             if (account.Fight != null)
             {
                 account.FightData.Reset(msg.IsFightStarted, msg.CanSayReady);
-                if (account.Config.LockingFights && account.Fight != null && !account.Config.LockPerformed)
-                {
-                    account.FightData.PerformAutoTimeoutFight(2000);
-                    account.Fight.LockFight();
-                    account.Config.LockPerformed = true;
-                }
-
             }
         }
 
@@ -346,6 +345,8 @@ namespace MageBot.Core.Engine.Handlers.Fight
             }
             if (account.MyGroup != null)
                 account.Wait((account.MyGroup.Accounts.Count - 1) * 1000);
+            PerformLockFight(account);
+            account.Wait(1000);
             GameFightReadyMessage nmsg = new GameFightReadyMessage(true);
             account.SocketManager.Send(nmsg);
             account.Log(new BotTextInformation("Send Ready !"), 5);
@@ -453,6 +454,59 @@ namespace MageBot.Core.Engine.Handlers.Fight
             }
             if (account.Fight != null && account.Fight.flag == -1)
                 account.Fight.EndTurn();
+        }
+        #endregion
+
+        #region Private methods
+        private static void PerformLockFight(Account.Account account)
+        {
+            if (account.MyGroup != null)
+            {
+                if (account.Config.IsMaster && account.Config.LockingFights && account.Fight != null && !account.LockPerformed)
+                {
+                    account.FightData.PerformAutoTimeoutFight(2000);
+                    account.Fight.LockFight();
+                    account.LockPerformed = true;
+                }
+            }
+            else
+            {
+                if (account.Config.LockingFights && account.Fight != null && !account.LockPerformed)
+                {
+                    account.FightData.PerformAutoTimeoutFight(2000);
+                    account.Fight.LockFight();
+                    account.LockPerformed = true;
+                }
+            }
+        }
+
+        private static void TreatObtainedLoot(Account.Account account, GameFightEndMessage msg)
+        {
+            List<ushort> itemsWithQuantity = new List<ushort>();
+            Dictionary<ushort, int> itemsByQuantity = new Dictionary<ushort, int>();
+            msg.Results.ForEach(res => itemsWithQuantity.AddRange(res.Rewards.Objects));
+
+            for (int i = 0; i < itemsWithQuantity.Count; i+=2)
+            {
+                if(i +1 < itemsWithQuantity.Count)
+                {
+                    if (itemsByQuantity.ContainsKey(itemsWithQuantity[i]))
+                        itemsByQuantity[itemsWithQuantity[i]] += itemsWithQuantity[i + 1];
+                    else
+                        itemsByQuantity.Add(itemsWithQuantity[i], itemsWithQuantity[i + 1]);
+                }
+            }
+            ulong kamas = 0;
+            msg.Results.ForEach(res => kamas += res.Rewards.Kamas);
+            List<string> itemsNamesWithQuantity = new List<string>();
+            itemsByQuantity.Keys.ToList().ForEach(item => itemsNamesWithQuantity.Add(I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, item).Fields["nameId"]) +
+                                                " x " + itemsByQuantity[item]));
+            account.Log(new BotTextInformation("Total obtained items :"), 0);
+            foreach (string s in itemsNamesWithQuantity)
+            {
+                account.Log(new BotTextInformation(s), 0);
+            }
+            account.Log(new BotTextInformation("total obtained Kamas : " + kamas + " kamas."), 0);
         }
         #endregion
     }

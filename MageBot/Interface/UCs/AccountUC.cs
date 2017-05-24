@@ -506,7 +506,7 @@ namespace MageBot.Interface
         private void IsLockingFight_CheckedChanged(object sender)
         {
             Account.Config.LockingFights = IsLockingFight.Checked;
-            Account.Config.LockPerformed = false;
+            Account.LockPerformed = false;
         }
 
         private void WithItemSetBox_CheckedChanged(object sender)
@@ -602,19 +602,19 @@ namespace MageBot.Interface
         private void LockForParty_CheckedChanged(object sender)
         {
             Account.Config.LockingForGroupOnly = LockForParty.Checked;
-            Account.Config.LockPerformed = false;
+            Account.LockPerformed = false;
         }
 
         private void LockSpectator_CheckedChanged(object sender)
         {
             Account.Config.LockingSpectators = LockSpectator.Checked;
-            Account.Config.LockPerformed = false;
+            Account.LockPerformed = false;
         }
 
         private void AskForHelp_CheckedChanged(object sender)
         {
             Account.Config.AskForHelp = AskForHelp.Checked;
-            Account.Config.LockPerformed = false;
+            Account.LockPerformed = false;
         }
 
         #endregion
