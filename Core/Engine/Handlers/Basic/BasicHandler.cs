@@ -31,7 +31,7 @@ namespace MageBot.Core.Engine.Handlers.Basic
         {
             BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage((ushort)account.LatencyFrame.GetLatencyAvg(),
                 (ushort)account.LatencyFrame.GetSamplesCount(), (ushort)account.LatencyFrame.GetSamplesMax());
-            if (!account.Config.IsMITM)
+            if (account.Config.IsSocket)
             {
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
@@ -77,7 +77,7 @@ namespace MageBot.Core.Engine.Handlers.Basic
                 case InteractiveUseRequestMessage.ProtocolID:
                     if (account.Running != null && account.Running.OnSafe)
                     {
-                        account.Log(new CharacterTextInformation("Ouverture du coffre."), 2);
+                        account.Log(new CharacterTextInformation("Trunk Opening."), 2);
 
                         account.Running.Init();
                     }
@@ -87,13 +87,13 @@ namespace MageBot.Core.Engine.Handlers.Basic
                     if (account.Running.OnLeaving)
                     {
                         account.Running.OnLeaving = false;
-                        account.Log(new ActionTextInformation("Dépôt d'un objet dans le coffre."), 3);
+                        account.Log(new ActionTextInformation("Depositing an object in the trunk."), 3);
                         account.Running.Init();
                     }
                     else if (account.Running.OnGetting)
                     {
                         account.Running.OnGetting = false;
-                        account.Log(new ActionTextInformation("Récupération d'un objet du coffre."), 3);
+                        account.Log(new ActionTextInformation("Retrieving a Trunk Object."), 3);
                         account.Running.Init();
                     }
                     return;
@@ -109,7 +109,7 @@ namespace MageBot.Core.Engine.Handlers.Basic
                     return;
 
                 case LeaveDialogRequestMessage.ProtocolID:
-                    account.Log(new ActionTextInformation("Fermeture du coffre."), 3);
+                    account.Log(new ActionTextInformation("Closed trunk."), 3);
                     if (account.Running != null)
                         account.Running.Init();
                     return;

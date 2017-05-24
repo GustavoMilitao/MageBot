@@ -49,9 +49,17 @@ namespace MageBot.Core.Map.Elements
                 {
                     if ((int)d.Fields["interactiveId"] == TypeId)
                     {
-                        return DataFiles.Data.I18n.I18N.GetText(
-                    (int)GameData.GetDataObject(D2oFileEnum.ItemTypes,
-                    (int)GameData.GetDataObject(D2oFileEnum.Items, (int)d.Fields["gatheredRessourceItem"]).Fields["typeId"]).Fields["nameId"]);
+                        var itemClass = GameData.GetDataObject(D2oFileEnum.Items, (int)d.Fields["gatheredRessourceItem"]);
+                        if (itemClass != null)
+                        {
+                            var itemTypeClass = GameData.GetDataObject(D2oFileEnum.ItemTypes, (int)itemClass.Fields["typeId"]);
+                            if (itemTypeClass != null)
+                            {
+                                return DataFiles.Data.I18n.I18N.GetText((int)itemTypeClass.Fields["nameId"]);
+                            }
+                            return "Unknown";
+                        }
+                        return "Unknown";
                     }
                 }
                 return "Unknown";
@@ -67,7 +75,14 @@ namespace MageBot.Core.Map.Elements
                 foreach (DataClass d in ld)
                 {
                     if ((int)d.Fields["interactiveId"] == TypeId)
-                        return DataFiles.Data.I18n.I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Items, (int)d.Fields["gatheredRessourceItem"]).Fields["nameId"]);
+                    {
+                        var dataClass = GameData.GetDataObject(D2oFileEnum.Items, (int)d.Fields["gatheredRessourceItem"]);
+                        if (dataClass != null)
+                        {
+                            return DataFiles.Data.I18n.I18N.GetText((int)dataClass.Fields["nameId"]);
+                        }
+                        return "Unknown";
+                    }
                 }
                 return "Unknown";
             }

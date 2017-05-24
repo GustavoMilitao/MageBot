@@ -342,13 +342,16 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            if (account.Config.HouseSearcherEnabled && !String.IsNullOrEmpty(account.Config.HouseSearcherLogPath))
+            if (String.IsNullOrEmpty(msg.Properties.OwnerName))
             {
-                StreamWriter SourceFile = new StreamWriter(account.Config.HouseSearcherLogPath, true);
-                SourceFile.WriteLine("Abandoned house in : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]");
-                SourceFile.Close();
+                if (account.Config.HouseSearcherEnabled && !String.IsNullOrEmpty(account.Config.HouseSearcherLogPath))
+                {
+                    StreamWriter SourceFile = new StreamWriter(account.Config.HouseSearcherLogPath, true);
+                    SourceFile.WriteLine("Abandoned house in : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]");
+                    SourceFile.Close();
+                }
+                account.Log(new BotTextInformation("Abandoned house in : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]"), 1);
             }
-            account.Log(new BotTextInformation("Abandoned house in : " + "[" + account.MapData.X + ";" + account.MapData.Y + "]"), 1);
         }
 
         [MessageHandler(typeof(GameContextRemoveElementMessage))]

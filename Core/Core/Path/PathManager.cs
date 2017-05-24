@@ -23,10 +23,11 @@ namespace MageBot.Core.Path
             set { flag = value; }
         }
         public bool Launched { get; set; }
-        public Thread Thread { get; set; }
-        //public EventWaitHandle WaitHandler { get; set; }
         public List<Action> ActionsStack { get; set; }
         public Action Current_Action { get; set; }
+        public List<string> ListActions { get; set; }
+        public Queue<string> WorkingActionsQueue { get; set; }
+        public string CurrentAction { get; set; }
         private string flag { get; set; }
         private List<string> m_content { get; set; }
         private List<PathCondition> conditions { get; set; }
@@ -62,16 +63,11 @@ namespace MageBot.Core.Path
         /// </summary>
         public void Start()
         {
-            //WaitHandler = new EventWaitHandle(false, EventResetMode.ManualReset);
-            Thread = new Thread(() =>
-            {
-                Account.Log(new BotTextInformation("Path started"), 1);
-                Launched = true;
-                Stop = false;
-                Account.WatchDog.StartPathDog();
-                ParsePath();
-            });
-            Thread.Start();
+            Account.Log(new BotTextInformation("Path started"), 1);
+            Launched = true;
+            Stop = false;
+            Account.WatchDog.StartPathDog();
+            ParsePath();
         }
 
         /// <summary>
@@ -83,9 +79,6 @@ namespace MageBot.Core.Path
             Launched = false;
             ClearStack();
             Account.WatchDog.StopPathDog();
-            //WaitHandler.Set();
-            Thread.Join();
-            Thread.Abort();
         }
 
         /// <summary>
@@ -172,42 +165,19 @@ namespace MageBot.Core.Path
                     //Wait for team regenerating
                     if (!Account.Fight.SearchFight())
                         PerformActionsStack();
-                    else
-                    {
-                        //WaitHandler.WaitOne();
-                        Thread.Suspend();
-                    }
-                }
-                else
-                {
-                    Thread.Suspend();
                 }
             }
             else if (Account.Config.IsSlave == false && Account.Fight != null)
             {
                 if (Account.State != Status.Fighting)
                 {
-                    do
-                    {
-                        Account.Wait(1);
-                    } while (Account.State != Status.None);
-                    //Wait for team regenerating
                     if (!Account.Fight.SearchFight())
                         PerformActionsStack();
-                    else
-                    {
-                        Thread.Suspend();
-                    }
-                }
-                else
-                {
-                    Thread.Suspend();
                 }
             }
             else
             {
                 Account.Log(new ErrorTextInformation("This Character isn't the master, path cannot do action."), 0);
-                Thread.Abort();
             }
         }
 
@@ -228,25 +198,48 @@ namespace MageBot.Core.Path
             //TODO: Fix the parser
             conditions = new List<PathCondition>();
             ActionsStack = new List<Action>();
-
+            ListActions = new List<string>();
+            CurrentAction = String.Empty;
             var listActionsPath = m_content.Where(elem => !String.IsNullOrEmpty(elem) && !elem.StartsWith("@"));
             foreach (string line in listActionsPath)
             {
-                if (line.Contains("+Condition "))
-                    ParseCondition(line);
-                else if (flags.Any(flag => line.Contains(flag)))
-                    flag = flags.ElementAt(flags.IndexOf(line));
-                else if (Endflags.Any(Endflag => line.Contains(Endflag)))
-                {
-                    conditions.Clear();
-                    flag = String.Empty;
-                }
-                else if (CheckConditions(false))
-                {
-                    Current_Map = Account.MapData.Pos;
-                    AnalyseLine(line);
-                }
+                ListActions.Add(line);
+            }
+            WorkingActionsQueue = new Queue<string>(ListActions);
+            DequeueAction();
+        }
 
+        public void DequeueAction()
+        {
+            if (WorkingActionsQueue.Count() > 0)
+            {
+                CurrentAction = WorkingActionsQueue.Dequeue();
+                TreatAction();
+            }
+        }
+
+        private void TreatAction()
+        {
+            if (CurrentAction.Contains("+Condition "))
+            {
+                ParseCondition(CurrentAction);
+                DequeueAction();
+            }
+            else if (flags.Any(flag => CurrentAction.Contains(flag)))
+            {
+                flag = flags.ElementAt(flags.IndexOf(CurrentAction));
+                DequeueAction();
+            }
+            else if (Endflags.Any(Endflag => CurrentAction.Contains(Endflag)))
+            {
+                conditions.Clear();
+                flag = String.Empty;
+                DequeueAction();
+            }
+            else if (CheckConditions(false))
+            {
+                Current_Map = Account.MapData.Pos;
+                AnalyseLine();
             }
         }
 
@@ -263,6 +256,7 @@ namespace MageBot.Core.Path
                 ActionsStack[0].PerformAction();
                 ActionsStack.Remove(Current_Action);
             }
+            DequeueAction();
         }
         #endregion
 
@@ -271,13 +265,13 @@ namespace MageBot.Core.Path
         /// <summary>
         /// Parse the line with the current pos.
         /// </summary>
-        private void AnalyseLine(string line)
+        private void AnalyseLine()
         {
-            if (line.Contains("@"))
+            if (CurrentAction.Contains("@"))
                 return;
             if (CheckConditions(true) && flag != String.Empty)
             {
-                ParseAction(line);
+                ParseAction(CurrentAction);
                 PerformFlag();
             }
         }

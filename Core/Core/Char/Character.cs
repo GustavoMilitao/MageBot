@@ -24,6 +24,7 @@ namespace MageBot.Core.Char
                 for (int i = 0; i < quantity; i++)
                 {
                     UpStat(Account.Config.CaracToAutoUp.Value, boost);
+                    Account.Wait(200);
                 }
             }
         }

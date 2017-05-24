@@ -408,8 +408,8 @@ namespace MageBot.Core.Fight
                 Account.SocketManager.Send(msg2);
                 Account.Log(new ActionTextInformation("Fast equipment number " + Convert.ToString(id)), 5);
             }
-            Account.SetStatus(Status.None);
             PulseRegen();
+            Account.SetStatus(Status.None);
         }
 
         /// <summary>
