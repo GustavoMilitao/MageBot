@@ -43,12 +43,16 @@ namespace MageBot.Core.Path
                         Account.MyGroup.MoveGroup((string)m_delta);
                         //account.PutTaskDelay(3000);
                         Account.Wait(3000);
+                        if (Account.State == Util.Enums.Internal.Status.Busy)
+                            PerformAction();
                     }
                     else if (Account.Config.IsSlave == false)
                     {
                         Account.Map.ChangeMap((string)m_delta);
                         //account.PutTaskDelay(3000);
                         Account.Wait(3000);
+                        if (Account.State == Util.Enums.Internal.Status.Busy)
+                            PerformAction();
                     }
                     else
                     {

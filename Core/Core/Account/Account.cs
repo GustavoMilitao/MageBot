@@ -387,7 +387,7 @@ namespace MageBot.Core.Account
             OnAccountRestart();
         }
 
-        private static int GetRandomTime()
+        public int GetRandomTime()
         {
             Random random = new Random();
 

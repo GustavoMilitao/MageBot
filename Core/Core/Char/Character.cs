@@ -19,13 +19,10 @@ namespace MageBot.Core.Char
         {
             if (Account.Config.CaracToAutoUp.HasValue)
             {
-                int boost = GetBoost(Account.Config.CaracToAutoUp.Value);
-                int quantity = Account.CharacterStats.StatsPoints / boost;
-                for (int i = 0; i < quantity; i++)
-                {
-                    UpStat(Account.Config.CaracToAutoUp.Value, boost);
-                    Account.Wait(200);
-                }
+                //int boost = GetBoost(Account.Config.CaracToAutoUp.Value);
+                //int quantity = Account.CharacterStats.StatsPoints / boost;
+                UpStat(Account.Config.CaracToAutoUp.Value, Account.CharacterStats.StatsPoints);
+                Account.Wait(1000);
             }
         }
 

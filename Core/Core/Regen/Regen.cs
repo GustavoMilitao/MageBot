@@ -50,7 +50,6 @@ namespace MageBot.Core.Regen
             {
                 EmotePlayRequestMessage msg = new EmotePlayRequestMessage(1);
                 Account.SocketManager.Send(msg);
-                Account.SetStatus(Status.None);
             }
         }
 

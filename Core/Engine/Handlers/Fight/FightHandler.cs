@@ -144,10 +144,10 @@ namespace MageBot.Core.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
+            account.Wait(5000);
             account.FightData.FightStop();
-            account.Wait(3000);
-            if (account.Path != null && account.Path.Launched)
-                account.Path.PerformFlag();
+            //if (account.Path != null && account.Path.Launched)
+            //    account.Path.PerformFlag();
         }
 
         [MessageHandler(typeof(GameFightHumanReadyStateMessage))]

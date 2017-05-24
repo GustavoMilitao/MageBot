@@ -156,29 +156,46 @@ namespace MageBot.Core.Path
         {
             if (Account.Config.IsMaster == true && Account.MyGroup != null && Account.Fight != null)
             {
-                if (Account.State != Status.Fighting)
+                WaitAccountsFightOrRegen();
+                if (!Account.Fight.SearchFight())
+                    PerformActionsStack();
+                else
                 {
-                    do
-                    {
-                        Account.Wait(1);
-                    } while (Account.MyGroup.Accounts.Any(acc => acc.State != Status.None));
-                    //Wait for team regenerating
-                    if (!Account.Fight.SearchFight())
-                        PerformActionsStack();
+                    WaitAccountsFightOrRegen();
+                    FightFlag();
                 }
             }
             else if (Account.Config.IsSlave == false && Account.Fight != null)
             {
-                if (Account.State != Status.Fighting)
+                WaitAccountFightOrRegen();
+                if (!Account.Fight.SearchFight())
+                    PerformActionsStack();
+                else
                 {
-                    if (!Account.Fight.SearchFight())
-                        PerformActionsStack();
+                    WaitAccountFightOrRegen();
+                    FightFlag();
                 }
             }
             else
             {
                 Account.Log(new ErrorTextInformation("This Character isn't the master, path cannot do action."), 0);
             }
+        }
+
+        private void WaitAccountsFightOrRegen()
+        {
+            do
+            {
+                Account.Wait(1);
+            } while (Account.MyGroup.Accounts.Any(acc => acc.State != Status.None));
+        }
+
+        private void WaitAccountFightOrRegen()
+        {
+            do
+            {
+                Account.Wait(1);
+            } while (Account.State != Status.None);
         }
 
         /// <summary>
@@ -253,7 +270,7 @@ namespace MageBot.Core.Path
             while (ActionsStack.Count() > 0)
             {
                 Current_Action = ActionsStack[0];
-                ActionsStack[0].PerformAction();
+                Current_Action.PerformAction();
                 ActionsStack.Remove(Current_Action);
             }
             DequeueAction();

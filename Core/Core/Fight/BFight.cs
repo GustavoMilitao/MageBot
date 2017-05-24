@@ -63,14 +63,18 @@ namespace MageBot.Core.Fight
                     case -1:              /* We can't use the spell, continue to the next spell */
                         continue;
                     case 0:
+                        Account.Wait(1000);
                         LaunchSpell(pair.Key.SpellId, pair.Value.CellId);  /* We can use the spell without move */
                         return;
                     default:
+                        Account.Wait(1000);
                         MoveToCell(c);                                    /* We can use the spell with move */
+                        Account.Wait(1000);
                         LaunchSpell(pair.Key.SpellId, pair.Value.CellId);
                         return;
                 }
             }
+            Account.Wait(1000);
             PerformMove(); /* No spell are launchable, move if we can and end the turn */
         }
 
@@ -96,10 +100,10 @@ namespace MageBot.Core.Fight
                     Account.SetStatus(Status.None);
                     Account.Log(new ActionTextInformation(string.Format("Fight started, {0} monsters of level {1} ({2})", monsters.monstersCount, monsters.monstersLevel, monsters.monstersName(true))), 1);
                     //m_Account.PutTaskDelay(2000);
-                    Account.Wait(2000);
+                    Account.Wait(3000);
                     Account.Fight.LaunchFight((int)monsters.m_contextualId);
                     //await m_Account.PutTaskDelay(2000);
-                    Account.Wait(2000);
+                    Account.Wait(5000+ Account.GetRandomTime());
                     if (Account.State != Status.Fighting)
                         SearchFight();
                     return true;
