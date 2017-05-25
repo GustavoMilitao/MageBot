@@ -36,7 +36,6 @@ namespace MageBot.Core.Groups
             Accounts.ForEach(acc =>
             {
                 acc.Map.ChangeMap(move);
-                acc.Wait(3000);
             });
         }
 

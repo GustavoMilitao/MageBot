@@ -160,10 +160,6 @@ namespace MageBot.Core.Path
                 if (!Account.Fight.SearchFight())
                     PerformActionsStack();
             }
-            else
-            {
-                Account.Log(new ErrorTextInformation("This Character isn't the master, path cannot do action."), 0);
-            }
         }
 
         private void WaitAccountsFightOrRegen()

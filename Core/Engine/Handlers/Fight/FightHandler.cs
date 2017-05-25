@@ -148,9 +148,9 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             TreatObtainedLoot(account, msg);
-            account.Wait(3000);
             if (account.IsMaster && account.MyGroup != null)
             {
+                account.Wait(5000);
                 account.MyGroup.DefineNewFightLauncher();
                 account.FightData.FightStop();
                 if (account.MyGroup.Path != null)

@@ -87,7 +87,14 @@ namespace MageBot.Core.Map
                     //m_MapId = neighbourId;
                     if (MoveToCell(randomCellId))
                     {
+                        var actualMap = Account.MapData.Id;
                         ChangeMap(neighbourId);
+                        Account.Wait(5000);
+                        if(actualMap == Account.MapData.Id)
+                        {
+                            Account.Wait(15000);
+                            return ChangeMap(direction);
+                        }
                         return true;
                     }
                     list.Remove(randomCellId);

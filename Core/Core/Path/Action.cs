@@ -31,7 +31,7 @@ namespace MageBot.Core.Path
         {
             if (Account.Path == null)
                 return;
-            while (Account.Busy == true)
+            while (Account.State == Util.Enums.Internal.Status.Busy)
                 //account.PutTaskDelay(5);
                 Account.Wait(5);
             switch (m_action)
@@ -42,7 +42,10 @@ namespace MageBot.Core.Path
                     {
                         Account.MyGroup.MoveGroup((string)m_delta);
                         //account.PutTaskDelay(3000);
-                        Account.Wait(3000);
+                        Account.Wait(5000);
+                        if (Account.MyGroup.Accounts.Any(acc => acc.State == Util.Enums.Internal.Status.Busy))
+                            Account.MyGroup.Accounts.Where(acc => acc.State == Util.Enums.Internal.Status.Busy)
+                                .ToList().ForEach(account => account.SetStatus(Util.Enums.Internal.Status.None));
                         //if (Account.State == Util.Enums.Internal.Status.Busy)
                         //    PerformAction();
                     }
