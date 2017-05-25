@@ -148,17 +148,20 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             TreatObtainedLoot(account, msg);
+            account.Wait(3000);
             if (account.IsMaster && account.MyGroup != null)
             {
                 account.MyGroup.DefineNewFightLauncher();
                 account.FightData.FightStop();
-                account.MyGroup.Path.PerformFlag();
+                if (account.MyGroup.Path != null)
+                    account.MyGroup.Path.PerformFlag();
             }
             else
             {
                 account.FightData.FightStop();
             }
-
+            if (account.MyGroup == null)
+                account.Path.PerformFlag();
             //account.Wait(20000+account.GetRandomTime());
             //if (account.Path != null && account.Path.Launched)
             //    account.Path.PerformFlag();

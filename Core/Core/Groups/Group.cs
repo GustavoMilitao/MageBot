@@ -36,6 +36,7 @@ namespace MageBot.Core.Groups
             Accounts.ForEach(acc =>
             {
                 acc.Map.ChangeMap(move);
+                acc.Wait(3000);
             });
         }
 
@@ -147,14 +148,19 @@ namespace MageBot.Core.Groups
         {
             var r = new Random();
             var i = r.Next(0, Accounts.Count - 2);
-            var newMaster = Accounts.Where(acc => acc.AccountName != LastAccountLaunchedFight.AccountName).ToList()[i];
-            newMaster.Log(new BotTextInformation("This is the Master account now !"), 1);
-            Accounts.ForEach(acc =>
+            var newMaster = Accounts.Where(
+                                     acc => LastAccountLaunchedFight != null && acc.AccountName != LastAccountLaunchedFight.AccountName
+                                           ).ToList()[i];
+            if (newMaster != null)
             {
-                acc.IsMaster = false;
-            });
-            newMaster.IsMaster = true;
-            newMaster.MyGroup.Path.Account = newMaster;
+                newMaster.Log(new BotTextInformation("This is the Master account now !"), 1);
+                Accounts.ForEach(acc =>
+                {
+                    acc.IsMaster = false;
+                });
+                newMaster.IsMaster = true;
+                newMaster.MyGroup.Path.Account = newMaster;
+            }
         }
 
         #endregion

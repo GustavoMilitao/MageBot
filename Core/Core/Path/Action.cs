@@ -38,25 +38,25 @@ namespace MageBot.Core.Path
             {
                 case "move(":
                     m_delta = (string)m_delta;
-                    if (Account.IsMaster && Account.MyGroup != null)
+                    if (Account.MyGroup != null)
                     {
                         Account.MyGroup.MoveGroup((string)m_delta);
                         //account.PutTaskDelay(3000);
                         Account.Wait(3000);
-                        if (Account.State == Util.Enums.Internal.Status.Busy)
-                            PerformAction();
+                        //if (Account.State == Util.Enums.Internal.Status.Busy)
+                        //    PerformAction();
                     }
                     else
                     {
                         Account.Map.ChangeMap((string)m_delta);
                         //account.PutTaskDelay(3000);
                         Account.Wait(3000);
-                        if (Account.State == Util.Enums.Internal.Status.Busy)
-                            PerformAction();
+                        //if (Account.State == Util.Enums.Internal.Status.Busy)
+                        //    PerformAction();
                     }
                     break;
                 case "object(":
-                    if (Account.IsMaster && Account.MyGroup != null)
+                    if (Account.MyGroup != null)
                     {
                         Account.MyGroup.UseItemGroup(Account.Inventory.GetItemFromGID(Convert.ToInt32(m_delta)).UID);
                         //account.PutTaskDelay(3000);
@@ -68,7 +68,7 @@ namespace MageBot.Core.Path
                     }
                     break;
                 case "cell(":
-                    if (Account.IsMaster && Account.MyGroup != null)
+                    if (Account.MyGroup != null)
                     {
                         Account.MyGroup.MoveToCellGroup(Convert.ToInt32(m_delta));
                         //account.PutTaskDelay(3000);
@@ -81,7 +81,7 @@ namespace MageBot.Core.Path
                     Account.Log(new BotTextInformation("Path: Moving to the cell " + Convert.ToString(m_delta)),5);
                     break;
                 case "npc(":
-                    if (Account.IsMaster && Account.MyGroup != null)
+                    if (Account.MyGroup != null)
                     {
                         Account.MyGroup.TalkToNpcGroup(Convert.ToInt32(m_delta));
                         //await account.PutTaskDelay(3000);
@@ -97,7 +97,7 @@ namespace MageBot.Core.Path
                     Account.Map.MoveToSecureElement(Convert.ToInt32(m_delta));
                     break;
                 case "zaap(":
-                    if (Account.IsMaster && Account.MyGroup != null)
+                    if (Account.MyGroup != null)
                     {
                         Account.MyGroup.UseZaapGroup();
                         //await account.PutTaskDelay(3000);
@@ -109,7 +109,7 @@ namespace MageBot.Core.Path
                     }                       
                     break;
                 case "zaapi(":
-                    if (Account.IsMaster && Account.MyGroup != null)
+                    if (Account.MyGroup != null)
                     {
                         Account.MyGroup.UseZaapiGroup();
                         //await account.PutTaskDelay(3000);
@@ -121,7 +121,7 @@ namespace MageBot.Core.Path
                     }
                     break;
                 case "exchange(":
-                    if (Account.IsMaster && Account.MyGroup != null)
+                    if (Account.MyGroup != null)
                     {
                         Account.MyGroup.RequestExchangeGroup((string)m_delta);
                         //await account.PutTaskDelay(3000);
