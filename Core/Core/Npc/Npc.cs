@@ -5,6 +5,7 @@ using MageBot.Protocol.Messages.Game.Dialog;
 using MageBot.Protocol.Types.Game.Context.Roleplay;
 using Util.Util.Text.Log;
 using System.Collections.Generic;
+using MageBot.Core.Engine.Network;
 
 namespace MageBot.Core.Npc
 {
@@ -66,8 +67,9 @@ namespace MageBot.Core.Npc
                 NpcGenericActionRequestMessage msg = new NpcGenericActionRequestMessage(npcId, 3, account.MapData.Id);
                 msg.Serialize(writer);
                 writer.Content = account.HumanCheck.Hash_function(writer.Content);
-                msg.Pack(writer);
-                account.SocketManager.Send(writer.Content);
+                MessagePackaging mp = new MessagePackaging(writer);
+                mp.Pack(msg.ProtocolId);
+                account.SocketManager.Send(mp.Writer.Content);
                 account.Log(new DebugTextInformation("[SND] 5898 (NpcGenericActionRequestMessage)"), 0);
             }
         }

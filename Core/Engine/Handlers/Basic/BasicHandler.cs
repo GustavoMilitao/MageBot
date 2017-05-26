@@ -11,6 +11,7 @@ using MageBot.Protocol.Messages.Game.Inventory.Exchanges;
 using MageBot.Protocol.Messages.Game.Inventory.Items;
 using MageBot.Protocol.Messages.Game.Dialog;
 using MageBot.Protocol.Messages.Game.Approach;
+using MageBot.Core.Engine.Network;
 
 namespace MageBot.Core.Engine.Handlers.Basic
 {
@@ -37,9 +38,9 @@ namespace MageBot.Core.Engine.Handlers.Basic
                 {
                     basicLatencyStatsMessage.Serialize(writer);
                     writer.Content = account.HumanCheck.Hash_function(writer.Content);
-                    basicLatencyStatsMessage.Pack(writer);
-
-                    account.SocketManager.Send(writer.Content);
+                    MessagePackaging mp = new MessagePackaging(writer);
+                    mp.Pack(basicLatencyStatsMessage.ProtocolId);
+                    account.SocketManager.Send(mp.Writer.Content);
                     account.Log(new DebugTextInformation("[SND] 5663 (BasicLatencyStatsMessage)"), 0);
                 }
             }

@@ -280,9 +280,9 @@ namespace MageBot.Core.Fight
                 GameActionFightCastRequestMessage msg = new GameActionFightCastRequestMessage((ushort)spellId, (short)cellId);
                 msg.Serialize(writer);
                 writer.Content = Account.HumanCheck.Hash_function(writer.Content);
-                MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack(msg.MessageID);
-                Account.SocketManager.Send(pack.Writer.Content);
+                MessagePackaging mp = new MessagePackaging(writer);
+                mp.Pack(msg.MessageID);
+                Account.SocketManager.Send(mp.Writer.Content);
                 Account.Log(new ActionTextInformation("Lancement d'un sort en " + cellId), 5);
                 Account.Log(new DebugTextInformation("[SND] 1005 (GameActionFightCastRequestMessage)"), 0);
             }
@@ -335,10 +335,10 @@ namespace MageBot.Core.Fight
                         GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.ToList().Select(ui => (short)ui).ToList(), Account.MapData.Id);
                         msg.Serialize(writer);
                         writer.Content = Account.HumanCheck.Hash_function(writer.Content);
-                        MessagePackaging pack = new MessagePackaging(writer);
-                        pack.Pack(msg.MessageID);
+                        MessagePackaging mp = new MessagePackaging(writer);
+                        mp.Pack(msg.MessageID);
                         flag = 0;
-                        Account.SocketManager.Send(pack.Writer.Content);
+                        Account.SocketManager.Send(mp.Writer.Content);
                         Account.Log(new DebugTextInformation("[SND] 950 (GameMapMovementRequestMessage)"), 0);
                     }
                     return true;

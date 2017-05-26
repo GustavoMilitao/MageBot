@@ -4,6 +4,7 @@ using MageBot.Protocol.Messages.Game.Context.Roleplay.Houses;
 using MageBot.Protocol.Messages.Game.Interactive;
 using Util.Util.Text.Log;
 using System;
+using MageBot.Core.Engine.Network;
 
 namespace MageBot.Core.Misc
 {
@@ -27,8 +28,9 @@ namespace MageBot.Core.Misc
                 ChatClientMultiMessage msg = new ChatClientMultiMessage(sentence, 0);
                 msg.Serialize(writer);
                 writer.Content = account.HumanCheck.Hash_function(writer.Content);
-                msg.Pack(writer);
-                account.SocketManager.Send(writer.Content);
+                MessagePackaging mp = new MessagePackaging(writer);
+                mp.Pack(msg.ProtocolId);
+                account.SocketManager.Send(mp.Writer.Content);
                 account.Log(new DebugTextInformation("[SND] 861 (ChatClientMultiMessage)"), 0);
             }
         }
@@ -40,8 +42,9 @@ namespace MageBot.Core.Misc
                 InteractiveUseRequestMessage msg = new InteractiveUseRequestMessage((uint)ElementIdd, (uint)SkillInstanceID);
                 msg.Serialize(writer);
                 writer.Content = account.HumanCheck.Hash_function(writer.Content);
-                msg.Pack(writer);
-                account.SocketManager.Send(writer.Content);
+                MessagePackaging mp = new MessagePackaging(writer);
+                mp.Pack(msg.ProtocolId);
+                account.SocketManager.Send(mp.Writer.Content);
                 account.Log(new DebugTextInformation("[SND] 5001 (InteractiveUseRequestMessage)"), 0);
             }
         }

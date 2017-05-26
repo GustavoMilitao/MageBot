@@ -928,7 +928,7 @@ namespace MageBot.Core.Network
                 //pack.Pack((int)msg.MessageID);
                 msg.Pack(writer);
                 account.SocketManager.Send(writer.Content);
-                account.Log(new DebugTextInformation("[SND] " + msg.MessageID), 0);
+                account.Log(new DebugTextInformation("[SND] " + msg.MessageID+" (" + msg.GetType().Name+")"), 0);
             }
         }
 

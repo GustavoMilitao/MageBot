@@ -56,7 +56,7 @@ namespace MageBot.Core.Map
                     if (MoveToCell(randomCellId))
                     {
                         ChangeMap(neighbourId);
-                        Account.Wait(5000);
+                        Account.Wait(10000);
                         if (actualMap == Account.MapData.Id)
                         {
                             Account.Wait(15000);
@@ -184,9 +184,9 @@ namespace MageBot.Core.Map
                 InteractiveUseRequestMessage msg = new InteractiveUseRequestMessage((uint)id, (uint)skillId);
                 msg.Serialize(writer);
                 writer.Content = Account.HumanCheck.Hash_function(writer.Content);
-                MessagePackaging pack = new MessagePackaging(writer);
-                pack.Pack(msg.MessageID);
-                Account.SocketManager.Send(pack.Writer.Content);
+                MessagePackaging mp = new MessagePackaging(writer);
+                mp.Pack(msg.MessageID);
+                Account.SocketManager.Send(mp.Writer.Content);
             }
             Account.Log(new DebugTextInformation("[SND] 5001 (InteractiveUseRequestMessage)"), 0);
         }
@@ -241,8 +241,9 @@ namespace MageBot.Core.Map
                 GameMapMovementRequestMessage msg = new GameMapMovementRequestMessage(serverMovement.Select(ui => (short)ui).ToList(), Account.MapData.Id);
                 msg.Serialize(writer);
                 writer.Content = Account.HumanCheck.Hash_function(writer.Content);
-                msg.Pack(writer);
-                Account.SocketManager.Send(writer.Content);
+                MessagePackaging mp = new MessagePackaging(writer);
+                mp.Pack(msg.ProtocolId);
+                Account.SocketManager.Send(mp.Writer.Content);
                 Account.SetStatus(Status.Moving);
                 Account.Log(new DebugTextInformation("[SND] 950 (GameMapMovementRequestMessage)"), 0);
             }

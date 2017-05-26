@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using MageBot.Core.Account;
 using MageBot.Core.Path;
 using System.Threading;
+using MageBot.Core.Engine.Network;
 
 namespace MageBot.Core.Engine.Common
 {
@@ -736,7 +737,8 @@ namespace MageBot.Core.Engine.Common
                         ChatClientPrivateMessage msg = new ChatClientPrivateMessage(message, dest);
                         msg.Serialize(writer);
                         writer.Content = account.HumanCheck.Hash_function(writer.Content);
-                        msg.Pack(writer);
+                        MessagePackaging mp = new MessagePackaging(writer);
+                        mp.Pack(msg.ProtocolId);
                         account.SocketManager.Send(writer.Content);
                         result.Add("à " + dest + " : " + message + "\n");
                         account.Log(new DebugTextInformation("[SND] 851 (ChatClientPrivateMessage)"), 0);

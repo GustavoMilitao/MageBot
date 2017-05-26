@@ -2,6 +2,7 @@
 using MageBot.Protocol.Messages.Game.Interactive;
 using MageBot.Protocol.Types.Game.Interactive;
 using Util.Util.Text.Log;
+using MageBot.Core.Engine.Network;
 
 namespace MageBot.Core.Storage
 {
@@ -31,9 +32,10 @@ namespace MageBot.Core.Storage
                 interactiveUseRequestMessage.Serialize(writer);
                 writer.Content = account.HumanCheck.Hash_function(writer.Content);
 
-                interactiveUseRequestMessage.Pack(writer);
+                MessagePackaging mp = new MessagePackaging(writer);
+                mp.Pack(interactiveUseRequestMessage.ProtocolId);
 
-                account.SocketManager.Send(writer.Content);
+                account.SocketManager.Send(mp.Writer.Content);
                 account.LastPacketID.Clear();
                 account.Log(new DebugTextInformation("[SND] 5001 (InteractiveUseRequestMessage)"), 0);
             }

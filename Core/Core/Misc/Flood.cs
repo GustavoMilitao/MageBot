@@ -9,6 +9,7 @@ using System.Threading;
 using MageBot.Protocol.Types.Game.Context.Roleplay;
 using MageBot.Protocol.Messages.Game.Chat;
 using System.Xml.Serialization;
+using MageBot.Core.Engine.Network;
 
 namespace MageBot.Core.Misc
 {
@@ -90,8 +91,9 @@ namespace MageBot.Core.Misc
                 ChatClientMultiMessage msg = new ChatClientMultiMessage(content, (byte)channel);
                 msg.Serialize(writer);
                 writer.Content = Account.HumanCheck.Hash_function(writer.Content);
-                msg.Pack(writer);
-                Account.SocketManager.Send(writer.Content);
+                MessagePackaging mp = new MessagePackaging(writer);
+                mp.Pack(msg.ProtocolId);
+                Account.SocketManager.Send(mp.Writer.Content);
                 Account.Log(new DebugTextInformation("[SND] 861 (ChatClientMultiMessage)"), 0);
                 increase(false);
             }
@@ -125,8 +127,9 @@ namespace MageBot.Core.Misc
                 ChatClientPrivateMessage msg = new ChatClientPrivateMessage(content, name);
                 msg.Serialize(writer);
                 writer.Content = Account.HumanCheck.Hash_function(writer.Content);
-                msg.Pack(writer);
-                Account.SocketManager.Send(writer.Content);
+                MessagePackaging mp = new MessagePackaging(writer);
+                mp.Pack(msg.ProtocolId);
+                Account.SocketManager.Send(mp.Writer.Content);
                 Account.Log(new PrivateTextInformation("à " + name + " : " + content), 1);
                 Account.Log(new DebugTextInformation("[SND] 851 (ChatClientPrivateMessage)"), 0);
             }
