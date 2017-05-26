@@ -38,6 +38,55 @@ namespace MageBot.Core.Map
             int num2 = -1;
             int rand = new Random().Next(0, 3);
             string direct = String.IsNullOrEmpty(direction) ? possibleDir[rand] : direction;
+            neighbourId = TreatNeighbourId(ref num2, direct);
+
+            if ((num2 != -1) && (neighbourId >= 0))
+            {
+                int cellId = Account.MapData.Character.Disposition.CellId;
+                if ((Account.MapData.Data.Cells[cellId].MapChangeData & num2) > 0)
+                {
+                    ChangeMap(neighbourId);
+                    return true;
+                }
+                List<int> list = GetGoodPositionsToChangeMap(neighbourId, num2, cellId);
+                while (list.Count > 0)
+                {
+                    int randomCellId = list[RandomCell(0, list.Count)];
+                    var actualMap = Account.MapData.Id;
+                    if (MoveToCell(randomCellId))
+                    {
+                        ChangeMap(neighbourId);
+                        if (actualMap == Account.MapData.Id)
+                        {
+                            Account.Wait(15000);
+                            return ChangeMap(direction);
+                        }
+                        return true;
+                    }
+                    list.Remove(randomCellId);
+                }
+            }
+            return false;
+        }
+
+        private List<int> GetGoodPositionsToChangeMap(int neighbourId, int num2, int cellId)
+        {
+            List<int> list = new List<int>();
+            int num4 = (Account.MapData.Data.Cells.Count - 1);
+            int i = 0;
+            while (i <= num4)
+            {
+                if (((Account.MapData.Data.Cells[i].MapChangeData & num2) > 0) && Account.MapData.NothingOnCell(i))
+                    list.Add(i);
+                i += 1;
+            }
+
+            return list;
+        }
+
+        private int TreatNeighbourId(ref int num2, string direct)
+        {
+            int neighbourId;
             switch (direct)
             {
                 case "haut":
@@ -61,46 +110,11 @@ namespace MageBot.Core.Map
                     num2 = 16;
                     break;
                 default:
-                    return false;
+                    neighbourId = -1;
+                    break;
             }
 
-            if ((num2 != -1) && (neighbourId >= 0))
-            {
-                int cellId = Account.MapData.Character.Disposition.CellId;
-                if ((Account.MapData.Data.Cells[cellId].MapChangeData & num2) > 0)
-                {
-                    ChangeMap(neighbourId);
-                    return true;
-                }
-                List<int> list = new List<int>();
-                int num4 = (Account.MapData.Data.Cells.Count - 1);
-                int i = 0;
-                while (i <= num4)
-                {
-                    if (((Account.MapData.Data.Cells[i].MapChangeData & num2) > 0) && Account.MapData.NothingOnCell(i))
-                        list.Add(i);
-                    i += 1;
-                }
-                while (list.Count > 0)
-                {
-                    int randomCellId = list[RandomCell(0, list.Count)];
-                    //m_MapId = neighbourId;
-                    if (MoveToCell(randomCellId))
-                    {
-                        var actualMap = Account.MapData.Id;
-                        ChangeMap(neighbourId);
-                        Account.Wait(5000);
-                        if(actualMap == Account.MapData.Id)
-                        {
-                            Account.Wait(15000);
-                            return ChangeMap(direction);
-                        }
-                        return true;
-                    }
-                    list.Remove(randomCellId);
-                }
-            }
-            return false;
+            return neighbourId;
         }
 
         public bool MoveToCell(int cellId)
