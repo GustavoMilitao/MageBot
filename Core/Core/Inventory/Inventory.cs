@@ -215,7 +215,7 @@ namespace MageBot.Core.Inventory
 
         public void RequestExchange(string name)
         {
-            ulong targetId = (ulong)Account.MapData.Players.Find(p => p.Name == name).ContextualId;
+            ulong targetId = (ulong)Account.MapData.Players.Values.FirstOrDefault(p => p.Name == name).ContextualId;
             if (targetId != 0)
             {
                 Account.SocketManager.Send(new ExchangePlayerRequestMessage(1, targetId));

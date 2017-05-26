@@ -355,7 +355,7 @@ namespace MageBot.DataFiles.Data.Pathfinding
                     if (!troughtEntities)
                     {
                         int count = 0;
-                        count += MapData.Monsters.Where((e) => e.m_cellId == actualPoint.CellId).ToList().Count;
+                        count += MapData.Monsters.Values.Where((e) => e.m_cellId == actualPoint.CellId).ToList().Count;
                         if (count > 0)
                         {
                             return false;

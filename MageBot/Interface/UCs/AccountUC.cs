@@ -951,8 +951,8 @@ namespace MageBot.Interface
         public void ActualizeMap()
         {
             BeginInvoke(new MethodInvoker(MapView.Items.Clear));
-            var join = Account.MapData.InteractiveElements.Keys.ToList().Join
-                (Account.MapData.StatedElements,
+            var join = Account.MapData.InteractiveElements.Values.Join
+                (Account.MapData.StatedElements.Values,
                  interactive => (int)interactive.Id,
                  stated => stated.Id,
                  (interactive, stated) => new
@@ -971,11 +971,11 @@ namespace MageBot.Interface
             {
                 AddItem(new ListViewItem(new string[] { Convert.ToString(e.Id), e.Name, e.CellId.ToString(), e.Type }), MapView);
             }
-            foreach (GameRolePlayNpcInformations n in Account.MapData.Npcs)
+            foreach (GameRolePlayNpcInformations n in Account.MapData.Npcs.Values)
             {
                 AddItem(new ListViewItem(new string[] { Convert.ToString(n.NpcId), I18N.GetText((int)GameData.GetDataObject(D2oFileEnum.Npcs, n.NpcId).Fields["nameId"]), Convert.ToString(n.Disposition.CellId), "NPC" }), MapView);
             }
-            foreach (GameRolePlayCharacterInformations c in Account.MapData.Players)
+            foreach (GameRolePlayCharacterInformations c in Account.MapData.Players.Values)
             {
                 AddItem(new ListViewItem(new string[] { Convert.ToString("[CID]:" + c.ContextualId + "[ACCID]:" + c.AccountId), c.Name, Convert.ToString(c.Disposition.CellId), "Player" }), MapView);
             }

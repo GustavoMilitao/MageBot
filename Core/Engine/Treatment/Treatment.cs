@@ -48,10 +48,7 @@ namespace MageBot.Core.Engine.Treatment
 
                 object[] parameters = { message, packetDatas, account };
 
-                var t = new Thread(() => 
-                method.Invoke(null, parameters)
-                );
-                t.Start();
+                method.Invoke(null, parameters);
             }
         }
         #endregion

@@ -19,6 +19,7 @@ using MageBot.Core.Fight;
 using MageBot.DataFiles.Data.D2o;
 using System.Collections.Generic;
 using MageBot.DataFiles.Data.I18n;
+using System.Threading;
 
 namespace MageBot.Core.Engine.Handlers.Fight
 {
@@ -150,11 +151,15 @@ namespace MageBot.Core.Engine.Handlers.Fight
             TreatObtainedLoot(account, msg);
             if (account.IsMaster && account.MyGroup != null)
             {
-                account.Wait(5000);
-                account.MyGroup.DefineNewFightLauncher();
-                account.FightData.FightStop();
-                if (account.MyGroup.Path != null)
-                    account.MyGroup.Path.PerformFlag();
+                Thread t = new Thread(() =>
+                {
+                    //account.Wait(5000);
+                    //account.MyGroup.DefineNewFightLauncher();
+                    account.FightData.FightStop();
+                    if (account.MyGroup.Path != null)
+                        account.MyGroup.Path.PerformFlag();
+                });
+                t.Start();
             }
             else
             {

@@ -9,6 +9,7 @@ using MageBot.DataFiles.Data.Pathfinding.Positions;
 using MageBot.Protocol.Types.Game.Context.Roleplay;
 using MageBot.Core.Monsters;
 using MageBot.Util.Enums.Internal;
+using System.Collections.Concurrent;
 
 namespace MageBot.Core.Map
 {
@@ -21,34 +22,32 @@ namespace MageBot.Core.Map
         /// <summary>
         /// List containing all the players on the map.
         /// </summary>
-        public List<GameRolePlayCharacterInformations> Players = new List<GameRolePlayCharacterInformations>();
+        public Dictionary<double, GameRolePlayCharacterInformations> Players = new Dictionary<double, GameRolePlayCharacterInformations>();
 
         /// <summary>
         /// List containing all the group of monsters on the map.
         /// </summary>
-        public List<MonsterGroup> Monsters = new List<MonsterGroup>();
+        public Dictionary<double, MonsterGroup> Monsters = new Dictionary<double, MonsterGroup>();
 
         /// <summary>
         /// List containing all the Npc on the map.
         /// </summary>
-        public List<GameRolePlayNpcInformations> Npcs = new List<GameRolePlayNpcInformations>();
+        public Dictionary<double, GameRolePlayNpcInformations> Npcs = new Dictionary<double, GameRolePlayNpcInformations>();
 
         /// <summary>
         /// List containing all the other actors that we can't identify.
         /// </summary>
-        public List<GameRolePlayActorInformations> Others = new List<GameRolePlayActorInformations>();
+        public Dictionary<double, GameRolePlayActorInformations> Others = new Dictionary<double, GameRolePlayActorInformations>();
 
         /// <summary>
         /// Dict containing the interactive elements and their cellId. If no cellId found, cellId equals -1.
         /// </summary>
-        public Dictionary<Elements.InteractiveElement, int> InteractiveElements = new Dictionary<Elements.InteractiveElement, int>();
+        public Dictionary<uint, InteractiveElement> InteractiveElements = new Dictionary<uint, InteractiveElement>();
 
         /// <summary>
         /// List containing all the stated elements on the map.
         /// </summary>
-        public List<Elements.StatedElement> StatedElements = new List<Elements.StatedElement>();
-
-        public List<Protocol.Types.Game.Interactive.InteractiveElement> InterElements { get; set; }
+        public Dictionary<double, StatedElement> StatedElements = new Dictionary<double, StatedElement>();
 
         public int LastMapId;
         #endregion
@@ -88,7 +87,7 @@ namespace MageBot.Core.Map
 
         public GameRolePlayCharacterInformations Character
         {
-            get { return Players.FirstOrDefault(p => p.ContextualId == Account.CharacterBaseInformations.ObjectID); }
+            get { return Players.FirstOrDefault(p => p.Key == Account.CharacterBaseInformations.ObjectID).Value; }
         }
 
         public int Id
@@ -101,9 +100,9 @@ namespace MageBot.Core.Map
             get
             {
                 Dictionary<int, UsableElement> usableElements = new Dictionary<int, UsableElement>();
-                foreach (var element in InteractiveElements.Keys)
+                foreach (var element in InteractiveElements)
                 {
-                    Elements.InteractiveElement interactiveElement = element;
+                    InteractiveElement interactiveElement = element.Value;
                     if (interactiveElement.EnabledSkills.Count >= 1)
                     {
                         foreach (var layer in Data.Layers)
@@ -117,7 +116,7 @@ namespace MageBot.Core.Map
                                         GraphicalElement graphicalElement = (GraphicalElement)layerElement;
                                         if (graphicalElement.Identifier == interactiveElement.Id)
                                         {
-                                            usableElements.Add((int)interactiveElement.Id, new Elements.UsableElement(cell.CellId, interactiveElement, interactiveElement.EnabledSkills));
+                                            usableElements.Add((int)interactiveElement.Id, new UsableElement(cell.CellId, interactiveElement, interactiveElement.EnabledSkills));
                                         }
                                     }
                                 }
@@ -150,42 +149,45 @@ namespace MageBot.Core.Map
             foreach (GameRolePlayActorInformations i in actors)
             {
                 if (i is GameRolePlayGroupMonsterInformations
-                    && !Monsters.Any(m => m.m_contextualId == i.ContextualId))
+                    && !Monsters.Any(m => m.Key == i.ContextualId))
                 {
                     GameRolePlayGroupMonsterInformations m = (GameRolePlayGroupMonsterInformations)i;
-                    Monsters.Add(new MonsterGroup(m.StaticInfos, m.Disposition.CellId, m.ContextualId));
+                    Monsters.Add(m.ContextualId, new MonsterGroup(m.StaticInfos, m.Disposition.CellId, m.ContextualId));
                 }
                 else if (i is GameRolePlayCharacterInformations
-                    && !Players.Any(p => p.ContextualId == i.ContextualId))
+                    && !Players.Any(p => p.Key == i.ContextualId))
                 {
                     GameRolePlayCharacterInformations p = (GameRolePlayCharacterInformations)i;
-                    Players.Add(p);
+                    Players.Add(p.ContextualId, p);
                 }
                 else if (i is GameRolePlayNpcInformations
-                    && !Npcs.Any(n => n.ContextualId == i.ContextualId))
+                    && !Npcs.Any(n => n.Key == i.ContextualId))
                 {
                     GameRolePlayNpcInformations npc = (GameRolePlayNpcInformations)i;
-                    Npcs.Add(npc);
+                    Npcs.Add(npc.ContextualId, npc);
                 }
                 else
-                    Others.Add(i);
+                {
+                    Others.Add(i.ContextualId, i);
+                }
             }
         }
 
         /// <summary>
         /// Parse the stated elements array from MapComplementaryInformationsDataMessage.
         /// </summary>
-        public void ParseStatedElements(MageBot.Protocol.Types.Game.Interactive.StatedElement[] statedElements)
+        public void ParseStatedElements(Protocol.Types.Game.Interactive.StatedElement[] statedElements)
         {
-            StatedElements =
-                statedElements.Where(element => element.OnCurrentMap)
-                .Select(elem => new StatedElement(elem.ElementCellId, elem.ElementId, elem.ElementState)).ToList();
+            var StatedOnMapInEnumerable = statedElements.Where(element => element.OnCurrentMap)
+                .Select(elem => new StatedElement(elem.ElementCellId, elem.ElementId, elem.ElementState))
+                .ToDictionary(elem => (double)elem.Id);
+            StatedElements = new Dictionary<double, StatedElement>(StatedOnMapInEnumerable);
         }
 
         /// <summary>
         /// Parse the interactive elements array from MapComplementaryInformationsDataMessage.
         /// </summary>
-        public void ParseInteractiveElements(MageBot.Protocol.Types.Game.Interactive.InteractiveElement[] interactiveElements)
+        public void ParseInteractiveElements(Protocol.Types.Game.Interactive.InteractiveElement[] interactiveElements)
         {
             var elementsOnTheMap = interactiveElements.Where(element => element.OnCurrentMap).ToList();
             foreach (Protocol.Types.Game.Interactive.InteractiveElement element in elementsOnTheMap)
@@ -193,9 +195,14 @@ namespace MageBot.Core.Map
                 if (element.ElementTypeId == 85)
                     Account.Safe = new InteractiveElement(element);
                 InteractiveElement Ielement = new InteractiveElement((uint)element.ElementId, element.ElementTypeId, element.EnabledSkills, element.DisabledSkills);
-                InteractiveElements.Add(Ielement, -1);
+                InteractiveElements.Add(Ielement.Id, Ielement);
                 if (Ielement.EnabledSkills.Count > 0)
                 {
+                    //Ielement.CellId = Data.Layers.Select(
+                    //    elem => elem.Cells.FirstOrDefault(cell =>
+                    //        cell.Elements.Where(e => e is GraphicalElement &&
+                    //        ((GraphicalElement)e).Identifier == Ielement.Id).Count() > 0)
+                    //        ).FirstOrDefault().CellId;
                     foreach (var layer in Data.Layers)
                     {
                         foreach (var cell in layer.Cells)
@@ -206,7 +213,7 @@ namespace MageBot.Core.Map
                                 {
                                     GraphicalElement graphicalElement = (GraphicalElement)layerElement;
                                     if (graphicalElement.Identifier == Ielement.Id)
-                                        InteractiveElements[Ielement] = cell.CellId;
+                                        Ielement.CellId = cell.CellId;
                                 }
                             }
                         }
@@ -228,7 +235,6 @@ namespace MageBot.Core.Map
             Others.Clear();
             InteractiveElements.Clear();
             StatedElements.Clear();
-            Account.SetStatus(Status.None);
         }
 
         /// <summary>
@@ -276,20 +282,19 @@ namespace MageBot.Core.Map
         {
             if (element.OnCurrentMap)
             {
-                InteractiveElement Ielement = new InteractiveElement((uint)element.ElementId, element.ElementTypeId, element.EnabledSkills, element.DisabledSkills);
-                Tuple<InteractiveElement, int> temp = new Tuple<InteractiveElement, int>(null, 0);
-                foreach (KeyValuePair<Elements.InteractiveElement, int> pair in InteractiveElements)
+                var ielement = new InteractiveElement((uint)element.ElementId,
+                                                element.ElementTypeId,
+                                                element.EnabledSkills,
+                                                element.DisabledSkills);
+                if (InteractiveElements.ContainsKey((uint)element.ElementId))
                 {
-                    if (pair.Key.Id == Ielement.Id)
-                        temp = new Tuple<InteractiveElement, int>(pair.Key, pair.Value);
-                }
-                if (temp.Item1 != null)
-                {
-                    InteractiveElements.Remove(temp.Item1);
-                    InteractiveElements.Add(Ielement, temp.Item2);
+                    ielement.CellId = InteractiveElements[(uint)element.ElementId].CellId;
+                    InteractiveElements[(uint)element.ElementId] = ielement;
                 }
                 else
-                    InteractiveElements.Add(Ielement, -1);
+                {
+                    InteractiveElements.Add(ielement.Id, ielement);
+                }
             }
         }
 
@@ -301,10 +306,14 @@ namespace MageBot.Core.Map
             if (element.OnCurrentMap)
             {
                 StatedElement Selement = new StatedElement(element.ElementCellId, element.ElementId, element.ElementState);
-                if (StatedElements.Find(s => s.Id == Selement.Id) != null)
-                    StatedElements.Find(s => s.Id == Selement.Id).State = Selement.State;
+                if (StatedElements.FirstOrDefault(s => s.Key == Selement.Id).Value != null)
+                {
+                    StatedElements.FirstOrDefault(s => s.Key == Selement.Id).Value.State = Selement.State;
+                }
                 else
-                    StatedElements.Add(Selement);
+                {
+                    StatedElements.Add(Selement.Id, Selement);
+                }
             }
         }
 
@@ -313,9 +322,9 @@ namespace MageBot.Core.Map
         /// </summary>
         public void Remove(double id)
         {
-            Players.RemoveAll(p => p.ContextualId == id);
-            Others.RemoveAll(o => o.ContextualId == id);
-            Monsters.RemoveAll(m => m.m_contextualId == id);
+            Players.Remove(id);
+            Others.Remove(id);
+            Monsters.Remove(id);
         }
 
         /// <summary>
@@ -323,9 +332,9 @@ namespace MageBot.Core.Map
         /// </summary>
         public bool CanGatherElement(int id)
         {
-            StatedElement statedElement = StatedElements.Find(s => s.Id == id);
+            StatedElement statedElement = StatedElements[id];
             InteractiveElement interactiveElement =
-                InteractiveElements.Keys.ToList().Find(el => el.Id == id);
+                InteractiveElements[(uint)id];
             if (!interactiveElement.IsUsable
                 || (statedElement.State != 0
                     && statedElement.State != 1))
@@ -358,9 +367,9 @@ namespace MageBot.Core.Map
         /// </summary>
         public bool NoEntitiesOnCell(int cellId)
         {
-            bool players = Players.Find(p => p.Disposition.CellId == cellId) == null;
-            bool npcs = Npcs.Find(n => n.Disposition.CellId == cellId) == null;
-            bool others = Others.Find(o => o.Disposition.CellId == cellId) == null;
+            bool players = Players.Values.FirstOrDefault(p => p.Disposition.CellId == cellId) == null;
+            bool npcs = Npcs.Values.FirstOrDefault(n => n.Disposition.CellId == cellId) == null;
+            bool others = Others.Values.FirstOrDefault(o => o.Disposition.CellId == cellId) == null;
             return (players && npcs && others);
         }
 
@@ -379,16 +388,16 @@ namespace MageBot.Core.Map
         /// </summary>
         public int GetCellFromContextId(double contextId)
         {
-            GameRolePlayCharacterInformations pl = Players.Find(p => p.ContextualId == contextId);
+            GameRolePlayCharacterInformations pl = Players.ContainsKey(contextId) ? Players[contextId] : null;
             if (pl != null)
                 return pl.Disposition.CellId;
-            Elements.StatedElement st = StatedElements.Find(s => s.Id == contextId);
+            StatedElement st = StatedElements.ContainsKey(contextId) ? StatedElements[contextId] : null;
             if (st != null)
                 return (int)st.CellId;
-            GameRolePlayNpcInformations npc = Npcs.Find(s => s.ContextualId == contextId);
+            GameRolePlayNpcInformations npc = Npcs.ContainsKey(contextId) ? Npcs[contextId] : null;
             if (npc != null)
                 return npc.Disposition.CellId;
-            GameRolePlayActorInformations other = Others.Find(s => s.ContextualId == contextId);
+            GameRolePlayActorInformations other = Others.ContainsKey(contextId) ? Others[contextId] : null;
             if (other != null)
                 return other.Disposition.CellId;
             return 0;
@@ -399,12 +408,12 @@ namespace MageBot.Core.Map
         /// </summary>
         public void UpdateEntityCell(double id, int cell)
         {
-            if (Monsters.Find(m => m.m_contextualId == id) != null)
-                Monsters.Find(m => m.m_contextualId == id).m_cellId = cell;
-            else if (Players.Find(p => p.ContextualId == id) != null)
-                Players.Find(p => p.ContextualId == id).Disposition.CellId = (short)cell;
-            else if (Others.Find(p => p.ContextualId == id) != null)
-                Others.Find(p => p.ContextualId == id).Disposition.CellId = (short)cell;
+            if (Monsters.ContainsKey(id))
+                Monsters[id].m_cellId = cell;
+            else if (Players.ContainsKey(id))
+                Players[id].Disposition.CellId = (short)cell;
+            else if (Others.ContainsKey(id))
+                Others[id].Disposition.CellId = (short)cell;
         }
 
         public List<MapPoint> GetListPointAtGoodDistance(MapPoint characterPoint, MapPoint elementPoint, int maxDistance)

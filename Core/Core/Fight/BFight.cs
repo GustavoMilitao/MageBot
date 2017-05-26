@@ -83,7 +83,7 @@ namespace MageBot.Core.Fight
             int maxNumber = Account.Config.MaxMonstersNumber;
             int minLevel = Account.Config.MinMonstersLevel;
             int maxLevel = Account.Config.MaxMonstersLevel;
-            MonsterGroup monsters = Account.MapData.Monsters.FirstOrDefault(monst => monst.monstersCount >= minNumber &&
+            MonsterGroup monsters = Account.MapData.Monsters.Values.FirstOrDefault(monst => monst.monstersCount >= minNumber &&
                                                                                        monst.monstersCount <= maxNumber &&
                                                                                        monst.monstersLevel >= minLevel &&
                                                                                        monst.monstersLevel <= maxLevel &&
@@ -99,15 +99,15 @@ namespace MageBot.Core.Fight
                     Account.Wait(2000);
                     if (Account.State != Status.Fighting)
                     {
-                        if (Account.MyGroup != null)
-                        {
-                            Account.MyGroup.DefineNewFightLauncher();
-                            return Account.MyGroup.Path.Account.Fight.SearchFight();
-                        }
+                        //if (Account.MyGroup != null)
+                        //{
+                        //    Account.MyGroup.DefineNewFightLauncher();
+                        //    return Account.MyGroup.Path.Account.Fight.SearchFight();
+                        //}
                         return Account.Fight.SearchFight();
                     }
-                    if (Account.MyGroup != null)
-                        Account.MyGroup.LastAccountLaunchedFight = Account;
+                    //if (Account.MyGroup != null)
+                    //    Account.MyGroup.LastAccountLaunchedFight = Account;
                     return true;
                 }
             }

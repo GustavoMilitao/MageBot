@@ -52,16 +52,9 @@ namespace MageBot.Core.Map
                 while (list.Count > 0)
                 {
                     int randomCellId = list[RandomCell(0, list.Count)];
-                    var actualMap = Account.MapData.Id;
                     if (MoveToCell(randomCellId))
                     {
                         ChangeMap(neighbourId);
-                        Account.Wait(10000);
-                        if (actualMap == Account.MapData.Id)
-                        {
-                            Account.Wait(15000);
-                            return ChangeMap(direction);
-                        }
                         return true;
                     }
                     list.Remove(randomCellId);
@@ -150,7 +143,7 @@ namespace MageBot.Core.Map
 
         public bool MoveToElement(int id, int maxDistance)
         {
-            Elements.StatedElement element = Account.MapData.StatedElements.Find(s => s.Id == id);
+            Elements.StatedElement element = Account.MapData.StatedElements[id];
             if (element != null)
                 return MoveToCellWithDistance((int)element.CellId, maxDistance, false);
             else
@@ -159,7 +152,7 @@ namespace MageBot.Core.Map
 
         public bool MoveToSecureElement(int id)
         {
-            Elements.StatedElement element = Account.MapData.StatedElements.Find(s => s.Id == id);
+            Elements.StatedElement element = Account.MapData.StatedElements[id];
             if (element != null)
                 return MoveToCellWithDistance((int)element.CellId, 1, true);
             else
@@ -193,7 +186,7 @@ namespace MageBot.Core.Map
 
         public void UseElement(int id)
         {
-            InteractiveElement e = Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.Id == id);
+            InteractiveElement e = Account.MapData.InteractiveElements[(uint)id];
             UseElement(id, e.EnabledSkills.FirstOrDefault().SkillInstanceUid);
         }
 
@@ -206,7 +199,7 @@ namespace MageBot.Core.Map
         public void useZaapiTo(int mapid)
         {
 
-            InteractiveElement e = Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.TypeId == 106);
+            InteractiveElement e = Account.MapData.InteractiveElements.Values.ToList().Find(i => i.TypeId == 106);
             if (e != null)
             {
                 MoveToSecureElement((int)e.Id);
@@ -219,7 +212,7 @@ namespace MageBot.Core.Map
 
         public void UseZaapTo(int mapid)
         {
-            InteractiveElement e = Account.MapData.InteractiveElements.Keys.ToList().Find(i => i.TypeId == 16);
+            InteractiveElement e = Account.MapData.InteractiveElements.Values.ToList().Find(i => i.TypeId == 16);
             if (e != null)
             {
                 MoveToSecureElement((int)e.Id);

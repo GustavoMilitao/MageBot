@@ -42,20 +42,15 @@ namespace MageBot.Core.Path
                     {
                         Account.MyGroup.MoveGroup((string)m_delta);
                         //account.PutTaskDelay(3000);
-                        Account.Wait(5000);
+                        Account.Wait(3000);
                         if (Account.MyGroup.Accounts.Any(acc => acc.State == Util.Enums.Internal.Status.Busy))
                             Account.MyGroup.Accounts.Where(acc => acc.State == Util.Enums.Internal.Status.Busy)
                                 .ToList().ForEach(account => account.SetStatus(Util.Enums.Internal.Status.None));
-                        //if (Account.State == Util.Enums.Internal.Status.Busy)
-                        //    PerformAction();
                     }
                     else
                     {
                         Account.Map.ChangeMap((string)m_delta);
-                        //account.PutTaskDelay(3000);
                         Account.Wait(3000);
-                        //if (Account.State == Util.Enums.Internal.Status.Busy)
-                        //    PerformAction();
                     }
                     break;
                 case "object(":

@@ -31,6 +31,7 @@ namespace MageBot.Core.Map.Elements
         public List<InteractiveElementSkill> DisabledSkills { get; private set; }
         public List<InteractiveElementSkill> EnabledSkills { get; private set; }
         public uint Id { get; private set; }
+        public int CellId { get; set; } = -1;
 
         public bool IsUsable
         {

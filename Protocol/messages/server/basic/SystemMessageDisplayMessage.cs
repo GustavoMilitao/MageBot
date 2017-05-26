@@ -93,6 +93,8 @@ namespace MageBot.Protocol.Messages.Server.Basic
         
         public override void Deserialize(IDataReader reader)
         {
+            m_hangUp = reader.ReadBoolean();
+            m_msgId = reader.ReadVarUhShort();
             int parametersCount = reader.ReadUShort();
             int parametersIndex;
             m_parameters = new System.Collections.Generic.List<string>();
@@ -100,8 +102,6 @@ namespace MageBot.Protocol.Messages.Server.Basic
             {
                 m_parameters.Add(reader.ReadUTF());
             }
-            m_hangUp = reader.ReadBoolean();
-            m_msgId = reader.ReadVarUhShort();
         }
     }
 }

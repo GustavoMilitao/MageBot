@@ -46,7 +46,7 @@ namespace MageBot.Core.Engine.Handlers.Context
                 msg.Deserialize(reader);
             }
             account.Npc.Id = msg.NpcId;
-            account.Npc.Entity = account.MapData.Npcs.FirstOrDefault((npc) => (int)npc.ContextualId == msg.NpcId);
+            account.Npc.Entity = account.MapData.Npcs[msg.NpcId];
             account.SetStatus(Status.Speaking);
         }
 
@@ -76,7 +76,7 @@ namespace MageBot.Core.Engine.Handlers.Context
             if (msg.VisibleReplies.Count == 0)
                 account.Npc.CloseDialog();
             account.Npc.Replies.Clear();
-            account.Npc.Replies = msg.VisibleReplies.Select((id) => new MageBot.Core.Npc.NpcReply(account.MapData.Npcs.Find(n => (int)n.ContextualId == account.Npc.Id).NpcId, (int)id)).ToList();
+            account.Npc.Replies = msg.VisibleReplies.Select((id) => new Npc.NpcReply(account.MapData.Npcs[account.Npc.Id].NpcId, (int)id)).ToList();
             if (account.Path != null)
             {
                 account.Path.SearchReplies(MageBot.DataFiles.Data.I18n.I18N.GetText(mess));

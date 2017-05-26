@@ -6,6 +6,7 @@ using MageBot.Protocol.Types.Game.Context.Roleplay;
 using Util.Util.Text.Log;
 using System.Collections.Generic;
 using MageBot.Core.Engine.Network;
+using System.Linq;
 
 namespace MageBot.Core.Npc
 {
@@ -78,12 +79,8 @@ namespace MageBot.Core.Npc
         {
             if (npcId == 0)
                 return (int)account.MapData.Npcs[0].ContextualId;
-            foreach (GameRolePlayNpcInformations p in account.MapData.Npcs)
-            {
-                if (p.NpcId == npcId)
-                    return (int)p.ContextualId;
-            }
-            return 0;
+            var npc = account.MapData.Npcs.Values.FirstOrDefault(v => v.NpcId == npcId);
+            return npc != null ? (int)npc.ContextualId : 0;
         }
 
         #endregion

@@ -694,7 +694,7 @@ namespace MageBot.Core.Engine.Common
                 else if (player != "null")
                 {
                     int cell = 0;
-                    foreach (GameRolePlayCharacterInformations p in account.MapData.Players)
+                    foreach (GameRolePlayCharacterInformations p in account.MapData.Players.Values)
                     {
                         if (p.Name == player)
                         {
@@ -702,9 +702,9 @@ namespace MageBot.Core.Engine.Common
                         }
                     }
                     if (cell != 0)
-                        result.Add("Le joueur " + player + " est à la cellule " + cell + ". \n");
+                        result.Add("The player " + player + " Is in the cell " + cell + ". \n");
                     else
-                        result.Add("Joueur introuvable.");
+                        result.Add("Player not found.");
                 }
             }
             catch (Exception ex)
@@ -792,21 +792,21 @@ namespace MageBot.Core.Engine.Common
 
             try
             {
-                foreach (GameRolePlayNpcInformations n in account.MapData.Npcs)
+                foreach (GameRolePlayNpcInformations n in account.MapData.Npcs.Values)
                 {
                     string name = account.Npc.GetNpcName(n.NpcId);
                     int cell = account.MapData.GetCellFromContextId(n.ContextualId);
                     result.Add("[PNJ] " + name + " -> id : +" + n.NpcId + " contextual id : " + n.ContextualId + " cell : " + cell + ".");
 
                 }
-                foreach (KeyValuePair<MageBot.Core.Map.Elements.InteractiveElement, int> pair in account.MapData.InteractiveElements)
+                foreach (var elem in account.MapData.InteractiveElements.Values)
                 {
                     if (verbose)
-                        result.Add("[INTERACTIVE ELEMENT] " + pair.Key.Name + " -> id " + pair.Key + " cell : " + pair.Value + " IsUsable : " + pair.Key.IsUsable + ".");
+                        result.Add("[INTERACTIVE ELEMENT] " + elem.Name + " -> id " + elem.Id + " cell : " + elem.CellId + " IsUsable : " + elem.IsUsable + ".");
                     else
-                        result.Add("[INTERACTIVE ELEMENT] " + pair.Key.Name + " -> id " + pair.Key + " cell : " + pair.Value + ".");
+                        result.Add("[INTERACTIVE ELEMENT] " + elem.Name + " -> id " + elem.Id + " cell : " + elem.CellId + ".");
                 }
-                foreach (GameRolePlayCharacterInformations p in account.MapData.Players)
+                foreach (GameRolePlayCharacterInformations p in account.MapData.Players.Values)
                 {
                     int cell = account.MapData.GetCellFromContextId(p.ContextualId);
                     if (verbose)
@@ -815,7 +815,7 @@ namespace MageBot.Core.Engine.Common
                         result.Add("[PLAYER] " + p.Name + " -> contextual id " + p.ContextualId + " cell : " + cell + ".");
 
                 }
-                foreach (MonsterGroup m in account.MapData.Monsters)
+                foreach (MonsterGroup m in account.MapData.Monsters.Values)
                 {
                     if (verbose)
                         result.Add("[MONSTERS] " + " -> (" + m.monstersLevel + ") " + m.monstersName(true) + " contextual id " + m.m_contextualId + " cell : " + m.m_cellId + ".");

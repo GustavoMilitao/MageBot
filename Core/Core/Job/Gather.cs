@@ -80,7 +80,7 @@ namespace MageBot.Core.Job
             {
                 #region Getting elements and join to some informations
                 List<int> resIDList = ressources.Distinct().ToList();
-                var usableElementsOnTheMap = account.MapData.UsableElements.Values.Join(account.MapData.InteractiveElements.Keys,
+                var usableElementsOnTheMap = account.MapData.UsableElements.Values.Join(account.MapData.InteractiveElements.Values,
                     usableElem => usableElem.Element.Id,
                     interactiveElem => interactiveElem.Id,
                     (usableElem, interactiveElem) => new
@@ -230,7 +230,7 @@ namespace MageBot.Core.Job
         public int GetRessourceDistance(int Id)
         {
             MapPoint CharacterMapPoint = new MapPoint(account.MapData.Character.Disposition.CellId);
-            StatedElement StatedRessource = account.MapData.StatedElements.FirstOrDefault((se) => se.Id == Id);
+            StatedElement StatedRessource = account.MapData.StatedElements[Id];
             if (StatedRessource != null)
             {
                 MapPoint RessourceMapPoint = new MapPoint((int)StatedRessource.CellId);
