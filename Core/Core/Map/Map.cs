@@ -56,6 +56,7 @@ namespace MageBot.Core.Map
                     if (MoveToCell(randomCellId))
                     {
                         ChangeMap(neighbourId);
+                        Account.Wait(5000);
                         if (actualMap == Account.MapData.Id)
                         {
                             Account.Wait(15000);
