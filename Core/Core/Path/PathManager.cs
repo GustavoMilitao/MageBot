@@ -195,8 +195,8 @@ namespace MageBot.Core.Path
         /// </summary>
         public void ParsePath()
         {
-            Thread t = new Thread(() =>
-            {
+            //Thread t = new Thread(() =>
+            //{
                 //TODO: Fix the parser
                 conditions = new List<PathCondition>();
                 ActionsStack = new List<Action>();
@@ -209,8 +209,8 @@ namespace MageBot.Core.Path
                 }
                 WorkingActionsQueue = new Queue<string>(ListActions);
                 DequeueAction();
-            });
-            t.Start();
+            //});
+            //t.Start();
         }
 
         public void DequeueAction()
@@ -261,8 +261,6 @@ namespace MageBot.Core.Path
         /// </summary>
         public void PerformActionsStack()
         {
-            if (ActionsStack.Count() == 0 || Stop)
-                return;
             while (ActionsStack.Count() > 0)
             {
                 Current_Action = ActionsStack[0];

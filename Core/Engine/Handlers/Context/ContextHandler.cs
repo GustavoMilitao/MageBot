@@ -27,6 +27,7 @@ using System.Linq;
 using System;
 using System.IO;
 using MageBot.Protocol.Messages.Game.Inventory;
+using System.Threading;
 
 namespace MageBot.Core.Engine.Handlers.Context
 {
@@ -48,6 +49,8 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
+            //Thread t = new Thread(() =>
+            //{
             account.Gather.ClearError();
             account.MapData.Clear();
             account.MapData.ParseLocation(msg.MapId, msg.SubAreaId);
@@ -58,6 +61,8 @@ namespace MageBot.Core.Engine.Handlers.Context
             account.SetStatus(Status.None);
             account.MapData.DoAction();
             account.UpdateMap();
+            //});
+            //t.Start();
         }
 
         [MessageHandler(typeof(MapComplementaryInformationsWithCoordsMessage))]
@@ -180,14 +185,18 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            List<int> keys = new List<int>();
-            foreach (int s in msg.KeyMovements)
+            Thread t = new Thread(() =>
             {
-                keys.Add(s);
-            }
+                List<int> keys = new List<int>();
+                foreach (int s in msg.KeyMovements)
+                {
+                    keys.Add(s);
+                }
 
-            MovementPath clientMovement = MapMovementAdapter.GetClientMovement(keys);
-            account.MapData.UpdateEntityCell(msg.ActorId, clientMovement.CellEnd.CellId);
+                MovementPath clientMovement = MapMovementAdapter.GetClientMovement(keys);
+                account.MapData.UpdateEntityCell(msg.ActorId, clientMovement.CellEnd.CellId);
+            });
+            t.Start();
         }
 
         [MessageHandler(typeof(GameMapNoMovementMessage))]
@@ -219,7 +228,7 @@ namespace MageBot.Core.Engine.Handlers.Context
         }
 
         [MessageHandler(typeof(SystemMessageDisplayMessage))]
-        public static void SystemMessageDisplayMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void SystemMessageDisplayMessageTreatment(Message message, byte[] packetDatas, Account.Account account)
         {
             SystemMessageDisplayMessage msg = (SystemMessageDisplayMessage)message;
 
@@ -232,7 +241,7 @@ namespace MageBot.Core.Engine.Handlers.Context
 
 
         [MessageHandler(typeof(PartyInvitationMessage))]
-        public static void PartyInvitationMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void PartyInvitationMessageTreatment(Message message, byte[] packetDatas, Account.Account account)
         {
             PartyInvitationMessage msg = (PartyInvitationMessage)message;
 
@@ -267,7 +276,6 @@ namespace MageBot.Core.Engine.Handlers.Context
             }
             if (msg.FightMap.MapId == account.MapData.Id && msg.MemberName == account.MyGroup.GetMaster().CharacterBaseInformations.Name)
             {
-                account.Wait(500);
                 using (BigEndianWriter writer = new BigEndianWriter())
                 {
                     GameFightJoinRequestMessage msg2 = new GameFightJoinRequestMessage(msg.MemberId, msg.FightId);
@@ -323,13 +331,13 @@ namespace MageBot.Core.Engine.Handlers.Context
             if (account.House != null)
             {
                 account.House.priceHouse = msg.Price;
-                if (account.House.priceHouse < account.Config.MaxPriceHouse)
+                if (account.House.priceHouse <= account.Config.MaxPriceHouse)
                 {
                     account.House.Buy();
                 }
                 else
                 {
-                    account.Log(new ErrorTextInformation("Prix trop élevé..."), 2);
+                    account.Log(new ErrorTextInformation("Price is too high..."), 2);
                 }
             }
         }
@@ -483,12 +491,16 @@ namespace MageBot.Core.Engine.Handlers.Context
             }
             if (!account.Config.ListeningToExchange)
                 return;
-            List<int> items = account.Inventory.GetItemsToTransfer();
-            account.Inventory.TransferItems(items);
-            account.Wait(3000);
-            account.Inventory.TransferKamas();
-            account.Wait(3000);
-            account.Inventory.ExchangeReady();
+            Thread t = new Thread(() =>
+            {
+                List<int> items = account.Inventory.GetItemsToTransfer();
+                account.Inventory.TransferItems(items);
+                account.Wait(3000);
+                account.Inventory.TransferKamas();
+                account.Wait(3000);
+                account.Inventory.ExchangeReady();
+            });
+            t.Start();
         }
 
         [MessageHandler(typeof(ExchangeRequestedTradeMessage))]

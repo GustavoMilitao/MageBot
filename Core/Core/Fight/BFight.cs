@@ -96,17 +96,11 @@ namespace MageBot.Core.Fight
                     Account.SetStatus(Status.None);
                     Account.Log(new ActionTextInformation(string.Format("Fight started, {0} monsters of level {1} ({2})", monsters.monstersCount, monsters.monstersLevel, monsters.monstersName(true))), 1);
                     Account.Fight.LaunchFight((int)monsters.m_contextualId);
+                    Account.Wait(2000);
                     if (Account.State != Status.Fighting)
                     {
-                        //if (Account.MyGroup != null)
-                        //{
-                        //    Account.MyGroup.DefineNewFightLauncher();
-                        //    return Account.MyGroup.Path.Account.Fight.SearchFight();
-                        //}
                         return Account.Fight.SearchFight();
                     }
-                    //if (Account.MyGroup != null)
-                    //    Account.MyGroup.LastAccountLaunchedFight = Account;
                     return true;
                 }
             }

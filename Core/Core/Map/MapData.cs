@@ -168,7 +168,8 @@ namespace MageBot.Core.Map
                 }
                 else
                 {
-                    Others.Add(i.ContextualId, i);
+                    if (!Others.ContainsKey(i.ContextualId))
+                        Others.Add(i.ContextualId, i);
                 }
             }
         }
