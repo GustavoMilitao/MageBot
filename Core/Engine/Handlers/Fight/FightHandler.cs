@@ -149,27 +149,21 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             TreatObtainedLoot(account, msg);
-            if (account.IsMaster && account.MyGroup != null)
+            if (account.MyGroup != null)
             {
                 Thread t = new Thread(() =>
                 {
-                    //account.Wait(5000);
-                    //account.MyGroup.DefineNewFightLauncher();
                     account.FightData.FightStop();
-                    if (account.MyGroup.Path != null)
+                    if (account.IsMaster && account.MyGroup.Path != null)
                         account.MyGroup.Path.PerformFlag();
                 });
                 t.Start();
             }
             else
             {
-                account.FightData.FightStop();
+                Thread t = new Thread(account.Path.PerformFlag);
+                t.Start();
             }
-            if (account.MyGroup == null)
-                account.Path.PerformFlag();
-            //account.Wait(20000+account.GetRandomTime());
-            //if (account.Path != null && account.Path.Launched)
-            //    account.Path.PerformFlag();
         }
 
         [MessageHandler(typeof(GameFightHumanReadyStateMessage))]
@@ -209,7 +203,10 @@ namespace MageBot.Core.Engine.Handlers.Fight
 
             if (msg.CharId == account.CharacterBaseInformations.ObjectID)
             {
-                account.FightData.FightStop();
+                Thread t = new Thread(() =>
+                account.FightData.FightStop()
+                );
+                t.Start();
             }
         }
 
@@ -290,7 +287,10 @@ namespace MageBot.Core.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            account.Wait((int)msg.WaitTime);
+            Thread t = new Thread(() =>
+            account.Wait((int)msg.WaitTime)
+            );
+            t.Start();
         }
 
         [MessageHandler(typeof(GameMapMovementMessage))]
@@ -332,7 +332,10 @@ namespace MageBot.Core.Engine.Handlers.Fight
             if (account.Fight != null)
             {
                 account.Fight.flag = 1;
-                account.Fight.ExecutePlan();
+                Thread t = new Thread(() =>
+                account.Fight.ExecutePlan()
+                );
+                t.Start();
             }
             else
                 account.Log(new ErrorTextInformation("No AI, the bot can not fight !"), 0);
@@ -352,6 +355,21 @@ namespace MageBot.Core.Engine.Handlers.Fight
             {
                 account.Fight.PlaceCharacter(msg.PositionsForChallengers.Select(item => (int)item).ToList());
             }
+            PerformStartWithItemSet(account);
+            Thread t = new Thread(() =>
+            {
+                if (account.MyGroup != null)
+                    account.Wait(2000);
+                PerformLockFight(account);
+                GameFightReadyMessage nmsg = new GameFightReadyMessage(true);
+                account.SocketManager.Send(nmsg);
+                account.Log(new BotTextInformation("Send Ready!"), 5);
+            });
+            t.Start();
+        }
+
+        private static void PerformStartWithItemSet(Account.Account account)
+        {
             if (account.Config.StartFightWithItemSet)
             {
                 byte id = account.Config.PresetStartUpId;
@@ -359,13 +377,6 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 account.SocketManager.Send(msg2);
                 account.Log(new ActionTextInformation("Fast equipment number " + Convert.ToString(id)), 5);
             }
-            if (account.MyGroup != null)
-                account.Wait((account.MyGroup.Accounts.Count - 1) * 1000);
-            PerformLockFight(account);
-            //account.Wait(1000);
-            GameFightReadyMessage nmsg = new GameFightReadyMessage(true);
-            account.SocketManager.Send(nmsg);
-            account.Log(new BotTextInformation("Send Ready !"), 5);
         }
 
         [MessageHandler(typeof(GameFightTurnReadyRequestMessage))]
@@ -398,7 +409,8 @@ namespace MageBot.Core.Engine.Handlers.Fight
                         account.Fight.EndTurn();
                         break;
                     case 1:
-                        account.Fight.ExecutePlan();
+                        Thread t = new Thread(account.Fight.ExecutePlan);
+                        t.Start();
                         break;
                 }
             }
@@ -480,7 +492,6 @@ namespace MageBot.Core.Engine.Handlers.Fight
             {
                 if (account.IsMaster && account.Config.LockingFights && account.Fight != null && !account.LockPerformed)
                 {
-                    account.FightData.PerformAutoTimeoutFight(2000);
                     account.Fight.LockFight();
                     account.LockPerformed = true;
                 }

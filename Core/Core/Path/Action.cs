@@ -41,7 +41,6 @@ namespace MageBot.Core.Path
                     if (Account.MyGroup != null)
                     {
                         Account.MyGroup.MoveGroup((string)m_delta);
-                        //account.PutTaskDelay(3000);
                         Account.Wait(3000);
                         if (Account.MyGroup.Accounts.Any(acc => acc.State == Util.Enums.Internal.Status.Busy))
                             Account.MyGroup.Accounts.Where(acc => acc.State == Util.Enums.Internal.Status.Busy)

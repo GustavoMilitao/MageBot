@@ -96,7 +96,6 @@ namespace MageBot.Core.Fight
                     Account.SetStatus(Status.None);
                     Account.Log(new ActionTextInformation(string.Format("Fight started, {0} monsters of level {1} ({2})", monsters.monstersCount, monsters.monstersLevel, monsters.monstersName(true))), 1);
                     Account.Fight.LaunchFight((int)monsters.m_contextualId);
-                    Account.Wait(2000);
                     if (Account.State != Status.Fighting)
                     {
                         //if (Account.MyGroup != null)
@@ -143,7 +142,7 @@ namespace MageBot.Core.Fight
         public void PlaceCharacter(List<int> PlacementCells)
         {
             m_error = 0;
-            Account.Log(new BotTextInformation("Placement du personnage."), 5);
+            Account.Log(new BotTextInformation("Character position placement."), 5);
             try
             {
                 PlacementEnum position = m_AI.GetPositioning();

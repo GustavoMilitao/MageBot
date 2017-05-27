@@ -13,7 +13,6 @@ namespace MageBot.Core.Path
     {
         #region Fields
         public Account.Account Account { get; set; }
-
         public string Path;
         public string PathName { get; set; }
         private string Current_Map { get; set; }
@@ -66,7 +65,7 @@ namespace MageBot.Core.Path
             Account.Log(new BotTextInformation("Path started"), 1);
             Launched = true;
             Stop = false;
-            Account.WatchDog.StartPathDog();
+            //Account.WatchDog.StartPathDog();
             ParsePath();
         }
 
@@ -78,7 +77,11 @@ namespace MageBot.Core.Path
             Stop = true;
             Launched = false;
             ClearStack();
-            Account.WatchDog.StopPathDog();
+            ListActions.Clear();
+            WorkingActionsQueue.Clear();
+            CurrentAction = string.Empty;
+            Current_Action = null;
+            //Account.WatchDog.StopPathDog();
         }
 
         /// <summary>
@@ -192,18 +195,22 @@ namespace MageBot.Core.Path
         /// </summary>
         public void ParsePath()
         {
-            //TODO: Fix the parser
-            conditions = new List<PathCondition>();
-            ActionsStack = new List<Action>();
-            ListActions = new List<string>();
-            CurrentAction = String.Empty;
-            var listActionsPath = m_content.Where(elem => !String.IsNullOrEmpty(elem) && !elem.StartsWith("@"));
-            foreach (string line in listActionsPath)
+            Thread t = new Thread(() =>
             {
-                ListActions.Add(line);
-            }
-            WorkingActionsQueue = new Queue<string>(ListActions);
-            DequeueAction();
+                //TODO: Fix the parser
+                conditions = new List<PathCondition>();
+                ActionsStack = new List<Action>();
+                ListActions = new List<string>();
+                CurrentAction = String.Empty;
+                var listActionsPath = m_content.Where(elem => !String.IsNullOrEmpty(elem) && !elem.StartsWith("@"));
+                foreach (string line in listActionsPath)
+                {
+                    ListActions.Add(line);
+                }
+                WorkingActionsQueue = new Queue<string>(ListActions);
+                DequeueAction();
+            });
+            t.Start();
         }
 
         public void DequeueAction()
@@ -212,6 +219,15 @@ namespace MageBot.Core.Path
             {
                 CurrentAction = WorkingActionsQueue.Dequeue();
                 TreatAction();
+            }
+            else if (Account.MyGroup != null)
+            {
+                if (Account.MyGroup.GetMaster().Config.RelaunchPath)
+                    ParsePath();
+            }
+            else if(Account.Config.RelaunchPath)
+            {
+                ParsePath();
             }
         }
 
