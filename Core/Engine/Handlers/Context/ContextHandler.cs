@@ -27,7 +27,6 @@ using System.Linq;
 using System;
 using System.IO;
 using MageBot.Protocol.Messages.Game.Inventory;
-using System.Threading;
 
 namespace MageBot.Core.Engine.Handlers.Context
 {
@@ -185,18 +184,18 @@ namespace MageBot.Core.Engine.Handlers.Context
             {
                 msg.Deserialize(reader);
             }
-            Thread t = new Thread(() =>
+            //Thread t = new Thread(() =>
+            //{
+            List<int> keys = new List<int>();
+            foreach (int s in msg.KeyMovements)
             {
-                List<int> keys = new List<int>();
-                foreach (int s in msg.KeyMovements)
-                {
-                    keys.Add(s);
-                }
+                keys.Add(s);
+            }
 
-                MovementPath clientMovement = MapMovementAdapter.GetClientMovement(keys);
-                account.MapData.UpdateEntityCell(msg.ActorId, clientMovement.CellEnd.CellId);
-            });
-            t.Start();
+            MovementPath clientMovement = MapMovementAdapter.GetClientMovement(keys);
+            account.MapData.UpdateEntityCell(msg.ActorId, clientMovement.CellEnd.CellId);
+            //});
+            //t.Start();
         }
 
         [MessageHandler(typeof(GameMapNoMovementMessage))]
@@ -491,16 +490,16 @@ namespace MageBot.Core.Engine.Handlers.Context
             }
             if (!account.Config.ListeningToExchange)
                 return;
-            Thread t = new Thread(() =>
-            {
-                List<int> items = account.Inventory.GetItemsToTransfer();
-                account.Inventory.TransferItems(items);
-                account.Wait(3000);
-                account.Inventory.TransferKamas();
-                account.Wait(3000);
-                account.Inventory.ExchangeReady();
-            });
-            t.Start();
+            //Thread t = new Thread(() =>
+            //{
+            List<int> items = account.Inventory.GetItemsToTransfer();
+            account.Inventory.TransferItems(items);
+            account.Wait(3000);
+            account.Inventory.TransferKamas();
+            account.Wait(3000);
+            account.Inventory.ExchangeReady();
+            //});
+            //t.Start();
         }
 
         [MessageHandler(typeof(ExchangeRequestedTradeMessage))]

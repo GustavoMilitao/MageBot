@@ -169,12 +169,12 @@ namespace MageBot.Core
             Account.PetsList = new List<Pet>();
 
 
-            foreach (MageBot.Core.Inventory.Item item in Account.Inventory.Items)
+            foreach (var item in Account.Inventory.Items)
             {
-                DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
+                DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.Value.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
                 {
-                    Pet petToAdd = new Pet(item, itemData, Account);
+                    Pet petToAdd = new Pet(item.Value, itemData, Account);
                     Account.PetsList.Add(petToAdd);
                 }
             }

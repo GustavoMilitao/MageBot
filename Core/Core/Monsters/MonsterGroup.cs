@@ -9,6 +9,11 @@ namespace MageBot.Core.Monsters
 {
     public class MonsterGroup
     {
+        public MonsterGroup()
+        {
+
+        }
+
         public MonsterGroup(GroupMonsterStaticInformations staticInfos, int cellId, double contextualId)
         {
             m_staticInfos = staticInfos;

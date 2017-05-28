@@ -19,7 +19,6 @@ using MageBot.Core.Fight;
 using MageBot.DataFiles.Data.D2o;
 using System.Collections.Generic;
 using MageBot.DataFiles.Data.I18n;
-using System.Threading;
 
 namespace MageBot.Core.Engine.Handlers.Fight
 {
@@ -151,18 +150,19 @@ namespace MageBot.Core.Engine.Handlers.Fight
             TreatObtainedLoot(account, msg);
             if (account.MyGroup != null)
             {
-                Thread t = new Thread(() =>
-                {
-                    account.FightData.FightStop();
-                    if (account.IsMaster && account.MyGroup.Path != null)
-                        account.MyGroup.Path.PerformFlag();
-                });
-                t.Start();
+                //Thread t = new Thread(() =>
+                //{
+                account.FightData.FightStop();
+                if (account.IsMaster && account.MyGroup.Path != null)
+                    account.MyGroup.Path.PerformFlag();
+                //});
+                //t.Start();
             }
             else
             {
-                Thread t = new Thread(account.Path.PerformFlag);
-                t.Start();
+                /*Thread t = new Thread(*/
+                account.Path.PerformFlag()/*)*/;
+                //t.Start();
             }
         }
 
@@ -203,10 +203,10 @@ namespace MageBot.Core.Engine.Handlers.Fight
 
             if (msg.CharId == account.CharacterBaseInformations.ObjectID)
             {
-                Thread t = new Thread(() =>
-                account.FightData.FightStop()
-                );
-                t.Start();
+                //Thread t = new Thread(() =>
+                account.FightData.FightStop();
+                //);
+                //t.Start();
             }
         }
 
@@ -287,10 +287,10 @@ namespace MageBot.Core.Engine.Handlers.Fight
             {
                 msg.Deserialize(reader);
             }
-            Thread t = new Thread(() =>
-            account.Wait((int)msg.WaitTime)
-            );
-            t.Start();
+            //Thread t = new Thread(() =>
+            account.Wait((int)msg.WaitTime);
+            //);
+            //t.Start();
         }
 
         [MessageHandler(typeof(GameMapMovementMessage))]
@@ -332,10 +332,10 @@ namespace MageBot.Core.Engine.Handlers.Fight
             if (account.Fight != null)
             {
                 account.Fight.flag = 1;
-                Thread t = new Thread(() =>
-                account.Fight.ExecutePlan()
-                );
-                t.Start();
+                //Thread t = new Thread(() =>
+                account.Fight.ExecutePlan();
+                //);
+                //t.Start();
             }
             else
                 account.Log(new ErrorTextInformation("No AI, the bot can not fight !"), 0);
@@ -356,16 +356,16 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 account.Fight.PlaceCharacter(msg.PositionsForChallengers.Select(item => (int)item).ToList());
             }
             PerformStartWithItemSet(account);
-            Thread t = new Thread(() =>
-            {
-                if (account.MyGroup != null)
-                    account.Wait(2000);
-                PerformLockFight(account);
-                GameFightReadyMessage nmsg = new GameFightReadyMessage(true);
-                account.SocketManager.Send(nmsg);
-                account.Log(new BotTextInformation("Send Ready!"), 5);
-            });
-            t.Start();
+            //Thread t = new Thread(() =>
+            //{
+            if (account.MyGroup != null)
+                account.Wait(2000);
+            PerformLockFight(account);
+            GameFightReadyMessage nmsg = new GameFightReadyMessage(true);
+            account.SocketManager.Send(nmsg);
+            account.Log(new BotTextInformation("Send Ready!"), 5);
+            //});
+            //t.Start();
         }
 
         private static void PerformStartWithItemSet(Account.Account account)
@@ -409,8 +409,8 @@ namespace MageBot.Core.Engine.Handlers.Fight
                         account.Fight.EndTurn();
                         break;
                     case 1:
-                        Thread t = new Thread(account.Fight.ExecutePlan);
-                        t.Start();
+                        /*Thread t = new Thread(*/account.Fight.ExecutePlan()/*)*/;
+                        //t.Start();
                         break;
                 }
             }

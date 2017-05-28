@@ -711,22 +711,22 @@ namespace MageBot.Interface
         public void ActualizeInventory()
         {
             BeginInvoke(new MethodInvoker(LVItems.Items.Clear));
-            foreach (MageBot.Core.Inventory.Item i in Account.Inventory.Items)
+            foreach (var i in Account.Inventory.Items)
             {
-                string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
+                string[] row1 = { i.Value.GID.ToString(), i.Key.ToString(), i.Value.Name, i.Value.Quantity.ToString(), i.Value.Type.ToString(), i.Value.Price.ToString() };
                 System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
-                li.ToolTipText = i.Description;
+                li.ToolTipText = i.Value.Description;
                 AddItem(li, LVItems);
             }
             ResizeGrid(LVItems);
             RegenUC.RefreshQuantity();
 
             BeginInvoke(new MethodInvoker(LVItemBag.Items.Clear));
-            foreach (MageBot.Core.Inventory.Item i in Account.Inventory.Items)
+            foreach (var i in Account.Inventory.Items)
             {
-                string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
+                string[] row1 = { i.Value.GID.ToString(), i.Key.ToString(), i.Value.Name, i.Value.Quantity.ToString(), i.Value.Type.ToString(), i.Value.Price.ToString() };
                 System.Windows.Forms.ListViewItem li = new System.Windows.Forms.ListViewItem(row1);
-                li.ToolTipText = i.Description;
+                li.ToolTipText = i.Value.Description;
                 AddItem(li, LVItemBag);
             }
             ResizeGrid(LVItemBag);

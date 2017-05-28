@@ -32,16 +32,16 @@ namespace MageBot.Core.Engine.Handlers.Inventory
             foreach (ObjectItem item in inventoryContentMessage.Objects)
             {
                 MageBot.Core.Inventory.Item i = new MageBot.Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
-                account.Inventory.Items.Add(i);
+                account.Inventory.Items.AddOrUpdate(i.UID, i, (key, oldValue) => i);
             }
             account.UpdateInventory();
             account.PetsList = new List<Pet>();
-            foreach (Core.Inventory.Item item in account.Inventory.Items)
+            foreach (var item in account.Inventory.Items)
             {
-                DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
+                DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.Value.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
                 {
-                    Pet pet = new Pet(item, itemData, account);
+                    Pet pet = new Pet(item.Value, itemData, account);
                     account.PetsList.Add(pet);
                     pet.SetFood();
                 }
@@ -90,16 +90,16 @@ namespace MageBot.Core.Engine.Handlers.Inventory
             foreach (ObjectItem item in msg.Objects)
             {
                 MageBot.Core.Inventory.Item i = new MageBot.Core.Inventory.Item(item.Effects.ToList(), item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
-                account.Inventory.Items.Add(i);
+                account.Inventory.Items.AddOrUpdate(i.UID, i, (key, oldValue) => i);
             }
             account.UpdateInventory();
             account.PetsList = new List<Pet>();
-            foreach (MageBot.Core.Inventory.Item item in account.Inventory.Items)
+            foreach (var item in account.Inventory.Items)
             {
-                DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.GID);
+                DataClass itemData = GameData.GetDataObject(D2oFileEnum.Items, item.Value.GID);
                 if ((int)itemData.Fields["typeId"] == 18)
                 {
-                    Pet pet = new Pet(item, itemData, account);
+                    Pet pet = new Pet(item.Value, itemData, account);
                     account.PetsList.Add(pet);
                     pet.SetFood();
                 }
@@ -146,11 +146,8 @@ namespace MageBot.Core.Engine.Handlers.Inventory
             {
                 msg.Deserialize(reader);
             }
-            for (int index = 0; index < account.Inventory.Items.Count; index++)
-            {
-                if (account.Inventory.Items[index].UID == msg.Object.ObjectUID)
-                    account.Inventory.Items[index] = new MageBot.Core.Inventory.Item(msg.Object.Effects, msg.Object.ObjectGID, msg.Object.Position, (int)msg.Object.Quantity, (int)msg.Object.ObjectUID);
-            }
+            var i = new Core.Inventory.Item(msg.Object.Effects, msg.Object.ObjectGID, msg.Object.Position, (int)msg.Object.Quantity, (int)msg.Object.ObjectUID);
+            account.Inventory.Items.AddOrUpdate(i.UID, i, (key, oldValue) => i);
             DataClass ItemData = GameData.GetDataObject(D2oFileEnum.Items, msg.Object.ObjectGID);
             if ((int)ItemData.Fields["typeId"] == 18)
             {
@@ -233,7 +230,7 @@ namespace MageBot.Core.Engine.Handlers.Inventory
             }
             ObjectItem item = msg.Object;
             Core.Inventory.Item i = new Core.Inventory.Item(item.Effects, item.ObjectGID, item.Position, (int)item.Quantity, (int)item.ObjectUID);
-            account.Inventory.Items.Add(i);
+            account.Inventory.Items.AddOrUpdate(i.UID,i,(key,oldValue)=>i);
             string[] row1 = { i.GID.ToString(), i.UID.ToString(), i.Name, i.Quantity.ToString(), i.Type.ToString(), i.Price.ToString() };
             if (account.Running != null)
             {
@@ -249,15 +246,9 @@ namespace MageBot.Core.Engine.Handlers.Inventory
             {
                 objectDeletedMessage.Deserialize(reader);
             }
-            for (int index = 0; index < account.Inventory.Items.Count; index++)
-            {
-                if (account.Inventory.Items[index].UID == objectDeletedMessage.ObjectUID)
-                {
-                    account.Inventory.Items.RemoveAt(index);
-                    break;
-                }
-            }
-            account.UpdateInventory();            
+            Core.Inventory.Item i = new Core.Inventory.Item(new List<Protocol.Types.Game.Data.Items.Effects.ObjectEffect>(),0,0,0,0);
+            account.Inventory.Items.TryRemove((int)objectDeletedMessage.ObjectUID,out i);
+            account.UpdateInventory();
             if (account.Running != null)
             {
                 foreach (Pet pet in account.PetsList)

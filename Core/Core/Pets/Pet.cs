@@ -51,11 +51,11 @@ namespace MageBot.Core.Pets
             FoodList.Clear();
             List<int> foodIndex = Food.GetFoods(Informations.GID);
 
-            foreach (MageBot.Core.Inventory.Item item in account.Inventory.Items)
+            foreach (var item in account.Inventory.Items)
             {
-                if (foodIndex != null && foodIndex.Contains(item.GID))
+                if (foodIndex != null && foodIndex.Contains(item.Value.GID))
                 {
-                    FoodList.Add(new Food(item, GameData.GetDataObject(D2oFileEnum.Items, item.GID)));
+                    FoodList.Add(new Food(item.Value, GameData.GetDataObject(D2oFileEnum.Items, item.Value.GID)));
                 }
             }
         }

@@ -7,6 +7,7 @@ using System.Reflection;
 using Util.Util.Text.Log;
 using MageBot.Core.Account;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace MageBot.Core.Engine.Treatment
 {
@@ -48,7 +49,9 @@ namespace MageBot.Core.Engine.Treatment
 
                 object[] parameters = { message, packetDatas, account };
 
-                method.Invoke(null, parameters);
+                Task.Run(() =>
+                method.Invoke(null, parameters)
+                );
             }
         }
         #endregion

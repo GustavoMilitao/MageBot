@@ -22,32 +22,32 @@ namespace MageBot.Core.Map
         /// <summary>
         /// List containing all the players on the map.
         /// </summary>
-        public Dictionary<double, GameRolePlayCharacterInformations> Players = new Dictionary<double, GameRolePlayCharacterInformations>();
+        public ConcurrentDictionary<double, GameRolePlayCharacterInformations> Players = new ConcurrentDictionary<double, GameRolePlayCharacterInformations>();
 
         /// <summary>
         /// List containing all the group of monsters on the map.
         /// </summary>
-        public Dictionary<double, MonsterGroup> Monsters = new Dictionary<double, MonsterGroup>();
+        public ConcurrentDictionary<double, MonsterGroup> Monsters = new ConcurrentDictionary<double, MonsterGroup>();
 
         /// <summary>
         /// List containing all the Npc on the map.
         /// </summary>
-        public Dictionary<double, GameRolePlayNpcInformations> Npcs = new Dictionary<double, GameRolePlayNpcInformations>();
+        public ConcurrentDictionary<double, GameRolePlayNpcInformations> Npcs = new ConcurrentDictionary<double, GameRolePlayNpcInformations>();
 
         /// <summary>
         /// List containing all the other actors that we can't identify.
         /// </summary>
-        public Dictionary<double, GameRolePlayActorInformations> Others = new Dictionary<double, GameRolePlayActorInformations>();
+        public ConcurrentDictionary<double, GameRolePlayActorInformations> Others = new ConcurrentDictionary<double, GameRolePlayActorInformations>();
 
         /// <summary>
         /// Dict containing the interactive elements and their cellId. If no cellId found, cellId equals -1.
         /// </summary>
-        public Dictionary<uint, InteractiveElement> InteractiveElements = new Dictionary<uint, InteractiveElement>();
+        public ConcurrentDictionary<uint, InteractiveElement> InteractiveElements = new ConcurrentDictionary<uint, InteractiveElement>();
 
         /// <summary>
         /// List containing all the stated elements on the map.
         /// </summary>
-        public Dictionary<double, StatedElement> StatedElements = new Dictionary<double, StatedElement>();
+        public ConcurrentDictionary<double, StatedElement> StatedElements = new ConcurrentDictionary<double, StatedElement>();
 
         public int LastMapId;
         #endregion
@@ -148,28 +148,33 @@ namespace MageBot.Core.Map
         {
             foreach (GameRolePlayActorInformations i in actors)
             {
-                if (i is GameRolePlayGroupMonsterInformations
-                    && !Monsters.Any(m => m.Key == i.ContextualId))
+                if (i is GameRolePlayGroupMonsterInformations)
                 {
                     GameRolePlayGroupMonsterInformations m = (GameRolePlayGroupMonsterInformations)i;
-                    Monsters.Add(m.ContextualId, new MonsterGroup(m.StaticInfos, m.Disposition.CellId, m.ContextualId));
+                    var mg = new MonsterGroup(m.StaticInfos, m.Disposition.CellId, m.ContextualId);
+                    Monsters.AddOrUpdate(m.ContextualId,
+                                         mg,
+                                         (key, oldValue) => mg);
                 }
                 else if (i is GameRolePlayCharacterInformations
                     && !Players.Any(p => p.Key == i.ContextualId))
                 {
                     GameRolePlayCharacterInformations p = (GameRolePlayCharacterInformations)i;
-                    Players.Add(p.ContextualId, p);
+                    Players.AddOrUpdate(p.ContextualId, p,
+                                        (key, oldValue) => p);
                 }
                 else if (i is GameRolePlayNpcInformations
                     && !Npcs.Any(n => n.Key == i.ContextualId))
                 {
                     GameRolePlayNpcInformations npc = (GameRolePlayNpcInformations)i;
-                    Npcs.Add(npc.ContextualId, npc);
+                    Npcs.AddOrUpdate(npc.ContextualId, npc,
+                                     (key, oldValue) => npc);
                 }
                 else
                 {
                     if (!Others.ContainsKey(i.ContextualId))
-                        Others.Add(i.ContextualId, i);
+                        Others.AddOrUpdate(i.ContextualId, i,
+                                           (key, oldValue) => i);
                 }
             }
         }
@@ -182,7 +187,7 @@ namespace MageBot.Core.Map
             var StatedOnMapInEnumerable = statedElements.Where(element => element.OnCurrentMap)
                 .Select(elem => new StatedElement(elem.ElementCellId, elem.ElementId, elem.ElementState))
                 .ToDictionary(elem => (double)elem.Id);
-            StatedElements = new Dictionary<double, StatedElement>(StatedOnMapInEnumerable);
+            StatedElements = new ConcurrentDictionary<double, StatedElement>(StatedOnMapInEnumerable);
         }
 
         /// <summary>
@@ -196,7 +201,8 @@ namespace MageBot.Core.Map
                 if (element.ElementTypeId == 85)
                     Account.Safe = new InteractiveElement(element);
                 InteractiveElement Ielement = new InteractiveElement((uint)element.ElementId, element.ElementTypeId, element.EnabledSkills, element.DisabledSkills);
-                InteractiveElements.Add(Ielement.Id, Ielement);
+                InteractiveElements.AddOrUpdate(Ielement.Id, Ielement,
+                                                (key, oldValue) => Ielement);
                 if (Ielement.EnabledSkills.Count > 0)
                 {
                     //Ielement.CellId = Data.Layers.Select(
@@ -294,7 +300,8 @@ namespace MageBot.Core.Map
                 }
                 else
                 {
-                    InteractiveElements.Add(ielement.Id, ielement);
+                    InteractiveElements.AddOrUpdate(ielement.Id, ielement,
+                                                    (key, oldValue) => ielement);
                 }
             }
         }
@@ -313,7 +320,8 @@ namespace MageBot.Core.Map
                 }
                 else
                 {
-                    StatedElements.Add(Selement.Id, Selement);
+                    StatedElements.AddOrUpdate(Selement.Id, Selement,
+                                               (key,oldValue) => Selement);
                 }
             }
         }
@@ -323,9 +331,12 @@ namespace MageBot.Core.Map
         /// </summary>
         public void Remove(double id)
         {
-            Players.Remove(id);
-            Others.Remove(id);
-            Monsters.Remove(id);
+            GameRolePlayCharacterInformations gri = new GameRolePlayCharacterInformations();
+            Players.TryRemove(id, out gri);
+            GameRolePlayActorInformations grai = new GameRolePlayActorInformations();
+            Others.TryRemove(id,out grai);
+            MonsterGroup mg = new MonsterGroup();
+            Monsters.TryRemove(id, out mg);
         }
 
         /// <summary>

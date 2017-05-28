@@ -8,6 +8,7 @@ using Util.Util.Text.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Concurrent;
 
 namespace MageBot.Core.Inventory
 {
@@ -18,7 +19,7 @@ namespace MageBot.Core.Inventory
         public int maxWeight;
         public int weight;
         private Account.Account Account;
-        public List<Item> Items; // All items
+        public ConcurrentDictionary<int,Item> Items; // All items
         public int weightPercent
         {
             get
@@ -35,7 +36,7 @@ namespace MageBot.Core.Inventory
         {
             Account = account;
 
-            Items = new List<Item>();
+            Items = new ConcurrentDictionary<int, Item>();
             Kamas = 0;
             maxWeight = 0;
             weight = 0;
@@ -47,7 +48,7 @@ namespace MageBot.Core.Inventory
         {
             get
             {
-                Item weapon = Items.FirstOrDefault(i => i.Position == (int)InventoryPositionEnum.Weapon);
+                Item weapon = Items.Values.FirstOrDefault(i => i.Position == (int)InventoryPositionEnum.Weapon);
                 if (weapon == null)
                     return false;
 
@@ -70,7 +71,7 @@ namespace MageBot.Core.Inventory
         {
             get
             {
-                Item weapon = Items.FirstOrDefault(i => i.Position == (int)InventoryPositionEnum.Weapon);
+                Item weapon = Items.Values.FirstOrDefault(i => i.Position == (int)InventoryPositionEnum.Weapon);
                 return weapon;
             }
         }
@@ -135,17 +136,17 @@ namespace MageBot.Core.Inventory
 
         public Item GetItemFromName(string name)
         {
-            return Items.FirstOrDefault(i => i.Name == name);
+            return Items.Values.FirstOrDefault(i => i.Name == name);
         }
 
         public Item GetItemFromGID(int gid)
         {
-            return Items.FirstOrDefault(i => i.GID == gid);
+            return Items.Values.FirstOrDefault(i => i.GID == gid);
         }
 
         public Item GetItemFromUID(int uid)
         {
-            return Items.FirstOrDefault(i => i.UID == uid);
+            return Items[uid];
         }
 
         public void UseItem(int uid)
@@ -184,10 +185,10 @@ namespace MageBot.Core.Inventory
         {
             List<int> stayingItems = Account.Config.ItemsToStayOnCharacter.Select(item => item.UID).ToList();
             List<int> items = new List<int>();
-            foreach (Item i in Items)
+            foreach (var i in Items)
             {
-                if (!stayingItems.Contains(i.UID))
-                    items.Add(i.UID);
+                if (!stayingItems.Contains(i.Key))
+                    items.Add(i.Key);
             }
             return items;
         }
@@ -236,7 +237,7 @@ namespace MageBot.Core.Inventory
 
         public bool ItemExists(int uid)
         {
-            return Items.FirstOrDefault(i => i.UID == uid) != null ? true : false;
+            return Items.ContainsKey(uid) ? true : false;
         }
 
         public void PerformAutoDeletion()
@@ -263,7 +264,7 @@ namespace MageBot.Core.Inventory
 
         private int ItemQuantity(int uid)
         {
-            return Items.FirstOrDefault(i => i.UID == uid) != null ? Items.First(i => i.UID == uid).Quantity : 0;
+            return Items.ContainsKey(uid) ? Items[uid].Quantity : 0;
         }
         #endregion
     }

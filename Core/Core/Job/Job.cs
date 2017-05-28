@@ -30,7 +30,7 @@ namespace MageBot.Core.Job
         public bool HasRightTool()
         {
             ArrayList possible_tools = (ArrayList)GameData.GetDataObject(D2oFileEnum.Jobs, Id).Fields["toolIds"];
-            Item weapon = account.Inventory.Items.FirstOrDefault(i => i.Position == (int)InventoryPositionEnum.Weapon);
+            Item weapon = account.Inventory.Items.Values.FirstOrDefault(i => i.Position == (int)InventoryPositionEnum.Weapon);
             if (weapon == null)
                 return false;
             foreach (int i in possible_tools)

@@ -21,7 +21,7 @@ namespace MageBot.Core.Storage
             int quantity = 0;
             int objectUID = 0;
 
-            foreach (MageBot.Core.Inventory.Item item in account.Inventory.Items)
+            foreach (var item in account.Inventory.Items)
             {
                 bool isFood = false;
 
@@ -29,7 +29,7 @@ namespace MageBot.Core.Storage
                 {
                     foreach (Food food in pet.FoodList)
                     {
-                        if (item.UID == food.Informations.UID)
+                        if (item.Key == food.Informations.UID)
                         {
                             isFood = true;
                             break;
@@ -39,8 +39,8 @@ namespace MageBot.Core.Storage
 
                 if (isFood)
                 {
-                    quantity = item.Quantity;
-                    objectUID = item.UID;
+                    quantity = item.Value.Quantity;
+                    objectUID = item.Key;
                     break;
                 }
             }
