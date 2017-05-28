@@ -167,13 +167,10 @@ namespace MageBot.Core.Engine.Handlers.Inventory
             {
                 msg.Deserialize(reader);
             }
-            for (int index = 0; index < account.Inventory.Items.Count; index++)
+            if(account.Inventory.Items.ContainsKey((int)msg.ObjectUID))
             {
-                if (account.Inventory.Items[index].UID == msg.ObjectUID)
-                {
-                    account.Inventory.Items[index].Quantity = (int)msg.Quantity;
-                    account.UpdateInventory();
-                }
+                account.Inventory.Items[(int)msg.ObjectUID].Quantity = (int)msg.Quantity;
+                account.UpdateInventory();
             }
             if (account.Running != null)
             {

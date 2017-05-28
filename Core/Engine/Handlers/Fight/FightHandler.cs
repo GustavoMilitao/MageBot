@@ -329,7 +329,7 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 msg.Deserialize(reader);
             }
             account.FightData.TurnStarted();
-            if (account.Fight != null)
+            if (account.Fight != null && !account.FightData.IsDead)
             {
                 account.Fight.flag = 1;
                 //Thread t = new Thread(() =>
