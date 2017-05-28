@@ -217,32 +217,33 @@ namespace MageBot.Core.Fight
         /// </summary>
         public void SetEffect(AbstractFightDispellableEffect effect, int actionId = -1)
         {
-            FightTemporaryBoostEffect effectToUpdate = (FightTemporaryBoostEffect)effect;
-
-            if (!IsDead && Fighter != null && effectToUpdate.TargetId == Fighter.Id)
+            if (effect is FightTemporaryBoostEffect effectToUpdate)
             {
-                if (DurationByEffect.ContainsKey(effectToUpdate.EffectId))
+                if (!IsDead && Fighter != null && effectToUpdate.TargetId == Fighter.Id)
                 {
-                    DurationByEffect.Remove(effectToUpdate.EffectId);
-                    DurationByEffect.Add(effectToUpdate.EffectId, effectToUpdate.TurnDuration);
-                }
-                else
-                {
-                    DurationByEffect.Add(effectToUpdate.EffectId, effectToUpdate.TurnDuration);
-                    if (actionId == 168)
-                        Fighter.ActionPoints -= effectToUpdate.Delta;
-                    else if (actionId == 169)
-                        Fighter.MovementPoints -= effectToUpdate.Delta;
-                    else if (actionId == 116)
-                        Account.CharacterStats.Range.ContextModif -= effectToUpdate.Delta;
+                    if (DurationByEffect.ContainsKey(effectToUpdate.EffectId))
+                    {
+                        DurationByEffect.Remove(effectToUpdate.EffectId);
+                        DurationByEffect.Add(effectToUpdate.EffectId, effectToUpdate.TurnDuration);
+                    }
+                    else
+                    {
+                        DurationByEffect.Add(effectToUpdate.EffectId, effectToUpdate.TurnDuration);
+                        if (actionId == 168)
+                            Fighter.ActionPoints -= effectToUpdate.Delta;
+                        else if (actionId == 169)
+                            Fighter.MovementPoints -= effectToUpdate.Delta;
+                        else if (actionId == 116)
+                            Account.CharacterStats.Range.ContextModif -= effectToUpdate.Delta;
+                    }
                 }
             }
-            if(effectToUpdate is FightTemporaryBoostStateEffect state)
+            if(effect is FightTemporaryBoostStateEffect state)
             {
                 if (FightStates.ContainsKey(state.StateId))
                 {
                     FightStates.Remove(state.StateId);
-                    FightStates.Add(state.StateId, effectToUpdate.TurnDuration);
+                    FightStates.Add(state.StateId, state.TurnDuration);
                 }
                 else
                 {
