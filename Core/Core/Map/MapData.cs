@@ -87,7 +87,7 @@ namespace MageBot.Core.Map
 
         public GameRolePlayCharacterInformations Character
         {
-            get { return Players.FirstOrDefault(p => p.Key == Account.CharacterBaseInformations.ObjectID).Value; }
+            get { return Players.ContainsKey(Account.CharacterBaseInformations.ObjectID) ? Players[Account.CharacterBaseInformations.ObjectID] : null; }
         }
 
         public int Id
@@ -156,15 +156,13 @@ namespace MageBot.Core.Map
                                          mg,
                                          (key, oldValue) => mg);
                 }
-                else if (i is GameRolePlayCharacterInformations
-                    && !Players.Any(p => p.Key == i.ContextualId))
+                else if (i is GameRolePlayCharacterInformations)
                 {
                     GameRolePlayCharacterInformations p = (GameRolePlayCharacterInformations)i;
                     Players.AddOrUpdate(p.ContextualId, p,
                                         (key, oldValue) => p);
                 }
-                else if (i is GameRolePlayNpcInformations
-                    && !Npcs.Any(n => n.Key == i.ContextualId))
+                else if (i is GameRolePlayNpcInformations)
                 {
                     GameRolePlayNpcInformations npc = (GameRolePlayNpcInformations)i;
                     Npcs.AddOrUpdate(npc.ContextualId, npc,
@@ -321,7 +319,7 @@ namespace MageBot.Core.Map
                 else
                 {
                     StatedElements.AddOrUpdate(Selement.Id, Selement,
-                                               (key,oldValue) => Selement);
+                                               (key, oldValue) => Selement);
                 }
             }
         }
@@ -334,7 +332,7 @@ namespace MageBot.Core.Map
             GameRolePlayCharacterInformations gri = new GameRolePlayCharacterInformations();
             Players.TryRemove(id, out gri);
             GameRolePlayActorInformations grai = new GameRolePlayActorInformations();
-            Others.TryRemove(id,out grai);
+            Others.TryRemove(id, out grai);
             MonsterGroup mg = new MonsterGroup();
             Monsters.TryRemove(id, out mg);
         }

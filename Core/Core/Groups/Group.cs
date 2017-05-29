@@ -5,6 +5,7 @@ using System;
 using MageBot.Core.Path;
 using Util.Util.Text.Log;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace MageBot.Core.Groups
 {
@@ -36,8 +37,7 @@ namespace MageBot.Core.Groups
         {
             Accounts.ForEach(acc =>
             {
-                Thread t = new Thread(() =>acc.Map.ChangeMap(move));
-                t.Start();
+                Task.Run(() => acc.Map.ChangeMap(move));
             });
         }
 

@@ -40,6 +40,7 @@ namespace MageBot.Core.Path
                     m_delta = (string)m_delta;
                     if (Account.MyGroup != null)
                     {
+                        Account.Wait(5000);
                         Account.MyGroup.MoveGroup((string)m_delta);
                         Account.Wait(3000);
                         if (Account.MyGroup.Accounts.Any(acc => acc.State == Util.Enums.Internal.Status.Busy))
@@ -48,6 +49,7 @@ namespace MageBot.Core.Path
                     }
                     else
                     {
+                        Account.Wait(5000);
                         Account.Map.ChangeMap((string)m_delta);
                         Account.Wait(3000);
                     }
