@@ -85,7 +85,7 @@ namespace MageBot.Core.Groups
         {
             Accounts.ForEach(acc =>
             {
-                acc.Map.MoveToCell(delta);
+                Task.Run(() => acc.Map.MoveToCell(delta));
                 //acc.Wait(500);
             });
         }

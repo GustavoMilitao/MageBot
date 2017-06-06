@@ -63,6 +63,21 @@ namespace MageBot.Core.Map
             return false;
         }
 
+        public bool CanChangeMapToDirection(string dir)
+        {
+            int num2 = -1;
+            var neighbourId = TreatNeighbourId(ref num2, dir);
+            if ((num2 != -1) && (neighbourId >= 0))
+            {
+                int cellId = Account.MapData.Character.Disposition.CellId;
+                List<int> list = GetGoodPositionsToChangeMap(neighbourId, num2, cellId);
+                if (list.Count > 0)
+                    return true;
+                return false;
+            }
+            return false;
+        }
+
         private List<int> GetGoodPositionsToChangeMap(int neighbourId, int num2, int cellId)
         {
             List<int> list = new List<int>();

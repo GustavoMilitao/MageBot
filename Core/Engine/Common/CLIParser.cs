@@ -106,6 +106,11 @@ namespace MageBot.Core.Engine.Common
                     DefineOptionalParameter(new string[] { "-cell = 0", "-dir = null" });
                     ParseArguments(passedCommands);
                     return Move();
+                case "/movegroup":
+                    DefineRequiredParameters(new string[] { });
+                    DefineOptionalParameter(new string[] { "-cell = 0", "-dir = null" });
+                    ParseArguments(passedCommands);
+                    return MoveGroup();
                 case "/mapid":
                     return new List<string>() { "L'id de la map est : " + account.MapData.Id };
                 case "/cellid":
@@ -532,6 +537,19 @@ namespace MageBot.Core.Engine.Common
                     ls.Add("2. > /move -cell 150 -dir right");
                     ls.Add("   - Move to the cell 150 and then move to the map at the right");
                     return ls;
+                case "movegroup":
+                    ls.Add("/movegroup [-cell <int>] [-dir <string>]");
+                    ls.Add("Move the group (if exists) to a cell and/or a direction.");
+                    ls.Add("OPTIONS:");
+                    ls.Add("  - cell: move to the specified cell.");
+                    ls.Add("  - dir : move to the specified direction (right, left, bottom or up).");
+                    ls.Add("EXAMPLE:");
+                    ls.Add("1. > /movegroup -cell 150");
+                    ls.Add("   - Move the group to the cell 150.");
+                    ls.Add("");
+                    ls.Add("2. > /movegroup -cell 150 -dir right");
+                    ls.Add("   - Move the group to the cell 150 and then move to the map at the right");
+                    return ls;
                 case "cell":
                     ls.Add("/cell [-npc <int>] [-elem <int>] [-player <string>]");
                     ls.Add("Get the cell of an element.");
@@ -661,6 +679,62 @@ namespace MageBot.Core.Engine.Common
             else
                 return result;
         }
+
+        /// <summary>
+        /// Do the moving action with group.
+        /// </summary>
+        /// <returns>A display string of the action</returns>
+        private List<string> MoveGroup()
+        {
+            int cell = Int32.Parse(GetParamValue("-cell"));
+            string dir = GetParamValue("-dir");
+
+            try
+            {
+                if (cell != 0)
+                {
+                    result.Add("Moving group to cellid : " + cell);
+                    if(account.MyGroup != null )
+                    {
+                        account.MyGroup.MoveToCellGroup(cell);
+                    }
+                    else
+                    {
+                        result.Add("This character haven't any group.");
+                    }
+                }
+
+                if (dir != "null" && new List<string>() { "bottom", "up", "left", "right" }.Contains(dir))
+                {
+                    if (!account.Map.CanChangeMapToDirection(dir))
+                    {
+                        result.Add("There is no way to switch to the selected map : " + dir);
+                    }
+                    else
+                    {
+                        if (account.MyGroup != null)
+                        {
+                            account.MyGroup.MoveGroup(dir);
+                            result.Add("Moving : " + dir);
+                        }
+                        else
+                        {
+                            result.Add("This character haven't any group.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Add("[ERROR] " + ex.Message + "\n");
+                return result;
+            }
+            if (!(result.Count > 0))
+                return Usage("movegroup");
+            else
+                return result;
+        }
+
 
         /// <summary>
         /// Get the cell of a specified element.
