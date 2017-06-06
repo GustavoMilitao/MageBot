@@ -470,7 +470,7 @@ namespace MageBot.Core.Account
         #endregion
 
         #region Interface Events
-        protected virtual void ClearLogger()
+        public virtual void ClearLogger()
         {
             LoggerClear?.Invoke(this, EventArgs.Empty);
         }

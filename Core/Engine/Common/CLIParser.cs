@@ -91,7 +91,7 @@ namespace MageBot.Core.Engine.Common
             CLIParser.CommandsHistory.Add(cmdLine);
             result = new List<string>();
             List<string> split = cmdLine.Split(' ').ToList();
-            string mainComand = split[0];
+            string mainComand = split[0].ToLower();
             split.RemoveAt(0);
             string passedCommands = String.Join(" ", split);
             switch (mainComand)
@@ -120,6 +120,8 @@ namespace MageBot.Core.Engine.Common
                     DefineOptionalParameter(new string[] { "-npc = 0", "-elem = 0", "-player = null" });
                     ParseArguments(passedCommands);
                     return Cell();
+                case "/clear":
+                    return ClearConsole();
                 case "/say":
                     DefineRequiredParameters(new string[] { "-c", "-m" });
                     DefineOptionalParameter(new string[] { "-dest = null" });
@@ -154,6 +156,12 @@ namespace MageBot.Core.Engine.Common
                     return Gather();
             }
             return Usage();
+        }
+
+        private List<string> ClearConsole()
+        {
+            account.ClearLogger();
+            return new List<string>();
         }
 
 
