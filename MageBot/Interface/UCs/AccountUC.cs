@@ -1105,19 +1105,19 @@ namespace MageBot.Interface
 
         private void FillAccountEvents()
         {
-            Account.LogChanged += Account_LogChanged;
-            Account.InfBarsChanged += Account_InfBarsChanged;
+            Account.LogChanging += Account_LogChanged;
+            Account.InfBarsChanging += Account_InfBarsChanged;
             Account.ActualizePets += Account_ActualizePets;
             Account.ActualizeMap += Account_ActualizeMap;
             Account.ActualizeInventory += Account_ActualizeInventory;
             Account.ActualizeShop += Account_ActualizeShop;
             Account.ActualizeJobs += Account_ActualizeJobs;
-            Account.LoggerClear += Account_loggerClear;
-            Account.StatusChanged += Account_StatusChanged;
-            Account.AccountRestart += Account_AccountRestart;
-            Account.ApplicationWait += Account_ApplicationWait;
-            Account.ConfigRecovered += Account_ConfigRecovered;
-            Account.UpdateStats += Account_UpdateStats;
+            Account.LoggerClearing += Account_loggerClear;
+            Account.StatusChanging += Account_StatusChanged;
+            Account.AccountRestarting += Account_AccountRestart;
+            Account.ApplicationWaiting += Account_ApplicationWait;
+            Account.ConfigRecovering += Account_ConfigRecovered;
+            Account.StatsUpdating += Account_UpdateStats;
             //TODO: Fill other modules events
         }
 

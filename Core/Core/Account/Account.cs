@@ -87,14 +87,14 @@ namespace MageBot.Core.Account
         #endregion
 
         #region Events to Fill in interface
-        public event EventHandler LogChanged;
-        public event EventHandler InfBarsChanged;
-        public event EventHandler LoggerClear;
-        public event EventHandler StatusChanged;
-        public event EventHandler AccountRestart;
-        public event EventHandler ApplicationWait;
-        public event EventHandler ConfigRecovered;
-        public event EventHandler UpdateStats;
+        public event EventHandler LogChanging;
+        public event EventHandler InfBarsChanging;
+        public event EventHandler LoggerClearing;
+        public event EventHandler StatusChanging;
+        public event EventHandler AccountRestarting;
+        public event EventHandler ApplicationWaiting;
+        public event EventHandler ConfigRecovering;
+        public event EventHandler StatsUpdating;
         #endregion
 
         #region Updater events (Fill in interface)
@@ -459,12 +459,12 @@ namespace MageBot.Core.Account
 
         public virtual void UpdateInfBars()
         {
-            InfBarsChanged?.Invoke(this, EventArgs.Empty);
+            InfBarsChanging?.Invoke(this, EventArgs.Empty);
         }
 
         public virtual void UpdateCharacterStats()
         {
-            UpdateStats?.Invoke(this, EventArgs.Empty);
+            StatsUpdating?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion
@@ -472,32 +472,32 @@ namespace MageBot.Core.Account
         #region Interface Events
         public virtual void ClearLogger()
         {
-            LoggerClear?.Invoke(this, EventArgs.Empty);
+            LoggerClearing?.Invoke(this, EventArgs.Empty);
         }
 
         public virtual void Wait(int milisec)
         {
-            ApplicationWait?.Invoke(this, new ApplicationWaitEventArgs(milisec));
+            ApplicationWaiting?.Invoke(this, new ApplicationWaitEventArgs(milisec));
         }
 
         protected virtual void OnStatusChanged()
         {
-            StatusChanged?.Invoke(this, EventArgs.Empty);
+            StatusChanging?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnAccountRestart()
         {
-            AccountRestart?.Invoke(this, EventArgs.Empty);
+            AccountRestarting?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnLog(TextInformation text, int verboseLevel)
         {
-            LogChanged?.Invoke(this, new LogEventArgs(text, verboseLevel));
+            LogChanging?.Invoke(this, new LogEventArgs(text, verboseLevel));
         }
 
         public virtual void OnRecoverConfig()
         {
-            ConfigRecovered?.Invoke(this, EventArgs.Empty);
+            ConfigRecovering?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion

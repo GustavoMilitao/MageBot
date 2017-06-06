@@ -53,6 +53,7 @@ namespace MageBot.Core.Account
                 string spath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MageBot", "Accounts", account.AccountName, account.CharacterBaseInformations.Name + "Config.json");
                 CreateDirectoryIfNotExists();
                 Serialize(account.Config, spath);
+                account.ConfRecovered = true;
             }
         }
 
