@@ -52,7 +52,8 @@ namespace MageBot.Core.Engine.Handlers.Character
             }
 
             account.CharacterBaseInformations = characterSelectedSuccessMessage.Infos;
-
+            if (!account.ConfRecovered)
+                account.ConfRecovered = account.ConfigRecover.RecoverConfig();
             account.Log(new BotTextInformation(account.CharacterBaseInformations.Name + " de niveau " + account.CharacterBaseInformations.Level + " est connecté."), 1);
             account.Log(new BotTextInformation("Breed: " + ((BreedEnum)account.CharacterBaseInformations.Breed).Description() + " Sex: " + ((Sex)Convert.ToInt32(account.CharacterBaseInformations.Sex)).Description()), 1);
             account.ModifBar(7, 0, 0, account.AccountName + " - " + account.CharacterBaseInformations.Name);

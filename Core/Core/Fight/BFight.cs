@@ -15,6 +15,7 @@ using MageBot.Core.Monsters;
 using MageBot.Core.Engine.Network;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Collections.Concurrent;
 
 namespace MageBot.Core.Fight
 {
@@ -29,7 +30,7 @@ namespace MageBot.Core.Fight
         #region Private Fields
         private Object clock = new Object();
         private int m_error = 0;
-        private List<MonsterGroup> Banned = new List<MonsterGroup>();
+        private ConcurrentDictionary<int,MonsterGroup> Banned = new ConcurrentDictionary<int,MonsterGroup>();
         #endregion
         #endregion
 
@@ -88,7 +89,7 @@ namespace MageBot.Core.Fight
                                                                                        monst.monstersLevel >= minLevel &&
                                                                                        monst.monstersLevel <= maxLevel &&
                                                                                        Account.AllowedGroup(monst.NameList()) &&
-                                                                                       !Banned.Contains(monst));
+                                                                                       !Banned.Values.Contains(monst));
             if (monsters != null)
             {
                 if (Account.Map.MoveToCell(monsters.m_cellId))
@@ -147,7 +148,7 @@ namespace MageBot.Core.Fight
                 {
                     int tempDistance = 0;
                     MapPoint cellPoint = new MapPoint(Convert.ToInt32(tempCell));
-                    foreach (BFighter fighter in m_Data.Fighters)
+                    foreach (BFighter fighter in m_Data.Fighters.Values)
                     {
                         MapPoint fighterPoint = new MapPoint(fighter.CellId);
                         tempDistance += cellPoint.DistanceToCell(fighterPoint);
@@ -318,7 +319,7 @@ namespace MageBot.Core.Fight
                     }
                 }
                 SimplePathfinder pathfinder = new SimplePathfinder(Account.MapData);
-                pathfinder.SetFight(m_Data.Fighters, m_Data.Fighter.MovementPoints);
+                pathfinder.SetFight(m_Data.Fighters.Values.ToList(), m_Data.Fighter.MovementPoints);
                 MovementPath path = pathfinder.FindPath(m_Data.Fighter.CellId, cellId);
                 if (path != null)
                 {
@@ -392,7 +393,7 @@ namespace MageBot.Core.Fight
         /// </summary>
         private void BanMonsters(MonsterGroup m)
         {
-            Banned.Add(m);
+            Banned.AddOrUpdate(m.m_staticInfos.MainCreatureLightInfos.CreatureGenericId, m, (key, oldValue) => m);
         }
         #endregion
     }

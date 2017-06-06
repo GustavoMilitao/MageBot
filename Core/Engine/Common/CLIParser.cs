@@ -896,7 +896,7 @@ namespace MageBot.Core.Engine.Common
                 }
                 if (fighters && account.State == Status.Fighting)
                 {
-                    foreach (BFighter f in account.FightData.Fighters)
+                    foreach (BFighter f in account.FightData.Fighters.Values)
                     {
                         if (verbose)
                         {

@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Linq;
 using MageBot.Core.Monsters;
 using MageBot.Util.Enums.EnumHelper;
+using System.Collections.Concurrent;
 
 namespace MageBot.Core.Fight
 {
@@ -23,18 +24,18 @@ namespace MageBot.Core.Fight
     {
         #region Fields
         #region Dictionary
-        public Dictionary<uint, int> DurationByEffect { get; set; } = new Dictionary<uint, int>();
-        public Dictionary<int, int> FightStates { get; set; } = new Dictionary<int, int>();
-        public Dictionary<int, int> LastTurnLaunchBySpell { get; set; } = new Dictionary<int, int>();
-        public Dictionary<int, int> TotalLaunchBySpell { get; set; } = new Dictionary<int, int>();
-        public Dictionary<int, Dictionary<int, int>> TotalLaunchByCellBySpell { get; set; } = new Dictionary<int, Dictionary<int, int>>();
-        private Dictionary<long, List<BFighter>> M_Summons { get; set; } = new Dictionary<long, List<BFighter>>();
+        public ConcurrentDictionary<uint, int> DurationByEffect { get; set; } = new ConcurrentDictionary<uint, int>();
+        public ConcurrentDictionary<int, int> FightStates { get; set; } = new ConcurrentDictionary<int, int>();
+        public ConcurrentDictionary<int, int> LastTurnLaunchBySpell { get; set; } = new ConcurrentDictionary<int, int>();
+        public ConcurrentDictionary<int, int> TotalLaunchBySpell { get; set; } = new ConcurrentDictionary<int, int>();
+        public ConcurrentDictionary<int, Dictionary<int, int>> TotalLaunchByCellBySpell { get; set; } = new ConcurrentDictionary<int, Dictionary<int, int>>();
+        private ConcurrentDictionary<long, List<BFighter>> M_Summons { get; set; } = new ConcurrentDictionary<long, List<BFighter>>();
         #endregion
 
         #region Public Fields
         private Account.Account Account { get; set; }
-        public List<BFighter> Fighters { get; set; } = new List<BFighter>();
-        public List<BFighter> DeadEnnemies { get; set; } = new List<BFighter>();
+        public ConcurrentDictionary<double, BFighter> Fighters { get; set; } = new ConcurrentDictionary<double, BFighter>();
+        public ConcurrentDictionary<double, BFighter> DeadEnnemies { get; set; } = new ConcurrentDictionary<double, BFighter>();
         public int TurnId { get; set; }
 
 
@@ -46,7 +47,7 @@ namespace MageBot.Core.Fight
         public List<FightOptionsEnum> Options { get; set; } = new List<FightOptionsEnum>();
         public Stopwatch Watch { get; set; } = new Stopwatch();
         public MonsterGroup FollowingGroup { get; set; }
-        private Dictionary<string, int> Boss { get; set; }
+        private ConcurrentDictionary<int, string> Boss { get; set; }
         #endregion
         #endregion
 
@@ -58,7 +59,7 @@ namespace MageBot.Core.Fight
 
         public int MonsterNumber
         {
-            get { return Fighters.FindAll(f => f.TeamId != Fighter.TeamId).ToList().Count; }
+            get { return Fighters.Values.Where(f => f.TeamId != Fighter.TeamId).ToList().Count; }
         }
 
         public bool IsFollowingGroup
@@ -83,10 +84,12 @@ namespace MageBot.Core.Fight
             this.Account = Account;
             DataClass[] data = GameData.GetDataObjects(D2oFileEnum.Monsters);
             List<DataClass> b = data.ToList().FindAll(e => ((bool)e.Fields["isBoss"]) == true).ToList();
-            Boss = new Dictionary<string, int>();
+            Boss = new ConcurrentDictionary<int, string>();
             foreach (DataClass d in b)
             {
-                Boss.Add(MageBot.DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]), (int)d.Fields["id"]);
+                var id = (int)d.Fields["id"];
+                var name = DataFiles.Data.I18n.I18N.GetText((int)d.Fields["nameId"]);
+                Boss.AddOrUpdate(id, name, (key, oldValue) => name);
             }
         }
         #endregion
@@ -116,7 +119,7 @@ namespace MageBot.Core.Fight
         /// <returns>The cellId we need to move to. -1 if we can't use. 0 if we don't need to move.</returns>
         public int CanUseSpell(BSpell spell, BFighter target)
         {
-            
+
             if (CanLaunchSpell(spell.SpellId) != SpellInabilityReason.None)
             {
                 Account.Log(new DebugTextInformation("Spell Inability Reason : " + CanLaunchSpell(spell.SpellId).Description()), 0);
@@ -158,20 +161,11 @@ namespace MageBot.Core.Fight
         /// </summary>
         public void AddSummon(long sourceId, BFighter summon)
         {
-            Fighters.Add(summon);
+            Fighters.AddOrUpdate(sourceId, summon, (key, oldValue) => summon);
             List<BFighter> summoned = new List<BFighter>();
-            if (M_Summons.ContainsKey(sourceId))
-            {
-                M_Summons.TryGetValue(sourceId, out summoned);
-                summoned.Add(summon);
-                M_Summons.Remove(sourceId);
-                M_Summons.Add(sourceId, summoned);
-            }
-            else
-            {
-                summoned.Add(summon);
-                M_Summons.Add(sourceId, summoned);
-            }
+            M_Summons.TryGetValue(sourceId, out summoned);
+            summoned.Add(summon);
+            M_Summons.AddOrUpdate(sourceId, summoned, (key, oldValue) => summoned);
         }
 
         /// <summary>
@@ -206,10 +200,11 @@ namespace MageBot.Core.Fight
             }
             else if (fighter.CreatureGenericId != 0)
             {
-                DeadEnnemies.Add(fighter);
+                DeadEnnemies.AddOrUpdate(id, fighter, (key, oldValue) => fighter);
                 Account.Log(new ActionTextInformation(fighter.Name + " is dead !"), 5);
             }
-            Fighters.Remove(fighter);
+            BFighter f;
+            Fighters.TryRemove(id, out f);
         }
 
         /// <summary>
@@ -221,34 +216,20 @@ namespace MageBot.Core.Fight
             {
                 if (!IsDead && Fighter != null && effectToUpdate.TargetId == Fighter.Id)
                 {
-                    if (DurationByEffect.ContainsKey(effectToUpdate.EffectId))
-                    {
-                        DurationByEffect.Remove(effectToUpdate.EffectId);
-                        DurationByEffect.Add(effectToUpdate.EffectId, effectToUpdate.TurnDuration);
-                    }
-                    else
-                    {
-                        DurationByEffect.Add(effectToUpdate.EffectId, effectToUpdate.TurnDuration);
-                        if (actionId == 168)
-                            Fighter.ActionPoints -= effectToUpdate.Delta;
-                        else if (actionId == 169)
-                            Fighter.MovementPoints -= effectToUpdate.Delta;
-                        else if (actionId == 116)
-                            Account.CharacterStats.Range.ContextModif -= effectToUpdate.Delta;
-                    }
+                    DurationByEffect.AddOrUpdate(effectToUpdate.EffectId, effectToUpdate.TurnDuration,
+                        (key, oldValue) => effectToUpdate.TurnDuration);
+                    if (actionId == 168)
+                        Fighter.ActionPoints -= effectToUpdate.Delta;
+                    else if (actionId == 169)
+                        Fighter.MovementPoints -= effectToUpdate.Delta;
+                    else if (actionId == 116)
+                        Account.CharacterStats.Range.ContextModif -= effectToUpdate.Delta;
                 }
             }
-            if(effect is FightTemporaryBoostStateEffect state)
+            if (effect is FightTemporaryBoostStateEffect state)
             {
-                if (FightStates.ContainsKey(state.StateId))
-                {
-                    FightStates.Remove(state.StateId);
-                    FightStates.Add(state.StateId, state.TurnDuration);
-                }
-                else
-                {
-                    FightStates.Add(state.StateId, state.TurnDuration);
-                }
+                FightStates.AddOrUpdate(state.StateId, state.TurnDuration,
+                    (key, oldValue) => state.TurnDuration);
             }
         }
 
@@ -316,11 +297,12 @@ namespace MageBot.Core.Fight
                         if (spellLevelData != null)
                         {
                             if ((int)spellLevelData.Fields["minCastInterval"] > 0 && !(LastTurnLaunchBySpell.ContainsKey(spellId)))
-                                LastTurnLaunchBySpell.Add(spellId, (int)spellLevelData.Fields["minCastInterval"]);
+                                LastTurnLaunchBySpell.AddOrUpdate(spellId, (int)spellLevelData.Fields["minCastInterval"],
+                                    (key, oldValue) => (int)spellLevelData.Fields["minCastInterval"]);
                             if (TotalLaunchBySpell.ContainsKey(spellId)) //Si on a déjà utilisé ce sort ce tour
                                 TotalLaunchBySpell[spellId] += 1;
                             else
-                                TotalLaunchBySpell.Add(spellId, 1);
+                                TotalLaunchBySpell.AddOrUpdate(spellId, 1, (key, oldValue) => 1);
                             if (TotalLaunchByCellBySpell.ContainsKey(spellId)) //Si on a déjà utilisé ce sort ce tour
                             {
                                 if (TotalLaunchByCellBySpell[spellId].ContainsKey(destinationCellId)) //Si on a déjà utilisé ce sort sur cette case
@@ -334,7 +316,7 @@ namespace MageBot.Core.Fight
                                 {
                                     { destinationCellId, 1 }
                                 };
-                                TotalLaunchByCellBySpell.Add(spellId, tempdico);
+                                TotalLaunchByCellBySpell.AddOrUpdate(spellId, tempdico, (key, oldValue) => tempdico);
                             }
                         }
                     }
@@ -372,11 +354,13 @@ namespace MageBot.Core.Fight
         {
             if (informations is GameFightMonsterInformations infos)
             {
-                Fighters.Add(new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, informations.TeamId, infos.CreatureGenericId));
+                BFighter newFighter = new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, informations.TeamId, infos.CreatureGenericId);
+                Fighters.AddOrUpdate(informations.ContextualId, newFighter, (key, oldValue) => newFighter);
             }
             else
             {
-                Fighters.Add(new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, informations.TeamId, 0));
+                BFighter newFighter = new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, informations.TeamId, 0);
+                Fighters.AddOrUpdate(informations.ContextualId, newFighter, (key, oldValue) => newFighter);
             }
             if (Fighter != null)
                 Fighter.Name = Account.CharacterBaseInformations.Name;
@@ -455,26 +439,29 @@ namespace MageBot.Core.Fight
 
         private void UpdateLastTurnLaunchSpell()
         {
-            Dictionary<int, int> lastTurnLaunchSpell = new Dictionary<int, int>();
+            ConcurrentDictionary<int, int> lastTurnLaunchSpell = new ConcurrentDictionary<int, int>();
             foreach (KeyValuePair<int, int> lastLaunchSpell in LastTurnLaunchBySpell)
             {
-                lastTurnLaunchSpell.Add(lastLaunchSpell.Key, lastLaunchSpell.Value - 1);
+                lastTurnLaunchSpell.AddOrUpdate(lastLaunchSpell.Key, lastLaunchSpell.Value - 1,
+                    (key, oldValue) => lastLaunchSpell.Value - 1);
             }
             LastTurnLaunchBySpell = lastTurnLaunchSpell;
         }
 
         private void UpdateEffectsDuration()
         {
-            Dictionary<uint, int> newDuration = new Dictionary<uint, int>();
+            ConcurrentDictionary<uint, int> newDuration = new ConcurrentDictionary<uint, int>();
             foreach (KeyValuePair<uint, int> duration in DurationByEffect)
             {
-                newDuration.Add(duration.Key, duration.Value - 1);
+                newDuration.AddOrUpdate(duration.Key, duration.Value - 1,
+                    (key, oldValue) => duration.Value - 1);
             }
             DurationByEffect = newDuration;
-            Dictionary<int, int> newStates = new Dictionary<int, int>();
+            ConcurrentDictionary<int, int> newStates = new ConcurrentDictionary<int, int>();
             foreach (KeyValuePair<int, int> state in FightStates)
             {
-                newStates.Add(state.Key, state.Value);
+                newStates.AddOrUpdate(state.Key, state.Value,
+                    (key, oldValue) => state.Value);
             }
             FightStates = newStates;
         }
@@ -521,7 +508,7 @@ namespace MageBot.Core.Fight
         {
             BFighter Fighterr = null;
             int SavDistance = -1;
-            foreach (BFighter TestFighter in Fighters)
+            foreach (BFighter TestFighter in Fighters.Values)
             {
                 if (TestFighter.TeamId == Fighter.TeamId || !TestFighter.IsAlive)
                     continue;
@@ -545,7 +532,7 @@ namespace MageBot.Core.Fight
         public BFighter WeakestMonster()
         {
             Tuple<int, BFighter> temp = new Tuple<int, BFighter>(0, null);
-            foreach (BFighter f in Fighters)
+            foreach (BFighter f in Fighters.Values)
             {
                 if (temp.Item1 > f.LifePoints && f.TeamId != Fighter.TeamId)
                     temp = new Tuple<int, BFighter>(f.LifePoints, f);
@@ -588,7 +575,7 @@ namespace MageBot.Core.Fight
         {
             BFighter Fighterr = null;
             int SavDistance = -1;
-            foreach (BFighter TestFighter in Fighters)
+            foreach (BFighter TestFighter in Fighters.Values)
             {
                 if (TestFighter.TeamId != Fighter.TeamId || TestFighter.IsAlive == false)
                     continue;
@@ -612,7 +599,7 @@ namespace MageBot.Core.Fight
         public BFighter WeakestAlly()
         {
             Tuple<int, BFighter> temp = new Tuple<int, BFighter>(0, null);
-            foreach (BFighter f in Fighters)
+            foreach (BFighter f in Fighters.Values)
             {
                 if (temp.Item1 > f.LifePoints && f.TeamId == Fighter.TeamId)
                     temp = new Tuple<int, BFighter>(f.LifePoints, f);
@@ -688,9 +675,9 @@ namespace MageBot.Core.Fight
         /// </summary>
         public bool BossInFight()
         {
-            foreach (BFighter f in Fighters)
+            foreach (BFighter f in Fighters.Values)
             {
-                if (Boss.ContainsKey(f.Name) || Boss.ContainsValue(f.CreatureGenericId))
+                if (Boss.ContainsKey(f.CreatureGenericId) || Boss.Values.Contains(f.Name))
                     return true;
             }
             return false;
@@ -703,7 +690,7 @@ namespace MageBot.Core.Fight
         {
             if (Account.MapData.Data.IsWalkable(cellId))
             {
-                var selectedFighter = Fighters.FirstOrDefault((f) => f.CellId == cellId || Account.MapData.Data.Cells[cellId].NonWalkableDuringFight);
+                var selectedFighter = Fighters.Values.FirstOrDefault((f) => f.CellId == cellId || Account.MapData.Data.Cells[cellId].NonWalkableDuringFight);
                 if (selectedFighter != null)
                     return false;
                 else
@@ -730,7 +717,7 @@ namespace MageBot.Core.Fight
         /// <returns>BFighter fighter.</returns>
         private BFighter GetFighter(long id)
         {
-            return Fighters.FirstOrDefault(f => f.Id == id);
+            return Fighters.Values.FirstOrDefault(f => f.Id == id);
         }
 
         /// <summary>
@@ -739,7 +726,7 @@ namespace MageBot.Core.Fight
         private int GetInvokationNumber()
         {
             int num = 0;
-            foreach (BFighter fighter in Fighters)
+            foreach (BFighter fighter in Fighters.Values)
             {
                 if (Fighter != null && fighter != null && fighter.GameFightMinimalStats.Summoner == Fighter.Id)
                     num++;
@@ -752,7 +739,7 @@ namespace MageBot.Core.Fight
         /// </summary>
         private bool IsFreeCell(int cellId)
         {
-            return !Fighters.Any(f => f != null && f.CellId == cellId);
+            return !Fighters.Values.Any(f => f != null && f.CellId == cellId);
         }
 
         /// <summary>

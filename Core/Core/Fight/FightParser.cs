@@ -394,7 +394,7 @@ namespace MageBot.Core.Fight
         /// </summary>
         private BFighter GetTargetFromName(string name)
         {
-           List<BFighter> result = Account.FightData.Fighters.FindAll(t => t.Name == name);
+           List<BFighter> result = Account.FightData.Fighters.Values.Where(t => t.Name == name).ToList();
            return Account.FightData.NearestMonster(result);
         }
 

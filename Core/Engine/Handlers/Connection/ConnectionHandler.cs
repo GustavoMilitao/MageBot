@@ -89,7 +89,7 @@ namespace MageBot.Core.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(SelectedServerDataExtendedMessage))]
-        public static void SelectedServerDataExtendedMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void SelectedServerDataExtendedMessageTreatment(Message message, byte[] packetDatas, Account.Account account)
         {
             SelectedServerDataExtendedMessage msg = (SelectedServerDataExtendedMessage)message;
             using (BigEndianReader reader = new BigEndianReader(packetDatas))
@@ -155,7 +155,7 @@ namespace MageBot.Core.Engine.Handlers.Connection
         }
 
         [MessageHandler(typeof(HelloGameMessage))]
-        public static void HelloGameMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void HelloGameMessageTreatment(Message message, byte[] packetDatas, Account.Account account)
         {
             if (!account.Config.IsMITM)
             {
@@ -210,7 +210,7 @@ namespace MageBot.Core.Engine.Handlers.Connection
             + identificationFailedForBadVersionMessage.RequiredVersion.Revision + "."
             + identificationFailedForBadVersionMessage.RequiredVersion.Patch + "."
             + identificationFailedForBadVersionMessage.RequiredVersion.BuildType + ")."
-            + " MageBot.supporte uniquement la version " + GameConstants.Major + "."
+            + " MageBot supporte uniquement la version " + GameConstants.Major + "."
             + GameConstants.Minor + "." + GameConstants.Release + "."
             + GameConstants.Revision + "." + GameConstants.Patch + "."
             + GameConstants.BuildType + " du jeu. Consultez le forum pour être alerté de la mise à jour du bot."), 0);
