@@ -23,8 +23,8 @@ namespace MageBot.DataFiles.Data.D2p
                 {
                     MemoryStream stream = new MemoryStream(D2pFileManager.method_1(str)) { Position = 2 };
                     DeflateStream stream2 = new DeflateStream(stream, CompressionMode.Decompress);
-                    byte[] buffer = new byte[50001];
-                    MemoryStream destination = new MemoryStream(buffer);
+                    //byte[] buffer = new byte[50001];
+                    MemoryStream destination = new MemoryStream(/*buffer*/);
                     stream2.CopyTo(destination);
                     destination.Position = 0;
                     BigEndianReader reader = new BigEndianReader(destination);

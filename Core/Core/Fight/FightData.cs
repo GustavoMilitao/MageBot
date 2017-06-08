@@ -360,10 +360,23 @@ namespace MageBot.Core.Fight
             else
             {
                 BFighter newFighter = new BFighter(informations.ContextualId, informations.Disposition.CellId, informations.Stats.ActionPoints, informations.Stats, informations.Alive, (int)informations.Stats.LifePoints, (int)informations.Stats.MaxLifePoints, informations.Stats.MovementPoints, informations.TeamId, 0);
+                AddFighterFightNamedInformations(informations, newFighter);
                 Fighters.AddOrUpdate(informations.ContextualId, newFighter, (key, oldValue) => newFighter);
             }
             if (Fighter != null)
                 Fighter.Name = Account.CharacterBaseInformations.Name;
+        }
+
+        private static void AddFighterFightNamedInformations(GameFightFighterInformations informations, BFighter newFighter)
+        {
+            try
+            {
+                var infor = (GameFightFighterNamedInformations)informations;
+                newFighter.Name = infor.Name;
+            }
+            catch
+            {
+            }
         }
 
         /// <summary>
@@ -506,24 +519,27 @@ namespace MageBot.Core.Fight
         /// </summary>
         public BFighter NearestMonster()
         {
-            BFighter Fighterr = null;
+            BFighter returnedFighter = null;
             int SavDistance = -1;
             foreach (BFighter TestFighter in Fighters.Values)
             {
-                if (TestFighter.TeamId == Fighter.TeamId || !TestFighter.IsAlive)
-                    continue;
-                int dist = DistanceFrom(TestFighter);
-                if (((dist < SavDistance) || (SavDistance == -1)) && TestFighter != Fighter)
+                if (TestFighter != null && Fighter != null)
                 {
-                    SavDistance = dist;
-                    Fighterr = TestFighter;
+                    if (TestFighter.TeamId == Fighter.TeamId || !TestFighter.IsAlive)
+                        continue;
+                    int dist = DistanceFrom(TestFighter);
+                    if (((dist < SavDistance) || (SavDistance == -1)) && TestFighter != Fighter)
+                    {
+                        SavDistance = dist;
+                        returnedFighter = TestFighter;
+                    }
                 }
             }
-            if (Fighterr == null)
+            if (returnedFighter == null)
             {
                 return null;
             }
-            return Fighterr;
+            return returnedFighter;
         }
 
         /// <summary>
@@ -717,7 +733,9 @@ namespace MageBot.Core.Fight
         /// <returns>BFighter fighter.</returns>
         private BFighter GetFighter(long id)
         {
-            return Fighters.Values.FirstOrDefault(f => f.Id == id);
+            if (Fighters.ContainsKey(id))
+                return Fighters[id];
+            return null;
         }
 
         /// <summary>

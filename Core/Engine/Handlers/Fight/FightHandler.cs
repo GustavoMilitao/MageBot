@@ -153,7 +153,7 @@ namespace MageBot.Core.Engine.Handlers.Fight
                 //Thread t = new Thread(() =>
                 //{
                 account.FightData.FightStop();
-                if (account.IsMaster && account.MyGroup.Path != null)
+                if (account.IsMaster && account.MyGroup.Path != null && account.MyGroup.Path.Launched)
                     account.MyGroup.Path.PerformFlag();
                 //});
                 //t.Start();

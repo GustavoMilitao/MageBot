@@ -277,7 +277,7 @@ namespace MageBot.Core.Fight
                 MessagePackaging mp = new MessagePackaging(writer);
                 mp.Pack(msg.MessageID);
                 Account.SocketManager.Send(mp.Writer.Content);
-                Account.Log(new ActionTextInformation("Lancement d'un sort en " + cellId), 5);
+                Account.Log(new ActionTextInformation("Launch of a spell in " + cellId), 5);
                 Account.Log(new DebugTextInformation("[SND] 1005 (GameActionFightCastRequestMessage)"), 0);
             }
         }
