@@ -59,7 +59,7 @@ namespace MageBot.DataFiles.Data.D2p
 
 
         // Fields
-        private Dictionary<string, int[]> FilenameDataDictionnary;
+        public Dictionary<string, int[]> FilenameDataDictionnary;
         private BigEndianReader Reader;
         private FileStream D2pFileStream;
         private object CheckLock;

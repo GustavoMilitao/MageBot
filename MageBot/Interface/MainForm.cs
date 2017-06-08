@@ -185,15 +185,22 @@ namespace MageBot.Interface
                 GameData.Init(Path.Combine (ActualMainForm.DofusPath, "app","data", "common"));
                 MapsManager.Init(Path.Combine(ActualMainForm.DofusPath, "app", "content", "maps"));
             }
-            //else
-            //{
-            //    i18NFileAccessor.Init(Path.Combine(ActualMainForm.DofusPath, "app", "data", "i18n", "i18n_fr.d2i"));
-            //    I18N i18N = new I18N(i18NFileAccessor);
-            //    GameData.Init(@"D:\Dofus2\app\data\common");
-            //    MapsManager.Init(@"D:\Dofus2\app\content\maps");
-            //}
             IntelliSense.InitMonsters();
             IntelliSense.InitItems();
+
+            //if (!Directory.Exists(Path.Combine(mageBotPath, "GameData")))
+            //{
+            //    DirectoryInfo dir = Directory.CreateDirectory(Path.Combine(mageBotPath, "GameData"));
+            //    dir.Attributes = FileAttributes.Normal;
+            //    IntelliSense.SaveGameData(dir.FullName);
+            //} TODO Militão 2.0 : Get a better pc and unzip all game and maps data
+
+            //if (!Directory.Exists(Path.Combine(mageBotPath, "mapDatas")))
+            //{
+            //    DirectoryInfo dir = Directory.CreateDirectory(Path.Combine(mageBotPath, "mapDatas"));
+            //    dir.Attributes = FileAttributes.Normal;
+            //    MapsManager.SaveMaps(dir.FullName);
+            //}TODO Militão 2.0 : Get a better pc and unzip all game and maps data
         }
 
 

@@ -32,7 +32,9 @@ namespace MageBot.DataFiles.Data.D2o
             string File = ModuleName.ToString();
             lock (GameData.CheckLock)
             {
-                return GameData.FileName_Data[File].DataObjects(File);
+                if (GameData.FileName_Data.ContainsKey(File))
+                    return GameData.FileName_Data[File].DataObjects(File);
+                return null;
             }
         }
 
@@ -40,17 +42,19 @@ namespace MageBot.DataFiles.Data.D2o
         /// <param name="DirectoryInit">Caminho para o diretório que contém o .d2o</param>
         /// <remarks>Este método executa automaticamente no momento da inicialização do updater</remarks>
         public static void Init(string DirectoryInit)
-		{
-			GameData.FileName_Data = new Dictionary<string, D2oData>();
-			foreach (string fichier_loopVariable in Directory.GetFiles(DirectoryInit)) {
-				string fichier = fichier_loopVariable;
-				FileInfo info = new FileInfo(fichier);
-				if ((info.Extension.ToUpper() == ".D2O")) {
-					D2oData D2oData = new D2oData(fichier);
-					GameData.FileName_Data.Add(Path.GetFileNameWithoutExtension(fichier), D2oData);
-				}
-			}
-		}
+        {
+            GameData.FileName_Data = new Dictionary<string, D2oData>();
+            foreach (string fichier_loopVariable in Directory.GetFiles(DirectoryInit))
+            {
+                string fichier = fichier_loopVariable;
+                FileInfo info = new FileInfo(fichier);
+                if ((info.Extension.ToUpper() == ".D2O"))
+                {
+                    D2oData D2oData = new D2oData(fichier);
+                    GameData.FileName_Data.Add(Path.GetFileNameWithoutExtension(fichier), D2oData);
+                }
+            }
+        }
 
         // Fields
         static internal Dictionary<string, D2oData> FileName_Data;

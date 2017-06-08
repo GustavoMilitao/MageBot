@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using MageBot.Util.IO;
+using Newtonsoft.Json;
 
 namespace MageBot.DataFiles.Data.D2p
 {
@@ -54,6 +55,31 @@ namespace MageBot.DataFiles.Data.D2p
             //MapId_Map = new Dictionary<int, Map>();
             D2pFileManager = new D2pFileManager(directory);
             MapsManager.CheckLock = new object();
+        }
+
+        public static void SaveMaps(string directory)
+        {
+            foreach (var map in D2pFileManager.ListD2pFileDlm)
+            {
+                foreach (var mapData in map.FilenameDataDictionnary)
+                {
+                    string dir = mapData.Key.Split('/').FirstOrDefault();
+                    string saveDir = Path.Combine(directory, dir);
+                    if (!Directory.Exists(saveDir))
+                        Directory.CreateDirectory(saveDir);
+                    MemoryStream stream = new MemoryStream(D2pFileManager.method_1(mapData.Key)) { Position = 2 };
+                    DeflateStream stream2 = new DeflateStream(stream, CompressionMode.Decompress);
+                    //byte[] buffer = new byte[50001];
+                    MemoryStream destination = new MemoryStream(/*buffer*/);
+                    stream2.CopyTo(destination);
+                    destination.Position = 0;
+                    BigEndianReader reader = new BigEndianReader(destination);
+                    Map map2 = new Map();
+                    map2.Init(reader);
+                    string json = JsonConvert.SerializeObject(map2, Formatting.Indented);
+                    File.WriteAllText(Path.Combine(saveDir, mapData.Key.Split('/').LastOrDefault().ToLower().Replace(".dlm", ".json")), json);
+                }
+            }
         }
 
         // Fields

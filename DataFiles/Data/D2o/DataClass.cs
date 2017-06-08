@@ -19,8 +19,8 @@ namespace MageBot.DataFiles.Data.D2o
         }
 
         // Fields
-        public Dictionary<string, object> Fields = new Dictionary<string, object>();
-        public string Name;
+        public Dictionary<string, object> Fields { get; set; } = new Dictionary<string, object>();
+        public string Name { get; set; }
     }
 
 

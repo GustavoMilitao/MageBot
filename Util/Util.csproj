@@ -66,6 +66,7 @@
     <Compile Include="Util\IO\IDataReader.cs" />
     <Compile Include="Util\IO\IDataWriter.cs" />
     <Compile Include="Util\IO\Int64.cs" />
+    <Compile Include="Util\StringsUtils\StringUtils.cs" />
     <Compile Include="Util\Text\Log\BlueSheepInfo\ActionTextInformation.cs" />
     <Compile Include="Util\Text\Log\BlueSheepInfo\BotTextInformation.cs" />
     <Compile Include="Util\Text\Log\BlueSheepInfo\CharacterTextInformation.cs" />

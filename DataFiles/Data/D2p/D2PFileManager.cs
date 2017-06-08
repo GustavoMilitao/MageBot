@@ -45,6 +45,6 @@ namespace MageBot.DataFiles.Data.D2p
         }
 
         // Fields
-        private List<D2PFileDlm> ListD2pFileDlm = new List<D2PFileDlm>();
+        public List<D2PFileDlm> ListD2pFileDlm = new List<D2PFileDlm>();
     }
 }
