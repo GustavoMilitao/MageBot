@@ -42,7 +42,7 @@ namespace MageBot.Core.Engine.Handlers.Character
         }
 
         [MessageHandler(typeof(CharacterSelectedSuccessMessage))]
-        public static void CharacterSelectedSuccessMessageTreatment(Message message, byte[] packetDatas, MageBot.Core.Account.Account account)
+        public static void CharacterSelectedSuccessMessageTreatment(Message message, byte[] packetDatas, Account.Account account)
         {
             CharacterSelectedSuccessMessage characterSelectedSuccessMessage = (CharacterSelectedSuccessMessage)message;
 

@@ -128,7 +128,7 @@ namespace MageBot.Core.Map
 
         public bool MoveToCell(int cellId)
         {
-            if (Account.State != Status.Fighting)
+            if (Account.State != Status.Fighting && Account.State != Status.Busy)
             {
                 MovementPath path = (new Pathfinder(Account.MapData)).FindPath(Account.MapData.Character.Disposition.CellId, cellId);
                 if (path != null)
@@ -145,9 +145,12 @@ namespace MageBot.Core.Map
                     //await Account.PutTaskDelay(timetowait);
                     Account.Wait(timetowait);
                     ConfirmMove();
+                    return true;
                 }
+                return false;
             }
-            return true;
+            Account.Wait(1000);
+            return MoveToCell(cellId);
         }
 
 

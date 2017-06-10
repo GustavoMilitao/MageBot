@@ -312,7 +312,7 @@ namespace MageBot.Core.Engine.Common
                 .Select(item2 => item2.TrimStart())
                 .Select(item3 => item3.TrimEnd()).ToList();
             Dictionary<string, string> passedCommands = new Dictionary<string, string>();
-            for (int i = 0; i < paramsList.Count; i++)
+            for (int i = 0; i <= paramsList.Count; i++)
             {
                 if (paramsList.Count == 1)
                 {
